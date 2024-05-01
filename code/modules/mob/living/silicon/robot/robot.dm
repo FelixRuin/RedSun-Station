@@ -18,7 +18,7 @@
 	set_wires(new /datum/wires/robot(src))
 	AddElement(/datum/element/empprotection, EMP_PROTECT_WIRES)
 	// AddElement(/datum/element/ridable, /datum/component/riding/creature/cyborg)
-	RegisterSignal(src, COMSIG_PROCESS_BORGCHARGER_OCCUPANT, .proc/charge)
+	RegisterSignal(src, COMSIG_PROCESS_BORGCHARGER_OCCUPANT, PROC_REF(charge))
 
 	robot_modules_background = new()
 	robot_modules_background.icon_state = "block"
@@ -83,7 +83,7 @@
 			mmi.brainmob.container = mmi
 			mmi.update_appearance()
 
-	INVOKE_ASYNC(src, .proc/updatename)
+	INVOKE_ASYNC(src, PROC_REF(updatename))
 
 	aicamera = new/obj/item/camera/siliconcam/robot_camera(src)
 	toner = tonermax
@@ -123,13 +123,42 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	. = ..()
-
+	// BLUEMOON ADD START - профиль для боргов
+	if(href_list["cyborg_profile"])
+		ui_interact(usr)
+	// BLUEMOON ADD END
 	if(href_list["character_profile"])
 		if(!profile)
 			profile = new(src)
 		profile.ui_interact(usr)
 
 	return
+
+// BLUEMOON ADD START - профиль для боргов
+// Да, это проклято и должно быть перенесено в отдельный датум, но...
+/mob/living/silicon/robot/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "CyborgProfile", "Профиль юнита [src]")
+		ui.open()
+
+/mob/living/silicon/robot/ui_static_data(mob/user, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	var/data[0]
+	if(!src || !istype(src))
+		return
+	data["silicon_flavor_text"] = mind?.silicon_flavor_text || ""
+	data["oocnotes"] = mind?.ooc_notes || ""
+	data["vore_tag"] = client?.prefs?.vorepref || "No"
+	data["erp_tag"] = client?.prefs?.erppref || "No"
+	data["mob_tag"] = client?.prefs?.mobsexpref || "No"
+	data["nc_tag"] = client?.prefs?.nonconpref || "No"
+	data["unholy_tag"] = client?.prefs?.unholypref || "No"
+	data["extreme_tag"] = client?.prefs?.extremepref || "No"
+	data["very_extreme_tag"] = client?.prefs?.extremeharm || "No"
+
+	return data
+// BLUEMOON ADD END
 
 /mob/living/silicon/robot/proc/pick_module()
 	if(module.type != /obj/item/robot_module)
@@ -262,7 +291,7 @@
 	if(source.z != z)
 		return
 	if(stat == DEAD)
-		return 1
+		return TRUE
 	var/list/our_sort = alarms[class]
 	for(var/areaname in our_sort)
 		if (areaname == home.name)
@@ -270,7 +299,7 @@
 			var/list/sources = alarm[3]
 			if (!(source in sources))
 				sources += source
-			return 1
+			return TRUE
 
 	var/obj/machinery/camera/cam = null
 	var/list/our_cams = null
@@ -755,7 +784,7 @@
 	. = ..()
 	radio = new /obj/item/radio/borg/syndicate(src)
 	laws = new /datum/ai_laws/syndicate_override()
-	addtimer(CALLBACK(src, .proc/show_playstyle), 5)
+	addtimer(CALLBACK(src, PROC_REF(show_playstyle)), 5)
 
 /mob/living/silicon/robot/modules/syndicate/create_modularInterface()
 	if(!modularInterface)
@@ -813,7 +842,7 @@
 	. = ..()
 	radio = new /obj/item/radio/borg/inteq(src)
 	laws = new /datum/ai_laws/inteq_override()
-	addtimer(CALLBACK(src, .proc/show_playstyle), 5)
+	addtimer(CALLBACK(src, PROC_REF(show_playstyle)), 5)
 
 /mob/living/silicon/robot/modules/inteq/create_modularInterface()
 	if(!modularInterface)
@@ -983,9 +1012,9 @@
 			toggle_headlamp(1)
 			return
 		if(IsUnconscious() || IsStun() || IsKnockdown() || IsParalyzed() || getOxyLoss() > maxHealth * 0.5)
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 		else
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 		update_mobility()
 	diag_hud_set_status()
 	diag_hud_set_health()
@@ -1036,7 +1065,7 @@
 	ionpulse = FALSE
 	revert_shell()
 
-	return 1
+	return TRUE
 
 /mob/living/silicon/robot/proc/has_module()
 	if(!module || module.type == /obj/item/robot_module)
@@ -1063,7 +1092,7 @@
 	hat_offset = module.hat_offset
 
 	magpulse = module.magpulsing
-	INVOKE_ASYNC(src, .proc/updatename)
+	INVOKE_ASYNC(src, PROC_REF(updatename))
 
 
 /mob/living/silicon/robot/proc/place_on_head(obj/item/new_hat)
@@ -1360,7 +1389,7 @@
 	switch(choice)
 		if("Resting")
 			update_icons()
-			return 0
+			return FALSE
 		if("Sitting")
 			sitting = 1
 		if("Belly up")

@@ -1,10 +1,11 @@
-import { filter, map, sortBy } from 'common/collections';
+import { filter, sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 import { clamp } from 'common/math';
 import { createSearch } from 'common/string';
+
 import { useBackend, useLocalState } from '../backend';
-import { BlockQuote, Button, Flex, LabeledList, Icon, Input, Section, Table, Tabs, Stack, ProgressBar, Divider } from '../components';
-import { TableCell, TableRow } from '../components/Table';
+import { BlockQuote, Button, Flex, Icon, Input, LabeledList, ProgressBar, Section, Stack, Table, Tabs } from '../components';
+import { TableCell } from '../components/Table';
 import { Window } from '../layouts';
 
 type HeaderInfo = {
@@ -230,9 +231,10 @@ const InteractionsTab = (props, context) => {
                 <Button
                   key={interaction.key}
                   content={interaction.desc}
-                  color={interaction.type === INTERACTION_UNHOLY ? "red"
-                    : interaction.type ? "pink"
-                      : "default"}
+                  color={interaction.type === INTERACTION_EXTREME ? "orange"
+                    : interaction.type === INTERACTION_UNHOLY ? "red"
+                      : interaction.type ? "pink"
+                        : "default"}
                   fluid
                   mb={0.3}
                   onClick={() => act('interact', {
@@ -315,11 +317,12 @@ export const sortInteractions = (interactions, searchText = '', data) => {
       (interaction.type === INTERACTION_NORMAL ? true
         // Lewd interaction
         : interaction.type === INTERACTION_LEWD ? verb_consent
-          // Unholy interaction
-          : interaction.type === INTERACTION_UNHOLY
-            ? verb_consent && unholy_pref
-            // Extreme interaction
-            : verb_consent && extreme_pref)),
+        // Extreme interaction
+          : interaction.type === INTERACTION_EXTREME
+            ? (verb_consent && extreme_pref)
+            // Unholy interaction
+            : interaction.type === INTERACTION_UNHOLY
+              ? (verb_consent && unholy_pref) : true)),
 
     // Filter off interactions depending on target's pref
     filter(interaction =>
@@ -329,11 +332,12 @@ export const sortInteractions = (interactions, searchText = '', data) => {
         : interaction.type === INTERACTION_NORMAL ? true
           // Lewd interaction
           : interaction.type === INTERACTION_LEWD ? theyAllowLewd
-            // Unholy interaction
-            : interaction.type === INTERACTION_UNHOLY
-              ? theyAllowLewd && theyAllowUnholy
-              // Extreme interaction
-              : theyAllowLewd && theyAllowExtreme)),
+            // Extreme interaction
+            : interaction.type === INTERACTION_EXTREME
+              ? (theyAllowLewd && theyAllowExtreme)
+              // Unholy interaction
+              : interaction.type === INTERACTION_UNHOLY
+                ? (theyAllowLewd && theyAllowUnholy) : true)),
 
     // Is self
     filter(interaction =>
