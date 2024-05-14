@@ -2418,7 +2418,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 						H.visible_message(span_warning("Корпус [H] слишком прочный, удар не повредил его!"), span_notice("Корпус нивелирует наносимые повреждения."))
 					else
 						H.visible_message("Кожа [H] слишком прочная, удар не повредил её!", span_notice("Кожа даже не повреждается от наносимых повреждений."))
-					return 0
+					return apply_damage(damage, damagetype = STAMINA)
 				damage_amount = damage * hit_percent * brutemod * H.physiology.brute_mod
 			else
 				damage_amount = forced ? damage : damage * hit_percent * brutemod * H.physiology.brute_mod
