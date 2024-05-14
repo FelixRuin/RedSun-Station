@@ -37,7 +37,7 @@
 			standard contractor gear to help with your mission - comes supplied with the tablet, specialised space suit, chameleon jumpsuit and mask, \
 			specialised contractor baton, and three randomly selected low cost items. Can include otherwise unobtainable items."
 	item = /obj/item/storage/box/syndie_kit/contract_kit
-	cost = 20
+	cost = 30
 	player_minimum = 25
 	purchasable_from = ~(UPLINK_NUKE_OPS | UPLINK_CLOWN_OPS)
 	restricted = TRUE
@@ -261,3 +261,10 @@
 	item = /obj/item/stack/telecrystal/inteq/twenty
 	cost = 20
 	purchasable_from = ~(UPLINK_SYNDICATE)
+
+/datum/uplink_item/bundles_tc/conversion_kit
+	name = "InteQ Conversion Kit"
+	desc = "Коробка с набором конвертации наушника в bowman headset и ключом-шифратором InteQ. Набор конвертации, после использования на наушнике обеспечивает пользователю защиту от звука светошумовой гранаты. Вставьте в наушник чтобы получить доступ к каналу InteQ (говорить и слышать) и остальным каналам на станции (только слышать)."
+	item = /obj/item/storage/box/inteq_kit/conversion_kit
+	cost = 1
+	purchasable_from = UPLINK_TRAITORS
