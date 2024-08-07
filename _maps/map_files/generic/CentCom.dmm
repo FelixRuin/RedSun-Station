@@ -9794,6 +9794,7 @@
 	req_access_txt = "101";
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 100, "energy" = 100, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 100)
 	},
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plasteel/dark,
 /area/centcom/control)
 "bhl" = (
@@ -14513,6 +14514,9 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/plasteel/dark,
 /area/centcom/control)
+"fwu" = (
+/turf/closed/wall/mineral/wood,
+/area/mail_spawner)
 "fwB" = (
 /obj/effect/turf_decal/loading_area/red{
 	dir = 8
@@ -17819,7 +17823,7 @@
 /area/centcom/evac)
 "ips" = (
 /obj/effect/turf_decal/delivery,
-/obj/structure/closet/crate/mail/full,
+/obj/structure/closet/crate/mail,
 /turf/open/floor/plasteel/dark,
 /area/centcom/supply)
 "ipu" = (
@@ -27936,6 +27940,7 @@
 	name = "Administrative Office";
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 100, "energy" = 100, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 100)
 	},
+/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plasteel/dark,
 /area/centcom/control)
 "rFz" = (
@@ -34546,6 +34551,10 @@
 	},
 /turf/open/floor/iron/white,
 /area/centcom/control)
+"xCV" = (
+/obj/structure/marker_beacon/yellow/mail_beacon,
+/turf/open/floor/carpet/green,
+/area/mail_spawner)
 "xDB" = (
 /obj/effect/turf_decal/box/corners{
 	dir = 1
@@ -34784,6 +34793,9 @@
 /obj/effect/turf_decal/tile/red/half,
 /turf/open/floor/plasteel/dark,
 /area/centcom/control)
+"xQF" = (
+/turf/open/floor/carpet,
+/area/mail_spawner)
 "xRe" = (
 /obj/structure/closet/crate/large,
 /obj/item/reagent_containers/food/snacks/rationpack,
@@ -66853,8 +66865,8 @@ oom
 oom
 iqg
 plw
+plw
 dEw
-aFe
 aFe
 vMa
 hIC
@@ -67110,8 +67122,8 @@ eQG
 oom
 kiC
 uDO
+uDO
 vzo
-aFe
 aFe
 hQW
 qUn
@@ -67368,7 +67380,7 @@ oom
 uDO
 uDO
 gHu
-aFe
+uDO
 aFe
 hQW
 viE
@@ -67624,8 +67636,8 @@ uDO
 oom
 eBG
 gpm
+gpm
 tZc
-aFe
 aFe
 eMS
 syk
@@ -68810,11 +68822,11 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+fwu
+fwu
+fwu
+fwu
+fwu
 aaa
 aaa
 aaa
@@ -69067,11 +69079,11 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+fwu
+xQF
+xQF
+xQF
+fwu
 aaa
 aaa
 aaa
@@ -69324,11 +69336,11 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+fwu
+xQF
+xCV
+xQF
+fwu
 aaa
 aaa
 aaa
@@ -69581,11 +69593,11 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+fwu
+xQF
+xQF
+xQF
+fwu
 aaa
 aaa
 aaa
@@ -69838,11 +69850,11 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+fwu
+fwu
+fwu
+fwu
+fwu
 aaa
 aaa
 aaa

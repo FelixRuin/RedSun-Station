@@ -140,6 +140,14 @@
 			if(user)
 				to_chat(user, "<span class='danger'>There's something too large in [src], preventing it from closing.</span>")
 			return FALSE
+	// BLUEMOON ADD START - крутое ЕРТ кропило против сатанистов
+	for(var/obj/item/aspergillum/ert/holy_thing)
+		if(iscultist(user) || is_servant_of_ratvar(user) || isclockmob(user) || isconstruct(user) || isvampire(user))
+			to_chat(user, span_cultbold("Священная энергия [holy_thing] не позволяет [src] закрыться!"))
+			return FALSE
+		else
+			break
+	// BLUEMOON ADD END
 	return TRUE
 
 /obj/structure/closet/proc/dump_contents(override = TRUE) //Override is for not revealing the locker electronics when you open the locker, for example
@@ -473,6 +481,9 @@
 	user.visible_message("<span class='warning'>[src] begins to shake violently!</span>", \
 		"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
 		"<span class='hear'>You hear banging from [src].</span>")
+	if(INTERACTING_WITH(user, src))
+		to_chat(user, span_warning("You're already interacting with [src]!"))
+		return
 	if(do_after(user, breakout_time, src, IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM))
 		if(!user || user.stat != CONSCIOUS || user.loc != src || opened || (!locked && !welded) )
 			return

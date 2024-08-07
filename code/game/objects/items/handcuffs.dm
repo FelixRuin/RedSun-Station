@@ -279,7 +279,7 @@
 	icon_state = "beartrap"
 	desc = "A trap used to catch bears and other legged creatures."
 	var/armed = FALSE
-	var/trap_damage = 60
+	var/trap_damage = 20
 	var/ignore_weight = FALSE //BLUEMOON ADD капканы реагируют на вес карбонов
 
 /obj/item/restraints/legcuffs/beartrap/prearmed

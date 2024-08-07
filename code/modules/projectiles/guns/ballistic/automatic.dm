@@ -75,6 +75,7 @@
 	fire_sound = 'sound/weapons/gunshot_smg.ogg'
 	burst_shot_delay = 2
 	burst_size = 2
+	w_class = WEIGHT_CLASS_NORMAL
 	pin = /obj/item/firing_pin/implant/pindicate
 	can_bayonet = TRUE
 	knife_x_offset = 26
@@ -103,8 +104,10 @@
 	mag_type = /obj/item/ammo_box/magazine/wt550m9
 	can_suppress = FALSE
 	weapon_weight = WEAPON_HEAVY
+	w_class = WEIGHT_CLASS_BULKY
 	burst_size = 2
 	burst_shot_delay = 1
+	fire_delay = 3 //BLUEMOON ADD Снижаем скорострельность втшки в автоматическом режиме
 	can_bayonet = TRUE
 	knife_x_offset = 25
 	knife_y_offset = 12
@@ -444,7 +447,9 @@
 	item_state = "laser-wielded"
 	mag_type = /obj/item/ammo_box/magazine/recharge/lasgun
 	automatic_burst_overlay = FALSE
-	fire_delay = 2
+	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_HEAVY
+	fire_delay = 3 // BLUEMOON CHANGE Снижаем скорострельность лазгана в автоматическом режиме
 	can_suppress = FALSE
 	burst_size = 1
 	actions_types = list()

@@ -4,7 +4,7 @@
 	var/list/players_spawned = new
 
 /datum/antagonist/ghost_role
-	name = "\improper Ghost Role"
+	name = "\improper Misc Ghost Role"
 	job_rank = ROLE_GHOSTROLE
 	show_in_antagpanel = FALSE
 	soft_antag = TRUE
@@ -138,7 +138,7 @@
 	return FALSE
 
 /obj/effect/mob_spawn/human/ash_walker/special(mob/living/new_spawn)
-	new_spawn.real_name = random_unique_lizard_name(gender)
+	// new_spawn.real_name = random_unique_lizard_name(gender)
 	if(is_mining_level(z))
 		to_chat(new_spawn, "<b>Drag the corpses of men and beasts to your nest. It will absorb them to create more of your kind. Glory to the Necropolis!</b>")
 		to_chat(new_spawn, "<b>You can expand the weather proof area provided by your shelters by using the 'New Area' key near the bottom right of your HUD.</b>")
@@ -319,6 +319,7 @@
 	assignedrole = "Hermit"
 	can_load_appearance = TRUE
 	loadout_enabled = TRUE
+	antagonist_type = /datum/antagonist/ghost_role/hermit
 
 /obj/effect/mob_spawn/human/hermit/Initialize(mapload)
 	. = ..()
@@ -438,6 +439,7 @@
 	assignedrole = "Hotel Staff"
 	can_load_appearance = TRUE
 	loadout_enabled = TRUE
+	antagonist_type = /datum/antagonist/ghost_role/space_hotel
 
 /datum/outfit/hotelstaff
 	name = "Hotel Staff"
@@ -836,6 +838,7 @@
 	banType = ROLE_GHOSTCAFE
 	back = /obj/item/storage/backpack/holding/satchel // BLUEMOON ADD
 	can_load_appearance = 2
+	antagonist_type = /datum/antagonist/ghost_role/ghost_cafe // BLUEMOON ADD
 
 /datum/action/toggle_dead_chat_mob
 	icon_icon = 'icons/mob/mob.dmi'
@@ -1010,6 +1013,8 @@
 	computer_area = /area/ruin/space/has_grav/bluemoon/port_tarkon/centerhall
 
 	give_cooler_to_mob_if_synth = TRUE
+
+	antagonist_type = /datum/antagonist/ghost_role/tarkov
 
 /datum/outfit/tarkoff
 	name = "Default Port Tarkov Outfit"
@@ -1192,6 +1197,7 @@
 	assignedrole = "Centcom Intern"
 	can_load_appearance = TRUE
 	loadout_enabled = TRUE
+	antagonist_type = /datum/antagonist/ghost_role/centcom_intern
 
 /datum/outfit/centcom_syndicate
 	name = "Special Ops Syndicate Intern"
@@ -1246,6 +1252,7 @@
 	assignedrole = "Centcom Intern"
 	can_load_appearance = TRUE
 	loadout_enabled = TRUE
+	antagonist_type = /datum/antagonist/ghost_role/centcom_intern
 
 /datum/outfit/centcom_nanotrasen
 	name = "Special Ops Nanotrasen Intern"
@@ -1298,6 +1305,7 @@
 	loadout_enabled = TRUE
 	use_outfit_name = TRUE
 	computer_area = /area/ruin/space/has_grav/bluemoon/deepspacetwo/service/dorms
+	antagonist_type = /datum/antagonist/ghost_role/ds2
 
 /obj/effect/mob_spawn/human/ds2/prisoner
 	name = "Syndicate Prisoner"

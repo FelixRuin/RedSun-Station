@@ -1149,7 +1149,7 @@
 	name = "Stimulants"
 	description = "Increases stun resistance and movement speed in addition to restoring minor damage and weakness. Overdose causes weakness and toxin damage."
 	color = "#78008C"
-	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	overdose_threshold = 60
 	pH = 8.7
 	can_synth = FALSE //BLUEMOON CHANGE ролькоприколы остаются у ролек
@@ -1160,24 +1160,22 @@
 	..()
 	L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulants)
 	ADD_TRAIT(L, TRAIT_TASED_RESISTANCE, type)
-	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 
 /datum/reagent/medicine/stimulants/on_mob_end_metabolize(mob/living/L)
 	L.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulants)
 	REMOVE_TRAIT(L, TRAIT_TASED_RESISTANCE, type)
-	REMOVE_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	..()
 
 /datum/reagent/medicine/stimulants/on_mob_life(mob/living/carbon/M)
-	M.adjustOxyLoss(-8*REM, FALSE)
-	M.adjustToxLoss(-4*REM, FALSE)
-	M.adjustBruteLoss(-4*REM, FALSE)
-	M.adjustFireLoss(-4*REM, FALSE)
-	if(M.blood_volume < (BLOOD_VOLUME_NORMAL*M.blood_ratio))
-		M.adjust_integration_blood(40) // blood fall out man bad
-	M.AdjustAllImmobility(-60, FALSE)
-	M.AdjustUnconscious(-60, FALSE)
+	if(M.health < 50 && M.health > 0)
+		M.adjustOxyLoss(-1 * REM, FALSE)
+		M.adjustToxLoss(-1 * REM, FALSE)
+		M.adjustBruteLoss(-1 * REM, FALSE)
+		M.adjustFireLoss(-1 * REM, FALSE)
+	M.AdjustAllImmobility(-80, FALSE)
+	M.AdjustParalyzed(-40, FALSE)
 	M.AdjustKnockdown(-40, FALSE)
+	M.AdjustImmobilized(-40, FALSE)
 	M.adjustStaminaLoss(-40*REM, FALSE)
 	..()
 	. = 1
@@ -1441,7 +1439,7 @@
 	M.adjustToxLoss(-3 * REM, FALSE, TRUE) //Heals TOXINLOVERS
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2 * REM, 150) //This does, after all, come from ambrosia, and the most powerful ambrosia in existence, at that!
 	M.adjustCloneLoss(-1 * REM, FALSE)
-	M.adjustStaminaLoss(-13 * REM, FALSE)
+	M.adjustStaminaLoss(-1 * REM, FALSE)
 	M.jitteriness = min(max(0, M.jitteriness + 3), 30)
 	M.druggy = min(max(0, M.druggy + 10), 15) //See above
 	..()
@@ -1804,29 +1802,40 @@
 	clot_coeff_per_wound = 0.8
 
 //Sloowly heals system corruption in robotic organisms. Causes mild toxins damage in nonrobots.
+// BLUEMOON EDITED - усилен эффект, добавлено оповещение о передозировке, увеличен порог передозировки
 /datum/reagent/medicine/system_cleaner
 	name = "System Cleaner"
 	description = "A reagent with special properties causing it to slowly reduce corruption in robots. Mildly toxic for organics."
 	reagent_state = LIQUID
 	color = "#D7C9C6"
-	metabolization_rate = 0.2 * REAGENTS_METABOLISM
+	metabolization_rate = 3 * REAGENTS_METABOLISM
 	chemical_flags = REAGENT_ALL_PROCESS
-	overdose_threshold = 30
+	overdose_threshold = 50
 
 /datum/reagent/medicine/system_cleaner/on_mob_life(mob/living/carbon/M)
 	. = ..()
 	if(HAS_TRAIT(M, TRAIT_ROBOTIC_ORGANISM))
-		M.adjustToxLoss(-0.4*REM, toxins_type = TOX_SYSCORRUPT)
+		M.adjustToxLoss(-0.8 * 2 * REM, toxins_type = TOX_SYSCORRUPT)
 	else
-		M.adjustToxLoss(0.5*REM)
+		M.adjustToxLoss(0.5 * 2 * REM)
 	. = 1
+
+/datum/reagent/medicine/system_cleaner/overdose_start(mob/living/M)
+	. = ..()
+	if(istype(M, /mob/living/carbon/human) && isrobotic(M))
+		var/mob/living/carbon/human/H = M
+		to_chat(H, span_boldwarning("Ош$бка систе%ммы обраббббботкI реаг^нтов - отк*люччение модулR очист%ки..."))
+		H.Dizzy(20)
+		H.emote("buzz")
 
 /datum/reagent/medicine/system_cleaner/overdose_process(mob/living/carbon/M)
 	. = ..()
 	if(HAS_TRAIT(M, TRAIT_ROBOTIC_ORGANISM))
-		M.adjustToxLoss(0.8*REM, toxins_type = TOX_SYSCORRUPT) //inverts its positive effect on overdose, for organics it's just more toxic
+		if(current_cycle % 10 == 0)
+			to_chat(M, span_warning("П&вреждение ддр%йверов оч$стки - обрат}тесь к сист#мному админист@ратору..."))
+		M.adjustToxLoss(1.6 * 2 * REM, toxins_type = TOX_SYSCORRUPT) //inverts its positive effect on overdose, for organics it's just more toxic
 	else
-		M.adjustToxLoss(0.5*REM)
+		M.adjustToxLoss(0.5 * 2 * REM)
 	. = 1
 
 /datum/reagent/medicine/limb_regrowth

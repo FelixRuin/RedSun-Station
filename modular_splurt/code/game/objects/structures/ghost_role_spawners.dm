@@ -80,6 +80,7 @@
 	flavour_text = "You've survived weeks in this hellish place. Maybe you want to live here with ash tribe or return to civilisation. \
 	Only you know how you got to this planetoid, whether this place in which you woke up was one of your shelters, or you just stumbled upon it."
 	can_load_appearance = TRUE
+	antagonist_type = /datum/antagonist/ghost_role/hermit
 
 /obj/effect/mob_spawn/human/wandering_hermit/Destroy()
 	var/obj/structure/fluff/empty_sleeper/S = new(drop_location())
@@ -190,6 +191,7 @@
 	can_load_appearance = TRUE
 	outfit = /datum/outfit/inteqspace/inteq_crew
 	assignedrole = ROLE_GHOSTROLE_INTEQ
+	antagonist_type = /datum/antagonist/ghost_role/inteq
 
 /datum/outfit/inteqspace/inteq_crew/post_equip(mob/living/carbon/human/H)
 	H.faction |= ROLE_INTEQ
@@ -205,6 +207,14 @@
 
 	var/obj/item/implant/anchor/ghost_anchor = new
 	ghost_anchor.implant(new_spawn, null, TRUE)
+
+/obj/effect/mob_spawn/human/inteqspace/hostage
+	name = "InteQ Hostage"
+	short_desc = "Вы - оказались в больших неприятностях в плену."
+	flavour_text = "Вы плохо помните как вы тут оказались, возможно вас накачали чем то. Вы до конца не уверены, продали ли вас в рабство либо похитили, в любом случае у вас большие неприятности. Люди с оружием которые пришли сюда вряд ли собираются вас спасти, возможно это отряд головорезов, что избавляется от свидетелей, по всей видимости те выполняют приказ, им лучше не попадаться на глаза. Если вы находитесь тут то вряд ли похитители хотят вас убить, если дать им повод то вы пополните ряды ваших коллег по несчастью."
+	important_info = "Запрещено пытаться сбежать и сопротивляться без веских причин как серьёзная угроза жизни от агентов InteQ. Побег только с разрешения администрации."
+	can_load_appearance = TRUE
+	outfit = /datum/outfit/inteqspace/inteq_hostage
 
 /obj/effect/mob_spawn/human/inteqspace/captain
 	name = "InteQ Ship Captain"
@@ -249,6 +259,14 @@
 	id = /obj/item/card/id/inteq/crew_id
 	backpack_contents = list(/obj/item/paper/fluff/ruins/forgottenship/password)
 
+/datum/outfit/inteqspace/inteq_hostage
+	name = "InteQ Hostage"
+
+	uniform = /obj/item/clothing/under/rank/prisoner
+	shoes = /obj/item/clothing/shoes/sneakers/orange
+	id = /obj/item/card/id/prisoner
+	ears = /obj/item/radio/headset/ghost_inteq
+
 /datum/outfit/inteqspace/inteq_captain
 	name = "InteQ Ship Captain"
 
@@ -286,6 +304,7 @@
 	skip_reentry_check = TRUE
 	banType = ROLE_GHOSTCAFE
 	can_load_appearance = 2 //(Forces player to load character appearance)
+	antagonist_type = /datum/antagonist/ghost_role/ghost_cafe
 
 /obj/effect/mob_spawn/human/ghostcafeVR/special(mob/living/carbon/human/new_spawn)
 	if(new_spawn.client)

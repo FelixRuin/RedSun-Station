@@ -1,10 +1,11 @@
 import { sortBy } from "common/collections";
 import { capitalize } from "common/string";
+
 import { useBackend, useLocalState } from "../backend";
-import { Blink, Box, Button, Dimmer, Flex, Icon, Input, Modal, Section, TextArea, LabeledList } from "../components";
+import { Blink, Box, Button, Dimmer, Flex, Icon, Input, LabeledList, Modal, Section, TextArea } from "../components";
+import { formatMoney } from '../format';
 import { Window } from "../layouts";
 import { sanitizeText } from "../sanitize";
-import { formatMoney } from '../format';
 
 const STATE_BUYING_SHUTTLE = "buying_shuttle";
 const STATE_CALLING_ERT = "calling_ert";
@@ -16,6 +17,7 @@ const STATE_MESSAGES = "messages";
 const SWIPE_NEEDED = "SWIPE_NEEDED";
 
 const sortByCreditCost = sortBy(shuttle => shuttle.creditCost);
+const sortByCreditCostERT = sortBy(ert => ert.creditCost);
 
 const AlertButton = (props, context) => {
   const { act, data } = useBackend(context);
@@ -247,6 +249,7 @@ const PageCallingERT = (props, context) => {
     </Box>
   );
 };
+
 
 const PageChangingStatus = (props, context) => {
   const { act, data } = useBackend(context);
@@ -757,6 +760,7 @@ const PageMain = (props, context) => {
 const PageMessages = (props, context) => {
   const { act, data } = useBackend(context);
   const messages = data.messages || [];
+  const { printerCooldown } = data;
 
   const children = [];
 
@@ -783,10 +787,15 @@ const PageMessages = (props, context) => {
               content={answer}
               color={message.answered === answerIndex + 1 ? "good" : undefined}
               key={answerIndex}
-              onClick={message.answered ? undefined : () => act("answerMessage", {
-                message: parseInt(messageIndex, 10) + 1,
-                answer: answerIndex + 1,
-              })}
+              onClick={
+                message.answered
+                  ? undefined
+                  : () =>
+                    act("answerMessage", {
+                      message: parseInt(messageIndex, 10) + 1,
+                      answer: answerIndex + 1,
+                    })
+              }
             />
           ))}
         </Box>
@@ -802,14 +811,24 @@ const PageMessages = (props, context) => {
         title={message.title}
         key={messageIndex}
         buttons={(
-          <Button.Confirm
-            icon="trash"
-            content="Удалить"
-            color="red"
-            onClick={() => act("deleteMessage", {
-              message: messageIndex + 1,
-            })}
-          />
+          <>
+            <Button
+              icon="print"
+              content="Распечатать"
+              disabled={printerCooldown}
+              onClick={() => act("printMessage", {
+                message: parseInt(messageIndex, 10) + 1,
+              })}
+            />
+            <Button.Confirm
+              icon="trash"
+              content="Удалить"
+              color="red"
+              onClick={() => act("deleteMessage", {
+                message: parseInt(messageIndex, 10) + 1,
+              })}
+            />
+          </>
         )}>
         <Box
           dangerouslySetInnerHTML={textHtml} />
@@ -840,7 +859,7 @@ export const CommunicationsConsoleInteq = (props, context) => {
 
   return (
     <Window
-      width={400}
+      width={450}
       height={650}
       theme={emagged ? "inteq" : undefined}>
       <Window.Content overflow="auto">

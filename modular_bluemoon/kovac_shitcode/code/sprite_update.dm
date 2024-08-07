@@ -555,6 +555,17 @@
 	gender = FEMALE
 	icon = 'modular_bluemoon/kovac_shitcode/icons/animals.dmi'
 
+/mob/living/simple_animal/pet/cat/space/alta
+	name = "Space Alta"
+	desc = "An ordinary Alta, except that she is wearing a special elite modsuit from a Cybersun to protect herself in space."
+	icon_state = "spacealta"
+	icon_living = "spacealta"
+	icon_dead = "spacealta_dead"
+	held_icon = "spacealta"
+	unique_pet = TRUE
+	gender = FEMALE
+	icon = 'modular_bluemoon/kovac_shitcode/icons/animals.dmi'
+
 /mob/living/simple_animal/pet/dog/corgi/Lisa/ada
 	name = "Ada"
 	real_name = "Ada"
@@ -565,6 +576,19 @@
 	icon_state = "ada"
 	icon_living = "ada"
 	icon_dead = "ada_dead"
+	held_icon = "ada"
+	icon = 'modular_bluemoon/kovac_shitcode/icons/animals.dmi'
+
+/mob/living/simple_animal/pet/dog/corgi/Lisa/zlatchek
+	name = "Zlat"
+	real_name = "Zlat"
+	gender = MALE
+	desc = "A happy coyote, in a green officer's cap with the name Zlat written on the back."
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
+	icon_state = "zlat"
+	icon_living = "zlat"
+	icon_dead = "zlat_dead"
 	held_icon = "ada"
 	icon = 'modular_bluemoon/kovac_shitcode/icons/animals.dmi'
 

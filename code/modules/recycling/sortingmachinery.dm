@@ -118,6 +118,9 @@
 		AM.relay_container_resist(user, O)
 		return
 	to_chat(user, "<span class='notice'>You lean on the back of [O] and start pushing to rip the wrapping around it.</span>")
+	if(INTERACTING_WITH(user, O))
+		to_chat(user, span_warning("You're already interacting with [O]!"))
+		return
 	if(do_after(user, 50, target = O))
 		if(!user || user.stat != CONSCIOUS || user.loc != O || O.loc != src )
 			return

@@ -561,7 +561,7 @@
 		to_chat(src, "<span class='notice'>Деятельность сброшена.</span>")
 		return
 	if(stat == CONSCIOUS)
-		display_typing_indicator()
+		display_typing_indicator(isMe = TRUE)
 		activity = stripped_input(src, "Здесь можно описать продолжительную (долго длящуюся) деятельность, которая будет отображаться столько, сколько тебе нужно.", "Опиши свою деятельность", "", MAX_MESSAGE_LEN)
 		clear_typing_indicator()
 		if(activity)
@@ -1389,10 +1389,10 @@
 			return FALSE
 		if(NAMEOF(src, resize))
 			update_size(var_value)
-			return FALSE
+			return TRUE
 		if(NAMEOF(src, size_multiplier))
 			update_size(var_value)
-			return FALSE
+			return TRUE
 	. = ..()
 	switch(var_name)
 		if(NAMEOF(src, eye_blind))

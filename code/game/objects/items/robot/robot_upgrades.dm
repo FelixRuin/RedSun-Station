@@ -93,6 +93,9 @@
 		R.AddAbility(VC)
 		R.cansprint = 0
 		R.disable_intentional_sprint_mode()
+		var/datum/hud/robot/robohud = R.hud_used
+		if(istype(robohud))
+			robohud.assert_move_intent_ui()
 
 /obj/item/borg/upgrade/vtec/deactivate(mob/living/silicon/robot/R, user = usr)
 	. = ..()
@@ -100,6 +103,9 @@
 		R.RemoveAbility(VC)
 		R.vtec = initial(R.vtec)
 		R.cansprint = 1
+		var/datum/hud/robot/robohud = R.hud_used
+		if(istype(robohud))
+			robohud.assert_move_intent_ui()
 
 /obj/item/borg/upgrade/disablercooler
 	name = "cyborg rapid energy blaster cooling module"
@@ -221,7 +227,7 @@
 	icon_state = "cyborg_upgrade3"
 	require_module = TRUE
 	module_type = list(/obj/item/robot_module/miner)
-	module_flags = BORG_MODULE_MINER // SANDSTORM EDIT
+	module_flags = BORG_MODULE_MINER
 
 /obj/item/borg/upgrade/premiumka/action(mob/living/silicon/robot/R, user = usr)
 	. = ..()
@@ -736,9 +742,9 @@
 			if (0) //default speed
 				user.vtec = initial(user.vtec) //"vtec" value is negative and the lesser it is the faster we move.
 			if (1) //slightly faster than runnung
-				user.vtec = initial(user.vtec) - 1.25 //cyborg sprinting is roughly -2. don't forget we can't sprint with vtec.
+				user.vtec = initial(user.vtec) - 0.75 //cyborg sprinting is roughly -2. don't forget we can't sprint with vtec.  //BLUEMOON EDIT Снижение модификатора скорости со стандартных -1,25 до -0,75 для второго режима VTEC
 			if (2) //overclocking module
-				user.vtec = initial(user.vtec) - 1.75 //while changing this value check /mob/living/silicon/robot/proc/use_power() to maintain proper power drain
+				user.vtec = initial(user.vtec) - 1 //while changing this value check /mob/living/silicon/robot/proc/use_power() to maintain proper power drain //BLUEMOON EDIT Снижение модификатора скорости со стандартных -1,75 до -1 для третьего режима VTEC
 
 	action.button_icon_state = "Chevron_State_[currentState]"
 	action.UpdateButtons()
