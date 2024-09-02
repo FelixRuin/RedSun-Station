@@ -59,3 +59,11 @@
 /datum/map_template/hilbertshotel/apartment/jungle
 	name = "Apartment_jungle"
 	mappath = '_maps/templates/apartment_jungle.dmm'
+
+/datum/map_template/hilbertshotel/apartment/prison
+	name = "Apartment_prison"
+	mappath = '_maps/templates/apartment_prison.dmm'
+
+/datum/map_template/hilbertshotel/apartment/winter
+	name = "Apartment_winter"
+	mappath = '_maps/templates/apartment_winter.dmm'
