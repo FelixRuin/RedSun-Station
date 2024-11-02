@@ -305,8 +305,12 @@
 	ammo = /obj/item/ammo_box/magazine/wt550m9
 
 /obj/item/storage/box/ammo/holy
-	name = "some holy water"
+	name = "box of holy water"
 	ammo = /obj/item/reagent_containers/food/drinks/bottle/holywater
+
+/obj/item/storage/box/ammo/cleaning_grenades
+	name = "box of cleaning grenades"
+	ammo = /obj/item/grenade/chem_grenade/cleaner
 
 /obj/item/storage/box/ammo/PopulateContents()
 	..()
@@ -1735,19 +1739,6 @@
 	beantype = /obj/item/reagent_containers/food/snacks/grown/coffee/robusta
 
 //BLUEMOON ADD
-
-/obj/item/storage/box/catcrin_kit
-	name = "Catcrin kit"
-	desc = "Contains a full kit of Catcrin equipment."
-	icon_state = "box"
-
-/obj/item/storage/box/catcrin_kit/PopulateContents()
-	new /obj/item/modkit/gewehr550(src)
-	new /obj/item/modkit/hwal2572(src)
-	new /obj/item/modkit/karabiner_kit(src)
-	new /obj/item/modkit/stunspear_kit(src)
-	new /obj/item/modkit/frontline(src)
-	new /obj/item/clothing/accessory/ac_patch(src)
 
 /obj/item/storage/box/acrador_kit
 	name = "Acrador kit"

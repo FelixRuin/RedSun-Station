@@ -12,8 +12,10 @@
 #define PLANE_SPACE_PARALLAX_RENDER_TARGET "PLANE_SPACE_PARALLAX"
 
 #define OPENSPACE_LAYER 17 //Openspace layer over all
+
 #define GRAVITY_PULSE_PLANE -12
 #define GRAVITY_PULSE_RENDER_TARGET "*GRAVPULSE_RENDER_TARGET"
+
 #define OPENSPACE_PLANE -10 //Openspace plane below all turfs
 #define OPENSPACE_BACKDROP_PLANE -9 //Black square just over openspace plane to guaranteed cover all in openspace turf
 
@@ -107,6 +109,7 @@
 #define ON_EDGED_TURF_LAYER 4.35
 #define LARGE_MOB_LAYER 4.4
 #define ABOVE_ALL_MOB_LAYER 4.5
+#define RAILING_LAYER 4.7
 
 #define SPACEVINE_LAYER 4.8
 #define SPACEVINE_MOB_LAYER 4.9
@@ -244,5 +247,9 @@
 #define RENDER_PLANE_GAME_WORLD -1
 
 #define RENDER_PLANE_LIGHTING 15
+
+// Admin popup layer
+#define ADMIN_POPUP_LAYER 1
+
 ///Layer for screentips
 #define SCREENTIP_LAYER 40

@@ -80,7 +80,7 @@
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/clothing/gloves/color/latex/nitrile(src)
 	new /obj/item/clothing/head/brigdoc(src)
-	new /obj/item/defibrillator(src)
+	new /obj/item/defibrillator/loaded(src) //BLUEMOOB Change - поменял на заряженный ибо батареек у БМов нет
 	new /obj/item/storage/belt/medical(src)
 	new /obj/item/pinpointer/crew(src)
 	new /obj/item/clothing/suit/brigdoc(src)
@@ -135,7 +135,7 @@
 /obj/structure/closet/secure_closet/mopp
 	name = "advance MOPP locker"
 	req_access = list(ACCESS_CENT_GENERAL)
-	icon_state = "goodies"
+	icon_state = "secure"
 
 /obj/structure/closet/secure_closet/mopp/PopulateContents()
 	..()
@@ -151,7 +151,7 @@
 /obj/structure/closet/secure_closet/commandmopp
 	name = "advance MOPP locker 'Commander'"
 	req_access = list(ACCESS_CENT_GENERAL)
-	icon_state = "goodies"
+	icon_state = "secure"
 
 /obj/structure/closet/secure_closet/commandmopp/PopulateContents()
 	..()
@@ -167,7 +167,7 @@
 /obj/structure/closet/secure_closet/secmopp
 	name = "advance MOPP locker 'secuirity'"
 	req_access = list(ACCESS_CENT_GENERAL)
-	icon_state = "goodies"
+	icon_state = "secure"
 
 /obj/structure/closet/secure_closet/secmopp/PopulateContents()
 	..()
@@ -183,7 +183,7 @@
 /obj/structure/closet/secure_closet/medmopp
 	name = "advance MOPP locker 'medical'"
 	req_access = list(ACCESS_CENT_GENERAL)
-	icon_state = "goodies"
+	icon_state = "secure"
 
 /obj/structure/closet/secure_closet/medmopp/PopulateContents()
 	..()
@@ -199,7 +199,7 @@
 /obj/structure/closet/secure_closet/engimopp
 	name = "advance MOPP locker 'engineering'"
 	req_access = list(ACCESS_CENT_GENERAL)
-	icon_state = "goodies"
+	icon_state = "secure"
 
 /obj/structure/closet/secure_closet/engimopp/PopulateContents()
 	..()
@@ -231,6 +231,7 @@
 	new /obj/item/autosurgeon/breathing_tube(src)
 	new /obj/item/storage/box/flashbangs(src)
 	new /obj/item/shield/riot/tele(src)
+	new /obj/item/storage/belt/military(src) //BLUEMOON add
 	new /obj/item/storage/belt/security/full(src)
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/pinpointer/nuke(src)
@@ -249,12 +250,6 @@
 
 /obj/structure/closet/secure_closet/ntr/PopulateContents()
 	..()
-	new /obj/item/clothing/neck/cloak/nanotrasen_representative(src)
-	new /obj/item/clothing/neck/cloak/syndiecap(src)
-	new /obj/item/clothing/under/rank/centcom/officer_alt(src)
-	new /obj/item/clothing/under/syndicate(src)
-	new /obj/item/clothing/head/beret/sec/ntr_beret(src)
-	new /obj/item/clothing/head/HoS/beret/syndicate(src)
 	new /obj/item/megaphone/sec(src)
 	new /obj/item/radio/headset/heads/ntr(src)
 	new /obj/item/stamp/syndicate(src)
@@ -267,3 +262,4 @@
 	new /obj/item/folder(src)
 	new /obj/item/folder(src)
 	new /obj/item/folder(src)
+	new /obj/item/storage/garment_case/ntr(src) //BLUEMOON add

@@ -178,7 +178,7 @@
 	begin_month = APRIL
 
 /datum/holiday/april_fools/celebrate()
-	SSjob.set_overflow_role("Clown Сектор |")
+	SSjob.set_overflow_role("Clown")
 	SSticker.login_music = 'sound/ambience/clown.ogg'
 	for(var/mob/dead/new_player/P in GLOB.mob_list)
 		if(P.client)
@@ -444,7 +444,7 @@
 	drone_hat = /obj/item/clothing/head/that
 
 /datum/holiday/lgbt/intersexawareness
-	name = "Intersex Awareness Day"
+	name = "Intersex Awareness Day |"
 	begin_day = 26
 	begin_month = OCTOBER
 
@@ -504,7 +504,7 @@
 	drone_hat = /obj/item/clothing/head/peaceflower
 
 /datum/holiday/lgbt/transawareness
-	name = "Transgender Awareness Week"
+	name = "Transgender Awareness Week |"
 	begin_day = 13
 	begin_month = NOVEMBER
 	end_day = 19
@@ -520,7 +520,7 @@
 	return "This week is Transgender Awareness Week!"
 
 /datum/holiday/lgbt/transremembrance
-	name = "Transgender Day of Remembrance"
+	name = "Transgender Day of Remembrance |"
 	begin_day = 20
 	begin_month = NOVEMBER
 
@@ -586,7 +586,7 @@
 	begin_weekday = MONDAY
 
 /datum/holiday/lgbt/aceawareness
-	name = "Asexual Awareness Week"
+	name = "Asexual Awareness Week |"
 	begin_month = OCTOBER
 
 	holiday_colors = list(

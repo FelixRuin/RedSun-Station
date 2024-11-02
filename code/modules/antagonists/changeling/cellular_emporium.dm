@@ -1,3 +1,6 @@
+#define ANTAG_EXTENDED 	(1<<0)
+#define ANTAG_DYNAMIC 	(1<<1)
+
 // cellular emporium
 // The place where changelings go to buy their biological weaponry.
 
@@ -43,6 +46,9 @@
 		if(dna_cost <= 0)
 			continue
 
+		if(!gamemode_restricted(ability))
+			continue
+
 		var/list/AL = list()
 		AL["name"] = initial(ability.name)
 		AL["desc"] = initial(ability.desc)
@@ -70,6 +76,13 @@
 		if("evolve")
 			var/sting_name = params["name"]
 			changeling.purchase_power(sting_name)
+
+/datum/cellular_emporium/proc/gamemode_restricted(datum/action/changeling/ability)
+	if(ANTAG_EXTENDED & initial(ability.gamemode_restriction_type) && GLOB.master_mode == "Extended")
+		. = TRUE
+	if(ANTAG_DYNAMIC & initial(ability.gamemode_restriction_type))
+		if(GLOB.master_mode == "Dynamic (Light)" && GLOB.master_mode == "Dynamic (Medium)" && GLOB.master_mode == "Dynamic (Hard)" && GLOB.master_mode == "Dynamic (Team-Based)")
+			. = TRUE
 
 /datum/action/innate/cellular_emporium
 	name = "Cellular Emporium"

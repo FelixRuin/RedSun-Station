@@ -7,6 +7,7 @@
 	dna_cost = 2
 	loudness = 1
 	req_human = TRUE
+	gamemode_restriction_type = ANTAG_DYNAMIC
 
 //A flashy ability, good for crowd control and sowing chaos.
 /datum/action/changeling/resonant_shriek/sting_action(mob/user)

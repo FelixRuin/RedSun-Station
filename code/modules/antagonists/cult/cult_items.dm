@@ -103,7 +103,6 @@
 			to_chat(user, "<span class='userdanger'>A horrible force yanks at your arm!</span>")
 			user.emote("realagony")
 			user.apply_damage(30, BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
-			user.emote("realagony")
 
 /obj/item/cult_bastard
 	name = "Bloody Bastard Sword"
@@ -1177,7 +1176,7 @@
 	throwforce = 15
 	throw_speed = 1
 	throw_range = 4
-	block_chance = 20 //bluemoon shange
+	block_chance = 30 //bluemoon shange
 	w_class = WEIGHT_CLASS_BULKY
 	attack_verb = list("bumped", "prodded")
 	hitsound = 'sound/weapons/smash.ogg'
@@ -1191,10 +1190,9 @@
 	if(iscultist(owner))
 		if(istype(object, /obj/item/projectile) && (attack_type == ATTACK_TYPE_PROJECTILE))
 			if(is_energy_reflectable_projectile(object))
-				block_chance += 70 //bluemoon shange
+				final_block_chance += 70 //bluemoon shange
 				if(prob(final_block_chance))
 					block_return[BLOCK_RETURN_REDIRECT_METHOD] = REDIRECT_METHOD_RETURN_TO_SENDER //bluemoon shange
-					block_chance = initial(block_chance) //bluemoon shange
 					return BLOCK_SUCCESS | BLOCK_SHOULD_REDIRECT | BLOCK_PHYSICAL_EXTERNAL | BLOCK_REDIRECTED
 				return BLOCK_NONE	//To avoid reflection chance double-dipping with block chance
 			var/obj/item/projectile/P = object
@@ -1203,7 +1201,7 @@
 				T.visible_message("<span class='warning'>The sheer force from [P] shatters the mirror shield!</span>")
 				new /obj/effect/temp_visual/cult/sparks(T)
 				playsound(T, 'sound/effects/glassbr3.ogg', 100)
-				owner.DefaultCombatKnockdown(25)
+				owner.Paralyze(25) //BULEMOON REBALANCE Смена обычного падения на паралич.
 				qdel(src)
 				return BLOCK_NONE
 		. = ..()

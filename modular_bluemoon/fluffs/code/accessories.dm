@@ -94,6 +94,14 @@
 	icon_state = "dogtag"
 	item_state = "dogtag"
 
+/obj/item/clothing/neck/tie/dread_neck
+	name = "Наплечники судьи"
+	desc = "Довольно большой полу-жилет что крепится на тонкую ткань, на плечах большие и довольно массивные словно отлитые из золота регалии, где на правом плече красовался Орёл, и на втором уже простое покрытие брусками, и на левой стороне передней части жилетки виднеется массивный значок с потертым именем Дредд что кажется вам знакомым. Одевая эти регалии вас переполняет чуство груза за решения что вы принимаете вынося вердикт."
+	icon_state = "dread_neck"
+	item_state = "dread_neck"
+	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/accessories.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/accessories.dmi'
+
 ////////////////////////
 
 /obj/item/clothing/gloves/fingerless/monolith_gloves
@@ -127,3 +135,13 @@
 	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/shoes.dmi'
 	icon_state = "SATTjackboots"
 	item_state = "SATTjackboots"
+
+////////////////////////
+
+/obj/item/clothing/suit/kimono/warai
+	name = "Кимоно 笑い"
+	desc = "Дорогая одежда на восточный мотив. Слишком большая для ношения существами без дополнительных пар лап. При детальном осмотре выясняется что соткана она из необычного материала, а именно сушеных сухожилий и чьей то шерсти. Вдоль всего кимоно виднеются позвонки и выпирающие ребра, что улучшают прочность одеяния. Так же имеется что то типа самурайской пластинчатой брони под кимоно, состоящих из плоских костей. А еще местами виднеется орнамент в виде странных цветов... вам показалось или они моргают?"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_ALL_TAURIC
+	icon = 'icons/obj/clothing/uniforms.dmi'
+	mob_overlay_icon = 'icons/mob/clothing/uniform_digi.dmi'
+	taur_mob_worn_overlay = 'modular_sand/icons/mob/suits_taur.dmi'

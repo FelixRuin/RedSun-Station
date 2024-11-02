@@ -216,10 +216,10 @@
 		return
 	new /obj/item/stack/medical/gauze(src)
 	new /obj/item/reagent_containers/medspray/sterilizine(src)
-	new /obj/item/reagent_containers/glass/bottle/morphine(src)
-	new /obj/item/reagent_containers/glass/bottle/morphine(src)
+	new /obj/item/reagent_containers/glass/bottle/chloralhydrate(src)
+	new /obj/item/reagent_containers/glass/bottle/chloralhydrate(src)
+	new /obj/item/reagent_containers/glass/bottle/chloralhydrate(src)
 	new /obj/item/reagent_containers/hypospray/combat/omnizine(src)
-	new /obj/item/reagent_containers/hypospray/medipen/penacid(src)
 	new /obj/item/reagent_containers/hypospray/medipen/penacid(src)
 	new /obj/item/reagent_containers/hypospray/medipen/penacid(src)
 
@@ -446,6 +446,23 @@
 /obj/item/storage/pill_bottle/neurine/PopulateContents()
 	for(var/i in 1 to 5)
 		new /obj/item/reagent_containers/pill/neurine(src)
+
+/obj/item/storage/pill_bottle/floorpill
+	name = "bottle of floorpills"
+	desc = "An old pill bottle. It smells musty."
+
+/obj/item/storage/pill_bottle/floorpill/Initialize(mapload)
+	. = ..()
+	var/obj/item/reagent_containers/pill/P = locate() in src
+	name = "bottle of [P.name]s"
+
+/obj/item/storage/pill_bottle/floorpill/PopulateContents()
+	for(var/i in 1 to rand(1,7))
+		new /obj/item/reagent_containers/pill/floorpill(src)
+
+/obj/item/storage/pill_bottle/floorpill/full/PopulateContents()
+	for(var/i in 1 to 7)
+		new /obj/item/reagent_containers/pill/floorpill(src)
 
 /////////////
 //Organ Box//
