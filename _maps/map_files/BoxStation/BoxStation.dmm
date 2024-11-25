@@ -14718,10 +14718,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
-	dir = 4;
-	external_pressure_bound = 140;
-	name = "server vent";
-	pressure_checks = 0
+	dir = 4
 	},
 /turf/open/floor/plasteel/white,
 /area/science)
@@ -21851,6 +21848,7 @@
 	name = "Server Room";
 	req_access_txt = "30"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel/dark,
 /area/science/server)
 "bAC" = (
@@ -42197,6 +42195,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel/dark,
 /area/tcommsat/computer)
 "dum" = (
@@ -64978,11 +64977,7 @@
 /turf/open/floor/plating,
 /area/maintenance/fore)
 "rQK" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on{
-	external_pressure_bound = 140;
-	name = "killroom vent";
-	pressure_checks = 0
-	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on,
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
 "rQQ" = (

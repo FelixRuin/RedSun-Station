@@ -72,4 +72,4 @@
 /obj/effect/mob_spawn/human/changeling_extended/special(mob/living/new_spawn)
 	. = ..()
 	var/mob/living/carbon/human/H = new_spawn
-	H.mind.make_Changeling()
+	H.mind.make_XenoChangeling()

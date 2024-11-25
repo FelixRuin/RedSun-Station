@@ -36,6 +36,7 @@
 	suit = /obj/item/clothing/suit/armor/abductor/vest
 	suit_store = /obj/item/abductor/baton
 	belt = /obj/item/storage/belt/military/abductor/full
+	gloves = /obj/item/clothing/gloves/combat
 
 	backpack_contents = list(
 		/obj/item/gun/energy/alien = 1,
@@ -44,6 +45,7 @@
 
 /datum/outfit/abductor/scientist
 	name = "Abductor Scientist"
+	gloves = /obj/item/clothing/gloves/color/latex/nitrile/infiltrator
 
 	backpack_contents = list(
 		/obj/item/abductor/gizmo = 1

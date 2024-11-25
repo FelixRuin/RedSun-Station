@@ -28,7 +28,7 @@
 
 	examine_list += span_lewd("\nВы испытываете сильное возбуждение при взгляде на [quirk_holder.ru_na()] и краснеете!")
 	if(!TIMER_COOLDOWN_CHECK(user, COOLDOWN_PHEROMON_AURA))
-		to_chat(quirk_holder, span_notice("[user] смотрит на вас и сильно краснеет издавая тихий стон..."))
+		to_chat(quirk_holder, span_notice("[user] смотрит на вас и сильно краснеет, издавая тихий стон..."))
 		TIMER_COOLDOWN_START(user, COOLDOWN_PHEROMON_AURA, 10 SECONDS)
 		sub.emote ("moan")
 		sub.emote("blush")
@@ -40,7 +40,7 @@
 /datum/quirk/sensitive_to_pheramones
 	name = "Чувствительный к феромонам"
 	desc = "Вы ощущаете феромоны самцов или самок, что хотят размножения. Эти феромоны опутывают ваш разум желанием спаривания."
-	value = -1
+	value = 0
 	gain_text = span_notice("Вы чувствуете феромоны окружающих...")
 	lose_text = span_notice("Вы больше не чувствуете феромны вокруг себя...")
 	processing_quirk = TRUE

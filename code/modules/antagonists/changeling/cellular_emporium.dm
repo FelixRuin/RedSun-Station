@@ -78,11 +78,10 @@
 			changeling.purchase_power(sting_name)
 
 /datum/cellular_emporium/proc/gamemode_restricted(datum/action/changeling/ability)
-	if(ANTAG_EXTENDED & initial(ability.gamemode_restriction_type) && GLOB.master_mode == "Extended")
+	if(ANTAG_EXTENDED & initial(ability.gamemode_restriction_type) && SSticker.mode.config_tag == "Extended")
 		. = TRUE
-	if(ANTAG_DYNAMIC & initial(ability.gamemode_restriction_type))
-		if(GLOB.master_mode == "Dynamic (Light)" && GLOB.master_mode == "Dynamic (Medium)" && GLOB.master_mode == "Dynamic (Hard)" && GLOB.master_mode == "Dynamic (Team-Based)")
-			. = TRUE
+	if(ANTAG_DYNAMIC & initial(ability.gamemode_restriction_type) && SSticker.mode.config_tag == "dynamic")
+		. = TRUE
 
 /datum/action/innate/cellular_emporium
 	name = "Cellular Emporium"

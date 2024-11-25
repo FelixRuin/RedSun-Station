@@ -1,8 +1,3 @@
-
-
-/obj/structure/sign/poster
-	icon = 'modular__juicy/icons/obj/structures/contraband.dmi'
-
 /obj/structure/sign/poster/contraband/lusty2
 	name = "Lusty Girl"
 	desc = "A heretical poster depicting the titular star of an equally heretical book."
