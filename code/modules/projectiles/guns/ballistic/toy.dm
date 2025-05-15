@@ -111,7 +111,7 @@
 	mag_type = /obj/item/ammo_box/magazine/toy/smgm45
 
 /obj/item/gun/ballistic/automatic/c20r/toy/unrestricted/riot
-	mag_type = /obj/item/ammo_box/magazine/toy/smgm45/riot
+	mag_type = Короче сделать круто
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy //This is the syndicate variant with syndicate firing pin and riot darts.
 	name = "donksoft LMG"
