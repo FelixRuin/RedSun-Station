@@ -6114,6 +6114,9 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 4
 	},
+/obj/structure/transmitter/mounted{
+	pixel_y = 30
+	},
 /turf/open/floor/plasteel,
 /area/security/brig)
 "avc" = (
@@ -18666,7 +18669,9 @@
 /area/hallway/secondary/entry)
 "bBh" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/food/snacks/chips,
+/obj/structure/transmitter{
+	pixel_y = 8
+	},
 /turf/open/floor/plasteel/grimy,
 /area/hallway/primary/port)
 "bBj" = (
@@ -21681,6 +21686,9 @@
 	},
 /obj/effect/turf_decal/tile/dark_green{
 	dir = 1
+	},
+/obj/structure/transmitter/mounted{
+	pixel_y = 25
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
@@ -26768,6 +26776,9 @@
 /obj/effect/landmark/navigate_destination/lawyer,
 /obj/structure/table/wood,
 /obj/item/toy/figure/lawyer,
+/obj/structure/transmitter{
+	pixel_x = 8
+	},
 /turf/open/floor/wood,
 /area/service/lawoffice)
 "chN" = (
@@ -26861,11 +26872,11 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/structure/sign/warning/nosmoking{
-	pixel_y = 28
-	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
+	},
+/obj/structure/transmitter/mounted{
+	pixel_y = 25
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
@@ -49271,6 +49282,9 @@
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{
 	dir = 8
 	},
+/obj/structure/transmitter/mounted{
+	pixel_x = -20
+	},
 /turf/open/floor/plasteel,
 /area/engineering/atmos)
 "elE" = (
@@ -58773,6 +58787,10 @@
 	},
 /obj/machinery/light,
 /obj/item/toy/figure/rd,
+/obj/structure/transmitter/command{
+	pixel_x = -8;
+	pixel_y = 8
+	},
 /turf/open/floor/plasteel/cafeteria{
 	dir = 5
 	},
@@ -59544,6 +59562,9 @@
 	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
+	},
+/obj/structure/transmitter/command{
+	pixel_y = 8
 	},
 /turf/open/floor/plasteel/cafeteria,
 /area/command/heads_quarters/cmo)
@@ -61987,6 +62008,16 @@
 	},
 /turf/open/floor/plasteel,
 /area/commons/dorms)
+"klh" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/obj/structure/transmitter/mounted{
+	pixel_x = -20
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/fore)
 "klD" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
@@ -62643,6 +62674,9 @@
 	pixel_x = 27
 	},
 /obj/item/toy/figure/captain,
+/obj/structure/transmitter/command{
+	pixel_x = -8
+	},
 /turf/open/floor/wood,
 /area/command/heads_quarters/captain/private)
 "kAx" = (
@@ -63148,6 +63182,9 @@
 "kLa" = (
 /obj/structure/table,
 /obj/item/toy/cards/deck,
+/obj/structure/transmitter{
+	pixel_y = 8
+	},
 /turf/open/floor/plasteel,
 /area/commons/dorms)
 "kLr" = (
@@ -65044,7 +65081,7 @@
 "lFY" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "Gravity Generator Room";
-	req_access_txt = "19;32"
+	req_access_txt = "32"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/turf_decal/delivery,
@@ -66684,6 +66721,18 @@
 	},
 /turf/open/floor/wood,
 /area/command/heads_quarters/hop)
+"mrJ" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/structure/transmitter/mounted{
+	pixel_y = 25
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/central)
 "mrL" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -66699,7 +66748,7 @@
 "msv" = (
 /obj/machinery/door/airlock/command/glass{
 	name = "Gravity Generator Area";
-	req_access_txt = "19; 61"
+	req_access_txt = "32"
 	},
 /turf/open/floor/plasteel/dark,
 /area/engineering/gravity_generator)
@@ -67302,6 +67351,9 @@
 /obj/item/pen{
 	pixel_x = 4;
 	pixel_y = 4
+	},
+/obj/structure/transmitter/command{
+	pixel_y = 8
 	},
 /turf/open/floor/plasteel,
 /area/cargo/qm)
@@ -69625,6 +69677,21 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard)
+"nQi" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/food/condiment/saltshaker{
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/food/condiment/peppermill{
+	desc = "Often used to flavor food or make people sneeze. Fashionably moved to the left side of the table.";
+	pixel_x = -8;
+	pixel_y = 2
+	},
+/obj/structure/transmitter{
+	pixel_x = 8
+	},
+/turf/open/floor/wood,
+/area/service/bar)
 "nQo" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
 	dir = 4
@@ -71465,6 +71532,9 @@
 	},
 /obj/item/storage/belt/utility,
 /obj/item/storage/belt/utility,
+/obj/structure/transmitter{
+	pixel_y = 8
+	},
 /turf/open/floor/plasteel,
 /area/engineering/main)
 "oCi" = (
@@ -71477,9 +71547,8 @@
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos/atmos_waste{
 	dir = 1
 	},
-/obj/structure/lattice/catwalk,
-/turf/open/space,
-/area/space/nearstation)
+/turf/open/floor/plating/airless,
+/area/engineering/atmos)
 "oCy" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -72309,6 +72378,9 @@
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
+	},
+/obj/structure/transmitter/command{
+	pixel_x = -8
 	},
 /turf/open/floor/plasteel,
 /area/command/heads_quarters/ce)
@@ -73867,6 +73939,9 @@
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment,
+/obj/structure/transmitter/mounted{
+	pixel_x = -20
+	},
 /turf/open/floor/plasteel/white,
 /area/science/research)
 "pEZ" = (
@@ -77900,17 +77975,15 @@
 /turf/open/floor/plasteel,
 /area/commons/fitness/recreation)
 "rtZ" = (
-/obj/item/phone{
-	desc = "Supposedly a direct line to Nanotrasen Central Command. It's not even plugged in.";
-	pixel_x = -3;
-	pixel_y = 3
-	},
 /obj/item/cigbutt/cigarbutt{
 	pixel_x = 5;
 	pixel_y = -1
 	},
 /obj/structure/table/wood,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/transmitter/command{
+	pixel_y = 8
+	},
 /turf/open/floor/carpet,
 /area/command/heads_quarters/hos)
 "rub" = (
@@ -81588,6 +81661,10 @@
 /obj/machinery/recharger,
 /obj/item/restraints/handcuffs,
 /obj/structure/table/glass,
+/obj/structure/transmitter{
+	pixel_x = 8;
+	pixel_y = 8
+	},
 /turf/open/floor/plasteel/dark,
 /area/command/bridge)
 "tdS" = (
@@ -82766,6 +82843,9 @@
 	},
 /obj/item/taperecorder,
 /obj/item/pen/fountain,
+/obj/structure/transmitter/command{
+	pixel_x = -8
+	},
 /turf/open/floor/carpet,
 /area/command/heads_quarters/ntr)
 "tHP" = (
@@ -83068,6 +83148,9 @@
 /obj/structure/table/reinforced,
 /obj/item/paper,
 /obj/item/toy/figure/secofficer,
+/obj/structure/transmitter{
+	pixel_y = 8
+	},
 /turf/open/floor/plasteel,
 /area/security/office)
 "tNR" = (
@@ -83906,6 +83989,9 @@
 	pixel_x = 34
 	},
 /obj/structure/table/wood,
+/obj/structure/transmitter/command{
+	pixel_x = -8
+	},
 /turf/open/floor/wood,
 /area/command/heads_quarters/hop)
 "uds" = (
@@ -85050,6 +85136,9 @@
 /obj/item/stamp/hop{
 	pixel_x = -4;
 	pixel_y = 4
+	},
+/obj/structure/transmitter/mounted{
+	pixel_x = 20
 	},
 /turf/open/floor/wood,
 /area/command/heads_quarters/hop)
@@ -86217,6 +86306,7 @@
 /obj/machinery/camera/autoname{
 	dir = 4
 	},
+/obj/structure/transmitter,
 /turf/open/floor/plasteel,
 /area/science/mixing)
 "vhM" = (
@@ -89067,6 +89157,9 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/structure/transmitter{
+	pixel_y = 8
+	},
 /turf/open/floor/plasteel,
 /area/cargo/storage)
 "wCr" = (
@@ -90985,6 +91078,16 @@
 /obj/structure/closet/secure_closet/blueshield,
 /turf/open/floor/carpet,
 /area/command/blueshielquarters)
+"xsH" = (
+/obj/structure/table,
+/obj/item/candle,
+/obj/effect/turf_decal/delivery,
+/obj/structure/transmitter{
+	pixel_x = 8;
+	pixel_y = 8
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/exit/departure_lounge)
 "xsL" = (
 /obj/machinery/atmospherics/pipe/simple/general/hidden,
 /obj/effect/turf_decal/tile/red{
@@ -91393,6 +91496,9 @@
 /obj/structure/table,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
+	},
+/obj/structure/transmitter{
+	pixel_y = 8
 	},
 /turf/open/floor/plasteel,
 /area/commons/fitness/recreation)
@@ -93002,6 +93108,9 @@
 /obj/structure/table/wood,
 /obj/machinery/newscaster{
 	pixel_x = -32
+	},
+/obj/structure/transmitter{
+	pixel_y = 8
 	},
 /turf/open/floor/wood,
 /area/service/library)
@@ -117998,7 +118107,7 @@ bTs
 bTs
 cLk
 cPb
-cMR
+xsH
 cNI
 cOo
 cMR
@@ -120229,7 +120338,7 @@ aCl
 aDx
 aEQ
 aGj
-aHz
+klh
 aII
 aJT
 aLy
@@ -122297,7 +122406,7 @@ aRZ
 aIT
 aUG
 aHD
-aXS
+mrJ
 aYX
 baT
 bci
@@ -128735,7 +128844,7 @@ wep
 boV
 brm
 dYw
-uMQ
+nQi
 hNP
 ccU
 kLz

@@ -515,10 +515,10 @@ GLOBAL_LIST_EMPTY(bot_event_sending_que)
 GLOBAL_LIST_EMPTY(bot_ooc_sending_que)
 GLOBAL_LIST_EMPTY(bot_asay_sending_que)
 
-/datum/world_topic/recieve_info
-	key = "recieve_info"
+/datum/world_topic/receive_info
+	key = "receive_info"
 
-/datum/world_topic/recieve_info/Run(list/input)
+/datum/world_topic/receive_info/Run(list/input)
 	data = list()
 	if(!length(GLOB.bot_event_sending_que) && !length(GLOB.bot_ooc_sending_que) && !length(GLOB.bot_asay_sending_que))
 		statuscode = 501
