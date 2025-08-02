@@ -16179,13 +16179,11 @@
 /obj/machinery/light_switch{
 	pixel_y = -23
 	},
-/obj/effect/turf_decal/tile/purple/anticorner,
 /obj/effect/turf_decal/loading_area{
 	dir = 8
 	},
-/turf/open/floor/plasteel/white/textured/corner{
-	dir = 1
-	},
+/obj/effect/turf_decal/tile/purple/full,
+/turf/open/floor/plasteel/white/textured/large,
 /area/science/research)
 "bpr" = (
 /obj/machinery/navbeacon{
@@ -16270,9 +16268,10 @@
 	pixel_x = 24
 	},
 /obj/effect/turf_decal/tile/purple/half{
-	dir = 4
+	dir = 1
 	},
-/turf/open/floor/plasteel/white/textured/half{
+/obj/effect/turf_decal/tile/purple,
+/turf/open/floor/plasteel/white/textured/edge{
 	dir = 1
 	},
 /area/science)
@@ -17731,6 +17730,9 @@
 	},
 /obj/effect/turf_decal/tile/purple/half,
 /obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
 /turf/open/floor/plasteel/white/textured/edge,
@@ -40042,7 +40044,7 @@
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/maintenance/fore)
+/area/service/lawoffice)
 "eIt" = (
 /obj/effect/turf_decal/tile/brown/anticorner{
 	dir = 8
@@ -47581,7 +47583,7 @@
 /turf/open/floor/plasteel/damturf/damage5,
 /area/maintenance/port/aft)
 "ilk" = (
-/turf/open/floor/plasteel/textured/half,
+/turf/open/floor/plasteel/textured/corner,
 /area/commons/storage/primary)
 "ilw" = (
 /turf/open/floor/grass/grass0,
@@ -54289,8 +54291,8 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/open/floor/plasteel/textured/corner{
-	dir = 4
+/turf/open/floor/plasteel/textured/edge{
+	dir = 8
 	},
 /area/hallway/primary/port)
 "ltP" = (
@@ -57780,6 +57782,17 @@
 	dir = 1
 	},
 /area/security/office)
+"mYt" = (
+/obj/effect/turf_decal/tile/purple/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/purple{
+	dir = 8
+	},
+/turf/open/floor/plasteel/white/textured/edge{
+	dir = 1
+	},
+/area/science)
 "mYJ" = (
 /obj/machinery/smartfridge/disks{
 	pixel_y = 2
@@ -60369,8 +60382,8 @@
 	location = "Tool Storage"
 	},
 /obj/structure/disposalpipe/segment,
-/turf/open/floor/plasteel/textured/edge{
-	dir = 1
+/turf/open/floor/plasteel/textured/corner{
+	dir = 8
 	},
 /area/commons/storage/primary)
 "opS" = (
@@ -64725,10 +64738,10 @@
 /area/science/xenobiology)
 "qzR" = (
 /obj/structure/bed,
-/obj/item/bedsheet/random,
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/item/bedsheet/brown,
 /turf/open/floor/carpet/orange,
 /area/medical/psychology)
 "qzY" = (
@@ -65337,7 +65350,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
-/turf/open/floor/plasteel/textured/half,
+/turf/open/floor/plasteel/textured/edge,
 /area/commons/storage/primary)
 "qPl" = (
 /obj/effect/turf_decal/bot/yellow,
@@ -69215,6 +69228,9 @@
 	},
 /obj/effect/turf_decal/tile/neutral/anticorner{
 	dir = 8
+	},
+/obj/effect/turf_decal/stripes/yellow/corner{
+	dir = 4
 	},
 /turf/open/floor/plasteel/textured/corner{
 	dir = 4
@@ -79151,6 +79167,15 @@
 "xxp" = (
 /turf/open/floor/plating,
 /area/security/range)
+"xxw" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
+/obj/structure/disposalpipe/segment,
+/obj/effect/turf_decal/tile/purple/half{
+	dir = 1
+	},
+/turf/open/floor/plasteel/white/textured/half,
+/area/science)
 "xxz" = (
 /obj/structure/disposalpipe/segment{
 	dir = 10
@@ -102286,14 +102311,14 @@ arP
 cCe
 ayz
 arP
-arP
+atS
 lLf
 qzh
 cmP
 btD
 lLf
-arP
-arP
+atS
+atS
 aKB
 jJt
 kzn
@@ -102818,7 +102843,7 @@ bOL
 aTI
 aPK
 aWB
-wUr
+aPz
 vRB
 vRB
 vRB
@@ -107681,7 +107706,7 @@ nFR
 qjs
 auf
 eIf
-ayW
+aph
 cQB
 cQB
 cQB
@@ -126475,7 +126500,7 @@ bkq
 bjZ
 bvx
 boz
-bzE
+mYt
 bzE
 bsX
 bsz
@@ -126732,7 +126757,7 @@ bhU
 vNH
 blX
 bow
-boO
+xxw
 boO
 bsZ
 cdX
