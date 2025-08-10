@@ -46474,9 +46474,11 @@
 /turf/open/floor/grass,
 /area/service/park)
 "icJ" = (
-/obj/structure/closet/secure_closet/personal,
 /obj/structure/window/reinforced{
 	dir = 8
+	},
+/obj/structure/closet/secure_closet/personal{
+	anchored = 1
 	},
 /turf/open/floor/plasteel/dark/textured/large,
 /area/commons/locker)
@@ -46696,7 +46698,9 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/structure/closet/secure_closet/personal,
+/obj/structure/closet/secure_closet/personal{
+	anchored = 1
+	},
 /turf/open/floor/plasteel/dark/textured/large,
 /area/commons/locker)
 "ijY" = (
