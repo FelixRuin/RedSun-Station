@@ -14294,7 +14294,7 @@
 /area/maintenance/central)
 "boW" = (
 /obj/structure/bed/double{
-	dir = 4
+	dir = 1
 	},
 /obj/item/bedsheet/captain/double{
 	dir = 4
