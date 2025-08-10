@@ -95,7 +95,6 @@
 	name = "blueshield's locker"
 	req_access = list(ACCESS_BLUESHIELD)
 	icon_state = "bs"
-	var/pack_amount = 2
 
 /obj/structure/closet/secure_closet/blueshield/PopulateContents()
 	..()
