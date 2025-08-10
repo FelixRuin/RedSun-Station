@@ -47325,7 +47325,7 @@
 /obj/machinery/door/window/brigdoor{
 	dir = 1;
 	name = "Reception Desk";
-	req_access_txt = "3"
+	req_access_txt = "63"
 	},
 /obj/machinery/door/window/southleft{
 	name = "Reception Desk";
@@ -61678,7 +61678,7 @@
 /obj/machinery/door/window/brigdoor{
 	dir = 4;
 	name = "Reception Desk";
-	req_access_txt = "3"
+	req_access_txt = "63"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/preopen{
@@ -73015,7 +73015,7 @@
 /obj/machinery/door/window/brigdoor{
 	dir = 1;
 	name = "Reception Desk";
-	req_access_txt = "3"
+	req_access_txt = "63"
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
