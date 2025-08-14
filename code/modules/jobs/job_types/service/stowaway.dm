@@ -81,6 +81,27 @@ GLOBAL_LIST_EMPTY(roundstart_stowaway)
 	duffelbag = /obj/item/storage/backpack/duffelbag/syndie
 	box = /obj/item/storage/box/survival/syndie
 
+/datum/outfit/job/stowaway/syndicate/changeling
+	name = "Syndicate Stowaway"
+	jobtype = /datum/job/stowaway
+
+	id = /obj/item/card/id/stowaway_stolen
+
+	uniform = /obj/item/clothing/under/syndicate/combat
+	shoes = /obj/item/clothing/shoes/jackboots/tall_default
+	ears = null
+	belt = /obj/item/storage/belt/utility/atmostech
+	gloves = /obj/item/clothing/gloves/color/yellow
+	r_pocket = /obj/item/radio
+	l_pocket = /obj/item/flashlight
+
+	accessory = /obj/item/clothing/accessory/permit/special/deviant/lust/changeling
+
+	backpack = /obj/item/storage/backpack/duffelbag/syndie
+	satchel = /obj/item/storage/backpack/duffelbag/syndie
+	duffelbag = /obj/item/storage/backpack/duffelbag/syndie
+	box = /obj/item/storage/box/survival/syndie
+
 /datum/outfit/plasmaman/stowaway
 	name = "Stowaway Plasmaman"
 	shoes = /obj/item/clothing/shoes/sneakers/black

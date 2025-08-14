@@ -150,7 +150,7 @@ mob/living/proc/ghost_cafe_traits(switch_on = FALSE, additional_area)
 	can_load_appearance = TRUE
 	loadout_enabled = TRUE
 	use_outfit_name = TRUE
-	outfit = /datum/outfit/job/stowaway/syndicate
+	outfit = /datum/outfit/job/stowaway/syndicate/changeling
 	category = "special"
 
 /obj/effect/mob_spawn/human/changeling_extended/attack_ghost(mob/user, latejoinercalling)
