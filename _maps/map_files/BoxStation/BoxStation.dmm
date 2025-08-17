@@ -16603,9 +16603,6 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/command/heads_quarters/rd)
-"bvK" = (
-/turf/closed/wall,
-/area/command/heads_quarters/rd)
 "bvM" = (
 /obj/machinery/light_switch{
 	pixel_x = -20
@@ -18007,7 +18004,7 @@
 /turf/open/floor/plasteel/white/textured/large,
 /area/science/mixing)
 "bBN" = (
-/turf/closed/wall,
+/turf/closed/wall/r_wall,
 /area/command/heads_quarters/cmo)
 "bBS" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/on{
@@ -54429,6 +54426,9 @@
 	dir = 1
 	},
 /area/cargo/miningdock)
+"lcv" = (
+/turf/closed/wall/r_wall,
+/area/security/checkpoint/medical)
 "lcw" = (
 /obj/effect/turf_decal/tile/brown/half{
 	dir = 8
@@ -124177,12 +124177,12 @@ cGo
 mZb
 nRy
 dzc
-bfK
-bfK
-bfK
-bfK
-bfK
-bfK
+lcv
+lcv
+lcv
+lcv
+lcv
+lcv
 sAM
 jJF
 nzR
@@ -132417,8 +132417,8 @@ bvJ
 bvJ
 bvJ
 tMF
-bvK
-bvK
+byt
+byt
 nbu
 bDn
 bEz
@@ -132675,7 +132675,7 @@ byo
 aDH
 bxP
 bCf
-bvK
+byt
 bEs
 bGc
 bHm
@@ -132932,7 +132932,7 @@ byq
 bwR
 baZ
 bCh
-bvK
+byt
 bEv
 bFU
 bFT
@@ -133183,13 +133183,13 @@ boP
 bqf
 brn
 bsC
-bvK
+byt
 bxi
 byp
 bzJ
 bxY
 bCg
-bvK
+byt
 bEu
 bFU
 bFT
@@ -133440,13 +133440,13 @@ bpo
 bqk
 brp
 bsD
-bvK
+byt
 bxl
 bys
 bzM
 bya
 bCj
-bvK
+byt
 bEx
 bFU
 bFT
@@ -133697,13 +133697,13 @@ hzg
 brx
 bro
 bup
-bvK
+byt
 cBu
 byr
 bzL
 bxZ
 bCi
-bvK
+byt
 bEw
 nkk
 bEL
@@ -133954,13 +133954,13 @@ bpq
 boB
 bth
 bus
-bvK
+byt
 bxm
 byu
 sHO
 byb
 aGs
-bvK
+byt
 bBF
 bFU
 oce
@@ -134211,8 +134211,8 @@ bpp
 bqe
 brr
 bsE
-bvK
-bvK
+byt
+byt
 byt
 byt
 byt
