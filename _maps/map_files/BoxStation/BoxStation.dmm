@@ -3845,12 +3845,7 @@
 	c_tag = "Arrivals North";
 	dir = 8
 	},
-/obj/effect/turf_decal/trimline/red/filled/line{
-	dir = 4
-	},
-/obj/effect/turf_decal/trimline/red/filled/mid_joiner{
-	dir = 4
-	},
+/obj/effect/turf_decal/trimline/red/filled/corner,
 /turf/open/floor/plasteel/textured/half{
 	dir = 1
 	},
@@ -4136,7 +4131,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/trimline/red/filled/corner,
 /turf/open/floor/plasteel/textured/corner,
 /area/hallway/secondary/entry)
 "aAK" = (
@@ -5796,6 +5790,12 @@
 /obj/effect/turf_decal/tile/neutral/half{
 	dir = 1
 	},
+/obj/effect/turf_decal/trimline/green/filled/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/green/filled/mid_joiner{
+	dir = 1
+	},
 /turf/open/floor/plasteel/textured/half,
 /area/hallway/secondary/entry)
 "aIQ" = (
@@ -5809,6 +5809,9 @@
 /obj/effect/turf_decal/trimline/red/filled/corner{
 	dir = 1
 	},
+/obj/effect/turf_decal/trimline/green/filled/corner{
+	dir = 4
+	},
 /turf/open/floor/plasteel/textured/half,
 /area/hallway/secondary/entry)
 "aIR" = (
@@ -5817,6 +5820,15 @@
 	},
 /obj/effect/turf_decal/tile/neutral/anticorner{
 	dir = 4
+	},
+/obj/effect/turf_decal/trimline/green/filled/mid_joiner{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/green/filled/mid_joiner{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/green/filled/line{
+	dir = 5
 	},
 /turf/open/floor/plasteel/textured/corner{
 	dir = 8
@@ -6492,8 +6504,11 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/turf_decal/trimline/green/filled/corner{
-	dir = 4
+/obj/effect/turf_decal/trimline/green/filled/mid_joiner{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/green/filled/line{
+	dir = 1
 	},
 /turf/open/floor/plasteel/textured/half,
 /area/hallway/secondary/entry)
@@ -6835,7 +6850,8 @@
 /area/hallway/secondary/entry)
 "aNh" = (
 /obj/machinery/door/firedoor,
-/obj/effect/turf_decal/trimline/yellow/filled/corner,
+/obj/effect/turf_decal/trimline/yellow/filled/line,
+/obj/effect/turf_decal/trimline/yellow/filled/mid_joiner,
 /turf/open/floor/plasteel/textured/half,
 /area/hallway/secondary/entry)
 "aNi" = (
@@ -8223,8 +8239,15 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/neutral/anticorner,
-/obj/effect/turf_decal/trimline/dark_blue/filled/line,
-/obj/effect/turf_decal/trimline/dark_blue/filled/mid_joiner,
+/obj/effect/turf_decal/trimline/dark_blue/filled/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/mid_joiner{
+	dir = 4
+	},
 /turf/open/floor/plasteel/textured/corner{
 	dir = 1
 	},
@@ -30717,6 +30740,9 @@
 /obj/effect/turf_decal/trimline/white/filled/line{
 	dir = 8
 	},
+/obj/effect/turf_decal/trimline/white/filled/mid_joiner{
+	dir = 8
+	},
 /turf/open/floor/plasteel/textured/edge{
 	dir = 8
 	},
@@ -43950,6 +43976,7 @@
 /turf/open/floor/plating,
 /area/maintenance/disposal)
 "gHx" = (
+/obj/effect/turf_decal/trimline/yellow/filled/corner,
 /turf/open/floor/plasteel/textured/corner,
 /area/hallway/secondary/entry)
 "gHE" = (
@@ -46065,6 +46092,9 @@
 /obj/effect/turf_decal/tile/neutral{
 	color = "#ffffff"
 	},
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 4
+	},
 /turf/open/floor/plasteel/textured/edge{
 	dir = 8
 	},
@@ -46465,8 +46495,6 @@
 	pixel_x = -7;
 	pixel_y = 2
 	},
-/obj/effect/turf_decal/trimline/red/filled/line,
-/obj/effect/turf_decal/trimline/red/filled/mid_joiner,
 /turf/open/floor/plasteel/textured/corner{
 	dir = 1
 	},
@@ -52178,6 +52206,9 @@
 /area/cargo/miningdock)
 "kdJ" = (
 /obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 4
 	},
 /turf/open/floor/plasteel/textured/edge{
@@ -68608,6 +68639,11 @@
 /obj/effect/turf_decal/trimline/yellow/filled/warning{
 	dir = 1
 	},
+/obj/effect/turf_decal/trimline/yellow/mid_joiner{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = 1
+	},
 /turf/open/floor/plasteel/textured/half,
 /area/hallway/secondary/entry)
 "rcv" = (
@@ -71313,6 +71349,9 @@
 	},
 /area/security/range)
 "smk" = (
+/obj/effect/turf_decal/trimline/green/filled/corner{
+	dir = 4
+	},
 /turf/open/floor/plasteel/textured/corner{
 	dir = 4
 	},
@@ -80331,6 +80370,12 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/neutral/half{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/mid_joiner{
 	dir = 4
 	},
 /turf/open/floor/plasteel/textured/half{
