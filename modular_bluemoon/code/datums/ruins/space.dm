@@ -5,7 +5,6 @@
 	suffix = "gallery.dmm"
 	name = "Abandoned Gallery"
 	description = "Unknown gallery from by-gone era."
-	always_place = TRUE
 
 /obj/effect/spawner/lootdrop/statuesevil
 	name = "statuesevil"
