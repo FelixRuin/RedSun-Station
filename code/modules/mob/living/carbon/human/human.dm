@@ -8,10 +8,6 @@
 /mob/living/carbon/human/Initialize(mapload)
 	add_verb(src, /mob/living/proc/mob_sleep)
 	add_verb(src, /mob/living/proc/lay_down)
-	//add_verb(src, /mob/living/carbon/human/verb/underwear_toggle)
-	add_verb(src, /mob/living/verb/subtle)
-	add_verb(src, /mob/living/verb/subtler)
-	add_verb(src, /mob/living/verb/surrender) // Sandstorm change
 	//initialize limbs first
 	create_bodyparts()
 
