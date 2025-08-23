@@ -649,23 +649,26 @@
 
 /obj/item/borg/upgrade/rped/action(mob/living/silicon/robot/R, user = usr)
 	. = ..()
-	if(.)
+	if(!.)
+		return
 
-		var/obj/item/storage/part_replacer/bluespace/cyborg/BSRPED = locate() in R
-		var/obj/item/storage/part_replacer/cyborg/RPED = locate() in R
-		if(!RPED)
-			RPED = locate() in R.module
-		if(!BSRPED)
-			BSRPED = locate() in R.module //There's gotta be a smarter way to do this.
+	// Проверяем есть-ли уже БСРПЕД
+	for(var/obj/item/storage/part_replacer/bluespace/cyborg/BSRPED in R.module.modules)
 		if(BSRPED)
 			to_chat(user, "<span class='warning'>This unit is already equipped with a BSRPED module.</span>")
 			return FALSE
 
-		BSRPED = new(R.module)
-		SEND_SIGNAL(RPED, COMSIG_TRY_STORAGE_QUICK_EMPTY)
-		qdel(RPED)
-		R.module.basic_modules += BSRPED
-		R.module.add_module(BSRPED, FALSE, TRUE)
+	// Удаляем обычный РПЕД
+	for(var/obj/item/storage/part_replacer/cyborg/RPED in R.module.modules)
+		if(RPED)
+			SEND_SIGNAL(RPED, COMSIG_TRY_STORAGE_QUICK_EMPTY)
+			R.module.remove_module(RPED, TRUE)
+			break
+
+	// Добавляем после всего этого новый БСРПЕД
+	var/obj/item/storage/part_replacer/bluespace/cyborg/BSRPED = new(R.module)
+	R.module.basic_modules += BSRPED
+	R.module.add_module(BSRPED, FALSE, TRUE)
 
 /obj/item/borg/upgrade/rped/deactivate(mob/living/silicon/robot/R, user = usr)
 	. = ..()
