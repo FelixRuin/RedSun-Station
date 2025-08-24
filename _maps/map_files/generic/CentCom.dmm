@@ -11066,7 +11066,7 @@
 /obj/effect/mob_spawn/qareen{
 	dir = 1
 	},
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "cot" = (
 /obj/effect/turf_decal/box,
@@ -13338,7 +13338,7 @@
 /area/centcom)
 "eyk" = (
 /obj/effect/decal/cleanable/ash,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "eyq" = (
 /obj/machinery/computer/bsa_control{
@@ -15306,7 +15306,7 @@
 "gaW" = (
 /obj/effect/decal/cleanable/semen,
 /obj/effect/custom_portal/Hotel,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "gaX" = (
 /obj/structure/flora/ausbushes/palebush,
@@ -17131,7 +17131,7 @@
 "hGV" = (
 /obj/structure/destructible/cult/pylon,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "hHm" = (
 /obj/effect/turf_decal/stripes/yellow/line{
@@ -18859,7 +18859,7 @@
 /area/syndicate_mothership/control)
 "jmA" = (
 /obj/structure/destructible/cult/pylon,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "jmE" = (
 /obj/structure/table/wood,
@@ -23049,7 +23049,7 @@
 "mUC" = (
 /obj/effect/decal/cleanable/ash,
 /obj/effect/mob_spawn/human/changeling_extended,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "mVF" = (
 /obj/effect/turf_decal/tile/brown/fourcorners,
@@ -23177,7 +23177,7 @@
 /obj/effect/mob_spawn/qareen/wendigo_lore{
 	dir = 1
 	},
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "naZ" = (
 /obj/structure/closet/crate/coffin,
@@ -25497,7 +25497,7 @@
 /area/centcom/control)
 "pha" = (
 /obj/effect/decal/cleanable/semen/femcum,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "phg" = (
 /obj/effect/turf_decal/siding/wood{
@@ -25755,7 +25755,7 @@
 /area/centcom/holding)
 "puU" = (
 /obj/effect/mob_spawn/qareen,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "puY" = (
 /obj/effect/turf_decal/siding/wood{
@@ -27450,7 +27450,7 @@
 /turf/open/floor/plating,
 /area/syndicate_mothership/control)
 "qWG" = (
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "qXC" = (
 /obj/structure/flora/tree/jungle/small,
@@ -30394,7 +30394,7 @@
 /area/centcom/holding)
 "tzG" = (
 /obj/effect/decal/cleanable/semen,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "tAx" = (
 /obj/effect/turf_decal/big_sign/enclave/top/right,
@@ -32043,7 +32043,7 @@
 /obj/effect/mob_spawn/human/changeling_extended{
 	dir = 1
 	},
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "uXT" = (
 /obj/machinery/door/airlock/centcom{
@@ -34105,7 +34105,7 @@
 "wQH" = (
 /obj/machinery/jukebox/disco{
 	req_one_access = null;
-	anchored = 1;
+	anchored = 1
 	},
 /turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/centcom/holding)
@@ -34681,7 +34681,7 @@
 /area/syndicate_mothership/control)
 "xmU" = (
 /obj/effect/custom_portal/Station,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "xna" = (
 /obj/structure/table/wood,
@@ -35752,7 +35752,7 @@
 /area/centcom/control)
 "ylX" = (
 /obj/effect/mob_spawn/qareen/wendigo_lore,
-/turf/open/indestructible/boss,
+/turf/open/indestructible/boss/air,
 /area/horny_antags/qareen)
 "yma" = (
 /obj/structure/grille,
