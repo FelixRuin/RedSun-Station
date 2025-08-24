@@ -1,25 +1,10 @@
 /datum/emote/sound/human/growl
+	name = "Рычать"
 	key = "growl"
 	key_third_person = "growl"
 	message = "рычит!"
 	message_mime = "безмолвно рычит."
 	sound = 'sound/voice/growl.ogg'
-	emote_cooldown = 4 SECONDS
-
-/datum/emote/sound/human/wurble
-	key = "wurble"
-	key_third_person = "wurble"
-	message = "урчит!"
-	message_mime = "изображает урчание."
-	sound = 'sound/voice/wurble.ogg'
-	emote_cooldown = 4 SECONDS
-
-/datum/emote/sound/human/warble
-	key = "warble"
-	key_third_person = "warbles"
-	message = "warble!"
-	message_mime = "warble."
-	sound = 'sound/voice/warbles.ogg'
 	emote_cooldown = 4 SECONDS
 
 /datum/emote/sound/human/trills
@@ -38,6 +23,7 @@
 	sound = 'sound/voice/woof.ogg'
 
 /datum/emote/sound/human/cloaker1
+	name = "Агрессивное Приближение!"
 	key = "cloaker"
 	key_third_person = "cloaker"
 	message = "агрессивно приближается."
@@ -46,6 +32,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/cloaker2
+	name = "Не бей себя!"
 	key = "cloaker2"
 	key_third_person = "cloaker2"
 	message = "даёт прямое требование перестать себя бить."
@@ -54,6 +41,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/cloaker3
+	name = "Причина Ареста"
 	key = "cloaker3"
 	key_third_person = "cloaker3"
 	message = "объясняет причину задержания."
@@ -62,6 +50,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/cloaker4
+	name = "Безопасное Слово"
 	key = "cloaker4"
 	key_third_person = "cloaker4"
 	message = "одобряет Стоп Слово."
@@ -70,6 +59,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/cluwne
+	name = "Мерзко смеяться"
 	key = "cluwne"
 	key_third_person = "cluwnes"
 	message = "клоуничает; ужасно плохо смеётся..."
@@ -85,6 +75,7 @@
 	. = ..()
 
 /datum/emote/sound/human/suka1
+	name = "Сука!"
 	key = "suka"
 	key_third_person = "suka"
 	message = "выглядит очень злым."
@@ -93,6 +84,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/suka2
+	name = "Агрессивное Сука!"
 	key = "suka2"
 	key_third_person = "suka2"
 	message = "выглядит <b>очень</b> злым."
@@ -101,6 +93,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/jacket1
+	name = "Какое время?"
 	key = "jacket"
 	key_third_person = "jacket"
 	message = "говорит: <b>'Ты знаешь что сейчас за время?'</b>"
@@ -109,6 +102,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/jacket2
+	name = "Нужна Помощь?"
 	key = "jacket2"
 	key_third_person = "jacket2"
 	message = "говорит: <b>'Помощь в пути!'</b>"
@@ -117,6 +111,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/bulldozer1
+	name = "Ты перед Стеной!"
 	key = "bulldozer"
 	key_third_person = "bulldozer"
 	message = "кричит: <b>'Ты напротив стены и Я - эта ёбанная стена!'</b>"
@@ -125,6 +120,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/bulldozer2
+	name = "Оставайся Жив!"
 	key = "bulldozer2"
 	key_third_person = "bulldozer2"
 	message = "кричит: <b>'Пожалуйста, оставайтесь живыми подольше, чтобы я прикончил вас собственноручно!!'</b>"
@@ -149,6 +145,7 @@
 	emote_cooldown = 3 SECONDS
 
 /datum/emote/sound/human/ura1
+	name = "Ура!"
 	key = "ura"
 	key_third_person = "ura"
 	message = "кричит '<b>ура!</b>'"
@@ -157,6 +154,7 @@
 	emote_cooldown = 5 SECONDS
 
 /datum/emote/sound/human/ura2
+	name = "Громкое Ура!"
 	key = "ura2"
 	key_third_person = "ura2"
 	message = "издаёт <b>мега-ура!</b>"
@@ -165,6 +163,7 @@
 	emote_cooldown = 10 SECONDS
 
 /datum/emote/sound/human/ura3
+	name = "Очень Громкое Ура!"
 	key = "ura3"
 	key_third_person = "ura3"
 	message = "издаёт <b>мега-ультра-УРАААААААА!</b>"
@@ -173,6 +172,7 @@
 	emote_cooldown = 15 SECONDS
 
 /datum/emote/sound/human/uwu
+	name = "Увукнуть"
 	key = "uwu"
 	key_third_person = "uwu"
 	message = "издаёт звук - <b>~UwU~</b>"
@@ -250,6 +250,7 @@
 	. = ..()
 
 /datum/emote/sound/human/rawr2
+	name = "Равр!"
 	key = "rawr2"
 	key_third_person = "rawr2"
 	message = "издаёт звук - <b>RAWR!</b>"
@@ -266,6 +267,7 @@
 	emote_cooldown = 15 SECONDS
 
 /datum/emote/sound/human/affirmative
+	name = "Утвердительный сигнал"
 	key = "affirmative"
 	key_third_person = "affirmative"
 	message = "испускает <b>утвердительный</b> сигнал"
@@ -274,6 +276,7 @@
 	emote_cooldown = 1 SECONDS
 
 /datum/emote/sound/human/negative
+	name = "Отрицательный сигнал"
 	key = "negative"
 	key_third_person = "negative"
 	message = "испускает <b>отрицательный</b> сигнал"
@@ -538,6 +541,7 @@
 	emote_cooldown = 5 SECONDS
 
 /datum/emote/sound/human/owl
+	name = "Ухухать как сова"
 	key = "owl"
 	key_third_person = "owl"
 	message = "OvO"
