@@ -281,8 +281,10 @@
 	adjustHealth(200 / severity)
 	src.AIStatus = AI_OFF
 	playsound(src, 'sound/machines/terminal_alert.ogg', 50, 0)
-	sleep(20)
-	src.AIStatus = AI_ON
+	addtimer(CALLBACK(src, PROC_REF(switch_AIStatus_on)), 2 SECONDS)
+
+/mob/living/simple_animal/hostile/malf_drone/experimental/proc/switch_AIStatus_on()
+	AIStatus = AI_ON
 
 /obj/effect/temp_visual/drone_scan
 	icon = 'modular_bluemoon/icons/mob/dron.dmi'
