@@ -120507,7 +120507,6 @@
 /turf/closed/wall/r_wall,
 /area/security/brig_cells)
 "uJd" = (
-/obj/item/kirbyplants/random,
 /obj/item/radio/intercom{
 	name = "Station Intercom";
 	pixel_y = -26
@@ -120525,6 +120524,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/machinery/bookbinder,
 /turf/open/floor/plasteel/dark,
 /area/service/library)
 "uJu" = (
