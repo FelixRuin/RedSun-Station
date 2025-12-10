@@ -30,8 +30,8 @@
 /datum/action/cooldown/toggle_lewdsummon/Activate()
 	var/mob/living/carbon/human/action_owner = owner
 
-	if(HAS_TRAIT_FROM(action_owner, TRAIT_LEWD_SUMMONED, "lewd_summon_dont_disturb"))
-		REMOVE_TRAIT(action_owner, TRAIT_LEWD_SUMMONED, "lewd_summon_dont_disturb")
+	if(HAS_TRAIT_FROM(action_owner, TRAIT_LEWD_SUMMONED, "lewd_summon_dont_disturb")) // объясняю позицию - не хочу плодить сущности
+		REMOVE_TRAIT(action_owner, TRAIT_LEWD_SUMMONED, "lewd_summon_dont_disturb") // но и не хочу удалять трейт от квирка
 		to_chat(action_owner, span_notice("Теперь вас смогут призвать!"))
 		button_icon_state = "arousal_max"
 	else
