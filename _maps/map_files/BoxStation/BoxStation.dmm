@@ -6328,11 +6328,11 @@
 /turf/open/floor/plasteel/dark/textured/large,
 /area/medical/paramedic)
 "aKI" = (
-/obj/structure/bed/double{
-	dir = 4
-	},
 /obj/item/bedsheet/green/double{
 	dir = 4
+	},
+/obj/structure/bed/double{
+	dir = 1
 	},
 /turf/open/floor/carpet,
 /area/commons/dorms)
@@ -73184,11 +73184,11 @@
 /turf/open/floor/plating,
 /area/maintenance/port)
 "tbb" = (
-/obj/structure/bed/double{
-	dir = 4
-	},
 /obj/item/bedsheet/brown/double{
 	dir = 4
+	},
+/obj/structure/bed/double{
+	dir = 1
 	},
 /turf/open/floor/carpet,
 /area/commons/dorms)
