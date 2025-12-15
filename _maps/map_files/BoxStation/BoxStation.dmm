@@ -69784,9 +69784,6 @@
 	name = "Chief Medical Officer"
 	},
 /obj/effect/mapping_helpers/airlock/access/any/medical/cmo,
-/obj/effect/mapping_helpers/airlock/unres{
-	dir = 1
-	},
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
