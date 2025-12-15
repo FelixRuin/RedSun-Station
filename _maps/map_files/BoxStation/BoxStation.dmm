@@ -11670,8 +11670,13 @@
 	c_tag = "Starboard Primary Hallway 3";
 	dir = 1
 	},
+/obj/machinery/power/apc{
+	areastring = "/area/hallway/primary/starboard";
+	name = "Starboard Primary Hallway APC";
+	pixel_y = -23
+	},
 /obj/structure/cable{
-	icon_state = "4-8"
+	icon_state = "0-4"
 	},
 /turf/open/floor/plasteel/textured/half,
 /area/hallway/primary/starboard)
@@ -50100,9 +50105,6 @@
 	},
 /turf/open/floor/plating,
 /area/hallway/secondary/exit)
-"jjz" = (
-/turf/open/space/basic,
-/area/service/chapel/main)
 "jjE" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 4
@@ -69856,6 +69858,12 @@
 	dir = 8
 	},
 /area/security/execution)
+"rwf" = (
+/obj/effect/turf_decal/trimline/blue/filled/line,
+/obj/effect/turf_decal/trimline/blue/filled/mid_joiner,
+/obj/machinery/light/directional/south,
+/turf/open/floor/plasteel/textured/half,
+/area/hallway/primary/starboard)
 "rwj" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer1{
@@ -74465,17 +74473,10 @@
 /turf/open/floor/plasteel/dark/textured/half,
 /area/security/office)
 "tvt" = (
-/obj/structure/cable{
-	icon_state = "0-4"
-	},
-/obj/machinery/power/apc{
-	areastring = "/area/hallway/primary/starboard";
-	name = "Starboard Primary Hallway APC";
-	pixel_y = -23
-	},
 /obj/effect/turf_decal/trimline/blue/filled/corner{
 	dir = 8
 	},
+/obj/machinery/light/directional/south,
 /turf/open/floor/plasteel/textured/half,
 /area/hallway/primary/starboard)
 "tvA" = (
@@ -126382,7 +126383,7 @@ jxN
 pXx
 nvd
 vad
-dzc
+rwf
 bfL
 bfL
 xfz
@@ -132791,7 +132792,7 @@ aFw
 aFw
 xhs
 lQN
-jjz
+aCR
 ftt
 bbT
 aMM
