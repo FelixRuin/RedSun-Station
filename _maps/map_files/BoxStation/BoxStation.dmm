@@ -20161,6 +20161,20 @@
 	},
 /turf/open/floor/plating/airless,
 /area/science/test_area)
+"bKl" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/power/apc{
+	areastring = "/area/maintenance/aft";
+	dir = 8;
+	name = "Aft Maintenance APC";
+	pixel_x = -25
+	},
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/maintenance/aft)
 "bKp" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 4
@@ -123902,7 +123916,7 @@ jtf
 tBV
 qvJ
 rGR
-rGR
+bKl
 rGR
 rGR
 rGR
