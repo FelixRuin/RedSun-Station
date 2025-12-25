@@ -182,7 +182,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 		var/datum/map_template/hilbertshotel/mapTemplate = getMapTemplate(currentArea.roomType)
 
 		do_sparks(3, FALSE, get_turf(user))
-		user.forceMove(locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
+		MobTransfer(user, locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
 		return TRUE
 	else
 		return FALSE
@@ -240,10 +240,36 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 		// SPLURT EDIT END
 		linkTurfs(roomReservation, roomNumber)
 		do_sparks(3, FALSE, get_turf(user))
-		user.forceMove(locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
+		MobTransfer(user, locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
 		return TRUE
 	else
 		return FALSE
+
+/obj/item/hilbertshotel/proc/MobTransfer(mob/living/user, turf/T, depth = 0)
+	depth++
+	if(depth > 4)
+		return
+	if(!istype(T))
+		return
+	var/atom/movable/AM
+	if(user.pulling)
+		AM = user.pulling
+		if(istype(AM, /mob/living))
+			MobTransfer(AM, T, depth)
+		else
+			AM.forceMove(T)
+	if(user.buckled && !user.buckled.anchored)
+		var/atom/movable/seating = user.buckled
+		if(istype(seating, /mob/living))
+			MobTransfer(seating, T, depth)
+		else
+			seating.forceMove(T)
+		user.forceMove(T)
+		seating.buckle_mob(user, TRUE, TRUE)
+	else
+		user.forceMove(T)
+	if(AM)
+		user.start_pulling(AM)
 
 /obj/item/hilbertshotel/proc/getMapTemplate(roomType) // To load a map and remove it's atoms
 	switch(roomType)
@@ -308,7 +334,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 	linkTurfs(roomReservation, roomNumber)
 	do_sparks(3, FALSE, get_turf(user))
-	user.forceMove(locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
+	MobTransfer(user, locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
 //SPLURT EDIT END
 
 /obj/item/hilbertshotel/proc/linkTurfs(var/datum/turf_reservation/currentReservation, var/currentRoomnumber, var/chosen_room)
@@ -449,7 +475,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	if(alert(user, "Hilbert's Hotel would like to remind you that while we will do everything we can to protect the belongings you leave behind, we make no guarantees of their safety while you're gone, especially that of the health of any living creatures. With that in mind, are you ready to leave?", "Exit", "Leave", "Stay") == "Leave")
 		if(!CHECK_MOBILITY(user, MOBILITY_MOVE) || (get_dist(get_turf(src), get_turf(user)) > 1)) //no teleporting around if they're dead or moved away during the prompt.
 			return
-		user.forceMove(get_turf(parentSphere))
+		parentSphere.MobTransfer(user, get_turf(parentSphere))
 		do_sparks(3, FALSE, get_turf(user))
 
 /turf/closed/indestructible/hoteldoor/attack_ghost(mob/dead/observer/user)
