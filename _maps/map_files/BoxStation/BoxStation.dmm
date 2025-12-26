@@ -18223,6 +18223,13 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/factory)
+"bCP" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1,
+/turf/open/floor/catwalk_floor/iron,
+/area/commons/storage/primary)
 "bCX" = (
 /obj/effect/decal/cleanable/oil,
 /obj/item/cigbutt,
@@ -18871,6 +18878,7 @@
 /obj/effect/turf_decal/siding/thinplating/dark/end{
 	dir = 8
 	},
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3,
 /turf/open/floor/plasteel/dark/textured/large,
 /area/commons/storage/primary)
 "bFq" = (
@@ -61162,6 +61170,13 @@
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden/layer3,
 /turf/open/floor/wood/wood_large,
 /area/service/sauna)
+"nIS" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden/layer3,
+/turf/open/floor/catwalk_floor/iron,
+/area/commons/storage/primary)
 "nIV" = (
 /obj/machinery/light/small,
 /obj/structure/janitorialcart,
@@ -71766,6 +71781,7 @@
 /obj/effect/turf_decal/siding/thinplating/dark/end{
 	dir = 4
 	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer1,
 /turf/open/floor/plasteel/dark/textured/large,
 /area/commons/storage/primary)
 "skW" = (
@@ -116717,7 +116733,7 @@ liQ
 lhV
 cwG
 bFo
-eLW
+nIS
 pzr
 bLM
 fKC
@@ -117231,7 +117247,7 @@ xlW
 bCt
 bDr
 skR
-eLW
+bCP
 pzr
 cbz
 bOd
