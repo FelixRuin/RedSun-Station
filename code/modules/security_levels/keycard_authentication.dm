@@ -108,10 +108,10 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 					if(region == 0)
 						break
 				region++
-
-			COOLDOWN_START(src, access_grant_cooldown, ACCESS_GRANTING_COOLDOWN)
-			SEND_GLOBAL_SIGNAL(COMSIG_ON_DEPARTMENT_ACCESS, region_access)
-			balloon_alert(usr, "key access sent")
+			if(region_access.len)
+				COOLDOWN_START(src, access_grant_cooldown, ACCESS_GRANTING_COOLDOWN)
+				SEND_GLOBAL_SIGNAL(COMSIG_ON_DEPARTMENT_ACCESS, region_access)
+				balloon_alert(usr, "key access sent")
 			return
 
 /obj/machinery/keycard_auth/proc/sendEvent(event_type, trigger_id)
