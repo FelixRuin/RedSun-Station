@@ -493,80 +493,50 @@
 			menu = "<h4>[PDAIMG(bucket)] Persistent Custodial Object Locator</h4>"
 
 			var/turf/cl = get_turf(src)
-			if (cl)
-				menu += "Текущее орбитальное положение: <b>\[[cl.x],[cl.y]\]</b>"
-
-				menu += "<h4>Обнаруженные швабры:</h4>"
-
-				var/ldat
-				for (var/obj/item/mop/M in GLOB.janitor_devices)
-					var/turf/ml = get_turf(M)
-
-					if(ml)
-						if (ml.z != cl.z)
-							continue
-						var/direction = get_dir(src, M)
-						ldat += "Mop - <b>\[[ml.x],[ml.y] ([uppertext(dir2text(direction))])\]</b> - [M.reagents.total_volume ? "Wet" : "Dry"]<br>"
-
-				if (!ldat)
-					menu += "Отсутствует"
-				else
-					menu += "[ldat]"
-
-				menu += "<h4>Pimpin' Ride:</h4>"
-
-				ldat = null
-				for (var/obj/vehicle/ridden/janicart/M in GLOB.janitor_devices)
-					var/turf/ml = get_turf(M)
-
-					if(ml)
-						if (ml.z != cl.z)
-							continue
-						var/direction = get_dir(src, M)
-						ldat += "Ride - <b>\[[ml.x],[ml.y] ([uppertext(dir2text(direction))])\]</b><br>"
-
-				if (!ldat)
-					menu += "Отсутствуют"
-				else
-					menu += "[ldat]"
-
-				menu += "<h4>Уборочные Тележки:</h4>"
-
-				ldat = null
-				for (var/obj/structure/janitorialcart/B in GLOB.janitor_devices)
-					var/turf/bl = get_turf(B)
-
-					if(bl)
-						if (bl.z != cl.z)
-							continue
-						var/direction = get_dir(src, B)
-						ldat += "Cart - <b>\[[bl.x],[bl.y] ([uppertext(dir2text(direction))])\]</b> - Water level: [B.reagents.total_volume]/100<br>"
-
-				if (!ldat)
-					menu += "Отсутствуют"
-				else
-					menu += "[ldat]"
-
-				menu += "<h4>Обнаруженные Клинботы:</h4>"
-
-				ldat = null
-				for (var/mob/living/simple_animal/bot/cleanbot/B in GLOB.janitor_devices)
-					var/turf/bl = get_turf(B)
-
-					if(bl)
-						if (bl.z != cl.z)
-							continue
-						var/direction = get_dir(src, B)
-						ldat += "Cleanbot - <b>\[[bl.x],[bl.y] ([uppertext(dir2text(direction))])\]</b> - [B.on ? "Online" : "Offline"]<br>"
-
-				if (!ldat)
-					menu += "Отсутствуют"
-				else
-					menu += "[ldat]"
-
-			else
+			if(!cl)
 				menu += "ОШИБКА: невозможно определить текущую локацию."
-			menu += "<br><br><A href='byond://?src=[REF(src)];choice=49'>Обновить GPS-локатор</a>"
+				return menu
+			menu += "Текущее орбитальное положение: <b>\[[cl.x],[cl.y]\]</b>"
+
+			menu += "<h4>Швабры:</h4>"
+			var/ldat
+			for(var/obj/item/mop/M in GLOB.janitor_devices)
+				var/turf/ml = get_turf(M)
+				if(!ml || ml.z != cl.z)
+					continue
+				var/direction = get_dir(src, M)
+				ldat += "[M.name] <b>\[[ml.x],[ml.y] ([uppertext(dir2text(direction))])\]</b> - [M.reagents.total_volume ? "Wet" : "Dry"]<br>"
+			menu += ldat ? "[ldat]" : "Отсутствуют"
+
+			menu += "<h4>Pimpin' Ride:</h4>"
+			ldat = null
+			for(var/obj/vehicle/ridden/janicart/M in GLOB.janitor_devices)
+				var/turf/ml = get_turf(M)
+				if(!ml || ml.z != cl.z)
+					continue
+				var/direction = get_dir(src, M)
+				ldat += "[M.name] <b>\[[ml.x],[ml.y] ([uppertext(dir2text(direction))])\]</b><br>"
+			menu += ldat ? "[ldat]" : "Отсутствуют"
+
+			menu += "<h4>Уборочные Тележки:</h4>"
+			ldat = null
+			for(var/obj/structure/janitorialcart/B in GLOB.janitor_devices)
+				var/turf/bl = get_turf(B)
+				if(!bl || bl.z != cl.z)
+					continue
+				var/direction = get_dir(src, B)
+				ldat += "[B.name] <b>\[[bl.x],[bl.y] ([uppertext(dir2text(direction))])\]</b> - Water level: [B.reagents.total_volume]/100<br>"
+			menu += ldat ? "[ldat]" : "Отсутствуют"
+
+			menu += "<h4>Клинботы:</h4>"
+			ldat = null
+			for(var/mob/living/simple_animal/bot/cleanbot/B in GLOB.janitor_devices)
+				var/turf/bl = get_turf(B)
+				if(!bl || bl.z != cl.z)
+					continue
+				var/direction = get_dir(src, B)
+				ldat += "[B.name] <b>\[[bl.x],[bl.y] ([uppertext(dir2text(direction))])\]</b> - [B.on ? "Online" : "Offline"]<br>"
+			menu += ldat ? "[ldat]" : "Отсутствуют"
 
 		if (54) // Beepsky, Medibot, Floorbot, and Cleanbot access
 			menu = "<h4>[PDAIMG(medbot)] Интерлинк: боты</h4>"
