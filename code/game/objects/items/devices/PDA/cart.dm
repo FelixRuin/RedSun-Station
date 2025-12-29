@@ -528,6 +528,16 @@
 				ldat += "[B.name] <b>\[[bl.x],[bl.y] ([uppertext(dir2text(direction))])\]</b> - Water level: [B.reagents.total_volume]/100<br>"
 			menu += ldat ? "[ldat]" : "Отсутствуют"
 
+			menu += "<h4>Универсальные ключи допуска:</h4>"
+			ldat = null
+			for(var/obj/item/access_key/B in GLOB.janitor_devices)
+				var/turf/bl = get_turf(B)
+				if(!bl || bl.z != cl.z)
+					continue
+				var/direction = get_dir(src, B)
+				ldat += "[B.name] <b>\[[bl.x],[bl.y] ([uppertext(dir2text(direction))])\]</b><br>"
+			menu += ldat ? "[ldat]" : "Отсутствуют"
+
 			menu += "<h4>Клинботы:</h4>"
 			ldat = null
 			for(var/mob/living/simple_animal/bot/cleanbot/B in GLOB.janitor_devices)
