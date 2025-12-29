@@ -499,7 +499,7 @@
 				menu += "<h4>Обнаруженные швабры:</h4>"
 
 				var/ldat
-				for (var/obj/item/mop/M in world)
+				for (var/obj/item/mop/M in GLOB.janitor_devices)
 					var/turf/ml = get_turf(M)
 
 					if(ml)
@@ -516,7 +516,7 @@
 				menu += "<h4>Pimpin' Ride:</h4>"
 
 				ldat = null
-				for (var/obj/vehicle/ridden/janicart/M in world)
+				for (var/obj/vehicle/ridden/janicart/M in GLOB.janitor_devices)
 					var/turf/ml = get_turf(M)
 
 					if(ml)
@@ -533,7 +533,7 @@
 				menu += "<h4>Уборочные Тележки:</h4>"
 
 				ldat = null
-				for (var/obj/structure/janitorialcart/B in world)
+				for (var/obj/structure/janitorialcart/B in GLOB.janitor_devices)
 					var/turf/bl = get_turf(B)
 
 					if(bl)
@@ -550,7 +550,7 @@
 				menu += "<h4>Обнаруженные Клинботы:</h4>"
 
 				ldat = null
-				for (var/mob/living/simple_animal/bot/cleanbot/B in GLOB.alive_mob_list)
+				for (var/mob/living/simple_animal/bot/cleanbot/B in GLOB.janitor_devices)
 					var/turf/bl = get_turf(B)
 
 					if(bl)
