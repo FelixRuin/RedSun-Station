@@ -16,6 +16,9 @@
 	///The departmental access given to the key.
 	var/list/department_access = list()
 
+	///The departmental access given to the key. (name edition)
+	var/department_name = ""
+
 /obj/item/access_key/Initialize(mapload)
 	. = ..()
 	RegisterSignal(SSdcs, COMSIG_ON_DEPARTMENT_ACCESS, PROC_REF(department_access_given))
@@ -27,8 +30,8 @@
 
 /obj/item/access_key/examine(mob/user)
 	. = ..()
-	if(department_access)
-		. += "It currently holds access to the [department_access] region."
+	if(department_access.len)
+		. += "It currently holds access to the [department_name] region."
 
 /obj/item/access_key/examine_more(mob/user)
 	. += span_notice("Access can be granted through a Keycard Authentication Device.")
@@ -63,13 +66,13 @@
  */
 /obj/item/access_key/proc/department_access_given(obj/machinery/keycard_auth/source, list/region_access)
 	SIGNAL_HANDLER
-	var/text_to_user = ""
+	department_name = ""
 	for(var/i in region_access)
 		department_access |= get_region_accesses(i)
-		if(text_to_user)
-			text_to_user += ", "
-		text_to_user += get_region_accesses_name(i)
-	say("Access granted to [text_to_user] area.")
+		if(department_name)
+			department_name += ", "
+		department_name += get_region_accesses_name(i)
+	say("Access granted to [department_name] area.")
 	playsound(src, 'sound/machines/ding.ogg', 25, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(clear_access)), ACCESS_TIMER_LIMIT, TIMER_UNIQUE|TIMER_OVERRIDE)
 	log_game("Access to the [department_access] department was given to [src] [(ismob(loc)) ? "held by [loc]" : "which is not being held"]")
@@ -83,6 +86,7 @@
 	log_game("Access to the [department_access] department on [src] has expired.")
 //	investigate_log("Access to the [department_access] department on [src] has expired.]", INVESTIGATE_ACCESSCHANGES)
 	department_access = list()
+	department_name = ""
 	say("Access revoked, time ran out.")
 	playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE)
 
