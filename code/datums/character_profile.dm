@@ -34,10 +34,13 @@ GLOBAL_LIST_EMPTY(cached_previews)
 	. = ..()
 	if(. <= UI_DISABLED)
 		return .
-	if(host.resolve() in view(10, user))
+	var/mob/M = host.resolve()
+	if(M in view(10, user))
+		return .
+	else if(get_turf(M) == get_turf(user))
 		return .
 	else
-		return UI_DISABLED
+		return UI_UPDATE
 
 /datum/description_profile/ui_state()
 	return GLOB.always_state

@@ -103,8 +103,8 @@
 	spreadFire(AM)
 
 /mob/living/carbon/human/Topic(href, href_list)
-	if(usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY, check_resting = FALSE))
-		if(href_list["embedded_object"])
+	if(href_list["embedded_object"])
+		if(usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY, check_resting = FALSE))
 			var/obj/item/bodypart/L = locate(href_list["embedded_limb"]) in bodyparts
 			if(!L)
 				return
@@ -114,7 +114,7 @@
 			SEND_SIGNAL(src, COMSIG_CARBON_EMBED_RIP, I, L)
 			return
 
-	if(href_list["character_profile"])
+	else if(href_list["character_profile"])
 		if(!profile)
 			profile = new(src)
 		profile.ui_interact(usr)
