@@ -194,7 +194,7 @@ GLOBAL_LIST_EMPTY(cached_previews)
 	var/mob/living/M = host.resolve()
 	if(!M || !istype(M))
 		return
-	if(M.mind)
+	if(M.mind )
 		data["silicon_flavor_text"] = M.mind.silicon_flavor_text || ""
 		data["oocnotes"] = M.mind.ooc_notes || ""
 	if(M.client?.prefs)
