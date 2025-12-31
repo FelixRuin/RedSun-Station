@@ -535,6 +535,7 @@ PAI_CUSTOM_HOLOFORMS
 STATION_NAME_NEEDS_APPROVAL
 
 INITIAL_GEAR_POINTS 16
+SPONSOR_EXTRA_GEAR_POINTS 4
 
 ## Strings for the station trait "Randomizing station name"
 RANDOMIZING_STATION_NAME_MESSAGE Due to internal affairs, the station is now named %NEW_STATION_NAME%.

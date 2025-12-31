@@ -301,6 +301,10 @@
 /datum/config_entry/number/initial_gear_points
 	default = 16
 
+///Sponsor extra loadout points
+/datum/config_entry/number/sponsor_extra_gear_points
+	default = 4
+
 /**
   * Enables the FoV component, which hides objects and mobs behind the parent from their sight, unless they turn around, duh.
   * Camera mobs, AIs, ghosts and some other are of course exempt from this. This also doesn't influence simplemob AI, for the best.
