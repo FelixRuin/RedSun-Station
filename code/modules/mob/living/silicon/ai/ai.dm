@@ -479,11 +479,6 @@
 		if(M)
 			M.transfer_ai(AI_MECH_HACK, src, usr) //Called on the mech itself.
 
-	if(href_list["character_profile"])
-		if(!profile)
-			profile = new(src)
-		profile.ui_interact(usr)
-
 /mob/living/silicon/ai/proc/switchCamera(obj/machinery/camera/C)
 	if(QDELETED(C))
 		return FALSE
