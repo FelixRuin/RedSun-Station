@@ -218,6 +218,7 @@
 					if(COOLDOWN_FINISHED(src, error_message_cooldown))
 						say("Insufficient funds.")
 						playsound(src, 'sound/misc/compiler-failure.ogg', 25, TRUE)
+						COOLDOWN_START(src, error_message_cooldown, 6 SECONDS)
 					queuecooldown = world.time + (1 SECONDS)
 					return
 				to_chat(usr, "<span class='notice'>You spend [queuecost] credits to queue [selectedtrack.song_name].</span>")
