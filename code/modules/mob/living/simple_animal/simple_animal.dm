@@ -445,13 +445,13 @@
 		return
 	if(gender != FEMALE || stat || !childtype || !animal_species || !SSticker.IsRoundInProgress())
 		return
-	COOLDOWN_START(src, childmaker, 1 SECONDS)
+	COOLDOWN_START(src, childmaker, 40 SECONDS)
 	var/mob/living/simple_animal/partner
 	var/children = 0
 	for(var/mob/M in view(7, src))
 		if(M.stat != CONSCIOUS) //Check if it's conscious FIRST.
 			continue
-		else if(istype(M, childtype)) //Check for children SECOND.
+		else if(M.type in childtype) //Check for children SECOND.
 			children++
 		else if(istype(M, animal_species))
 			if(M.ckey)
