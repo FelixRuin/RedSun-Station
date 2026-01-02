@@ -26,7 +26,18 @@
 #define REALTIMEOFDAY (world.timeofday + (MIDNIGHT_ROLLOVER * MIDNIGHT_ROLLOVER_CHECK))
 #define MIDNIGHT_ROLLOVER_CHECK ( GLOB.rollovercheck_last_timeofday != world.timeofday ? update_midnight_rollover() : GLOB.midnight_rollovers )
 
+#if DM_VERSION < 516
+/// Gets the sign of x, returns -1 if negative, 0 if 0, 1 if positive
 #define SIGN(x) ( (x)!=0 ? (x) / abs(x) : 0 )
+// Performs a linear interpolation between a and b.
+// Note that amount=0 returns a, amount=1 returns b, and
+// amount=0.5 returns the mean of a and b.
+#define LERP(a, b, amount) ( amount ? ((a) + ((b) - (a)) * (amount)) : a )
+#else
+#define SIGN(x) sign(x)
+
+#define LERP(a, b, amount) lerp(a, b, amount)
+#endif
 
 #define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
 
@@ -79,11 +90,6 @@
 #define ISINTEGER(x) (round(x) == x)
 
 #define ISMULTIPLE(x, y) ((x) % (y) == 0)
-
-// Performs a linear interpolation between a and b.
-// Note that amount=0 returns a, amount=1 returns b, and
-// amount=0.5 returns the mean of a and b.
-#define LERP(a, b, amount) ( amount ? ((a) + ((b) - (a)) * (amount)) : a )
 
 // Returns the nth root of x.
 #define ROOT(n, x) ((x) ** (1 / (n)))
