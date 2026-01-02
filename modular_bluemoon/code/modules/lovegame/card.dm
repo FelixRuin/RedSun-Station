@@ -17,7 +17,7 @@
 	if(holo)
 		holo.spawned += H
 	var/choice = popleft(cards)
-	H.cardname = "[deckstyle] cards"
+	H.name = "[deckstyle] card"
 	H.parentdeck = src
 	H.cardname = choice
 	if(H.cardname == "Blank card")
