@@ -121,7 +121,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	var/chosen_room = "Nothing"
 	if(!activeRooms["[chosenRoomNumber]"] && !storedRooms["[chosenRoomNumber]"] && chosenRoomNumber != GLOB.hhmysteryRoomNumber)
 		chosen_room = tgui_input_list(user, "Choose your desired room:", "∼♦️ Time to choose a room ♦️∼!", hotel_maps)
-		if(!chosen_room)
+		if(!chosen_room || !user.CanReach(src))
 			return FALSE
 	//SPLURT EDIT END
 
