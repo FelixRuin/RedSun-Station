@@ -347,9 +347,9 @@
 
 /datum/component/embedded/proc/examineTurf(datum/source, mob/user, list/examine_list)
 	if(harmful)
-		examine_list += "<a href='?src=[REF(src)];embedded_object=[REF(weapon)]' class='warning'>Вы можете заметить \a [weapon], врезавшуюся в [parent]!</a>"
+		examine_list += "<a href='byond://?src=[REF(src)];embedded_object=[REF(weapon)]' class='warning'>Вы можете заметить \a [weapon], врезавшуюся в [parent]!</a>"
 	else
-		examine_list += "<a href='?src=[REF(src)];embedded_object=[REF(weapon)]' class='warning'>Вы можете заметить \a [weapon], застрявшую в [parent]!</a>"
+		examine_list += "<a href='byond://?src=[REF(src)];embedded_object=[REF(weapon)]' class='warning'>Вы можете заметить \a [weapon], застрявшую в [parent]!</a>"
 
 
 /// Someone is ripping out the item from the turf by hand

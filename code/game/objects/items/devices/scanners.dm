@@ -153,7 +153,7 @@ GENETICS SCANNER
 		return
 	var/to_chat_msg = last_msg
 	if(advanced)
-		to_chat_msg += "<center><a href='?src=[REF(src)];print_scan=1;subject_name=[last_recipient_name];time=[last_scan_time]'>Распечатать</a></center>"
+		to_chat_msg += "<center><a href='byond://?src=[REF(src)];print_scan=1;subject_name=[last_recipient_name];time=[last_scan_time]'>Распечатать</a></center>"
 	if(browser_mode)
 		to_chat_msg = replacetext(to_chat_msg, "\n", "<br>") // Чтобы нормально переносилось
 		to_chat_msg = replacetext(to_chat_msg, "color='#0000CC'", "color='#13ace3'") // На тёмном фоне плохо видно
@@ -567,7 +567,7 @@ GENETICS SCANNER
 	// BLUEMOON EDIT START - изменение анализаторов здоровья; to_chat_msg - чтобы на распечатанном листочке не было "распечатать"
 	var/to_chat_msg = msg
 	if(connected_analyzer && advanced)
-		to_chat_msg += "<center><a href='?src=[REF(connected_analyzer)];print_scan=1;subject_name=[M.get_visible_name()];time=[scan_time]'>Распечатать</a></center>"
+		to_chat_msg += "<center><a href='byond://?src=[REF(connected_analyzer)];print_scan=1;subject_name=[M.get_visible_name()];time=[scan_time]'>Распечатать</a></center>"
 	to_chat_msg += "</body></html>"
 
 	SEND_SIGNAL(M, COMSIG_HEALTH_SCAN, user)//SPLURT EDIT ADD - gregnancy

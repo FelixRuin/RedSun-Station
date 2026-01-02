@@ -152,14 +152,14 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		<table border='1' style='undefined;table-layout: fixed; width: 80%'>"
 
 	if(assembly)
-		HTML += "<a href='?src=[REF(src)];return=1'>Return to Assembly</a><br>"
+		HTML += "<a href='byond://?src=[REF(src)];return=1'>Return to Assembly</a><br>"
 
-	HTML += "<a href='?src=[REF(src)]'>Refresh</a>  |  \
-		<a href='?src=[REF(src)];rename=1'>Rename</a>  |  \
-		<a href='?src=[REF(src)];scan=1'>Copy Ref</a>"
+	HTML += "<a href='byond://?src=[REF(src)]'>Refresh</a>  |  \
+		<a href='byond://?src=[REF(src)];rename=1'>Rename</a>  |  \
+		<a href='byond://?src=[REF(src)];scan=1'>Copy Ref</a>"
 
 	if(assembly && removable)
-		HTML += "  |  <a href='?src=[REF(assembly)];component=[REF(src)];remove=1'>Remove</a>"
+		HTML += "  |  <a href='byond://?src=[REF(assembly)];component=[REF(src)];remove=1'>Remove</a>"
 
 	HTML += "<br><colgroup> \
 		<col style='width: [table_edge_width]'> \
@@ -180,14 +180,14 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				if(1)
 					io = get_pin_ref(IC_INPUT, i)
 					if(io)
-						words += "<b><a href='?src=[REF(src)];act=wire;pin=[REF(io)]'>[io.display_pin_type()] [io.name]</a> \
-							<a href='?src=[REF(src)];act=data;pin=[REF(io)]'>[io.display_data(io.data)]</a></b><br>"
+						words += "<b><a href='byond://?src=[REF(src)];act=wire;pin=[REF(io)]'>[io.display_pin_type()] [io.name]</a> \
+							<a href='byond://?src=[REF(src)];act=data;pin=[REF(io)]'>[io.display_data(io.data)]</a></b><br>"
 						if(io.linked.len)
 							words += "<ul>"
 							for(var/k in io.linked)
 								var/datum/integrated_io/linked = k
-								words += "<li><a href='?src=[REF(src)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
-									@ <a href='?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
+								words += "<li><a href='byond://?src=[REF(src)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
+									@ <a href='byond://?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
 							words += "</ul>"
 
 						if(outputs.len > inputs.len)
@@ -201,14 +201,14 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				if(3)
 					io = get_pin_ref(IC_OUTPUT, i)
 					if(io)
-						words += "<b><a href='?src=[REF(src)];act=wire;pin=[REF(io)]'>[io.display_pin_type()] [io.name]</a> \
-							<a href='?src=[REF(src)];act=data;pin=[REF(io)]'>[io.display_data(io.data)]</a></b><br>"
+						words += "<b><a href='byond://?src=[REF(src)];act=wire;pin=[REF(io)]'>[io.display_pin_type()] [io.name]</a> \
+							<a href='byond://?src=[REF(src)];act=data;pin=[REF(io)]'>[io.display_data(io.data)]</a></b><br>"
 						if(io.linked.len)
 							words += "<ul>"
 							for(var/k in io.linked)
 								var/datum/integrated_io/linked = k
-								words += "<li><a href='?src=[REF(src)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
-									@ <a href='?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
+								words += "<li><a href='byond://?src=[REF(src)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
+									@ <a href='byond://?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
 							words += "</ul>"
 
 						if(inputs.len > outputs.len)
@@ -220,15 +220,15 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		var/datum/integrated_io/io = activator
 		var/words
 
-		words += "<b><a href='?src=[REF(src)];act=wire;pin=[REF(io)]'>[io]</a> \
-			<a href='?src=[REF(src)];act=data;pin=[REF(io)]'>[io.data?"\<PULSE OUT\>":"\<PULSE IN\>"]</a></b><br>"
+		words += "<b><a href='byond://?src=[REF(src)];act=wire;pin=[REF(io)]'>[io]</a> \
+			<a href='byond://?src=[REF(src)];act=data;pin=[REF(io)]'>[io.data?"\<PULSE OUT\>":"\<PULSE IN\>"]</a></b><br>"
 
 		if(io.linked.len)
 			words += "<ul>"
 			for(var/k in io.linked)
 				var/datum/integrated_io/linked = k
-				words += "<li><a href='?src=[REF(src)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
-					@ <a href='?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
+				words += "<li><a href='byond://?src=[REF(src)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
+					@ <a href='byond://?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
 			words += "<ul>"
 
 		HTML += "<tr><td colspan='3' align='center'>[words]</td></tr>"

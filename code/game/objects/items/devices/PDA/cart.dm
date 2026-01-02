@@ -255,15 +255,15 @@
 		if (42) //status displays
 			menu = "<h4>[PDAIMG(status)] Интерлинк: статус-дисплеи</h4>"
 
-			menu += "\[ <A HREF='?src=[REF(src)];choice=Status;statdisp=blank'>Очистить</A> \]<BR>"
-			menu += "\[ <A HREF='?src=[REF(src)];choice=Status;statdisp=shuttle'>Время прибытия шаттла</A> \]<BR>"
-			menu += "\[ <A HREF='?src=[REF(src)];choice=Status;statdisp=message'>Выставить сообщение:</A> \]"
-			menu += "<ul><li> Строка 1: <A HREF='?src=[REF(src)];choice=Status;statdisp=setmsg1'>[ message1 ? message1 : "(отсут.)"]</A>"
-			menu += "<li> Строка 2: <A HREF='?src=[REF(src)];choice=Status;statdisp=setmsg2'>[ message2 ? message2 : "(отсут.)"]</A></ul><br>"
-			menu += "\[ Угроза: <A HREF='?src=[REF(src)];choice=Status;statdisp=alert;alert=default'>Отсутствует</A> |"
-			menu += " <A HREF='?src=[REF(src)];choice=Status;statdisp=alert;alert=redalert'>Красный Код</A> |"
-			menu += " <A HREF='?src=[REF(src)];choice=Status;statdisp=alert;alert=lockdown'>Изоляция</A> |"
-			menu += " <A HREF='?src=[REF(src)];choice=Status;statdisp=alert;alert=biohazard'>Биоугроза</A> \]<BR>"
+			menu += "\[ <a href='byond://?src=[REF(src)];choice=Status;statdisp=blank'>Очистить</A> \]<BR>"
+			menu += "\[ <a href='byond://?src=[REF(src)];choice=Status;statdisp=shuttle'>Время прибытия шаттла</A> \]<BR>"
+			menu += "\[ <a href='byond://?src=[REF(src)];choice=Status;statdisp=message'>Выставить сообщение:</A> \]"
+			menu += "<ul><li> Строка 1: <a href='byond://?src=[REF(src)];choice=Status;statdisp=setmsg1'>[ message1 ? message1 : "(отсут.)"]</A>"
+			menu += "<li> Строка 2: <a href='byond://?src=[REF(src)];choice=Status;statdisp=setmsg2'>[ message2 ? message2 : "(отсут.)"]</A></ul><br>"
+			menu += "\[ Угроза: <a href='byond://?src=[REF(src)];choice=Status;statdisp=alert;alert=default'>Отсутствует</A> |"
+			menu += " <a href='byond://?src=[REF(src)];choice=Status;statdisp=alert;alert=redalert'>Красный Код</A> |"
+			menu += " <a href='byond://?src=[REF(src)];choice=Status;statdisp=alert;alert=lockdown'>Изоляция</A> |"
+			menu += " <a href='byond://?src=[REF(src)];choice=Status;statdisp=alert;alert=biohazard'>Биоугроза</A> \]<BR>"
 
 		if (43)
 			menu = "<h4>[PDAIMG(power)] Консоли Питания - выберите одну</h4><BR>"

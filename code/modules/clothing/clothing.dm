@@ -296,7 +296,7 @@ MOVED TO: modular_splurt/code/module/clothing/clothing.dm
 		durability_list += list("Радиация" = armor.rad)
 
 	if(LAZYLEN(armor_list) || LAZYLEN(durability_list))
-		. += "<span class='notice'>Видно <a href='?src=[REF(src)];list_armor=1'>бирку</a> со списком классов защиты.</span>"
+		. += "<span class='notice'>Видно <a href='byond://?src=[REF(src)];list_armor=1'>бирку</a> со списком классов защиты.</span>"
 
 /obj/item/clothing/Topic(href, href_list)
 	. = ..()

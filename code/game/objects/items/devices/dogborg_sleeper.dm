@@ -364,7 +364,7 @@
 			if(iscarbon(target)) //Handle the target being a mob
 				var/mob/living/carbon/T = target
 				if(T.stat == DEAD && (T.vore_flags & DIGESTABLE))	//Mob is now dead
-					message_admins("[key_name(hound)] has digested [key_name(T)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
+					message_admins("[key_name(hound)] has digested [key_name(T)] as a dogborg. ([hound ? "<a href='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 					to_chat(hound,"<span class='notice'>You feel your belly slowly churn around [T], breaking them down into a soft slurry to be used as power for your systems.</span>")
 					to_chat(T,"<span class='notice'>You feel [hound]'s belly slowly churn around your form, breaking you down into a soft slurry to be used as power for [hound]'s systems.</span>")
 					hound.cell.give(30000) //Fueeeeellll

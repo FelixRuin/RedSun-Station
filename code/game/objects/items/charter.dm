@@ -65,7 +65,7 @@
 	// Autoapproves after a certain time
 	var/requires_approval = CONFIG_GET(flag/station_name_needs_approval)
 	response_timer_id = addtimer(CALLBACK(src, PROC_REF(check_state), new_name, user.name, user.real_name, key_name(user)), approval_time, TIMER_STOPPABLE)
-	to_chat(GLOB.admins, "<span class='adminnotice'><b><font color=orange>CUSTOM STATION RENAME:</font></b>[ADMIN_LOOKUPFLW(user)] proposes to rename the [name_type] to [html_encode(new_name)] ([requires_approval ? "REQUIRES ADMIN APPROVAL and will autodeny" : "will autoapprove"] in [DisplayTimeText(approval_time)]). [ADMIN_SMITE(user)] (<A HREF='?_src_=holder;[HrefToken(TRUE)];reject_custom_name=[REF(src)]'>REJECT</A>)[requires_approval ? " (<A HREF='?_src_=holder;[HrefToken(TRUE)];approve_custom_name=[REF(src)]'>APPROVE</A>)" : ""] [ADMIN_CENTCOM_REPLY(user)]</span>")
+	to_chat(GLOB.admins, "<span class='adminnotice'><b><font color=orange>CUSTOM STATION RENAME:</font></b>[ADMIN_LOOKUPFLW(user)] proposes to rename the [name_type] to [html_encode(new_name)] ([requires_approval ? "REQUIRES ADMIN APPROVAL and will autodeny" : "will autoapprove"] in [DisplayTimeText(approval_time)]). [ADMIN_SMITE(user)] (<a href='byond://?_src_=holder;[HrefToken(TRUE)];reject_custom_name=[REF(src)]'>REJECT</A>)[requires_approval ? " (<a href='byond://?_src_=holder;[HrefToken(TRUE)];approve_custom_name=[REF(src)]'>APPROVE</A>)" : ""] [ADMIN_CENTCOM_REPLY(user)]</span>")
 
 /obj/item/station_charter/proc/check_state(designation, uname, ureal_name, ukey)
 	var/requires_approval = CONFIG_GET(flag/station_name_needs_approval)

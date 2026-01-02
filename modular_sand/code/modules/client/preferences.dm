@@ -47,7 +47,7 @@
 		dat += "<hr>"
 		dat += "<b>Additional Languages are disabled.</b>"
 		dat += "<hr>"
-	dat += "<center><a href='?_src_=prefs;preference=language;task=close'>Done</a></center>"
+	dat += "<center><a href='byond://?_src_=prefs;preference=language;task=close'>Done</a></center>"
 
 	var/datum/browser/popup = new(user, "mob_occupation", "<div align='center'>Language Preference</div>", 900, 600) //no reason not to reuse the occupation window, as it's cleaner that way
 	popup.set_window_options("can_close=0")

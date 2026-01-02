@@ -146,14 +146,14 @@ GLOBAL_LIST_EMPTY(allConsoles)
 				dat += "<tr>"
 				dat += "<td width='55%'>[dpt]</td>"
 				dat += "<td width='45%'>"
-				dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=1'>Обычный</a>"
-				dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=2'>Высокий</a>"
+				dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=1'>Обычный</a>"
+				dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=2'>Высокий</a>"
 				if(hackState)
-					dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=3'>ЭКСТРЕМАЛЬНЫЙ</a>"
+					dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=3'>ЭКСТРЕМАЛЬНЫЙ</a>"
 				dat += "</td>"
 				dat += "</tr>"
 			dat += "</table>"
-			dat += "<br><A href='?src=[REF(src)];setScreen=0'><< Назад</A><br>"
+			dat += "<br><a href='byond://?src=[REF(src)];setScreen=0'><< Назад</A><br>"
 
 		if(2)	//req. supplies
 			dat += "Из какого отдела вам нужны припасы?<br><br>"
@@ -165,14 +165,14 @@ GLOBAL_LIST_EMPTY(allConsoles)
 				dat += "<tr>"
 				dat += "<td width='55%'>[dpt]</td>"
 				dat += "<td width='45%'>"
-				dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=1'>Обычный</a>"
-				dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=2'>Высокий</a>"
+				dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=1'>Обычный</a>"
+				dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=2'>Высокий</a>"
 				if(hackState)
-					dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=3'>ЭКСТРЕМАЛЬНЫЙ</a>"
+					dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=3'>ЭКСТРЕМАЛЬНЫЙ</a>"
 				dat += "</td>"
 				dat += "</tr>"
 			dat += "</table>"
-			dat += "<br><A href='?src=[REF(src)];setScreen=0'><< Назад</A><br>"
+			dat += "<br><a href='byond://?src=[REF(src)];setScreen=0'><< Назад</A><br>"
 
 		if(3)	//relay information
 			dat += "В какой отдел вы хотите отправить информацию?<br><br>"
@@ -183,22 +183,22 @@ GLOBAL_LIST_EMPTY(allConsoles)
 				dat += "<tr>"
 				dat += "<td width='55%'>[dpt]</td>"
 				dat += "<td width='45%'>"
-				dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=1'>Обычный</a>"
-				dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=2'>Высокий</a>"
+				dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=1'>Обычный</a>"
+				dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=2'>Высокий</a>"
 				if(hackState)
-					dat += "<a href='?src=[REF(src)];write=[ckey(dpt)];priority=3'>ЭКСТРЕМАЛЬНЫЙ</a>"
+					dat += "<a href='byond://?src=[REF(src)];write=[ckey(dpt)];priority=3'>ЭКСТРЕМАЛЬНЫЙ</a>"
 				dat += "</td>"
 				dat += "</tr>"
 			dat += "</table>"
-			dat += "<br><a href='?src=[REF(src)];setScreen=0'><< Назад</a><br>"
+			dat += "<br><a href='byond://?src=[REF(src)];setScreen=0'><< Назад</a><br>"
 
 		if(6)	//sent successfully
 			dat += "<span class='good'>Сообщение отправлено.</span><br><br>"
-			dat += "<a href='?src=[REF(src)];setScreen=0'>Продолжить</a><br>"
+			dat += "<a href='byond://?src=[REF(src)];setScreen=0'>Продолжить</a><br>"
 
 		if(7)	//unsuccessful; not sent
 			dat += "<span class='bad'>Произошла ошибка.</span><br><br>"
-			dat += "<a href='?src=[REF(src)];setScreen=0'>Продолжить</a><br>"
+			dat += "<a href='byond://?src=[REF(src)];setScreen=0'>Продолжить</a><br>"
 
 		if(8)	//view messages
 			for(var/obj/machinery/requests_console/Console in GLOB.allConsoles)
@@ -212,7 +212,7 @@ GLOBAL_LIST_EMPTY(allConsoles)
 			for(var/msg in messages) // This puts more recent messages at the *top*, where they belong.
 				messageComposite = "<div class='block'>[msg]</div>" + messageComposite
 			dat += messageComposite
-			dat += "<br><a href='?src=[REF(src)];setScreen=0'><< Вернуться в главное меню</a><br>"
+			dat += "<br><a href='byond://?src=[REF(src)];setScreen=0'><< Вернуться в главное меню</a><br>"
 
 		if(9)	//authentication before sending
 			dat += "<b>Авторизация сообщения</b> <br><br>"
@@ -222,8 +222,8 @@ GLOBAL_LIST_EMPTY(allConsoles)
 			dat += "<b>Утверждено:</b> [msgVerified ? "<span class='good'><b>[msgVerified]</b></span>" : "<i>Не прошло утверждение</i>"] <br>"
 			dat += "<b>Печать выставлена:</b> [msgStamped ? "<span class='boldnotice'>[msgStamped]</span>" : "<i>Не проставлена печать</i>"] <br><br>"
 
-			dat += "<a href='?src=[REF(src)];department=[dpt]'>Отправить сообщение</a> <br><br>"
-			dat += "<a href='?src=[REF(src)];setScreen=0'><< Очистить сообщение</a> <br>"
+			dat += "<a href='byond://?src=[REF(src)];department=[dpt]'>Отправить сообщение</a> <br><br>"
+			dat += "<a href='byond://?src=[REF(src)];setScreen=0'><< Очистить сообщение</a> <br>"
 
 		if(10)	//send announcement
 			dat += "<h3>Станционное объявление</h3>"
@@ -232,12 +232,12 @@ GLOBAL_LIST_EMPTY(allConsoles)
 			else
 				dat += "<div class='notice'>Проведите картой для авторизации</div> <br>"
 			dat += "<b>Сообщение: </b>[message ? message : "<i>Отсутствует</i>"] <br>"
-			dat += "<a href='?src=[REF(src)];writeAnnouncement=1'>[message ? "Отредактировать" : "Написать"] сообщение</a> <br><br>"
+			dat += "<a href='byond://?src=[REF(src)];writeAnnouncement=1'>[message ? "Отредактировать" : "Написать"] сообщение</a> <br><br>"
 			if((announceAuth || IsAdminGhost(user)) && message)
-				dat += "<a href='?src=[REF(src)];sendAnnouncement=1'>Сделать объявление</a> <br>"
+				dat += "<a href='byond://?src=[REF(src)];sendAnnouncement=1'>Сделать объявление</a> <br>"
 			else
 				dat += "<span class='linkOff'>Сделать объявление</span> <br>"
-			dat += "<br><a href='?src=[REF(src)];setScreen=0'><< Назад</a> <br>"
+			dat += "<br><a href='byond://?src=[REF(src)];setScreen=0'><< Назад</a> <br>"
 
 		else	//main menu
 			screen = 0
@@ -249,25 +249,25 @@ GLOBAL_LIST_EMPTY(allConsoles)
 			if(newmessagepriority == EXTREME_MESSAGE_PRIORITY)
 				dat += "<div class='notice'>Имеются новые сообщения <b>ЭКСТРЕМАЛЬНОЙ ВАЖНОСТИ</b>.</div><br>"
 
-			dat += "<a href='?src=[REF(src)];setScreen=8'>Посмотреть сообщения</a> <br><br>"
+			dat += "<a href='byond://?src=[REF(src)];setScreen=8'>Посмотреть сообщения</a> <br><br>"
 
-			dat += "<a href='?src=[REF(src)];setScreen=1'>Запросить помощь</a> <br>"
-			dat += "<a href='?src=[REF(src)];setScreen=2'>Запросить припасы</a> <br>"
-			dat += "<a href='?src=[REF(src)];setScreen=3'>Передача анонимной информации</a> <br><br>"
+			dat += "<a href='byond://?src=[REF(src)];setScreen=1'>Запросить помощь</a> <br>"
+			dat += "<a href='byond://?src=[REF(src)];setScreen=2'>Запросить припасы</a> <br>"
+			dat += "<a href='byond://?src=[REF(src)];setScreen=3'>Передача анонимной информации</a> <br><br>"
 
 			if(!emergency)
-				dat += "<a href='?src=[REF(src)];emergency=1'>Охранная тревога</a> <br>"
-				dat += "<a href='?src=[REF(src)];emergency=2'>Инженерная тревога</a> <br>"
-				dat += "<a href='?src=[REF(src)];emergency=3'>Медицинская тревога</a> <br><br>"
+				dat += "<a href='byond://?src=[REF(src)];emergency=1'>Охранная тревога</a> <br>"
+				dat += "<a href='byond://?src=[REF(src)];emergency=2'>Инженерная тревога</a> <br>"
+				dat += "<a href='byond://?src=[REF(src)];emergency=3'>Медицинская тревога</a> <br><br>"
 			else
 				dat += "<b><div class='bad'>[emergency] ТРЕВОГА НА ДАННОМ МЕСТОПОЛОЖЕНИИ!</div></b> <br><br>"
 
 			if(announcementConsole)
-				dat += "<a href='?src=[REF(src)];setScreen=10'>Отправить станционное объявление</a> <br><br>"
+				dat += "<a href='byond://?src=[REF(src)];setScreen=10'>Отправить станционное объявление</a> <br><br>"
 			if(silent)
-				dat += "Динамик <a href='?src=[REF(src)];setSilent=0'>ВЫКЛ</a>"
+				dat += "Динамик <a href='byond://?src=[REF(src)];setSilent=0'>ВЫКЛ</a>"
 			else
-				dat += "Динамик <a href='?src=[REF(src)];setSilent=1'>ВКЛ</a>"
+				dat += "Динамик <a href='byond://?src=[REF(src)];setSilent=1'>ВКЛ</a>"
 
 	var/datum/browser/popup = new(user, "req_console", "Консоль запросов", 450, 440)
 	popup.set_content(dat)
@@ -493,7 +493,7 @@ GLOBAL_LIST_EMPTY(allConsoles)
 	var/linkedsender
 	if(istype(source, /obj/machinery/requests_console))
 		var/obj/machinery/requests_console/sender = source
-		linkedsender = "<a href='?src=[REF(src)];write=[ckey(sender.department)]'>[sender.department]</a>"
+		linkedsender = "<a href='byond://?src=[REF(src)];write=[ckey(sender.department)]'>[sender.department]</a>"
 	else
 		capitalize(source)
 		linkedsender = source

@@ -214,12 +214,12 @@
 	// Варианты производства
 	for(var/prod in production)
 		var/datum/reagent/reagent_prod = prod
-		data += "<a href='?src=[REF(src)];selected_reagent=[prod]'>[initial(reagent_prod.name)] ([production[prod]]bs)</a><br>"
+		data += "<a href='byond://?src=[REF(src)];selected_reagent=[prod]'>[initial(reagent_prod.name)] ([production[prod]]bs)</a><br>"
 	// Отмена производства
-	data += "<a href='?src=[REF(src)];selected_reagent=1'>NONE</a><br>"
+	data += "<a href='byond://?src=[REF(src)];selected_reagent=1'>NONE</a><br>"
 	// Контейнер
 	data += "<b>Ёмкость</b>: [istype(beaker) ? "[icon2html(beaker, user)][beaker.name] - [beaker.reagents.total_volume]/[beaker.reagents.maximum_volume]" : "ОТСУТСТВУЕТ"]"
-	data += " <a href='?src=[REF(src)];detach_beaker=1'>Вынуть</a><br>"
+	data += " <a href='byond://?src=[REF(src)];detach_beaker=1'>Вынуть</a><br>"
 	data += "<hr>"
 	// Информация о том, как улучшен генератор
 	data += "<b>Максимум порошка</b>: [max_single_material_amount]<br>"

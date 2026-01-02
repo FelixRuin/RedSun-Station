@@ -79,7 +79,7 @@
 	. = ..()
 	if(user == loc || !ismob(loc))
 		return
-	. += span_notice(" <a href='?src=[REF(src)];peek=1'>\[Подсмотреть\]</a>")
+	. += span_notice(" <a href='byond://?src=[REF(src)];peek=1'>\[Подсмотреть\]</a>")
 
 /obj/item/paper/Topic(href, href_list)
 	..()

@@ -624,7 +624,7 @@ SUBSYSTEM_DEF(vote)
 		var/vp = vote_time
 		if(vp == -1)
 			vp = CONFIG_GET(number/vote_period)
-		text += "\nНажмите <b>'Vote'</b> во вкладке OOC или нажмите <a href='?src=[REF(src)]'>сюда</a> чтобы проголосовать."
+		text += "\nНажмите <b>'Vote'</b> во вкладке OOC или нажмите <a href='byond://?src=[REF(src)]'>сюда</a> чтобы проголосовать."
 		text += "\nДо окончания голосования – [DisplayTimeText(vp)]."
 		to_chat(world, vote_block(text))
 		// BLUEMOON EDIT END
@@ -735,7 +735,7 @@ SUBSYSTEM_DEF(vote)
 							ivotedforthis = ((C.ckey in voted) && (i in voted[C.ckey]))
 					if(!votes)
 						votes = 0
-					. += "<li>[ivotedforthis ? "<b>" : ""]<a href='?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([display_votes & SHOW_VOTES ? votes : (admin ? "??? ([votes])" : "???")] votes)[ivotedforthis ? "</b>" : ""]</li>" // CIT CHANGE - adds obfuscated votes
+					. += "<li>[ivotedforthis ? "<b>" : ""]<a href='byond://?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([display_votes & SHOW_VOTES ? votes : (admin ? "??? ([votes])" : "???")] votes)[ivotedforthis ? "</b>" : ""]</li>" // CIT CHANGE - adds obfuscated votes
 					if(choice_descs.len >= i)
 						. += "<li>[choice_descs[i]]</li>"
 				. += "</ul><hr>"
@@ -744,24 +744,24 @@ SUBSYSTEM_DEF(vote)
 				for(var/i=1,i<=choices.len,i++)
 					var/vote = (islist(myvote) ? (myvote.Find(i)) : 0)
 					if(vote)
-						. += "<li><b><a href='?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([vote])</b></li>"
+						. += "<li><b><a href='byond://?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([vote])</b></li>"
 					else
-						. += "<li><a href='?src=[REF(src)];vote=[i]'>[choices[i]]</a></li>"
+						. += "<li><a href='byond://?src=[REF(src)];vote=[i]'>[choices[i]]</a></li>"
 					if(choice_descs.len >= i)
 						. += "<li>[choice_descs[i]]</li>"
 				. += "</ul><hr>"
 				if(!(C.ckey in saved))
-					. += "(<a href='?src=[REF(src)];vote=save'>Save vote</a>)"
+					. += "(<a href='byond://?src=[REF(src)];vote=save'>Save vote</a>)"
 				else
 					. += "(Saved!)"
-				. += "(<a href='?src=[REF(src)];vote=load'>Load vote from save</a>)"
-				. += "(<a href='?src=[REF(src)];vote=reset'>Reset votes</a>)"
+				. += "(<a href='byond://?src=[REF(src)];vote=load'>Load vote from save</a>)"
+				. += "(<a href='byond://?src=[REF(src)];vote=reset'>Reset votes</a>)"
 			if(SCORE_VOTING,HIGHEST_MEDIAN_VOTING)
 				var/list/myvote = voted[C.ckey]
 				for(var/i=1,i<=choices.len,i++)
 					. += "<li><b>[choices[i]]</b>"
 					for(var/r in 1 to GLOB.vote_score_options.len)
-						. += " <a href='?src=[REF(src)];vote=[i];score=[r]'>"
+						. += " <a href='byond://?src=[REF(src)];vote=[i];score=[r]'>"
 						if((choices[i] in myvote) && myvote[choices[i]] == r)
 							. +="<b>([GLOB.vote_score_options[r]])</b>"
 						else
@@ -772,39 +772,39 @@ SUBSYSTEM_DEF(vote)
 						. += "<li>[choice_descs[i]]</li>"
 				. += "</ul><hr>"
 				if(!(C.ckey in saved))
-					. += "(<a href='?src=[REF(src)];vote=save'>Save vote</a>)"
+					. += "(<a href='byond://?src=[REF(src)];vote=save'>Save vote</a>)"
 				else
 					. += "(Saved!)"
-				. += "(<a href='?src=[REF(src)];vote=load'>Load vote from save</a>)"
-				. += "(<a href='?src=[REF(src)];vote=reset'>Reset votes</a>)"
+				. += "(<a href='byond://?src=[REF(src)];vote=load'>Load vote from save</a>)"
+				. += "(<a href='byond://?src=[REF(src)];vote=reset'>Reset votes</a>)"
 		if(admin)
-			. += "(<a href='?src=[REF(src)];vote=cancel'>Cancel Vote</a>) "
+			. += "(<a href='byond://?src=[REF(src)];vote=cancel'>Cancel Vote</a>) "
 	else
 		. += "<h2>Start a vote:</h2><hr><ul><li>"
 		//restart
 		var/avr = CONFIG_GET(flag/allow_vote_restart)
 		if(trialmin || avr)
-			. += "<a href='?src=[REF(src)];vote=restart'>Restart</a>"
+			. += "<a href='byond://?src=[REF(src)];vote=restart'>Restart</a>"
 		else
 			. += "<font color='grey'>Restart (Disallowed)</font>"
 		if(trialmin)
-			. += "\t(<a href='?src=[REF(src)];vote=toggle_restart'>[avr ? "Allowed" : "Disallowed"]</a>)"
+			. += "\t(<a href='byond://?src=[REF(src)];vote=toggle_restart'>[avr ? "Allowed" : "Disallowed"]</a>)"
 		. += "</li><li>"
 		//gamemode
 		var/avm = CONFIG_GET(flag/allow_vote_mode)
 		if(trialmin || avm)
-			. += "<a href='?src=[REF(src)];vote=gamemode'>GameMode</a>"
+			. += "<a href='byond://?src=[REF(src)];vote=gamemode'>GameMode</a>"
 		else
 			. += "<font color='grey'>GameMode (Disallowed)</font>"
 		if(trialmin)
-			. += "\t(<a href='?src=[REF(src)];vote=toggle_gamemode'>[avm ? "Allowed" : "Disallowed"]</a>)"
+			. += "\t(<a href='byond://?src=[REF(src)];vote=toggle_gamemode'>[avm ? "Allowed" : "Disallowed"]</a>)"
 
 		. += "</li>"
 		//custom
 		if(trialmin)
-			. += "<li><a href='?src=[REF(src)];vote=custom'>Custom</a></li>"
+			. += "<li><a href='byond://?src=[REF(src)];vote=custom'>Custom</a></li>"
 		. += "</ul><hr>"
-	. += "<a href='?src=[REF(src)];vote=close' style='position:absolute;right:50px'>Close</a>"
+	. += "<a href='byond://?src=[REF(src)];vote=close' style='position:absolute;right:50px'>Close</a>"
 	return .
 
 

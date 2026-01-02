@@ -398,7 +398,7 @@
 	parts += "<hr><b><font color=\"#60b6ff\">ИНФОРМАЦИЯ О РАУНДЕ //</font></b>"
 	if(GLOB.round_id)
 		var/statspage = CONFIG_GET(string/roundstatsurl)
-		var/info = statspage ? "<a href='?action=openLink&link=[url_encode(statspage)][GLOB.round_id]'>[GLOB.round_id]</a>" : GLOB.round_id
+		var/info = statspage ? "<a href='byond://?action=openLink&link=[url_encode(statspage)][GLOB.round_id]'>[GLOB.round_id]</a>" : GLOB.round_id
 		parts += "[FOURSPACES]├ ID раунда: <b>[info]</b>"
 	else
 		parts += "[FOURSPACES]├ ID раунда: <b>(<i>недоступно</i>)</b>"
@@ -777,7 +777,7 @@
 	var/datum/action/report/R = new
 	C.player_details.player_actions += R
 	R.Grant(C.mob)
-	to_chat(C,"<a href='?src=[REF(R)];report=1'>Показать результаты раунда снова.</a>")
+	to_chat(C,"<a href='byond://?src=[REF(R)];report=1'>Показать результаты раунда снова.</a>")
 
 /datum/action/report
 	name = "Показать результаты раунда"

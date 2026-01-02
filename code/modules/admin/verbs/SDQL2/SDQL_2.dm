@@ -705,7 +705,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 		return
 	if(is_object_datatype(object))
 		if(!islist(object))
-			text_list += "<A HREF='?_src_=vars;[HrefToken(TRUE)];Vars=[REF(object)]'>[object.type] [REF(object)]</A>: [object]"
+			text_list += "<a href='byond://?_src_=vars;[HrefToken(TRUE)];Vars=[REF(object)]'>[object.type] [REF(object)]</A>: [object]"
 			if(istype(object, /atom))
 				if(istype(object, /turf))
 					var/turf/T = object
@@ -718,13 +718,13 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 					else if(container)
 						var/turf/T = get_turf(container)
 						var/cref = REF(container)
-						text_list += " <font color='gray'>in</font> <A HREF='?_src_=vars;[HrefToken(TRUE)];Vars=[cref]'><b>[container]</b>([cref])</A>"
+						text_list += " <font color='gray'>in</font> <a href='byond://?_src_=vars;[HrefToken(TRUE)];Vars=[cref]'><b>[container]</b>([cref])</A>"
 						if(T)
 							text_list += " <font color='gray'>on</font> [T] [ADMIN_COORDJMP(T)] <font color='gray'>at</font>[T.loc]"
 					else
 						text_list += " <font color='gray'>in</font> nullspace"
 		else		// lists are snowflake and get special treatment.
-			text_list += "<A HREF='?_src_=vars;[HrefToken(TRUE)];Vars=[REF(object)]'>/list [REF(object)]</A> \[<br>"
+			text_list += "<a href='byond://?_src_=vars;[HrefToken(TRUE)];Vars=[REF(object)]'>/list [REF(object)]</A> \[<br>"
 			var/list/L = object
 			if(length(L))
 				for(var/key in object)

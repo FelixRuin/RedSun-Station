@@ -125,7 +125,7 @@ GLOBAL_VAR_INIT(weapon_permits_issued, 0)
 	else
 		. += span_notice("Данная карточка разблокирована. Используйте её в руке, чтобы изменить параметры.")
 	if(can_see_permit(user))
-		. += span_boldnotice(" <center><a href='?src=[REF(src)];check=1'>\[Проверить\]</a></center>")
+		. += span_boldnotice(" <center><a href='byond://?src=[REF(src)];check=1'>\[Проверить\]</a></center>")
 
 /obj/item/clothing/accessory/permit/proc/can_see_permit(mob/user)
 	if(!istype(user))
@@ -170,7 +170,7 @@ GLOBAL_VAR_INIT(weapon_permits_issued, 0)
 		var/mob/living/carbon/human/wearer = unif.loc
 		if(wearer.get_visible_name() != owner_name)
 			. += span_warning("(!)")
-	. += span_notice(" <a href='?src=[REF(src)];check=1'>\[Проверить\]</a>")
+	. += span_notice(" <a href='byond://?src=[REF(src)];check=1'>\[Проверить\]</a>")
 
 /obj/item/clothing/accessory/permit/Topic(href, href_list)
 	..()

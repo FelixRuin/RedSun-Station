@@ -80,7 +80,7 @@
 
 /obj/structure/anvil/examine(mob/user)
 	. = ..()
-	. += span_boldnotice("<a href='?src=[REF(src)];recipes=1'>\[Recipes\]</a>")
+	. += span_boldnotice("<a href='byond://?src=[REF(src)];recipes=1'>\[Recipes\]</a>")
 
 /obj/structure/anvil/Topic(href, list/href_list)
 	. = ..()

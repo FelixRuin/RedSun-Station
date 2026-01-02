@@ -44,11 +44,11 @@
 		to_chat(owner, span_warning("[target_datum] was not already tagged."))
 
 /// Quick define for readability
-#define TAGS_REFRESH "<A href='?src=[REF(src)];[HrefToken(TRUE)];show_tags=1'>Refresh</a>"
-#define TAGS_CLEAR "<A href='?src=[REF(src)];[HrefToken(TRUE)];clear_tags=1'>Untag all</a>"
+#define TAGS_REFRESH "<a href='byond://?src=[REF(src)];[HrefToken(TRUE)];show_tags=1'>Refresh</a>"
+#define TAGS_CLEAR "<a href='byond://?src=[REF(src)];[HrefToken(TRUE)];clear_tags=1'>Untag all</a>"
 
-#define TAG_DEL(X) "<b>(<A href='?src=[REF(src)];[HrefToken(TRUE)];del_tag=[REF(X)]'>UNTAG</a>)</b>"
-#define TAG_MARK(X) "<b>(<A href='?src=[REF(src)];[HrefToken(TRUE)];mark_datum=[REF(X)]'>MARK</a>)</b>"
+#define TAG_DEL(X) "<b>(<a href='byond://?src=[REF(src)];[HrefToken(TRUE)];del_tag=[REF(X)]'>UNTAG</a>)</b>"
+#define TAG_MARK(X) "<b>(<a href='byond://?src=[REF(src)];[HrefToken(TRUE)];mark_datum=[REF(X)]'>MARK</a>)</b>"
 #define TAG_SIMPLE_HEALTH(X) "<font color='#ff0000'><b>Health: [X.health]</b></font>"
 #define TAG_CARBON_HEALTH(X) "<font color='#ff0000'><b>Health: [X.health]</b></font> (\
 					<font color='#ff3333'>[X.getBruteLoss()]</font> \

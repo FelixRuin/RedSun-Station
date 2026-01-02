@@ -11,23 +11,23 @@
 /datum/admins/proc/one_click_antag()
 
 	var/dat = {"
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=traitors'>Make 1 Traitor</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=heretics'>Make 1 Heretic</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=changelings'>Make 1 Changeling</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=bloodsucker'>Make 1 Bloodsucker</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=revs'>Make 1 Head Rev</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=cult'>Make 1 Nar'Sie Cultist</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=clockcult'>Make 1 Clockwork Cultist</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=blob'>Make Blob</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=wizard'>Make Wizard (Requires Ghosts)</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=nukeops'>Make Nuke Team (Requires Ghosts)</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=syndicate_ops'>Make Syndicate Team (Requires Ghosts)</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=slaver'>Make Slave Trader Crew (Requires Ghosts)</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=centcom'>Make CentCom Response Team (Requires Ghosts)</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=abductors'>Make Abductor Team (Requires Ghosts)</a><br>
-		<a href='?src=[REF(src)];[HrefToken()];makeAntag=revenant'>Make Revenant (Requires Ghost)</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=traitors'>Make 1 Traitor</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=heretics'>Make 1 Heretic</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=changelings'>Make 1 Changeling</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=bloodsucker'>Make 1 Bloodsucker</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=revs'>Make 1 Head Rev</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=cult'>Make 1 Nar'Sie Cultist</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=clockcult'>Make 1 Clockwork Cultist</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=blob'>Make Blob</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=wizard'>Make Wizard (Requires Ghosts)</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=nukeops'>Make Nuke Team (Requires Ghosts)</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=syndicate_ops'>Make Syndicate Team (Requires Ghosts)</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=slaver'>Make Slave Trader Crew (Requires Ghosts)</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=centcom'>Make CentCom Response Team (Requires Ghosts)</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=abductors'>Make Abductor Team (Requires Ghosts)</a><br>
+		<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=revenant'>Make Revenant (Requires Ghost)</a><br>
 		"}
-	//<a href='?src=[REF(src)];[HrefToken()];makeAntag=qareen'>Make Qareen (Requires Ghost)</a><br> 	Temporary removed. - Gardelin0
+	//<a href='byond://?src=[REF(src)];[HrefToken()];makeAntag=qareen'>Make Qareen (Requires Ghost)</a><br> 	Temporary removed. - Gardelin0
 
 	var/datum/browser/popup = new(usr, "oneclickantag", "Quick-Create Antagonist", 400, 400)
 	popup.set_content(dat)

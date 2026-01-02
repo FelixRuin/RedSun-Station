@@ -161,12 +161,12 @@
 
 /obj/item/mail/examine(mob/user)
 	. = ..()
-	. += span_notice("<br>Вы видите красную панель с текстом на упаковке. <a href='?src=[REF(src)];check_mail_info=1'>Осмотреть</a>")
+	. += span_notice("<br>Вы видите красную панель с текстом на упаковке. <a href='byond://?src=[REF(src)];check_mail_info=1'>Осмотреть</a>")
 	. += span_info("<br>Используйте таггер, чтобы отправить письмо по станционной системе труб.")
 	if(pattern && isobserver(user))
 		. += span_info("<br>Будучи неупокоенным и очень любознательным духом, вы понимаете, что это <b>[pattern.name]</b>")
 	if(opened)
-		. += span_info("<br>Письмо уже открыто, и вы видите мигающую кнопку самоуничтожения конверта <a href='?src=[REF(src)];destroy=1'>Нажать</a>")
+		. += span_info("<br>Письмо уже открыто, и вы видите мигающую кнопку самоуничтожения конверта <a href='byond://?src=[REF(src)];destroy=1'>Нажать</a>")
 
 /obj/item/mail/Topic(href, list/href_list)
 	. = ..()
