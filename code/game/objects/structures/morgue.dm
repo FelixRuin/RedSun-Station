@@ -174,7 +174,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 		icon_state = "morgue0"
 		STOP_PROCESSING(SSobj, src)
 		return
-	
+
 	if(contents.len == 1)  // Empty
 		icon_state = "morgue1"
 		STOP_PROCESSING(SSobj, src)
@@ -432,7 +432,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	else
 		return FALSE
 
-/obj/structure/tray/m_tray/CanAStarPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
+/obj/structure/tray/m_tray/CanAStarPass(obj/item/card/id/ID, to_dir, atom/movable/requester)
 	. = !density
-	if(istype(caller))
-		. = . || (caller.pass_flags & PASSTABLE)
+	if(istype(requester))
+		. = . || (requester.pass_flags & PASSTABLE)

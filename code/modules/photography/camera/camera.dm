@@ -115,8 +115,8 @@
 
 			disk.record = new
 			var/mob/M = target
-			disk.record.caller_name = M.name
-			disk.record.set_caller_image(M)
+			disk.record.call_source_name = M.name
+			disk.record.set_call_source_image(M)
 		else
 			to_chat(user, "<span class='warning'>Invalid holodisk target.</span>")
 			return

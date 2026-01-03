@@ -252,7 +252,7 @@ Doesn't work on other aliens/AI.*/
 	action.button_icon_state = "alien_neurotoxin_[active]"
 	action.UpdateButtons()
 
-/obj/effect/proc_holder/alien/neurotoxin/InterceptClickOn(mob/living/caller, params, atom/target)
+/obj/effect/proc_holder/alien/neurotoxin/InterceptClickOn(mob/living/clicker, params, atom/target)
 	if(..())
 		return
 	var/p_cost = 50

@@ -412,7 +412,7 @@ DEFINE_BITFIELD(turret_flags, list(
 
 /obj/machinery/porta_turret/welder_act(mob/living/user, obj/item/I)
 	. = TRUE
-	if(obj_integrity < max_integrity) //BLUEMOON EDIT: removed cover && since it broke the logic and considered the turret to be at 100% at all times. This bug is from 2021, hello. 
+	if(obj_integrity < max_integrity) //BLUEMOON EDIT: removed cover && since it broke the logic and considered the turret to be at 100% at all times. This bug is from 2021, hello.
 		if(!I.tool_start_check(user, amount=0))
 			return
 		user.visible_message("[user] чинит турель сваркой.", \
@@ -726,13 +726,13 @@ DEFINE_BITFIELD(turret_flags, list(
 	remote_controller = null
 	return TRUE
 
-/obj/machinery/porta_turret/proc/InterceptClickOn(mob/living/caller, params, atom/A)
+/obj/machinery/porta_turret/proc/InterceptClickOn(mob/living/clicker, params, atom/A)
 	if(!manual_control)
 		return FALSE
-	if(!can_interact(caller))
+	if(!can_interact(clicker))
 		remove_control()
 		return FALSE
-	log_combat(caller,A,"fired with manual turret control at")
+	log_combat(clicker,A,"fired with manual turret control at")
 	target(A)
 	return TRUE
 

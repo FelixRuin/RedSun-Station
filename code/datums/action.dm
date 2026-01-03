@@ -915,13 +915,13 @@
 	return PreActivate(owner)
 
 /// Intercepts client owner clicks to activate the ability
-/datum/action/cooldown/proc/InterceptClickOn(mob/living/caller, params, atom/target)
+/datum/action/cooldown/proc/InterceptClickOn(mob/living/clicker, params, atom/target)
 	if(!IsAvailable())
 		return FALSE
 	if(!target)
 		return FALSE
 	PreActivate(target)
-	caller.click_intercept = null
+	clicker.click_intercept = null
 	return TRUE
 
 /// For signal calling
@@ -1141,7 +1141,7 @@
 
 /* Basic availability checks in this proc.
  * Arguments:
- * show_message - Do we show recharging message to the caller?
+ * show_message - Do we show recharging message to the clicker?
  * ignore_ready - Are we ignoring the "action_ready" flag? Usefull when u call this check indirrectly.
  */
 /datum/action/item_action/advanced/IsAvailable(show_message = FALSE, ignore_ready = FALSE)
