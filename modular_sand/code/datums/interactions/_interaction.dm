@@ -47,6 +47,7 @@
 	var/required_from_target_unexposed = NONE
 
 	var/big_user_target_text = FALSE // BLUEMOON ADD большой текстик для TARGET И USER если TRUE
+	var/massage_by_user = TRUE /// BLUEMOON ADD Сообщение и звук происходит от user-а? Если нет, то от цели
 	/// Additional details to be shown in the interaction menu, accepts more than one entry
 	var/list/additional_details
 
@@ -146,7 +147,10 @@
 	if(simple_message)
 		var/use_message = replacetext(simple_message, "USER", big_user_target_text ? "<b>\the [user]</b>" : "\the [user]") // BLUEMOON ADD большой текст
 		use_message = replacetext(use_message, "TARGET", big_user_target_text ? "<b>\the [target]</b>" : "\the [target]") // BLUEMOON ADD большой текст
-		user.visible_message("<span class='[simple_style]'>[capitalize(use_message)]</span>")
+		if(massage_by_user)
+			user.visible_message("<span class='[simple_style]'>[capitalize(use_message)]</span>")
+		else
+			target.visible_message("<span class='[simple_style]'>[capitalize(use_message)]</span>")
 
 /// After the interaction, the base only plays the sound and only if it has one
 /datum/interaction/proc/post_interaction(mob/living/user, mob/living/target, apply_cooldown = TRUE)
@@ -163,7 +167,7 @@
 			soundfile_to_play = pickweight(interaction_sound)
 		else
 			soundfile_to_play = interaction_sound
-		playsound(get_turf(user), soundfile_to_play, 50, 1, -1)
+		playsound(get_turf(massage_by_user ? user : target), soundfile_to_play, 50, 1, -1)
 	return
 
 /datum/interaction/cheer/post_interaction(mob/living/user, mob/living/target, apply_cooldown = TRUE)
