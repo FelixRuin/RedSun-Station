@@ -141,6 +141,8 @@
 	// BLUEMOON ADD
 	if(self.has_tail())
 		required_from_user |= INTERACTION_REQUIRE_TAIL
+	if(self.check_mutation(TK))
+		required_from_user |= INTERACTION_REQUIRE_TK
 	if(user_has_penis)
 		var/shape_desc = get_penis_shape_desc(self)
 		if(self?.client?.prefs.sexknotting && target?.client?.prefs.sexknotting && findtext(shape_desc, "узл"))
