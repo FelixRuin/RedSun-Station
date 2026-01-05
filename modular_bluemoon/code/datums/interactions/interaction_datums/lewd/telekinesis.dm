@@ -23,6 +23,19 @@
 	write_log_target = "TKheadpatted by"
 	interaction_sound = 'sound/weapons/thudswoosh.ogg'
 
+/datum/interaction/TKpulltail
+	description = "Телекинез. Потянуть за хвост."
+	simple_message = "Что-то тянет хвост TARGET."
+	simple_style = "lewd"
+	required_from_user = INTERACTION_REQUIRE_TK
+	required_from_target = INTERACTION_REQUIRE_TAIL
+	interaction_flags = NONE
+	max_distance = TK_MAXRANGE
+	massage_by_user = FALSE
+	write_log_user = "TKtailpull"
+	write_log_target = "TKtailpulled by"
+	interaction_sound = 'sound/weapons/thudswoosh.ogg'
+
 /datum/interaction/TKhug/display_interaction(mob/living/user, mob/living/target)
 	..()
 	if(!HAS_TRAIT(user, TRAIT_LEWD_JOB))
@@ -63,8 +76,8 @@
 	p13target_emote = PLUG13_EMOTE_BREASTS
 	start_text = "Что-то обхватывает грудь TARGET."
 	help_text = "Что-то обводит и мягко сжимает грудь TARGET."
-	grab_text = "Что-то крепко зажимает грудь TARGET."
-	harm_text = "Что-то впивается до боли в грудь TARGET."
+	grab_text = "Что-то крепко сжимает грудь TARGET."
+	harm_text = "Что-то впивается в грудь TARGET до болезненного покалывания."
 
 /datum/interaction/lewd/simplified_interaction/TK_interaction/ass
 	description = "Телекинез. Схватить задницу."
@@ -72,10 +85,10 @@
 	write_log_user = "TK-ass-groped"
 	write_log_target = "was TK-ass-groped by"
 	p13target_emote = PLUG13_EMOTE_ASS
-	start_text = "Что-то обхватывает зад TARGET."
-	help_text = "Что-то поочерёдно сжимает булки зада TARGET."
+	start_text = "Что-то хватает за зад TARGET."
+	help_text = "Что-то поочерёдно массирует ягодицы TARGET."
 	grab_text = "Что-то крепко сжимает зад TARGET."
-	harm_text = "Что-то впивается и растягивает булки TARGET."
+	harm_text = "Что-то болезненно хватает за ягодицы TARGET."
 
 /datum/interaction/lewd/simplified_interaction/TK_interaction/things
 	description = "Телекинез. Схватить бёдра."
@@ -83,9 +96,9 @@
 	write_log_user = "TK-things-groped"
 	write_log_target = "was TK-things-groped by"
 	p13target_emote = PLUG13_EMOTE_BREASTS
-	start_text = "Что-то обхватывает бёдра TARGET."
+	start_text = "Что-то мягко массирует объёмы бедёр TARGET."
 	help_text = "Что-то проходится и обжимает бёдра TARGET."
-	grab_text = "Что-то крепко зажимает бёдра TARGET."
+	grab_text = "Что-то ощутимо сжимает бёдра TARGET."
 	harm_text = "Что-то впивается в бёдра TARGET, то и дело поочерёдно их сжимая."
 
 /datum/interaction/lewd/simplified_interaction/TK_interaction/balls
@@ -96,27 +109,29 @@
 	write_log_user = "TK-balls-groped"
 	write_log_target = "was TK-balls-groped by"
 	p13target_emote = PLUG13_EMOTE_GROIN
-	start_text = "Что-то хватается за яйца TARGET."
-	help_text = "Что-то перебирает яйцами TARGET в своей хватке."
-	grab_text = "Что-то обхватывает и зажимает яйца TARGET."
-	harm_text = "Что-то крайне сильно сжимает яйца TARGET."
+	start_text = "Что-то хватает TARGET за шары."
+	help_text = "Что-то перебирает свисающими грушами TARGET."
+	grab_text = "Что-то сильно сжимает нежные шарики TARGET."
+	harm_text = "Что-то пытается расплющить чувствительные орешки TARGET."
 
 /datum/interaction/lewd/simplified_interaction/TK_interaction/penis
 	description = "Телекинез. Схватить член."
 	required_from_target_exposed = INTERACTION_REQUIRE_PENIS
 	required_from_target_unexposed = INTERACTION_REQUIRE_PENIS
 	target_organ = ORGAN_SLOT_PENIS
+	lewd_sounds = list('modular_sand/sound/interactions/bang1.ogg',
+						'modular_sand/sound/interactions/bang2.ogg',
+						'modular_sand/sound/interactions/bang3.ogg')
 	write_log_user = "TK-penis-groped"
 	write_log_target = "was TK-penis-groped by"
 	p13target_emote = PLUG13_EMOTE_PENIS
 
-/datum/interaction/lewd/simplified_interaction/TK_interaction/penisgrope/text_picker(mob/living/user, mob/living/partner)
+/datum/interaction/lewd/simplified_interaction/TK_interaction/penis/text_picker(mob/living/user, mob/living/partner)
 	var/has_penis = partner.has_penis()
-	start_text = "USER обхватывает хвостом собственный [has_penis ? "член" : "дилдо"]."
 	start_text = "Что-то обхватывает [has_penis ? "член" : "дилдо"] TARGET."
 	help_text = "Что-то проходится по [has_penis ? "член" : "дилдо"] TARGET, [has_penis ? "" : "безуспешно "]стараясь доставить удовольствие."
 	grab_text = "Что-то бодро скользит по [has_penis ? "член" : "дилдо"] TARGET."
-	harm_text = "Что-то излишне сильно обхватывает [has_penis ? "член" : "дилдо"] TARGET."
+	harm_text = "что-то сжимает [has_penis ? "член" : "дилдо"] TARGET как стальными тисками."
 
 /datum/interaction/lewd/simplified_interaction/TK_interaction/vagina
 	description = "Телекинез. Вжаться в киску."
@@ -126,9 +141,10 @@
 	write_log_user = "TK-vagina-groped"
 	write_log_target = "was TK-vagina-groped by"
 	p13target_emote = PLUG13_EMOTE_PENIS
-	start_text = "Что-то вжимается в киску TARGET."
-	help_text = "Что-то проскальзывает по киску TARGET."
-	grab_text = "Что-то проскальзывает и мучает лоно TARGET."
-	harm_text = "Что-то вбивается и грубо тянет лоно TARGET."
+	lewd_sounds = 'modular_sand/sound/interactions/champ_fingering.ogg'
+	start_text = "Что-то упирается в чувствительные губки TARGET."
+	help_text = "Что-то невесомо ощупывает лепестки TARGET."
+	grab_text = "Что-то обхватывает с двух сторон чувствительную горошину TARGET."
+	harm_text = "Что-то резко упирается внутрь лона TARGET."
 
 #undef TK_MAXRANGE
