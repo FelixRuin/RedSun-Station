@@ -57,5 +57,8 @@
 		simple_message += " Стараясь ловить исходящие жидкости в [liquid_container]"
 	if(lust_granted(partner))
 		partner.handle_post_sex(lust_amount, cum_target, liquid_container ? liquid_container : user,  partner_organ)
-	playlewdinteractionsound(get_turf(user), pick(lewd_sounds), 70, 1, -1)
+	if(massage_by_user)
+		playlewdinteractionsound(get_turf(user), pick(lewd_sounds), 70, 1, -1)
+	else
+		playlewdinteractionsound(get_turf(partner), pick(lewd_sounds), 70, 1, -1)
 	..() // отправка сообщения в родительском проке
