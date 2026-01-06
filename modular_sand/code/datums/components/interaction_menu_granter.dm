@@ -141,7 +141,7 @@
 	// BLUEMOON ADD
 	if(self.has_tail())
 		required_from_user |= INTERACTION_REQUIRE_TAIL
-	if(self.check_mutation(TK))
+	if(self.check_mutation(TK) || HAS_TRAIT(self, TRAIT_TK_POTENTIAL))
 		required_from_user |= INTERACTION_REQUIRE_TK
 	if(user_has_penis)
 		var/shape_desc = get_penis_shape_desc(self)
