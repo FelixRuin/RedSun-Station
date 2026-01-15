@@ -246,7 +246,6 @@
 
 //SPLURT EDIT START: HOTEL UPDATE. Was sendToNewRoom(chosenRoomNumber, target) | Added new selectable apartments
 /obj/item/hilbertshotel/proc/sendToNewRoom(roomNumber, mob/user, chosen_room)
-	var/datum/turf_reservation/roomReservation = SSmapping.RequestBlockReservation(SShilbertshotel.hotel_room_template.width, SShilbertshotel.hotel_room_template.height)
 	var/datum/map_template/hilbertshotel/mapTemplate
 
 	if(SShilbertshotel.lore_room_spawned && roomNumber == SShilbertshotel.hhMysteryroom_number)
@@ -257,6 +256,7 @@
 	if(!mapTemplate)
 		mapTemplate = SShilbertshotel.hotel_room_template //Default Hotel Room
 
+	var/datum/turf_reservation/roomReservation = SSmapping.RequestBlockReservation(mapTemplate.width, mapTemplate.height)
 	mapTemplate.load(locate(roomReservation.bottom_left_coords[1], roomReservation.bottom_left_coords[2], roomReservation.bottom_left_coords[3]))
 	activeRooms["[roomNumber]"] = roomReservation
 
