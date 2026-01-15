@@ -6,28 +6,6 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	icon_state = "hilbertshotel"
 	w_class = WEIGHT_CLASS_SMALL
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	//SPLURT EDIT START
-	var/list/static/hotel_maps = list("Hotel Room", "Apartment-1","Apartment-2", "Apartment-3", "Apartment-4", "Apartment-Syndi", "Apartment-Bar", "Apartment-dojo", "Apartment-Sauna", "Apartment-Beach", "Apartment-Forest", "Apartment-Jungle", "Apartment-Winter", "Apartment-Prison","Apartment-GYM","Apartment-Capsule","Apartment-Train")
-	var/datum/map_template/hilbertshotel/apartment/hilberts_hotel_rooms_apartment_one
-	var/datum/map_template/hilbertshotel/apartment/one/hilberts_hotel_rooms_apartment_two
-	var/datum/map_template/hilbertshotel/apartment/two/hilberts_hotel_rooms_apartment_three
-	var/datum/map_template/hilbertshotel/apartment/three/hilberts_hotel_rooms_apartment_four
-	var/datum/map_template/hilbertshotel/apartment/syndi/hilberts_hotel_rooms_apartment_syndi
-	var/datum/map_template/hilbertshotel/apartment/bar/hilberts_hotel_rooms_apartment_bar
-	var/datum/map_template/hilbertshotel/apartment/dojo/hilberts_hotel_rooms_apartment_dojo
-	var/datum/map_template/hilbertshotel/apartment/sauna/hilberts_hotel_rooms_apartment_sauna
-	var/datum/map_template/hilbertshotel/apartment/beach/hilberts_hotel_rooms_apartment_beach
-	var/datum/map_template/hilbertshotel/apartment/forest/hilberts_hotel_rooms_apartment_forest
-	var/datum/map_template/hilbertshotel/apartment/jungle/hilberts_hotel_rooms_apartment_jungle
-	var/datum/map_template/hilbertshotel/apartment/winter/hilberts_hotel_rooms_apartment_winter
-	var/datum/map_template/hilbertshotel/apartment/prison/hilberts_hotel_rooms_apartment_prison
-	var/datum/map_template/hilbertshotel/apartment/sport/hilberts_hotel_rooms_apartment_sport
-	var/datum/map_template/hilbertshotel/apartment/capsule/hilberts_hotel_rooms_apartment_capsule
-	var/datum/map_template/hilbertshotel/apartment/train/hilberts_hotel_rooms_apartment_train
-	//SPLURT EDIT END
-	var/datum/map_template/hilbertshotel/hotelRoomTemp
-	var/datum/map_template/hilbertshotel/empty/hotelRoomTempEmpty
-	var/datum/map_template/hilbertshotel/lore/hotelRoomTempLore
 	var/list/activeRooms = list()
 	var/list/storedRooms = list()
 	var/list/checked_in_ckeys = list()
@@ -45,27 +23,6 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	INVOKE_ASYNC(src, PROC_REF(prepare_rooms))
 
 /obj/item/hilbertshotel/proc/prepare_rooms()
-	hotelRoomTemp = new()
-	hotelRoomTempEmpty = new()
-	hotelRoomTempLore = new()
-
-	hilberts_hotel_rooms_apartment_one = new()
-	hilberts_hotel_rooms_apartment_two = new()
-	hilberts_hotel_rooms_apartment_three = new()
-	hilberts_hotel_rooms_apartment_four = new()
-	hilberts_hotel_rooms_apartment_syndi = new()
-	hilberts_hotel_rooms_apartment_bar = new()
-	hilberts_hotel_rooms_apartment_dojo = new()
-	hilberts_hotel_rooms_apartment_sauna = new()
-	hilberts_hotel_rooms_apartment_beach = new()
-	hilberts_hotel_rooms_apartment_forest = new()
-	hilberts_hotel_rooms_apartment_jungle = new()
-	hilberts_hotel_rooms_apartment_winter = new()
-	hilberts_hotel_rooms_apartment_prison = new()
-	hilberts_hotel_rooms_apartment_sport = new()
-	hilberts_hotel_rooms_apartment_capsule = new()
-	hilberts_hotel_rooms_apartment_train = new()
-
 	var/area/currentArea = get_area(src)
 	if(currentArea.type == /area/ruin/space/has_grav/hilbertresearchfacility)
 		ruinSpawned = TRUE
@@ -121,7 +78,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	// Check if the room is already active, stored, or the secret room. If so, skip room type selection
 	var/chosen_room = "Nothing"
 	if(!activeRooms["[chosenRoomNumber]"] && !storedRooms["[chosenRoomNumber]"] && chosenRoomNumber != GLOB.hhmysteryRoomNumber)
-		chosen_room = tgui_input_list(user, "Choose your desired room:", "∼♦️ Time to choose a room ♦️∼!", hotel_maps)
+		chosen_room = tgui_input_list(user, "Choose your desired room:", "∼♦️ Time to choose a room ♦️∼!", SShilbertshotel.hotel_map_list)
 		if(!chosen_room || !user.CanReach(src))
 			return FALSE
 	//SPLURT EDIT END
@@ -279,58 +236,25 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 		user.start_pulling(AM)
 
 /obj/item/hilbertshotel/proc/getMapTemplate(roomType) // To load a map and remove it's atoms
-	switch(roomType)
-		if("Hotel Room") return hotelRoomTemp
-		if("Apartment-1") return hilberts_hotel_rooms_apartment_one
-		if("Apartment-2") return hilberts_hotel_rooms_apartment_two
-		if("Apartment-3") return hilberts_hotel_rooms_apartment_three
-		if("Apartment-4") return hilberts_hotel_rooms_apartment_four
-		if("Apartment-Bar") return hilberts_hotel_rooms_apartment_bar
-		if("Apartment-Syndi") return hilberts_hotel_rooms_apartment_syndi
-		if("Apartment-dojo") return hilberts_hotel_rooms_apartment_dojo
-		if("Apartment-Sauna") return hilberts_hotel_rooms_apartment_sauna
-		if("Apartment-Beach") return hilberts_hotel_rooms_apartment_beach
-		if("Apartment-Forest") return hilberts_hotel_rooms_apartment_forest
-		if("Apartment-Jungle") return hilberts_hotel_rooms_apartment_jungle
-		if("Apartment-Winter") return hilberts_hotel_rooms_apartment_winter
-		if("Apartment-Prison") return hilberts_hotel_rooms_apartment_prison
-		if("Apartment-GYM") return hilberts_hotel_rooms_apartment_sport
-		if("Apartment-Capsule") return hilberts_hotel_rooms_apartment_capsule
-		if("Apartment-Train") return hilberts_hotel_rooms_apartment_train
-		if("Mystery Room") return hotelRoomTempLore
-	return hotelRoomTemp // Default to Hotel Room if no match is found
+	if(roomType == "Mystery Room")
+		return SShilbertshotel.hotel_room_template_lore
+	else if(roomType in SShilbertshotel.hotel_map_list)
+		return SShilbertshotel.hotel_map_list[roomType]
+
+	return SShilbertshotel.hotel_room_template // Default to Hotel Room if no match is found
 
 //SPLURT EDIT START: HOTEL UPDATE. Was sendToNewRoom(chosenRoomNumber, target) | Added new selectable apartments
 /obj/item/hilbertshotel/proc/sendToNewRoom(roomNumber, mob/user, chosen_room)
-	var/datum/turf_reservation/roomReservation = SSmapping.RequestBlockReservation(hotelRoomTemp.width, hotelRoomTemp.height)
-	mysteryRoom = GLOB.hhmysteryRoomNumber
-
+	var/datum/turf_reservation/roomReservation = SSmapping.RequestBlockReservation(SShilbertshotel.hotel_room_template.width, SShilbertshotel.hotel_room_template.height)
 	var/datum/map_template/hilbertshotel/mapTemplate
 
 	if(ruinSpawned && roomNumber == mysteryRoom)
 		chosen_room = "Mystery Room"
-		mapTemplate = hotelRoomTempLore
+		mapTemplate = SShilbertshotel.hotel_room_template_lore
 	else
-		switch(chosen_room)
-			if("Hotel Room") mapTemplate = hotelRoomTemp
-			if("Apartment-1") mapTemplate = hilberts_hotel_rooms_apartment_one
-			if("Apartment-2") mapTemplate = hilberts_hotel_rooms_apartment_two
-			if("Apartment-3") mapTemplate = hilberts_hotel_rooms_apartment_three
-			if("Apartment-4") mapTemplate = hilberts_hotel_rooms_apartment_four
-			if("Apartment-Syndi") mapTemplate = hilberts_hotel_rooms_apartment_syndi
-			if("Apartment-Bar") mapTemplate = hilberts_hotel_rooms_apartment_bar
-			if("Apartment-dojo") mapTemplate = hilberts_hotel_rooms_apartment_dojo
-			if("Apartment-Sauna") mapTemplate = hilberts_hotel_rooms_apartment_sauna
-			if("Apartment-Beach") mapTemplate = hilberts_hotel_rooms_apartment_beach
-			if("Apartment-Forest") mapTemplate = hilberts_hotel_rooms_apartment_forest
-			if("Apartment-Jungle") mapTemplate = hilberts_hotel_rooms_apartment_jungle
-			if("Apartment-Winter") mapTemplate = hilberts_hotel_rooms_apartment_winter
-			if("Apartment-Prison") mapTemplate = hilberts_hotel_rooms_apartment_prison
-			if("Apartment-GYM") mapTemplate = hilberts_hotel_rooms_apartment_sport
-			if("Apartment-Capsule") mapTemplate = hilberts_hotel_rooms_apartment_capsule
-			if("Apartment-Train") mapTemplate = hilberts_hotel_rooms_apartment_train
+		mapTemplate = SShilbertshotel.hotel_map_list[chosen_room]
 	if(!mapTemplate)
-		mapTemplate = hotelRoomTemp //Default Hotel Room
+		mapTemplate = SShilbertshotel.hotel_room_template //Default Hotel Room
 
 	mapTemplate.load(locate(roomReservation.bottom_left_coords[1], roomReservation.bottom_left_coords[2], roomReservation.bottom_left_coords[3]))
 	activeRooms["[roomNumber]"] = roomReservation
@@ -361,8 +285,8 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	if(activeRooms.len)
 		for(var/x in activeRooms)
 			var/datum/turf_reservation/room = activeRooms[x]
-			for(var/i=0, i<hotelRoomTemp.width, i++)
-				for(var/j=0, j<hotelRoomTemp.height, j++)
+			for(var/i=0, i<SShilbertshotel.hotel_room_template.width, i++)
+				for(var/j=0, j<SShilbertshotel.hotel_room_template.height, j++)
 					for(var/atom/movable/A in locate(room.bottom_left_coords[1] + i, room.bottom_left_coords[2] + j, room.bottom_left_coords[3]))
 						if(ismob(A))
 							var/mob/M = A
@@ -413,7 +337,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 //Template Stuff
 /datum/map_template/hilbertshotel
-	name = "Hilbert's Hotel Room"
+	name = "Hotel Room"
 	mappath = '_maps/templates/hilbertshotel.dmm'
 	var/landingZoneRelativeX = 2
 	var/landingZoneRelativeY = 8
