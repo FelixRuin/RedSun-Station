@@ -37,6 +37,9 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	//Lore Stuff
 	var/ruinSpawned = FALSE
 	var/mysteryRoom
+	light_color = "#5692d6"
+	light_range = 5
+	light_power = 3
 
 /obj/item/hilbertshotel/Initialize(mapload)
 	. = ..()
