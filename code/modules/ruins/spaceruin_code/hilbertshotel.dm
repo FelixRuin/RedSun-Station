@@ -1,5 +1,3 @@
-GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
-
 /obj/item/hilbertshotel
 	name = "Hilbert's Hotel"
 	desc = "A sphere of what appears to be an intricate network of bluespace. Observing it in detail seems to give you a headache as you try to comprehend the infinite amount of infinitesimally distinct points on its surface."
@@ -10,22 +8,15 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	var/list/storedRooms = list()
 	var/list/checked_in_ckeys = list()
 	var/list/lockedRooms = list()
-	//Lore Stuff
-	var/ruinSpawned = FALSE
-	var/mysteryRoom
 	light_color = "#5692d6"
 	light_range = 5
 	light_power = 3
 
 /obj/item/hilbertshotel/Initialize(mapload)
 	. = ..()
-	//Load templates
-	INVOKE_ASYNC(src, PROC_REF(prepare_rooms))
-
-/obj/item/hilbertshotel/proc/prepare_rooms()
 	var/area/currentArea = get_area(src)
 	if(currentArea.type == /area/ruin/space/has_grav/hilbertresearchfacility)
-		ruinSpawned = TRUE
+		SShilbertshotel.lore_room_spawned = TRUE
 
 /obj/item/hilbertshotel/Destroy()
 	ejectRooms()
@@ -77,7 +68,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	//SPLURT EDIT START
 	// Check if the room is already active, stored, or the secret room. If so, skip room type selection
 	var/chosen_room = "Nothing"
-	if(!activeRooms["[chosenRoomNumber]"] && !storedRooms["[chosenRoomNumber]"] && chosenRoomNumber != GLOB.hhmysteryRoomNumber)
+	if(!activeRooms["[chosenRoomNumber]"] && !storedRooms["[chosenRoomNumber]"])
 		chosen_room = tgui_input_list(user, "Choose your desired room:", "∼♦️ Time to choose a room ♦️∼!", SShilbertshotel.hotel_map_list)
 		if(!chosen_room || !user.CanReach(src))
 			return FALSE
@@ -248,7 +239,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	var/datum/turf_reservation/roomReservation = SSmapping.RequestBlockReservation(SShilbertshotel.hotel_room_template.width, SShilbertshotel.hotel_room_template.height)
 	var/datum/map_template/hilbertshotel/mapTemplate
 
-	if(ruinSpawned && roomNumber == mysteryRoom)
+	if(SShilbertshotel.lore_room_spawned && room_number == SShilbertshotel.hhMysteryroom_number)
 		chosen_room = "Mystery Room"
 		mapTemplate = SShilbertshotel.hotel_room_template_lore
 	else
@@ -607,7 +598,8 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 /obj/item/paper/crumpled/docslogs/Initialize(mapload)
 	. = ..()
-	GLOB.hhmysteryRoomNumber = rand(1, SHORT_REAL_LIMIT)
+	if(!SShilbertshotel.hhMysteryroom_number)
+		SShilbertshotel.hhMysteryroom_number = rand(1, SHORT_REAL_LIMIT)
 	default_raw_text = {"
 ###  Research Logs
 I might just be onto something here!
@@ -627,7 +619,7 @@ I've also instructed him to use the encryption method we discussed for any impor
 It's clear what happens now. One day they'll show up uninvited, and claim my research as their own, leaving me as nothing more than a bullet ridden corpse floating in space.
 I can't stick around to the let that happen.
 I'm escaping into the very thing that brought all this trouble to my doorstep in the first place - my hotel.
-I'll be in <u>[uppertext(num2hex(GLOB.hhmysteryRoomNumber, 0))]</u> (That will make sense to anyone who should know)
+I'll be in <u>[uppertext(num2hex(SShilbertshotel.hhMysteryroom_number, 0))]</u> (That will make sense to anyone who should know)
 I'm sorry that I must go like this. Maybe one day things will be different and it will be safe to return... maybe...
 Goodbye
      _Doctor Hilbert_"}

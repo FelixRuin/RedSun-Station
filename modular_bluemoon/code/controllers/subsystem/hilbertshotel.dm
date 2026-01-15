@@ -12,6 +12,10 @@ SUBSYSTEM_DEF(hilbertshotel)
 	/// Name of the first template in the list - used as default
 	var/default_template
 	var/storageTurf
+	// Lore stuff
+	var/lore_room_spawned = FALSE
+	var/hhMysteryroom_number
+
 /datum/controller/subsystem/hilbertshotel/Initialize()
 	. = ..()
 	if(!CONFIG_GET(flag/hilbertshotel_enabled))
