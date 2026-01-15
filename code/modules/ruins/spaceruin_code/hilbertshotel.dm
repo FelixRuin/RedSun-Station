@@ -1,4 +1,3 @@
-GLOBAL_VAR_INIT(hhStorageTurf, null)
 GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 /obj/item/hilbertshotel
@@ -33,7 +32,6 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	var/list/storedRooms = list()
 	var/list/checked_in_ckeys = list()
 	var/list/lockedRooms = list()
-	var/storageTurf
 	//Lore Stuff
 	var/ruinSpawned = FALSE
 	var/mysteryRoom
@@ -128,15 +126,8 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 			return FALSE
 	//SPLURT EDIT END
 
-	if(!storageTurf) //Blame subsystems for not allowing this to be in Initialize
-		if(!GLOB.hhStorageTurf)
-			var/datum/map_template/hilbertshotelstorage/storageTemp = new()
-			var/datum/turf_reservation/storageReservation = SSmapping.RequestBlockReservation(3, 3)
-			storageTemp.load(locate(storageReservation.bottom_left_coords[1], storageReservation.bottom_left_coords[2], storageReservation.bottom_left_coords[3]))
-			GLOB.hhStorageTurf = locate(storageReservation.bottom_left_coords[1]+1, storageReservation.bottom_left_coords[2]+1, storageReservation.bottom_left_coords[3])
-		//SPLURT EDIT START: Removed else statement in this line (to fix first room not storing correctly)
-		storageTurf = GLOB.hhStorageTurf
-		//SPLURT EDIT END
+	if(!SShilbertshotel.storageTurf) //Blame subsystems for not allowing... huh...
+		SShilbertshotel.setup_storage_turf()
 	checked_in_ckeys |= user.ckey		//if anything below runtimes, guess you're outta luck!
 	if(tryActiveRoom(chosenRoomNumber, user))
 		return
@@ -151,7 +142,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	var/roomSize = roomWidth * roomHeight
 	var/storage[roomSize]
 	var/turfNumber = 1
-	var/obj/item/abstracthotelstorage/storageObj = new(storageTurf)
+	var/obj/item/abstracthotelstorage/storageObj = new(SShilbertshotel.storageTurf)
 	storageObj.roomNumber = roomnumber
 	storageObj.parentSphere = parentSphere
 	storageObj.roomType = roomType // Save the room type here
@@ -195,7 +186,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	if(storedRooms["[roomNumber]"])
 		// Find the storage object for the stored room
 		var/obj/item/abstracthotelstorage/storageObj
-		for(var/obj/item/abstracthotelstorage/S in storageTurf)
+		for(var/obj/item/abstracthotelstorage/S in SShilbertshotel.storageTurf)
 			if(S.roomNumber == roomNumber && S.parentSphere == src)
 				storageObj = S
 				break
@@ -226,7 +217,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 					if(istype(A.loc, /obj/item/abstracthotelstorage)) // Don't want to recall something that's been moved
 						A.forceMove(locate(roomReservation.bottom_left_coords[1] + i, roomReservation.bottom_left_coords[2] + j, roomReservation.bottom_left_coords[3]))
 				turfNumber++
-		for(var/obj/item/abstracthotelstorage/S in storageTurf)
+		for(var/obj/item/abstracthotelstorage/S in SShilbertshotel.storageTurf)
 			if((S.roomNumber == roomNumber) && (S.parentSphere == src))
 				qdel(S)
 
@@ -357,7 +348,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 	var/area/hilbertshotel/currentArea = get_area(locate(currentReservation.bottom_left_coords[1], currentReservation.bottom_left_coords[2], currentReservation.bottom_left_coords[3]))
 	currentArea.name = "Hilbert's Hotel Room [currentRoomnumber]"
 	currentArea.parentSphere = src
-	currentArea.storageTurf = storageTurf
+	currentArea.storageTurf = SShilbertshotel.storageTurf
 	currentArea.roomnumber = currentRoomnumber
 	currentArea.reservation = currentReservation
 	for(var/turf/closed/indestructible/hoteldoor/door in currentArea)
