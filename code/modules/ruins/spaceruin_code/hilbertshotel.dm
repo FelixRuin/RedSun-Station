@@ -249,7 +249,7 @@
 	var/datum/turf_reservation/roomReservation = SSmapping.RequestBlockReservation(SShilbertshotel.hotel_room_template.width, SShilbertshotel.hotel_room_template.height)
 	var/datum/map_template/hilbertshotel/mapTemplate
 
-	if(SShilbertshotel.lore_room_spawned && room_number == SShilbertshotel.hhMysteryroom_number)
+	if(SShilbertshotel.lore_room_spawned && roomNumber == SShilbertshotel.hhMysteryroom_number)
 		chosen_room = "Mystery Room"
 		mapTemplate = SShilbertshotel.hotel_room_template_lore
 	else

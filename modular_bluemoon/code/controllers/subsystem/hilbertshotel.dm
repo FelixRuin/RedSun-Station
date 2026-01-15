@@ -2,6 +2,9 @@ SUBSYSTEM_DEF(hilbertshotel)
 	name = "Hilbert's Hotel"
 	flags = SS_NO_FIRE
 	init_order = INIT_ORDER_HILBERTSHOTEL
+
+	var/list/obj/item/hilbertshotel/all_hilbert_spheres = list()
+
 	// Some placeholder templates
 	var/datum/map_template/hilbertshotel/hotel_room_template
 	var/datum/map_template/hilbertshotel/empty/hotel_room_template_empty
