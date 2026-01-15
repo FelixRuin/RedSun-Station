@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(hilbertshotel)
 		return
 	var/datum/map_template/hilbertshotelstorage/storageTemp = new()
 	var/datum/turf_reservation/storageReservation = SSmapping.RequestBlockReservation(3, 3)
-	var/turf/bottom_left = get_turf(storageReservation.bottom_left_coords[1])
+	var/turf/bottom_left = get_turf(locate(storageReservation.bottom_left_coords[1], storageReservation.bottom_left_coords[2], storageReservation.bottom_left_coords[3]))
 	storageTemp.load(bottom_left)
 	storageTurf = locate(bottom_left.x + 1, bottom_left.y + 1, bottom_left.z)
 
@@ -34,7 +34,6 @@ SUBSYSTEM_DEF(hilbertshotel)
 		return
 
 	hotel_room_template = new()
-	hotel_room_template_empty = new()
 	hotel_room_template_lore = new()
 
 	hotel_map_list[hotel_room_template.name] = hotel_room_template
