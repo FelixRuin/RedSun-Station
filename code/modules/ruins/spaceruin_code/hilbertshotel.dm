@@ -4,6 +4,8 @@
 	icon_state = "hilbertshotel"
 	w_class = WEIGHT_CLASS_SMALL
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	var/is_ghost_cafe = FALSE
+	var/ruinSpawned = FALSE
 	var/list/activeRooms = list()
 	var/list/storedRooms = list()
 	var/list/checked_in_ckeys = list()
@@ -14,11 +16,19 @@
 
 /obj/item/hilbertshotel/Initialize(mapload)
 	. = ..()
+
+	if(!length(SShilbertshotel.hotel_map_list) && CONFIG_GET(flag/hilbertshotel_enabled))
+		INVOKE_ASYNC(SShilbertshotel, TYPE_PROC_REF(/datum/controller/subsystem/hilbertshotel, prepare_rooms))
+
 	var/area/currentArea = get_area(src)
 	if(currentArea.type == /area/ruin/space/has_grav/hilbertresearchfacility)
+		ruinSpawned = TRUE
 		SShilbertshotel.lore_room_spawned = TRUE
 
+	SShilbertshotel.all_hilbert_spheres += src
+
 /obj/item/hilbertshotel/Destroy()
+	SShilbertshotel.all_hilbert_spheres -= src
 	ejectRooms()
 	return ..()
 
