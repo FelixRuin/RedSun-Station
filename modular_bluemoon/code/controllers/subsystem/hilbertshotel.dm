@@ -14,10 +14,6 @@ SUBSYSTEM_DEF(hilbertshotel)
 	/// Name of the first template in the list - used as default
 	var/default_template
 
-	/// List of active rooms with their data.
-	var/list/room_data = list()
-	/// List of "frozen" rooms.
-	var/list/conservated_rooms = list()
 	var/storageTurf
 
 	/// List of strings used for the prompt check-in message

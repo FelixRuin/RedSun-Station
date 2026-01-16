@@ -18,6 +18,7 @@
 /obj/item/hilbertshotel/ghostdojo
 	name = "Infinite Dormitories"
 	anchored = TRUE
+	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND
 
 /obj/item/hilbertshotel/ghostdojo/ghostcafe
 	rooms_can_be_locked = TRUE
@@ -185,8 +186,8 @@
 	mapTemplate.load(locate(roomReservation.bottom_left_coords[1], roomReservation.bottom_left_coords[2], roomReservation.bottom_left_coords[3]))
 
 	// Clear all movable atoms from the loaded room template
-	for(var/i=0, i<mapTemplate.width, i++)
-		for(var/j=0, j<mapTemplate.height, j++)
+	for(var/i in 0 to mapTemplate.width - 1)
+		for(var/j in 0 to mapTemplate.height - 1)
 			var/turf/T = locate(roomReservation.bottom_left_coords[1] + i, roomReservation.bottom_left_coords[2] + j, roomReservation.bottom_left_coords[3])
 			for(var/atom/movable/A in T)
 				if(istype(A, /obj/effect/overlay/water) || istype(A, /obj/effect/overlay/water/top)) // Skip pool water overlays
@@ -196,8 +197,8 @@
 
 	// Place the STORED atoms back into the room
 	var/turfNumber = 1
-	for(var/i=0, i<mapTemplate.width, i++)
-		for(var/j=0, j<mapTemplate.height, j++)
+	for(var/i in 0 to mapTemplate.width - 1)
+		for(var/j in 0 to mapTemplate.height - 1)
 			for(var/atom/movable/A in storedRooms["[roomNumber]"][turfNumber])
 				if(istype(A.loc, /obj/item/abstracthotelstorage)) // Don't want to recall something that's been moved
 					A.forceMove(locate(roomReservation.bottom_left_coords[1] + i, roomReservation.bottom_left_coords[2] + j, roomReservation.bottom_left_coords[3]))
@@ -232,13 +233,17 @@
 	if(user.pulling)
 		AM = user.pulling
 		if(istype(AM, /mob/living))
-			MobTransfer(AM, T, depth)
+			if(check_user(AM))
+				MobTransfer(AM, T, depth)
 		else
 			AM.forceMove(T)
 	if(user.buckled && !user.buckled.anchored)
 		var/atom/movable/seating = user.buckled
 		if(istype(seating, /mob/living))
-			MobTransfer(seating, T, depth)
+			if(check_user(seating))
+				MobTransfer(seating, T, depth)
+			else
+				user.forceMove(T)
 		else
 			seating.forceMove(T)
 			user.forceMove(T)
@@ -269,7 +274,6 @@
 
 	return SShilbertshotel.hotel_room_template // Default to Hotel Room if no match is found
 
-//SPLURT EDIT START: HOTEL UPDATE. Was sendToNewRoom(chosenRoomNumber, target) | Added new selectable apartments
 /obj/item/hilbertshotel/proc/sendToNewRoom(roomNumber, mob/user, chosen_room)
 	var/datum/map_template/hilbertshotel/mapTemplate
 
@@ -292,7 +296,6 @@
 	linkTurfs(roomReservation, roomNumber)
 	do_sparks(3, FALSE, get_turf(user))
 	MobTransfer(user, locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
-//SPLURT EDIT END
 
 /obj/item/hilbertshotel/proc/linkTurfs(var/datum/turf_reservation/currentReservation, var/currentRoomnumber, var/chosen_room)
 	var/area/hilbertshotel/currentArea = get_area(locate(currentReservation.bottom_left_coords[1], currentReservation.bottom_left_coords[2], currentReservation.bottom_left_coords[3]))
@@ -311,8 +314,8 @@
 	if(activeRooms.len)
 		for(var/x in activeRooms)
 			var/datum/turf_reservation/room = activeRooms[x]
-			for(var/i=0, i<room.width, i++)
-				for(var/j=0, j<room.height, j++)
+			for(var/i in 0 to room.width-1)
+				for(var/j in 0 to room.height-1)
 					for(var/atom/movable/A in locate(room.bottom_left_coords[1] + i, room.bottom_left_coords[2] + j, room.bottom_left_coords[3]))
 						if(ismob(A))
 							var/mob/M = A
@@ -323,7 +326,7 @@
 						var/list/possible_transtitons = list()
 						for(var/AZ in SSmapping.z_list)
 							var/datum/space_level/D = AZ
-							if (D.linkage == CROSSLINKED)
+							if(D.linkage == CROSSLINKED)
 								possible_transtitons += D.z_value
 						var/_z = pick(possible_transtitons)
 						var/_x = rand(min,max)
@@ -348,18 +351,6 @@
 				var/_y = rand(min,max)
 				var/turf/T = locate(_x, _y, _z)
 				A.forceMove(T)
-
-/obj/item/hilbertshotel/ghostdojo
-	name = "Infinite Dormitories"
-	anchored = TRUE
-	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND
-
-/obj/item/hilbertshotel/ghostdojo/linkTurfs(datum/turf_reservation/currentReservation, currentRoomnumber)
-	. = ..()
-	var/area/hilbertshotel/currentArea = get_area(locate(currentReservation.bottom_left_coords[1], currentReservation.bottom_left_coords[2], currentReservation.bottom_left_coords[3]))
-	for(var/turf/closed/indestructible/hoteldoor/door in currentArea)
-		door.parentSphere = src
-		door.roomnumber = currentRoomnumber
 
 //Turfs and Areas
 /turf/closed/indestructible/hotelwall
@@ -552,18 +543,19 @@
 
 /area/hilbertshotel/Exited(atom/movable/AM)
 	. = ..()
-	if(ismob(AM))
-		var/mob/M = AM
-		parentSphere?.checked_in_ckeys -= M.ckey
-		if(M.mind)
-			var/stillPopulated = FALSE
-			var/list/currentLivingMobs = GetAllContents(/mob/living) //Got to catch anyone hiding in anything
-			for(var/mob/living/L in currentLivingMobs) //Check to see if theres any sentient mobs left.
-				if(L.mind)
-					stillPopulated = TRUE
-					break
-			if(!stillPopulated)
-				storeRoom()
+	if(!ismob(AM))
+		return
+	var/mob/M = AM
+	parentSphere?.checked_in_ckeys -= M.ckey
+	if(M.mind)
+		var/stillPopulated = FALSE
+		var/list/currentLivingMobs = GetAllContents(/mob/living) //Got to catch anyone hiding in anything
+		for(var/mob/living/L in currentLivingMobs) //Check to see if theres any sentient mobs left.
+			if(L.mind)
+				stillPopulated = TRUE
+				break
+		if(!stillPopulated)
+			storeRoom()
 
 /area/hilbertshotelstorage
 	name = "Hilbert's Hotel Storage Room"
