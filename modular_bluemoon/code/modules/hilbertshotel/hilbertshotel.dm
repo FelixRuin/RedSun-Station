@@ -24,14 +24,8 @@
 
 /obj/item/hilbertshotel/Initialize(mapload)
 	. = ..()
-
 	if(!length(SShilbertshotel.hotel_map_list) && CONFIG_GET(flag/hilbertshotel_enabled))
 		INVOKE_ASYNC(SShilbertshotel, TYPE_PROC_REF(/datum/controller/subsystem/hilbertshotel, prepare_rooms))
-
-	var/area/currentArea = get_area(src)
-	if(currentArea.type == /area/ruin/space/has_grav/hilbertresearchfacility)
-		ruinSpawned = TRUE
-		SShilbertshotel.lore_room_spawned = TRUE
 
 	SShilbertshotel.all_hilbert_spheres += src
 

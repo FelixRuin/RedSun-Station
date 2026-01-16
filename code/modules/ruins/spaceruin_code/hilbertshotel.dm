@@ -45,6 +45,13 @@
 	back = /obj/item/storage/backpack/satchel/leather
 	suit = /obj/item/clothing/suit/toggle/labcoat
 
+/obj/item/hilbertshotel/researchfacility
+	ruinSpawned = TRUE
+
+/obj/item/hilbertshotel/Initialize(mapload)
+	. = ..()
+	SShilbertshotel.lore_room_spawned = TRUE
+
 /obj/item/paper/crumpled/docslogs
 	name = "Research Logs"
 
