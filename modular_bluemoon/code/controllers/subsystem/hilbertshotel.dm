@@ -3,6 +3,7 @@ SUBSYSTEM_DEF(hilbertshotel)
 	flags = SS_NO_FIRE
 	init_order = INIT_ORDER_HILBERTSHOTEL
 
+	/// List for all hilberts spheres
 	var/list/obj/item/hilbertshotel/all_hilbert_spheres = list()
 
 	// Some placeholder templates
@@ -14,19 +15,8 @@ SUBSYSTEM_DEF(hilbertshotel)
 	/// Name of the first template in the list - used as default
 	var/default_template
 
+	/// Storage for conserved rooms
 	var/storageTurf
-
-	/// List of strings used for the prompt check-in message
-	var/static/list/vanity_strings = list(
-		"You feel a strange sense of déjà vu.",
-		"You feel chills rolling down your spine.",
-		"You suddenly feel like you're being watched from behind.",
-		"You feel like a gust of bone-chilling cold is passing through you.",
-		"Your vision gets a little blurry for a moment.",
-		"Your heart sinks as you feel a strange sense of dread.",
-		"Your mouth goes dry.",
-		"You feel uneasy.",
-	)
 
 	/// List of ckey-based user preferences
 	var/list/user_data = list()
