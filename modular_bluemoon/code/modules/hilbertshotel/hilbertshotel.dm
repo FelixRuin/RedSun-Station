@@ -2,11 +2,12 @@
 	name = "Hilbert's Hotel"
 	desc = "A sphere of what appears to be an intricate network of bluespace. Observing it in detail seems to give you a headache as you try to comprehend the infinite amount of infinitesimally distinct points on its surface."
 	icon_state = "hilbertshotel"
-	w_class = WEIGHT_CLASS_SMALL
+	w_class = WEIGHT_CLASS_GIGANTIC
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/rooms_can_be_locked = FALSE
 	var/is_ghost_cafe = FALSE
 	var/ruinSpawned = FALSE
+	var/list/list/mob_dorms = list()
 	var/list/activeRooms = list()
 	var/list/storedRooms = list()
 	var/list/checked_in_ckeys = list()
@@ -38,21 +39,133 @@
 /obj/item/hilbertshotel/attack(mob/living/M, mob/living/user)
 	if(M.mind)
 		to_chat(user, span_notice("You invite [M] to the hotel."))
-		promptAndCheckIn(user, M)
+		ui_interact(user)
 	else
 		to_chat(user, span_warning("[M] is not intelligent enough to understand how to use this device!"))
 
 /obj/item/hilbertshotel/attack_self(mob/user)
 	. = ..()
-	promptAndCheckIn(user, user)
+	ui_interact(user)
 
-/obj/item/hilbertshotel/ghostdojo/attack_hand(mob/user, list/modifiers)
-	. = ..()
-	if(.)
-		return
+/obj/item/hilbertshotel/ui_interact(mob/user, datum/tgui/ui)
 	if(!check_user(user))
 		return
-	return promptAndCheckIn(user)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "HilbertsHotelCheckout")
+		ui.set_autoupdate(TRUE)
+		ui.open()
+
+/obj/item/hilbertshotel/ui_static_data(mob/user)
+	. = ..()
+
+	// Shouldn't change during the round so we may as well cache it
+	.["hotel_map_list"] = list()
+	for(var/template in SShilbertshotel.hotel_map_list)
+		var/datum/map_template/hilbertshotel/room_template = SShilbertshotel.hotel_map_list[template]
+		.["hotel_map_list"] += list(list(
+			"name" = room_template.name,
+			"category" = room_template.category,
+			"donator_tier" = room_template.donator_tier,
+			"ckeywhitelist" = room_template.ckeywhitelist
+		))
+
+/obj/item/hilbertshotel/ui_data(mob/user)
+	var/list/data = list()
+
+	if(!SShilbertshotel.user_data[user.ckey])
+		SShilbertshotel.user_data[user.ckey] = list(
+			"room_number" = 1,
+			"template" = SShilbertshotel.default_template,
+			"donator_tier" = is_donator_group(user.ckey, DONATOR_GROUP_TIER_2) ? DONATOR_GROUP_TIER_2 : is_donator_group(user.ckey, DONATOR_GROUP_TIER_1) ? DONATOR_GROUP_TIER_1 : DONATOR_GROUP_NONE
+		)
+
+	data["current_room"] = SShilbertshotel.user_data[user.ckey]["room_number"]
+	data["selected_template"] = SShilbertshotel.user_data[user.ckey]["template"]
+	data["user_donator_tier"] = SShilbertshotel.user_data[user.ckey]["donator_tier"]
+	data["user_ckey"] = user.ckey
+
+
+	data["active_rooms"] = list()
+/*
+	for(var/room_number in SShilbertshotel.room_data)
+		var/list/room = SShilbertshotel.room_data["[room_number]"]
+		if(room["room_preferences"]["visibility"] == ROOM_VISIBLE && (room["is_ghost_cafe"] == is_ghost_cafe || !CONFIG_GET(flag/hilbertshotel_ghost_cafe_restricted)))
+			data["active_rooms"] += list(list(
+				"number" = room_number,
+				"occupants" = SShilbertshotel.generate_occupant_list(room_number),
+				"room_preferences" = room["room_preferences"]
+			))
+*/
+	data["conservated_rooms"] = list()
+/*
+	for(var/room_number in SShilbertshotel.conservated_rooms)
+		var/list/room = SShilbertshotel.conservated_rooms[room_number]
+		var/visibility = room["room_preferences"]["visibility"]
+		if(room["is_ghost_cafe"] != is_ghost_cafe && CONFIG_GET(flag/hilbertshotel_ghost_cafe_restricted))
+			continue
+		switch(visibility)
+			if(ROOM_VISIBLE)
+				data["conservated_rooms"] += list(list(
+					"number" = room_number,
+					"room_preferences" = room["room_preferences"]
+					))
+			if(ROOM_GUESTS_ONLY)
+				if((user.mind in room["access_restrictions"]["trusted_guests"]) || (user.mind == room["access_restrictions"]["room_owner"]))
+					data["conservated_rooms"] += list(list(
+						"number" = room_number,
+						"room_preferences" = room["room_preferences"]
+					))
+			if(ROOM_CLOSED)
+				if((user.mind == room["access_restrictions"]["room_owner"]))
+					data["conservated_rooms"] += list(list(
+						"number" = room_number,
+						"room_preferences" = room["room_preferences"]
+					))
+*/
+	return data
+
+/obj/item/hilbertshotel/ui_act(action, params)
+	. = ..()
+	if(.) // Orange eye; updates but is not interactive
+		return
+
+	if(!usr.ckey)
+		return
+
+	if(!SShilbertshotel.user_data[usr.ckey])
+		SShilbertshotel.user_data[usr.ckey] = list(
+			"room_number" = 1,
+			"template" = SShilbertshotel.default_template
+		)
+
+	switch(action)
+		if("update_room")
+			var/new_room = params["room"]
+			if(!new_room)
+				return FALSE
+			if(new_room < 1)
+				return FALSE
+			SShilbertshotel.user_data[usr.ckey]["room_number"] = new_room
+			return TRUE
+
+		if("select_room")
+			var/template_name = params["room"]
+			if(!(template_name in SShilbertshotel.hotel_map_list))
+				return FALSE
+			SShilbertshotel.user_data[usr.ckey]["template"] = template_name
+			return TRUE
+
+		if("checkin")
+			var/template = SShilbertshotel.user_data[usr.ckey]["template"] || SShilbertshotel.default_template
+			var/room_number = params["room"] || SShilbertshotel.user_data[usr.ckey]["room_number"] || 1
+			if(!room_number || !(template in SShilbertshotel.hotel_map_list))
+				return FALSE
+			var/mob/living/user = usr
+			if(type == /obj/item/hilbertshotel)
+				user = istype(loc, /mob/living) ? loc : usr
+			promptAndCheckIn(user, usr, room_number, template)
+			return TRUE
 
 /obj/item/hilbertshotel/proc/check_user(mob/user)
 	if(GLOB.master_mode == "Extended")
@@ -71,55 +184,44 @@
 	to_chat(user, "<span class='warning'>Your special role doesn't allow you to enter infinity dormitory.</span>")
 	return FALSE
 
-/obj/item/hilbertshotel/proc/promptAndCheckIn(mob/user)
+/obj/item/hilbertshotel/proc/promptAndCheckIn(mob/user, mob/target, room_number, template)
 	//SPLURT EDIT - max infinidorms rooms
 	var/max_rooms = CONFIG_GET(number/max_infinidorms)
-	var/chosenRoomNumber
-	if(max_rooms == 0)
+	if(!max_rooms)
 		playsound(src, 'sound/machines/terminal_error.ogg', 15, 1)
 		to_chat(user, span_warning("We're currently not offering service, please come back another day!"))
 		return
 
-	chosenRoomNumber = input(user, "What number room will you be checking into?", "Room Number") as null|num
-	if(!mob_dorms[user] || !mob_dorms[user].Find(chosenRoomNumber)) //BLUEMOON ADD владелец комнаты может зайти в комнату даже если она закрыта и активна
-		if(activeRooms.len && activeRooms["[chosenRoomNumber]"])	//лесенка ради удобства восприятия, точно-точно говорю
-			if(lockedRooms.len && lockedRooms["[chosenRoomNumber]"])
+	if(!mob_dorms[user] || !mob_dorms[user].Find(room_number)) //BLUEMOON ADD владелец комнаты может зайти в комнату даже если она закрыта и активна
+		if(activeRooms.len && activeRooms["[room_number]"])	//лесенка ради удобства восприятия, точно-точно говорю
+			if(lockedRooms.len && lockedRooms["[room_number]"])
 				to_chat(user, span_warning("You cant enter in locked room, contact with room owner."))
 				return												//BLUEMOON ADD END
-	if(max_rooms > 0 && mob_dorms[user]?.len >= max_rooms && !activeRooms["[chosenRoomNumber]"] && !storedRooms["[chosenRoomNumber]"])
+	if(max_rooms > 0 && mob_dorms[user]?.len >= max_rooms && !activeRooms["[room_number]"] && !storedRooms["[room_number]"])
 		to_chat(user, span_warning("Your free trial of Hilbert's Hotel has ended! Please select one of the rooms you've already visited."))
-		chosenRoomNumber = input(user, "Select one of your previous rooms", "Room number") as null|anything in mob_dorms[user]
+		room_number = input(user, "Select one of your previous rooms", "Room number") as null|anything in mob_dorms[user]
 
 	//SPLURT EDIT END
-	if(!chosenRoomNumber || !user.CanReach(src))
+	if(!room_number || !user.CanReach(src))
 		return
-	if(chosenRoomNumber > SHORT_REAL_LIMIT)
+	if(room_number > SHORT_REAL_LIMIT)
 		to_chat(user, span_warning("You have to check out the first [SHORT_REAL_LIMIT] rooms before you can go to a higher numbered one!"))
 		return
-	if((chosenRoomNumber < 1) || (chosenRoomNumber != round(chosenRoomNumber)))
+	if((room_number < 1) || (room_number != round(room_number)))
 		to_chat(user, span_warning("That is not a valid room number!"))
 		return
 	if(!isturf(loc))
 		if((loc == user) || (loc.loc == user) || (loc.loc in user.contents) || (loc in user.GetAllContents(type)))		//short circuit, first three checks are cheaper and covers almost all cases (loc.loc covers hotel in box in backpack).
 			forceMove(get_turf(user))
 
-	//SPLURT EDIT START
-	// Check if the room is already active, stored, or the secret room. If so, skip room type selection
-	var/chosen_room = "Nothing"
-	if(!activeRooms["[chosenRoomNumber]"] && !storedRooms["[chosenRoomNumber]"])
-		chosen_room = tgui_input_list(user, "Choose your desired room:", "∼♦️ Time to choose a room ♦️∼!", SShilbertshotel.hotel_map_list)
-		if(!chosen_room || !user.CanReach(src))
-			return FALSE
-	//SPLURT EDIT END
-
 	if(!SShilbertshotel.storageTurf) //Blame subsystems for not allowing... huh...
 		SShilbertshotel.setup_storage_turf()
 	checked_in_ckeys |= user.ckey		//if anything below runtimes, guess you're outta luck!
-	if(tryActiveRoom(chosenRoomNumber, user))
+	if(tryActiveRoom(room_number, user))
 		return
-	if(tryStoredRoom(chosenRoomNumber, user, chosen_room))
+	if(tryStoredRoom(room_number, user))
 		return
-	sendToNewRoom(chosenRoomNumber, user, chosen_room)
+	sendToNewRoom(room_number, user, template)
 
 /area/hilbertshotel/proc/storeRoom()
 	// Calculate the actual room size based on the reservation coordinates
@@ -296,6 +398,8 @@
 	linkTurfs(roomReservation, roomNumber)
 	do_sparks(3, FALSE, get_turf(user))
 	MobTransfer(user, locate(roomReservation.bottom_left_coords[1] + mapTemplate.landingZoneRelativeX, roomReservation.bottom_left_coords[2] + mapTemplate.landingZoneRelativeY, roomReservation.bottom_left_coords[3]))
+	if(!mob_dorms[user]?.Find(roomNumber))
+		LAZYADD(mob_dorms[user], roomNumber)
 
 /obj/item/hilbertshotel/proc/linkTurfs(var/datum/turf_reservation/currentReservation, var/currentRoomnumber, var/chosen_room)
 	var/area/hilbertshotel/currentArea = get_area(locate(currentReservation.bottom_left_coords[1], currentReservation.bottom_left_coords[2], currentReservation.bottom_left_coords[3]))

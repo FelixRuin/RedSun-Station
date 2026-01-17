@@ -28,6 +28,7 @@
 #include "code\__BLUEMOONCODE\_DEFINES\economy.dm"
 #include "code\__BLUEMOONCODE\_DEFINES\faction.dm"
 #include "code\__BLUEMOONCODE\_DEFINES\gamemode.dm"
+#include "code\__BLUEMOONCODE\_DEFINES\hilbertshotel.dm"
 #include "code\__BLUEMOONCODE\_DEFINES\is_helpers.dm"
 #include "code\__BLUEMOONCODE\_DEFINES\language.dm"
 #include "code\__BLUEMOONCODE\_DEFINES\mail.dm"
