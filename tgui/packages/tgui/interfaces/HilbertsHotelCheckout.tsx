@@ -428,7 +428,7 @@ const RoomsTab = (props, context) => {
                 borderRadius: '2px',
                 border: '1px solid rgba(150, 211, 150, 0.21)',
                 background:
-                  room.name == selected_template
+                  room.name === selected_template
                     ? "rgba(159, 212, 163, 0.64)"
                     : "rgba(255, 255, 255, 0.1)",
               }}
