@@ -682,12 +682,16 @@
 	name = "Vella plushie"
 	desc = "Почти плюшевая игрушка, наполнение которой по каким-то неведомым законам физики стало прозрачным. На ощупь очень сильно напоминает слизьку, а запах выдаёт гамму разнообразных ягодных ноток."
 	icon_state = "vella"
-	icon = 'modular_bluemoon/icons/obj/toys/plushes.dmi'
 	squeak_override = list('modular_splurt/sound/voice/catpeople/cat_mrrp1.ogg' = 1)
 
 /obj/item/toy/plush/bm/belfor
 	name = "Belfor plushie"
 	desc = "Белая как сахарная вата игрушка кота-учёного Синдиката. Его пушистый хвост в форме запятой лишь добавляет контраста. От него пахнет бридингом. Стоп.. что такое бридинг?"
 	icon_state = "belfor"
-	icon = 'modular_bluemoon/icons/obj/toys/plushes.dmi'
 	squeak_override = list('modular_splurt/sound/voice/meow_meme.ogg' = 1, 'modular_splurt/sound/voice/woof.ogg' = 1)
+
+/obj/item/toy/plush/bm/koteykomya
+	name = "Silly kitty plushie"
+	desc = "У неё осуждающий взгляд, как будто она в курсе всего, что вы когда-либо делали не так."
+	icon_state = "koteykomya"
+	squeak_override = list('modular_bluemoon/sound/plush/Koteyko_bad_smell.ogg' = 1, 'modular_bluemoon/sound/plush/Koteyko_rotting.ogg' = 1, 'modular_bluemoon/sound/plush/Koteyko_dicks_and_butts.ogg' = 1)

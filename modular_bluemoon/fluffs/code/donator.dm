@@ -949,7 +949,7 @@
 	name = "Dread Kit"
 	slot = ITEM_SLOT_ICLOTHING
 	path = /obj/item/modkit/dreadmk3_kit
-	ckeywhitelist = list("stasdvrz", "mrsko", "akinight", "vovakr", "roninqwerty","pingvas","lev1932","dragon9090")
+	ckeywhitelist = list("stasdvrz", "mrsko", "akinight", "vovakr", "roninqwerty","pingvas","lev1932","dragon9090","cnaperdodo")
 
 /datum/gear/donator/bm/old_laser_kit
 	name = "AER9 Kit"
@@ -967,7 +967,7 @@
 	name = "P320 kit"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/modkit/p320_kit
-	ckeywhitelist = list("pingvas", "ty4kahahebe")
+	ckeywhitelist = list("pingvas", "ty4kahahebe", "scorpionch")
 
 /datum/gear/donator/bm/dedication_kit
 	name = "Dedication kit"
@@ -1333,7 +1333,7 @@
 	name = "Halved Violet Spectacles"
 	slot = ITEM_SLOT_EYES
 	path = /obj/item/clothing/glasses/halvedspectacles
-	ckeywhitelist = list("silverfoxpaws")
+	ckeywhitelist = list("silverfoxpaws", "ninjapikachushka")
 
 /////////////////////////////////////
 
@@ -1475,7 +1475,7 @@
 	name = "Millie plush"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/toy/plush/bm/millie
-	ckeywhitelist = list("pingvas")
+	ckeywhitelist = list("pingvas", "ty4kahahebe", "scorpionch")
 
 /datum/gear/donator/bm/praxil_seven
 	name = "Praxil-7 Mark II Kit"
@@ -1983,7 +1983,37 @@
 	ckeywhitelist = list("dragon9090")
 
 /datum/gear/donator/bm/imperium_flags
-	name = "Invisible Belt Kit"
+	name = "Imperium flag kit"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/storage/box/imperium_flags
 	ckeywhitelist = list("domilion")
+
+/datum/gear/donator/bm/gestapo_uniform
+	name = "Truth Enforcer Uniform"
+	slot = ITEM_SLOT_ICLOTHING
+	path = /obj/item/clothing/under/donator/gestapo
+	ckeywhitelist = list("monolithxxv")
+
+/datum/gear/donator/bm/gestapo_cloak
+	name = "Truth Enforcer cloak"
+	slot = ITEM_SLOT_NECK
+	path = /obj/item/clothing/neck/cloak/gestapo
+	ckeywhitelist = list("monolithxxv")
+
+/datum/gear/donator/bm/gestapo_head
+	name = "Truth Enforcer Cap"
+	slot = ITEM_SLOT_HEAD
+	path = /obj/item/clothing/head/donator/bm/gestapo
+	ckeywhitelist = list("monolithxxv")
+
+/datum/gear/donator/bm/gestapo_mask
+	name = "Truth Enforcer Mask"
+	slot = ITEM_SLOT_MASK
+	path = /obj/item/clothing/mask/breath/gestapo
+	ckeywhitelist = list("monolithxxv")
+
+/datum/gear/donator/bm/cultist_poly
+	name = "Aged Robe"
+	slot = ITEM_SLOT_OCLOTHING
+	path = /obj/item/clothing/suit/donator/bm/cultist_poly
+	ckeywhitelist = list("monolithxxv")

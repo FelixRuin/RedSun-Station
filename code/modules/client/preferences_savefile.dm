@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	61
+#define SAVEFILE_VERSION_MAX	62
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -65,6 +65,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// Input had a bad reception anyways, this way people won't even have to look into it.
 	if(current_version < 59)
 		hotkeys = TRUE
+
+	// BLUEMOON ADD - миграция кейбинда pixel_tilt
+	if(current_version < 62)
+		if(GLOB.keybindings_by_name["pixel_tilt"])
+			var/has_pixel_tilt = FALSE
+			for(var/key in key_bindings)
+				if("pixel_tilt" in key_bindings[key])
+					has_pixel_tilt = TRUE
+					break
+			if(!has_pixel_tilt)
+				LAZYADD(key_bindings["N"], "pixel_tilt")
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	if(current_version < 19)
@@ -652,6 +663,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		var/bindname = modless_key_bindings[key]
 		if(!GLOB.keybindings_by_name[bindname])
 			modless_key_bindings -= key
+
 
 /datum/preferences/proc/save_preferences(bypass_cooldown = FALSE, silent = FALSE)
 	if(!path)
