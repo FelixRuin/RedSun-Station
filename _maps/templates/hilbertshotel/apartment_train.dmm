@@ -947,7 +947,7 @@
 /turf/closed/indestructible/fakedoor,
 /area/hilbertshotel)
 "Jp" = (
-/turf/open/space/basic,
+/turf/open/space/bluespace,
 /area/hilbertshotel)
 "JC" = (
 /obj/structure/grille/indestructable/fake{
