@@ -30,7 +30,9 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/floor/spooktime/cobble/cornerNW,
+/turf/open/indestructible/cobble/side{
+	dir = 9
+	},
 /area/hilbertshotel)
 "cg" = (
 /obj/machinery/light{
@@ -53,7 +55,9 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/floor/spooktime/cobble/cornerNE,
+/turf/open/indestructible/cobble/side{
+	dir = 5
+	},
 /area/hilbertshotel)
 "cC" = (
 /obj/structure/flora/spookyrock,
@@ -70,7 +74,7 @@
 	custom_premium_price = 0;
 	custom_price = 0
 	},
-/turf/open/floor/spooktime/cobble/roadmid,
+/turf/open/indestructible/cobble,
 /area/hilbertshotel)
 "dl" = (
 /turf/open/floor/wood,
@@ -117,7 +121,7 @@
 /obj/structure/spacevine,
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/grass/jungle,
-/turf/open/floor/spooktime/cobble/roadmid,
+/turf/open/indestructible/cobble,
 /area/hilbertshotel)
 "hg" = (
 /obj/effect/turf_decal/siding/wood{
@@ -152,7 +156,9 @@
 	dir = 8;
 	icon_state = "railing"
 	},
-/turf/open/floor/spooktime/cobble/cornerSW,
+/turf/open/indestructible/cobble/side{
+	dir = 10
+	},
 /area/hilbertshotel)
 "iL" = (
 /obj/structure/flora/rock/jungle,
@@ -421,7 +427,9 @@
 	},
 /area/hilbertshotel)
 "AL" = (
-/turf/open/floor/spooktime/cobble/cornerSE,
+/turf/open/indestructible/cobble/side{
+	dir = 6
+	},
 /area/hilbertshotel)
 "BA" = (
 /obj/structure/flora/grass/jungle,
@@ -546,7 +554,7 @@
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/grass/jungle,
 /obj/structure/spacevine,
-/turf/open/floor/spooktime/cobble/roadmid,
+/turf/open/indestructible/cobble,
 /area/hilbertshotel)
 "Ld" = (
 /obj/structure/flora/grass/jungle/b,

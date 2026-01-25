@@ -82,7 +82,9 @@
 	},
 /area/hilbertshotel)
 "hD" = (
-/turf/open/floor/spooktime/cobble/sideW,
+/turf/open/indestructible/cobble/side{
+	dir = 8
+	},
 /area/hilbertshotel)
 "hY" = (
 /obj/structure/flora/ausbushes/fullgrass,
@@ -171,7 +173,9 @@
 /turf/open/floor/grass,
 /area/hilbertshotel)
 "pd" = (
-/turf/open/floor/spooktime/cobble/sideN,
+/turf/open/indestructible/cobble/side{
+	dir = 1
+	},
 /area/hilbertshotel)
 "pH" = (
 /obj/structure/flora/ausbushes/brflowers,
@@ -213,7 +217,9 @@
 /turf/open/floor/plating/beach/sand,
 /area/hilbertshotel)
 "tX" = (
-/turf/open/floor/spooktime/cobble/cornerNE,
+/turf/open/indestructible/cobble/side{
+	dir = 5
+	},
 /area/hilbertshotel)
 "uz" = (
 /obj/item/toy/cards/deck,
@@ -233,7 +239,9 @@
 /turf/open/floor/grass/grass3,
 /area/hilbertshotel)
 "we" = (
-/turf/open/floor/spooktime/cobble/sideE,
+/turf/open/indestructible/cobble/side{
+	dir = 4
+	},
 /area/hilbertshotel)
 "xr" = (
 /obj/structure/flora/ausbushes/grassybush,
@@ -266,7 +274,9 @@
 	},
 /area/hilbertshotel)
 "yU" = (
-/turf/open/floor/spooktime/cobble/cornerNW,
+/turf/open/indestructible/cobble/side{
+	dir = 9
+	},
 /area/hilbertshotel)
 "yV" = (
 /obj/machinery/vending/kink{
@@ -329,7 +339,9 @@
 /turf/open/floor/plating/beach/sand,
 /area/hilbertshotel)
 "DA" = (
-/turf/open/floor/spooktime/cobble/cornerSE,
+/turf/open/indestructible/cobble/side{
+	dir = 6
+	},
 /area/hilbertshotel)
 "Ew" = (
 /obj/structure/flora/ausbushes/fullgrass,
@@ -403,7 +415,7 @@
 "MC" = (
 /obj/structure/bonfire,
 /obj/item/lighter/gold,
-/turf/open/floor/spooktime/cobble,
+/turf/open/indestructible/cobble,
 /area/hilbertshotel)
 "Ng" = (
 /obj/structure/flora/biolumi/mine,
@@ -530,7 +542,9 @@
 /turf/open/floor/grass/grass2,
 /area/hilbertshotel)
 "YF" = (
-/turf/open/floor/spooktime/cobble/cornerSW,
+/turf/open/indestructible/cobble/side{
+	dir = 10
+	},
 /area/hilbertshotel)
 "YH" = (
 /obj/structure/flora/ausbushes/fullgrass,
