@@ -636,6 +636,10 @@
 /area/hilbertshotel)
 "AY" = (
 /obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/pizzabox/margherita{
+	pixel_x = 0;
+	pixel_y = 10
+	},
 /turf/open/floor/plasteel/shuttle/evac{
 	icon_state = "11,3";
 	dir = 8
