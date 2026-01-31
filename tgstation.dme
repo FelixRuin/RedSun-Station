@@ -4348,6 +4348,7 @@
 #include "modular_bluemoon\code\game\objects\items\implants\implant_claws.dm"
 #include "modular_bluemoon\code\game\objects\items\implants\implant_deathrattle.dm"
 #include "modular_bluemoon\code\game\objects\items\lewd_items\book_of_stealing.dm"
+#include "modular_bluemoon\code\game\objects\items\lewd_items\pillow.dm"
 #include "modular_bluemoon\code\game\objects\items\lewd_items\rope.dm"
 #include "modular_bluemoon\code\game\objects\items\lewd_items\genital_equipment\chastity\flat_chastity_cage.dm"
 #include "modular_bluemoon\code\game\objects\items\melee\backstab_knives.dm"

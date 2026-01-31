@@ -428,6 +428,7 @@ GLOBAL_LIST_INIT(cloth_recipes, list ( \
 	new/datum/stack_recipe("loincloth", /obj/item/clothing/under/costume/loincloth/cloth/sensor, 2), \
 	new/datum/stack_recipe("sensorless loincloth", /obj/item/clothing/under/costume/loincloth/cloth, 2), \
 	new/datum/stack_recipe("tunic", /obj/item/clothing/under/tunic, 3), \
+	new/datum/stack_recipe("fancy pillow", /obj/item/fancy_pillow, 3), \
 	//SPLURT CHANGE: ADD MATTRESSES
 	new/datum/stack_recipe_list("matresses", list( \
 		new/datum/stack_recipe("mattress (random)", /obj/structure/bed/matress, 2, one_per_turf = TRUE, on_floor = TRUE), \
