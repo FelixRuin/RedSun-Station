@@ -697,6 +697,7 @@
 	icon_state = "plastitaniumglass_table"
 	canSmoothWith = list(/obj/structure/table/reinforced/plastitaniumglass)
 	desc = "Стол из силикат-плазменного композита с титановым усилением. Прочно так же, как и звучит."
+	buildstack = /obj/item/stack/sheet/plastitaniumglass
 	max_integrity = 300
 
 /obj/structure/table/reinforced/brass
