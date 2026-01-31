@@ -151,7 +151,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("floodlight frame", /obj/structure/floodlight_frame, 5, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("iron ingot", /obj/item/ingot/iron, 6, time = 100), \
 	null, \
-	new/datum/stack_recipe("tiny fan", /obj/structure/fans/tiny, 2, time = 4, one_per_turf = TRUE, on_floor = TRUE), \
+	new/datum/stack_recipe("tiny fan", /obj/structure/fans/tiny, 10, time = 4, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("Metal Barricade", /obj/structure/deployable_barricade/metal, 2, time = 1 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("desk bell", /obj/structure/desk_bell, 2, time = 50, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("light switch frame", /obj/item/wallframe/light_switch, 1), \
