@@ -693,6 +693,9 @@
 
 /obj/structure/table/reinforced/plastitaniumglass
 	name = "Plastitanium Glass Table"
+	icon = 'icons/obj/smooth_structures/plastitaniumglass_table.dmi'
+	icon_state = "plastitaniumglass_table"
+	canSmoothWith = list(/obj/structure/table/reinforced/plastitaniumglass)
 	desc = "Стол из силикат-плазменного композита с титановым усилением. Прочно так же, как и звучит."
 	max_integrity = 300
 
