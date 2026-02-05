@@ -203,6 +203,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel/white/textured/edge,
 /area/medical/medbay/central)
 "acN" = (
@@ -946,6 +947,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/open/floor/plasteel/white/textured/large,
@@ -3511,8 +3515,7 @@
 /turf/open/floor/grass/grass0,
 /area/service/chapel/main)
 "axK" = (
-/obj/structure/bed/dogbed/runtime,
-/mob/living/simple_animal/pet/cat/Runtime,
+/obj/machinery/photocopier,
 /turf/open/floor/wood/wood_parquet,
 /area/command/heads_quarters/cmo)
 "axP" = (
@@ -16532,13 +16535,10 @@
 "bvm" = (
 /obj/machinery/light/directional/west,
 /obj/machinery/firealarm/directional/west,
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer1{
+/obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/obj/item/kirbyplants{
-	icon_state = "plant-28";
-	pixel_y = 6
-	},
+/obj/machinery/disposal/bin,
 /turf/open/floor/wood/wood_parquet,
 /area/command/heads_quarters/cmo)
 "bvx" = (
@@ -25226,6 +25226,10 @@
 /obj/item/toy/figure/cmo{
 	pixel_y = 9;
 	pixel_x = 8
+	},
+/obj/machinery/computer/security/telescreen/cmo{
+	pixel_x = 0;
+	pixel_y = 29
 	},
 /turf/open/floor/carpet/blue,
 /area/command/heads_quarters/cmo)
@@ -38190,6 +38194,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel/dark/textured/large,
 /area/medical/medbay/central)
 "eqD" = (
@@ -39609,6 +39614,9 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
 /turf/open/floor/plasteel/white/textured/large,
 /area/medical/medbay/central)
 "eVc" = (
@@ -40343,6 +40351,9 @@
 /obj/item/kirbyplants{
 	icon_state = "plant-33";
 	pixel_y = 6
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer1{
+	dir = 8
 	},
 /turf/open/floor/wood/wood_parquet,
 /area/command/heads_quarters/cmo)
@@ -53428,10 +53439,8 @@
 	dir = 4
 	},
 /obj/machinery/airalarm/directional/north,
-/obj/item/kirbyplants{
-	icon_state = "plant-21";
-	pixel_y = 3
-	},
+/obj/structure/bed/dogbed/runtime,
+/mob/living/simple_animal/pet/cat/Runtime,
 /turf/open/floor/wood/wood_parquet,
 /area/command/heads_quarters/cmo)
 "kyS" = (
@@ -58476,12 +58485,15 @@
 /turf/open/floor/plasteel,
 /area/maintenance/port/aft)
 "mFJ" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
-	dir = 10
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
 /obj/structure/cable{
 	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 6
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 10
 	},
 /turf/open/floor/wood/wood_parquet,
 /area/command/heads_quarters/cmo)
@@ -60809,6 +60821,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 4
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/plasteel/white/textured/large,
 /area/medical/medbay/central)
 "nzV" = (
@@ -62753,6 +62768,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel/white/textured/edge{
 	dir = 1
 	},
@@ -68154,6 +68170,7 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel/white/textured/large,
 /area/medical/medbay/central)
 "qHr" = (
@@ -69772,6 +69789,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden/layer3,
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
 /turf/open/floor/plasteel/white/textured/large,
 /area/medical/medbay/central)
 "rrA" = (
@@ -70002,6 +70022,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/wood,
 /area/command/heads_quarters/cmo)
 "rva" = (
@@ -70601,9 +70622,6 @@
 /turf/open/floor/plasteel,
 /area/engineering/main)
 "rIz" = (
-/obj/structure/disposalpipe/segment{
-	dir = 6
-	},
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -70612,6 +70630,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden/layer3{
 	dir = 8
+	},
+/obj/structure/disposalpipe/junction/yjunction{
+	dir = 4
 	},
 /turf/open/floor/plasteel/white/textured/large,
 /area/medical/medbay/central)
@@ -70841,6 +70862,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/open/floor/plasteel/white/textured/large,
@@ -81249,6 +81273,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1{
 	dir = 1
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/open/floor/plasteel/white/textured/large,
 /area/medical/medbay/central)
