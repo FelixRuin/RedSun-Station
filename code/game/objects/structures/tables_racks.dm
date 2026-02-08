@@ -693,7 +693,11 @@
 
 /obj/structure/table/reinforced/plastitaniumglass
 	name = "Plastitanium Glass Table"
+	icon = 'icons/obj/smooth_structures/plastitaniumglass_table.dmi'
+	icon_state = "plastitaniumglass_table"
+	canSmoothWith = list(/obj/structure/table/reinforced/plastitaniumglass)
 	desc = "Стол из силикат-плазменного композита с титановым усилением. Прочно так же, как и звучит."
+	buildstack = /obj/item/stack/sheet/plastitaniumglass
 	max_integrity = 300
 
 /obj/structure/table/reinforced/brass
@@ -768,9 +772,6 @@
 	. = ..()
 	register_context()
 
-/obj/structure/table/optable/Destroy()
-	stop_process()
-	. = ..()
 
 /obj/structure/table/optable/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	LAZYSET(context[SCREENTIP_CONTEXT_LMB], INTENT_ANY, "Unbuckle patient")
@@ -894,6 +895,13 @@
 	if(mask)
 		mask.forceMove(loc)
 		mask = null
+	if(patient)
+		if(patient.internal == tank)
+			patient.internal = null
+		patient = null
+	if(computer)
+		computer.table = null
+		computer = null
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
