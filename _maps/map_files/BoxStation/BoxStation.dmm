@@ -35400,7 +35400,8 @@
 	name = "Private Study Lock";
 	pixel_x = -5;
 	pixel_y = 24;
-	req_access_txt = "28"
+	normaldoorcontrol = 1;
+	specialfunctions = 4
 	},
 /obj/machinery/button/door{
 	id = "PrivateStudy1";
@@ -47477,8 +47478,9 @@
 /area/cargo/office)
 "hZS" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/wood/glass{
-	name = "Gaming Backroom"
+/obj/machinery/door/airlock/wood{
+	name = "Gaming Backroom";
+	id_tag = "PrivateStudy"
 	},
 /turf/open/floor/carpet,
 /area/service/library)
