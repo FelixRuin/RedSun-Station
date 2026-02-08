@@ -60783,7 +60783,7 @@
 	dir = 5
 	},
 /turf/open/space/basic,
-/area/science/xenobiology)
+/area/space/nearstation)
 "ets" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 4
@@ -70269,7 +70269,7 @@
 /area/command/blueshielquarters)
 "hiy" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/on,
-/turf/open/floor/plating,
+/turf/open/floor/plating/airless,
 /area/science/xenobiology)
 "hiL" = (
 /obj/structure/disposalpipe/segment,
