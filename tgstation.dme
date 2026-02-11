@@ -4297,6 +4297,7 @@
 #include "modular_bluemoon\code\datums\traits\negative\shower_trait.dm"
 #include "modular_bluemoon\code\datums\traits\negative\water_vulnerability.dm"
 #include "modular_bluemoon\code\datums\traits\neutral\criminal_quirk.dm"
+#include "modular_bluemoon\code\datums\traits\neutral\crocin_poisonous.dm"
 #include "modular_bluemoon\code\datums\traits\neutral\lewd_bite.dm"
 #include "modular_bluemoon\code\datums\traits\neutral\lewdsummon.dm"
 #include "modular_bluemoon\code\datums\traits\neutral\pheromones.dm"
