@@ -27,6 +27,11 @@ import { telemetryMiddleware } from './telemetry';
 
 perf.mark('inception', window.performance?.timing?.navigationStart);
 perf.mark('init');
+window.__tguiBundleLoaded__ = true;
+window.__tguiAppBooted__ = false;
+window.__pushTguiDebugEvent__?.('bundleLoaded', {
+  bundle: 'tgui-panel',
+});
 
 const store = configureStore({
   reducer: combineReducers({
@@ -74,17 +79,30 @@ const setupApp = () => {
   // Subscribe for Redux state updates
   store.subscribe(renderApp);
 
-  // Subscribe for bankend updates
-  window.update = msg => store.dispatch(Byond.parseJson(msg));
+  // Subscribe for backend updates
+  const dispatchIncomingMessage = msg => {
+    window.__recordIncomingTguiMessage__?.(msg);
+    store.dispatch(Byond.parseJson(msg));
+  };
+  window.update = dispatchIncomingMessage;
 
   // Process the early update queue
+  window.__pushTguiDebugEvent__?.('appSetupBegin', {
+    bundle: 'tgui-panel',
+    queuedBeforeDrain: window.__updateQueue__?.length || 0,
+  });
   while (true) {
     const msg = window.__updateQueue__.shift();
     if (!msg) {
       break;
     }
-    window.update(msg);
+    store.dispatch(Byond.parseJson(msg));
   }
+  window.__tguiAppBooted__ = true;
+  window.__pushTguiDebugEvent__?.('appBooted', {
+    bundle: 'tgui-panel',
+    queuedAfterDrain: window.__updateQueue__?.length || 0,
+  });
 
   // Unhide the panel
   Byond.winset('output', {

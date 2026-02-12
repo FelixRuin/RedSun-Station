@@ -79,6 +79,7 @@
 	html = replacetextEx(html, "\[tgui:windowId]", id)
 	// Inject inline assets
 	var/inline_assets_str = ""
+	var/first_js_url = null
 	for(var/datum/asset/asset in assets)
 		var/mappings = asset.get_url_mappings()
 		for(var/name in mappings)
@@ -88,28 +89,67 @@
 				inline_assets_str += "Byond.loadCss('[url]', true);\n"
 			else if(copytext(name, -3) == ".js")
 				inline_assets_str += "Byond.loadJs('[url]', true);\n"
+				if(isnull(first_js_url))
+					first_js_url = url
 		asset.send(client)
+	var/assets_placeholder_before = !!findtext(html, "<!-- tgui:assets -->")
+	var/assets_placeholder_before_lf = !!findtext(html, "<!-- tgui:assets -->\n")
+	var/assets_placeholder_before_crlf = FALSE
+	if(findtext(html, "<!-- tgui:assets -->[ascii2text(13)]\n"))
+		assets_placeholder_before_crlf = TRUE
 	if(length(inline_assets_str))
 		inline_assets_str = "<script>\n" + inline_assets_str + "</script>\n"
+	// 516 migration: handle either LF or CRLF template line endings.
 	html = replacetextEx(html, "<!-- tgui:assets -->\n", inline_assets_str)
+	html = replacetextEx(html, "<!-- tgui:assets -->", inline_assets_str)
+	var/assets_placeholder_after = !!findtext(html, "<!-- tgui:assets -->")
+	var/first_js_url_display = first_js_url || "<none>"
+	if(CONFIG_GET(flag/emergency_tgui_logging))
+		log_tgui(client,
+			"[id]/initialize assets_count=[length(assets)] inline_assets_chars=[length(inline_assets_str)] first_js_url=[first_js_url_display] placeholder_before=[assets_placeholder_before] lf=[assets_placeholder_before_lf] crlf=[assets_placeholder_before_crlf] placeholder_after=[assets_placeholder_after]",
+			window = src)
 	// Inject inline HTML
 	if (inline_html)
 		html = replacetextEx(html, "<!-- tgui:inline-html -->", inline_html)
+		html = replacetextEx(html, "<!-- tgui:html -->", inline_html)
 	// Inject inline JS
 	if (inline_js)
 		inline_js = "<script>\n[inline_js]\n</script>"
 		html = replacetextEx(html, "<!-- tgui:inline-js -->", inline_js)
+		html = replacetextEx(html, "<!-- tgui:js -->", inline_js)
 	// Inject inline CSS
 	if (inline_css)
 		inline_css = "<style>\n[inline_css]\n</style>"
 		html = replacetextEx(html, "<!-- tgui:inline-css -->", inline_css)
+		html = replacetextEx(html, "<!-- tgui:css -->", inline_css)
 	// Open the window
 	client << browse(html, "window=[id];[options]")
 	// Detect whether the control is a browser
-	is_browser = winexists(client, id) == "BROWSER"
+	var/win_type = winexists(client, id)
+	is_browser = win_type == "BROWSER"
+	if(CONFIG_GET(flag/emergency_tgui_logging))
+		var/primary_target = is_browser ? "[id]:update" : "[id].browser:update"
+		var/secondary_target = is_browser ? "[id].browser:update" : "[id]:update"
+		log_tgui(client,
+			"[id]/initialize winexists=[win_type], is_browser=[is_browser], primary_target=[primary_target], secondary_target=[secondary_target]",
+			window = src)
 	// Instruct the client to signal UI when the window is closed.
 	if(!is_browser && istype(client)) // BLUEMOON EDIT - sanity check
 		winset(client, id, "on-close=\"uiclose [id]\"")
+
+/datum/tgui_window/proc/get_output_targets()
+	var/list/targets = list(
+		is_browser ? "[id]:update" : "[id].browser:update")
+	// 516 migration diagnostics: mirror to alternate channel.
+	if(CONFIG_GET(flag/emergency_tgui_logging))
+		targets += is_browser ? "[id].browser:update" : "[id]:update"
+	return targets
+
+/datum/tgui_window/proc/send_output_message(message)
+	if(!client)
+		return
+	for(var/target in get_output_targets())
+		client << output(message, target)
 
 /**
  * public
@@ -237,9 +277,7 @@
 			message_queue = list()
 		message_queue += list(message)
 		return
-	client << output(message, is_browser \
-		? "[id]:update" \
-		: "[id].browser:update")
+	send_output_message(message)
 
 /**
  * public
@@ -258,9 +296,7 @@
 			message_queue = list()
 		message_queue += list(message)
 		return
-	client << output(message, is_browser \
-		? "[id]:update" \
-		: "[id].browser:update")
+	send_output_message(message)
 
 /**
  * public
@@ -289,10 +325,13 @@
 /datum/tgui_window/proc/flush_message_queue()
 	if(!client || !message_queue)
 		return
+	var/queue_len = length(message_queue)
+	if(CONFIG_GET(flag/emergency_tgui_logging))
+		log_tgui(client,
+			"[id]/flush_message_queue queue_len=[queue_len], status=[status]",
+			window = src)
 	for(var/message in message_queue)
-		client << output(message, is_browser \
-			? "[id]:update" \
-			: "[id].browser:update")
+		send_output_message(message)
 	message_queue = null
 
 /**
@@ -301,6 +340,12 @@
  * Callback for handling incoming tgui messages.
  */
 /datum/tgui_window/proc/on_message(type, payload, href_list)
+	var/log_handshake = CONFIG_GET(flag/emergency_tgui_logging) \
+		&& (type == "ready" || type == "ping" || type == "pingReply" || type == "log")
+	if(log_handshake)
+		log_tgui(client,
+			"[id]/on_message type=[type], status_before=[status], queue_len=[length(message_queue)]",
+			window = src)
 	// Status can be READY if user has refreshed the window.
 	if(type == "ready" && status == TGUI_WINDOW_READY)
 		// Resend the assets
@@ -347,3 +392,7 @@
 			// Resend the assets
 			for(var/asset in sent_assets)
 				send_asset(asset)
+	if(log_handshake)
+		log_tgui(client,
+			"[id]/on_message done type=[type], status_after=[status], queue_len=[length(message_queue)], fatally_errored=[fatally_errored]",
+			window = src)

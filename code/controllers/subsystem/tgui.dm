@@ -28,6 +28,12 @@ SUBSYSTEM_DEF(tgui)
 
 /datum/controller/subsystem/tgui/PreInit()
 	basehtml = file2text('tgui/public/tgui.html')
+	if(CONFIG_GET(flag/emergency_tgui_logging))
+		var/has_version_marker = findtext(basehtml, "bridge-localhost-fallback-v2") ? "present" : "missing"
+		var/has_host_fallback = findtext(basehtml, "hasKnownBridge || hostLooksLocal") ? "present" : "missing"
+		log_tgui(null,
+			"PreInit basehtml_md5=[md5(basehtml)] version_marker=[has_version_marker] host_fallback=[has_host_fallback]",
+			context = "SStgui/PreInit")
 
 /datum/controller/subsystem/tgui/Shutdown()
 	close_all_uis()

@@ -35,6 +35,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	*/
 
 /client/Topic(href, href_list, hsrc)
+	// BYOND 516 can invoke browser/topic callbacks with a null usr.
+	// Normalize to this client's mob so tgui callbacks are not dropped.
+	if(isnull(usr))
+		usr = mob
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
 		return
 
@@ -77,6 +81,18 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		if (topiclimiter[SECOND_COUNT] > stl)
 			to_chat(src, "<span class='danger'>Your previous action was ignored because you've done too many in a second</span>")
 			return
+
+	var/log_tgui_ingress = href_list["tgui"] && CONFIG_GET(flag/emergency_tgui_logging)
+	if(log_tgui_ingress)
+		var/topic_type = href_list["type"]
+		var/window_id = href_list["window_id"]
+		var/payload_len = length(href_list["payload"])
+		var/href_preview = href
+		if(length(href_preview) > 256)
+			href_preview = "[copytext(href_preview, 1, 257)]..."
+		log_tgui(src,
+			"ingress usr=[usr] usr_eq_mob=[usr == mob] type=[topic_type] window_id=[window_id] payload_len=[payload_len] href=[href_preview]",
+			context = "client/Topic")
 
 
 	// Tgui Topic middleware
