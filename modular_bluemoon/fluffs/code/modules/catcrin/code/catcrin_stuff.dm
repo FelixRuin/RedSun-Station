@@ -1,3 +1,12 @@
+#define CATCRIN_GANG "oni3288", "discord980", "mihana964", "romontesque", "enigma418", \
+"smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", \
+"devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", \
+"earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", \
+"deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", \
+"cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", \
+"spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", \
+"ailhate", "kingdeaths", "mentaleater"
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////Слот головы.
 
 /obj/item/clothing/head/helmet/sec/mark45
@@ -749,15 +758,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////ДАТУМы.
 
-#define CATCRIN_GANG "oni3288", "discord980", "mihana964", "romontesque", "enigma418", \
-"smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", \
-"devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", \
-"earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", \
-"deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", \
-"cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", \
-"spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", \
-"ailhate", "kingdeaths", "mentaleater"
-
 /datum/gear/donator/bm/catcrin_combatmask_one
 	name = "First Catcrin's tactical gasmask"
 	slot = ITEM_SLOT_BACKPACK
@@ -788,8 +788,6 @@
 	path = /obj/item/clothing/neck/tie/maskchalat
 	ckeywhitelist = list(CATCRIN_GANG)
 
-#undef CATCRIN_GANG
-
 //////////////////// ДАТУМы для личных кастомных Кеткринских вещей.
 
 /datum/gear/donator/bm/mark45_ce
@@ -809,3 +807,5 @@
 	subcategory = LOADOUT_SUBCATEGORIES_DON03
 	restricted_desc = "Head of Security, Warden, Detective, Security Officer, Brig Physician, Peacekeeper, Blueshield."
 	restricted_roles = list("Head of Security", "Warden", "Detective", "Security Officer", "Brig Physician", "Peacekeeper", "Blueshield")
+
+#undef CATCRIN_GANG
