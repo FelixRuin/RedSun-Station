@@ -495,7 +495,7 @@ SUBSYSTEM_DEF(job)
 		SSpersistence.antag_rep_change[M.client.ckey] += job.GetAntagRep()
 
 		if(M.client.holder)
-			if(CONFIG_GET(flag/auto_deadmin_players) || (M.client.prefs?.deadmin & DEADMIN_ALWAYS))
+			if(CONFIG_GET(flag/auto_deadmin_players) || (M.client.prefs?.deadmin & DEADMIN_ONSPAWN))
 				M.client.holder.auto_deadmin()
 			else
 				handle_auto_deadmin_roles(M.client, rank)
@@ -827,7 +827,9 @@ SUBSYSTEM_DEF(job)
 		if(!already_equiped && replace_clothing && G.slot)
 			var/obj/item/existing = M.get_item_by_slot(G.slot)
 			if(existing)
-				M.dropItemToGround(existing, TRUE)
+				// BLUEMOON FIX — при замене униформы/костюма не выбрасываем зависимые предметы (ID, ремень, карманы, кобуру) каскадом
+				var/should_invdrop = !(G.slot == ITEM_SLOT_ICLOTHING || G.slot == ITEM_SLOT_OCLOTHING)
+				M.dropItemToGround(existing, TRUE, FALSE, should_invdrop)
 				if(iscarbon(M))
 					var/mob/living/carbon/RC = M
 					var/obj/item/storage/backpack/RB = RC.back
@@ -955,7 +957,9 @@ SUBSYSTEM_DEF(job)
 		if(!already_equiped && replace_clothing && G.slot)
 			var/obj/item/existing = M.get_item_by_slot(G.slot)
 			if(existing)
-				M.dropItemToGround(existing, TRUE)
+				// BLUEMOON FIX — при замене униформы/костюма не выбрасываем зависимые предметы (ID, ремень, карманы, кобуру) каскадом
+				var/should_invdrop = !(G.slot == ITEM_SLOT_ICLOTHING || G.slot == ITEM_SLOT_OCLOTHING)
+				M.dropItemToGround(existing, TRUE, FALSE, should_invdrop)
 				if(iscarbon(M))
 					var/mob/living/carbon/RC = M
 					var/obj/item/storage/backpack/RB = RC.back

@@ -944,11 +944,12 @@
 
 				//deadmin
 				dat += "<h2>Deadmin While Playing</h2>"
+				dat += "<b>Deadmin On Login:</b> <a href = '?_src_=prefs;preference=toggle_deadmin_onlogin'>[(deadmin & DEADMIN_ONLOGIN)?"Enabled":"Disabled"]</a><br>"
 				if(CONFIG_GET(flag/auto_deadmin_players))
-					dat += "<b>Always Deadmin:</b> FORCED</a><br>"
+					dat += "<b>Deadmin On Spawn:</b> FORCED</a><br>"
 				else
-					dat += "<b>Always Deadmin:</b> <a href = '?_src_=prefs;preference=toggle_deadmin_always'>[(deadmin & DEADMIN_ALWAYS)?"Enabled":"Disabled"]</a><br>"
-					if(!(deadmin & DEADMIN_ALWAYS))
+					dat += "<b>Deadmin On Spawn:</b> <a href = '?_src_=prefs;preference=toggle_deadmin_onspawn'>[(deadmin & DEADMIN_ONSPAWN)?"Enabled":"Disabled"]</a><br>"
+					if(!(deadmin & DEADMIN_ONSPAWN))
 						dat += "<br>"
 						if(!CONFIG_GET(flag/auto_deadmin_antagonists))
 							dat += "<b>As Antag:</b> <a href = '?_src_=prefs;preference=toggle_deadmin_antag'>[(deadmin & DEADMIN_ANTAGONIST)?"Deadmin":"Keep Admin"]</a><br>"
@@ -1187,7 +1188,7 @@
 						else if((gear_points - gear.cost) < 0)
 							class_link = "style='white-space:normal;' class='linkOff'"
 						else if(donoritem)
-							class_link = "style='white-space:normal;background:#ebc42e;' href='?_src_=prefs;preference=gear;toggle_gear_path=[url_encode(name)];toggle_gear=1'"
+							class_link = "style='white-space:normal;background:#2e6eeb;' href='?_src_=prefs;preference=gear;toggle_gear_path=[url_encode(name)];toggle_gear=1'"
 						else if(!istype(gear, /datum/gear/unlockable) || can_use_unlockable(gear))
 							class_link = "style='white-space:normal;' href='?_src_=prefs;preference=gear;toggle_gear_path=[url_encode(name)];toggle_gear=1'"
 						else

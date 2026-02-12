@@ -13,6 +13,7 @@
 #define TRAIT_BLUEMOON_COOLANT_GENERATOR	"coolant_generator"
 #define TRAIT_BLUEMOON_WATER_VULNERABILITY	"robotic_water_vulnerability"
 #define TRAIT_BLUEMOON_EMP_VULNERABILITY	"robotic_emp_vulnerability"
+#define TRAIT_BLUEMOON_CROCIN_POISONOUS		"crocin_poisonous"
 #define TRAIT_LEWD_JOB						"lewd_job"
 #define TRAIT_LEWD_SUMMON					"Призываемый"
 #define TRAIT_LEWD_SUMMONED					"lewd_summoned"
@@ -35,6 +36,7 @@
 #define BLUEMOON_TRAIT_NAME_COOLANT_GENERATOR	"Генератор Хладагента"
 #define BLUEMOON_TRAIT_NAME_WATER_VULNERABILITY	"Уязвимость к Воде"
 #define BLUEMOON_TRAIT_NAME_EMP_VULNERABILITY	"Некачественное Экранирование"
+#define TRAIT_KNOWS_RESEARCH 					"Знанине использования Пергаментом"
 
 // Трейты для рас
 #define CAN_BE_OPERATED_WITHOUT_PAIN		"can_be_operated_without_pain"
