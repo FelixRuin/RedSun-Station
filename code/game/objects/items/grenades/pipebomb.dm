@@ -1,3 +1,5 @@
+#define MAX_STUFFINGS 3
+
 /obj/item/projectile/bullet/shrapnel/ied
 	name = "flying glass shrapnel"
 	damage = 15
@@ -10,21 +12,10 @@
 /obj/item/grenade/iedcasing/pipebomb
 	name = "improvised explosive"
 	desc = "An improvised explosive device."
-	w_class = WEIGHT_CLASS_SMALL
-	icon = 'modular_bluemoon/oni3288/icons/weapons/pipebomb/grenade.dmi'
 	base_icon_state = "pipebomb"
 	icon_state = "slicedapart"
-	item_state = "flashbang"
-	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
-	throw_speed = 3
-	throw_range = 7
-	flags_1 = CONDUCT_1
-	slot_flags = ITEM_SLOT_BELT
-	active = FALSE
 	shrapnel_type = /obj/item/projectile/bullet/shrapnel/ied
 	det_time = 225 SECONDS //this is handled by assemblies now
-	display_timer = FALSE
 	/// Explosive power
 	var/power = 5
 	/// Our assembly that when activated causes us to explode
@@ -186,13 +177,11 @@
 	power = 2.5 //20u welding fuel
 	activator = /obj/item/assembly/timer
 
-#define MAX_STUFFINGS 3
-
 /obj/item/sliced_pipe
 	name = "halved pipe"
 	desc = "Two half-size pipes made from one."
 	w_class = WEIGHT_CLASS_SMALL
-	icon = 'modular_bluemoon/oni3288/icons/weapons/pipebomb/grenade.dmi'
+	icon = 'icons/obj/grenade.dmi'
 	icon_state = "slicedapart"
 	/// Are wires inserted? If so, we are on the final step
 	var/wires_are_in = FALSE

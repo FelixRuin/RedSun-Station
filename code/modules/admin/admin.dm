@@ -1,6 +1,11 @@
 ////////////////////////////////
-/proc/message_admins(msg)
-	msg = span_filter_adminlog("<span class=\"prefix\">ADMIN LOG:</span> <span class=\"message linkify\">[msg]</span>")
+/proc/message_admins(msg, log = FALSE)
+	var/prefix = log ? "ADMIN LOG" : "ADMIN MESSAGE"
+	msg = "<span class=\"prefix\">[prefix]:</span> <span class=\"message linkify\">[msg]</span>"
+	if(log)
+		msg = span_filter_adminlog(msg)
+	else
+		msg = span_message_to_admin(msg)
 	to_chat(GLOB.admins, msg, confidential = TRUE)
 
 /proc/relay_msg_admins(msg)

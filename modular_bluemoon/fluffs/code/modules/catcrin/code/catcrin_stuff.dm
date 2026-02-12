@@ -1,107 +1,116 @@
+#define CATCRIN_GANG "oni3288", "discord980", "mihana964", "romontesque", "enigma418", \
+"smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", \
+"devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", \
+"earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", \
+"deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", \
+"cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", \
+"spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", \
+"ailhate", "kingdeaths", "mentaleater"
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////Слот головы.
 
 /obj/item/clothing/head/helmet/sec/mark45
 	name = "Mk. 45 Black Legionnaire helmet"
 	desc = "The standard-issue helmet of the Catcrin army. Developed in 2545, it can be worn independently of its accompanying suit by removing a protective cover on the lower section of the helmet, sporting specially designed earpieces to accommodate Catcrin anatomy. Besides maximizing comfort, these earpieces also automaticly swivel towards sound sources thanks to a set of inbuilt servo-motors, designed to pick up background noise while also dampening louder sounds for hearing protection. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet"
 	item_state = "mark45_helmet"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/head/helmet/sec/mark45_desert
 	name = "Mk. 45 Desert Hunter helmet"
 	desc = "A modified helmet commonly used by desert Catcrins. Among the most noticeable differences is a layer of fabric designed to minimize the wear-and-tear caused by sandstorms, prolonging its lifespan in desert environments.  The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet_desert"
 	item_state = "mark45_helmet_desert"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/head/helmet/sec/mark45_anomalist
 	name = "Mk. 45 Anomalist helmet"
 	desc = "Helmet of the anomalist of the Catcrin army with additional decoration in the form of light armored fabric on it. It also provides protection from small shrapnel and shows the status of the wearer. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet_anomalist"
 	item_state = "mark45_helmet_anomalist"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/head/helmet/sec/mark45_combatengineer
 	name = "Mk. 45 Combat engineer helmet"
 	desc = "Helmet of a combat engineer of the Catcrin army with a slight tinting on the visor to protect the eyes while working. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet_combatengineer"
 	item_state = "mark45_helmet_combatengineer"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/head/helmet/sec/mark45_support
 	name = "Mk. 45 Support helmet"
 	desc = "Helmet of a Catcrin army support trooper with a white cross on it for identification purposes. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet_support"
 	item_state = "mark45_helmet_support"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/head/helmet/sec/mark45_snow
 	name = "Mk. 45 Snow Cover helmet"
 	desc = "A modified Catcrin helmet optimized for cold-weather operations, differing wildly in appearance from its original form. An additional light plate is attached to the top of the helmet to deflect snow, and the visor itself has been made smaller. The inside of the helmet is lined with wool, with only the ears having been left unaffected. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet_snow"
 	item_state = "mark45_helmet_snow"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/head/HoS/mark45_officer
 	name = "Mk. 45 officer helmet"
 	desc = "An Catcrins officer's helmet with special distinguishing marks on it. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet_officer"
 	item_state = "mark45_helmet_officer"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	flags_cover = HEADCOVERSEYES
 	flags_inv = HIDEHAIR|HIDEEARS
 
 /obj/item/clothing/head/helmet/sec/mark45_ce //Личный предмет.
 	name = "Mk. 45 Master Engineer Specialist Helmet"
 	desc = "A modified Mk.45 Snow Cover helmet of the Catcrin army. It seems to have an armor comb on it alongside engineer-grade visor and Yernela white color scheme. The whole helmet looks like an individual design and does have personal code written on the helmet nape: ME-KVM:82991"
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_helmet_ce"
 	item_state = "mark45_helmet_ce"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/head/helmet/brigdoc/mark45_medic_l
 	name = "Mk. 45 light medic helmet"
 	desc = "A modified lightweight helmet of Catcrin Army medics to assist in combat encounters. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45medic.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45medic.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45medic.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45medic.dmi'
 	icon_state = "mark45_helmet_medic_l"
 	item_state = "mark45_helmet_medic_l"
 
 /obj/item/clothing/head/helmet/brigdoc/mark45_medic_h
 	name = "Mk. 45 heavy medic helmet"
 	desc = "A modified heavy helmet of Catcrin Army medics to assist in combat encounters. The personal code of the person who wears this helmet is written on the outside. This one looks worn out, most likely the helmet was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45medic.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45medic.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45medic.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45medic.dmi'
 	icon_state = "mark45_helmet_medic_h"
 	item_state = "mark45_helmet_medic_h"
 
@@ -110,96 +119,96 @@
 /obj/item/clothing/suit/armor/mark45_armor
 	name = "Mk. 45 Black Legionnaire Armor"
 	desc = "The standard-issue armor of the Catcrin army. Developed in 2545. The armor is noticeably light, does not restrict movement and covers most of the body, but does not lose its protective properties, remaining on an equal footing with similar ones. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor"
 	item_state = "mark45_armor"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/mark45_armor/mark45_armor_desert
 	name = "Mk. 45 Desert Hunter Armor"
 	desc = "A modified armor commonly used by desert Catcrins. Among the most noticeable differences is a layer of fabric designed to minimize the wear-and-tear caused by sandstorms, prolonging its lifespan in desert environments. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor_desert"
 	item_state = "mark45_armor_desert"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/mark45_armor/mark45_armor_snow
 	name = "Mk. 45 Snow Cover Аrmor"
 	desc = "A modified Catcrin armor optimized for cold-weather operations. A layer of warm wool is visible inside the armor to preserve the warmth of the wearer. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor_snow"
 	item_state = "mark45_armor_snow"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/mark45_armor/mark45_armor_anomalist
 	name = "Mk. 45 Anomalist Аrmor"
 	desc = "Armor made on the basis of Mk. 45. This armor is worn by Catcrin anomalists, those who study the otherworldly world of ghosts, as well as associated with the elimination of various kinds of hostile anomalies. It is also decorated with special light armored fabric, showing the status of the carrier, and also protects it from potential shrapnel. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor_anomalist"
 	item_state = "mark45_armor_anomalist"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/mark45_armor/mark45_armor_combatengineer
 	name = "Mk. 45 Combat engineer Аrmor"
 	desc = "A modified version of the armor created for combat engineers in the Catcrin army, with a special auxiliary manipulator. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor_combatengineer"
 	item_state = "mark45_armor_combatengineer"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/mark45_armor/mark45_armor_support
 	name = "Mk. 45 Support Аrmor"
 	desc = "A lighter version of the Mk armor. 45 with additional pouches and a support mark on the shoulder pad. It is used by auxiliary fighters in the Catcrin army. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor_support"
 	item_state = "mark45_armor_support"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/mark45_armor_ce //Личный респрайт.
 	name = "Mk. 45 Master Engineer Specialist Armor"
 	desc = "An exquisite example of extra-padded engineer mark 45 armor of the Catcrin army with officer-rank cape, featuring some of the Yernela winter armor elements and white color scheme. It seems that this armor is special design for one specific individual and does have his personal code written on the neckplate: ME-KVM:829917"
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor_ce"
 	item_state = "mark45_armor_ce"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/hos/mark45_armor_officer
 	name = "Mk. 45 Officer Аrmor"
 	desc = "Slightly more reinforced armor worn by officers in the Catcrin army with special cape on it's left shoulder. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "mark45_armor_officer"
 	item_state = "mark45_armor_officer"
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/brigdoc/mark45_armor/medic_l
 	name = "Mk. 45 medic's combat coat"
 	desc = "A special coat for a Catcrin Army medic with light plates in the chest, shoulder protection and armored fabric to minimize movement interference. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45medic.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45medic.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45medic.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45medic.dmi'
 	icon_state = "mark45_armor_medic_l"
 	item_state = "mark45_armor_medic_l"
 	unique_reskin = null
@@ -207,8 +216,8 @@
 /obj/item/clothing/suit/armor/brigdoc/mark45_armor/medic_h
 	name = "Mk. 45 heavy combat medic Аrmor"
 	desc = "heavier by medical standards, modified Catcrin armor. This one has a distinctive mark on a noticeably larger shoulder pad and is much more often used in combat encounters. The personal code of the person who wears this armor is written on the outside. This one looks worn out, most likely the armor was removed from the corpse."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45medic.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45medic.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45medic.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45medic.dmi'
 	icon_state = "mark45_armor_medic_h"
 	item_state = "mark45_armor_medic_h"
 	unique_reskin = null
@@ -218,8 +227,8 @@
 /obj/item/clothing/under/rank/brigdoc/catcrin_combat_medic_uniform_blue
 	name = "Catcrin combat medic uniform"
 	desc= "Uniform for combat medics in the Catcrin army. Most of it is made of a material similar to rubber. This one is blue."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45medic.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45medic.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45medic.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45medic.dmi'
 	icon_state = "medic_blue"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	can_adjust = FALSE
@@ -227,8 +236,8 @@
 /obj/item/clothing/under/rank/brigdoc/catcrin_combat_medic_uniform_green
 	name = "Catcrin combat medic uniform"
 	desc= "Uniform for combat medics in the Catcrin army. Most of it is made of a material similar to rubber. This one is green."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45medic.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45medic.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45medic.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45medic.dmi'
 	icon_state = "medic_green"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	can_adjust = FALSE
@@ -238,9 +247,9 @@
 /obj/item/clothing/head/helmet/space/hardsuit/security/mark46_sec
 	name = "Mk.46-SH"
 	desc = "Mark 46 based on the previous version. This space suit is designed specifically for combat in space, capable of providing protection from both weapons and vacuum."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
-	anthro_mob_worn_overlay = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
+	anthro_mob_worn_overlay = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
 	icon_state = "hardsuit0-sec_mark46"
 	item_state = "hardsuit0-sec_mark46"
 	hardsuit_type = "sec_mark46"
@@ -249,11 +258,11 @@
 /obj/item/clothing/suit/space/hardsuit/security/mark46_sec
 	name = "Mk.46-SS"
 	desc = "Mark 46 based on the previous version. This space suit is designed specifically for combat in space, capable of providing protection from both weapons and vacuum."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/mark45.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
-	anthro_mob_worn_overlay = 'modular_bluemoon/oni3288/icons/mob/clothing/mark45.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_lefthand.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/mob/inhands/mark45_righthand.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/mark45.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
+	anthro_mob_worn_overlay = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/mark45.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/inhands/mark45_righthand.dmi'
 	icon_state = "hardsuit-sec_mark46"
 	item_state = "hardsuit-sec_mark46"
 	tail_suit_worn_overlay = 'modular_bluemoon/icons/mob/clothing/tails_digi.dmi'
@@ -283,8 +292,8 @@
 /obj/item/clothing/neck/tie/maskchalat
 	name = "Catcrin maskhalat"
 	desc = "A disguise used in the regular Catcrin army. It is painted in different colors to disguise itself in different areas and locations, as well as to hide things worn underneath."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/neck.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/mob/clothing/neck.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/neck.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/clothing/neck.dmi'
 	icon_state = "maskchalat"
 	item_state = "maskchalat"
 	flags_inv = HIDEHAIR
@@ -295,9 +304,9 @@
 /obj/item/gun/energy/e_gun/hos/karabiner_m13
 	name = "\improper Karabiner-M13"
 	desc = "The development of the Catcrin army. It is used extremely rarely and only by the highest ranks. It has several different shooting modes."
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/aa_multiphasecarabinb.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/aa_multiphasecarabinb.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	icon_state = "multiphasecarabin"
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler/karabiner_m13, /obj/item/ammo_casing/energy/laser/hos/karabiner_m13, /obj/item/ammo_casing/energy/ion/hos/karabiner_m13, /obj/item/ammo_casing/energy/electrode/hos/karabiner_m13)
 	ammo_x_offset = 0
@@ -306,16 +315,16 @@
 	flight_y_offset = 5
 
 /obj/item/ammo_casing/energy/disabler/karabiner_m13
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/Karabiner-M13/DisablerOni.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/Karabiner-M13/DisablerOni.ogg'
 
 /obj/item/ammo_casing/energy/laser/hos/karabiner_m13
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/Karabiner-M13/LaserOni.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/Karabiner-M13/LaserOni.ogg'
 
 /obj/item/ammo_casing/energy/ion/hos/karabiner_m13
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/Karabiner-M13/IonOni.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/Karabiner-M13/IonOni.ogg'
 
 /obj/item/ammo_casing/energy/electrode/hos/karabiner_m13
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/Karabiner-M13/TaserOni.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/Karabiner-M13/TaserOni.ogg'
 
 /obj/item/modkit/karabiner_kit
 	name = "Karabiner-M13 Kit"
@@ -334,12 +343,12 @@
 /obj/item/gun/ballistic/shotgun/automatic/combat/frontline
 	name = "CS-Frontline-2534"
 	desc = "A standard assault automatic shotgun with a 7-shot magazine used by the Catcrin Empire army"
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/csfrontline.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/csfrontline.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	icon_state = "csfrontline"
 	item_state = "csfrontline"
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/frontlineshot.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/frontlineshot.ogg'
 	unique_reskin = null
 
 /obj/item/gun/ballistic/shotgun/automatic/combat/frontline/update_overlays()
@@ -350,12 +359,12 @@
 /obj/item/gun/ballistic/shotgun/automatic/combat/frontline
 	name = "CS-Frontline-2534"
 	desc = "A standard assault automatic shotgun with a 7-shot magazine used by the Catcrin Empire army"
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/csfrontline.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/csfrontline.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	icon_state = "csfrontline"
 	item_state = "csfrontline"
-	fire_sound = "modular_bluemoon/oni3288/sounds/weapons/frontlineshot.ogg"
+	fire_sound = "modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/frontlineshot.ogg"
 	stock = FALSE
 	extend_sound = 'sound/weapons/batonextend.ogg'
 	unique_reskin = null
@@ -380,12 +389,12 @@
 /obj/item/gun/ballistic/shotgun/riot/yernela
 	name = "PS-Yernela-2525"
 	desc = "A standard assault pump-action shotgun with a 7-shot magazine used by the Catcrin Empire army, was developed on planet Yernela."
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/yernela.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/yernela.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	icon_state = "yernela"
 	item_state = "yernela"
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/yernelashot.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/yernelashot.ogg'
 	unique_reskin = null
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -399,13 +408,13 @@
 /obj/item/gun/ballistic/automatic/wt550/gewehr550
 	name = "\improper Gewehr-550"
 	desc = "A regular shortened assault rifle made in the Catcrin Empire for fighting in narrow spaces in the likeness of stations and shuttles."
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/aa_gewehr550.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/aa_gewehr550.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	icon_state = "gewehr550"
 	item_state = "gewehr550"
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/G-550shot1.ogg'
-	pickup_sound = "modular_bluemoon/oni3288/sounds/weapons/g-550grab.ogg"
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/G-550shot1.ogg'
+	pickup_sound = "modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/g-550grab.ogg"
 	can_suppress = FALSE
 	can_bayonet = TRUE
 	knife_x_offset = 30
@@ -427,12 +436,12 @@
 	desc = "A hybrid taser made by Catcrin's waffenschmied that combines electric and energy shots. There is a small circle on the handle showing the charging level."
 	icon_state = "hwal"
 	item_state = "hwal"
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/hwal.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/hwal.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	ammo_x_offset = 0
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler/hwal2572, /obj/item/ammo_casing/energy/electrode/security/hwal2572 = FALSE)
-	pickup_sound = 'modular_bluemoon/oni3288/sounds/weapons/H-Wal-2572/DisablerGrab.ogg'
+	pickup_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/H-Wal-2572/DisablerGrab.ogg'
 	var/last_altfire = 0
 	var/altfire_delay = CLICK_CD_RANGE
 	shot_type_overlay = FALSE
@@ -449,10 +458,10 @@
 	last_altfire = world.time
 
 /obj/item/ammo_casing/energy/disabler/hwal2572
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/H-Wal-2572/DisablerOni.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/H-Wal-2572/DisablerOni.ogg'
 
 /obj/item/ammo_casing/energy/electrode/security/hwal2572
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/H-Wal-2572/TaserOni.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/H-Wal-2572/TaserOni.ogg'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -467,15 +476,15 @@
 	desc = "A standard non-lethal spear used by Catcrin's law enforcement agencies."
 	item_state = "stunspear"
 	icon_state = "stunspear"
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/stunspear.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/stunspear.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 
 /obj/item/melee/baton/stunspear/switch_status(new_status = FALSE, silent = FALSE)
 	if(turned_on != new_status)
 		turned_on = new_status
 		if(!silent)
-			playsound(loc, 'modular_bluemoon/oni3288/sounds/weapons/stunspear.ogg', 75, 1, -1)
+			playsound(loc, 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/stunspear.ogg', 75, 1, -1)
 		if(turned_on)
 			START_PROCESSING(SSobj, src)
 		else
@@ -508,9 +517,9 @@
 	name = "Force-field riot shield"
 	desc = "A small special shield developed in the Catcrin Empire that uses a force field charge to block physical influences."
 	icon_state = "ffshield0"
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/ffshield.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/ffshield.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	slot_flags = null
 	force = 3
 	throwforce = 3
@@ -530,7 +539,7 @@
 /obj/item/shield/riot/ffshield/attack_self(mob/living/user)
 	active = !active
 	icon_state = "ffshield[active]"
-	playsound(src.loc, 'modular_bluemoon/oni3288/sounds/weapons/ffshield.ogg', 50, TRUE)
+	playsound(src.loc, 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/ffshield.ogg', 50, TRUE)
 
 	if(active)
 		force = 8
@@ -559,9 +568,9 @@
 /obj/item/gun/ballistic/automatic/pistol/enforcer/bwal2572
 	name = "\improper B-Wal-2572"
 	desc = "A one-handed pistol used in the regular Catcrin Army."
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/bwal.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/bwal.dmi'
 	icon_state = "bwal"
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/bwalshot.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/bwalshot.ogg'
 	unique_reskin = null
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -575,12 +584,12 @@
 /obj/item/gun/ballistic/automatic/magrifle/magrrinei
 	name = "MAG-R-Rinei"
 	desc = "An assault rifle developed on a planet belonging to the Catcrins : - Lar'rinei, the principle of operation is similar to the Gauss system, ammunition and battery charging are needed."
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/magweapon.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/magweapon.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	icon_state = "rinei"
 	item_state = "rinei"
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/magshot.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/magshot.ogg'
 
 /obj/item/gun/ballistic/automatic/magrifle/magrrinei/update_icon_state()
 	icon_state = "rinei[magazine ? "-[CEILING(get_ammo(0)/7, 1)*4]" : ""][chambered ? "" : "-e"]"
@@ -596,12 +605,12 @@
 /obj/item/gun/ballistic/automatic/magrifle/pistol/magplar
 	name = "MAG-P-Lar"
 	desc = "A one-handed submachine gun with a slow-motion firing mode made specifically on the basis of Gauss rifle. Due to the reduced appearance, the rate of fire and the magazine suffered, but it is popular among Catcrins due to its compactness and ease of use in the caves of the planet Lar'rinei."
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/magweapon.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/magweapon.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
 	icon_state = "lar"
 	item_state = "lar"
-	fire_sound = 'modular_bluemoon/oni3288/sounds/weapons/magshot.ogg'
+	fire_sound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/magshot.ogg'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -616,11 +625,11 @@
 	desc = "A sharp dagger used in the Catcrin army as a regular melee weapon. It is issued to each soldier in a case. Its blade is extremely sharp and slightly curved."
 	item_state = "hopesh"
 	icon_state = "hopesh"
-	icon = 'modular_bluemoon/oni3288/icons/weapons/icons/hopesh.dmi'
-	lefthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_left.dmi'
-	righthand_file = 'modular_bluemoon/oni3288/icons/weapons/hands/guns_right.dmi'
-	mob_overlay_icon = 'modular_bluemoon/oni3288/icons/weapons/mob/back.dmi'
-	hitsound = 'modular_bluemoon/oni3288/sounds/weapons/hopesh.ogg'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/icons/hopesh.dmi'
+	lefthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_left.dmi'
+	righthand_file = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/hands/guns_right.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/weapons/mob/back.dmi'
+	hitsound = 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/weapons/hopesh.ogg'
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////Слот масок.
 
@@ -652,13 +661,13 @@
 		usr.audible_message("<b>[usr]</b> exclaims, \"<font color='red' size='4'><b>[frase]</b></font>\"")
 		switch(rand(0,3))
 			if(0)
-				playsound(src.loc, 'modular_bluemoon/oni3288/sounds/misc/catcrin_halt0.ogg', 100, 1)
+				playsound(src.loc, 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/misc/catcrin_halt0.ogg', 100, 1)
 			if(1)
-				playsound(src.loc, 'modular_bluemoon/oni3288/sounds/misc/catcrin_halt1.ogg', 100, 1)
+				playsound(src.loc, 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/misc/catcrin_halt1.ogg', 100, 1)
 			if(2)
-				playsound(src.loc, 'modular_bluemoon/oni3288/sounds/misc/catcrin_halt2.ogg', 100, 1)
+				playsound(src.loc, 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/misc/catcrin_halt2.ogg', 100, 1)
 			if(3)
-				playsound(src.loc, 'modular_bluemoon/oni3288/sounds/misc/catcrin_halt3.ogg', 100, 1)
+				playsound(src.loc, 'modular_bluemoon/fluffs/code/modules/catcrin/sounds/misc/catcrin_halt3.ogg', 100, 1)
 
 /obj/item/clothing/mask/gas/syndicate/cool_version/ui_action_click(mob/user, action)
 	if(istype(action, /datum/action/item_action/maskhalt))
@@ -692,21 +701,21 @@
 
 /obj/item/banner/catcrin
 	name = "Banner of Catcrin Empire"
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/accessories.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/accessories.dmi'
 	icon_state = "banner_catcrin"
 	desc = "Banner of Catcrin Empire"
 
 /obj/item/sign/flag/catcrin
 	name = "folded flag of the Catcrin Empire"
 	desc = "The folded flag of the Catcrin Empire."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/accessories.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/accessories.dmi'
 	icon_state = "flag_catcrin"
 	sign_path = /obj/structure/sign/flag/catcrin
 
 /obj/structure/sign/flag/catcrin
 	name = "flag of Catcrin Empire"
 	desc = "The official flag of Catcrin Empire. Mostly flown as a ceremonial piece, or to mark land on a new frontier."
-	icon = 'modular_bluemoon/oni3288/icons/mob/icons/accessories_32x48.dmi'
+	icon = 'modular_bluemoon/fluffs/code/modules/catcrin/icons/mob/icons/accessories_32x48.dmi'
 	icon_state = "flag_catcrin"
 	pixel_y = -12
 
@@ -753,36 +762,31 @@
 	name = "First Catcrin's tactical gasmask"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/clothing/mask/gas/syndicate/cool_version/catcrin_combatmask_one
-	ckeywhitelist = list("oni3288", "discord980", "mihana964", "romontesque", "enigma418", "smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", "devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", "earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", "deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", "cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", "spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", "ailhate", "kingdeaths", "mentaleater")
-	subcategory = LOADOUT_SUBCATEGORIES_DON03
+	ckeywhitelist = list(CATCRIN_GANG)
 
 /datum/gear/donator/bm/catcrin_combatmask_two
 	name = "Second Catcrin's tactical gasmask"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/clothing/mask/gas/syndicate/cool_version/catcrin_combatmask_two
-	ckeywhitelist = list("oni3288", "ghos7ik", "discord980", "mihana964", "romontesque", "enigma418", "smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", "devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", "earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", "deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", "cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", "spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", "ailhate", "kingdeaths", "mentaleater")
-	subcategory = LOADOUT_SUBCATEGORIES_DON03
+	ckeywhitelist = list(CATCRIN_GANG, "ghos7ik")
 
 /datum/gear/donator/bm/catcrin_combatmask_tree
 	name = "Thrid Catcrin's tactical gasmask"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/clothing/mask/gas/syndicate/cool_version/catcrin_combatmask_three
-	ckeywhitelist = list("oni3288", "discord980", "mihana964", "romontesque", "enigma418", "smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", "devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", "earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", "deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", "cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", "spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", "ailhate", "kingdeaths", "mentaleater")
-	subcategory = LOADOUT_SUBCATEGORIES_DON03
+	ckeywhitelist = list(CATCRIN_GANG)
 
 /datum/gear/donator/bm/catcrin_kit
 	name = "Catcrin kit"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/storage/box/catcrin_kit
-	ckeywhitelist = list("oni3288", "discord980", "mihana964", "romontesque", "enigma418", "smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", "devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", "earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", "deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", "cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", "spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", "ailhate", "kingdeaths", "mentaleater")
-	subcategory = LOADOUT_SUBCATEGORIES_DON03
+	ckeywhitelist = list(CATCRIN_GANG)
 
 /datum/gear/donator/bm/maskchalat
 	name = "Catcrin Maskhalat"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/clothing/neck/tie/maskchalat
-	ckeywhitelist = list("oni3288", "discord980", "mihana964", "romontesque", "enigma418", "smol42", "notlikeluls",  "kladmenuwu", "alexsandoor", "scramblescream", "nai1ten", "devildeadspace", "zetneskov", "hazzi", "definitelynotnesuby", "silverfoxpaws", "pr1zrak", "earthphobia", "wafflemeow", "trora", "kosep", "urfdrf", "mikolaostavkin", "xaeshkavd", "deltarayx", "korinfellori", "troubleneko17th", "dimofon", "lichfail", "gisya", "dimakr", "cupteazee", "nopeingeneer", "silyamg", "lomodno", "valsons", "nyctealust", "abrikos", "spoopyman228", "stasdvrz", "shizalrp", "tblkba", "dragon9090", "avtobuspng", "ninjapikachushka", "ailhate", "kingdeaths", "mentaleater")
-	subcategory = LOADOUT_SUBCATEGORIES_DON03
+	ckeywhitelist = list(CATCRIN_GANG)
 
 //////////////////// ДАТУМы для личных кастомных Кеткринских вещей.
 
@@ -803,3 +807,5 @@
 	subcategory = LOADOUT_SUBCATEGORIES_DON03
 	restricted_desc = "Head of Security, Warden, Detective, Security Officer, Brig Physician, Peacekeeper, Blueshield."
 	restricted_roles = list("Head of Security", "Warden", "Detective", "Security Officer", "Brig Physician", "Peacekeeper", "Blueshield")
+
+#undef CATCRIN_GANG
