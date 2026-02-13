@@ -121,3 +121,14 @@
 	trash = /obj/item/reagent_containers/glass/bowl
 	color = "#D9BB79"
 	foodtype = MEAT | VEGETABLES | GRAIN
+
+/obj/item/reagent_containers/food/snacks/soup/dashi
+	name = "Dashi soup"
+	desc = "Made with kombu and katsuobushi, this mother stock forms the basis for a large number of Japanese dishes."
+	icon = 'icons/obj/food/soupsalad.dmi'
+	icon_state = "wishsoup"
+	tastes = list("umami" = 1)
+	list_reagents = list(/datum/reagent/consumable/nutriment/soup/dashi = 30)
+	trash = /obj/item/reagent_containers/glass/bowl
+	color = "#D49D26"
+	foodtype = MEAT | VEGETABLES
