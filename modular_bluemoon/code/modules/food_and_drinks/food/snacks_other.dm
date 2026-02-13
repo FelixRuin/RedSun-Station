@@ -9,6 +9,17 @@
 	tastes = list("rice" = 1)
 	foodtype = GRAIN
 
+/obj/item/reagent_containers/food/snacks/curd
+	name = "curd"
+	desc = "A piece of curd."
+	icon = 'modular_bluemoon/icons/obj/food/food_ingredients.dmi'
+	icon_state = "curd"
+	list_reagents = list(
+		/datum/reagent/consumable/nutriment = 6,
+	)
+	tastes = list("curd" = 1)
+	foodtype = DAIRY
+
 // Rice Dough
 /obj/item/reagent_containers/food/snacks/rice_dough
 	name = "rice dough"
