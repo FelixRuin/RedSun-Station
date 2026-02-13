@@ -14,7 +14,7 @@
 	tastes = list("fish" = 1, "dried meat" = 1)
 	foodtype = SEAFOOD
 	w_class = WEIGHT_CLASS_SMALL
-	grind_results = list(/datum/reagent/consumable/bonito = 20,)
+	grind_results = list(/datum/reagent/consumable/bonito = 20)
 
 /obj/item/reagent_containers/food/snacks/katsu_fillet
 	name = "katsu fillet"
