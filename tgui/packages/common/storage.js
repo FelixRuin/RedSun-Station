@@ -26,8 +26,7 @@ const testGeneric = testFn => () => {
   }
 };
 
-// Localstorage can sometimes throw an error, even if DOM storage is not
-// disabled in IE11 settings.
+// LocalStorage can sometimes throw even when storage appears available.
 // See: https://superuser.com/questions/1080011
 const testLocalStorage = testGeneric(() => (
   window.localStorage && window.localStorage.getItem

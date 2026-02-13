@@ -46,7 +46,7 @@ class LinkServer {
     logger.log(`listening on port ${port} (WebSocket)`);
   }
 
-  // One way HTTP-based client link for IE8
+  // One-way HTTP-based client link.
   setupHttpLink() {
     const port = 3001;
     this.httpServer = http.createServer((req, res) => {

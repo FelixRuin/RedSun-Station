@@ -4,6 +4,14 @@
  * cost the same as cardinal moves currently, so paths may look a bit strange, but should still be optimal.
  */
 
+/// Rate-limited warning for invalid path requests that would otherwise spam runtimes.
+/proc/log_invalid_astar_request(atom/movable/caller, turf/start, turf/end)
+	var/static/next_log_time = 0
+	if(world.time < next_log_time)
+		return
+	next_log_time = world.time + (5 SECONDS)
+	WARNING("Invalid A* start or destination (suppressed runtime): caller=[caller ? "[caller] ([caller.type])" : "null"], start=[start ? "[start] ([start.type])" : "null"], end=[end ? "[end] ([end.type])" : "null"]")
+
 /**
  * This is the proc you use whenever you want to have pathfinding more complex than "try stepping towards the thing".
  * If no path was found, returns an empty list, which is important for bots like medibots who expect an empty list rather than nothing.
@@ -19,8 +27,9 @@
  * * skip_first: Whether or not to delete the first item in the path. This would be done because the first item is the starting tile, which can break movement for some creatures.
  */
 /proc/get_path_to(caller, end, max_distance = 30, mintargetdist, id=null, simulated_only = TRUE, turf/exclude, skip_first=TRUE)
-	if(!caller || !get_turf(end))
-		return
+	var/turf/end_turf = get_turf(end)
+	if(!caller || !end_turf)
+		return list()
 
 	var/l = SSpathfinder.mobs.getfree(caller)
 	while(!l)
@@ -28,7 +37,7 @@
 		l = SSpathfinder.mobs.getfree(caller)
 
 	var/list/path
-	var/datum/pathfind/pathfind_datum = new(caller, end, id, max_distance, mintargetdist, simulated_only, exclude)
+	var/datum/pathfind/pathfind_datum = new(caller, end_turf, id, max_distance, mintargetdist, simulated_only, exclude)
 	path = pathfind_datum.search()
 	qdel(pathfind_datum)
 
@@ -145,7 +154,7 @@
 /datum/pathfind/proc/search()
 	start = get_turf(caller)
 	if(!start || !end)
-		stack_trace("Invalid A* start or destination")
+		log_invalid_astar_request(caller, start, end)
 		return
 	if(start.z != end.z || start == end ) //no pathfinding between z levels
 		return

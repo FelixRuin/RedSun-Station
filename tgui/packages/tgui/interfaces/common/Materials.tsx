@@ -1,7 +1,7 @@
 import { createPopper } from '@popperjs/core';
 import { BooleanLike } from 'common/react';
 import { classes } from 'common/react';
-import { Component, findDOMfromVNode, render } from 'inferno';
+import { Component, findDOMFromVNode, render } from 'inferno';
 
 import { Box, Button, Flex } from '../../components';
 import { BoxProps } from '../../components/Box';
@@ -266,7 +266,7 @@ class MaterialDockTooltip extends Component<DockTooltipProps, DockTooltipState> 
   };
 
   getDOMNode() {
-    return findDOMfromVNode(this.$LI, true);
+    return findDOMFromVNode(this.$LI, true);
   }
 
   ensureDockEl() {

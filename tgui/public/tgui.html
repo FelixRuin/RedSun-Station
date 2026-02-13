@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta charset="utf-8">
 
 <!-- Inlined data -->
@@ -102,18 +101,9 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
   // ------------------------------------------------------
 
   var Byond = window.Byond = {};
-  // Trident engine version
-  var tridentVersion = (function () {
-    var groups = navigator.userAgent.match(/Trident\/(\d+).+?;/i);
-    var majorVersion = groups && groups[1];
-    return majorVersion
-      ? parseInt(majorVersion, 10)
-      : null;
-  })();
 
   var byondBridgeKeys = objectKeysSafe(window.BYOND);
-  var hasKnownBridge = tridentVersion !== null
-    || !!window.cef_to_byond
+  var hasKnownBridge = !!window.cef_to_byond
     || !!window.BYOND;
   var locationHost = location.hostname;
   var hostLooksLocal = locationHost === '127.0.0.1'
@@ -121,8 +111,8 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
     || locationHost === '';
 
   // Basic checks to detect whether this page runs in BYOND
-  // BYOND 515: Trident (IE11), BYOND webclient: cef_to_byond, BYOND 516+: WebView2 (window.BYOND).
-  // On 516 some clients expose no JS bridge object, but still support byond:// transport
+  // BYOND webclient: cef_to_byond, BYOND 516+: WebView2 (window.BYOND).
+  // Some clients expose no JS bridge object, but still support byond:// transport
   // from the local DreamSeeker-served page.
   var isByond = (hasKnownBridge || hostLooksLocal)
     && location.search !== '?external';
@@ -132,11 +122,6 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
 
   // Version constants
   Byond.IS_BYOND = isByond;
-  Byond.IS_LTE_IE8 = tridentVersion !== null && tridentVersion <= 4;
-  Byond.IS_LTE_IE9 = tridentVersion !== null && tridentVersion <= 5;
-  Byond.IS_LTE_IE10 = tridentVersion !== null && tridentVersion <= 6;
-  Byond.IS_LTE_IE11 = tridentVersion !== null && tridentVersion <= 7;
-  Byond.IS_WEBVIEW2 = !!window.BYOND;
   Byond.BRIDGE_KEYS = byondBridgeKeys;
 
   pushDebugEvent('env', {
@@ -144,7 +129,6 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
     host: locationHost,
     hostLooksLocal: hostLooksLocal,
     search: location.search,
-    tridentVersion: tridentVersion,
     hasCefBridge: !!window.cef_to_byond,
     hasByondBridge: !!window.BYOND,
     byondBridgeKeys: byondBridgeKeys,
@@ -157,17 +141,13 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
   Byond.__callbacks__ = [];
 
   // Reviver for BYOND JSON
-  // IE8: No reviver for you!
   // See: https://stackoverflow.com/questions/1288962
-  var byondJsonReviver;
-  if (!Byond.IS_LTE_IE8) {
-    byondJsonReviver = function (key, value) {
-      if (typeof value === 'object' && value !== null && value.__number__) {
-        return parseFloat(value.__number__);
-      }
-      return value;
-    };
-  }
+  var byondJsonReviver = function (key, value) {
+    if (typeof value === 'object' && value !== null && value.__number__) {
+      return parseFloat(value.__number__);
+    }
+    return value;
+  };
 
   // Makes a BYOND call.
   // See: https://secure.byond.com/docs/ref/skinparams.html
@@ -395,7 +375,7 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
         return -1;
       }
     };
-    // Method #1 (works on IE10+)
+    // Method #1
     var styleSheet = node.sheet;
     if (styleSheet) {
       var count = getRuleCount(styleSheet);
@@ -482,10 +462,7 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
     if (type === 'js') {
       var node = document.createElement('script');
       node.type = 'text/javascript';
-      // IE8: Prefer non-https protocols
-      node.src = Byond.IS_LTE_IE9
-        ? url.replace('https://', 'http://')
-        : url;
+      node.src = url;
       if (sync) {
         node.defer = true;
       }
@@ -534,10 +511,7 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
       var node = document.createElement('link');
       node.type = 'text/css';
       node.rel = 'stylesheet';
-      // IE8: Prefer non-https protocols
-      node.href = Byond.IS_LTE_IE9
-        ? url.replace('https://', 'http://')
-        : url;
+      node.href = url;
       // Temporarily set media to something inapplicable
       // to ensure it'll fetch without blocking render
       if (!sync) {
@@ -633,8 +607,7 @@ window.onerror = function (msg, url, line, col, error) {
     else {
       window.onerror.__stack__ = stack;
     }
-    var textProp = Byond.IS_LTE_IE8 ? 'innerText' : 'textContent';
-    errorStack[textProp] = window.onerror.__stack__;
+    errorStack.textContent = window.onerror.__stack__;
   }
   // Set window geometry
   var setFatalErrorGeometry = function () {
@@ -745,8 +718,7 @@ window.__showTguiDebugOverlay__ = function (reason) {
     var node = document.createElement('div');
     node.id = 'TguiDebugOverlay';
     node.className = 'TguiDebugOverlay';
-    var textProp = Byond.IS_LTE_IE8 ? 'innerText' : 'textContent';
-    node[textProp] = lines.join('\n');
+    node.textContent = lines.join('\n');
     document.body.appendChild(node);
   };
 
@@ -886,50 +858,6 @@ setTimeout(function () {
   }
 }, 8000);
 
-// Necessary polyfill to make Webpack code splitting work on IE8
-if (!Function.prototype.bind) (function () {
-  var slice = Array.prototype.slice;
-  Function.prototype.bind = function () {
-    var thatFunc = this, thatArg = arguments[0];
-    var args = slice.call(arguments, 1);
-    if (typeof thatFunc !== 'function') {
-      // closest thing possible to the ECMAScript 5
-      // internal IsCallable function
-      throw new TypeError('Function.prototype.bind - ' +
-        'what is trying to be bound is not callable');
-    }
-    return function () {
-      var funcArgs = args.concat(slice.call(arguments))
-      return thatFunc.apply(thatArg, funcArgs);
-    };
-  };
-})();
-
-if (!Array.prototype['forEach']) {
-  Array.prototype.forEach = function (callback, thisArg) {
-    if (this == null) {
-      throw new TypeError('Array.prototype.forEach called on null or undefined');
-    }
-    var T, k;
-    var O = Object(this);
-    var len = O.length >>> 0;
-    if (typeof callback !== "function") {
-      throw new TypeError(callback + ' is not a function');
-    }
-    if (arguments.length > 1) {
-      T = thisArg;
-    }
-    k = 0;
-    while (k < len) {
-      var kValue;
-      if (k in O) {
-        kValue = O[k];
-        callback.call(T, kValue, k, O);
-      }
-      k++;
-    }
-  };
-}
 </script>
 
 <style>

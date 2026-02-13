@@ -10,6 +10,7 @@ import { selectDebug } from './debug/selectors';
 import { Window } from './layouts';
 
 const requireInterface = require.context('./interfaces');
+const loggedMissingExports = new Set();
 
 const routingError = (type, name) => () => {
   return (
@@ -51,6 +52,26 @@ const RefreshingWindow = () => {
   );
 };
 
+const resolveInterfaceComponent = (esModule, name) => {
+  if (!esModule) {
+    return null;
+  }
+  if (typeof esModule === 'function') {
+    return esModule;
+  }
+  if (esModule[name]) {
+    return esModule[name];
+  }
+  const defaultExport = esModule.default;
+  if (defaultExport?.[name]) {
+    return defaultExport[name];
+  }
+  if (typeof defaultExport === 'function') {
+    return defaultExport;
+  }
+  return null;
+};
+
 export const getRoutedComponent = store => {
   const state = store.getState();
   const { suspended, config } = selectBackend(state);
@@ -90,8 +111,14 @@ export const getRoutedComponent = store => {
   if (!esModule) {
     return routingError('notFound', name);
   }
-  const Component = esModule[name];
+  const Component = resolveInterfaceComponent(esModule, name);
   if (!Component) {
+    if (process.env.NODE_ENV !== 'production' && !loggedMissingExports.has(name)) {
+      loggedMissingExports.add(name);
+      console.error(`Interface ${name} is missing an export.`, {
+        exports: Object.keys(esModule),
+      });
+    }
     return routingError('missingExport', name);
   }
   return Component;

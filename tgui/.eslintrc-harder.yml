@@ -1,3 +1,6 @@
+plugins:
+  - radar
+
 rules:
   ## Enforce a maximum cyclomatic complexity allowed in a program
   # complexity: [warn, { max: 25 }]

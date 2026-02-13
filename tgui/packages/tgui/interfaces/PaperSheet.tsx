@@ -246,7 +246,7 @@ class PaperSheetStamper extends Component<PaperSheetStamperProps> {
 }
 
 // Creates a full stamp div to render the given stamp to the preview.
-export const Stamp = (props, context): InfernoElement<HTMLDivElement> => {
+export const Stamp = (props, context) => {
   const { activeStamp, sprite, x, y, rotation, opacity, yOffset = 0 } = props;
   const stamp_transform = {
     'left': x + 'px',
@@ -502,7 +502,7 @@ export class PreviewView extends Component<PreviewViewProps> {
       walkTokens: walkTokens,
       // Once assets are fixed might need to change this for them
       baseUrl: 'thisshouldbreakhttp',
-    });
+    } as any);
   };
 
   // Extracts the paper field "counter" from a full ID.
@@ -728,7 +728,7 @@ export class PreviewView extends Component<PreviewViewProps> {
       },
     };
 
-    return marked.parse(rawText);
+    return marked.parse(rawText) as string;
   };
 
   // Fully formats, sanitises and parses the provided raw text and wraps it

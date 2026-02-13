@@ -29,7 +29,7 @@ module.exports = (env = {}, argv) => {
   const config = {
     mode,
     context: path.resolve(__dirname),
-    target: ['web', 'es3', 'browserslist:ie 8'],
+    target: ['web', 'es2020'],
     entry: {
       'tgui': [
         './packages/tgui-polyfill',
@@ -133,8 +133,7 @@ module.exports = (env = {}, argv) => {
       new TerserPlugin({
         extractComments: false,
         terserOptions: {
-          ie8: true,
-          output: {
+          format: {
             ascii_only: true,
             comments: false,
           },

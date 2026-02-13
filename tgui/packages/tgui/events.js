@@ -204,7 +204,7 @@ export class KeyEvent {
   }
 }
 
-// IE8: Keydown event is only available on document.
+// Handle global keyboard shortcuts at the document level.
 document.addEventListener('keydown', e => {
   if (canStealFocus(e.target)) {
     return;

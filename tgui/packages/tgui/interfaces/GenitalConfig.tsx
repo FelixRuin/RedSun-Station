@@ -139,7 +139,6 @@ const SelfConfig = (props, context) => {
               src={`data:image/jpeg;base64,${genital.img}`}
               style={{
                 'vertical-align': 'middle',
-                'horizontal-align': 'middle',
               }} />
           </Stack.Item>
         ) : null}
