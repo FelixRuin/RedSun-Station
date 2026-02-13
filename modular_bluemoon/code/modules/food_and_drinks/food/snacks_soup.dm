@@ -121,15 +121,3 @@
 	trash = /obj/item/reagent_containers/glass/bowl
 	color = "#D9BB79"
 	foodtype = MEAT | VEGETABLES | GRAIN
-
-/obj/item/reagent_containers/food/snacks/soup/teriyaki
-	name = "Teriyaki Sauce"
-	desc = "A Japanese sauce that's heavy on umami."
-	icon = 'modular_bluemoon/icons/obj/food/food_ingredients.dmi'
-	icon_state = "sambal"
-	tastes = list("umami" = 1)
-	list_reagents = list(
-		/datum/reagent/consumable/nutriment/soup/teriyaki = 20,
-		)
-	color = "#3F0D02"
-	foodtype = SAUCE
