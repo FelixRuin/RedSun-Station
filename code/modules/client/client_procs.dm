@@ -101,7 +101,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(href_list["reload_tguipanel"])
 		nuke_chat()
 	if(href_list["reload_statbrowser"])
+		statbrowser_ready = FALSE
 		src << browse(file('html/statbrowser.html'), "window=statbrowser")
+		addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
 	// Log all hrefs
 	log_href("[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
 
@@ -401,6 +403,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 				return
 
 	// Initialize tgui panel
+	statbrowser_ready = FALSE
 	src << browse(file('html/statbrowser.html'), "window=statbrowser")
 	addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
 	tgui_panel.initialize()
@@ -1186,6 +1189,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(statbrowser_ready)
 		return
 	to_chat(src, span_userdanger("Statpanel failed to load, click <a href='?src=[REF(src)];reload_statbrowser=1'>here</a> to reload the panel "))
+	// Fallback for clients where Panel-Ready bridge callback is delayed/missing.
+	statbrowser_ready = TRUE
+	init_verbs()
 
 //increment progress for an unlockable loadout item
 /client/proc/increment_progress(key, amount)

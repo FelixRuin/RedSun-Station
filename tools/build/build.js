@@ -11,6 +11,7 @@
  */
 
 import fs from 'fs';
+import path from 'path';
 import { DreamDaemon, DreamMaker } from './lib/byond.js';
 import { yarn } from './lib/yarn.js';
 import Juke from './juke/index.js';
@@ -263,10 +264,43 @@ export const CleanTarget = new Juke.Target({
 export const DistCleanTarget = new Juke.Target({
   dependsOn: [CleanTarget],
   executes: async () => {
+    const bootstrapCacheDir = 'tools/bootstrap/.cache';
+
     Juke.logger.info('Cleaning up data/logs');
     Juke.rm('data/logs', { recursive: true });
+
     Juke.logger.info('Cleaning up bootstrap cache');
-    Juke.rm('tools/bootstrap/.cache', { recursive: true });
+    if (!fs.existsSync(bootstrapCacheDir)) {
+      Juke.logger.info('Bootstrap cache directory not found, skipping');
+    }
+    else {
+      const cacheRealPath = fs.realpathSync(bootstrapCacheDir);
+      const nodeRealPath = fs.realpathSync(process.execPath);
+      const nodeRelativePath = path.relative(cacheRealPath, nodeRealPath);
+      const nodeRunsFromBootstrapCache = nodeRelativePath
+        && !nodeRelativePath.startsWith('..')
+        && !path.isAbsolute(nodeRelativePath);
+
+      if (!nodeRunsFromBootstrapCache) {
+        Juke.rm(bootstrapCacheDir, { recursive: true });
+      }
+      else {
+        const activeNodeDir = nodeRelativePath.split(path.sep)[0];
+        const entries = fs.readdirSync(bootstrapCacheDir);
+
+        for (const entry of entries) {
+          const isActiveNodeDir = process.platform === 'win32'
+            ? entry.toLowerCase() === activeNodeDir.toLowerCase()
+            : entry === activeNodeDir;
+          if (isActiveNodeDir) {
+            continue;
+          }
+
+          Juke.rm(path.posix.join(bootstrapCacheDir, entry), { recursive: true });
+        }
+      }
+    }
+
     Juke.logger.info('Cleaning up global yarn cache');
     await yarn('cache', 'clean', '--all');
   },

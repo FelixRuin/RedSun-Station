@@ -128,21 +128,27 @@
 	var/win_type = winexists(client, id)
 	is_browser = win_type == "BROWSER"
 	if(CONFIG_GET(flag/emergency_tgui_logging))
-		var/primary_target = is_browser ? "[id]:update" : "[id].browser:update"
-		var/secondary_target = is_browser ? "[id].browser:update" : "[id]:update"
+		var/primary_target = get_primary_output_target()
+		var/secondary_target = get_secondary_output_target()
+		var/mirror_output = CONFIG_GET(flag/emergency_tgui_mirror_output)
 		log_tgui(client,
-			"[id]/initialize winexists=[win_type], is_browser=[is_browser], primary_target=[primary_target], secondary_target=[secondary_target]",
+			"[id]/initialize winexists=[win_type], is_browser=[is_browser], primary_target=[primary_target], secondary_target=[secondary_target], mirror_output=[mirror_output]",
 			window = src)
 	// Instruct the client to signal UI when the window is closed.
 	if(!is_browser && istype(client)) // BLUEMOON EDIT - sanity check
 		winset(client, id, "on-close=\"uiclose [id]\"")
 
+/datum/tgui_window/proc/get_primary_output_target()
+	return is_browser ? "[id]:update" : "[id].browser:update"
+
+/datum/tgui_window/proc/get_secondary_output_target()
+	return is_browser ? "[id].browser:update" : "[id]:update"
+
 /datum/tgui_window/proc/get_output_targets()
-	var/list/targets = list(
-		is_browser ? "[id]:update" : "[id].browser:update")
-	// 516 migration diagnostics: mirror to alternate channel.
-	if(CONFIG_GET(flag/emergency_tgui_logging))
-		targets += is_browser ? "[id].browser:update" : "[id]:update"
+	var/list/targets = list(get_primary_output_target())
+	// Opt-in diagnostics only: mirror updates to the alternate output channel.
+	if(CONFIG_GET(flag/emergency_tgui_mirror_output))
+		targets += get_secondary_output_target()
 	return targets
 
 /datum/tgui_window/proc/send_output_message(message)

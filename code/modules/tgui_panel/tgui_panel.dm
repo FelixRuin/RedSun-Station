@@ -66,7 +66,7 @@
  *
  * Callback for handling incoming tgui messages.
  */
-/datum/tgui_panel/proc/on_message(type, payload)
+/datum/tgui_panel/proc/on_message(type, payload, href_list)
 	if(type == "ready")
 		broken = FALSE
 		window.send_message("update", list(
@@ -82,6 +82,23 @@
 				),
 			),
 		))
+		var/theme = "default"
+		if(client?.prefs?.tgui_panel_theme in list("default", "light", "dark"))
+			theme = client.prefs.tgui_panel_theme
+		window.send_message("panel/theme", list(
+			"theme" = theme,
+		))
+		return TRUE
+	if(type == "panel/theme_set")
+		var/theme
+		if(islist(payload))
+			theme = payload["theme"]
+		if(!istext(theme) && islist(href_list))
+			theme = href_list["theme"]
+		if(theme in list("default", "light", "dark"))
+			if(client?.prefs && client.prefs.tgui_panel_theme != theme)
+				client.prefs.tgui_panel_theme = theme
+				client.prefs.save_preferences(bypass_cooldown = TRUE, silent = TRUE)
 		return TRUE
 	if(type == "audio/setAdminMusicVolume")
 		client.admin_music_volume = payload["volume"]

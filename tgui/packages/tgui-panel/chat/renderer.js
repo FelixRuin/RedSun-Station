@@ -16,22 +16,45 @@ const logger = createLogger('chatRenderer');
 
 // We consider this as the smallest possible scroll offset
 // that is still trackable.
-const SCROLL_TRACKING_TOLERANCE = 24;
+const SCROLL_TRACKING_TOLERANCE = 48;
+const SCROLLABLE_OVERFLOWS = new Set(['auto', 'scroll', 'overlay']);
+
+const getScrollableRoot = () => (
+  document.scrollingElement
+  || document.documentElement
+  || document.body
+);
+
+const canScrollVertically = node => {
+  if (!(node instanceof HTMLElement)) {
+    return false;
+  }
+  const style = window.getComputedStyle(node);
+  return SCROLLABLE_OVERFLOWS.has(style.overflowY);
+};
 
 const findNearestScrollableParent = startingNode => {
   const body = document.body;
   let node = startingNode;
-  while (node && node !== body) {
-    // This definitely has a vertical scrollbar, because it reduces
-    // scrollWidth of the element. Might not work if element uses
-    // overflow: hidden.
-    if (node.scrollWidth < node.offsetWidth) {
+  while (node) {
+    if (canScrollVertically(node)) {
       return node;
+    }
+    if (node === body) {
+      break;
     }
     node = node.parentNode;
   }
-  return window;
+  return getScrollableRoot();
 };
+
+const getDistanceFromBottom = node => (
+  Math.max(0, node.scrollHeight - (node.scrollTop + node.clientHeight))
+);
+
+const isScrollTracked = node => (
+  getDistanceFromBottom(node) <= SCROLL_TRACKING_TOLERANCE
+);
 
 const createHighlightNode = (text, color) => {
   const node = document.createElement('span');
@@ -93,7 +116,7 @@ const updateMessageBadge = message => {
   }
 };
 
-class ChatRenderer {
+export class ChatRenderer {
   constructor() {
     /** @type {HTMLElement} */
     this.loaded = false;
@@ -108,22 +131,33 @@ class ChatRenderer {
     /** @type {HTMLElement} */
     this.scrollNode = null;
     this.scrollTracking = true;
-    this.handleScroll = type => {
+    this.updateScrollTracking = () => {
       const node = this.scrollNode;
-      const height = node.scrollHeight;
-      const bottom = node.scrollTop + node.offsetHeight;
-      const scrollTracking = (
-        Math.abs(height - bottom) < SCROLL_TRACKING_TOLERANCE
-      );
+      if (!node) {
+        return;
+      }
+      const scrollTracking = isScrollTracked(node);
       if (scrollTracking !== this.scrollTracking) {
         this.scrollTracking = scrollTracking;
         this.events.emit('scrollTrackingChanged', scrollTracking);
         logger.debug('tracking', this.scrollTracking);
       }
     };
+    this.handleScroll = () => {
+      this.updateScrollTracking();
+    };
+    this.handleDeferredContentLoad = e => {
+      e?.target?.removeEventListener('load', this.handleDeferredContentLoad);
+      if (this.scrollTracking) {
+        setImmediate(() => this.scrollToBottom());
+      }
+    };
     this.ensureScrollTracking = () => {
       if (this.scrollTracking) {
         this.scrollToBottom();
+      }
+      else {
+        this.updateScrollTracking();
       }
     };
     // Periodic message pruning
@@ -134,7 +168,7 @@ class ChatRenderer {
     return this.loaded && this.rootNode && this.page;
   }
 
-  mount(node) {
+  mount(node, scrollNode) {
     // Mount existing root node on top of the new node
     if (this.rootNode) {
       node.appendChild(this.rootNode);
@@ -143,9 +177,13 @@ class ChatRenderer {
     else {
       this.rootNode = node;
     }
-    // Find scrollable parent
-    this.scrollNode = findNearestScrollableParent(this.rootNode);
-    this.scrollNode.addEventListener('scroll', this.handleScroll);
+    if (this.scrollNode) {
+      this.scrollNode.removeEventListener('scroll', this.handleScroll);
+    }
+    // Prefer explicit scroll container and fallback to inferred one.
+    this.scrollNode = scrollNode || findNearestScrollableParent(this.rootNode);
+    this.scrollNode?.addEventListener('scroll', this.handleScroll);
+    this.updateScrollTracking();
     setImmediate(() => {
       this.scrollToBottom();
     });
@@ -198,9 +236,13 @@ class ChatRenderer {
   }
 
   scrollToBottom() {
+    if (!this.scrollNode) {
+      return;
+    }
     // scrollHeight is always bigger than scrollTop and is
     // automatically clamped to the valid range.
     this.scrollNode.scrollTop = this.scrollNode.scrollHeight;
+    this.updateScrollTracking();
   }
 
   changePage(page) {
@@ -227,6 +269,7 @@ class ChatRenderer {
       this.rootNode.appendChild(fragment);
       node.scrollIntoView();
     }
+    this.updateScrollTracking();
   }
 
   getCombinableMessage(predicate) {
@@ -256,6 +299,9 @@ class ChatRenderer {
       prepend,
       notifyListeners = true,
     } = options;
+    const shouldAutoScroll = this.scrollTracking || (
+      this.scrollNode && isScrollTracked(this.scrollNode)
+    );
     const now = Date.now();
     // Queue up messages until chat is ready
     if (!this.isReady()) {
@@ -324,6 +370,7 @@ class ChatRenderer {
           for (let i = 0; i < imgNodes.length; i++) {
             const imgNode = imgNodes[i];
             imgNode.addEventListener('error', handleImageError);
+            imgNode.addEventListener('load', this.handleDeferredContentLoad);
           }
         }
       }
@@ -357,8 +404,11 @@ class ChatRenderer {
       else {
         this.rootNode.appendChild(fragment);
       }
-      if (this.scrollTracking) {
+      if (shouldAutoScroll) {
         setImmediate(() => this.scrollToBottom());
+      }
+      else {
+        this.updateScrollTracking();
       }
     }
     // Notify listeners that we have processed the batch

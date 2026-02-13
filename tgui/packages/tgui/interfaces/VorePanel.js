@@ -392,7 +392,7 @@ const VoreContentsPanel = (props, context) => {
                   width="64px"
                   height="64px"
                   style={{
-                    '-ms-interpolation-mode': 'nearest-neighbor',
+                    imageRendering: 'pixelated',
                     'margin-left': '-5px',
                   }} />
               </Button>

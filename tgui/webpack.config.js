@@ -56,6 +56,7 @@ module.exports = (env = {}, argv) => {
       rules: [
         {
           test: /\.(js|cjs|ts|tsx)$/,
+          exclude: /node_modules/,
           use: [
             {
               loader: require.resolve('babel-loader'),

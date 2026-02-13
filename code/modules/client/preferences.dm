@@ -76,6 +76,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/tgui_input_mode = TRUE			// All the Input Boxes (Text,Number,List,Alert)
 	var/tgui_large_buttons = TRUE
 	var/tgui_swapped_buttons = FALSE
+	var/tgui_panel_theme = "default"
 	var/windowflashing = TRUE
 	var/windownoise = TRUE
 	var/toggles = TOGGLES_DEFAULT
@@ -687,7 +688,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/is_modern_theme = (new_character_creator && !!findtext(charcreation_theme, "modern"))
 	var/list/dat
 	if(new_character_creator)
-		// Compact inline CSS: конкретные значения цветов для IE/Trident-совместимости BYOND-браузера.
+		// Compact inline CSS: конкретные значения цветов для BYOND-браузера.
 		// Enhanced decoration — CSS-класс .csetup-decoration-enhanced (переключается без inline CSS).
 		var/modern_palette_css = ""
 		if(is_modern_theme)

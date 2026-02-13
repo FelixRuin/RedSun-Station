@@ -360,7 +360,7 @@ const SecurityRecordsViewGeneral = (_properties, context) => {
                 style={{
                   width: '96px',
                   'margin-bottom': '0.5rem',
-                  '-ms-interpolation-mode': 'nearest-neighbor',
+                  imageRendering: 'pixelated',
                 }}
               /><br />
               Photo #{i + 1}

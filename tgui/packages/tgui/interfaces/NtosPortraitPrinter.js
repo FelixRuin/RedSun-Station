@@ -162,7 +162,7 @@ export const NtosPortraitPrinter = (props, context) => {
                     height="128px"
                     style={{
                       'vertical-align': 'middle',
-                      '-ms-interpolation-mode': 'nearest-neighbor',
+                      imageRendering: 'pixelated',
                     }} />
                 </Stack.Item>
                 <Stack.Item className="Section__titleText">

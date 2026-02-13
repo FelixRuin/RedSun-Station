@@ -88,7 +88,7 @@ const VendingImage = (props, context) => {
         height="96px"
         width="96px"
         style={{
-          '-ms-interpolation-mode': 'nearest-neighbor',
+          imageRendering: 'pixelated',
           'vertical-align': 'middle',
         }} />
     </Section>

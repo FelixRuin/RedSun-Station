@@ -5,12 +5,12 @@
  */
 
 /// Rate-limited warning for invalid path requests that would otherwise spam runtimes.
-/proc/log_invalid_astar_request(atom/movable/caller, turf/start, turf/end)
+/proc/log_invalid_astar_request(atom/movable/path_owner, turf/start, turf/end)
 	var/static/next_log_time = 0
 	if(world.time < next_log_time)
 		return
 	next_log_time = world.time + (5 SECONDS)
-	WARNING("Invalid A* start or destination (suppressed runtime): caller=[caller ? "[caller] ([caller.type])" : "null"], start=[start ? "[start] ([start.type])" : "null"], end=[end ? "[end] ([end.type])" : "null"]")
+	WARNING("Invalid A* start or destination (suppressed runtime): owner=[path_owner ? "[path_owner] ([path_owner.type])" : "null"], start=[start ? "[start] ([start.type])" : "null"], end=[end ? "[end] ([end.type])" : "null"]")
 
 /**
  * This is the proc you use whenever you want to have pathfinding more complex than "try stepping towards the thing".
@@ -28,13 +28,18 @@
  */
 /proc/get_path_to(caller, end, max_distance = 30, mintargetdist, id=null, simulated_only = TRUE, turf/exclude, skip_first=TRUE)
 	var/turf/end_turf = get_turf(end)
-	if(!caller || !end_turf)
+	if(!caller || !get_turf(caller) || !end_turf)
 		return list()
 
 	var/l = SSpathfinder.mobs.getfree(caller)
 	while(!l)
 		stoplag(3)
 		l = SSpathfinder.mobs.getfree(caller)
+
+	// Recheck after sleep — caller may have been deleted or moved to nullspace
+	if(!caller || !get_turf(caller))
+		SSpathfinder.mobs.found(l)
+		return list()
 
 	var/list/path
 	var/datum/pathfind/pathfind_datum = new(caller, end_turf, id, max_distance, mintargetdist, simulated_only, exclude)

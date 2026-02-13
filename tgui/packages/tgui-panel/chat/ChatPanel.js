@@ -23,7 +23,9 @@ export class ChatPanel extends Component {
   }
 
   componentDidMount() {
-    chatRenderer.mount(this.ref.current);
+    const rootNode = this.ref.current;
+    const scrollNode = rootNode?.closest('.Layout__content--scrollable');
+    chatRenderer.mount(rootNode, scrollNode);
     chatRenderer.events.on('scrollTrackingChanged',
       this.handleScrollTrackingChange);
     this.componentDidUpdate();

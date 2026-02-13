@@ -71,7 +71,7 @@ export const Colormate = (props, context) => {
                       width="100%"
                       height="100%"
                       style={{
-                        '-ms-interpolation-mode': 'nearest-neighbor',
+                        imageRendering: 'pixelated',
                       }} />
                   </Section>
                 </Table.Cell>
@@ -83,7 +83,7 @@ export const Colormate = (props, context) => {
                       width="100%"
                       height="100%"
                       style={{
-                        '-ms-interpolation-mode': 'nearest-neighbor',
+                        imageRendering: 'pixelated',
                       }} />
                   </Section>
                 </Table.Cell>

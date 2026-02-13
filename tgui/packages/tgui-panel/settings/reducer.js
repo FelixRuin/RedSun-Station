@@ -37,10 +37,10 @@ export const settingsReducer = (state = initialState, action) => {
     if (!payload?.version) {
       return state;
     }
-    delete payload.view;
+    const { view, ...settings } = payload;
     return {
       ...state,
-      ...payload,
+      ...settings,
     };
   }
   if (type === toggleSettings.type) {

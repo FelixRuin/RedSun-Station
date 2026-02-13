@@ -525,7 +525,7 @@ export const StripMenu = (props, context) => {
                         height="100%"
                         width="100%"
                         style={{
-                          "-ms-interpolation-mode": "nearest-neighbor",
+                          imageRendering: "pixelated",
                           "vertical-align": "middle",
                         }}
                       />

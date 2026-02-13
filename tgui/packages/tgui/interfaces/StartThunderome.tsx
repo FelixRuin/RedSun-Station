@@ -47,7 +47,7 @@ const TeamSection = (props, context) => {
         src={`data:image/jpeg;base64,${data[`team_${teamNumber}`]["icon64"]}`}
         width="100%"
         style={{
-          '-ms-interpolation-mode': 'nearest-neighbor',
+          imageRendering: 'pixelated',
         }} />
       <Flex textAlign="right" align="center">
         <Flex.Item grow>

@@ -279,9 +279,6 @@
 		var/list/explode = splittext(web_sound_input, "/") //if url=="https://fixthisshit.com/pogchamp.ogg"then title="pogchamp.ogg"
 		var/title = "[explode[explode.len]]"
 
-		if(!findtext(title, ".mp3") && !findtext(title, ".mp4")) // IE sucks.
-			to_chat(src, "<span class='warning'>The format is not .mp3/.mp4, IE 8 and above can only support the .mp3/.mp4 format, the music might not play.</span>", confidential = TRUE)
-
 		if(length(title) > 50) //kev no.
 			title = "Unknown.mp3"
 

@@ -6,7 +6,7 @@
 
 import { storage } from 'common/storage';
 
-import { setClientTheme } from '../themes';
+import { setClientTheme, THEMES } from '../themes';
 import { loadSettings, updateSettings } from './actions';
 import { FONTS_DISABLED } from './constants';
 import { selectSettings } from './selectors';
@@ -29,28 +29,104 @@ const setGlobalFontFamily = fontFamily => {
 
 export const settingsMiddleware = store => {
   let initialized = false;
+  let hydrating = false;
+  let dirtyKeys = new Set();
+  let lastAppliedTheme = null;
+
+  const isValidTheme = theme => THEMES.includes(theme);
+
+  const trackDirtyKeys = payload => {
+    if (!hydrating || !payload || typeof payload !== 'object') {
+      return;
+    }
+    for (let key of Object.keys(payload)) {
+      dirtyKeys.add(key);
+    }
+  };
+
+  const loadSettingsFromStorage = () => {
+    hydrating = true;
+    storage.get('panel-settings')
+      .then(settings => {
+        if (!settings) {
+          return;
+        }
+        let nextSettings = settings;
+        if (dirtyKeys.size > 0 && typeof nextSettings === 'object') {
+          nextSettings = { ...nextSettings };
+          for (let key of dirtyKeys) {
+            delete nextSettings[key];
+          }
+        }
+        store.dispatch(loadSettings(nextSettings));
+      })
+      .catch(err => {
+        console.error('Failed to load panel settings:', err);
+      })
+      .finally(() => {
+        hydrating = false;
+        dirtyKeys.clear();
+      });
+  };
+
   return next => action => {
-    const { type, payload } = action;
+    let nextAction = action;
+    let { type, payload } = nextAction;
     if (!initialized) {
       initialized = true;
-      storage.get('panel-settings').then(settings => {
-        store.dispatch(loadSettings(settings));
+      loadSettingsFromStorage();
+    }
+    if (type === 'panel/theme') {
+      const theme = payload?.theme;
+      if (!isValidTheme(theme)) {
+        return;
+      }
+      trackDirtyKeys({
+        theme,
       });
+      nextAction = loadSettings({
+        version: 1,
+        theme,
+      });
+      ({ type, payload } = nextAction);
+    }
+    if (type === updateSettings.type) {
+      trackDirtyKeys(payload);
     }
     if (type === updateSettings.type || type === loadSettings.type) {
-      // Set client theme
-      const theme = payload?.theme;
-      if (theme) {
-        setClientTheme(theme);
-      }
+      const previousSettings = selectSettings(store.getState());
       // Pass action to get an updated state
-      next(action);
+      next(nextAction);
       const settings = selectSettings(store.getState());
+      // Set client theme
+      if (settings.theme !== lastAppliedTheme) {
+        setClientTheme(settings.theme);
+        lastAppliedTheme = settings.theme;
+      }
       // Update global UI font size
       setGlobalFontSize(settings.fontSize);
       setGlobalFontFamily(settings.fontFamily);
+      // Persist theme server-side for clients where browser storage is not durable.
+      if (type === updateSettings.type
+        && Object.prototype.hasOwnProperty.call(payload || {}, 'theme')
+        && isValidTheme(payload.theme)
+        && payload.theme !== previousSettings.theme) {
+        Byond.topic({
+          tgui: 1,
+          window_id: window.__windowId__,
+          type: 'panel/theme_set',
+          payload: JSON.stringify({
+            theme: payload.theme,
+          }),
+        });
+      }
       // Save settings to the web storage
-      storage.set('panel-settings', settings);
+      // Only persist on user actions or valid loads (not on failed/empty loads)
+      if (type === updateSettings.type || payload?.version) {
+        storage.set('panel-settings', settings).catch(err => {
+          console.error('Failed to save panel settings:', err);
+        });
+      }
       return;
     }
     return next(action);
