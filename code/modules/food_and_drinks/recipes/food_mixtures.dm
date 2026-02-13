@@ -172,6 +172,13 @@
 	mix_message = "The ingredients solidify into a stick of margarine."
 	resulting_food_path = /obj/item/reagent_containers/food/snacks/butter/margarine
 
+/datum/chemical_reaction/food/yoghurt
+	name = "yoghurt"
+	id = "yoghurt"
+	required_reagents = list(/datum/reagent/consumable/cream = 10, /datum/reagent/consumable/virus_food = 2)
+	results = list(/datum/reagent/consumable/yoghurt = 10)
+	mix_message = "The mixture thickens into yoghurt."
+
 /datum/chemical_reaction/food/wine_vinegar
 	name = "Wine Vinegar"
 	id = "wine_vinegar"
