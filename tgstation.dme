@@ -4509,6 +4509,7 @@
 #include "modular_bluemoon\code\modules\food_and_drinks\recipes\food_mixtures.dm"
 #include "modular_bluemoon\code\modules\food_and_drinks\recipes\synth_drinks_recipes.dm"
 #include "modular_bluemoon\code\modules\food_and_drinks\recipes\tablecraft\recipes_east.dm"
+#include "modular_bluemoon\code\modules\food_and_drinks\recipes\tablecraft\recipes_misc.dm"
 #include "modular_bluemoon\code\modules\food_and_drinks\recipes\tablecraft\recipes_pastry.dm"
 #include "modular_bluemoon\code\modules\food_and_drinks\recipes\tablecraft\recipes_salad.dm"
 #include "modular_bluemoon\code\modules\food_and_drinks\recipes\tablecraft\recipes_soup.dm"
