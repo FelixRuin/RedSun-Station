@@ -123,16 +123,24 @@ ensure_dreammaker_runtime_deps() {
     needs_apt_install=1
   fi
 
+  if [ -x "${dreammaker_path}" ] && command -v ldd >/dev/null 2>&1; then
+    ldd_out="$(
+      (
+        set +e
+        set +u
+        # shellcheck disable=SC1090
+        [ -f "${BYOND_BIN_DIR}/byondsetup" ] && source "${BYOND_BIN_DIR}/byondsetup" >/dev/null 2>&1
+        ldd "${dreammaker_path}" 2>&1 || true
+      )
+    )"
+  fi
+
   if [ "${needs_apt_install}" -eq 0 ]; then
-    if [ -x "${dreammaker_path}" ] && command -v ldd >/dev/null 2>&1; then
-      ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
-      if grep -Fq "not found" <<< "${ldd_out}"; then
-        echo "DreamMaker still has unresolved shared library dependencies:" >&2
-        echo "${ldd_out}" >&2
-        return 1
-      fi
+    if grep -Eq "libcurl\\.so\\.4.*not found" <<< "${ldd_out}"; then
+      needs_apt_install=1
+    else
+      return 0
     fi
-    return 0
   fi
 
   echo "Ensuring BYOND runtime dependency is installed: libcurl4:i386."
@@ -153,9 +161,17 @@ ensure_dreammaker_runtime_deps() {
   "${sudo_cmd[@]}" apt-get install -y libcurl4:i386
 
   if [ -x "${dreammaker_path}" ] && command -v ldd >/dev/null 2>&1; then
-    ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
-    if grep -Fq "not found" <<< "${ldd_out}"; then
-      echo "DreamMaker still has unresolved shared library dependencies after install attempt:" >&2
+    ldd_out="$(
+      (
+        set +e
+        set +u
+        # shellcheck disable=SC1090
+        [ -f "${BYOND_BIN_DIR}/byondsetup" ] && source "${BYOND_BIN_DIR}/byondsetup" >/dev/null 2>&1
+        ldd "${dreammaker_path}" 2>&1 || true
+      )
+    )"
+    if grep -Eq "libcurl\\.so\\.4.*not found" <<< "${ldd_out}"; then
+      echo "DreamMaker still cannot resolve libcurl.so.4 after install attempt." >&2
       echo "${ldd_out}" >&2
       return 1
     fi
