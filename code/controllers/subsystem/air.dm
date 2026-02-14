@@ -236,7 +236,7 @@ SUBSYSTEM_DEF(air)
 			return
 
 /datum/controller/subsystem/air/proc/add_to_rebuild_queue(atmos_machine)
-	if(istype(atmos_machine, /obj/machinery/atmospherics))
+	if(istype(atmos_machine, /obj/machinery/atmospherics) && !(atmos_machine in pipenets_needing_rebuilt))
 		pipenets_needing_rebuilt += atmos_machine
 
 /datum/controller/subsystem/air/proc/process_atmos_machinery(resumed = 0)

@@ -26,9 +26,10 @@
  * * exclude: If we want to avoid a specific turf, like if we're a mulebot who already got blocked by some turf
  * * skip_first: Whether or not to delete the first item in the path. This would be done because the first item is the starting tile, which can break movement for some creatures.
  */
-/proc/get_path_to(caller, end, max_distance = 30, mintargetdist, id=null, simulated_only = TRUE, turf/exclude, skip_first=TRUE)
+/proc/get_path_to(atom/movable/caller, end, max_distance = 30, mintargetdist, id=null, simulated_only = TRUE, turf/exclude, skip_first=TRUE)
+	var/turf/start_turf = get_turf(caller)
 	var/turf/end_turf = get_turf(end)
-	if(!caller || !get_turf(caller) || !end_turf)
+	if(!caller || !start_turf || !end_turf)
 		return list()
 
 	var/l = SSpathfinder.mobs.getfree(caller)
@@ -37,12 +38,13 @@
 		l = SSpathfinder.mobs.getfree(caller)
 
 	// Recheck after sleep — caller may have been deleted or moved to nullspace
-	if(!caller || !get_turf(caller))
+	start_turf = get_turf(caller)
+	if(!caller || !start_turf)
 		SSpathfinder.mobs.found(l)
 		return list()
 
 	var/list/path
-	var/datum/pathfind/pathfind_datum = new(caller, end_turf, id, max_distance, mintargetdist, simulated_only, exclude)
+	var/datum/pathfind/pathfind_datum = new(caller, start_turf, end_turf, id, max_distance, mintargetdist, simulated_only, exclude)
 	path = pathfind_datum.search()
 	qdel(pathfind_datum)
 
@@ -135,9 +137,10 @@
 	/// A specific turf we're avoiding, like if a mulebot is being blocked by someone t-posing in a doorway we're trying to get through
 	var/turf/avoid
 
-/datum/pathfind/New(atom/movable/caller, atom/goal, id, max_distance, mintargetdist, simulated_only, avoid)
+/datum/pathfind/New(atom/movable/caller, turf/start_turf, turf/goal_turf, id, max_distance, mintargetdist, simulated_only, avoid)
 	src.caller = caller
-	end = get_turf(goal)
+	start = start_turf
+	end = goal_turf
 	open = new /datum/heap(/proc/HeapPathWeightCompare)
 	sources = new()
 	src.id = id
@@ -157,9 +160,7 @@
  * return null, which [/proc/get_path_to] translates to an empty list (notable for simple bots, who need empty lists)
  */
 /datum/pathfind/proc/search()
-	start = get_turf(caller)
 	if(!start || !end)
-		log_invalid_astar_request(caller, start, end)
 		return
 	if(start.z != end.z || start == end ) //no pathfinding between z levels
 		return
