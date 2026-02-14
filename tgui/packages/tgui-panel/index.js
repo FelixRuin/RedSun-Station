@@ -14,12 +14,12 @@ import { setupGlobalEvents } from 'tgui/events';
 import { captureExternalLinks } from 'tgui/links';
 import { createRenderer } from 'tgui/renderer';
 import { configureStore, StoreProvider } from 'tgui/store';
-import { setupHotReloading } from 'tgui-dev-server/link/client.cjs';
 
 import { audioMiddleware, audioReducer } from './audio';
 import { chatMiddleware, chatReducer } from './chat';
 import { emotesReducer } from './emotes'; // BLUEMOON ADD
 import { gameMiddleware, gameReducer } from './game';
+import { Panel } from './Panel';
 import { setupPanelFocusHacks } from './panelFocus';
 import { pingMiddleware, pingReducer } from './ping';
 import { settingsMiddleware, settingsReducer } from './settings';
@@ -55,7 +55,6 @@ const store = configureStore({
 });
 
 const renderApp = createRenderer(() => {
-  const { Panel } = require('./Panel');
   return (
     <StoreProvider store={store}>
       <Panel />
@@ -122,23 +121,6 @@ const setupApp = () => {
     });
   });
 
-  // Enable hot module reloading
-  if (module.hot) {
-    setupHotReloading();
-    module.hot.accept([
-      './audio',
-      './chat',
-      './emotes', // BLUEMOON ADD
-      './game',
-      './Notifications',
-      './Panel',
-      './ping',
-      './settings',
-      './telemetry',
-    ], () => {
-      renderApp();
-    });
-  }
 };
 
 setupApp();

@@ -158,7 +158,7 @@ A lambda is what's known as an anonymous function, it's a function that doesn't 
 
 This is quite a bit higher concept than ractive's each statements, so feel free to look around and ~~copy paste~~ learn from how other interfaces use this.
 
-Now for objects, there's a genuinely pretty gross syntax here. We apoligize, it's related to ie8 compatibility nonsense.
+Now for objects, there's a genuinely pretty gross syntax here. We apologize, it's related to old compatibility constraints.
 
 ```jsx
 {map((value, key) => (

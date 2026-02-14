@@ -71,26 +71,13 @@ Run `.\bin\tgui.bat` with any of the options listed below.
 **Available commands:**
 
 - `bin/tgui` - Build the project in production mode.
-- `bin/tgui --dev` - Launch a development server.
-  - tgui development server provides you with incremental compilation,
-  hot module replacement and logging facilities in all running instances
-  of tgui. In short, this means that you will instantly see changes in the
-  game as you code it. Very useful, highly recommended.
-  - In order to use it, you should start the game server first, connect to it
-  and wait until the world has been properly loaded and you are no longer
-  in the lobby. Start tgui dev server, and once it has finished building,
-  press F5 on any tgui window. You'll know that it's hooked correctly if
-  you see a green bug icon in titlebar and data gets dumped to the console.
-- `bin/tgui --dev --reload` - Reload byond cache once.
-- `bin/tgui --dev --debug` - Run server with debug logging enabled.
-- `bin/tgui --dev --no-hot` - Disable hot module replacement (helps when
-doing development on IE8).
+- `bin/tgui --dev` - Start development watchers for `tgui` and `tgui-panel`.
 - `bin/tgui --lint` - Show problems with the code.
 - `bin/tgui --fix` - Auto-fix problems with the code.
 - `bin/tgui --test` - Run tests.
-- `bin/tgui --analyze` - Run a bundle analyzer.
+- `bin/tgui --analyze` - Build both bundles with source maps for manual analysis.
 - `bin/tgui --clean` - Clean up project repo.
-- `bin/tgui [webpack options]` - Build the project with custom webpack
+- `bin/tgui [vite options]` - Build the project with custom Vite
 options.
 
 **For virgins:**
@@ -115,38 +102,17 @@ spaces or unicode characters.
 
 This is a known issue with Yarn Berry, and fix is going to happen someday.
 
-**Development server doesn't find my BYOND cache!**
+**Build tooling errors out with some cryptic messages!**
 
-This happens if your Documents folder in Windows has a custom location, for
-example in `E:\Libraries\Documents`. Development server tries its best to find
-this non-standard location (searches for a Windows Registry key), but it can
-fail. You have to run the dev server with an additional environmental
-variable, with a full path to BYOND cache.
-
-```
-BYOND_CACHE="E:/Libraries/Documents/BYOND/cache"
-```
-
-**Webpack errors out with some cryptic messages!**
-
-> Example: `No template for dependency: PureExpressionDependency`
-
-Webpack stores its cache on disk since tgui 4.3, and it is very sensitive
-to build configuration. So if you update webpack, or share the same cache
-directory between development and production build, it will start
-hallucinating.
+The build toolchain stores cache on disk, and stale cache can cause
+hard-to-read failures after dependency or config updates.
 
 To fix this kind of problem, run `bin/tgui --clean` and try again.
 
 ## Developer Tools
 
-When developing with `tgui-dev-server`, you will have access to certain
-development only features.
-
-**Debug Logs.**
-When running server via `bin/tgui --dev --debug`, server will print debug
-logs and time spent on rendering. Use this information to optimize your
-code, and try to keep re-renders below 16ms.
+When developing with `bin/tgui --dev`, you can use the in-app debugging
+features listed below.
 
 **Kitchen Sink.**
 Press `F12` to open the KitchenSink interface. This interface is a
@@ -187,7 +153,7 @@ in UI components. These stylesheets closely follow the
 Add stylesheets here if you really need a fine control over your UI styles.
 - `/packages/tgui/styles/layouts` - Layout-related styles.
 - `/packages/tgui/styles/themes` - Contains all the various themes you can
-use in tgui. Each theme must be registered in `webpack.config.js` file.
+use in tgui. Each theme must be imported from the relevant entrypoint.
 
 ## Component Reference
 

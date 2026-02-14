@@ -5,8 +5,8 @@
  */
 
 declare global {
-  // Webpack asset modules.
-  // Should match extensions used in webpack config.
+  // Asset modules used by the frontend bundler.
+  // Should match extensions used in Vite config.
   declare module '*.png' {
     const content: string;
     export default content;

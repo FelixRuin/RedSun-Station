@@ -5,6 +5,7 @@
  */
 
 import { KEY_BACKSPACE, KEY_F10, KEY_F11, KEY_F12 } from 'common/keycodes';
+import devServerModule from 'tgui-dev-server/link/client.cjs';
 
 import { globalEvents } from '../events';
 import { acquireHotKey } from '../hotkeys';
@@ -14,6 +15,7 @@ const relayedTypes = [
   'backend/update',
   'chat/message',
 ];
+const devServer = devServerModule.default || devServerModule;
 
 export const debugMiddleware = store => {
   acquireHotKey(KEY_F11);
@@ -40,7 +42,6 @@ export const debugMiddleware = store => {
 };
 
 export const relayMiddleware = store => {
-  const devServer = require('tgui-dev-server/link/client.cjs');
   const externalBrowser = location.search === '?external';
   if (externalBrowser) {
     devServer.subscribe(msg => {

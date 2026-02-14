@@ -6,6 +6,7 @@
 
 import { EventEmitter } from 'common/events';
 import { classes } from 'common/react';
+import { defer } from 'common/defer';
 import { createLogger } from 'tgui/logging';
 
 import { COMBINE_MAX_MESSAGES, COMBINE_MAX_TIME_WINDOW, IMAGE_RETRY_DELAY, IMAGE_RETRY_LIMIT, IMAGE_RETRY_MESSAGE_AGE, MAX_PERSISTED_MESSAGES, MAX_VISIBLE_MESSAGES, MESSAGE_PRUNE_INTERVAL, MESSAGE_TYPE_INTERNAL, MESSAGE_TYPE_UNKNOWN, MESSAGE_TYPES } from './constants';
@@ -149,7 +150,7 @@ export class ChatRenderer {
     this.handleDeferredContentLoad = e => {
       e?.target?.removeEventListener('load', this.handleDeferredContentLoad);
       if (this.scrollTracking) {
-        setImmediate(() => this.scrollToBottom());
+        defer(() => this.scrollToBottom());
       }
     };
     this.ensureScrollTracking = () => {
@@ -184,7 +185,7 @@ export class ChatRenderer {
     this.scrollNode = scrollNode || findNearestScrollableParent(this.rootNode);
     this.scrollNode?.addEventListener('scroll', this.handleScroll);
     this.updateScrollTracking();
-    setImmediate(() => {
+    defer(() => {
       this.scrollToBottom();
     });
     // Flush the queue
@@ -405,7 +406,7 @@ export class ChatRenderer {
         this.rootNode.appendChild(fragment);
       }
       if (shouldAutoScroll) {
-        setImmediate(() => this.scrollToBottom());
+        defer(() => this.scrollToBottom());
       }
       else {
         this.updateScrollTracking();

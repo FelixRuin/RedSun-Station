@@ -8,6 +8,7 @@
  */
 
 import { vecLength, vecSubtract } from 'common/vector';
+import { defer } from 'common/defer';
 import { canStealFocus, globalEvents } from 'tgui/events';
 import { focusMap } from 'tgui/focus';
 
@@ -15,7 +16,7 @@ import { focusMap } from 'tgui/focus';
 // text you can select with the mouse.
 const MIN_SELECTION_DISTANCE = 10;
 
-const deferredFocusMap = () => setImmediate(() => focusMap());
+const deferredFocusMap = () => defer(() => focusMap());
 
 export const setupPanelFocusHacks = () => {
   let focusStolen = false;

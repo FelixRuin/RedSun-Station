@@ -13,6 +13,7 @@
 
 import { perf } from 'common/perf';
 import { createAction } from 'common/redux';
+import { defer } from 'common/defer';
 
 import { setupDrag } from './drag';
 import { focusMap } from './focus';
@@ -159,7 +160,7 @@ export const backendMiddleware = store => {
       Byond.winset(window.__windowId__, {
         'is-visible': false,
       });
-      setImmediate(() => focusMap());
+      defer(() => focusMap());
     }
 
     if (type === 'backend/update') {
@@ -189,7 +190,7 @@ export const backendMiddleware = store => {
       setupDrag();
       // We schedule this for the next tick here because resizing and unhiding
       // during the same tick will flash with a white background.
-      setImmediate(() => {
+      defer(() => {
         perf.mark('resume/start');
         // Doublecheck if we are not re-suspended.
         const { suspended } = selectBackend(store.getState());

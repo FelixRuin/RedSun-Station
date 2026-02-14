@@ -5,6 +5,8 @@
  */
 
 import { Button, Section, Stack } from 'tgui/components';
+import { KitchenSink, useDebug } from 'tgui/debug';
+import { IS_DEVELOPMENT } from 'tgui/env';
 import { Pane } from 'tgui/layouts';
 
 import { NowPlayingWidget, useAudio } from './audio';
@@ -20,8 +22,7 @@ export const Panel = (props, context) => {
   const audio = useAudio(context);
   const settings = useSettings(context);
   const game = useGame(context);
-  if (process.env.NODE_ENV !== 'production') {
-    const { useDebug, KitchenSink } = require('tgui/debug');
+  if (IS_DEVELOPMENT) {
     const debug = useDebug(context);
     if (debug.kitchenSink) {
       return (

@@ -21,12 +21,12 @@ import './styles/themes/clockcult.scss';
 import './styles/themes/inteq.scss';
 
 import { perf } from 'common/perf';
-import { setupHotReloading } from 'tgui-dev-server/link/client.cjs';
 
 import { setupGlobalEvents } from './events';
 import { setupHotKeys } from './hotkeys';
 import { captureExternalLinks } from './links';
 import { createRenderer } from './renderer';
+import { getRoutedComponent } from './routes';
 import { configureStore, StoreProvider } from './store';
 
 perf.mark('inception', window.performance?.timing?.navigationStart);
@@ -40,7 +40,6 @@ window.__pushTguiDebugEvent__?.('bundleLoaded', {
 const store = configureStore();
 
 const renderApp = createRenderer(() => {
-  const { getRoutedComponent } = require('./routes');
   const Component = getRoutedComponent(store);
   return (
     <StoreProvider store={store}>
@@ -88,18 +87,6 @@ const setupApp = () => {
     queuedAfterDrain: window.__updateQueue__?.length || 0,
   });
 
-  // Enable hot module reloading
-  if (module.hot) {
-    setupHotReloading();
-    module.hot.accept([
-      './components',
-      './debug',
-      './layouts',
-      './routes',
-    ], () => {
-      renderApp();
-    });
-  }
 };
 
 setupApp();

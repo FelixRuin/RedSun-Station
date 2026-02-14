@@ -149,7 +149,9 @@ export const TguiTarget = new Juke.Target({
   dependsOn: [YarnTarget],
   inputs: [
     'tgui/.yarn/install-target',
-    'tgui/webpack.config.js',
+    'tgui/vite.base.config.cjs',
+    'tgui/vite.tgui.config.cjs',
+    'tgui/vite.tgui-panel.config.cjs',
     'tgui/**/package.json',
     'tgui/packages/**/*.+(js|cjs|ts|tsx|scss)',
   ],
@@ -160,7 +162,8 @@ export const TguiTarget = new Juke.Target({
     'tgui/public/tgui-panel.bundle.js',
   ],
   executes: async () => {
-    await yarn('webpack-cli', '--mode=production');
+    await yarn('vite', 'build', '--mode=production', '--config', 'vite.tgui.config.cjs');
+    await yarn('vite', 'build', '--mode=production', '--config', 'vite.tgui-panel.config.cjs');
   },
 });
 
@@ -196,14 +199,15 @@ export const TguiLintTarget = new Juke.Target({
 export const TguiDevTarget = new Juke.Target({
   dependsOn: [YarnTarget],
   executes: async ({ args }) => {
-    await yarn('node', 'packages/tgui-dev-server/index.js', ...args);
+    await yarn('run', 'tgui:dev', ...args);
   },
 });
 
 export const TguiAnalyzeTarget = new Juke.Target({
   dependsOn: [YarnTarget],
   executes: async () => {
-    await yarn('webpack-cli', '--mode=production', '--analyze');
+    await yarn('vite', 'build', '--mode=production', '--sourcemap', '--config', 'vite.tgui.config.cjs');
+    await yarn('vite', 'build', '--mode=production', '--sourcemap', '--config', 'vite.tgui-panel.config.cjs');
   },
 });
 
@@ -250,7 +254,6 @@ export const CleanTarget = new Juke.Target({
     Juke.rm('tgui/packages/tgfont/dist', { recursive: true });
     Juke.rm('tgui/.yarn/cache', { recursive: true });
     Juke.rm('tgui/.yarn/unplugged', { recursive: true });
-    Juke.rm('tgui/.yarn/webpack', { recursive: true });
     Juke.rm('tgui/.yarn/build-state.yml');
     Juke.rm('tgui/.yarn/install-state.gz');
     Juke.rm('tgui/.yarn/install-target');

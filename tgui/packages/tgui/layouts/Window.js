@@ -15,6 +15,7 @@ import { UI_DISABLED, UI_INTERACTIVE, UI_UPDATE } from '../constants';
 import { useDebug } from '../debug';
 import { toggleKitchenSink } from '../debug/actions';
 import { dragStartHandler, recallWindowGeometry, resizeStartHandler, setWindowKey } from '../drag';
+import { IS_DEVELOPMENT } from '../env';
 import { createLogger } from '../logging';
 import { Layout } from './Layout';
 
@@ -204,7 +205,7 @@ const TitleBar = (props, context) => {
           </div>
         )}
       </div>
-      {process.env.NODE_ENV !== 'production' && (
+      {IS_DEVELOPMENT && (
         <div
           className="TitleBar__devBuildIndicator"
           onClick={() => dispatch(toggleKitchenSink())}>
