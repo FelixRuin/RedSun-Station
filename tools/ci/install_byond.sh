@@ -127,17 +127,19 @@ if download_byond_zip "${zip_file}"; then
     exit 1
   fi
 
-  (
-    cd "${stage_dir}/byond"
-    make here
-  )
-
   ready_root="${stage_dir}/BYOND"
   mkdir -p "${ready_root}"
   mv "${stage_dir}/byond" "${ready_root}/byond"
-  echo "${BYOND_VERSION}" > "${ready_root}/version.txt"
 
   swap_install_dir "${ready_root}"
+
+  # 'make here' embeds absolute paths into byondsetup, so it must run in final location.
+  (
+    cd "${BYOND_ROOT}/byond"
+    make here
+  )
+
+  echo "${BYOND_VERSION}" > "${BYOND_VERSION_FILE}"
   trap - EXIT
   rm -rf "${stage_dir}"
   echo "Installed BYOND ${BYOND_VERSION}."
