@@ -7,8 +7,8 @@
  * @license MIT
  */
 
-import { vecLength, vecSubtract } from 'common/vector';
 import { defer } from 'common/defer';
+import { vecLength, vecSubtract } from 'common/vector';
 import { canStealFocus, globalEvents } from 'tgui/events';
 import { focusMap } from 'tgui/focus';
 

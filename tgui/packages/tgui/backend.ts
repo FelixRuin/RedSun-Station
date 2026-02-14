@@ -11,9 +11,9 @@
  * @license MIT
  */
 
+import { defer } from 'common/defer';
 import { perf } from 'common/perf';
 import { createAction } from 'common/redux';
-import { defer } from 'common/defer';
 
 import { setupDrag } from './drag';
 import { focusMap } from './focus';
