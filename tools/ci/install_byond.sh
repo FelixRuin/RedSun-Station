@@ -105,25 +105,37 @@ swap_install_dir() {
 
 ensure_dreammaker_runtime_deps() {
   local dreammaker_path="${BYOND_BIN_DIR}/DreamMaker"
-  local ldd_out
+  local ldd_out=""
   local sudo_cmd=()
-
-  if [ ! -x "${dreammaker_path}" ] || ! command -v ldd >/dev/null 2>&1; then
-    return 0
-  fi
-
-  ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
-  if ! grep -Fq "libcurl.so.4 => not found" <<< "${ldd_out}"; then
-    return 0
-  fi
-
-  echo "DreamMaker is missing libcurl.so.4. Installing i386 runtime dependency libcurl4:i386."
+  local needs_apt_install=0
+  local added_i386_arch=0
 
   if ! command -v dpkg >/dev/null 2>&1 || ! command -v apt-get >/dev/null 2>&1; then
-    echo "Automatic dependency install is not supported on this system." >&2
-    echo "Install libcurl.so.4 for DreamMaker manually and retry." >&2
-    return 1
+    return 0
   fi
+
+  if ! dpkg --print-foreign-architectures | grep -Fxq "i386"; then
+    needs_apt_install=1
+    added_i386_arch=1
+  fi
+
+  if ! dpkg-query -W -f='${Status}' libcurl4:i386 2>/dev/null | grep -Fq "install ok installed"; then
+    needs_apt_install=1
+  fi
+
+  if [ "${needs_apt_install}" -eq 0 ]; then
+    if [ -x "${dreammaker_path}" ] && command -v ldd >/dev/null 2>&1; then
+      ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
+      if grep -Fq "not found" <<< "${ldd_out}"; then
+        echo "DreamMaker still has unresolved shared library dependencies:" >&2
+        echo "${ldd_out}" >&2
+        return 1
+      fi
+    fi
+    return 0
+  fi
+
+  echo "Ensuring BYOND runtime dependency is installed: libcurl4:i386."
 
   if [ "$(id -u)" -ne 0 ]; then
     if command -v sudo >/dev/null 2>&1; then
@@ -134,14 +146,19 @@ ensure_dreammaker_runtime_deps() {
     fi
   fi
 
-  "${sudo_cmd[@]}" dpkg --add-architecture i386
+  if [ "${added_i386_arch}" -eq 1 ]; then
+    "${sudo_cmd[@]}" dpkg --add-architecture i386
+  fi
   "${sudo_cmd[@]}" apt-get update
   "${sudo_cmd[@]}" apt-get install -y libcurl4:i386
 
-  ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
-  if grep -Fq "libcurl.so.4 => not found" <<< "${ldd_out}"; then
-    echo "DreamMaker still cannot resolve libcurl.so.4 after installation attempt." >&2
-    return 1
+  if [ -x "${dreammaker_path}" ] && command -v ldd >/dev/null 2>&1; then
+    ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
+    if grep -Fq "not found" <<< "${ldd_out}"; then
+      echo "DreamMaker still has unresolved shared library dependencies after install attempt:" >&2
+      echo "${ldd_out}" >&2
+      return 1
+    fi
   fi
 }
 
