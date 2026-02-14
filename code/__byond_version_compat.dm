@@ -15,6 +15,12 @@
 #error Please consider downgrading to 514.1575 or lower.
 #endif
 
+// Stub for BYOND 516 native builtins that SpacemanDMM doesn't know about
+#ifdef SPACEMAN_DMM
+/proc/lerp(a, b, t)
+	return a + (b - a) * t
+#endif
+
 // Keep savefile compatibilty at minimum supported level
 #if DM_VERSION >= 515
 /savefile/byond_version = MIN_COMPILER_VERSION
