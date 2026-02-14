@@ -103,7 +103,50 @@ swap_install_dir() {
   return 1
 }
 
+ensure_dreammaker_runtime_deps() {
+  local dreammaker_path="${BYOND_BIN_DIR}/DreamMaker"
+  local ldd_out
+  local sudo_cmd=()
+
+  if [ ! -x "${dreammaker_path}" ] || ! command -v ldd >/dev/null 2>&1; then
+    return 0
+  fi
+
+  ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
+  if ! grep -Fq "libcurl.so.4 => not found" <<< "${ldd_out}"; then
+    return 0
+  fi
+
+  echo "DreamMaker is missing libcurl.so.4. Installing i386 runtime dependency libcurl4:i386."
+
+  if ! command -v dpkg >/dev/null 2>&1 || ! command -v apt-get >/dev/null 2>&1; then
+    echo "Automatic dependency install is not supported on this system." >&2
+    echo "Install libcurl.so.4 for DreamMaker manually and retry." >&2
+    return 1
+  fi
+
+  if [ "$(id -u)" -ne 0 ]; then
+    if command -v sudo >/dev/null 2>&1; then
+      sudo_cmd=(sudo)
+    else
+      echo "sudo is required to install DreamMaker runtime dependencies." >&2
+      return 1
+    fi
+  fi
+
+  "${sudo_cmd[@]}" dpkg --add-architecture i386
+  "${sudo_cmd[@]}" apt-get update
+  "${sudo_cmd[@]}" apt-get install -y libcurl4:i386
+
+  ldd_out="$(ldd "${dreammaker_path}" 2>&1 || true)"
+  if grep -Fq "libcurl.so.4 => not found" <<< "${ldd_out}"; then
+    echo "DreamMaker still cannot resolve libcurl.so.4 after installation attempt." >&2
+    return 1
+  fi
+}
+
 if is_exact_cached_install; then
+  ensure_dreammaker_runtime_deps
   echo "Using cached BYOND ${BYOND_VERSION}."
   exit 0
 fi
@@ -140,6 +183,7 @@ if download_byond_zip "${zip_file}"; then
   )
 
   echo "${BYOND_VERSION}" > "${BYOND_VERSION_FILE}"
+  ensure_dreammaker_runtime_deps
   trap - EXIT
   rm -rf "${stage_dir}"
   echo "Installed BYOND ${BYOND_VERSION}."
@@ -148,6 +192,7 @@ fi
 
 if has_any_cached_install && [ "${BYOND_ALLOW_STALE_CACHE}" != "0" ]; then
   if is_supported_stale_cache; then
+    ensure_dreammaker_runtime_deps
     echo "Warning: failed to download pinned BYOND ${BYOND_VERSION}; using existing cached BYOND install." >&2
     echo "Cached BYOND version: $(get_cached_version)" >&2
     print_attempted_urls
