@@ -1,7 +1,7 @@
 /obj/item/qareen_chalk
 	name = "qareen enchanted chalk"
 	desc = "A weird chalk covered in ectoplasm."
-	icon = 'modular_bluemoon/Gardelin0/icons/items/qareen_chalk.dmi'
+	icon = 'modular_bluemoon/icons/obj/lewd_items/qareen_chalk.dmi'
 	icon_state = "chalk"
 	throw_speed = 3
 	throw_range = 5
@@ -20,7 +20,7 @@
 /obj/effect/qareen_rune
 	name = "Qareen rune"
 	desc = "It is believed this rune is capable of summoning horny ghosts!"
-	icon = 'modular_bluemoon/Gardelin0/icons/items/qareen_chalk.dmi'
+	icon = 'modular_bluemoon/icons/obj/lewd_items/qareen_chalk.dmi'
 	icon_state = "rune"
 
 /obj/effect/qareen_rune/attack_hand(mob/living/carbon/M)

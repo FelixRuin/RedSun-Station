@@ -1,24 +1,23 @@
 /obj/item/magicwand
 	name = "white magic wand"
 	desc = "It doesn't cast spells tho."
-	icon = 'modular_bluemoon/Gardelin0/icons/items/lewd_items.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/items/onmob/toys.dmi'
-	lefthand_file = 'modular_bluemoon/Gardelin0/icons/items/onmob/lefthand.dmi'
-	righthand_file = 'modular_bluemoon/Gardelin0/icons/items/onmob/righthand.dmi'
+	icon = 'modular_bluemoon/icons/obj/lewd_items/lewd_items.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
+	lefthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_righthand.dmi'
 	icon_state = "magicwand"
-	item_state = "magicwand"
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_UNDERWEAR
-	var/icon_base = "magicwand"
+	base_icon_state = "magicwand"
 	var/on = 0
 	var/mode = 2
 	var/intencity = 12
 
 /obj/item/magicwand/update_icon()
 	if(on)
-		icon_state = "[icon_base]_1"
+		icon_state = "[base_icon_state]_1"
 	else
-		icon_state = "[icon_base]"
+		icon_state = "[base_icon_state]"
 	..()
 
 /obj/item/magicwand/attack_self(mob/user)
@@ -147,10 +146,5 @@
 
 /obj/item/magicwand/blackwand
 	name = "Black magic wand"
-	icon = 'modular_bluemoon/Gardelin0/icons/items/lewd_items.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/back.dmi'
-	lefthand_file = 'modular_bluemoon/Gardelin0/icons/items/onmob/lefthand.dmi'
-	righthand_file = 'modular_bluemoon/Gardelin0/icons/items/onmob/righthand.dmi'
 	icon_state = "blackmwand"
-	item_state = "blackmwand"
-	icon_base = "blackmwand"
+	base_icon_state = "blackmwand"

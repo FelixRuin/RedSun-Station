@@ -3,10 +3,10 @@
 	desc = "Exorcizo te, creatura salis. Adjuro te, maledicte diabole. Adjuro te, serpens, discedas ab hoc virgo. Exorcizo te per Deum vivum, phantasma. En nomine Jesu Christi, qui venturus est judicare vivos et mortuos. Et nomine Patri et Fili et Spiritu Sancti."
 	icon_state = "crucifix"
 	item_state = "crucifix"
-	icon = 'modular_bluemoon/Gardelin0/icons/items/weapons/melee.dmi'
+	icon = 'modular_bluemoon/icons/obj/items_and_weapons.dmi'
 	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/neck.dmi'
-	lefthand_file = 'modular_bluemoon/Gardelin0/icons/items/weapons/onmob/left.dmi'
-	righthand_file = 'modular_bluemoon/Gardelin0/icons/items/weapons/onmob/right.dmi'
+	lefthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_righthand.dmi'
 	attack_verb = list("banished", "struck", "smacked", "exorcised")
 	force = 18
 	throw_speed = 3

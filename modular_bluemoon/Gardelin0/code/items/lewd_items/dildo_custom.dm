@@ -1,6 +1,6 @@
 /obj/item/dildo
-	lefthand_file = 'modular_bluemoon/Gardelin0/icons/items/onmob/lefthand.dmi'
-	righthand_file = 'modular_bluemoon/Gardelin0/icons/items/onmob/righthand.dmi'
+	lefthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_righthand.dmi'
 	item_state = "dildo"
 	var/inside = FALSE
 

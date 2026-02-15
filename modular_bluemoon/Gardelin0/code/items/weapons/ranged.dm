@@ -7,9 +7,9 @@
 /obj/item/gun/ballistic/shotgun/KS23
 	name = "KS-23 shotgun"
 	desc = "War crimes are fun!"
-	icon = 'modular_bluemoon/Gardelin0/icons/items/weapons/ranged.dmi'
-	lefthand_file = 'modular_bluemoon/Gardelin0/icons/items/weapons/onmob/left.dmi'
-	righthand_file = 'modular_bluemoon/Gardelin0/icons/items/weapons/onmob/right.dmi'
+	icon = 'modular_bluemoon/icons/obj/guns/projectile.dmi'
+	lefthand_file = 'modular_bluemoon/icons/mob/inhands/weapons/guns_lefthand.dmi'
+	righthand_file = 'modular_bluemoon/icons/mob/inhands/weapons/guns_righthand.dmi'
 	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/back.dmi'
 	fire_sound = 'modular_bluemoon/sound/weapons/fire_KS23.ogg'
 	icon_state = "KS-23"

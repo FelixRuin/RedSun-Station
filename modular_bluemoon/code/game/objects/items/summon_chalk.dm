@@ -1,7 +1,7 @@
 /obj/item/summon_chalk
 	name = "summon chalk"
 	desc = "A weird chalk covered in ectoplasm."
-	icon = 'modular_bluemoon/Gardelin0/icons/items/qareen_chalk.dmi'
+	icon = 'modular_bluemoon/icons/obj/lewd_items/qareen_chalk.dmi'
 	icon_state = "chalk_pink"
 	throw_speed = 3
 	throw_range = 5
@@ -22,7 +22,7 @@
 /obj/effect/summon_rune
 	name = "Lewd summon rune"
 	desc = "It is believed this rune is capable of summoning horny creatures!"
-	icon = 'modular_bluemoon/Gardelin0/icons/items/qareen_chalk.dmi'
+	icon = 'modular_bluemoon/icons/obj/lewd_items/qareen_chalk.dmi'
 	icon_state = "rune_pink"
 	light_color = LIGHT_COLOR_PINK
 	var/cooldown = 0
