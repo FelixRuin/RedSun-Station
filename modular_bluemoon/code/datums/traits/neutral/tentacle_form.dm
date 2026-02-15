@@ -67,7 +67,7 @@
 // 	tentacle.update_icon()
 
 // 	if(has_clothes_to_rip)
-// 		playsound(caster, 'modular_bluemoon/Gardelin0/sound/effect/lewd/interactions/bang6.ogg', 50, 1)
+// 		playsound(caster, 'modular_sand/sound/interactions/bang6.ogg', 50, 1)
 
 
 // 	clothes_req = NONE

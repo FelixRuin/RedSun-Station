@@ -165,7 +165,7 @@
 			if("low")
 				message = "[pick("медленно","плавно","мягко")] [pick("вводит дилдо в", "погружает дилдо в")] [message_end]"
 
-		playsound(loc, "modular_bluemoon/Gardelin0/sound/effect/lewd/interactions/bang[rand(1, 6)].ogg", 30, 1)
+		playsound(loc, "modular_sand/sound/interactions/bang[rand(1, 6)].ogg", 30, 1)
 		visible_message(span_lewd("\the [src] [message]"))
 
 
