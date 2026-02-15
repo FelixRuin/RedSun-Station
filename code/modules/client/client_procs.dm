@@ -407,6 +407,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	src << browse(file('html/statbrowser.html'), "window=statbrowser")
 	addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
 	tgui_panel.initialize()
+	acquire_dpi()
 
 	if(alert_mob_dupe_login && !holder)
 		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
@@ -552,12 +553,37 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	view_size = new(src, getScreenSize(prefs.widescreenpref))
 	view_size.resetFormat()
 	view_size.setZoomMode()
+	normalize_ui_layout()
 	fit_viewport()
 	Master.UpdateTickRate()
 
 //////////////
 //DISCONNECT//
 //////////////
+
+/client/proc/get_window_scaling()
+	if(!isnum(window_scaling) || window_scaling <= 0)
+		return 1
+	return window_scaling
+
+/client/proc/acquire_dpi()
+	window_scaling = text2num(winget(src, null, "dpi"))
+	if(!isnum(window_scaling) || window_scaling <= 0)
+		window_scaling = 1
+
+/client/proc/normalize_ui_layout(force = TRUE)
+	if(!force)
+		return
+	// Reset splitter state to sane defaults; stale per-client values can break layout on DPI changes.
+	winset(src, "mainwindow.split", "splitter=53")
+	winset(src, "infowindow.info", "splitter=32")
+	winset(src, "legacy_output_selector", "left=output_browser")
+	// Ensure critical panes are not left minimized by stale skin state.
+	winset(src, "mainwindow", "is-minimized=false")
+	winset(src, "mapwindow", "is-minimized=false")
+	winset(src, "infowindow", "is-minimized=false")
+	winset(src, "outputwindow", "is-minimized=false")
+	winset(src, "statwindow", "is-minimized=false")
 
 /client/Del()
 	if(!gc_destroyed)

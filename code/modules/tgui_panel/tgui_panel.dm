@@ -79,6 +79,7 @@
 				"window" = list(
 					"fancy" = FALSE,
 					"locked" = FALSE,
+					"scale" = client.get_window_scaling(),
 				),
 			),
 		))

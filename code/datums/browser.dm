@@ -66,6 +66,16 @@
 	for (file in stylesheets)
 		head_content += "<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url(file)]'>"
 
+	var/scaling = user?.client?.get_window_scaling()
+	if(scaling && scaling != 1 && width && height)
+		head_content += {"
+			<style>
+				body {
+					zoom: [100 / scaling]%;
+				}
+			</style>
+		"}
+
 
 	for (file in scripts)
 		head_content += "<script type='text/javascript' src='[SSassets.transport.get_asset_url(file)]'></script>"
@@ -102,7 +112,7 @@
 		to_chat(user, span_userdanger("The [title] browser you tried to open failed a sanity check! Please report this on github!"))
 		return
 	var/window_size = ""
-	if (width && height)
+	if(width && height)
 		window_size = "size=[width]x[height];"
 	common_asset.send(user)
 	if (stylesheets.len)
