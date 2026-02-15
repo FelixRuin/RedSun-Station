@@ -129,7 +129,7 @@
 			if(target.mind?.has_antag_datum(/datum/antagonist/ghost_role/ghost_cafe))
 				target.ghost_cafe_traits(FALSE) // Выдаём и забираем трэйты в разных места для ситуаций ухода госта обратно домой
 
-	playsound(loc, "modular_bluemoon/Gardelin0/sound/effect/spook.ogg", 50, 1)
+	playsound(loc, 'modular_bluemoon/sound/effects/spook.ogg', 50, 1)
 	new /obj/effect/temp_visual/yellowsparkles(target.loc)
 	if(transfer_target_items)
 		transfer_items(target)

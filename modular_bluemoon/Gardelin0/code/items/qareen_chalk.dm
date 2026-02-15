@@ -46,7 +46,7 @@
 						new /obj/item/ectoplasm/qareen(src.loc)
 						to_chat(M, span_userdanger("Something is happening!"))
 						target.forceMove(src.loc)
-						playsound(loc, "modular_bluemoon/Gardelin0/sound/effect/spook.ogg", 50, 1)
+						playsound(loc, 'modular_bluemoon/sound/effects/spook.ogg', 50, 1)
 						for(var/obj/machinery/light/L in loc)
 							L.flicker(20)
 						qdel(src)
