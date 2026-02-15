@@ -29,6 +29,7 @@ export { LabeledList } from './LabeledList';
 export { Modal } from './Modal';
 export { NoticeBox } from './NoticeBox';
 export { NumberInput } from './NumberInput';
+export { PixelArtImage } from './PixelArtImage';
 export { Popper } from './Popper';
 export { ProgressBar } from './ProgressBar';
 export { RestrictedInput } from './RestrictedInput';

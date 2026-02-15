@@ -706,7 +706,7 @@ const SDQLSpellIcons = (props, context) => {
               height="64px"
               width="auto"
               m={0}
-              src={`data:image/jpeg;base64,${action_icon}`}
+              src={`data:image/png;base64,${action_icon}`}
               style={{
                 imageRendering: 'pixelated',
               }}
@@ -720,7 +720,7 @@ const SDQLSpellIcons = (props, context) => {
               height="64px"
               width="auto"
               m={0}
-              src={`data:image/jpeg;base64,${hand_icon}`}
+              src={`data:image/png;base64,${hand_icon}`}
               style={{
                 imageRendering: 'pixelated',
               }}
@@ -734,7 +734,7 @@ const SDQLSpellIcons = (props, context) => {
               height="64px"
               width="auto"
               m={0}
-              src={`data:image/jpeg;base64,${projectile_icon}`}
+              src={`data:image/png;base64,${projectile_icon}`}
               style={{
                 imageRendering: 'pixelated',
               }}
@@ -750,7 +750,7 @@ const SDQLSpellIcons = (props, context) => {
               height="64px"
               width="auto"
               m={0}
-              src={`data:image/jpeg;base64,${mouse_icon}`}
+              src={`data:image/png;base64,${mouse_icon}`}
               style={{
                 imageRendering: 'pixelated',
               }}
@@ -764,7 +764,7 @@ const SDQLSpellIcons = (props, context) => {
               height="64px"
               width="auto"
               m={0}
-              src={`data:image/jpeg;base64,${overlay_icon}`}
+              src={`data:image/png;base64,${overlay_icon}`}
               style={{
                 imageRendering: 'pixelated',
               }}

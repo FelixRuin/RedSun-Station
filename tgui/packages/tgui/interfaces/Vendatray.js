@@ -84,7 +84,7 @@ const VendingImage = (props, context) => {
     <Section height="100%">
       <Box as="img"
         m={1}
-        src={`data:image/jpeg;base64,${product_icon}`}
+        src={`data:image/png;base64,${product_icon}`}
         height="96px"
         width="96px"
         style={{

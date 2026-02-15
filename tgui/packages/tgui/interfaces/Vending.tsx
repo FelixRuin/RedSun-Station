@@ -296,9 +296,10 @@ const ProductImage = (props) => {
 
   return product.img ? (
     <img
-      src={`data:image/jpeg;base64,${product.img}`}
+      src={`data:image/png;base64,${product.img}`}
       style={{
         'vertical-align': 'middle',
+        'image-rendering': 'pixelated',
       }}
     />
   ) : (

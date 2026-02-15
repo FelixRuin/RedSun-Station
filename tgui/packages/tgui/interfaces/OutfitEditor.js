@@ -17,7 +17,7 @@ export const OutfitEditor = (props, context) => {
           height="100%"
           opacity={0.5}
           py={3}
-          src={`data:image/jpeg;base64,${dummy64}`}
+          src={`data:image/png;base64,${dummy64}`}
           style={{
             imageRendering: 'pixelated',
           }} />
@@ -128,7 +128,7 @@ const OutfitSlot = (props, context) => {
           <>
             <Box
               as="img"
-              src={`data:image/jpeg;base64,${currItem?.sprite}`}
+              src={`data:image/png;base64,${currItem?.sprite}`}
               title={currItem?.desc}
               style={{
                 imageRendering: 'pixelated',

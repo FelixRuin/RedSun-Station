@@ -1124,6 +1124,18 @@ GLOBAL_DATUM_INIT(dummySave, /savefile, new("tmp/dummySave.sav")) //Cache of ico
 	var/list/partial = splittext(iconData, "{")
 	return replacetext(copytext_char(partial[2], 3, -5), "\n", "")
 
+/// Converts an icon to base64 after optional integer upscale to improve browser rendering.
+/proc/icon2base64_scaled(icon/icon, scale = 1)
+	if (!isicon(icon))
+		return FALSE
+
+	var/icon/to_encode = icon
+	if (isnum(scale) && scale > 1)
+		to_encode = new(icon)
+		to_encode.Scale(round(icon.Width() * scale), round(icon.Height() * scale))
+
+	return icon2base64(to_encode)
+
 /proc/icon2html(thing, target, icon_state, dir = SOUTH, frame = 1, moving = FALSE, sourceonly = FALSE)
 	if (!thing)
 		return
