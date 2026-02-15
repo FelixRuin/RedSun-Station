@@ -1827,18 +1827,14 @@
 /datum/gear/donator/bm/mu88
 	name = "M.U. 88 New hope coat"
 	slot = ITEM_SLOT_OCLOTHING
-	path = /obj/item/clothing/suit/armor/vest/bluesheid/mu88
+	path = /obj/item/clothing/suit/donator/bm/mu88
 	ckeywhitelist = list("milidead", "hateredsoul")
-	restricted_desc = "Brig Physician, Blueshield."
-	restricted_roles = list("Brig Physician, Blueshield.")
 
 /datum/gear/donator/bm/mu88_swimsuit
-	name = "M.U. 88 New hope swimcoat"
+	name = "M.U. 88 New hope swimsuit"
 	slot = ITEM_SLOT_ICLOTHING
-	path = /obj/item/clothing/under/rank/brigdoc/mu88_swimsuit
+	path = /obj/item/clothing/under/donator/bm/mu88_swimsuit
 	ckeywhitelist = list("milidead", "hateredsoul")
-	restricted_desc = "Brig Physician, Blueshield."
-	restricted_roles = list("Brig Physician, Blueshield.")
 
 /datum/gear/donator/bm/mu88_boots
 	name = "M.U. 88 New hope boots"
@@ -1849,10 +1845,8 @@
 /datum/gear/donator/bm/mu88_horns
 	name = "M.U. 88 New hope horns"
 	slot = ITEM_SLOT_ICLOTHING
-	path = /obj/item/clothing/head/blueshield/mu88_horns
+	path = /obj/item/clothing/head/donator/bm/mu88_horns
 	ckeywhitelist = list("milidead", "hateredsoul")
-	restricted_desc = "Brig Physician, Blueshield."
-	restricted_roles = list("Brig Physician, Blueshield.")
 
 /datum/gear/donator/bm/mu88_tie
 	name = "M.U. 88 New hope tie"
