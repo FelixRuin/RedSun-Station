@@ -11,7 +11,7 @@
 	lefthand_file = 'modular_bluemoon/Gardelin0/icons/items/weapons/onmob/left.dmi'
 	righthand_file = 'modular_bluemoon/Gardelin0/icons/items/weapons/onmob/right.dmi'
 	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/back.dmi'
-	fire_sound = "modular_bluemoon/Gardelin0/sound/weapons/fire_shotgun.ogg"
+	fire_sound = 'modular_bluemoon/sound/weapons/fire_KS23.ogg'
 	icon_state = "KS-23"
 	item_state = "KS-23"
 	fire_delay = 7
@@ -22,7 +22,7 @@
 		chambered.forceMove(drop_location())//Eject casing
 		chambered.bounce_away()
 		chambered = null
-		playsound(src, "modular_bluemoon/Gardelin0/sound/weapons/shell_fall.ogg", 45, 1)
+		playsound(src, 'modular_bluemoon/sound/weapons/shell_fall_KS23.ogg', 45, 1)
 
 /obj/item/gun/ballistic/shotgun/KS23/Inquisitor
 	name = "Righteous Wrath of the Faithful"
