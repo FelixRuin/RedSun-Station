@@ -47,7 +47,7 @@
 // 	caster.shake_animation(2)
 // 	caster.Stun(30)
 
-// 	playsound(caster, 'modular_bluemoon/Gardelin0/sound/effect/lewd/interactions/splat.ogg', 50, 0)
+// 	playsound(caster, 'sound/effects/splat.ogg', 50, 0)
 
 // 	sleep(30)
 
