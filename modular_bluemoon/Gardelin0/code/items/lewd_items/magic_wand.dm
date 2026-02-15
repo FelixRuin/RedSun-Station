@@ -28,7 +28,7 @@
 	if(!on)
 		to_chat(user, "[src] выключен.")
 	update_icon()
-	playsound(src.loc, 'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand1.ogg', 25, 1)
+	playsound(src.loc, 'modular_bluemoon/sound/items/lewd/toys/magicwand1.ogg', 25, 1)
 
 /obj/item/magicwand/AltClick(mob/user)
 	if(!istype(user))
@@ -82,14 +82,11 @@
 
 		switch(mode)
 			if(1)
-				playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator1.ogg',
-								'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator2.ogg',
-								'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator3.ogg'), 25, 1)
+				playsound(loc, "modular_bluemoon/sound/items/lewd/toys/devicevibrator[rand(1,3)].ogg", 25, 1)
 			if(2)
-				playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand1.ogg',
-								'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand2.ogg'), 25, 1)
+				playsound(loc, "modular_bluemoon/sound/items/lewd/toys/magicwand[rand(1, 2)].ogg", 25, 1)
 			if(3)
-				playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand3.ogg'), 25, 1)
+				playsound(loc, pick('modular_bluemoon/sound/items/lewd/toys/magicwand3.ogg'), 25, 1)
 				to_chat(M, span_userdanger("Вибрация слишком интенсивная!"))
 				if(M.client?.prefs.cit_toggles & SEX_JITTER) //By Gardelin0
 					M.Jitter(3)
@@ -129,14 +126,11 @@
 
 		switch(mode)
 			if(1)
-				playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator1.ogg',
-								'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator2.ogg',
-								'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator3.ogg'), 25, 1)
+				playsound(loc, "modular_bluemoon/sound/items/lewd/toys/devicevibrator[rand(1, 3)].ogg", 25, 1)
 			if(2)
-				playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand1.ogg',
-								'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand2.ogg'), 25, 1)
+				playsound(loc, "modular_bluemoon/sound/items/lewd/toys/magicwand[rand(1, 2)].ogg", 25, 1)
 			if(3)
-				playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand3.ogg'), 25, 1)
+				playsound(loc, pick('modular_bluemoon/sound/items/lewd/toys/magicwand3.ogg'), 25, 1)
 				to_chat(M, span_userdanger("Вибрация слишком интенсивная!"))
 				if(M.client?.prefs.cit_toggles & SEX_JITTER) //By Gardelin0
 					M.Jitter(3)

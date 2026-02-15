@@ -263,7 +263,7 @@
 		M.reagents.add_reagent(/datum/reagent/drug/aphrodisiacplus, 5) //Cum contains hexocrocin
 	new /obj/effect/decal/cleanable/semen(loc)
 
-	playsound(loc, "modular_bluemoon/Gardelin0/sound/effect/lewd/splast.ogg", 30, 1, -1)
+	playsound(loc, 'sound/effects/splat.ogg', 30, 1, -1)
 	visible_message("<font color=purple><b>\The [src]</b> [message]</font>")
 	shake_camera(M, 6, 1)
 	set_is_fucking(null ,null)

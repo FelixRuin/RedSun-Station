@@ -101,7 +101,7 @@
 					M.emote("moan")
 					M.handle_post_sex(intencity, null, src)
 					M.client?.plug13.send_emote(PLUG13_EMOTE_GROIN, intencity * 5)
-					playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand3.ogg'), 25, 1)
+					playsound(loc, 'modular_bluemoon/sound/items/lewd/toys/magicwand3.ogg', 25, 1)
 					if(prob(50))
 						M.Stun(5)
 				if(2)
@@ -113,8 +113,7 @@
 						M.client?.plug13.send_emote(PLUG13_EMOTE_GROIN, intencity * 5)
 						if(M.client?.prefs.cit_toggles & SEX_JITTER) //By Gardelin0
 							M.do_jitter_animation()
-						playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand1.ogg',
-										'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/magicwand2.ogg'), 25, 1)
+						playsound(loc, "modular_bluemoon/sound/items/lewd/toys/magicwand[rand(1, 2)].ogg", 25, 1)
 				if(1)
 					if(M.has_penis())
 						to_chat(M, span_love(pick("Я чувствую слабую вибрацию у своего члена!", "Оно слабо вибрирует мой член!")))
@@ -124,6 +123,4 @@
 						M.client?.plug13.send_emote(PLUG13_EMOTE_GROIN, intencity * 5)
 						if(M.client?.prefs.cit_toggles & SEX_JITTER) //By Gardelin0
 							M.do_jitter_animation()
-						playsound(loc, pick('modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator1.ogg',
-										'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator2.ogg',
-										'modular_bluemoon/Gardelin0/sound/effect/lewd/toys/devicevibrator3.ogg'), 25, 1)
+						playsound(loc, "modular_bluemoon/sound/items/lewd/toys/devicevibrator[rand(1, 3)].ogg", 25, 1)

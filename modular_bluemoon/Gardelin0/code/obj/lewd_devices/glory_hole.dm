@@ -243,11 +243,11 @@
 				if("crocin")
 					M.reagents.add_reagent(/datum/reagent/drug/aphrodisiac, 15)
 					to_chat(usr, "[input] введён.")
-					playsound(loc, "modular_bluemoon/Gardelin0/sound/effect/lewd/toys/injection.ogg", 30, 1)
+					playsound(loc, 'modular_bluemoon/sound/items/lewd/injection.ogg', 30, 1)
 				if("hexacrocin")
 					M.reagents.add_reagent(/datum/reagent/drug/aphrodisiacplus, 15)
 					to_chat(usr, "[input] введён.")
-					playsound(loc, "modular_bluemoon/Gardelin0/sound/effect/lewd/toys/injection.ogg", 30, 1)
+					playsound(loc, 'modular_bluemoon/sound/items/lewd/injection.ogg', 30, 1)
 	else
 		to_chat(usr, "Никого внутри.")
 		return
