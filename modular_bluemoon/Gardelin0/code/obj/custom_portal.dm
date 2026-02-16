@@ -1,6 +1,6 @@
 /obj/effect/custom_portal
 	name = "Portal?"
-	icon = 'modular_bluemoon/Gardelin0/icons/effects/effects.dmi'
+	icon = 'modular_bluemoon/icons/effects/effects.dmi'
 	icon_state = "portal"
 	desc = "A strange portal"
 
