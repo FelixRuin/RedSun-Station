@@ -1,7 +1,7 @@
 /obj/structure/bed/dildo_machine
 	name = "Dildo machine"
 	desc = "It provides pleasure."
-	icon = 'modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi'
+	icon = 'modular_bluemoon/icons/obj/structures/lewd_devices.dmi'
 	icon_state = "dilmachine"
 	anchored = TRUE
 	var/mode = "low"
@@ -15,7 +15,7 @@
 
 /obj/structure/bed/dildo_machine/New()
 	..()
-	add_overlay(mutable_appearance('modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi', "dilmachine_over", MOB_LAYER + 1))
+	add_overlay(mutable_appearance('modular_bluemoon/icons/obj/structures/lewd_devices.dmi', "dilmachine_over", MOB_LAYER + 1))
 
 /obj/structure/bed/dildo_machine/examine(mob/user)
 	. = ..()
@@ -211,7 +211,7 @@
 /obj/item/dildo_machine_kit
 	name = "dildo machine construction kit"
 	desc = "Construction requires a screwdriver. Put it on the ground first!"
-	icon = 'modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi'
+	icon = 'modular_bluemoon/icons/obj/structures/lewd_devices.dmi'
 	icon_state = "kit"
 	throwforce = 0
 	var/unwrapped = 0

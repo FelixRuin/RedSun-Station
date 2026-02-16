@@ -1,7 +1,7 @@
 /obj/structure/chair/sybian
 	name = "sybian"
 	desc = "It provides vibration."
-	icon = 'modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi'
+	icon = 'modular_bluemoon/icons/obj/structures/lewd_devices.dmi'
 	icon_state = "sybian"
 	anchored = TRUE
 	var/mode = "normal"
@@ -12,7 +12,7 @@
 
 /obj/structure/chair/sybian/New()
 	..()
-	add_overlay(mutable_appearance('modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi', "sybian_over", MOB_LAYER + 1))
+	add_overlay(mutable_appearance('modular_bluemoon/icons/obj/structures/lewd_devices.dmi', "sybian_over", MOB_LAYER + 1))
 
 /obj/structure/chair/sybian/verb/change_mode()
 	set name = "Change mode"
@@ -86,7 +86,7 @@
 /obj/item/sybian_kit
 	name = "sybian construction kit"
 	desc = "Construction requires a screwdriver. Put it on the ground first!"
-	icon = 'modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi'
+	icon = 'modular_bluemoon/icons/obj/structures/lewd_devices.dmi'
 	icon_state = "kit"
 	throwforce = 0
 	var/unwrapped = 0

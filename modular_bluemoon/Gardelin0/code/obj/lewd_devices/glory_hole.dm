@@ -1,7 +1,7 @@
 /obj/structure/chair/gloryhole
 	name = "glory hole"
 	desc = "A restraining device in the wall box. It provides easier access to the victim's genitalia and other holes."
-	icon = 'modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi'
+	icon = 'modular_bluemoon/icons/obj/structures/lewd_devices.dmi'
 	icon_state = "gloryhole"
 	var/over_state = "nothing"
 	var/restrains = 0
@@ -9,7 +9,7 @@
 	var/aphrodisiac
 	var/obj/item/letter //Any papers pinned to the gloryhole
 	var/obj/item/picture //Any photos pinned to the gloryhole
-	var/overlays_file = 'modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi'
+	var/overlays_file = 'modular_bluemoon/icons/obj/structures/lewd_devices.dmi'
 	var/static/list/gloryhole_overlays = list()
 	anchored = 1
 	dir = 2
@@ -304,7 +304,7 @@
 /obj/item/gloryhole_kit
 	name = "gloryhole construction kit"
 	desc = "Construction requires a screwdriver. Put it on the ground first!"
-	icon = 'modular_bluemoon/Gardelin0/icons/obj/lewd_devices.dmi'
+	icon = 'modular_bluemoon/icons/obj/structures/lewd_devices.dmi'
 	icon_state = "kit"
 	throwforce = 0
 	var/unwrapped = 0
