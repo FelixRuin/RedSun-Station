@@ -69,6 +69,10 @@
 	fatally_errored = FALSE
 	// Build window options
 	var/options = "file=[id].html;can_minimize=0;auto_format=0;"
+	// Pooled tgui windows are revealed by frontend after geometry is applied.
+	// Keep them hidden at browse() time to avoid a first-frame flash.
+	if(pooled)
+		options += "is-visible=0;size=400x600;"
 	// Remove titlebar and resize handles for a fancy window
 	if(fancy)
 		options += "titlebar=0;can_resize=0;"
@@ -124,6 +128,10 @@
 		html = replacetextEx(html, "<!-- tgui:css -->", inline_css)
 	// Open the window
 	client << browse(html, "window=[id];[options]")
+	// BYOND 516 can occasionally present an initial frame despite browse options.
+	// Force pooled windows hidden immediately; frontend will reveal when ready.
+	if(pooled && istype(client))
+		winset(client, id, "is-visible=0")
 	// Detect whether the control is a browser
 	var/win_type = winexists(client, id)
 	is_browser = win_type == "BROWSER"

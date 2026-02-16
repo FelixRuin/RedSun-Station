@@ -11,6 +11,7 @@ import { createLogger } from './logging';
 
 const logger = createLogger('drag');
 const pixelRatio = window.devicePixelRatio ?? 1;
+const now = () => Date.now ? Date.now() : +new Date();
 
 let windowKey = window.__windowId__;
 let dragging = false;
@@ -21,10 +22,31 @@ let dragPointOffset;
 let resizeMatrix;
 let initialSize;
 let size;
+let initialGeometryReady = false;
+let resolveInitialGeometryReady;
+let initialGeometryReadyPromise;
+
+export const resetInitialGeometryReady = () => {
+  initialGeometryReady = false;
+  initialGeometryReadyPromise = new Promise(resolve => {
+    resolveInitialGeometryReady = resolve;
+  });
+};
+
+const markInitialGeometryReady = () => {
+  if (initialGeometryReady) {
+    return;
+  }
+  initialGeometryReady = true;
+  resolveInitialGeometryReady();
+};
 
 export const setWindowKey = key => {
   windowKey = key;
 };
+
+export const waitForInitialGeometryReady = () => initialGeometryReadyPromise;
+resetInitialGeometryReady();
 
 export const getWindowPosition = () => [
   window.screenLeft * pixelRatio,
@@ -35,6 +57,87 @@ export const getWindowSize = () => [
   window.innerWidth * pixelRatio,
   window.innerHeight * pixelRatio,
 ];
+
+const SIZE_APPLY_TIMEOUT_MS = 250;
+const SIZE_APPLY_EPSILON = Math.max(2, Math.ceil(pixelRatio * 2));
+
+const isWindowSizeApplied = targetSize => {
+  const currentSize = getWindowSize();
+  return Math.abs(currentSize[0] - targetSize[0]) <= SIZE_APPLY_EPSILON
+    && Math.abs(currentSize[1] - targetSize[1]) <= SIZE_APPLY_EPSILON;
+};
+
+const waitForWindowSizeApplied = targetSize => {
+  const startedAt = now();
+  const startSize = getWindowSize();
+  if (isWindowSizeApplied(targetSize)) {
+    return Promise.resolve({
+      matched: true,
+      reason: 'alreadyApplied',
+      elapsedMs: now() - startedAt,
+      targetSize,
+      startSize,
+      endSize: startSize,
+      resizeEvents: 0,
+    });
+  }
+  return new Promise(resolve => {
+    let done = false;
+    let resizeEvents = 0;
+    let timeoutId = null;
+    let rafId = null;
+    let onResize;
+    const finish = (reason, matched) => {
+      if (done) {
+        return;
+      }
+      done = true;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('resize', onResize);
+      resolve({
+        matched,
+        reason,
+        elapsedMs: now() - startedAt,
+        targetSize,
+        startSize,
+        endSize: getWindowSize(),
+        resizeEvents,
+      });
+    };
+    const maybeFinish = reason => {
+      if (isWindowSizeApplied(targetSize)) {
+        finish(reason, true);
+      }
+    };
+    onResize = () => {
+      resizeEvents += 1;
+      maybeFinish('resize');
+    };
+    const onFrame = () => {
+      if (done) {
+        return;
+      }
+      maybeFinish('animationFrame');
+      if (!done) {
+        rafId = requestAnimationFrame(onFrame);
+      }
+    };
+    window.addEventListener('resize', onResize);
+    maybeFinish('immediateCheck');
+    if (done) {
+      return;
+    }
+    rafId = requestAnimationFrame(onFrame);
+    timeoutId = setTimeout(() => {
+      finish('timeout', false);
+    }, SIZE_APPLY_TIMEOUT_MS);
+  });
+};
 
 export const setWindowPosition = vec => {
   const byondPos = vecAdd(vec, screenOffset);
@@ -103,59 +206,66 @@ export const storeWindowGeometry = async () => {
 };
 
 export const recallWindowGeometry = async (options = {}) => {
-  // Only recall geometry in fancy mode
-  const geometry = options.fancy && await storage.get(windowKey);
-  if (geometry) {
-    logger.log('recalled geometry:', geometry);
-  }
-  const scaleValue = Number(options.scale);
-  const useScaledMode = Number.isFinite(scaleValue) && scaleValue !== 1;
-  let pos = geometry?.pos || options.pos;
-  let size = options.size;
-  // Convert size from css-pixels to display-pixels if UI scaling mode is enabled.
-  if (useScaledMode && size) {
-    size = [size[0] * pixelRatio, size[1] * pixelRatio];
-  }
-  if (!useScaledMode) {
-    document.body.style.zoom = `${100 / pixelRatio}%`;
-    document.documentElement.style.setProperty('--scaling-amount', pixelRatio.toString());
-  }
-  else {
-    document.body.style.zoom = '';
-    document.documentElement.style.removeProperty('--scaling-amount');
-  }
-  // Wait until screen offset gets resolved
-  await screenOffsetPromise;
-  const areaAvailable = useScaledMode
-    ? getScreenSize()
-    : [
-      window.screen.availWidth,
-      window.screen.availHeight,
-    ];
-  // Set window size
-  if (size) {
-    // Constraint size to not exceed available screen area.
-    size = [
-      Math.min(areaAvailable[0], size[0]),
-      Math.min(areaAvailable[1], size[1]),
-    ];
-    setWindowSize(size);
-  }
-  // Set window position
-  if (pos) {
-    // Constraint window position if monitor lock was set in preferences.
-    if (size && options.locked) {
-      pos = constraintPosition(pos, size)[1];
+  let geometry;
+  try {
+    // Only recall geometry in fancy mode
+    geometry = options.fancy && await storage.get(windowKey);
+    if (geometry) {
+      logger.log('recalled geometry:', geometry);
     }
-    setWindowPosition(pos);
+    const scaleValue = Number(options.scale);
+    const useScaledMode = Number.isFinite(scaleValue) && scaleValue !== 1;
+    let pos = geometry?.pos || options.pos;
+    let size = options.size;
+    // Convert size from css-pixels to display-pixels if UI scaling mode is enabled.
+    if (useScaledMode && size) {
+      size = [size[0] * pixelRatio, size[1] * pixelRatio];
+    }
+    if (!useScaledMode) {
+      document.body.style.zoom = `${100 / pixelRatio}%`;
+      document.documentElement.style.setProperty('--scaling-amount', pixelRatio.toString());
+    }
+    else {
+      document.body.style.zoom = '';
+      document.documentElement.style.removeProperty('--scaling-amount');
+    }
+    // Wait until screen offset gets resolved
+    await screenOffsetPromise;
+    const areaAvailable = useScaledMode
+      ? getScreenSize()
+      : [
+        window.screen.availWidth,
+        window.screen.availHeight,
+      ];
+    // Set window size
+    if (size) {
+      // Constraint size to not exceed available screen area.
+      size = [
+        Math.min(areaAvailable[0], size[0]),
+        Math.min(areaAvailable[1], size[1]),
+      ];
+      setWindowSize(size);
+      await waitForWindowSizeApplied(size);
+    }
+    // Set window position
+    if (pos) {
+      // Constraint window position if monitor lock was set in preferences.
+      if (size && options.locked) {
+        pos = constraintPosition(pos, size)[1];
+      }
+      setWindowPosition(pos);
+    }
+    // Set window position at the center of the screen.
+    else if (size) {
+      pos = vecAdd(
+        vecScale(areaAvailable, 0.5),
+        vecScale(size, -0.5),
+        vecScale(screenOffset, -1.0));
+      setWindowPosition(pos);
+    }
   }
-  // Set window position at the center of the screen.
-  else if (size) {
-    pos = vecAdd(
-      vecScale(areaAvailable, 0.5),
-      vecScale(size, -0.5),
-      vecScale(screenOffset, -1.0));
-    setWindowPosition(pos);
+  finally {
+    markInitialGeometryReady();
   }
 };
 

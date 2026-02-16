@@ -15,7 +15,11 @@ import { defer } from 'common/defer';
 import { perf } from 'common/perf';
 import { createAction } from 'common/redux';
 
-import { setupDrag } from './drag';
+import {
+  resetInitialGeometryReady,
+  setupDrag,
+  waitForInitialGeometryReady,
+} from './drag';
 import { focusMap } from './focus';
 import { createLogger } from './logging';
 import { resumeRenderer, suspendRenderer } from './renderer';
@@ -118,6 +122,7 @@ export const backendReducer = (state = initialState, action) => {
 };
 
 export const backendMiddleware = store => {
+  const INITIAL_VISIBILITY_GATE_TIMEOUT = 300;
   let fancyState;
   let suspendInterval;
 
@@ -182,6 +187,7 @@ export const backendMiddleware = store => {
 
     // Resume on incoming update
     if (type === 'backend/update' && suspended) {
+      resetInitialGeometryReady();
       // Show the payload
       logger.log('backend/update', payload);
       // Signal renderer that we have resumed
@@ -190,13 +196,21 @@ export const backendMiddleware = store => {
       setupDrag();
       // We schedule this for the next tick here because resizing and unhiding
       // during the same tick will flash with a white background.
-      defer(() => {
+      defer(async () => {
         perf.mark('resume/start');
+        const revealReason = await Promise.race([
+          waitForInitialGeometryReady()
+            .then(() => 'geometryReady'),
+          new Promise<'timeout'>(resolve => {
+            setTimeout(() => resolve('timeout'), INITIAL_VISIBILITY_GATE_TIMEOUT);
+          }),
+        ]);
         // Doublecheck if we are not re-suspended.
         const { suspended } = selectBackend(store.getState());
         if (suspended) {
           return;
         }
+        logger.log('showing window after', revealReason);
         Byond.winset(window.__windowId__, {
           'is-visible': true,
         });
