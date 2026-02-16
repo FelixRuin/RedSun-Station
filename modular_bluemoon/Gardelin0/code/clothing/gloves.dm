@@ -2,7 +2,7 @@
 	name = "polychromic evening gloves"
 	desc = "Thin, pretty polychromic gloves intended for use in regal feminine attire."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/gloves.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/hands.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/hands.dmi'
 	icon_state = "poly_evening"
 	item_state = "poly_evening"
 	transfer_prints = TRUE
@@ -20,7 +20,7 @@
 	name = "transparent bracers"
 	desc = "A pair of transparent bracers, they look fancy."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/gloves.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/hands.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/hands.dmi'
 	icon_state = "transparent_bracers"
 	item_state = "transparent_bracers"
 	transfer_prints = TRUE

@@ -10,7 +10,7 @@
 	icon = 'modular_bluemoon/icons/obj/guns/projectile.dmi'
 	lefthand_file = 'modular_bluemoon/icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'modular_bluemoon/icons/mob/inhands/weapons/guns_righthand.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/back.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/back.dmi'
 	fire_sound = 'modular_bluemoon/sound/weapons/fire_KS23.ogg'
 	icon_state = "KS-23"
 	item_state = "KS-23"

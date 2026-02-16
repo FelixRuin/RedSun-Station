@@ -3,7 +3,7 @@
 	desc = "To stop that awful noise, but dirty."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/masks.dmi'
 	mob_overlay_icon = 'modular_splurt/icons/mob/clothing/mask.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/mask.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/mask.dmi'
 	icon_state = "raggag"
 	item_state = "raggag"
 

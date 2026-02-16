@@ -4,7 +4,7 @@
 	icon_state = "crucifix"
 	item_state = "crucifix"
 	icon = 'modular_bluemoon/icons/obj/items_and_weapons.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/neck.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/neck.dmi'
 	lefthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_lefthand.dmi'
 	righthand_file = 'modular_bluemoon/icons/mob/inhands/items/items_righthand.dmi'
 	attack_verb = list("banished", "struck", "smacked", "exorcised")

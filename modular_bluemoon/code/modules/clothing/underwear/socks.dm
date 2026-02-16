@@ -4,7 +4,7 @@
 	icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	anthro_mob_worn_overlay = 'modular_bluemoon/icons/mob/clothing/underwear_digi.dmi'
-	icon_state = "polypantyhose"
+	icon_state = "polypantyhose_less"
 	var/polychromic = TRUE
 
 /obj/item/clothing/underwear/socks/poly_pantyhose_crotchless/ComponentInitialize()
@@ -18,7 +18,7 @@
 	icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	anthro_mob_worn_overlay = 'modular_bluemoon/icons/mob/clothing/underwear_digi.dmi'
-	icon_state = "polypantyhose_thick"
+	icon_state = "polypantyhose_thick_less"
 	var/polychromic = TRUE
 
 /obj/item/clothing/underwear/socks/poly_pantyhose_thick_crotchless/ComponentInitialize()
@@ -32,7 +32,7 @@
 	icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	anthro_mob_worn_overlay = 'modular_bluemoon/icons/mob/clothing/underwear_digi.dmi'
-	icon_state = "polypantyhose_plaid"
+	icon_state = "polypantyhose_plaid_less"
 	var/polychromic = TRUE
 
 /obj/item/clothing/underwear/socks/poly_pantyhose_plaid_crotchless/ComponentInitialize()
@@ -46,7 +46,7 @@
 	icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	anthro_mob_worn_overlay = 'modular_bluemoon/icons/mob/clothing/underwear_digi.dmi'
-	icon_state = "polypantyhose_dotted"
+	icon_state = "polypantyhose_dotted_less"
 	var/polychromic = TRUE
 
 /obj/item/clothing/underwear/socks/poly_pantyhose_dotted_crotchless/ComponentInitialize()
@@ -60,7 +60,7 @@
 	icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/underwear.dmi'
 	anthro_mob_worn_overlay = 'modular_bluemoon/icons/mob/clothing/underwear_digi.dmi'
-	icon_state = "polypantyhose_faux"
+	icon_state = "polypantyhose_faux_less"
 	var/polychromic = TRUE
 
 /obj/item/clothing/underwear/socks/poly_pantyhose_faux_crotchless/ComponentInitialize()

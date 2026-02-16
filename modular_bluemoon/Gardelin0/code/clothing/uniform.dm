@@ -2,7 +2,7 @@
 	name = "white dress"
 	desc = "A tight white dress"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "dress_white"
 	item_state = "dress_white"
 	body_parts_covered = CHEST|GROIN
@@ -14,7 +14,7 @@
 	name = "black jumpskirt"
 	desc = "A black jumpskirt, with a pink undershirt."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "blackjumpskirt"
 	item_state = "blackjumpskirt"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -26,7 +26,7 @@
 	name = "silk gown"
 	desc = "A long silky sleeveless gown with a flared hem."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "gowndress"
 	item_state = "gowndress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -39,7 +39,7 @@
 	name = "maxi dress"
 	desc = "A sleeveless dress that reaches the wearer's ankles."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "longdress"
 	item_state = "longdress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -52,7 +52,7 @@
 	name = "transparent nightie"
 	desc = "Famous girls nightwear. You can see right through it!"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "nightie"
 	item_state = "nightie"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -63,7 +63,7 @@
 	name = "short dress"
 	desc = "A short plain sleeveless dress."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "shortdress"
 	item_state = "shortdress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -74,7 +74,7 @@
 	name = "mini dress"
 	desc = "A very short plain sleeveless dress. It almost covers nothing at all!"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "minidress"
 	item_state = "minidress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -85,7 +85,7 @@
 	name = "tight evening dress"
 	desc = "A fancy short plain sleeveless dress. It is really tight!"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "tightevening"
 	item_state = "tightevening"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -96,7 +96,7 @@
 	name = "leather skirt"
 	desc = "A short skirt, made of leather material."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "skirt_leather"
 	item_state = "skirt_leather"
 	body_parts_covered = GROIN
@@ -108,7 +108,7 @@
 	name = "short skirt"
 	desc = "A short skirt, made of some semi-gloss material."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "skirt_short"
 	item_state = "skirt_short"
 	body_parts_covered = GROIN
@@ -120,7 +120,7 @@
 	name = "long skirt"
 	desc = "A long skirt, made of some semi-gloss material that reaches the wearer's ankles."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "skirt_long"
 	item_state = "skirt_long"
 	body_parts_covered = GROIN|LEGS
@@ -134,7 +134,7 @@
 	name = "pleated skirt"
 	desc = "A pleated skirt, made of some semi-gloss material."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "skirt_pleated"
 	item_state = "skirt_pleated"
 	body_parts_covered = GROIN
@@ -146,7 +146,7 @@
 	name = "short pleated skirt"
 	desc = "A short pleated skirt, made of some semi-gloss material."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "skirt_pleatedshort"
 	item_state = "skirt_pleatedshort"
 	body_parts_covered = GROIN
@@ -158,7 +158,7 @@
 	name = "vintage dress"
 	desc = "Makes you want to dance!"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "vintage_dress"
 	item_state = "vintage_dress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -169,7 +169,7 @@
 	name = "fancy evening dress"
 	desc = "An evening dress made with the finest silk."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "evening"
 	item_state = "evening"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -186,7 +186,7 @@
 	name = "party dress"
 	desc = "Fancy and with style!"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "party_dress"
 	item_state = "party_dress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -197,7 +197,7 @@
 	name = "transparent skirt"
 	desc = "A transparent skirt, made for concubines and belly dancers!"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "skirt_transparent"
 	item_state = "skirt_transparent"
 	body_parts_covered = GROIN
@@ -209,7 +209,7 @@
 	name = "half-shoulder white toga"
 	desc = "A short simple cloth toga, covering just one of the shoulders. It has a fancy spheric golden button."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "toga"
 	item_state = "toga"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -220,7 +220,7 @@
 	name = "Revealing Maid Uniform"
 	desc = "A sexy maid uniform, that has a low cropped front to show off some chest, or bra. And a short dress that reveals thighs."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "maid_revealing"
 	item_state = "maid_revealing"
 	fitted = NO_FEMALE_UNIFORM
@@ -231,7 +231,7 @@
 	name = "Sexy Maid Uniform"
 	desc = "A sexy maid uniform that reveals everything."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "sexymaid"
 	item_state = "sexymaid"
 	body_parts_covered = NONE
@@ -243,7 +243,7 @@
 	name = "Turtleneck dress"
 	desc = "It moves with the body, and it's flattering too, because it accentuates the face and elongates the figure."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "turtledress"
 	item_state = "turtledress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -254,8 +254,8 @@
 	name = "Commissar Uniform"
 	desc = "A great way to cosplay the hero of the Imperium!"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
-	anthro_mob_worn_overlay = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform_digi.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
+	anthro_mob_worn_overlay = 'modular_bluemoon/icons/mob/clothing/uniform_digi.dmi'
 	icon_state = "commissar"
 	item_state = "commissar"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_ALL_TAURIC
@@ -264,7 +264,7 @@
 	name = "polychromic sweater"
 	desc = "A polychromic sweater."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "poly_sweater"
 	item_state = "poly_sweater"
 	body_parts_covered = CHEST | ARMS
@@ -311,7 +311,7 @@
 	name = "shoulderless polychromic sweater"
 	desc = "A polychromic sweater made for the girls, who like to flash their shoulders."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "poly_sweater_shoulderless"
 	item_state = "poly_sweater_shoulderless"
 	body_parts_covered = CHEST | ARMS
@@ -358,7 +358,7 @@
 	name = "shoulderless polychromic sweater alt"
 	desc = "A polychromic sweater made for the girls, who like to flash their shoulders."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "poly_sweater_shoulderlessalt"
 	item_state = "poly_sweater_shoulderlessalt"
 	body_parts_covered = CHEST | ARMS
@@ -405,7 +405,7 @@
 	name = "polychromic keyhole sweater"
 	desc = "What is the point of this, anyway?"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/uniforms.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/uniform.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/uniform.dmi'
 	icon_state = "poly_keyholesweater"
 	item_state = "poly_keyholesweater"
 	body_parts_covered = CHEST | ARMS

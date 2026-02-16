@@ -2,14 +2,14 @@
 	name = "medical guard armband"
 	desc = "An armband, usually worn by the station's security forces to display which department they're assigned to."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/accessories.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/accessories.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/accessories.dmi'
 	icon_state = "polyband"
 
 /obj/item/clothing/accessory/waistcoat_color
 	name = "waistcoat"
 	desc = "For some classy, murderous fun."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/accessories.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/accessories.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/accessories.dmi'
 	icon_state = "waistcoat_color"
 	item_state = "waistcoat_color"
 	minimize_when_attached = FALSE
@@ -18,7 +18,7 @@
 	name = "polychromic sweater"
 	desc = "A polychromic sweater."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/accessories.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/accessories.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/accessories.dmi'
 	icon_state = "poly_sweater"
 	item_state = "poly_sweater"
 	minimize_when_attached = FALSE
@@ -62,7 +62,7 @@
 	name = "shoulderless polychromic sweater"
 	desc = "A polychromic sweater made for the girls, who like to flash their shoulders."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/accessories.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/accessories.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/accessories.dmi'
 	icon_state = "poly_sweater_shoulderless"
 	item_state = "poly_sweater_shoulderless"
 	minimize_when_attached = FALSE
@@ -106,7 +106,7 @@
 	name = "shoulderless polychromic sweater alt"
 	desc = "A polychromic sweater made for the girls, who like to flash their shoulders."
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/accessories.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/accessories.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/accessories.dmi'
 	icon_state = "poly_sweater_shoulderlessalt"
 	item_state = "poly_sweater_shoulderlessalt"
 	minimize_when_attached = FALSE
@@ -150,7 +150,7 @@
 	name = "polychromic keyhole sweater"
 	desc = "What is the point of this, anyway?"
 	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/accessories.dmi'
-	mob_overlay_icon = 'modular_bluemoon/Gardelin0/icons/clothing/worn/accessories.dmi'
+	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/accessories.dmi'
 	icon_state = "poly_keyholesweater"
 	item_state = "poly_keyholesweater"
 	minimize_when_attached = FALSE
