@@ -566,10 +566,24 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		return 1
 	return window_scaling
 
-/client/proc/acquire_dpi()
-	window_scaling = text2num(winget(src, null, "dpi"))
-	if(!isnum(window_scaling) || window_scaling <= 0)
-		window_scaling = 1
+/client/proc/acquire_dpi(max_retries = 3, retry_delay = 2 SECONDS, retrying = FALSE)
+	if(!retrying)
+		window_scaling_retry_count = 0
+
+	var/new_scaling = text2num(winget(src, null, "dpi"))
+	if(isnum(new_scaling) && new_scaling > 0)
+		window_scaling = new_scaling
+		window_scaling_retry_count = 0
+		return TRUE
+
+	window_scaling = 1
+
+	if(window_scaling_retry_count >= max_retries)
+		return FALSE
+
+	window_scaling_retry_count++
+	addtimer(CALLBACK(src, PROC_REF(acquire_dpi), max_retries, retry_delay, TRUE), retry_delay, TIMER_UNIQUE | TIMER_OVERRIDE)
+	return FALSE
 
 /client/proc/normalize_ui_layout(force = TRUE)
 	if(!force)

@@ -43,6 +43,8 @@
 	var/datum/preferences/prefs = null
 	/// The client's UI DPI multiplier reported by BYOND. 1 equals 100% Windows scaling.
 	var/window_scaling = 1
+	/// Current DPI acquisition retry count for delayed post-login reads.
+	var/window_scaling_retry_count = 0
 	var/last_turn = 0
 	var/move_delay = 0
 	var/last_move = 0

@@ -108,13 +108,15 @@ export const recallWindowGeometry = async (options = {}) => {
   if (geometry) {
     logger.log('recalled geometry:', geometry);
   }
+  const scaleValue = Number(options.scale);
+  const useScaledMode = Number.isFinite(scaleValue) && scaleValue !== 1;
   let pos = geometry?.pos || options.pos;
   let size = options.size;
   // Convert size from css-pixels to display-pixels if UI scaling mode is enabled.
-  if (options.scale && size) {
+  if (useScaledMode && size) {
     size = [size[0] * pixelRatio, size[1] * pixelRatio];
   }
-  if (!options.scale) {
+  if (!useScaledMode) {
     document.body.style.zoom = `${100 / pixelRatio}%`;
     document.documentElement.style.setProperty('--scaling-amount', pixelRatio.toString());
   }
@@ -124,10 +126,12 @@ export const recallWindowGeometry = async (options = {}) => {
   }
   // Wait until screen offset gets resolved
   await screenOffsetPromise;
-  const areaAvailable = [
-    window.screen.availWidth,
-    window.screen.availHeight,
-  ];
+  const areaAvailable = useScaledMode
+    ? getScreenSize()
+    : [
+      window.screen.availWidth,
+      window.screen.availHeight,
+    ];
   // Set window size
   if (size) {
     // Constraint size to not exceed available screen area.
