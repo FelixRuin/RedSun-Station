@@ -207,6 +207,7 @@ export const storeWindowGeometry = async () => {
 
 export const recallWindowGeometry = async (options = {}) => {
   let geometry;
+  let geometryReadyForReveal = false;
   try {
     const rawScale = options.scale;
     const hasScale = rawScale !== undefined
@@ -263,7 +264,14 @@ export const recallWindowGeometry = async (options = {}) => {
         Math.min(areaAvailable[1], size[1]),
       ];
       setWindowSize(size);
-      await waitForWindowSizeApplied(size);
+      const sizeApplyResult = await waitForWindowSizeApplied(size);
+      geometryReadyForReveal = sizeApplyResult.matched;
+      if (!sizeApplyResult.matched) {
+        logger.warn('window size was not applied before reveal gate timeout', sizeApplyResult);
+      }
+    }
+    else {
+      geometryReadyForReveal = true;
     }
     // Set window position
     if (pos) {
@@ -283,7 +291,9 @@ export const recallWindowGeometry = async (options = {}) => {
     }
   }
   finally {
-    markInitialGeometryReady();
+    if (geometryReadyForReveal) {
+      markInitialGeometryReady();
+    }
   }
 };
 

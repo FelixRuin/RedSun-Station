@@ -122,7 +122,7 @@ export const backendReducer = (state = initialState, action) => {
 };
 
 export const backendMiddleware = store => {
-  const INITIAL_VISIBILITY_GATE_TIMEOUT = 300;
+  const INITIAL_VISIBILITY_GATE_TIMEOUT = 500;
   let fancyState;
   let suspendInterval;
 
