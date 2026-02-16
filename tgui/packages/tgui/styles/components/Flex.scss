@@ -10,3 +10,9 @@
 .Flex--inline {
   display: inline-flex;
 }
+
+// A large amount of legacy TGUI assumes a single child inside Flex
+// should naturally fill the available width.
+.Flex > .Flex__item:only-child {
+  flex: 1 1 auto;
+}

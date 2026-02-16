@@ -25,8 +25,11 @@ const DEFAULT_SIZE = [400, 600];
 
 export class Window extends Component {
   componentDidMount() {
-    const { suspended } = useBackend(this.context);
+    const { suspended, config } = useBackend(this.context);
     const { canClose = true } = this.props;
+    this._wasSuspended = suspended;
+    this._lastWindowKey = config.window?.key;
+    this._lastWindowScale = config.window?.scale;
     if (suspended) {
       return;
     }
@@ -38,13 +41,21 @@ export class Window extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { suspended, config } = useBackend(this.context);
+    const wasSuspended = this._wasSuspended;
     const shouldUpdateGeometry = (
       this.props.width !== prevProps.width
       || this.props.height !== prevProps.height
+      || (wasSuspended && !suspended)
+      || this._lastWindowKey !== config.window?.key
+      || this._lastWindowScale !== config.window?.scale
     );
-    if (shouldUpdateGeometry) {
+    if (!suspended && shouldUpdateGeometry) {
       this.updateGeometry();
     }
+    this._wasSuspended = suspended;
+    this._lastWindowKey = config.window?.key;
+    this._lastWindowScale = config.window?.scale;
   }
 
   updateGeometry() {

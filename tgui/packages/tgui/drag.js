@@ -208,31 +208,49 @@ export const storeWindowGeometry = async () => {
 export const recallWindowGeometry = async (options = {}) => {
   let geometry;
   try {
+    const rawScale = options.scale;
+    const hasScale = rawScale !== undefined
+      && rawScale !== null
+      && rawScale !== '';
+    const scaleValue = Number(rawScale);
+    const validScale = hasScale
+      && Number.isFinite(scaleValue)
+      && scaleValue > 0;
+    const useScaledMode = hasScale && validScale;
+    const displayScale = pixelRatio;
+    if (useScaledMode) {
+      // Keep neutral browser zoom in DPI-aware mode.
+      document.body.style.zoom = '100%';
+      document.documentElement.style.removeProperty('--scaling-amount');
+    }
+    else {
+      // Legacy fallback for invalid/missing scale payloads.
+      document.body.style.zoom = `${100 / pixelRatio}%`;
+      document.documentElement.style.setProperty('--scaling-amount', pixelRatio.toString());
+    }
     // Only recall geometry in fancy mode
-    geometry = options.fancy && await storage.get(windowKey);
+    if (options.fancy) {
+      try {
+        geometry = await storage.get(windowKey);
+      }
+      catch {}
+    }
     if (geometry) {
       logger.log('recalled geometry:', geometry);
     }
-    const scaleValue = Number(options.scale);
-    const useScaledMode = Number.isFinite(scaleValue) && scaleValue !== 1;
     let pos = geometry?.pos || options.pos;
     let size = options.size;
     // Convert size from css-pixels to display-pixels if UI scaling mode is enabled.
     if (useScaledMode && size) {
-      size = [size[0] * pixelRatio, size[1] * pixelRatio];
-    }
-    if (!useScaledMode) {
-      document.body.style.zoom = `${100 / pixelRatio}%`;
-      document.documentElement.style.setProperty('--scaling-amount', pixelRatio.toString());
-    }
-    else {
-      document.body.style.zoom = '';
-      document.documentElement.style.removeProperty('--scaling-amount');
+      size = [size[0] * displayScale, size[1] * displayScale];
     }
     // Wait until screen offset gets resolved
     await screenOffsetPromise;
     const areaAvailable = useScaledMode
-      ? getScreenSize()
+      ? [
+        window.screen.availWidth * displayScale,
+        window.screen.availHeight * displayScale,
+      ]
       : [
         window.screen.availWidth,
         window.screen.availHeight,
