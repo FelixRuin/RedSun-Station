@@ -2,7 +2,7 @@
 /obj/item/clothing/ears/earring
 	name = "earrings"
 	desc = "Earrings of some kind."
-	icon = 'modular_bluemoon/Gardelin0/icons/clothing/object/earrings.dmi'
+	icon = 'modular_bluemoon/icons/obj/clothing/accessories.dmi'
 
 /obj/item/clothing/ears/earring/stud
 	name = "pearl stud earrings"
