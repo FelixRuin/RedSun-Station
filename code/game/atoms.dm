@@ -1210,7 +1210,9 @@
 		if(TOOL_CROWBAR)
 			return crowbar_act(user, I)
 		if(TOOL_MULTITOOL)
-			return multitool_act(user, I)
+			. = multitool_act(user, I)
+			I.update_icon()
+			return
 		if(TOOL_SCREWDRIVER)
 			return screwdriver_act(user, I)
 		if(TOOL_WRENCH)
