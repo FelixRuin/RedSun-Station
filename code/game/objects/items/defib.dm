@@ -237,6 +237,8 @@
 
 /obj/item/defibrillator/proc/cooldowncheck(mob/user)
 	spawn(50)
+		if(QDELETED(src) || QDELETED(paddles))
+			return
 		if(cell)
 			if(cell.charge >= paddles.revivecost)
 				user.visible_message("<span class='notice'>[src] beeps: Unit ready.</span>")

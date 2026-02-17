@@ -126,6 +126,12 @@
 	var/dwarf_mob = FALSE
 	var/mob/living/carbon/human/stored_mob
 
+/mob/living/simple_animal/hostile/asteroid/hivelord/legion/Destroy()
+	if(stored_mob)
+		stored_mob.forceMove(get_turf(src))
+		stored_mob = null
+	return ..()
+
 /mob/living/simple_animal/hostile/asteroid/hivelord/legion/random/Initialize(mapload)
 	. = ..()
 	if(prob(5))

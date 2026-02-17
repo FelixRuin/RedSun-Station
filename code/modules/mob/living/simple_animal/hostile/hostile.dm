@@ -75,9 +75,13 @@
 
 
 /mob/living/simple_animal/hostile/Destroy()
+	deltimer(lose_patience_timer_id)
+	deltimer(search_objects_timer_id)
 	targets_from = null
+	target = null
 	friends = null
 	foes = null
+	enemies = null
 	return ..()
 
 /mob/living/simple_animal/hostile/BiologicalLife(delta_time, times_fired)
@@ -441,7 +445,7 @@
 
 
 /mob/living/simple_animal/hostile/proc/Shoot(atom/targeted_atom)
-	if( QDELETED(targeted_atom) || targeted_atom == targets_from.loc || targeted_atom == targets_from )
+	if(QDELETED(src) || QDELETED(targeted_atom) || targeted_atom == targets_from?.loc || targeted_atom == targets_from)
 		return
 	var/turf/startloc = get_turf(targets_from)
 	if(casingtype)
