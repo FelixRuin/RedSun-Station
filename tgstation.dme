@@ -4531,6 +4531,7 @@
 #include "modular_bluemoon\code\modules\language\demonic.dm"
 #include "modular_bluemoon\code\modules\language\felinid.dm"
 #include "modular_bluemoon\code\modules\language\german.dm"
+#include "modular_bluemoon\code\modules\language\skrellian.dm"
 #include "modular_bluemoon\code\modules\language\vox.dm"
 #include "modular_bluemoon\code\modules\lewd_russian_revlover\lewd_russian_revolver.dm"
 #include "modular_bluemoon\code\modules\lewd_structures\_kits.dm"
