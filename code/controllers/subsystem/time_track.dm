@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(time_track)
 	name = "Time Tracking"
-	wait = 10
+	wait = 5
 	flags = SS_NO_TICK_CHECK
 	init_order = INIT_ORDER_TIMETRACK
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
@@ -53,9 +53,11 @@ SUBSYSTEM_DEF(time_track)
 	var/current_realtime = REALTIMEOFDAY
 	var/current_byondtime = world.time
 	var/current_tickcount = world.time/world.tick_lag
-	GLOB.glide_size_multiplier = (current_byondtime - last_tick_byond_time) / (current_realtime - last_tick_realtime)
+	var/raw_multiplier = (current_byondtime - last_tick_byond_time) / (current_realtime - last_tick_realtime)
+	// Smooth the multiplier to prevent jerky visual glide transitions during load spikes
+	GLOB.glide_size_multiplier = MC_AVERAGE_FAST(GLOB.glide_size_multiplier, raw_multiplier)
 
-	if(times_fired % 10)	// everything else is once every 10 seconds
+	if(times_fired % 20)	// everything else is once every 10 seconds (wait=5 * 20 = 100ds)
 		return
 
 	if (!first_run)

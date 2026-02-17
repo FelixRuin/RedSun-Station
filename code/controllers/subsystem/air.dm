@@ -111,6 +111,16 @@ SUBSYSTEM_DEF(air)
 /datum/controller/subsystem/air/fire(resumed = 0)
 	var/timer = TICK_USAGE_REAL
 
+	// Adaptive throttling: reduce atmos processing intensity when server is lagging
+	if(!resumed && SStime_track?.initialized)
+		var/dilation = SStime_track.time_dilation_avg_fast
+		if(dilation > 40)
+			share_max_steps = 1
+		else if(dilation > 20)
+			share_max_steps = max(1, share_max_steps_target - 1)
+		else
+			share_max_steps = share_max_steps_target
+
 	thread_wait_ticks = MC_AVERAGE(thread_wait_ticks, cur_thread_wait_ticks)
 	cur_thread_wait_ticks = 0
 

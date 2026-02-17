@@ -2,6 +2,9 @@ GLOBAL_LIST_EMPTY(lighting_update_lights) // List of lighting sources  queued fo
 GLOBAL_LIST_EMPTY(lighting_update_corners) // List of lighting corners  queued for update.
 GLOBAL_LIST_EMPTY(lighting_update_objects) // List of lighting objects queued for update.
 
+/// Maximum items per phase per fire to prevent lighting from monopolizing tick budget during large events
+#define LIGHTING_MAX_ITEMS_PER_PHASE 75
+
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
 	wait = 2
@@ -32,7 +35,9 @@ SUBSYSTEM_DEF(lighting)
 	if(!init_tick_checks)
 		MC_SPLIT_TICK
 	var/i = 0
-	for (i in 1 to GLOB.lighting_update_lights.len)
+	var/phase_limit
+	phase_limit = init_tick_checks ? GLOB.lighting_update_lights.len : min(GLOB.lighting_update_lights.len, LIGHTING_MAX_ITEMS_PER_PHASE)
+	for (i in 1 to phase_limit)
 		var/datum/light_source/L = GLOB.lighting_update_lights[i]
 
 		L.update_corners()
@@ -50,7 +55,8 @@ SUBSYSTEM_DEF(lighting)
 	if(!init_tick_checks)
 		MC_SPLIT_TICK
 
-	for (i in 1 to GLOB.lighting_update_corners.len)
+	phase_limit = init_tick_checks ? GLOB.lighting_update_corners.len : min(GLOB.lighting_update_corners.len, LIGHTING_MAX_ITEMS_PER_PHASE)
+	for (i in 1 to phase_limit)
 		var/datum/lighting_corner/C = GLOB.lighting_update_corners[i]
 
 		C.update_objects()
@@ -67,7 +73,8 @@ SUBSYSTEM_DEF(lighting)
 	if(!init_tick_checks)
 		MC_SPLIT_TICK
 
-	for (i in 1 to GLOB.lighting_update_objects.len)
+	phase_limit = init_tick_checks ? GLOB.lighting_update_objects.len : min(GLOB.lighting_update_objects.len, LIGHTING_MAX_ITEMS_PER_PHASE)
+	for (i in 1 to phase_limit)
 		var/datum/lighting_object/O = GLOB.lighting_update_objects[i]
 
 		if (QDELETED(O))

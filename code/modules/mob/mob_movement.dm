@@ -118,10 +118,6 @@
 
 	SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_MOVE, src, direction, n, oldloc, add_delay)
 
-/mob/Moved(atom/OldLoc, Dir)
-	. = ..()
-	if(client)
-		client.parallax_holder.Update()
 
 /// Process_Grab(): checks for grab, attempts to break if so. Return TRUE to prevent movement.
 /client/proc/Process_Grab()
