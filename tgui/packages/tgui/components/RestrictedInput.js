@@ -147,7 +147,8 @@ export class RestrictedInput extends Component {
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
           ref={this.inputRef}
-          type="number"
+          type="text"
+          inputMode="numeric"
         />
       </Box>
     );
