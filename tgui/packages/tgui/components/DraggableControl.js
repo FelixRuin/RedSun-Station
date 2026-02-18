@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+import { KEY_ENTER, KEY_ESCAPE } from 'common/keycodes';
 import { clamp } from 'common/math';
 import { pureComponentHooks } from 'common/react';
 import { Component, createRef } from 'inferno';
@@ -251,7 +252,7 @@ export class DraggableControl extends Component {
           }
         }}
         onKeyDown={e => {
-          if (e.keyCode === 13) {
+          if (e.key === KEY_ENTER) {
             let value;
             if (unclamped) {
               value = parseFloat(e.target.value);
@@ -281,7 +282,7 @@ export class DraggableControl extends Component {
             }
             return;
           }
-          if (e.keyCode === 27) {
+          if (e.key === KEY_ESCAPE) {
             this.setState({
               editing: false,
             });

@@ -71,9 +71,8 @@ export const Button = props => {
         }
       }}
       onKeyDown={e => {
-        const keyCode = window.event ? e.which : e.keyCode;
         // Simulate a click when pressing space or enter.
-        if (keyCode === KEY_SPACE || keyCode === KEY_ENTER) {
+        if (e.key === KEY_SPACE || e.key === KEY_ENTER) {
           e.preventDefault();
           if (!disabled && onClick) {
             onClick(e);
@@ -81,7 +80,7 @@ export const Button = props => {
           return;
         }
         // Refocus layout on pressing escape.
-        if (keyCode === KEY_ESCAPE) {
+        if (e.key === KEY_ESCAPE) {
           e.preventDefault();
           return;
         }
@@ -271,12 +270,12 @@ export class ButtonInput extends Component {
             this.commitResult(e);
           }}
           onKeyDown={e => {
-            if (e.keyCode === KEY_ENTER) {
+            if (e.key === KEY_ENTER) {
               this.setInInput(false);
               this.commitResult(e);
               return;
             }
-            if (e.keyCode === KEY_ESCAPE) {
+            if (e.key === KEY_ESCAPE) {
               this.setInInput(false);
             }
           }}

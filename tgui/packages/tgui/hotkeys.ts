@@ -15,7 +15,7 @@ const logger = createLogger('hotkeys');
 const byondMacros: Record<string, string> = {};
 
 // Default set of acquired keys, which will not be sent to BYOND.
-const hotKeysAcquired = [
+const hotKeysAcquired: string[] = [
   keycodes.KEY_ESCAPE,
   keycodes.KEY_ENTER,
   keycodes.KEY_SPACE,
@@ -32,35 +32,53 @@ const hotKeysAcquired = [
 // State of passed-through keys.
 const keyState: Record<string, boolean> = {};
 
+// Maps event.key → BYOND direction names
+const BYOND_DIRECTION_MAP: Record<string, string> = {
+  'ArrowLeft': 'West',
+  'ArrowUp': 'North',
+  'ArrowRight': 'East',
+  'ArrowDown': 'South',
+  'PageUp': 'Northeast',
+  'PageDown': 'Southeast',
+  'End': 'Southwest',
+  'Home': 'Northwest',
+};
+
 /**
- * Converts a browser keycode to BYOND keycode.
+ * Converts a KeyEvent to BYOND key name.
  */
-const keyCodeToByond = (keyCode: number) => {
-  if (keyCode === 16) return 'Shift';
-  if (keyCode === 17) return 'Ctrl';
-  if (keyCode === 18) return 'Alt';
-  if (keyCode === 33) return 'Northeast';
-  if (keyCode === 34) return 'Southeast';
-  if (keyCode === 35) return 'Southwest';
-  if (keyCode === 36) return 'Northwest';
-  if (keyCode === 37) return 'West';
-  if (keyCode === 38) return 'North';
-  if (keyCode === 39) return 'East';
-  if (keyCode === 40) return 'South';
-  if (keyCode === 45) return 'Insert';
-  if (keyCode === 46) return 'Delete';
-  if (keyCode >= 48 && keyCode <= 57 || keyCode >= 65 && keyCode <= 90) {
-    return String.fromCharCode(keyCode);
+const keyToByond = (keyEvent: KeyEvent): string | undefined => {
+  const { key, code } = keyEvent;
+
+  // Numpad digits — distinguish via event.code
+  if (/^Numpad\d$/.test(code)) {
+    return 'Numpad' + code.slice(6);
   }
-  if (keyCode >= 96 && keyCode <= 105) {
-    return 'Numpad' + (keyCode - 96);
+
+  // Direction/navigation keys
+  if (BYOND_DIRECTION_MAP[key]) {
+    return BYOND_DIRECTION_MAP[key];
   }
-  if (keyCode >= 112 && keyCode <= 123) {
-    return 'F' + (keyCode - 111);
+
+  // Modifier and special keys
+  if (key === 'Shift') return 'Shift';
+  if (key === 'Control') return 'Ctrl';
+  if (key === 'Alt') return 'Alt';
+  if (key === 'Insert') return 'Insert';
+  if (key === 'Delete') return 'Delete';
+
+  // Single alphanumeric character → uppercase for BYOND
+  if (key.length === 1 && /[a-zA-Z0-9]/.test(key)) {
+    return key.toUpperCase();
   }
-  if (keyCode === 188) return ',';
-  if (keyCode === 189) return '-';
-  if (keyCode === 190) return '.';
+
+  // F-keys
+  if (/^F\d+$/.test(key)) return key;
+
+  // Symbol keys
+  if ([',', '-', '.'].includes(key)) return key;
+
+  return undefined;
 };
 
 /**
@@ -81,10 +99,10 @@ const handlePassthrough = (key: KeyEvent) => {
   // NOTE: Alt modifier can be sticky and conflict-prone.
   if (key.event.defaultPrevented
       || key.isModifierKey()
-      || hotKeysAcquired.includes(key.code)) {
+      || hotKeysAcquired.includes(key.key)) {
     return;
   }
-  const byondKeyCode = keyCodeToByond(key.code);
+  const byondKeyCode = keyToByond(key);
   if (!byondKeyCode) {
     return;
   }
@@ -114,15 +132,15 @@ const handlePassthrough = (key: KeyEvent) => {
  * Acquires a lock on the hotkey, which prevents it from being
  * passed through to BYOND.
  */
-export const acquireHotKey = (keyCode: number) => {
-  hotKeysAcquired.push(keyCode);
+export const acquireHotKey = (key: string) => {
+  hotKeysAcquired.push(key);
 };
 
 /**
  * Makes the hotkey available to BYOND again.
  */
-export const releaseHotKey = (keyCode: number) => {
-  const index = hotKeysAcquired.indexOf(keyCode);
+export const releaseHotKey = (key: string) => {
+  const index = hotKeysAcquired.indexOf(key);
   if (index >= 0) {
     hotKeysAcquired.splice(index, 1);
   }

@@ -33,8 +33,7 @@ const testLocalStorage = testGeneric(() => (
 ));
 
 const testIndexedDb = testGeneric(() => (
-  (window.indexedDB || window.msIndexedDB)
-  && (window.IDBTransaction || window.msIDBTransaction)
+  window.indexedDB && window.IDBTransaction
 ));
 
 class MemoryBackend {
@@ -90,7 +89,7 @@ class IndexedDbBackend {
     this.impl = IMPL_INDEXED_DB;
     /** @type {Promise<IDBDatabase>} */
     this.dbPromise = new Promise((resolve, reject) => {
-      const indexedDB = window.indexedDB || window.msIndexedDB;
+      const indexedDB = window.indexedDB;
       const req = indexedDB.open(INDEXED_DB_NAME, INDEXED_DB_VERSION);
       req.onupgradeneeded = () => {
         try {
