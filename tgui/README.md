@@ -6,8 +6,21 @@ tgui is a robust user interface framework of /tg/station.
 
 tgui is very different from most UIs you will encounter in BYOND programming.
 It is heavily reliant on Javascript and web technologies as opposed to DM.
-If you are familiar with NanoUI (a library which can be found on almost
-every other SS13 codebase), tgui should be fairly easy to pick up.
+It uses **Inferno** (a fast React-compatible library) for rendering and
+**Vite** as the build system.
+
+## Browser Target
+
+BYOND 516 uses **WebView2** (Microsoft Edge / Chromium, version 109+)
+instead of the old Internet Explorer control. This means:
+
+- Full ES2020+ JavaScript support
+- All modern CSS features (flexbox, grid, etc.) work reliably
+- No IE polyfills or `-ms-` CSS prefixes are needed
+- Babel targets Edge 109 (`babel.config.js`), Vite build targets ES2020
+
+See [BYOND 516 Migration Notes](docs/byond-516-migration-notes.md) for a
+detailed overview of what changed.
 
 ## Learn tgui
 
@@ -25,22 +38,22 @@ start with our [practical tutorial](docs/tutorial-and-examples.md).
 This project uses **Inferno** - a very fast UI rendering engine with a similar
 API to React. Take your time to read these guides:
 
-- [React guide](https://reactjs.org/docs/hello-world.html)
+- [React guide](https://react.dev/learn) - Inferno uses the same JSX syntax
+and component model as React.
 - [Inferno documentation](https://infernojs.org/docs/guides/components) -
 highlights differences with React.
-
-If you were already familiar with an older, Ractive-based tgui, and want
-to translate concepts between old and new tgui, read this
-[interface conversion guide](docs/converting-old-tgui-interfaces.md).
 
 ## Pre-requisites
 
 You will need these programs to start developing in tgui:
 
-- [Node v12.18.3+](https://nodejs.org/en/download/)
-- [Yarn v1.22.4+](https://yarnpkg.com/getting-started/install) (optional)
+- [Node v18+](https://nodejs.org/en/download/) (v20 recommended)
 - [Git Bash](https://git-scm.com/downloads)
   or [MSys2](https://www.msys2.org/) (optional)
+
+Yarn 4.12.0 is bundled with the project (via the `packageManager` field
+in `package.json` and `.yarn/releases/`). You do **not** need to install
+Yarn globally.
 
 **DO NOT install Chocolatey if Node installer asks you to!**
 
@@ -64,9 +77,10 @@ either `Open command window here` or `Open PowerShell window here`.
 
 Run `.\bin\tgui.bat` with any of the options listed below.
 
-> If using PowerShell, you will receive errors if trying to run
-> `.\bin\tgui.ps1`, because default Windows policy does not allow direct
-> execution of PS1 scripts. Run `.\bin\tgui.bat` instead.
+> The `.bat` file internally calls `tgui_.ps1` via
+> `powershell.exe -ExecutionPolicy Bypass`. You can also invoke the
+> PowerShell script directly:
+> `powershell.exe -NoLogo -ExecutionPolicy Bypass -File .\bin\tgui_.ps1`
 
 **Available commands:**
 
@@ -76,11 +90,12 @@ Run `.\bin\tgui.bat` with any of the options listed below.
 - `bin/tgui --fix` - Auto-fix problems with the code.
 - `bin/tgui --test` - Run tests.
 - `bin/tgui --analyze` - Build both bundles with source maps for manual analysis.
+- `bin/tgui --lint-harder` - Run stricter lint rules.
 - `bin/tgui --clean` - Clean up project repo.
 - `bin/tgui [vite options]` - Build the project with custom Vite
 options.
 
-**For virgins:**
+**Quick start:**
 
 You can double-click these batch files to achieve the same thing:
 
@@ -137,9 +152,6 @@ look and feel of the browser window. They usually hold various window
 elements, like the titlebar and resize handlers, and control the UI theme.
 - `/packages/tgui/routes.js` - This is where tgui decides which interface to
 pull and render.
-- `/packages/tgui/layout.js` - A root-level component, holding the
-window elements, like the titlebar, buttons, resize handlers. Calls
-`routes.js` to decide which component to render.
 - `/packages/tgui/styles/main.scss` - CSS entry point.
 - `/packages/tgui/styles/functions.scss` - Useful SASS functions.
 Stuff like `lighten`, `darken`, `luminance` are defined here.
