@@ -899,6 +899,7 @@
 #include "code\datums\elements\ventcrawling.dm"
 #include "code\datums\elements\weather_listener.dm"
 #include "code\datums\elements\wuv.dm"
+#include "code\datums\elements\food\dunkable.dm"
 #include "code\datums\elements\screentips\contextual_screentip_bare_hands.dm"
 #include "code\datums\elements\screentips\contextual_screentip_item_typechecks.dm"
 #include "code\datums\elements\screentips\contextual_screentip_sharpness.dm"

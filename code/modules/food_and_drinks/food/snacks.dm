@@ -71,6 +71,11 @@ All foods are distributed among various categories. Use common sense.
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 
+/obj/item/reagent_containers/food/snacks/ComponentInitialize()
+	. = ..()
+	if(dunkable)
+		AddElement(/datum/element/dunkable, dunk_amount)
+
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(tastes && tastes.len)
 		if(list_reagents)
@@ -356,24 +361,6 @@ All foods are distributed among various categories. Use common sense.
 				if(sattisfaction_text)
 					M.emote("me", EMOTE_VISIBLE, "[sattisfaction_text]")
 				qdel(src)
-
-//////////////////////////////////////////Dunking///////////////////////////////////////////
-
-/obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/M, mob/user, proximity)
-	. = ..()
-	if(!dunkable || !proximity)
-		return
-	if(istype(M, /obj/item/reagent_containers/glass) || istype(M, /obj/item/reagent_containers/food/drinks))	//you can dunk dunkable snacks into beakers or drinks
-		if(!M.is_drainable())
-			to_chat(user, "<span class='warning'>[M] is unable to be dunked in!</span>")
-			return
-		if(M.reagents.trans_to(src, dunk_amount, log = TRUE))	//if reagents were transfered, show the message
-			to_chat(user, "<span class='notice'>You dunk the [M].</span>")
-			return
-		if(!M.reagents.total_volume)
-			to_chat(user, "<span class='warning'>[M] is empty!</span>")
-		else
-			to_chat(user, "<span class='warning'>[src] is full!</span>")
 
 // //////////////////////////////////////////////Store////////////////////////////////////////
 /// All the food items that can store an item inside itself, like bread or cake.
