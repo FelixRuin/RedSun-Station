@@ -5,7 +5,7 @@
  */
 
 import { storage } from 'common/storage';
-import { vecAdd, vecMultiply, vecScale, vecSubtract } from 'common/vector';
+import { vecAdd, vecScale } from 'common/vector';
 
 import { createLogger } from './logging';
 
@@ -21,6 +21,11 @@ let dragPointOffset;
 let resizeMatrix;
 let initialSize;
 let size;
+let cachedPixelRatio = 1;
+let dragRafId = null;
+let pendingDragScreen = null;
+let resizeRafId = null;
+let pendingResizeScreen = null;
 let initialGeometryReady = false;
 let resolveInitialGeometryReady;
 let initialGeometryReadyPromise;
@@ -156,6 +161,19 @@ export const setWindowPosition = vec => {
 export const setWindowSize = vec => {
   return Byond.winset(window.__windowId__, {
     size: Math.round(vec[0]) + 'x' + Math.round(vec[1]),
+  });
+};
+
+// Fast inlined setters for the drag/resize hot path (no vector utility overhead)
+const setWindowPositionFast = (x, y) => {
+  Byond.winset(window.__windowId__, {
+    pos: Math.round(x + screenOffset[0]) + ',' + Math.round(y + screenOffset[1]),
+  });
+};
+
+const setWindowSizeFast = (w, h) => {
+  Byond.winset(window.__windowId__, {
+    size: Math.round(w) + 'x' + Math.round(h),
   });
 };
 
@@ -323,12 +341,15 @@ const constraintPosition = (pos, size) => {
 export const dragStartHandler = event => {
   logger.log('drag start');
   dragging = true;
-  const pr = window.devicePixelRatio ?? 1;
-  dragPointOffset = vecSubtract(
-    [event.screenX * pr, event.screenY * pr],
-    getWindowPosition());
+  cachedPixelRatio = window.devicePixelRatio ?? 1;
+  const winPos = getWindowPosition();
+  dragPointOffset = [
+    event.screenX * cachedPixelRatio - winPos[0],
+    event.screenY * cachedPixelRatio - winPos[1],
+  ];
   // Focus click target
   event.target?.focus();
+  document.body.style['pointer-events'] = 'none';
   document.addEventListener('mousemove', dragMoveHandler);
   document.addEventListener('mouseup', dragEndHandler);
   dragMoveHandler(event);
@@ -336,11 +357,33 @@ export const dragStartHandler = event => {
 
 const dragEndHandler = event => {
   logger.log('drag end');
-  dragMoveHandler(event);
+  // Cancel pending RAF and apply final position synchronously
+  if (dragRafId) {
+    cancelAnimationFrame(dragRafId);
+    dragRafId = null;
+  }
+  applyDragPosition(event.screenX, event.screenY);
   document.removeEventListener('mousemove', dragMoveHandler);
   document.removeEventListener('mouseup', dragEndHandler);
+  document.body.style['pointer-events'] = 'auto';
   dragging = false;
+  pendingDragScreen = null;
   storeWindowGeometry();
+};
+
+const applyDragPosition = (screenX, screenY) => {
+  setWindowPositionFast(
+    screenX * cachedPixelRatio - dragPointOffset[0],
+    screenY * cachedPixelRatio - dragPointOffset[1]);
+};
+
+const dragRafCallback = () => {
+  dragRafId = null;
+  if (!dragging || !pendingDragScreen) {
+    return;
+  }
+  applyDragPosition(pendingDragScreen[0], pendingDragScreen[1]);
+  pendingDragScreen = null;
 };
 
 const dragMoveHandler = event => {
@@ -348,23 +391,26 @@ const dragMoveHandler = event => {
     return;
   }
   event.preventDefault();
-  const pr = window.devicePixelRatio ?? 1;
-  setWindowPosition(vecSubtract(
-    [event.screenX * pr, event.screenY * pr],
-    dragPointOffset));
+  pendingDragScreen = [event.screenX, event.screenY];
+  if (!dragRafId) {
+    dragRafId = requestAnimationFrame(dragRafCallback);
+  }
 };
 
 export const resizeStartHandler = (x, y) => event => {
   resizeMatrix = [x, y];
   logger.log('resize start', resizeMatrix);
   resizing = true;
-  const pr = window.devicePixelRatio ?? 1;
-  dragPointOffset = vecSubtract(
-    [event.screenX * pr, event.screenY * pr],
-    getWindowPosition());
+  cachedPixelRatio = window.devicePixelRatio ?? 1;
+  const winPos = getWindowPosition();
+  dragPointOffset = [
+    event.screenX * cachedPixelRatio - winPos[0],
+    event.screenY * cachedPixelRatio - winPos[1],
+  ];
   initialSize = getWindowSize();
   // Focus click target
   event.target?.focus();
+  document.body.style['pointer-events'] = 'none';
   document.addEventListener('mousemove', resizeMoveHandler);
   document.addEventListener('mouseup', resizeEndHandler);
   resizeMoveHandler(event);
@@ -372,11 +418,41 @@ export const resizeStartHandler = (x, y) => event => {
 
 const resizeEndHandler = event => {
   logger.log('resize end', size);
-  resizeMoveHandler(event);
+  // Cancel pending RAF and apply final size synchronously
+  if (resizeRafId) {
+    cancelAnimationFrame(resizeRafId);
+    resizeRafId = null;
+  }
+  applyResizeSize(event.screenX, event.screenY);
   document.removeEventListener('mousemove', resizeMoveHandler);
   document.removeEventListener('mouseup', resizeEndHandler);
+  document.body.style['pointer-events'] = 'auto';
   resizing = false;
+  pendingResizeScreen = null;
   storeWindowGeometry();
+};
+
+const applyResizeSize = (screenX, screenY) => {
+  const winPos = getWindowPosition();
+  const offsetX = screenX * cachedPixelRatio - winPos[0];
+  const offsetY = screenY * cachedPixelRatio - winPos[1];
+  const deltaX = offsetX - dragPointOffset[0];
+  const deltaY = offsetY - dragPointOffset[1];
+  // Extra 1x1 area is added to ensure the browser can see the cursor.
+  size = [
+    Math.max(initialSize[0] + resizeMatrix[0] * deltaX + 1, 150),
+    Math.max(initialSize[1] + resizeMatrix[1] * deltaY + 1, 50),
+  ];
+  setWindowSizeFast(size[0], size[1]);
+};
+
+const resizeRafCallback = () => {
+  resizeRafId = null;
+  if (!resizing || !pendingResizeScreen) {
+    return;
+  }
+  applyResizeSize(pendingResizeScreen[0], pendingResizeScreen[1]);
+  pendingResizeScreen = null;
 };
 
 const resizeMoveHandler = event => {
@@ -384,15 +460,8 @@ const resizeMoveHandler = event => {
     return;
   }
   event.preventDefault();
-  const pr = window.devicePixelRatio ?? 1;
-  const currentOffset = vecSubtract(
-    [event.screenX * pr, event.screenY * pr],
-    getWindowPosition());
-  const delta = vecSubtract(currentOffset, dragPointOffset);
-  // Extra 1x1 area is added to ensure the browser can see the cursor.
-  size = vecAdd(initialSize, vecMultiply(resizeMatrix, delta), [1, 1]);
-  // Sane window size values
-  size[0] = Math.max(size[0], 150);
-  size[1] = Math.max(size[1], 50);
-  setWindowSize(size);
+  pendingResizeScreen = [event.screenX, event.screenY];
+  if (!resizeRafId) {
+    resizeRafId = requestAnimationFrame(resizeRafCallback);
+  }
 };
