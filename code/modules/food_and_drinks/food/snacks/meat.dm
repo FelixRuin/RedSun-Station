@@ -372,6 +372,7 @@
 	name = "fish fillet"
 	icon_state = "grilled_carp_slice"
 	tastes = list("charred sushi" = 1)
+	cooked_type = /obj/item/reagent_containers/food/snacks/dried_fish
 
 /obj/item/reagent_containers/food/snacks/meat/steak/plain
 	foodtype = MEAT

@@ -176,8 +176,7 @@
 /datum/round_event/comet_belt/end()
 	for(var/V in GLOB.player_list)
 		var/mob/M = V
-		if(is_station_level(M.z))
-			REMOVE_TRAIT(M, TRAIT_PACIFISM, "comet_belt")
+		REMOVE_TRAIT(M, TRAIT_PACIFISM, "comet_belt")
 	for(var/client/C in saved_ambience_clients)
 		if(!C?.mob)
 			continue
