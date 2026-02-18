@@ -10,7 +10,6 @@ import { vecAdd, vecMultiply, vecScale, vecSubtract } from 'common/vector';
 import { createLogger } from './logging';
 
 const logger = createLogger('drag');
-const pixelRatio = window.devicePixelRatio ?? 1;
 const now = () => Date.now ? Date.now() : +new Date();
 
 let windowKey = window.__windowId__;
@@ -48,23 +47,30 @@ export const setWindowKey = key => {
 export const waitForInitialGeometryReady = () => initialGeometryReadyPromise;
 resetInitialGeometryReady();
 
-export const getWindowPosition = () => [
-  window.screenLeft * pixelRatio,
-  window.screenTop * pixelRatio,
-];
+export const getWindowPosition = () => {
+  const pr = window.devicePixelRatio ?? 1;
+  return [
+    Math.round(window.screenLeft * pr),
+    Math.round(window.screenTop * pr),
+  ];
+};
 
-export const getWindowSize = () => [
-  window.innerWidth * pixelRatio,
-  window.innerHeight * pixelRatio,
-];
+export const getWindowSize = () => {
+  const pr = window.devicePixelRatio ?? 1;
+  return [
+    Math.round(window.innerWidth * pr),
+    Math.round(window.innerHeight * pr),
+  ];
+};
 
 const SIZE_APPLY_TIMEOUT_MS = 250;
-const SIZE_APPLY_EPSILON = Math.max(2, Math.ceil(pixelRatio * 2));
 
 const isWindowSizeApplied = targetSize => {
+  const pr = window.devicePixelRatio ?? 1;
+  const epsilon = Math.max(2, Math.ceil(pr * 2));
   const currentSize = getWindowSize();
-  return Math.abs(currentSize[0] - targetSize[0]) <= SIZE_APPLY_EPSILON
-    && Math.abs(currentSize[1] - targetSize[1]) <= SIZE_APPLY_EPSILON;
+  return Math.abs(currentSize[0] - targetSize[0]) <= epsilon
+    && Math.abs(currentSize[1] - targetSize[1]) <= epsilon;
 };
 
 const waitForWindowSizeApplied = targetSize => {
@@ -140,15 +146,16 @@ const waitForWindowSizeApplied = targetSize => {
 };
 
 export const setWindowPosition = vec => {
-  const byondPos = vecAdd(vec, screenOffset);
+  // All internal coordinates are physical (BYOND) pixels.
+  const physPos = vecAdd(vec, screenOffset);
   return Byond.winset(window.__windowId__, {
-    pos: byondPos[0] + ',' + byondPos[1],
+    pos: Math.round(physPos[0]) + ',' + Math.round(physPos[1]),
   });
 };
 
 export const setWindowSize = vec => {
   return Byond.winset(window.__windowId__, {
-    size: vec[0] + 'x' + vec[1],
+    size: Math.round(vec[0]) + 'x' + Math.round(vec[1]),
   });
 };
 
@@ -157,10 +164,13 @@ export const getScreenPosition = () => [
   0 - screenOffset[1],
 ];
 
-export const getScreenSize = () => [
-  window.screen.availWidth * pixelRatio,
-  window.screen.availHeight * pixelRatio,
-];
+export const getScreenSize = () => {
+  const pr = window.devicePixelRatio ?? 1;
+  return [
+    Math.round(window.screen.availWidth * pr),
+    Math.round(window.screen.availHeight * pr),
+  ];
+};
 
 /**
  * Moves an item to the top of the recents array, and keeps its length
@@ -209,26 +219,10 @@ export const recallWindowGeometry = async (options = {}) => {
   let geometry;
   let geometryReadyForReveal = false;
   try {
-    const rawScale = options.scale;
-    const hasScale = rawScale !== undefined
-      && rawScale !== null
-      && rawScale !== '';
-    const scaleValue = Number(rawScale);
-    const validScale = hasScale
-      && Number.isFinite(scaleValue)
-      && scaleValue > 0;
-    const useScaledMode = hasScale && validScale;
-    const displayScale = pixelRatio;
-    if (useScaledMode) {
-      // Keep neutral browser zoom in DPI-aware mode.
-      document.body.style.zoom = '100%';
-      document.documentElement.style.removeProperty('--scaling-amount');
-    }
-    else {
-      // Legacy fallback for invalid/missing scale payloads.
-      document.body.style.zoom = `${100 / pixelRatio}%`;
-      document.documentElement.style.setProperty('--scaling-amount', pixelRatio.toString());
-    }
+    // Use legacy zoom mode: scale content down to compensate for DPI.
+    // This preserves physical window size at any DPI, matching browser.dm behavior.
+    const pixelRatio = window.devicePixelRatio ?? 1;
+    document.body.style.zoom = `${100 / pixelRatio}%`;
     // Only recall geometry in fancy mode
     if (options.fancy) {
       try {
@@ -241,21 +235,13 @@ export const recallWindowGeometry = async (options = {}) => {
     }
     let pos = geometry?.pos || options.pos;
     let size = options.size;
-    // Convert size from css-pixels to display-pixels if UI scaling mode is enabled.
-    if (useScaledMode && size) {
-      size = [size[0] * displayScale, size[1] * displayScale];
-    }
     // Wait until screen offset gets resolved
     await screenOffsetPromise;
-    const areaAvailable = useScaledMode
-      ? [
-        window.screen.availWidth * displayScale,
-        window.screen.availHeight * displayScale,
-      ]
-      : [
-        window.screen.availWidth,
-        window.screen.availHeight,
-      ];
+    // All coordinates are physical (BYOND) pixels.
+    const areaAvailable = [
+      Math.round(window.screen.availWidth * pixelRatio),
+      Math.round(window.screen.availHeight * pixelRatio),
+    ];
     // Set window size
     if (size) {
       // Constraint size to not exceed available screen area.
@@ -298,7 +284,8 @@ export const recallWindowGeometry = async (options = {}) => {
 };
 
 export const setupDrag = async () => {
-  // Calculate screen offset caused by the windows taskbar
+  // Calculate screen offset caused by the windows taskbar.
+  // Both Byond.winget and getWindowPosition return physical pixels.
   const windowPosition = getWindowPosition();
   screenOffsetPromise = Byond.winget(window.__windowId__, 'pos')
     .then(pos => [
@@ -336,8 +323,9 @@ const constraintPosition = (pos, size) => {
 export const dragStartHandler = event => {
   logger.log('drag start');
   dragging = true;
+  const pr = window.devicePixelRatio ?? 1;
   dragPointOffset = vecSubtract(
-    [event.screenX * pixelRatio, event.screenY * pixelRatio],
+    [event.screenX * pr, event.screenY * pr],
     getWindowPosition());
   // Focus click target
   event.target?.focus();
@@ -360,8 +348,9 @@ const dragMoveHandler = event => {
     return;
   }
   event.preventDefault();
+  const pr = window.devicePixelRatio ?? 1;
   setWindowPosition(vecSubtract(
-    [event.screenX * pixelRatio, event.screenY * pixelRatio],
+    [event.screenX * pr, event.screenY * pr],
     dragPointOffset));
 };
 
@@ -369,8 +358,9 @@ export const resizeStartHandler = (x, y) => event => {
   resizeMatrix = [x, y];
   logger.log('resize start', resizeMatrix);
   resizing = true;
+  const pr = window.devicePixelRatio ?? 1;
   dragPointOffset = vecSubtract(
-    [event.screenX * pixelRatio, event.screenY * pixelRatio],
+    [event.screenX * pr, event.screenY * pr],
     getWindowPosition());
   initialSize = getWindowSize();
   // Focus click target
@@ -394,14 +384,15 @@ const resizeMoveHandler = event => {
     return;
   }
   event.preventDefault();
+  const pr = window.devicePixelRatio ?? 1;
   const currentOffset = vecSubtract(
-    [event.screenX * pixelRatio, event.screenY * pixelRatio],
+    [event.screenX * pr, event.screenY * pr],
     getWindowPosition());
   const delta = vecSubtract(currentOffset, dragPointOffset);
   // Extra 1x1 area is added to ensure the browser can see the cursor.
   size = vecAdd(initialSize, vecMultiply(resizeMatrix, delta), [1, 1]);
   // Sane window size values
-  size[0] = Math.max(size[0], 150 * pixelRatio);
-  size[1] = Math.max(size[1], 50 * pixelRatio);
+  size[0] = Math.max(size[0], 150);
+  size[1] = Math.max(size[1], 50);
   setWindowSize(size);
 };
