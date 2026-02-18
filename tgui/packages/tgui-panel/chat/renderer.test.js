@@ -30,19 +30,16 @@ const setupScrollMetrics = (node, {
 };
 
 describe('ChatRenderer', () => {
-  let originalSetImmediate;
+  let originalQueueMicrotask;
 
   beforeEach(() => {
-    originalSetImmediate = global.setImmediate;
-    global.setImmediate = jest.fn(callback => {
-      callback();
-      return 0;
-    });
+    originalQueueMicrotask = global.queueMicrotask;
+    global.queueMicrotask = jest.fn(callback => callback());
     jest.spyOn(global, 'setInterval').mockImplementation(() => 0);
   });
 
   afterEach(() => {
-    global.setImmediate = originalSetImmediate;
+    global.queueMicrotask = originalQueueMicrotask;
     jest.restoreAllMocks();
   });
 
