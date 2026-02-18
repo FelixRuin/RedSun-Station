@@ -57,7 +57,8 @@
 		inline_html = "",
 		inline_js = "",
 		inline_css = "")
-	log_tgui(client, "[id]/initialize ([src])")
+	if(CONFIG_GET(flag/emergency_tgui_logging))
+		log_tgui(client, "[id]/initialize ([src])")
 	if(!client)
 		return
 	src.initial_fancy = fancy
@@ -261,7 +262,8 @@
 		if(!logout && client)
 			winset(client, null, "mapwindow.map.focus=true")
 		return
-	log_tgui(client, "[id]/close")
+	if(CONFIG_GET(flag/emergency_tgui_logging))
+		log_tgui(client, "[id]/close")
 	release_lock()
 	status = TGUI_WINDOW_CLOSED
 	message_queue = null
