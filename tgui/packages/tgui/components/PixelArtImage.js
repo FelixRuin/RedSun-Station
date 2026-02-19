@@ -16,7 +16,11 @@ export class PixelArtImage extends Component {
     this.image.onload = this.handleImageLoad;
     this.image.src = this.props.src;
     window.addEventListener('resize', this.handleWindowResize);
-    this.recomputeSize();
+    // Defer to let flex layout settle before measuring container width
+    this.resizeRaf = requestAnimationFrame(() => {
+      this.resizeRaf = null;
+      this.recomputeSize();
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -60,6 +64,10 @@ export class PixelArtImage extends Component {
     if (!naturalWidth || !naturalHeight) {
       return;
     }
+
+    // Reset canvas size so the container can shrink freely in flex layout
+    canvas.style.width = '0';
+    canvas.style.height = '0';
 
     let displayWidth = Math.floor(container.clientWidth);
     if (!displayWidth) {
