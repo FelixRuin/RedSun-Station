@@ -270,7 +270,7 @@ describe('uniqBy', () => {
       { id: 2, name: 'second' },
       { id: 1, name: 'duplicate' },
     ];
-    const result = uniqBy(x => x.id)(items);
+    const result = uniqBy((x: { id: number; name: string }) => x.id)(items);
     expect(result).toEqual([
       { id: 1, name: 'first' },
       { id: 2, name: 'second' },
@@ -322,11 +322,8 @@ describe('paginate', () => {
   });
 
   test('maxPerPage больше коллекции', () => {
-    // Если коллекция меньше maxPerPage, последняя страница не добавляется
     const result = paginate([1, 2], 5);
-    // BUG: неполная последняя страница теряется!
-    // Ожидаемо: [[1, 2]], реально: []
-    expect(result).toEqual([]);
+    expect(result).toEqual([[1, 2]]);
   });
 
   // BUG: paginate теряет неполную последнюю страницу
