@@ -1050,7 +1050,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	id_select += "</select>"
 
 	var/dat = {"
-	<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'><title>Create Outfit</title></head><body>
 	<form name="outfit" action="byond://?src=[REF(src)];[HrefToken()]" method="get">
 	<input type="hidden" name="src" value="[REF(src)]">
 	[HrefTokenFormField()]
@@ -1161,9 +1160,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	</table>
 	<br>
 	<input type="submit" value="Save">
-	</form></body></html>
+	</form>
 	"}
-	usr << browse(dat, "window=dressup;size=550x600")
+	var/datum/browser/popup = new(usr, "dressup", "Create Outfit", 550, 600)
+	popup.set_content(dat)
+	popup.open(FALSE)
 
 /client/proc/toggle_combo_hud()
 	set category = "Admin.Game"
@@ -1339,7 +1340,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		<a href='?src=[REF(S)];[HrefToken()];remove=1'>Remove</a> | \
 		<a href='?src=[REF(S)];[HrefToken()];complete=1'>Toggle completion flag</a><br>"
 	dat += "<br><a href='?src=[REF(src)];[HrefToken()];add_station_goal=1'>Add New Goal</a>"
-	usr << browse(dat, "window=goals;size=400x400")
+	var/datum/browser/popup = new(usr, "goals", "Station Goals", 400, 400)
+	popup.set_content(dat)
+	popup.open(FALSE)
 
 /client/proc/toggle_hub()
 	set category = "Server"

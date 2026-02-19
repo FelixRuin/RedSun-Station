@@ -678,7 +678,9 @@
 	set name = "Display Initialize() Log"
 	set desc = "Displays a list of things that didn't handle Initialize() properly"
 
-	usr << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
+	var/datum/browser/popup = new(usr, "initlog", "Initialize Log")
+	popup.set_content(replacetext(SSatoms.InitLog(), "\n", "<br>"))
+	popup.open(FALSE)
 
 /client/proc/debug_huds(i as num)
 	set category = "Debug"

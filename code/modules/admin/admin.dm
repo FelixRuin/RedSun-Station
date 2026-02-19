@@ -446,8 +446,9 @@
 		else
 			dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
 
-	usr << browse(dat, "window=admincaster_main;size=400x600")
-	onclose(usr, "admincaster_main")
+	var/datum/browser/popup = new(usr, "admincaster_main", "Admin Newscaster", 400, 600)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/admins/proc/Game()
 	if(!check_rights(0))
@@ -481,7 +482,9 @@
 	if(marked_datum && istype(marked_datum, /atom))
 		dat += "<A href='?src=[REF(src)];[HrefToken()];dupe_marked_datum=1'>Duplicate Marked Datum</A><br>"
 
-	usr << browse(dat, "window=admin2;size=240x280")
+	var/datum/browser/popup = new(usr, "admin2", "Game Panel", 240, 280)
+	popup.set_content(dat)
+	popup.open(FALSE)
 	return
 
 /////////////////////////////////////////////////////////////////////////////////////////////////admins2.dm merge
@@ -959,7 +962,9 @@
 		<br/>The threshold at which "round-ender" rulesets will stack. A value higher than 100 ensure this never happens. <br/>
 		"}
 
-	user << browse(dat, "window=dyn_mode_options;size=900x650")
+	var/datum/browser/popup = new(user, "dyn_mode_options", "Dynamic Mode Options", 900, 650)
+	popup.set_content(dat)
+	popup.open(FALSE)
 
 /datum/admins/proc/create_or_modify_area()
 	set category = "Debug"

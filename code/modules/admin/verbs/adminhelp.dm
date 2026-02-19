@@ -79,13 +79,15 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			title = "Resolved Tickets"
 	if(!l2b)
 		return
-	var/list/dat = list("<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'><title>[title]</title></head>")
+	var/list/dat = list()
 	dat += "<A href='?_src_=holder;[HrefToken()];ahelp_tickets=[state]'>Refresh</A><br><br>"
 	for(var/I in l2b)
 		var/datum/admin_help/AH = I
 		dat += "<span class='adminnotice'><span class='adminhelp'>Ticket #[AH.id]</span>: <A href='?_src_=holder;[HrefToken()];ahelp=[REF(AH)];ahelp_action=ticket'>[AH.initiator_key_name]: [AH.name]</A></span><br>"
 
-	usr << browse(dat.Join(), "window=ahelp_list[state];size=600x480")
+	var/datum/browser/popup = new(usr, "ahelp_list[state]", title, 600, 480)
+	popup.set_content(dat.Join())
+	popup.open(FALSE)
 
 //Tickets statpanel
 /datum/admin_help_tickets/proc/stat_entry()
@@ -489,7 +491,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 //Show the ticket panel
 /datum/admin_help/proc/TicketPanel()
-	var/list/dat = list("<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'><title>Ticket #[id]</title></head>")
+	var/list/dat = list()
 	var/ref_src = "[REF(src)]"
 	dat += "<h4>Admin Help Тикет #[id]: [LinkedReplyName(ref_src)]</h4>"
 	dat += "<b>Статус: "
@@ -519,7 +521,9 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	for(var/I in _interactions)
 		dat += "[I]<br>"
 
-	usr << browse(dat.Join(), "window=ahelp[id];size=620x480")
+	var/datum/browser/popup = new(usr, "ahelp[id]", "Ticket #[id]", 620, 480)
+	popup.set_content(dat.Join())
+	popup.open(FALSE)
 
 /datum/admin_help/proc/Retitle()
 	var/new_title = input(usr, "Введите новое имя тикета", "Переименование тикета", name) as text|null
