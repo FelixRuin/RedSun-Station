@@ -19,7 +19,7 @@
 
 /datum/element/dunkable/proc/on_examine(obj/item/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	examine_list += span_notice("Выглядит так, будто [source.ru_ego()] можно обмакнуть в жидкость.")
+	examine_list += span_notice("Выглядит так, будто [source.ru_ego()] можно [span_bold("обмакнуть")] в жидкость.")
 
 /datum/element/dunkable/proc/get_dunked(obj/item/source, mob/user, atom/target, params)
 	SIGNAL_HANDLER

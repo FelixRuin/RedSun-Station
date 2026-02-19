@@ -515,6 +515,8 @@
 #define COMPONENT_MICROWAVE_SUCCESS (1<<0)
 ///called on item when created through microwaving (): (obj/machinery/microwave/M, cooking_efficiency)
 #define COMSIG_ITEM_MICROWAVE_COOKED "microwave_cooked"
+///called on the ingredient through microwawing: (result)
+#define COMSIG_ITEM_MICROWAVE_COOKED_FROM "item_microwave_cooked_from"
 /// Returned on "failure" - an item was produced but it was the default fail recipe
 #define COMPONENT_MICROWAVE_BAD_RECIPE (1<<1)
 // /obj/item signals for economy

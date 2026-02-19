@@ -76,6 +76,26 @@ All foods are distributed among various categories. Use common sense.
 	if(dunkable)
 		AddElement(/datum/element/dunkable, dunk_amount)
 
+/obj/item/reagent_containers/food/snacks/Initialize(mapload)
+	. = ..()
+	RegisterSignal(src, COMSIG_ITEM_MICROWAVE_COOKED, PROC_REF(on_microwave_cooked))
+	make_microwaveable()
+
+/obj/item/reagent_containers/food/snacks/Destroy()
+	UnregisterSignal(src, COMSIG_ITEM_MICROWAVE_COOKED)
+	if(contents)
+		for(var/atom/movable/something in contents)
+			something.forceMove(drop_location())
+	return ..()
+
+/// This proc handles the microwave component. Overwrite if you want special microwave results.
+/// By default, all food is microwavable. However, they will be microwaved into a bad recipe (burnt mess).
+/obj/item/reagent_containers/food/snacks/proc/make_microwaveable()
+	if(!cooked_type)
+		AddElement(/datum/element/microwavable, /obj/item/reagent_containers/food/snacks/badrecipe, bad_recipe = TRUE)
+	else
+		AddElement(/datum/element/microwavable, cooked_type)
+
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(tastes && tastes.len)
 		if(list_reagents)
@@ -306,47 +326,20 @@ All foods are distributed among various categories. Use common sense.
 
 	add_overlay(filling)
 
-// initialize_cooked_food() is called when microwaving the food
-/obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(obj/item/reagent_containers/food/snacks/S, cooking_efficiency = 1)
-	S.create_reagents(S.volume, reagent_flags, reagent_value)
-	if(reagents)
-		reagents.trans_to(S, reagents.total_volume)
-	if(cooking_efficiency && length(S.bonus_reagents))
-		for(var/r_id in S.bonus_reagents)
-			var/amount = round(S.bonus_reagents[r_id] * cooking_efficiency)
-			if(r_id == /datum/reagent/consumable/nutriment || r_id == /datum/reagent/consumable/nutriment/vitamin)
-				S.reagents.add_reagent(r_id, amount, tastes)
-			else
-				S.reagents.add_reagent(r_id, amount)
+// on_microwave_cooked() is called when microwaving the food
+/obj/item/reagent_containers/food/snacks/proc/on_microwave_cooked(datum/source, atom/source_item, cooking_efficiency = 1)
+	SIGNAL_HANDLER
 
-/obj/item/reagent_containers/food/snacks/microwave_act(obj/machinery/microwave/microwave_source, mob/microwaver, randomize_pixel_offset)
-	. = ..()
-	var/turf/T = get_turf(src)
-	var/obj/item/result
-	if(cooked_type)
-		result = new cooked_type(T)
-		if(istype(microwave_source))
-			initialize_cooked_food(result, microwave_source.efficiency)
-			//if the result is food, set its food quality to the original food item's quality
-			if(isfood(result))
-				var/obj/item/reagent_containers/food/food_output = result
-				food_output.adjust_food_quality(food_quality + microwave_source.quality_increase)
+	//adjust_food_quality(food_quality + microwave_source.quality_increase)
+	if(!length(bonus_reagents))
+		return
+
+	for(var/r_id in bonus_reagents)
+		var/amount = round(bonus_reagents[r_id] * cooking_efficiency)
+		if(r_id == /datum/reagent/consumable/nutriment || r_id == /datum/reagent/consumable/nutriment/vitamin)
+			reagents.add_reagent(r_id, amount, tastes)
 		else
-			initialize_cooked_food(result, 1)
-		SSblackbox.record_feedback("tally", "food_made", 1, result.type)
-	else
-		result = new /obj/item/reagent_containers/food/snacks/badrecipe(T)
-		if(istype(microwave_source) && microwave_source.dirty < 100)
-			microwave_source.dirty++
-	qdel(src)
-
-	return result
-
-/obj/item/reagent_containers/food/snacks/Destroy()
-	if(contents)
-		for(var/atom/movable/something in contents)
-			something.forceMove(drop_location())
-	return ..()
+			reagents.add_reagent(r_id, amount)
 
 /obj/item/reagent_containers/food/snacks/attack_animal(mob/M)
 	if(isanimal(M))
