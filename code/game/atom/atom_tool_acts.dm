@@ -28,3 +28,59 @@
 		return early_sig_return
 
 	return NONE
+
+
+// Tool behavior procedure. Redirects to tool-specific procs by default.
+// You can override it to catch all tool interactions, for use in complex deconstruction procs.
+// Just don't forget to return ..() in the end.
+/atom/proc/tool_act(mob/living/user, obj/item/tool, params)
+	var/tool_type = tool.tool_behaviour
+	if(!tool_type)
+		return NONE
+
+
+	switch(tool_type)
+		if(TOOL_CROWBAR)
+			return crowbar_act(user, tool)
+		if(TOOL_MULTITOOL)
+			. = multitool_act(user, tool)
+			tool.update_icon()
+			return
+		if(TOOL_SCREWDRIVER)
+			return screwdriver_act(user, tool)
+		if(TOOL_WRENCH)
+			return wrench_act(user, tool)
+		if(TOOL_WIRECUTTER)
+			return wirecutter_act(user, tool)
+		if(TOOL_WELDER)
+			return welder_act(user, tool)
+		if(TOOL_ANALYZER)
+			return analyzer_act(user, tool)
+
+/// Called on an object when a tool with crowbar capabilities is used to left click an object
+/atom/proc/crowbar_act(mob/living/user, obj/item/tool)
+	return
+
+/// Called on an object when a tool with multitool capabilities is used to left click an object
+/atom/proc/multitool_act(mob/living/user, obj/item/tool)
+	return
+
+/// Called on an object when a tool with screwdriver capabilities is used to left click an object
+/atom/proc/screwdriver_act(mob/living/user, obj/item/tool)
+	return
+
+/// Called on an object when a tool with wrench capabilities is used to left click an object
+/atom/proc/wrench_act(mob/living/user, obj/item/tool)
+	return
+
+/// Called on an object when a tool with wirecutter capabilities is used to left click an object
+/atom/proc/wirecutter_act(mob/living/user, obj/item/tool)
+	return
+
+/// Called on an object when a tool with welder capabilities is used to left click an object
+/atom/proc/welder_act(mob/living/user, obj/item/tool)
+	return
+
+/// Called on an object when a tool with analyzer capabilities is used to left click an object
+/atom/proc/analyzer_act(mob/living/user, obj/item/tool)
+	return
