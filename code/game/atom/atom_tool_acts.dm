@@ -38,6 +38,15 @@
 	if(!tool_type)
 		return NONE
 
+	var/list/processing_recipes = list()
+	var/signal_result = SEND_SIGNAL(src, COMSIG_ATOM_TOOL_ACT(tool_type), user, tool, processing_recipes)
+	if(signal_result)
+		return signal_result
+	if(length(processing_recipes))
+		process_recipes(user, tool, processing_recipes)
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	if(QDELETED(tool))
+		return TOOL_ACT_TOOLTYPE_SUCCESS // Safe-ish to assume that if we deleted our item something succeeded
 
 	switch(tool_type)
 		if(TOOL_CROWBAR)
