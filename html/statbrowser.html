@@ -228,6 +228,13 @@
 <div id="under_menu"></div>
 <div id="statcontent"></div>
 <script>
+// DPI compensation — scale content down on high-DPI displays,
+// matching the approach used by TGUI (drag.js) and /datum/browser.
+var pixelRatio = window.devicePixelRatio || 1;
+if (pixelRatio !== 1) {
+	document.body.style.zoom = (100 / pixelRatio) + '%';
+}
+
 // Status panel implementation ------------------------------------------------
 var status_tab_parts = ["Loading..."];
 var current_tab = null;
