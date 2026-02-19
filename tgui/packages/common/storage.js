@@ -51,7 +51,7 @@ export class MemoryBackend {
   }
 
   remove(key) {
-    this.store[key] = undefined;
+    delete this.store[key];
   }
 
   clear() {
@@ -72,7 +72,11 @@ export class LocalStorageBackend {
   }
 
   set(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (value === undefined) {
+      localStorage.removeItem(key);
+    } else {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
   }
 
   remove(key) {

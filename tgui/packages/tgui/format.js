@@ -120,7 +120,7 @@ export const formatDb = value => {
 };
 
 const SI_BASE_TEN_UNIT = [
-  '',
+  ' ',
   '· 10³', // kilo
   '· 10⁶', // mega
   '· 10⁹', // giga
