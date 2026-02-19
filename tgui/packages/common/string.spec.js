@@ -1,12 +1,12 @@
 import {
-  multiline,
-  createGlobPattern,
-  createSearch,
+  buildQueryString,
   capitalize,
   capitalizeAll,
-  toTitleCase,
+  createGlobPattern,
+  createSearch,
   decodeHtmlEntities,
-  buildQueryString,
+  multiline,
+  toTitleCase,
 } from './string';
 
 describe('multiline', () => {

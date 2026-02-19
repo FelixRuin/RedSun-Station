@@ -1,8 +1,8 @@
 import {
-  createStore,
-  createAction,
-  combineReducers,
   applyMiddleware,
+  combineReducers,
+  createAction,
+  createStore,
   useDispatch,
   useSelector,
 } from './redux';

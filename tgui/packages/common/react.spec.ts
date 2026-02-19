@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-import { classes, normalizeChildren, shallowDiffers, canRender, pureComponentHooks } from './react';
+import { canRender, classes, normalizeChildren, pureComponentHooks, shallowDiffers } from './react';
 
 describe('classes', () => {
   test('empty', () => {

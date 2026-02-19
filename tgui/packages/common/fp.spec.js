@@ -1,4 +1,4 @@
-import { flow, compose } from './fp';
+import { compose, flow } from './fp';
 
 describe('flow', () => {
   test('последовательное применение функций (left-to-right)', () => {

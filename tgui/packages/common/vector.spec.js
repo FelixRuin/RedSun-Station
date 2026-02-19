@@ -1,12 +1,12 @@
 import {
   vecAdd,
-  vecSubtract,
-  vecMultiply,
   vecDivide,
-  vecScale,
   vecInverse,
   vecLength,
+  vecMultiply,
   vecNormalize,
+  vecScale,
+  vecSubtract,
 } from './vector';
 
 describe('vecAdd', () => {

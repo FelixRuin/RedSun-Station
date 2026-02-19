@@ -1,8 +1,8 @@
 import {
-  IMPL_MEMORY,
   IMPL_LOCAL_STORAGE,
-  MemoryBackend,
+  IMPL_MEMORY,
   LocalStorageBackend,
+  MemoryBackend,
   storage,
 } from './storage';
 

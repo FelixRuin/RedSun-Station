@@ -1,4 +1,4 @@
-import { getGasLabel, getGasColor, CSS_COLORS } from './constants';
+import { CSS_COLORS, getGasColor, getGasLabel } from './constants';
 
 describe('getGasLabel', () => {
   test('поиск по id — возвращает label', () => {

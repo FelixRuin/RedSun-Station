@@ -1,12 +1,12 @@
 import {
   clamp,
   clamp01,
-  scale,
-  round,
-  toFixed,
   inRange,
   keyOfMatchingRange,
   numberOfDecimalDigits,
+  round,
+  scale,
+  toFixed,
 } from './math';
 
 describe('clamp', () => {
