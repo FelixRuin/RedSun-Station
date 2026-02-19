@@ -139,13 +139,6 @@
 
 	add_overlay(filling)
 
-
-/obj/item/reagent_containers/food/snacks/customizable/initialize_slice(obj/item/reagent_containers/food/snacks/slice, reagents_per_slice)
-	..()
-	slice.filling_color = filling_color
-	slice.update_snack_overlays(src)
-
-
 /obj/item/reagent_containers/food/snacks/customizable/Destroy()
 	for(. in ingredients)
 		qdel(.)

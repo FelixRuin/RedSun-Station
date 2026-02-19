@@ -289,3 +289,4 @@ GLOBAL_LIST_INIT(deathgasp_sounds, list(
 	))
 
 #define SFX_ROLLING_PIN_ROLLING "rolling_pin_rolling"
+#define SFX_KNIFE_SLICE "knife_slice"

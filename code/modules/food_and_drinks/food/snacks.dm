@@ -99,6 +99,8 @@ All foods are distributed among various categories. Use common sense.
 
 ///This proc handles processable elements, overwrite this if you want to add behavior such as slicing, forking, spooning, whatever, to turn the item into something else
 /obj/item/reagent_containers/food/snacks/proc/make_processable()
+	if(slice_path)
+		AddElement(/datum/element/processable, TOOL_KNIFE, slice_path, slices_num,  3 SECONDS, table_required = TRUE, screentip_verb = "Cut", sound_to_play = SFX_KNIFE_SLICE)
 	return
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
@@ -246,12 +248,8 @@ All foods are distributed among various categories. Use common sense.
 			var/obj/item/reagent_containers/food/snacks/customizable/C = new custom_food_type(get_turf(src))
 			C.initialize_custom_food(src, S, user)
 			return FALSE
-	var/sharp = W.get_sharpness()
-	if(sharp)
-		if(slice(sharp, W, user))
-			return TRUE
-	else
-		..()
+
+	return ..()
 
 //Called when you finish tablecrafting a snack.
 /obj/item/reagent_containers/food/snacks/CheckParts(list/parts_list, datum/crafting_recipe/food/R)
@@ -276,37 +274,27 @@ All foods are distributed among various categories. Use common sense.
 			else
 				reagents.add_reagent(r_id, amount)
 
-/obj/item/reagent_containers/food/snacks/proc/slice(accuracy, obj/item/W, mob/user)
-	if((slices_num <= 0 || !slices_num) || !slice_path) //is the food sliceable?
-		return FALSE
+///Called when food is created through processing (Usually this means it was sliced). We use this to pass the OG items reagents.
+/obj/item/reagent_containers/food/snacks/OnCreatedFromProcessing(mob/living/user, obj/item/work_tool, list/chosen_option, atom/original_atom)
+	..()
 
-	if ( \
-			!isturf(src.loc) || \
-			!(locate(/obj/structure/table) in src.loc) && \
-			!(locate(/obj/structure/table/optable) in src.loc) && \
-			!(locate(/obj/item/storage/bag/tray) in src.loc) \
-		)
-		to_chat(user, "<span class='warning'>You cannot slice [src] here! You need a table or at least a tray.</span>")
-		return FALSE
+	if(!original_atom.reagents)
+		return
 
-	user.visible_message("[user] slices [src].", "<span class='notice'>You slice [src].</span>")
-	var/reagents_per_slice = reagents.total_volume/slices_num
-	for(var/i=1 to slices_num)
-		var/obj/item/reagent_containers/food/snacks/slice = new slice_path (loc)
-		initialize_slice(slice, reagents_per_slice)
-	qdel(src)
-	return TRUE
+	//Make sure we have a reagent container large enough to fit the original atom's reagents.
+	var/volume = ROUND_UP(original_atom.reagents.maximum_volume / chosen_option[TOOL_PROCESSING_AMOUNT])
 
-/obj/item/reagent_containers/food/snacks/proc/initialize_slice(obj/item/reagent_containers/food/snacks/slice, reagents_per_slice)
-	slice.create_reagents(slice.volume, reagent_flags, reagent_value)
-	reagents.trans_to(slice,reagents_per_slice)
-	if(name != initial(name))
-		slice.name = "slice of [name]"
-	if(desc != initial(desc))
-		slice.desc = "[desc]"
-	if(foodtype != initial(foodtype))
-		slice.foodtype = foodtype //if something happens that overrode our food type, make sure the slice carries that over
-	slice.adjust_food_quality(food_quality)
+	create_reagents(volume, reagents?.reagents_holder_flags)
+	original_atom.reagents.trans_to(src, original_atom.reagents.total_volume / chosen_option[TOOL_PROCESSING_AMOUNT])
+
+	if(original_atom.name != initial(original_atom.name))
+		name = "slice of [original_atom.name]"
+		//It inherits the name of the original, which may already have a prefix
+		//So we need to make sure we don't double up on prefixes
+		//This is called before set_custom_materials() anyway
+		material_flags &= ~MATERIAL_ADD_PREFIX
+	if(original_atom.desc != initial(original_atom.desc))
+		desc = "[original_atom.desc]"
 
 /obj/item/reagent_containers/food/snacks/proc/generate_trash(atom/location)
 	if(trash)

@@ -17,14 +17,16 @@
 	tastes = list("meat" = 1)
 	foodtype = MEAT | RAW
 
-/obj/item/reagent_containers/food/snacks/meat/slab/initialize_slice(obj/item/reagent_containers/food/snacks/meat/rawcutlet/slice, reagents_per_slice)
+/obj/item/reagent_containers/food/snacks/meat/rawcutlet/plain/OnCreatedFromProcessing(mob/living/user, obj/item/work_tool, list/chosen_option, obj/item/reagent_containers/food/snacks/meat/original_atom)
 	..()
+	if(!istype(original_atom))
+		return
 	var/mutable_appearance/filling = mutable_appearance(icon, "rawcutlet_coloration")
-	filling.color = filling_color
-	slice.add_overlay(filling)
-	slice.filling_color = filling_color
-	slice.name = "raw [name] cutlet"
-	slice.meat_type = name
+	filling.color = original_atom.filling_color
+	add_overlay(filling)
+	filling_color = original_atom.filling_color
+	name = "raw [original_atom.name] cutlet"
+	meat_type = original_atom.name
 
 ///////////////////////////////////// HUMAN MEATS //////////////////////////////////////////////////////
 
@@ -36,15 +38,17 @@
 	tastes = list("tender meat" = 1)
 	foodtype = MEAT | RAW | GROSS
 
-/obj/item/reagent_containers/food/snacks/meat/slab/human/initialize_slice(obj/item/reagent_containers/food/snacks/meat/rawcutlet/plain/human/slice, reagents_per_slice)
+/obj/item/reagent_containers/food/snacks/meat/rawcutlet/plain/human/OnCreatedFromProcessing(mob/living/user, obj/item/work_tool, list/chosen_option, obj/item/reagent_containers/food/snacks/meat/original_atom)
 	..()
-	slice.subjectname = subjectname
-	slice.subjectjob = subjectjob
-	if(subjectname)
-		slice.name = "raw [subjectname] cutlet"
-	else if(subjectjob)
-		slice.name = "raw [subjectjob] cutlet"
-	slice.adjust_food_quality(food_quality)
+	if(!istype(original_atom))
+		return
+	subjectname = original_atom.subjectname
+	subjectjob = original_atom.subjectjob
+	if(original_atom.subjectname)
+		name = "raw [original_atom.subjectname] cutlet"
+	else if(original_atom.subjectjob)
+		name = "raw [original_atom.subjectjob] cutlet"
+	adjust_food_quality(original_atom.food_quality)
 
 /obj/item/reagent_containers/food/snacks/meat/rawcrab
 	name = "raw crab meat"
