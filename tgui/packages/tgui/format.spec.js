@@ -1,5 +1,6 @@
 import {
   formatSiUnit,
+  formatSiBaseTenUnit,
   formatPower,
   formatMoney,
   formatDb,
@@ -183,5 +184,71 @@ describe('formatTime', () => {
 
   test('default формат — 0 отображает 00:00:00', () => {
     expect(formatTime(0)).toBe('00:00:00');
+  });
+});
+
+describe('formatSiBaseTenUnit', () => {
+  // BUG: SI_BASE_TEN_INDEX = SI_BASE_TEN_UNIT.indexOf(' ') возвращает -1,
+  // потому что в массиве первый элемент — пустая строка '' а не пробел ' '.
+  // Из-за этого minBase1000 = -(-1) = 1, и значения < 1000 масштабируются
+  // как кило: value / 1000, а затем toFixed с precision 0 → "0".
+
+  // BUG: SI_BASE_TEN_INDEX = SI_BASE_TEN_UNIT.indexOf(' ') = -1
+  // (в массиве '' а не ' '), сдвигает ВСЕ SI-тиры на один вниз.
+  // Сейчас: 42→"0", 1000→"1" (без SI), 1e6→"· 10³" (вместо · 10⁶)
+
+  test('BUG: значение 42 — должно содержать "42"', () => {
+    expect(formatSiBaseTenUnit(42)).toContain('42');
+  });
+
+  test('BUG: значение 999 — должно содержать "999"', () => {
+    expect(formatSiBaseTenUnit(999)).toContain('999');
+  });
+
+  test('BUG: значение 1 — должно содержать "1"', () => {
+    const result = formatSiBaseTenUnit(1);
+    expect(result).toMatch(/^1/);
+  });
+
+  test('BUG: кило (1000) — должно содержать "· 10³"', () => {
+    expect(formatSiBaseTenUnit(1000)).toContain('10³');
+  });
+
+  test('BUG: мега (1e6) — должно содержать "· 10⁶"', () => {
+    expect(formatSiBaseTenUnit(1e6)).toContain('10⁶');
+  });
+
+  test('BUG: гига (1e9) — должно содержать "· 10⁹"', () => {
+    expect(formatSiBaseTenUnit(1e9)).toContain('10⁹');
+  });
+
+  test('BUG: дробные кило (1500) — должно быть "1.50 · 10³"', () => {
+    const result = formatSiBaseTenUnit(1500);
+    expect(result).toContain('1.50');
+    expect(result).toContain('10³');
+  });
+
+  test('BUG: с unit суффиксом (1000W) — должно содержать "· 10³" и "W"', () => {
+    const result = formatSiBaseTenUnit(1000, 0, 'W');
+    expect(result).toContain('W');
+    expect(result).toContain('10³');
+  });
+
+  test('не-число возвращается как есть', () => {
+    expect(formatSiBaseTenUnit('hello')).toBe('hello');
+  });
+
+  test('Infinity возвращается как есть', () => {
+    expect(formatSiBaseTenUnit(Infinity)).toBe(Infinity);
+  });
+
+  test('NaN возвращается как есть', () => {
+    expect(formatSiBaseTenUnit(NaN)).toBe(NaN);
+  });
+
+  test('с явным minBase1000=0 — обходит баг для базовых значений', () => {
+    // При minBase1000=0 значения < 1000 показываются без масштабирования
+    const result = formatSiBaseTenUnit(42, 0);
+    expect(result).toContain('42');
   });
 });

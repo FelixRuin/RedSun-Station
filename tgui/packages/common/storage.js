@@ -36,7 +36,7 @@ const testIndexedDb = testGeneric(() => (
   window.indexedDB && window.IDBTransaction
 ));
 
-class MemoryBackend {
+export class MemoryBackend {
   constructor() {
     this.impl = IMPL_MEMORY;
     this.store = {};
@@ -59,7 +59,7 @@ class MemoryBackend {
   }
 }
 
-class LocalStorageBackend {
+export class LocalStorageBackend {
   constructor() {
     this.impl = IMPL_LOCAL_STORAGE;
   }

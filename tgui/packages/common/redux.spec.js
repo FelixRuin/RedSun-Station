@@ -1,4 +1,11 @@
-import { createStore, createAction, combineReducers, applyMiddleware } from './redux';
+import {
+  createStore,
+  createAction,
+  combineReducers,
+  applyMiddleware,
+  useDispatch,
+  useSelector,
+} from './redux';
 
 describe('createStore', () => {
   test('инициализируется через @@INIT dispatch', () => {
@@ -216,5 +223,56 @@ describe('applyMiddleware', () => {
     expect(() => {
       createStore(reducer, applyMiddleware(badMiddleware));
     }).toThrow('Dispatching while constructing');
+  });
+});
+
+describe('useDispatch', () => {
+  test('возвращает dispatch из store', () => {
+    const reducer = (state = 0) => state;
+    const store = createStore(reducer);
+    const context = { store };
+    expect(useDispatch(context)).toBe(store.dispatch);
+  });
+
+  test('dispatch через useDispatch обновляет state', () => {
+    const reducer = (state = 0, action) => {
+      if (action.type === 'INC') return state + 1;
+      return state;
+    };
+    const store = createStore(reducer);
+    const dispatch = useDispatch({ store });
+    dispatch({ type: 'INC' });
+    dispatch({ type: 'INC' });
+    expect(store.getState()).toBe(2);
+  });
+});
+
+describe('useSelector', () => {
+  test('вызывает selector с текущим state', () => {
+    const reducer = (state = { count: 42, name: 'test' }) => state;
+    const store = createStore(reducer);
+    const context = { store };
+    const result = useSelector(context, state => state);
+    expect(result).toEqual({ count: 42, name: 'test' });
+  });
+
+  test('selector возвращает часть state', () => {
+    const reducer = (state = { count: 42, name: 'test' }) => state;
+    const store = createStore(reducer);
+    const context = { store };
+    expect(useSelector(context, state => state.count)).toBe(42);
+    expect(useSelector(context, state => state.name)).toBe('test');
+  });
+
+  test('selector видит актуальный state после dispatch', () => {
+    const reducer = (state = 0, action) => {
+      if (action.type === 'INC') return state + 1;
+      return state;
+    };
+    const store = createStore(reducer);
+    const context = { store };
+    expect(useSelector(context, s => s)).toBe(0);
+    store.dispatch({ type: 'INC' });
+    expect(useSelector(context, s => s)).toBe(1);
   });
 });
