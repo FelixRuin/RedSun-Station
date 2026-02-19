@@ -80,6 +80,7 @@ All foods are distributed among various categories. Use common sense.
 	. = ..()
 	RegisterSignal(src, COMSIG_ITEM_MICROWAVE_COOKED, PROC_REF(on_microwave_cooked))
 	make_microwaveable()
+	make_processable()
 
 /obj/item/reagent_containers/food/snacks/Destroy()
 	UnregisterSignal(src, COMSIG_ITEM_MICROWAVE_COOKED)
@@ -95,6 +96,10 @@ All foods are distributed among various categories. Use common sense.
 		AddElement(/datum/element/microwavable, /obj/item/reagent_containers/food/snacks/badrecipe, bad_recipe = TRUE)
 	else
 		AddElement(/datum/element/microwavable, cooked_type)
+
+///This proc handles processable elements, overwrite this if you want to add behavior such as slicing, forking, spooning, whatever, to turn the item into something else
+/obj/item/reagent_containers/food/snacks/proc/make_processable()
+	return
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(tastes && tastes.len)

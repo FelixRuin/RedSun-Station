@@ -287,3 +287,5 @@ GLOBAL_LIST_INIT(deathgasp_sounds, list(
 	"Смерть в богатстве" =	'modular_bluemoon/sound/voice/death_gasps/richstalker.ogg',
 	"Зомбированный сталкер" =	'modular_bluemoon/sound/voice/death_gasps/stalkerzombie.ogg'
 	))
+
+#define SFX_ROLLING_PIN_ROLLING "rolling_pin_rolling"

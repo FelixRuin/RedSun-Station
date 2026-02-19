@@ -370,4 +370,6 @@ distance_multiplier - Can be used to multiply the distance at which the sound is
 				soundin = pick('modular_sand/sound/misc/drawer_open1.ogg', 'modular_sand/sound/misc/drawer_open2.ogg')
 			if("drawer_close")
 				soundin = pick('modular_sand/sound/misc/drawer_close.ogg')
+			if(SFX_ROLLING_PIN_ROLLING)
+				soundin = pick("sound/items/rolling_pin/rolling_pin_rolling[rand(1,6)].ogg")
 	return soundin
