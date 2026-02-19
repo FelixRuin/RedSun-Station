@@ -27,11 +27,11 @@ describe('range', () => {
     expect(range(3, 7)).toEqual([3, 4, 5, 6]);
   });
 
-  test('range(0, 0) → пустой массив', () => {
+  test('range(0, 0) -> пустой массив', () => {
     expect(range(0, 0)).toEqual([]);
   });
 
-  test('range(5, 5) → пустой массив', () => {
+  test('range(5, 5) -> пустой массив', () => {
     expect(range(5, 5)).toEqual([]);
   });
 });
@@ -59,23 +59,23 @@ describe('toArray', () => {
     expect(toArray(arr)).toBe(arr);
   });
 
-  test('объект → массив значений', () => {
+  test('объект -> массив значений', () => {
     expect(toArray({ a: 1, b: 2, c: 3 })).toEqual([1, 2, 3]);
   });
 
-  test('null → пустой массив', () => {
+  test('null -> пустой массив', () => {
     expect(toArray(null)).toEqual([]);
   });
 
-  test('undefined → пустой массив', () => {
+  test('undefined -> пустой массив', () => {
     expect(toArray(undefined)).toEqual([]);
   });
 
-  test('число → пустой массив', () => {
+  test('число -> пустой массив', () => {
     expect(toArray(42)).toEqual([]);
   });
 
-  test('строка → пустой массив', () => {
+  test('строка -> пустой массив', () => {
     expect(toArray('hello')).toEqual([]);
   });
 
@@ -112,19 +112,19 @@ describe('filter', () => {
     expect(filter(x => x > 2)([1, 2, 3, 4, 5])).toEqual([3, 4, 5]);
   });
 
-  test('null → null (passthrough)', () => {
+  test('null -> null (passthrough)', () => {
     expect(filter(x => x)(null)).toBe(null);
   });
 
-  test('undefined → undefined (passthrough)', () => {
+  test('undefined -> undefined (passthrough)', () => {
     expect(filter(x => x)(undefined)).toBe(undefined);
   });
 
-  test('объект → throw', () => {
+  test('объект -> throw', () => {
     expect(() => filter(x => x)({ a: 1 })).toThrow();
   });
 
-  test('пустой массив → пустой массив', () => {
+  test('пустой массив -> пустой массив', () => {
     expect(filter(x => x)([])).toEqual([]);
   });
 
@@ -143,22 +143,22 @@ describe('map', () => {
     expect(map(x => x * 2)([1, 2, 3])).toEqual([2, 4, 6]);
   });
 
-  test('маппит объект → массив', () => {
+  test('маппит объект -> массив', () => {
     expect(map((v, k) => `${k}=${v}`)({ a: 1, b: 2 })).toEqual([
       'a=1',
       'b=2',
     ]);
   });
 
-  test('null → null (passthrough)', () => {
+  test('null -> null (passthrough)', () => {
     expect(map(x => x)(null)).toBe(null);
   });
 
-  test('undefined → undefined (passthrough)', () => {
+  test('undefined -> undefined (passthrough)', () => {
     expect(map(x => x)(undefined)).toBe(undefined);
   });
 
-  test('число → throw', () => {
+  test('число -> throw', () => {
     expect(() => map(x => x)(42 as any)).toThrow();
   });
 });
@@ -185,7 +185,7 @@ describe('filterMap', () => {
     expect(result).toEqual([0, 0]);
   });
 
-  test('пустой массив → пустой массив', () => {
+  test('пустой массив -> пустой массив', () => {
     expect(filterMap([], x => x)).toEqual([]);
   });
 });
@@ -228,8 +228,8 @@ describe('sortBy', () => {
   });
 
   test('sort() без критериев — сохраняет исходный порядок (нет сортировки)', () => {
-    // sortBy() без iteratees: COMPARATOR сравнивает пустые criteria → всегда 0
-    // Array.sort стабильная → исходный порядок сохраняется
+    // sortBy() без iteratees: COMPARATOR сравнивает пустые criteria -> всегда 0
+    // Array.sort стабильная -> исходный порядок сохраняется
     expect(sort([3, 1, 2])).toEqual([3, 1, 2]);
   });
 
@@ -254,7 +254,7 @@ describe('reduce', () => {
     expect(reduce((acc, x) => acc + x, '')(['a', 'b', 'c'])).toBe('abc');
   });
 
-  test('один элемент без init → возвращает элемент', () => {
+  test('один элемент без init -> возвращает элемент', () => {
     expect(reduce((acc, x) => acc + x, undefined)([42])).toBe(42);
   });
 });
@@ -278,7 +278,7 @@ describe('uniqBy', () => {
   });
 
   test('NaN дедупликация — NaN считается равным NaN', () => {
-    // NaN === NaN → false в JS, но uniqBy должен дедуплицировать
+    // NaN === NaN -> false в JS, но uniqBy должен дедуплицировать
     expect(uniq([NaN, NaN, NaN])).toEqual([NaN]);
   });
 
@@ -317,7 +317,7 @@ describe('paginate', () => {
     expect(paginate([1, 2, 3], 3)).toEqual([[1, 2, 3]]);
   });
 
-  test('пустой массив → пустой результат', () => {
+  test('пустой массив -> пустой результат', () => {
     expect(paginate([], 3)).toEqual([]);
   });
 

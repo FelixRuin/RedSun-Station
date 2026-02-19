@@ -149,16 +149,16 @@ describe('LocalStorageBackend', () => {
     expect(backend.get('f')).toBe(false);
   });
 
-  test('set/get null — JSON.stringify(null) = "null" → JSON.parse("null") = null', () => {
+  test('set/get null — JSON.stringify(null) = "null" -> JSON.parse("null") = null', () => {
     backend.set('key', null);
     expect(backend.get('key')).toBeNull();
   });
 
-  // BUG: set(undefined) → localStorage.setItem(key, "undefined") (undefined → строка)
+  // BUG: set(undefined) -> localStorage.setItem(key, "undefined") (undefined -> строка)
   // При get: JSON.parse("undefined") бросает SyntaxError
   // Правильное поведение: set(undefined) должно работать как remove, или
   // get должно вернуть undefined без ошибки.
-  test('BUG: set(undefined) → get НЕ должен бросать ошибку', () => {
+  test('BUG: set(undefined) -> get НЕ должен бросать ошибку', () => {
     backend.set('key', undefined);
     expect(() => backend.get('key')).not.toThrow();
   });

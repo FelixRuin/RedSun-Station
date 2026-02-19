@@ -44,11 +44,11 @@ describe('clamp01', () => {
     expect(clamp01(0.5)).toBe(0.5);
   });
 
-  test('отрицательное → 0', () => {
+  test('отрицательное -> 0', () => {
     expect(clamp01(-1)).toBe(0);
   });
 
-  test('больше 1 → 1', () => {
+  test('больше 1 -> 1', () => {
     expect(clamp01(2)).toBe(1);
   });
 
@@ -70,7 +70,7 @@ describe('scale', () => {
     expect(scale(-10, 0, 10)).toBe(-1);
   });
 
-  test('min === max → деление на ноль → Infinity/NaN', () => {
+  test('min === max -> деление на ноль -> Infinity/NaN', () => {
     expect(scale(5, 5, 5)).toBe(NaN);
   });
 
@@ -130,7 +130,7 @@ describe('toFixed', () => {
     expect(toFixed(3.7, 0)).toBe('4');
   });
 
-  test('отрицательный fractionDigits → 0', () => {
+  test('отрицательный fractionDigits -> 0', () => {
     expect(toFixed(3.14, -1)).toBe('3');
   });
 
@@ -154,7 +154,7 @@ describe('inRange', () => {
     expect(inRange(11, [0, 10])).toBe(false);
   });
 
-  test('falsy range → falsy результат', () => {
+  test('falsy range -> falsy результат', () => {
     expect(inRange(5, null)).toBeFalsy();
     expect(inRange(5, undefined)).toBeFalsy();
   });
@@ -173,7 +173,7 @@ describe('keyOfMatchingRange', () => {
     expect(keyOfMatchingRange(80, ranges)).toBe('high');
   });
 
-  test('нет совпадения → undefined', () => {
+  test('нет совпадения -> undefined', () => {
     expect(keyOfMatchingRange(200, ranges)).toBeUndefined();
     expect(keyOfMatchingRange(-1, ranges)).toBeUndefined();
   });
@@ -185,7 +185,7 @@ describe('keyOfMatchingRange', () => {
 });
 
 describe('numberOfDecimalDigits', () => {
-  test('целое число → 0', () => {
+  test('целое число -> 0', () => {
     expect(numberOfDecimalDigits(42)).toBe(0);
   });
 
@@ -195,12 +195,12 @@ describe('numberOfDecimalDigits', () => {
     expect(numberOfDecimalDigits(0.123456)).toBe(6);
   });
 
-  test('0 → 0', () => {
+  test('0 -> 0', () => {
     expect(numberOfDecimalDigits(0)).toBe(0);
   });
 
   // BUG: научная нотация вызывает crash
-  // 1e-7.toString() = "1e-7", split('.')[1] = undefined → .length → TypeError
+  // 1e-7.toString() = "1e-7", split('.')[1] = undefined -> .length -> TypeError
   test('научная нотация (1e-7) — не должна падать', () => {
     expect(() => numberOfDecimalDigits(1e-7)).not.toThrow();
   });

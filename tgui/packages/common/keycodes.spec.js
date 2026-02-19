@@ -17,40 +17,40 @@ import {
 } from './keycodes';
 
 describe('isAlphaKey', () => {
-  test('строчные латинские буквы a-z → true', () => {
+  test('строчные латинские буквы a-z -> true', () => {
     expect(isAlphaKey('a')).toBe(true);
     expect(isAlphaKey('m')).toBe(true);
     expect(isAlphaKey('z')).toBe(true);
   });
 
-  test('заглавные латинские буквы A-Z → true', () => {
+  test('заглавные латинские буквы A-Z -> true', () => {
     expect(isAlphaKey('A')).toBe(true);
     expect(isAlphaKey('M')).toBe(true);
     expect(isAlphaKey('Z')).toBe(true);
   });
 
-  test('цифры → false', () => {
+  test('цифры -> false', () => {
     expect(isAlphaKey('0')).toBe(false);
     expect(isAlphaKey('5')).toBe(false);
     expect(isAlphaKey('9')).toBe(false);
   });
 
-  test('специальные клавиши (длинные строки) → false', () => {
+  test('специальные клавиши (длинные строки) -> false', () => {
     expect(isAlphaKey('Enter')).toBe(false);
     expect(isAlphaKey('Shift')).toBe(false);
     expect(isAlphaKey('Backspace')).toBe(false);
     expect(isAlphaKey('ArrowLeft')).toBe(false);
   });
 
-  test('пробел → false', () => {
+  test('пробел -> false', () => {
     expect(isAlphaKey(' ')).toBe(false);
   });
 
-  test('пустая строка → false', () => {
+  test('пустая строка -> false', () => {
     expect(isAlphaKey('')).toBe(false);
   });
 
-  test('спецсимволы → false', () => {
+  test('спецсимволы -> false', () => {
     expect(isAlphaKey('!')).toBe(false);
     expect(isAlphaKey('@')).toBe(false);
     expect(isAlphaKey('+')).toBe(false);
@@ -58,13 +58,13 @@ describe('isAlphaKey', () => {
     expect(isAlphaKey('/')).toBe(false);
   });
 
-  test('кириллица → false (только латиница в regex [a-zA-Z])', () => {
+  test('кириллица -> false (только латиница в regex [a-zA-Z])', () => {
     expect(isAlphaKey('я')).toBe(false);
     expect(isAlphaKey('А')).toBe(false);
     expect(isAlphaKey('ё')).toBe(false);
   });
 
-  test('Unicode символ длиной > 1 (emoji) → false', () => {
+  test('Unicode символ длиной > 1 (emoji) -> false', () => {
     // Emoji — surrogate pair, length = 2
     expect(isAlphaKey('😀')).toBe(false);
   });

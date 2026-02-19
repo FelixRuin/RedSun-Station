@@ -7,6 +7,7 @@
 import { storage } from 'common/storage';
 import { vecAdd, vecScale } from 'common/vector';
 
+import { constraintPosition, isWindowSizeApplied as isWindowSizeAppliedUtil, touchRecents } from './drag.utils';
 import { createLogger } from './logging';
 
 const logger = createLogger('drag');
@@ -72,10 +73,7 @@ const SIZE_APPLY_TIMEOUT_MS = 250;
 
 const isWindowSizeApplied = targetSize => {
   const pr = window.devicePixelRatio ?? 1;
-  const epsilon = Math.max(2, Math.ceil(pr * 2));
-  const currentSize = getWindowSize();
-  return Math.abs(currentSize[0] - targetSize[0]) <= epsilon
-    && Math.abs(currentSize[1] - targetSize[1]) <= epsilon;
+  return isWindowSizeAppliedUtil(targetSize, getWindowSize(), pr);
 };
 
 const waitForWindowSizeApplied = targetSize => {
@@ -190,31 +188,7 @@ export const getScreenSize = () => {
   ];
 };
 
-/**
- * Moves an item to the top of the recents array, and keeps its length
- * limited to the number in `limit` argument.
- *
- * Uses a strict equality check for comparisons.
- *
- * Returns new recents and an item which was trimmed.
- */
-const touchRecents = (recents, touchedItem, limit = 50) => {
-  const nextRecents = [touchedItem];
-  let trimmedItem;
-  for (let i = 0; i < recents.length; i++) {
-    const item = recents[i];
-    if (item === touchedItem) {
-      continue;
-    }
-    if (nextRecents.length < limit) {
-      nextRecents.push(item);
-    }
-    else {
-      trimmedItem = item;
-    }
-  }
-  return [nextRecents, trimmedItem];
-};
+// touchRecents is imported from drag.utils.js
 
 export const storeWindowGeometry = async () => {
   logger.log('storing geometry');
@@ -281,7 +255,7 @@ export const recallWindowGeometry = async (options = {}) => {
     if (pos) {
       // Constraint window position if monitor lock was set in preferences.
       if (size && options.locked) {
-        pos = constraintPosition(pos, size)[1];
+        pos = constraintPositionOnScreen(pos, size)[1];
       }
       setWindowPosition(pos);
     }
@@ -318,24 +292,8 @@ export const setupDrag = async () => {
  * Constraints window position to safe screen area, accounting for safe
  * margins which could be a system taskbar.
  */
-const constraintPosition = (pos, size) => {
-  const screenPos = getScreenPosition();
-  const screenSize = getScreenSize();
-  const nextPos = [pos[0], pos[1]];
-  let relocated = false;
-  for (let i = 0; i < 2; i++) {
-    const leftBoundary = screenPos[i];
-    const rightBoundary = screenPos[i] + screenSize[i];
-    if (pos[i] < leftBoundary) {
-      nextPos[i] = leftBoundary;
-      relocated = true;
-    }
-    else if (pos[i] + size[i] > rightBoundary) {
-      nextPos[i] = rightBoundary - size[i];
-      relocated = true;
-    }
-  }
-  return [relocated, nextPos];
+const constraintPositionOnScreen = (pos, size) => {
+  return constraintPosition(pos, size, getScreenPosition(), getScreenSize());
 };
 
 export const dragStartHandler = event => {

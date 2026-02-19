@@ -124,7 +124,7 @@ describe('createSearch', () => {
     expect(search({ name: 'Jane Doe' })).toBe(false);
   });
 
-  test('объект с falsy строкой → false', () => {
+  test('объект с falsy строкой -> false', () => {
     const search = createSearch('test');
     expect(search(null)).toBe(false);
     expect(search('')).toBe(false);
@@ -214,7 +214,7 @@ describe('decodeHtmlEntities', () => {
     expect(decodeHtmlEntities('&#x61;')).toBe('a');
   });
 
-  test('<br> → перевод строки', () => {
+  test('<br> -> перевод строки', () => {
     expect(decodeHtmlEntities('line1<br>line2')).toBe('line1\nline2');
   });
 

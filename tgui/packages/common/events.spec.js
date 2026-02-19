@@ -59,7 +59,7 @@ describe('EventEmitter', () => {
       expect(listener).not.toHaveBeenCalled();
     });
 
-    test('несуществующее событие → throw', () => {
+    test('несуществующее событие -> throw', () => {
       expect(() => {
         emitter.off('nonexistent', () => {});
       }).toThrow('There is no listeners for "nonexistent"');

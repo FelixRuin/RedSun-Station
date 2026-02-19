@@ -92,12 +92,12 @@ describe('createAction', () => {
     expect(noop()).toEqual({ type: 'NOOP' });
   });
 
-  test('prepare вернул falsy → throw', () => {
+  test('prepare вернул falsy -> throw', () => {
     const broken = createAction('BROKEN', () => null);
     expect(() => broken()).toThrow('prepare function did not return an object');
   });
 
-  test('без аргументов → payload = undefined', () => {
+  test('без аргументов -> payload = undefined', () => {
     const action = createAction('TEST');
     expect(action()).toEqual({ type: 'TEST', payload: undefined });
   });
@@ -203,7 +203,7 @@ describe('applyMiddleware', () => {
     order.length = 0; // Очищаем после @@INIT
     store.dispatch({ type: 'TEST' });
 
-    // mid1 оборачивает mid2: mid1 → mid2 → reducer → mid2 → mid1
+    // mid1 оборачивает mid2: mid1 -> mid2 -> reducer -> mid2 -> mid1
     expect(order).toEqual([
       'mid1-before',
       'mid2-before',
@@ -212,7 +212,7 @@ describe('applyMiddleware', () => {
     ]);
   });
 
-  test('dispatch во время конструирования middleware → throw', () => {
+  test('dispatch во время конструирования middleware -> throw', () => {
     const badMiddleware = store => {
       // Пытаемся dispatch во время конструирования
       store.dispatch({ type: 'BAD' });

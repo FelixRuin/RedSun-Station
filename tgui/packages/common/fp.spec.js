@@ -46,12 +46,12 @@ describe('compose', () => {
     expect(compose(add1, double)(3)).toBe(7);
   });
 
-  test('0 функций → identity', () => {
+  test('0 функций -> identity', () => {
     expect(compose()(42)).toBe(42);
     expect(compose()('hello')).toBe('hello');
   });
 
-  test('1 функция → passthrough', () => {
+  test('1 функция -> passthrough', () => {
     const add1 = x => x + 1;
     expect(compose(add1)(5)).toBe(6);
     // compose(f) возвращает f напрямую, а не обёртку

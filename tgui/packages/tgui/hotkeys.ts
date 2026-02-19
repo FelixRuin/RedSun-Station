@@ -32,7 +32,7 @@ const hotKeysAcquired: string[] = [
 // State of passed-through keys.
 const keyState: Record<string, boolean> = {};
 
-// Maps event.key → BYOND direction names
+// Maps event.key -> BYOND direction names
 const BYOND_DIRECTION_MAP: Record<string, string> = {
   'ArrowLeft': 'West',
   'ArrowUp': 'North',
@@ -67,7 +67,7 @@ const keyToByond = (keyEvent: KeyEvent): string | undefined => {
   if (key === 'Insert') return 'Insert';
   if (key === 'Delete') return 'Delete';
 
-  // Single alphanumeric character → uppercase for BYOND
+  // Single alphanumeric character -> uppercase for BYOND
   if (key.length === 1 && /[a-zA-Z0-9]/.test(key)) {
     return key.toUpperCase();
   }

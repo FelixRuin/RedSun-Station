@@ -86,7 +86,7 @@ const handleImageError = e => {
       logger.error(`failed to load an image after ${attempts} attempts`);
       return;
     }
-    const src = node.src;
+    const src = node.src.split('#')[0];
     node.src = null;
     node.src = src + '#' + attempts;
     node.setAttribute('data-reload-n', attempts + 1);

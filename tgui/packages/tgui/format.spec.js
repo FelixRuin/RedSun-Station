@@ -10,7 +10,7 @@ import {
 describe('formatSiUnit', () => {
   test('единицы (< 1000)', () => {
     const result = formatSiUnit(42);
-    // scaledPrecision = 2 + 0*3 - 1 = 1 → toFixed(42, 1) = "42.0"
+    // scaledPrecision = 2 + 0*3 - 1 = 1 -> toFixed(42, 1) = "42.0"
     expect(result).toBe('42.0');
   });
 
@@ -87,7 +87,7 @@ describe('formatMoney', () => {
     expect(formatMoney(999)).toBe('999');
   });
 
-  test('Infinity → Infinity', () => {
+  test('Infinity -> Infinity', () => {
     expect(formatMoney(Infinity)).toBe(Infinity);
   });
 
@@ -116,32 +116,32 @@ describe('formatMoney', () => {
 });
 
 describe('formatDb', () => {
-  test('1 → +0.00 dB (unity gain)', () => {
+  test('1 -> +0.00 dB (unity gain)', () => {
     expect(formatDb(1)).toBe('+0.00 dB');
   });
 
-  test('10 → +20.00 dB', () => {
+  test('10 -> +20.00 dB', () => {
     expect(formatDb(10)).toBe('+20.00 dB');
   });
 
-  test('100 → +40.00 dB', () => {
+  test('100 -> +40.00 dB', () => {
     expect(formatDb(100)).toBe('+40.00 dB');
   });
 
-  test('0.1 → отрицательные dB', () => {
+  test('0.1 -> отрицательные dB', () => {
     const result = formatDb(0.1);
     expect(result).toMatch(/^–\d+\.\d+ dB$/);
   });
 
-  test('0 → -Inf dB', () => {
+  test('0 -> -Inf dB', () => {
     expect(formatDb(0)).toBe('–Inf dB');
   });
 
-  test('значение > 1 → положительный знак', () => {
+  test('значение > 1 -> положительный знак', () => {
     expect(formatDb(2)).toMatch(/^\+/);
   });
 
-  test('значение < 1 → отрицательный знак (–)', () => {
+  test('значение < 1 -> отрицательный знак (–)', () => {
     expect(formatDb(0.5)).toMatch(/^–/);
   });
 });
@@ -191,11 +191,11 @@ describe('formatSiBaseTenUnit', () => {
   // BUG: SI_BASE_TEN_INDEX = SI_BASE_TEN_UNIT.indexOf(' ') возвращает -1,
   // потому что в массиве первый элемент — пустая строка '' а не пробел ' '.
   // Из-за этого minBase1000 = -(-1) = 1, и значения < 1000 масштабируются
-  // как кило: value / 1000, а затем toFixed с precision 0 → "0".
+  // как кило: value / 1000, а затем toFixed с precision 0 -> "0".
 
   // BUG: SI_BASE_TEN_INDEX = SI_BASE_TEN_UNIT.indexOf(' ') = -1
   // (в массиве '' а не ' '), сдвигает ВСЕ SI-тиры на один вниз.
-  // Сейчас: 42→"0", 1000→"1" (без SI), 1e6→"· 10³" (вместо · 10⁶)
+  // Сейчас: 42->"0", 1000->"1" (без SI), 1e6->"· 10³" (вместо · 10⁶)
 
   test('BUG: значение 42 — должно содержать "42"', () => {
     expect(formatSiBaseTenUnit(42)).toContain('42');

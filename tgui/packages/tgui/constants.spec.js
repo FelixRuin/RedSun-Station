@@ -45,7 +45,7 @@ describe('getGasLabel', () => {
   });
 
   test('пустая строка без fallback — возвращает пустую строку', () => {
-    // gas не найден → fallbackValue undefined → gasId = ''
+    // gas не найден -> fallbackValue undefined -> gasId = ''
     // Но '' || '' — falsy, цепочка: gas && gas.label || fallbackValue || gasId
     // undefined || undefined || '' = ''
     expect(getGasLabel('')).toBe('');

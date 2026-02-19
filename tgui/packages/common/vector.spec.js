@@ -180,7 +180,7 @@ describe('vecLength', () => {
     expect(vecLength([0, 0])).toBe(0);
   });
 
-  test('3D вектор: [1, 2, 2] → 3', () => {
+  test('3D вектор: [1, 2, 2] -> 3', () => {
     expect(vecLength([1, 2, 2])).toBe(3);
   });
 
@@ -200,7 +200,7 @@ describe('vecLength', () => {
 describe('vecNormalize', () => {
   // BUG: vecNormalize вызывает vecDivide(vec, vecLength(vec)),
   // но vecLength возвращает скаляр (число), а vecDivide ожидает векторы.
-  // zip(vector, number) обращается к number[0], number[1] и т.д. → undefined,
+  // zip(vector, number) обращается к number[0], number[1] и т.д. -> undefined,
   // поэтому DIV(x, undefined) = NaN для каждого компонента.
   // Правильная реализация: vecScale(vec, 1 / vecLength(vec))
 
