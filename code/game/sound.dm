@@ -263,4 +263,3 @@ distance_multiplier - Can be used to multiply the distance at which the sound is
 		return soundin
 	var/datum/sound_effect/sfx = GLOB.sfx_datum_by_key[soundin]
 	return sfx?.return_sfx() || soundin
-
