@@ -250,7 +250,10 @@ var interviewManager = {status: "", interviews: []};
 var sdql2 = [];
 var permanent_tabs = []; // tabs that won't be cleared by wipes
 var turfcontents = [];
+var turfcontentsRaw = "";
 var turfname = "";
+var turfTable = null;
+var turfItemNodes = {}; // ref -> container div
 var imageRetryDelay = 500;
 var imageRetryLimit = 50;
 var menu = document.getElementById('menu');
@@ -342,6 +345,66 @@ function byond_bridge_call(path, params) {
 
 function byond_winset(params) {
 	byond_bridge_call("winset", params || {});
+}
+
+// Send a pre-formatted Topic href through the BYOND bridge.
+// href should be like "?src=_statpanel_;statpanel_item_target=REF"
+function byond_topic(href) {
+	var protocolUrl = "byond://" + href;
+
+	if (window.cef_to_byond) {
+		try {
+			window.cef_to_byond(protocolUrl);
+			return true;
+		} catch (e) {}
+	}
+
+	var bridge = window.BYOND;
+	if (bridge) {
+		var callTargets = [];
+		if (typeof bridge === "function") {
+			callTargets.push(bridge);
+		}
+		var methodNames = [
+			"callByond",
+			"byond",
+			"call",
+			"topic",
+			"sendMessage",
+			"send",
+			"postMessage"
+		];
+		for (var m = 0; m < methodNames.length; m++) {
+			var method = bridge[methodNames[m]];
+			if (typeof method === "function") {
+				callTargets.push(method);
+			}
+		}
+		for (var c = 0; c < callTargets.length; c++) {
+			try {
+				callTargets[c].call(bridge, href);
+				return true;
+			} catch (e1) {}
+			try {
+				callTargets[c].call(bridge, protocolUrl);
+				return true;
+			} catch (e2) {}
+		}
+	}
+
+	try {
+		window.location.href = protocolUrl;
+		return true;
+	} catch (e3) {}
+
+	try {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", href);
+		xhr.send();
+		return true;
+	} catch (e4) {}
+
+	return false;
 }
 
 // Any BYOND verb call must go through this, as if a verb is sent during reconnect then
@@ -970,11 +1033,15 @@ function add_admin_tabs(ht) {
 }
 function create_listedturf(TN) {
 	remove_listedturf(); // remove the last one if we had one
+	turfcontents = [];
 	turfname = JSON.parse(TN);
 	addPermanentTab(turfname);
 	tab_change(turfname);
 }
 function update_listedturf(TC) {
+	if(TC === turfcontentsRaw)
+		return;
+	turfcontentsRaw = TC;
 	turfcontents = JSON.parse(TC);
 	if(current_tab == turfname)
 		draw_listedturf();
@@ -991,72 +1058,93 @@ function iconError() {
 		that.src = null;
 		that.src = src + '#' + current_attempts;
 		that.id++;
-		draw_listedturf();
 	}, imageRetryDelay);
 }
 function draw_listedturf() {
-	statcontentdiv.textContent = "";
-	var table = document.createElement("table");
+	var statcontent = document.getElementById("statcontent");
+	// Ensure persistent table exists and is attached
+	if(!turfTable || !turfTable.parentNode) {
+		statcontentdiv.textContent = "";
+		turfTable = document.createElement("table");
+		turfItemNodes = {};
+		statcontent.appendChild(turfTable);
+	}
+	// Build lookup of new items by ref
+	var newData = {};
+	for(var i = 0; i < turfcontents.length; i++) {
+		newData[turfcontents[i][1]] = turfcontents[i];
+	}
+	// Remove items no longer present
+	for(var ref in turfItemNodes) {
+		if(!(ref in newData)) {
+			turfTable.removeChild(turfItemNodes[ref]);
+			delete turfItemNodes[ref];
+		}
+	}
+	// Add new items, update existing, ensure correct order
+	var nextSibling = turfTable.firstChild;
 	for(var i = 0; i < turfcontents.length; i++) {
 		var part = turfcontents[i];
-		if(storedimages[part[1]] == null && part[2]) {
-			var img = document.createElement("img");
-			img.src = part[2];
-			img.id = part[1];
-			storedimages[part[1]] = part[2];
-			img.onerror = function() {
-				iconError();
-			};
-			table.appendChild(img);
-		} else {
-			var img = document.createElement("img");
-			img.onerror = function() {
-				iconError();
-			};
-			img.src = storedimages[part[1]];
-			img.id = part[1];
-			table.appendChild(img);
-		}
-		var b = document.createElement("div");
-		var clickcatcher = "";
-		b.className = "link";
-		b.onmousedown = function (part) {
-			// The outer function is used to close over a fresh "part" variable,
-			// rather than every onmousedown getting the "part" of the last entry.
-			return function(e) {
-				e.preventDefault();
-				clickcatcher = "?src=_statpanel_;statpanel_item_target=" + part[1];
-				switch(e.button){
-					case 1:
-						clickcatcher += ";statpanel_item_click=middle"
-						break;
-					case 2:
-						clickcatcher += ";statpanel_item_click=right"
-						break;
-					default:
-						clickcatcher += ";statpanel_item_click=left"
-				}
-				if(e.shiftKey){
-					clickcatcher += ";statpanel_item_shiftclick=1";
-				}
-				if(e.ctrlKey){
-					clickcatcher += ";statpanel_item_ctrlclick=1";
-				}
-				if(e.altKey) {
-					clickcatcher += ";statpanel_item_altclick=1";
-				}
-				window.location.href = clickcatcher;
+		var ref = part[1];
+		if(ref in turfItemNodes) {
+			// Existing item — update name if changed, ensure order
+			var container = turfItemNodes[ref];
+			var linkEl = container.childNodes[1];
+			if(linkEl && linkEl.textContent !== part[0]) {
+				linkEl.textContent = part[0];
 			}
-		}(part);
-		b.textContent = part[0];
-		table.appendChild(b);
-		table.appendChild(document.createElement("br"));
+			if(container !== nextSibling) {
+				turfTable.insertBefore(container, nextSibling);
+			} else {
+				nextSibling = nextSibling.nextSibling;
+			}
+		} else {
+			// New item — create container with img + link
+			var container = document.createElement("div");
+			var img = document.createElement("img");
+			if(storedimages[ref] == null && part[2]) {
+				img.src = part[2];
+				storedimages[ref] = part[2];
+			} else if(storedimages[ref]) {
+				img.src = storedimages[ref];
+			}
+			img.onerror = iconError;
+			container.appendChild(img);
+			var b = document.createElement("div");
+			b.className = "link";
+			b.onmousedown = function(part) {
+				return function(e) {
+					e.preventDefault();
+					var clickcatcher = "?src=_statpanel_;statpanel_item_target=" + part[1];
+					switch(e.button){
+						case 1:
+							clickcatcher += ";statpanel_item_click=middle";
+							break;
+						case 2:
+							clickcatcher += ";statpanel_item_click=right";
+							break;
+						default:
+							clickcatcher += ";statpanel_item_click=left";
+					}
+					if(e.shiftKey) clickcatcher += ";statpanel_item_shiftclick=1";
+					if(e.ctrlKey) clickcatcher += ";statpanel_item_ctrlclick=1";
+					if(e.altKey) clickcatcher += ";statpanel_item_altclick=1";
+					byond_topic(clickcatcher);
+				};
+			}(part);
+			b.textContent = part[0];
+			container.appendChild(b);
+			turfItemNodes[ref] = container;
+			turfTable.insertBefore(container, nextSibling);
+		}
 	}
-	document.getElementById("statcontent").appendChild(table);
 }
 
 function remove_listedturf() {
 	removePermanentTab(turfname);
+	turfcontentsRaw = "";
+	turfTable = null;
+	turfItemNodes = {};
 	checkStatusTab();
 	if(current_tab == turfname)
 		tab_change("Status");
