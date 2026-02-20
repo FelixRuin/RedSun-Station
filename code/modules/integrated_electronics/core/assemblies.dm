@@ -106,7 +106,7 @@
 
 	//sets up diagnostic hud view
 	prepare_huds()
-	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
+	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.all_huds)
 		diag_hud.add_to_hud(src)
 	diag_hud_set_circuithealth()
 	diag_hud_set_circuitcell()
@@ -117,7 +117,7 @@
 
 /obj/item/electronic_assembly/Destroy()
 	STOP_PROCESSING(SScircuit, src)
-	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
+	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.all_huds)
 		diag_hud.remove_from_hud(src)
 	QDEL_NULL(access_card)
 	return ..()
