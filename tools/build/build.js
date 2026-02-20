@@ -236,28 +236,45 @@ export const AllTarget = new Juke.Target({
 });
 
 /**
+ * Wrapper around Juke.rm that skips files locked by another process.
+ */
+const safeRm = (pattern, options) => {
+  try {
+    Juke.rm(pattern, options);
+  } catch (err) {
+    if (err.code === 'EBUSY' || err.code === 'EPERM') {
+      Juke.logger.warn(
+        `Cannot remove '${err.path || pattern}': file is busy or locked, skipping`
+      );
+    } else {
+      throw err;
+    }
+  }
+};
+
+/**
  * Removes the immediate build junk to produce clean builds.
  */
 export const CleanTarget = new Juke.Target({
   executes: async () => {
-    Juke.rm('*.dmb');
-    Juke.rm('*.rsc');
-    Juke.rm('*.mdme');
-    Juke.rm('*.mdme*');
-    Juke.rm('*.m.*');
-    Juke.rm('_maps/templates.dm');
-    Juke.rm('tgui/public/.tmp', { recursive: true });
-    Juke.rm('tgui/public/*.map');
-    Juke.rm('tgui/public/*.chunk.*');
-    Juke.rm('tgui/public/*.bundle.*');
-    Juke.rm('tgui/public/*.hot-update.*');
-    Juke.rm('tgui/packages/tgfont/dist', { recursive: true });
-    Juke.rm('tgui/.yarn/cache', { recursive: true });
-    Juke.rm('tgui/.yarn/unplugged', { recursive: true });
-    Juke.rm('tgui/.yarn/build-state.yml');
-    Juke.rm('tgui/.yarn/install-state.gz');
-    Juke.rm('tgui/.yarn/install-target');
-    Juke.rm('tgui/.pnp.*');
+    safeRm('*.dmb');
+    safeRm('*.rsc');
+    safeRm('*.mdme');
+    safeRm('*.mdme*');
+    safeRm('*.m.*');
+    safeRm('_maps/templates.dm');
+    safeRm('tgui/public/.tmp', { recursive: true });
+    safeRm('tgui/public/*.map');
+    safeRm('tgui/public/*.chunk.*');
+    safeRm('tgui/public/*.bundle.*');
+    safeRm('tgui/public/*.hot-update.*');
+    safeRm('tgui/packages/tgfont/dist', { recursive: true });
+    safeRm('tgui/.yarn/cache', { recursive: true });
+    safeRm('tgui/.yarn/unplugged', { recursive: true });
+    safeRm('tgui/.yarn/build-state.yml');
+    safeRm('tgui/.yarn/install-state.gz');
+    safeRm('tgui/.yarn/install-target');
+    safeRm('tgui/.pnp.*');
   },
 });
 
@@ -270,7 +287,7 @@ export const DistCleanTarget = new Juke.Target({
     const bootstrapCacheDir = 'tools/bootstrap/.cache';
 
     Juke.logger.info('Cleaning up data/logs');
-    Juke.rm('data/logs', { recursive: true });
+    safeRm('data/logs', { recursive: true });
 
     Juke.logger.info('Cleaning up bootstrap cache');
     if (!fs.existsSync(bootstrapCacheDir)) {
@@ -285,7 +302,7 @@ export const DistCleanTarget = new Juke.Target({
         && !path.isAbsolute(nodeRelativePath);
 
       if (!nodeRunsFromBootstrapCache) {
-        Juke.rm(bootstrapCacheDir, { recursive: true });
+        safeRm(bootstrapCacheDir, { recursive: true });
       }
       else {
         const activeNodeDir = nodeRelativePath.split(path.sep)[0];
@@ -299,7 +316,7 @@ export const DistCleanTarget = new Juke.Target({
             continue;
           }
 
-          Juke.rm(path.posix.join(bootstrapCacheDir, entry), { recursive: true });
+          safeRm(path.posix.join(bootstrapCacheDir, entry), { recursive: true });
         }
       }
     }
