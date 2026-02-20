@@ -154,7 +154,13 @@ class PaperSheetStamper extends Component<PaperSheetStamperProps> {
   };
 
   handleMouseClick = (e: MouseEvent): void => {
-    if (e.pageY <= 30) {
+    const scrollable = this.scrollableRef.current;
+    if (!scrollable) {
+      return;
+    }
+    const rect = scrollable.getBoundingClientRect();
+    // Ignore clicks outside the container
+    if (e.clientY - rect.top <= 0) {
       return;
     }
     const { act } = useBackend<PaperContext>(this.context);
@@ -188,8 +194,17 @@ class PaperSheetStamper extends Component<PaperSheetStamperProps> {
     const stampHeight = stamp.clientHeight;
     const stampWidth = stamp.clientWidth;
 
-    const currentHeight = rotating ? this.state.y : e.pageY - stampHeight;
-    const currentWidth = rotating ? this.state.x : e.pageX - stampWidth / 2;
+    // Convert to container-relative coordinates
+    const rect = scrollable.getBoundingClientRect();
+    const relativeX = e.clientX - rect.left;
+    const relativeY = e.clientY - rect.top;
+
+    const currentHeight = rotating
+      ? this.state.y
+      : relativeY - stampHeight;
+    const currentWidth = rotating
+      ? this.state.x
+      : relativeX - stampWidth / 2;
 
     const widthMin = 0;
     const heightMin = 0;
@@ -198,8 +213,8 @@ class PaperSheetStamper extends Component<PaperSheetStamperProps> {
     const heightMax = scrollable.clientHeight - stampHeight;
 
     const radians = Math.atan2(
-      currentWidth + stampWidth / 2 - e.pageX,
-      currentHeight + stampHeight - e.pageY
+      currentWidth + stampWidth / 2 - relativeX,
+      currentHeight + stampHeight - relativeY
     );
 
     const rotate = rotating
@@ -370,7 +385,28 @@ export class PrimaryView extends Component {
                       color="good"
                       onClick={() => {
                         if (textAreaText.length) {
-                          act('add_text', { text: textAreaText });
+                          // Chunk large text to avoid exceeding BYOND
+                          // Topic message size limit
+                          const CHUNK_SIZE = 2000;
+                          if (textAreaText.length > CHUNK_SIZE) {
+                            for (
+                              let i = 0;
+                              i < textAreaText.length;
+                              i += CHUNK_SIZE
+                            ) {
+                              const chunk = textAreaText.substring(
+                                i,
+                                i + CHUNK_SIZE,
+                              );
+                              const isLast
+                                = i + CHUNK_SIZE >= textAreaText.length;
+                              act(isLast ? 'add_text' : 'add_text_chunk', {
+                                text: chunk,
+                              });
+                            }
+                          } else {
+                            act('add_text', { text: textAreaText });
+                          }
                           setTextAreaText('');
                         }
                         if (Object.keys(inputFieldData).length) {
@@ -542,12 +578,13 @@ export class PreviewView extends Component<PreviewViewProps> {
     const { data } = useBackend<PaperContext>(this.context);
     const { default_pen_font, default_pen_color, held_item_details } = data;
 
+    const newFieldData = { ...inputFieldData };
     if (input.value.length) {
-      inputFieldData[this.getHeaderID(input.id)] = input.value;
+      newFieldData[this.getHeaderID(input.id)] = input.value;
     } else {
-      delete inputFieldData[this.getHeaderID(input.id)];
+      delete newFieldData[this.getHeaderID(input.id)];
     }
-    setInputFieldData(inputFieldData);
+    setInputFieldData(newFieldData);
     input.style.fontFamily = held_item_details?.font || default_pen_font;
     input.style.color = held_item_details?.color || default_pen_color;
     input.defaultValue = input.value;
@@ -1009,17 +1046,6 @@ export const PaperSheet = (props, context) => {
   const { paper_color, paper_name, held_item_details } = data;
 
   const writeMode = canEdit(held_item_details);
-
-  if (!writeMode) {
-    const [inputFieldData, setInputFieldData] = useLocalState(
-      context,
-      'inputFieldData',
-      {}
-    );
-    if (Object.keys(inputFieldData).length) {
-      setInputFieldData({});
-    }
-  }
 
   return (
     <Window

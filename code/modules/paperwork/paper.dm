@@ -608,7 +608,6 @@
 
 			update_appearance()
 			update_static_data_for_all_viewers()
-			return TRUE
 		if("add_text")
 			var/paper_input = params["text"]
 			var/this_input_length = length_char(paper_input)
@@ -655,7 +654,37 @@
 
 			update_static_data_for_all_viewers()
 			update_appearance()
-			return TRUE
+		if("add_text_chunk")
+			// Silent text append for chunked large text — no UI update triggered.
+			// The final chunk should be sent via "add_text" to trigger the update.
+			var/paper_input = params["text"]
+			var/this_input_length = length_char(paper_input)
+
+			if(this_input_length == 0)
+				return
+
+			if(istype(loc, /obj/structure/noticeboard))
+				var/obj/structure/noticeboard/noticeboard = loc
+				if(!noticeboard.allowed(user))
+					return TRUE
+
+			var/obj/item/holding = user.get_active_held_item()
+			if(istype(loc, /obj/item/clipboard))
+				var/obj/item/clipboard/clipboard = loc
+				if(!istype(holding, /obj/item/stamp) && clipboard.pen)
+					holding = clipboard.pen
+
+			if(!user.can_write(holding))
+				return TRUE
+
+			var/current_length = get_total_length()
+			var/new_length = current_length + this_input_length
+
+			if(new_length > MAX_PAPER_LENGTH)
+				return TRUE
+
+			var/writing_implement_data = holding.get_writing_implement_details()
+			add_raw_text(paper_input, writing_implement_data["font"], writing_implement_data["color"], writing_implement_data["use_bold"], check_rights_for(user?.client, R_FUN))
 		if("fill_input_field")
 			// If the paper is on an unwritable noticeboard, this usually shouldn't be possible.
 			if(istype(loc, /obj/structure/noticeboard))
@@ -695,7 +724,6 @@
 					log_paper("[key_name(user)] tried to write to field [field_key] when it already has data, with the following text: [field_text]")
 
 			update_static_data_for_all_viewers()
-			return TRUE
 
 /obj/item/paper/proc/get_input_field_count(raw_text)
 	var/static/regex/field_regex = new(@"\[_+\]","g")
