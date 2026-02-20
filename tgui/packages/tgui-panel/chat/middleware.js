@@ -18,7 +18,6 @@ import { selectChat, selectCurrentChatPage } from './selectors';
 
 // List of blacklisted tags
 const FORBID_TAGS = [
-  'a',
   'iframe',
   'link',
   'video',
