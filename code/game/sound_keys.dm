@@ -471,3 +471,25 @@
 	file_paths = list(
 		'modular_sand/sound/misc/drawer_close.ogg'
 	)
+
+/datum/sound_effect/rolling_pin_rolling
+	key = SFX_ROLLING_PIN_ROLLING
+	file_paths = list(
+		'sound/items/rolling_pin/rolling_pin_rolling1.ogg',
+		'sound/items/rolling_pin/rolling_pin_rolling2.ogg',
+		'sound/items/rolling_pin/rolling_pin_rolling3.ogg',
+		'sound/items/rolling_pin/rolling_pin_rolling4.ogg',
+		'sound/items/rolling_pin/rolling_pin_rolling5.ogg',
+		'sound/items/rolling_pin/rolling_pin_rolling6.ogg',
+	)
+
+/datum/sound_effect/knife_slice
+	key = SFX_KNIFE_SLICE
+	file_paths = list(
+		'sound/items/knife/knife_slice1.ogg',
+		'sound/items/knife/knife_slice2.ogg',
+		'sound/items/knife/knife_slice3.ogg',
+		'sound/items/knife/knife_slice4.ogg',
+		'sound/items/knife/knife_slice5.ogg',
+		'sound/items/knife/knife_slice6.ogg'
+	)
