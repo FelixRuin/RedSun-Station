@@ -36,13 +36,16 @@ export const Panel = (props, context) => {
         <Stack.Item>
           <Section fitted>
             <Stack mr={1} align="center">
-              <Stack.Item grow overflowX="auto">
+              <Stack.Item
+                grow
+                overflowX="auto"
+                style={{ 'min-width': 0 }}>
                 <ChatTabs />
               </Stack.Item>
-              <Stack.Item>
+              <Stack.Item shrink={0}>
                 <PingIndicator />
               </Stack.Item>
-              <Stack.Item>
+              <Stack.Item shrink={0}>
                 <Button
                   color="grey"
                   selected={emotes.visible}
@@ -51,7 +54,7 @@ export const Panel = (props, context) => {
                   tooltipPosition="bottom-start"
                   onClick={() => emotes.toggle()} />
               </Stack.Item>
-              <Stack.Item>
+              <Stack.Item shrink={0}>
                 <Button
                   color="grey"
                   selected={audio.visible}
@@ -60,7 +63,7 @@ export const Panel = (props, context) => {
                   tooltipPosition="bottom-start"
                   onClick={() => audio.toggle()} />
               </Stack.Item>
-              <Stack.Item>
+              <Stack.Item shrink={0}>
                 <Button
                   icon={settings.visible ? 'times' : 'cog'}
                   selected={settings.visible}

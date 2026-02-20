@@ -49,6 +49,23 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		if (!asset_cache_job)
 			return
 
+	// Tgui Topic middleware — exempt from rate limiting.
+	// tgui messages (ready, ping, UI interactions) must not be dropped
+	// during connection burst when many asset/stat topics fire at once.
+	var/log_tgui_ingress = href_list["tgui"] && CONFIG_GET(flag/emergency_tgui_logging)
+	if(log_tgui_ingress)
+		var/topic_type = href_list["type"]
+		var/window_id = href_list["window_id"]
+		var/payload_len = length(href_list["payload"])
+		var/href_preview = href
+		if(length(href_preview) > 256)
+			href_preview = "[copytext(href_preview, 1, 257)]..."
+		log_tgui(src,
+			"ingress usr=[usr] usr_eq_mob=[usr == mob] type=[topic_type] window_id=[window_id] payload_len=[payload_len] href=[href_preview]",
+			context = "client/Topic")
+	if(tgui_Topic(href_list))
+		return
+
 	// Rate limiting
 	var/mtl = CONFIG_GET(number/minute_topic_limit)
 	if (!holder && mtl)
@@ -81,23 +98,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		if (topiclimiter[SECOND_COUNT] > stl)
 			to_chat(src, "<span class='danger'>Your previous action was ignored because you've done too many in a second</span>")
 			return
-
-	var/log_tgui_ingress = href_list["tgui"] && CONFIG_GET(flag/emergency_tgui_logging)
-	if(log_tgui_ingress)
-		var/topic_type = href_list["type"]
-		var/window_id = href_list["window_id"]
-		var/payload_len = length(href_list["payload"])
-		var/href_preview = href
-		if(length(href_preview) > 256)
-			href_preview = "[copytext(href_preview, 1, 257)]..."
-		log_tgui(src,
-			"ingress usr=[usr] usr_eq_mob=[usr == mob] type=[topic_type] window_id=[window_id] payload_len=[payload_len] href=[href_preview]",
-			context = "client/Topic")
-
-
-	// Tgui Topic middleware
-	if(tgui_Topic(href_list))
-		return
 	if(href_list["reload_tguipanel"])
 		nuke_chat()
 	if(href_list["reload_statbrowser"])

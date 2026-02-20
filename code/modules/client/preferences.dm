@@ -77,6 +77,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/tgui_large_buttons = TRUE
 	var/tgui_swapped_buttons = FALSE
 	var/tgui_panel_theme = "default"
+	var/tgui_panel_state = ""
 	var/windowflashing = TRUE
 	var/windownoise = TRUE
 	var/toggles = TOGGLES_DEFAULT

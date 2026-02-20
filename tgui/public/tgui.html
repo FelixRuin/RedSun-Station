@@ -804,13 +804,22 @@ else {
   onDomContentLoaded();
 }
 
-// Safety net: if DOMContentLoaded is delayed/never observed, still attempt ready.
-setTimeout(function () {
+// Retry ready every 2s until backend responds.
+// location.href transport can be unreliable in WebView2 during connection burst,
+// and DM rate limiting may drop the first attempt.
+var readyRetryTimer = setInterval(function () {
   var debug = window.__tguiDebug__;
-  if (!debug || !debug.readySentAt) {
-    sendReady('timerFallback');
+  if (debug && debug.hasAnyMessage) {
+    clearInterval(readyRetryTimer);
+    return;
   }
-}, 2500);
+  sendReady('retry');
+}, 2000);
+// Stop retrying after 30s
+setTimeout(function () {
+  clearInterval(readyRetryTimer);
+}, 30000);
+// Watchdog: show debug overlay if no backend update after 8s (informational only, retries continue)
 setTimeout(function () {
   var debug = window.__tguiDebug__;
   if (debug && !debug.hasAnyMessage) {
@@ -821,7 +830,7 @@ setTimeout(function () {
         incomingCount: debug.incomingCount || 0,
       });
     }
-    window.__showTguiDebugOverlay__('No backend update within 8 seconds after ready');
+    window.__showTguiDebugOverlay__('No backend update within 8 seconds after ready (retrying...)');
     try {
       Byond.topic({
         tgui: 1,

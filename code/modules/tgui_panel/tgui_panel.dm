@@ -89,6 +89,21 @@
 		window.send_message("panel/theme", list(
 			"theme" = theme,
 		))
+		// Restore saved panel state (chat tabs, filters, settings)
+		if(client?.prefs?.tgui_panel_state && length(client.prefs.tgui_panel_state) > 2)
+			window.send_message("panel/state", list(
+				"state" = client.prefs.tgui_panel_state,
+			))
+		return TRUE
+	if(type == "panel/state_set")
+		var/state_json
+		if(islist(payload))
+			state_json = payload["state"]
+		if(!istext(state_json) || length(state_json) > 8192)
+			return TRUE
+		if(client?.prefs && client.prefs.tgui_panel_state != state_json)
+			client.prefs.tgui_panel_state = state_json
+			client.prefs.save_preferences(bypass_cooldown = FALSE, silent = TRUE)
 		return TRUE
 	if(type == "panel/theme_set")
 		var/theme

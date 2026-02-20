@@ -6,6 +6,7 @@
 
 import { storage } from 'common/storage';
 
+import { scheduleSaveToServer } from '../serverState';
 import { setClientTheme, THEMES } from '../themes';
 import { loadSettings, updateSettings } from './actions';
 import { FONTS_DISABLED } from './constants';
@@ -76,6 +77,28 @@ export const settingsMiddleware = store => {
       initialized = true;
       loadSettingsFromStorage();
     }
+    // Restore settings from server-side persistence (WebView2 storage is not durable)
+    if (type === 'panel/state') {
+      const stateJson = payload?.state;
+      if (typeof stateJson === 'string') {
+        try {
+          const state = JSON.parse(stateJson);
+          if (state?.settings && state?.v === 1) {
+            // Mark keys dirty so late browser storage hydration
+            // does not overwrite server-restored values
+            trackDirtyKeys(state.settings);
+            store.dispatch(loadSettings({
+              version: 1,
+              ...state.settings,
+            }));
+          }
+        }
+        catch (err) {
+          console.error('Failed to parse panel state from server:', err);
+        }
+      }
+      return next(action);
+    }
     if (type === 'panel/theme') {
       const theme = payload?.theme;
       if (!isValidTheme(theme)) {
@@ -126,6 +149,10 @@ export const settingsMiddleware = store => {
         storage.set('panel-settings', settings).catch(err => {
           console.error('Failed to save panel settings:', err);
         });
+      }
+      // Persist all panel state server-side on user changes (debounced)
+      if (type === updateSettings.type) {
+        scheduleSaveToServer(store);
       }
       return;
     }

@@ -7,9 +7,10 @@
 import { storage } from 'common/storage';
 import DOMPurify from 'dompurify';
 
+import { scheduleSaveToServer } from '../serverState';
 import { loadSettings, updateSettings } from '../settings/actions';
 import { selectSettings } from '../settings/selectors';
-import { addChatPage, changeChatPage, changeScrollTracking, loadChat, rebuildChat, removeChatPage, saveChatToDisk, toggleAcceptedType, updateMessageCount } from './actions';
+import { addChatPage, changeChatPage, changeScrollTracking, loadChat, rebuildChat, removeChatPage, saveChatToDisk, toggleAcceptedType, updateChatPage, updateMessageCount } from './actions';
 import { MAX_PERSISTED_MESSAGES, MESSAGE_SAVE_INTERVAL } from './constants';
 import { createMessage, serializeMessage } from './model';
 import { chatRenderer } from './renderer';
@@ -34,6 +35,9 @@ const saveChatToStorage = async store => {
   storage.set('chat-messages', messages);
 };
 
+// Flag: server already restored chat page structure
+let serverChatLoaded = false;
+
 const loadChatFromStorage = async store => {
   const [state, messages] = await Promise.all([
     storage.get('chat-state'),
@@ -44,6 +48,7 @@ const loadChatFromStorage = async store => {
     store.dispatch(loadChat());
     return;
   }
+  // Always try to restore messages from browser storage (not server-persisted)
   if (messages) {
     for (let message of messages) {
       if (message.html) {
@@ -61,6 +66,10 @@ const loadChatFromStorage = async store => {
     chatRenderer.processBatch(batch, {
       prepend: true,
     });
+  }
+  // If server already restored page structure, skip browser storage for structure
+  if (serverChatLoaded) {
+    return;
   }
   store.dispatch(loadChat(state));
 };
@@ -86,6 +95,23 @@ export const chatMiddleware = store => {
       initialized = true;
       loadChatFromStorage(store);
     }
+    // Restore chat pages from server-side persistence
+    if (type === 'panel/state') {
+      const stateJson = payload?.state;
+      if (typeof stateJson === 'string') {
+        try {
+          const state = JSON.parse(stateJson);
+          if (state?.chat && state?.v === 1) {
+            serverChatLoaded = true;
+            store.dispatch(loadChat(state.chat));
+          }
+        }
+        catch (err) {
+          console.error('Failed to parse chat state from server:', err);
+        }
+      }
+      return next(action);
+    }
     if (type === 'chat/message') {
       // Normalize the payload
       const batch = Array.isArray(payload) ? payload : [payload];
@@ -107,6 +133,12 @@ export const chatMiddleware = store => {
       next(action);
       const page = selectCurrentChatPage(store.getState());
       chatRenderer.changePage(page);
+      scheduleSaveToServer(store);
+      return;
+    }
+    if (type === updateChatPage.type) {
+      next(action);
+      scheduleSaveToServer(store);
       return;
     }
     if (type === rebuildChat.type) {
