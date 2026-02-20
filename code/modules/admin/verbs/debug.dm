@@ -15,6 +15,20 @@
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Toggle Debug Two") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/allow_browser_inspect()
+	set category = "Debug"
+	set name = "Allow Browser Inspect"
+	if(!check_rights(R_DEBUG))
+		return
+
+	if(byond_version < 516)
+		to_chat(src, span_warning("Эта функция доступна только на BYOND 516 и выше!"))
+		return
+
+	to_chat(src, span_notice("Теперь вы можете использовать инспектор браузера через правый клик."))
+	winset(src, null, "browser-options=+devtools")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Allow Browser Inspect") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /client/proc/Cell()
 	set category = "Debug"
 	set name = "Air Status in Location"
