@@ -22,6 +22,7 @@ import './styles/themes/inteq.scss';
 
 import { perf } from 'common/perf';
 
+import { isDragOrResizeActive } from './drag';
 import { setupGlobalEvents } from './events';
 import { setupHotKeys } from './hotkeys';
 import { captureExternalLinks } from './links';
@@ -48,6 +49,28 @@ const renderApp = createRenderer(() => {
   );
 });
 
+// During drag/resize, defer renders to requestAnimationFrame so pending
+// mousemove events are processed first, keeping window movement smooth.
+// Content still updates (once per frame via RAF) — only the scheduling changes.
+let dragRafId = null;
+
+const renderAppIfIdle = () => {
+  if (isDragOrResizeActive()) {
+    if (dragRafId === null) {
+      dragRafId = requestAnimationFrame(() => {
+        dragRafId = null;
+        renderApp();
+      });
+    }
+    return;
+  }
+  if (dragRafId !== null) {
+    cancelAnimationFrame(dragRafId);
+    dragRafId = null;
+  }
+  renderApp();
+};
+
 const setupApp = () => {
   // Delay setup
   if (document.readyState === 'loading') {
@@ -60,7 +83,7 @@ const setupApp = () => {
   captureExternalLinks();
 
   // Subscribe for state updates
-  store.subscribe(renderApp);
+  store.subscribe(renderAppIfIdle);
 
   // Dispatch incoming messages
   const dispatchIncomingMessage = msg => {
