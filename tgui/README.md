@@ -47,7 +47,7 @@ highlights differences with React.
 
 You will need these programs to start developing in tgui:
 
-- [Node v18+](https://nodejs.org/en/download/) (v20 recommended)
+- [Node v20+](https://nodejs.org/en/download/)
 - [Git Bash](https://git-scm.com/downloads)
   or [MSys2](https://www.msys2.org/) (optional)
 
@@ -100,7 +100,7 @@ options.
 You can double-click these batch files to achieve the same thing:
 
 - `bin\tgui.bat` - Build the project in production mode.
-- `bin\tgui-dev-server.bat` - Launch a development server.
+- `bin\tgui-dev-server.bat` - Launch development watchers (Vite watch mode).
 
 > Remember to always run a full build before submitting a PR. It creates
 > a compressed javascript bundle which is then referenced from DM code.
@@ -109,7 +109,7 @@ You can double-click these batch files to achieve the same thing:
 
 ## Troubleshooting
 
-**Development server is crashing**
+**Development watcher is crashing**
 
 Make sure path to your working directory does not contain spaces or special
 unicode characters. If so, move codebase to a location which does not contain

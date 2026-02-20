@@ -20,6 +20,8 @@ frontend runtime and build toolchain.
   Window, Button, Knob, Slider, RoundGauge, ByondUi, and related SCSS
 - Trident-specific `<meta>` tags from `tgui.html`
 - ES5 shims (`Function.bind`, `Array.forEach`, `Array.includes`)
+- `tgui-dev-server` package (replaced by `scripts/vite-dev.cjs` Vite
+  watch mode)
 
 ## Modernized APIs
 
@@ -66,6 +68,10 @@ automatically.
 | Babel target     | IE 8                | Edge 109                         |
 | Node baseline    | v12                 | v20.19+                          |
 | Sass functions   | Deprecated built-ins| Modern `color.channel()` etc.    |
+| Inferno          | 8.x                | 9.x                              |
+| TypeScript       | 4.9                | 5.9                              |
+| ESLint           | 8.x                | 9.x                              |
+| Jest             | 28.x               | 30.x                             |
 
 ## BYOND-to-browser bridge
 
@@ -82,6 +88,18 @@ automatically.
 - **`PixelArtImage`** — Canvas-based pixel-art renderer with crisp
   nearest-neighbor upscale, auto-scaling to container, DPI-aware.
   See [Component Reference](component-reference.md#pixelartimage).
+
+## Testing
+
+Comprehensive unit test coverage (~2,800 lines) was added alongside the
+migration, covering `packages/common`, `packages/tgui`, and
+`packages/tgui-panel`. See [Writing Tests](writing-tests.md) for details
+on how to write and run tests.
+
+## Debugging with WebView2
+
+The `allow_browser_inspect` verb enables the Edge DevTools panel for
+WebView2 windows, useful for inspecting the DOM and debugging at runtime.
 
 ## Guidelines for developers
 
