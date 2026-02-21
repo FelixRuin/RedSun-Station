@@ -87,7 +87,7 @@
 		L.ResetPosition(T.x, T.y)
 
 // better updates via client_mobs_in_contents can be created again when important recursive contents is ported!
-/datum/parallax_holder/proc/Update(full)
+/datum/parallax_holder/proc/Update(full, anim_time = 0)
 	if(!full && !cached_eye || (get_turf(cached_eye) == last))
 		return
 	if(!owner)	// why are we here
@@ -108,9 +108,13 @@
 	var/rel_y = T.y - last.y
 	// set last
 	last = T
+	// Only animate for single-tile moves when not scrolling
+	var/effective_anim_time = 0
+	if(anim_time > 0 && !scrolling && abs(rel_x) <= 1 && abs(rel_y) <= 1)
+		effective_anim_time = anim_time
 	// move
 	for(var/atom/movable/screen/parallax_layer/L in layers)
-		L.RelativePosition(T.x, T.y, rel_x, rel_y)
+		L.RelativePosition(T.x, T.y, rel_x, rel_y, effective_anim_time)
 	// process scrolling/movedir
 	if(last_area != T.loc)
 		last_area = T.loc

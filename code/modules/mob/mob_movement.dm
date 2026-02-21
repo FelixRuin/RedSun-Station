@@ -408,6 +408,15 @@
 /mob/proc/canZMove(direction, turf/target)
 	return FALSE
 
+/mob/Moved()
+	. = ..()
+	if(!client?.parallax_holder)
+		return
+	var/anim_time = 0
+	if(glide_size > 0)
+		anim_time = world.icon_size / glide_size * world.tick_lag
+	client.parallax_holder.Update(anim_time = anim_time)
+
 /mob/onTransitZ(old_z, new_z)
 	. = ..()
 	if(old_z != new_z)
