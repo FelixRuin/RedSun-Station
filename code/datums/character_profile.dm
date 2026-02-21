@@ -22,6 +22,7 @@ GLOBAL_LIST_EMPTY(cached_previews)
 	var/atom/movable/screen/map_view/examine_panel_screen/examine_panel_screen
 	var/mutable_appearance/current_mob_appearance
 	var/mutable_appearance/current_background
+	var/preview_dirty = TRUE
 	var/static/list/preview_backgrounds = list("000", "midgrey", "FFF", "white", "steel", "techmaint", "dark", "plating", "reinforced")
 
 /datum/description_profile/New(var/host_mob)
@@ -31,7 +32,14 @@ GLOBAL_LIST_EMPTY(cached_previews)
 
 /datum/description_profile/Destroy(force, ...)
 	. = ..()
+	var/mob/M = host?.resolve()
+	if(M)
+		UnregisterSignal(M, COMSIG_ATOM_UPDATED_ICON)
 	host = null
+
+/datum/description_profile/proc/on_host_icon_updated(datum/source, updates, result)
+	SIGNAL_HANDLER
+	preview_dirty = TRUE
 
 /datum/description_profile/ui_status(mob/user, datum/ui_state/state)
 	. = ..()
@@ -152,11 +160,14 @@ GLOBAL_LIST_EMPTY(cached_previews)
 		examine_panel_screen.assigned_map = "examine_panel_[REF(M)]_map"
 		examine_panel_screen.del_on_map_removal = FALSE
 		examine_panel_screen.screen_loc = "[examine_panel_screen.assigned_map]:1,1"
+		RegisterSignal(M, COMSIG_ATOM_UPDATED_ICON, PROC_REF(on_host_icon_updated))
 
 	if (!current_background)
 		current_background = mutable_appearance('modular_citadel/icons/ui/backgrounds.dmi', "reinforced", layer = SPACE_LAYER)
 
-	update_preview()
+	if(preview_dirty)
+		update_preview()
+		preview_dirty = FALSE
 
 	ui = SStgui.try_update_ui(user, src, ui)
 	if (!ui)
@@ -180,6 +191,7 @@ GLOBAL_LIST_EMPTY(cached_previews)
 			examine_panel_screen.setDir(turn(examine_panel_screen.dir, 90))
 		if("change_background")
 			current_background.icon_state = next_list_item(current_background.icon_state, preview_backgrounds)
+			preview_dirty = TRUE
 			return TRUE
 
 
