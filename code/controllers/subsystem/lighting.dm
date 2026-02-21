@@ -39,7 +39,11 @@ SUBSYSTEM_DEF(lighting)
 	var/phase_limit
 	phase_limit = init_tick_checks ? GLOB.lighting_update_lights.len : min(GLOB.lighting_update_lights.len, LIGHTING_MAX_SOURCES_PER_FIRE)
 	for (i in 1 to phase_limit)
+		if (i > GLOB.lighting_update_lights.len)
+			break
 		var/datum/light_source/L = GLOB.lighting_update_lights[i]
+		if (QDELETED(L))
+			continue
 
 		L.update_corners()
 
