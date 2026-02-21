@@ -386,13 +386,18 @@ SUBSYSTEM_DEF(timer)
 	bucketJoin()
 
 /datum/timedevent/Destroy()
-	..()
+	datum_flags &= ~DF_USE_TAG
+
 	if (flags & TIMER_UNIQUE && hash)
 		SStimer.hashes -= hash
 
-	if (callBack && callBack.object && callBack.object != GLOBAL_PROC && callBack.object.active_timers)
-		callBack.object.active_timers -= src
-		UNSETEMPTY(callBack.object.active_timers)
+	var/datum/cb_object = callBack?.object
+	if (cb_object && cb_object != GLOBAL_PROC)
+		var/list/timers = cb_object.active_timers
+		if (timers)
+			timers -= src
+			if (!length(timers))
+				cb_object.active_timers = null
 
 	callBack = null
 
