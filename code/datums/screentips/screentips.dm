@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT_TYPED(screentip_context_icons, /image, prepare_screentip_contex
 			if(context_icon)
 				button = "<span style='font-size: [SCREENTIP_CONTEXT_ICON_FONT_SCALE_PERCENT]%;'>\icon[context_icon]</span>"
 				using_image = TRUE
-		LAZYADD(to_add, "[key_combo][button][using_image ? "" : ":"] [context[key][intent]]")
+		LAZYADD(to_add, "[key_combo][button][using_image ? "" : ": "][context[key][intent]]")
 
 	// Prepare separator for same button but different intent
 	var/separator = "[allow_image ? " " : " / "]"
