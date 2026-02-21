@@ -501,8 +501,10 @@ GLOBAL_LIST_INIT(pda_ringtone_list, list(
 	if (!underline_flag)
 		dat = replacetext(dat, "text-decoration:underline", "text-decoration:none")
 
-	user << browse(dat, "window=pda;size=400x450;border=1;can_resize=1;can_minimize=0")
-	onclose(user, "pda", src)
+	var/datum/browser/popup = new(user, "pda", null, 400, 450, src)
+	popup.set_window_options("can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=1;border=1;")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/pda/Topic(href, href_list)
 	..()

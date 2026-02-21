@@ -678,7 +678,9 @@
 
 	dellog += "</ol>"
 
-	usr << browse(dellog.Join(), "window=dellog")
+	var/datum/browser/popup = new(usr, "dellog", "Deletion Log")
+	popup.set_content(dellog.Join())
+	popup.open()
 
 /client/proc/cmd_display_overlay_log()
 	set category = "Debug"
