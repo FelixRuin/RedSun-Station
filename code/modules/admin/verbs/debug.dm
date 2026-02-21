@@ -689,7 +689,7 @@
 
 	var/list/queue_names = list("Soft Delete Queue (GC_QUEUE_CHECK)", "Hard Delete Queue (GC_QUEUE_HARDDELETE)")
 	var/list/output = list("<B>Current GC Queue Contents</B>")
-	output += " — <A href='?src=[REF(holder)];[HrefToken()];gc_queue_refresh=1'>Refresh</A><BR>"
+	output += " — <A href='byond://?src=[REF(holder)];[HrefToken()];gc_queue_refresh=1'>Refresh</A><BR>"
 
 	// --- Queues by type ---
 	for(var/level in 1 to GC_QUEUE_COUNT)
