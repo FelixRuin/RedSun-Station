@@ -682,6 +682,85 @@
 	popup.set_content(dellog.Join())
 	popup.open()
 
+/client/proc/cmd_display_gc_queue()
+	set category = "Debug"
+	set name = "Display GC Queue"
+	set desc = "Display current GC queue contents by type."
+
+	var/list/queue_names = list("Soft Delete Queue (GC_QUEUE_CHECK)", "Hard Delete Queue (GC_QUEUE_HARDDELETE)")
+	var/list/output = list("<B>Current GC Queue Contents</B>")
+	output += " — <A href='?src=[REF(holder)];[HrefToken()];gc_queue_refresh=1'>Refresh</A><BR>"
+
+	// --- Queues by type ---
+	for(var/level in 1 to GC_QUEUE_COUNT)
+		var/list/queue = SSgarbage.queues[level]
+		var/queue_len = length(queue)
+		output += "<BR><h3>[queue_names[level]] — [queue_len] items</h3>"
+
+		if(!queue_len)
+			output += "<i>Empty</i>"
+			continue
+
+		var/list/type_counts = list()
+		var/alive_count = 0
+		var/dead_count = 0
+
+		for(var/i in 1 to queue_len)
+			var/list/L = queue[i]
+			if(length(L) < 2)
+				dead_count++
+				continue
+			var/refID = L[2]
+			var/datum/D = locate(refID)
+			if(!D)
+				dead_count++
+				continue
+			alive_count++
+			var/tpath = "[D.type]"
+			type_counts[tpath] = (type_counts[tpath] || 0) + 1
+
+		sortTim(type_counts, cmp = GLOBAL_PROC_REF(cmp_numeric_dsc), associative = TRUE)
+
+		output += "<b>Alive: [alive_count] | Already GC'd: [dead_count]</b><ol>"
+		var/shown = 0
+		for(var/tpath in type_counts)
+			output += "<li><u>[tpath]</u> — [type_counts[tpath]]</li>"
+			shown++
+			if(shown >= 50)
+				output += "<li><i>...and [length(type_counts) - 50] more types</i></li>"
+				break
+		output += "</ol>"
+
+	// --- Costly types (from qdel_item stats) ---
+	output += "<BR><h3>Top types by Destroy() cost</h3>"
+	var/list/destroy_cost = list()
+	for(var/path in SSgarbage.items)
+		var/datum/qdel_item/I = SSgarbage.items[path]
+		if(I.destroy_time > 0)
+			destroy_cost["[path]"] = I.destroy_time
+	sortTim(destroy_cost, cmp = GLOBAL_PROC_REF(cmp_numeric_dsc), associative = TRUE)
+	output += "<ol>"
+	var/shown_cost = 0
+	for(var/path in destroy_cost)
+		var/datum/qdel_item/I = SSgarbage.items[text2path(path)]
+		var/extra = ""
+		if(I.failures)
+			extra += " | Failures: [I.failures]"
+		if(I.hard_deletes)
+			extra += " | Hard dels: [I.hard_deletes] ([I.hard_delete_time]ms, max [I.hard_delete_max]ms)"
+		if(I.slept_destroy)
+			extra += " | Sleeps: [I.slept_destroy]"
+		output += "<li><u>[path]</u> — Destroy: [I.destroy_time]ms / [I.qdels] calls ([round(I.destroy_time / max(I.qdels, 1), 0.01)]ms avg)[extra]</li>"
+		shown_cost++
+		if(shown_cost >= 30)
+			output += "<li><i>...and [length(destroy_cost) - 30] more types</i></li>"
+			break
+	output += "</ol>"
+
+	var/datum/browser/popup = new(usr, "gcqueue", "GC Queue Contents", 700, 600)
+	popup.set_content(output.Join())
+	popup.open()
+
 /client/proc/cmd_display_overlay_log()
 	set category = "Debug"
 	set name = "Display overlay Log"
