@@ -346,6 +346,14 @@
 					posY = (posY - docHeight) - realIconSizeY - tooltip.padding;
 				}
 
+				//Clamp to prevent going off-screen on the left or top
+				if (posX < tooltip.padding) {
+					posX = tooltip.padding;
+				}
+				if (posY < tooltip.padding) {
+					posY = tooltip.padding;
+				}
+
 				//Actually size, move and show the tooltip box
 				byond_winset({
 					id: tooltip.control,

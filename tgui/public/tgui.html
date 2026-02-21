@@ -304,6 +304,18 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
   };
 
   Byond.command = function (command) {
+    // BYOND 516+ native API — required for WebView2 command execution.
+    // location.href transport does not reliably deliver winset commands
+    // in WebView2, so prefer the native bridge when available.
+    if (window.BYOND && typeof window.BYOND.command === 'function') {
+      try {
+        window.BYOND.command(command);
+        return;
+      }
+      catch (err) {
+        // fall through to legacy transport
+      }
+    }
     return Byond.call('winset', {
       command: command,
     });
@@ -355,6 +367,7 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
   var RETRY_ATTEMPTS = 5;
   var RETRY_WAIT_INITIAL = 500;
   var RETRY_WAIT_INCREMENT = 500;
+  var JS_LOAD_TIMEOUT = 15000;
 
   var loadedAssetByUrl = {};
   var pushAssetEvent = function (kind, payload) {
@@ -464,18 +477,36 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
       node.type = 'text/javascript';
       node.src = url;
       if (sync) {
-        node.defer = true;
+        node.async = false;
       }
       else {
         node.async = true;
       }
+      var loadTimeout = setTimeout(function () {
+        pushAssetEvent('jsTimeout', {
+          url: url,
+          attempt: attempt,
+          timeoutMs: JS_LOAD_TIMEOUT,
+        });
+        if (node) {
+          node.onload = null;
+          node.onerror = null;
+          if (node.parentNode) {
+            node.parentNode.removeChild(node);
+          }
+          node = null;
+        }
+        retry();
+      }, JS_LOAD_TIMEOUT);
       node.onload = function () {
+        clearTimeout(loadTimeout);
         pushAssetEvent('jsOnload', {
           url: url,
           attempt: attempt,
         });
       };
       node.onerror = function () {
+        clearTimeout(loadTimeout);
         pushAssetEvent('jsOnerror', {
           url: url,
           attempt: attempt,
@@ -496,6 +527,7 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
         });
       }
       catch (err) {
+        clearTimeout(loadTimeout);
         pushAssetEvent('injectError', {
           url: url,
           type: type,
@@ -671,6 +703,18 @@ window.__showTguiDebugOverlay__ = function (reason) {
     return;
   }
 
+  var dismissInterval = null;
+  var dismissOverlay = function () {
+    if (dismissInterval) {
+      clearInterval(dismissInterval);
+      dismissInterval = null;
+    }
+    var overlay = document.getElementById('TguiDebugOverlay');
+    if (overlay && overlay.parentNode) {
+      overlay.parentNode.removeChild(overlay);
+    }
+  };
+
   var render = function () {
     if (!document.body) {
       setTimeout(render, 100);
@@ -719,7 +763,21 @@ window.__showTguiDebugOverlay__ = function (reason) {
     node.id = 'TguiDebugOverlay';
     node.className = 'TguiDebugOverlay';
     node.textContent = lines.join('\n');
+
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'TguiDebugOverlay__close';
+    closeBtn.textContent = '\u2715 Close';
+    closeBtn.onclick = dismissOverlay;
+    node.insertBefore(closeBtn, node.firstChild);
+
     document.body.appendChild(node);
+
+    // Auto-dismiss when the app eventually boots
+    dismissInterval = setInterval(function () {
+      if (window.__tguiAppBooted__) {
+        dismissOverlay();
+      }
+    }, 500);
   };
 
   render();
@@ -885,6 +943,24 @@ setTimeout(function () {
   overflow: auto;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.TguiDebugOverlay__close {
+  position: sticky;
+  top: 0;
+  float: right;
+  padding: 4px 12px;
+  font-size: 14px;
+  font-family: Consolas, monospace;
+  color: #ffffff;
+  background-color: #cc0000;
+  border: none;
+  cursor: pointer;
+  z-index: 1201;
+}
+
+.TguiDebugOverlay__close:hover {
+  background-color: #ff0000;
 }
 
 .FatalError {

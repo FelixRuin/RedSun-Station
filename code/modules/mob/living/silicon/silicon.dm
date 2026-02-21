@@ -298,7 +298,9 @@
 			number++
 	list += {"<br><br><A href='byond://?src=[REF(src)];laws=1'>State Laws</A>"}
 
-	usr << browse(list, "window=laws")
+	var/datum/browser/popup = new(usr, "laws", "Laws")
+	popup.set_content(list)
+	popup.open()
 
 /mob/living/silicon/proc/set_autosay() //For allowing the AI and borgs to set the radio behavior of auto announcements (state laws, arrivals).
 	if(!radio)

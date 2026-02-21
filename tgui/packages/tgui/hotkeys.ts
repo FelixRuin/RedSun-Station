@@ -46,6 +46,10 @@ const BYOND_DIRECTION_MAP: Record<string, string> = {
 
 /**
  * Converts a KeyEvent to BYOND key name.
+ *
+ * Uses event.code (physical key) for layout-independent mapping of letters,
+ * digits, and symbols. This ensures hotkeys work regardless of keyboard
+ * layout (e.g. Russian, German QWERTZ, French AZERTY).
  */
 const keyToByond = (keyEvent: KeyEvent): string | undefined => {
   const { key, code } = keyEvent;
@@ -55,28 +59,37 @@ const keyToByond = (keyEvent: KeyEvent): string | undefined => {
     return 'Numpad' + code.slice(6);
   }
 
-  // Direction/navigation keys
+  // Direction/navigation keys (layout-independent in event.key)
   if (BYOND_DIRECTION_MAP[key]) {
     return BYOND_DIRECTION_MAP[key];
   }
 
-  // Modifier and special keys
+  // Modifier and special keys (layout-independent in event.key)
   if (key === 'Shift') return 'Shift';
   if (key === 'Control') return 'Ctrl';
   if (key === 'Alt') return 'Alt';
   if (key === 'Insert') return 'Insert';
   if (key === 'Delete') return 'Delete';
 
-  // Single alphanumeric character -> uppercase for BYOND
-  if (key.length === 1 && /[a-zA-Z0-9]/.test(key)) {
-    return key.toUpperCase();
+  // Letters — use physical key code (layout-independent)
+  // e.g. 'KeyW' → 'W', works for any keyboard layout
+  if (/^Key[A-Z]$/.test(code)) {
+    return code.charAt(3);
   }
 
-  // F-keys
+  // Digits — use physical key code (layout-independent)
+  // e.g. 'Digit1' → '1'
+  if (/^Digit\d$/.test(code)) {
+    return code.charAt(5);
+  }
+
+  // F-keys (layout-independent in event.key)
   if (/^F\d+$/.test(key)) return key;
 
-  // Symbol keys
-  if ([',', '-', '.'].includes(key)) return key;
+  // Symbol keys — use physical key code (layout-independent)
+  if (code === 'Comma') return ',';
+  if (code === 'Minus') return '-';
+  if (code === 'Period') return '.';
 
   return undefined;
 };

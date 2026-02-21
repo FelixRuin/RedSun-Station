@@ -239,7 +239,7 @@ export const TechwebContent = (props, context) => {
           </Flex.Item>
         </Flex>
       </Flex.Item>
-      <Flex.Item className="Techweb__RouterContent" height="100%">
+      <Flex.Item className="Techweb__RouterContent" grow={1}>
         <TechwebRouter />
       </Flex.Item>
     </Flex>
@@ -333,8 +333,8 @@ const TechwebOverview = (props, context) => {
           </Flex.Item>
         </Flex>
       </Flex.Item>
-      <Flex.Item className={"Techweb__OverviewNodes"} height="100%">
-        <Flex height="100%">
+      <Flex.Item className={"Techweb__OverviewNodes"} grow={1}>
+        <Flex>
           {!searching && (
             <>
               <Flex.Item mr={1}>
@@ -708,7 +708,7 @@ const TechNodeDetail = (props, context) => {
           </Flex.Item>
         </Flex>
       </Flex.Item>
-      <Flex.Item className={"Techweb__OverviewNodes"} height="100%">
+      <Flex.Item className={"Techweb__OverviewNodes"} grow={1}>
         <Flex>
           <Flex.Item mr={1}>
             {prereqNodes.map(n => (
