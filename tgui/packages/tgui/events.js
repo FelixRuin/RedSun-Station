@@ -192,7 +192,15 @@ export class KeyEvent {
     if (this.shift) {
       this._str += 'Shift+';
     }
-    if (this.key.length === 1) {
+    // Use physical key code for letters/digits to be layout-independent.
+    // e.g. 'KeyW' → 'W', 'Digit1' → '1' — works on any keyboard layout.
+    if (/^Key[A-Z]$/.test(this.code)) {
+      this._str += this.code.charAt(3);
+    }
+    else if (/^Digit\d$/.test(this.code)) {
+      this._str += this.code.charAt(5);
+    }
+    else if (this.key.length === 1) {
       this._str += this.key.toUpperCase();
     }
     else {

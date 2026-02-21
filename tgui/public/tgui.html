@@ -304,6 +304,18 @@ if (window.__windowId__ === '[' + 'tgui:windowId' + ']') {
   };
 
   Byond.command = function (command) {
+    // BYOND 516+ native API — required for WebView2 command execution.
+    // location.href transport does not reliably deliver winset commands
+    // in WebView2, so prefer the native bridge when available.
+    if (window.BYOND && typeof window.BYOND.command === 'function') {
+      try {
+        window.BYOND.command(command);
+        return;
+      }
+      catch (err) {
+        // fall through to legacy transport
+      }
+    }
     return Byond.call('winset', {
       command: command,
     });
