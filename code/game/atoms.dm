@@ -1678,8 +1678,12 @@
 
 				if(extra_lines)
 					extra_context = "<br><span class='subcontext'>[lmb_rmb_line][ctrl_lmb_ctrl_rmb_line][alt_lmb_alt_rmb_line][shift_lmb_ctrl_shift_lmb_line]</span>"
-					//first extra line pushes atom name line up 10px, subsequent lines push it up 9px, this offsets that and keeps the first line in the same place
-					active_hud.screentip_text.maptext_y = -1 + (extra_lines - 1) * -9
+					if(screentip_images)
+						//first extra line pushes atom name line up 16px, subsequent lines push it up 12px, this offsets that and keeps the first line in the same place
+						active_hud.screentip_text.maptext_y = -6 + (extra_lines - 1) * -12
+					else
+						//first extra line pushes atom name line up 11px, subsequent lines push it up 8px, this offsets that and keeps the first line in the same place
+						active_hud.screentip_text.maptext_y = -1 + (extra_lines - 1) * -8
 
 	if (screentips_enabled == SCREENTIP_PREFERENCE_CONTEXT_ONLY && extra_context == "")
 		active_hud.screentip_text.maptext = ""
