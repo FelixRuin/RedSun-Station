@@ -56,9 +56,11 @@ GLOBAL_LIST_EMPTY(cached_previews)
 	return GLOB.always_state
 
 /datum/description_profile/ui_close(mob/user)
-	var/viewer_screen = LAZYACCESS(viewer_screens, user)
+	var/atom/movable/screen/map_view/viewer_screen = LAZYACCESS(viewer_screens, user)
 	LAZYREMOVE(viewer_screens, user)
-	qdel(viewer_screen)
+	if(viewer_screen)
+		viewer_screen.hide_from(user)
+		qdel(viewer_screen)
 
 /atom/movable/screen/map_view/examine_panel_screen
 	name = "description profile screen"

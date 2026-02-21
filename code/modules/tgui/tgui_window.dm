@@ -25,6 +25,8 @@
 	var/initial_inline_js
 	var/initial_inline_css
 
+	var/list/oversized_payloads = list()
+
 /**
  * public
  *
@@ -414,7 +416,60 @@
 			// Resend the assets
 			for(var/asset in sent_assets)
 				send_asset(asset)
+		if("oversizedPayloadRequest")
+			var/payload_id = payload["id"]
+			var/chunk_count = payload["chunkCount"]
+			var/permit_payload = chunk_count <= CONFIG_GET(number/tgui_max_chunk_count)
+			if(permit_payload)
+				permit_payload = create_oversized_payload(payload_id, payload["type"], chunk_count)
+			send_message("oversizePayloadResponse", list("allow" = permit_payload, "id" = payload_id))
+		if("payloadChunk")
+			var/payload_id = payload["id"]
+			if(append_payload_chunk(payload_id, payload["chunk"]))
+				send_message("acknowlegePayloadChunk", list("id" = payload_id))
+			else
+				send_message("payloadDropped", list("id" = payload_id))
 	if(log_handshake)
 		log_tgui(client,
 			"[id]/on_message done type=[type], status_after=[status], queue_len=[length(message_queue)], fatally_errored=[fatally_errored]",
 			window = src)
+
+/datum/tgui_window/proc/create_oversized_payload(payload_id, message_type, chunk_count)
+	// Limit concurrent in-flight payloads to prevent memory exhaustion
+	if(length(oversized_payloads) >= 3)
+		return FALSE
+	if(oversized_payloads[payload_id])
+		stack_trace("Attempted to create oversized tgui payload with duplicate ID.")
+		return FALSE
+	// Do NOT use TIMER_UNIQUE|TIMER_OVERRIDE: each new CALLBACK() has a different hash,
+	// so those flags would not deduplicate timers — they would just accumulate.
+	// Store the timer ID explicitly and use deltimer() before each reset.
+	var/timer_id = addtimer(CALLBACK(src, PROC_REF(remove_oversized_payload), payload_id), 30 SECONDS, TIMER_STOPPABLE)
+	oversized_payloads[payload_id] = list(
+		"type" = message_type,
+		"count" = chunk_count,
+		"chunks" = list(),
+		"timer" = timer_id,
+	)
+	return TRUE
+
+/datum/tgui_window/proc/append_payload_chunk(payload_id, chunk)
+	var/list/oversized_payload = oversized_payloads[payload_id]
+	if(!oversized_payload)
+		return FALSE // Payload was timed out or never existed — signal caller
+	var/list/chunks = oversized_payload["chunks"]
+	chunks += chunk
+	if(length(chunks) >= oversized_payload["count"])
+		deltimer(oversized_payload["timer"])
+		var/message_type = oversized_payload["type"]
+		var/final_payload = chunks.Join("")
+		remove_oversized_payload(payload_id)
+		on_message(message_type, json_decode(final_payload), list("type" = message_type, "payload" = final_payload, "tgui" = TRUE, "window_id" = id))
+	else
+		// Explicit deltimer + new addtimer to correctly reset the deadline
+		deltimer(oversized_payload["timer"])
+		oversized_payload["timer"] = addtimer(CALLBACK(src, PROC_REF(remove_oversized_payload), payload_id), 30 SECONDS, TIMER_STOPPABLE)
+	return TRUE
+
+/datum/tgui_window/proc/remove_oversized_payload(payload_id)
+	oversized_payloads -= payload_id

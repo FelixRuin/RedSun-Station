@@ -74,6 +74,8 @@
 /obj/item/mod/paint/ui_close(mob/user)
 	. = ..()
 	editing_mod = null
+	if(proxy_view && user?.client)
+		user.client.clear_map(proxy_view.assigned_map)
 	QDEL_NULL(proxy_view)
 	current_color = color_matrix_identity()
 

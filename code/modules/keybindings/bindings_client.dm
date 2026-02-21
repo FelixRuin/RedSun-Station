@@ -76,13 +76,9 @@
 	mob.focus?.key_down(_key, src, full_key)
 	mob.update_mouse_pointer()
 
-/// Keyup's all keys held down.
+/// Keyup's all keys held down, including modifier keys.
 /client/proc/ForceAllKeysUp()
-	// simulate a user releasing all keys except for the mod keys. groan. i hate this. thanks, byond. why aren't keyups able to be forced to fire on macro change aoaoaoao.
-	// groan
-	for(var/key in keys_held)		// all of these won't be the 3 mod keys.
-		if((key == "Ctrl") || (key == "Alt") || (key == "Shift"))
-			continue
+	for(var/key in keys_held)
 		keyUp("[key]")
 
 /client/verb/keyUp(_key as text)

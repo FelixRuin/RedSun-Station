@@ -401,7 +401,8 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 
 /obj/machinery/computer/gateway_control/ui_close(mob/user)
 	. = ..()
-	user.client.clear_map(user)
+	if(G?.portal_visuals)
+		G.portal_visuals.hide_from(user)
 
 /obj/machinery/computer/gateway_control/proc/try_to_linkup()
 	G = locate(/obj/machinery/gateway) in view(7,get_turf(src))

@@ -96,14 +96,19 @@
 			))
 		return TRUE
 	if(type == "panel/state_set")
-		var/state_json
-		if(islist(payload))
+		// State JSON is sent as a direct href parameter (not inside payload)
+		// to avoid double-JSON-encoding that inflates the topic URL size.
+		var/state_json = href_list?["panel_state"]
+		// Fallback: legacy payload path for backward compatibility
+		if(!state_json && islist(payload))
 			state_json = payload["state"]
-		if(!istext(state_json) || length(state_json) > 8192)
+		if(!istext(state_json) || length(state_json) > 16384)
+			if(client && istext(state_json))
+				window.send_message("panel/state_error", list("reason" = "too_large", "size" = length(state_json)))
 			return TRUE
 		if(client?.prefs && client.prefs.tgui_panel_state != state_json)
 			client.prefs.tgui_panel_state = state_json
-			client.prefs.save_preferences(bypass_cooldown = FALSE, silent = TRUE)
+			client.prefs.save_preferences(bypass_cooldown = TRUE, silent = TRUE)
 		return TRUE
 	if(type == "panel/theme_set")
 		var/theme

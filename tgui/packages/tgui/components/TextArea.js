@@ -86,6 +86,42 @@ export class TextArea extends Component {
         this.setEditing(true);
       }
     };
+    // BYOND 516 WebView2 fix: explicitly handle paste to ensure the full
+    // clipboard content is inserted. Without this, large pastes may be
+    // silently truncated or injected in small chunks by the host browser.
+    this.handleOnPaste = e => {
+      const cb = e.clipboardData || window.clipboardData;
+      if (!cb) {
+        return;
+      }
+      const text = cb.getData('text');
+      if (!text) {
+        return;
+      }
+      e.preventDefault();
+      const ta = this.textareaRef.current;
+      if (!ta) {
+        return;
+      }
+      const start = ta.selectionStart !== null ? ta.selectionStart : ta.value.length;
+      const end = ta.selectionEnd !== null ? ta.selectionEnd : ta.value.length;
+      let newVal = ta.value.substring(0, start) + text + ta.value.substring(end);
+      const maxLen = this.props.maxLength;
+      if (maxLen && newVal.length > maxLen) {
+        newVal = newVal.substring(0, maxLen);
+      }
+      ta.value = newVal;
+      const newPos = Math.min(start + text.length, newVal.length);
+      ta.selectionStart = newPos;
+      ta.selectionEnd = newPos;
+      if (!this.state.editing) {
+        this.setEditing(true);
+      }
+      const { onInput } = this.props;
+      if (onInput) {
+        onInput(e, ta.value);
+      }
+    };
     this.handleBlur = e => {
       const { editing } = this.state;
       const { onChange } = this.props;
@@ -164,6 +200,7 @@ export class TextArea extends Component {
           onKeyDown={this.handleKeyDown}
           onKeyPress={this.handleKeyPress}
           onInput={this.handleOnInput}
+          onPaste={this.handleOnPaste}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           maxLength={maxLength} />
