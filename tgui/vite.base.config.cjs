@@ -74,7 +74,9 @@ const createViteConfig = ({ entry, bundleName, globalName }) => {
     },
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
-      'process.env.DEV_SERVER_IP': JSON.stringify(null),
+      'process.env.DEV_SERVER_IP': JSON.stringify(
+        mode === 'development' ? (process.env.DEV_SERVER_IP || null) : null
+      ),
     },
     esbuild: {
       target: 'es2020',
