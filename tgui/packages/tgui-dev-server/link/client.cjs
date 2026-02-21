@@ -10,11 +10,11 @@ const subscribers = [];
 
 const ensureConnection = () => {
   if (process.env.NODE_ENV !== 'production') {
-    if (!window.WebSocket) {
+    const DEV_SERVER_IP = process.env.DEV_SERVER_IP;
+    if (!DEV_SERVER_IP || !window.WebSocket) {
       return;
     }
     if (!socket || socket.readyState === WebSocket.CLOSED) {
-      const DEV_SERVER_IP = process.env.DEV_SERVER_IP || '127.0.0.1';
       socket = new WebSocket(`ws://${DEV_SERVER_IP}:3000`);
       socket.onopen = () => {
         // Empty the message queue
@@ -93,11 +93,15 @@ const serializeObject = obj => {
 
 const sendMessage = msg => {
   if (process.env.NODE_ENV !== 'production') {
+    const DEV_SERVER_IP = process.env.DEV_SERVER_IP;
+    if (!DEV_SERVER_IP) {
+      return;
+    }
     const json = serializeObject(msg);
     // Send message using WebSocket
     if (window.WebSocket) {
       ensureConnection();
-      if (socket.readyState === WebSocket.OPEN) {
+      if (socket && socket.readyState === WebSocket.OPEN) {
         socket.send(json);
       }
       else {
@@ -110,7 +114,6 @@ const sendMessage = msg => {
     }
     // Send message using plain HTTP request.
     else {
-      const DEV_SERVER_IP = process.env.DEV_SERVER_IP || '127.0.0.1';
       const req = new XMLHttpRequest();
       req.open('POST', `http://${DEV_SERVER_IP}:3001`, true);
       req.timeout = 250;
