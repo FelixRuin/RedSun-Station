@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(movespeed_modification_cache)
 		key = type_id_datum.id
 	else								//assume it's an id
 		key = type_id_datum
-	if(!LAZYACCESS(movespeed_modification, key))
+	if(!key || !LAZYACCESS(movespeed_modification, key))
 		return FALSE
 	LAZYREMOVE(movespeed_modification, key)
 	if(update)
@@ -275,7 +275,7 @@ GLOBAL_LIST_EMPTY(movespeed_modification_cache)
   * DANGER: IT IS UP TO THE PERSON USING THIS TO MAKE SURE THE MODIFIER IS NOT MODIFIED IF IT HAPPENS TO BE GLOBAL/CACHED.
   */
 /mob/proc/get_movespeed_modifier_datum(id)
-	return movespeed_modification[id]
+	return LAZYACCESS(movespeed_modification, id)
 
 /// Checks if a move speed modifier is valid and not missing any data
 /proc/movespeed_data_null_check(datum/movespeed_modifier/M)		//Determines if a data list is not meaningful and should be discarded.
