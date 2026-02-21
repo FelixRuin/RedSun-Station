@@ -140,7 +140,7 @@ const MaterialEjectDock = (props: {
                 <MaterialIcon material={material.name} />
               </Flex.Item>
               <Flex.Item>
-                {(sheetsFloat < min_sheets_to_round) ? sheetsFloat : sheetsInt}
+                {(sheetsFloat < min_sheets_to_round) ? Math.round(sheetsFloat * 1000) / 1000 : sheetsInt}
               </Flex.Item>
             </Flex>
           }
@@ -365,7 +365,7 @@ class MaterialDockTooltip extends Component<DockTooltipProps, DockTooltipState> 
             ...DOCK_DEFAULT_OPTIONS,
             placement: this.props.position || 'bottom',
           });
-          pop.update();
+          pop.forceUpdate();
         }
       },
       this.context,
