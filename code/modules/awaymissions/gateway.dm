@@ -364,9 +364,9 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	. = ..()
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		G.portal_visuals.display_to(user)
 		ui = new(user, src, "Gateway", name)
 		ui.open()
+		G.portal_visuals.display_to(user, ui.window)
 
 /obj/machinery/computer/gateway_control/ui_data(mob/user)
 	. = ..()
@@ -431,13 +431,8 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	cam_background.plane = HIGHEST_EVER_PLANE
 	cam_background.blend_mode = BLEND_OVERLAY
 
-/atom/movable/screen/map_view/gateway_port/proc/generate_view(map_key)
-	// Map keys have to start and end with an A-Z character,
-	// and definitely NOT with a square bracket or even a number.
-	// I wasted 6 hours on this. :agony:
-	// -- Stylemistake
-	assigned_map = map_key
-	set_position(1, 1)
+/atom/movable/screen/map_view/gateway_port/generate_view(map_key)
+	. = ..(map_key)
 	cam_background.assigned_map = assigned_map
 	cam_background.fill_rect(1, 1, 3, 3)
 
@@ -445,8 +440,9 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	QDEL_NULL(cam_background)
 	return ..()
 
-/atom/movable/screen/map_view/gateway_port/proc/display_to(mob/show_to)
-	show_to.client.register_map_obj(cam_background)
+/atom/movable/screen/map_view/gateway_port/display_to_client(client/show_to)
+	. = ..()
+	show_to?.register_map_obj(cam_background)
 
 /atom/movable/screen/map_view/gateway_port/proc/setup_visuals(datum/gateway_destination/D)
 	our_destination = D
