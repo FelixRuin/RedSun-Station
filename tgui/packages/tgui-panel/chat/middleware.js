@@ -7,7 +7,7 @@
 import { storage } from 'common/storage';
 import DOMPurify from 'dompurify';
 
-import { scheduleSaveToServer } from '../serverState';
+import { flushSaveToServer, getLastSavedAt, scheduleSaveToServer } from '../serverState';
 import { loadSettings, updateSettings } from '../settings/actions';
 import { selectSettings } from '../settings/selectors';
 import { addChatPage, changeChatPage, changeScrollTracking, loadChat, rebuildChat, removeChatPage, saveChatToDisk, toggleAcceptedType, updateChatPage, updateMessageCount } from './actions';
@@ -25,17 +25,19 @@ const FORBID_TAGS = [
 
 const saveChatToStorage = async store => {
   const state = selectChat(store.getState());
+  const savedAt = getLastSavedAt();
   const fromIndex = Math.max(0,
     chatRenderer.messages.length - MAX_PERSISTED_MESSAGES);
   const messages = chatRenderer.messages
     .slice(fromIndex)
     .map(message => serializeMessage(message));
-  storage.set('chat-state', state);
+  storage.set('chat-state', { ...state, savedAt });
   storage.set('chat-messages', messages);
 };
 
-// Flag: server already restored chat page structure
+// Server state tracking for smart merge with browser storage
 let serverChatLoaded = false;
+let serverSavedAt = 0;
 
 const loadChatFromStorage = async store => {
   const [state, messages] = await Promise.all([
@@ -66,8 +68,12 @@ const loadChatFromStorage = async store => {
       prepend: true,
     });
   }
-  // If server already restored page structure, skip browser storage for structure
-  if (serverChatLoaded) {
+  // Compare server vs browser storage by savedAt counter.
+  // Use the fresher copy; if equal or both missing, server wins (backward compat).
+  const browserSavedAt = (state && typeof state.savedAt === 'number')
+    ? state.savedAt
+    : 0;
+  if (serverChatLoaded && serverSavedAt >= browserSavedAt) {
     return;
   }
   store.dispatch(loadChat(state));
@@ -102,13 +108,39 @@ export const chatMiddleware = store => {
           const state = JSON.parse(stateJson);
           if (state?.chat && state?.v === 1) {
             serverChatLoaded = true;
-            store.dispatch(loadChat(state.chat));
+            serverSavedAt = typeof state.savedAt === 'number'
+              ? state.savedAt
+              : 0;
+            // Decompact: restore id fields and acceptedTypes format
+            const chat = state.chat;
+            if (chat.pageById) {
+              for (const [id, page] of Object.entries(chat.pageById)) {
+                page.id = id;
+                if (Array.isArray(page.acceptedTypes)) {
+                  const obj = {};
+                  for (const t of page.acceptedTypes) {
+                    obj[t] = true;
+                  }
+                  page.acceptedTypes = obj;
+                }
+              }
+            }
+            store.dispatch(loadChat(chat));
           }
         }
         catch (err) {
           console.error('Failed to parse chat state from server:', err);
         }
       }
+      return next(action);
+    }
+    if (type === 'panel/state_error') {
+      // eslint-disable-next-line no-console
+      console.error(
+        '[tgui-panel] Server rejected state save:',
+        payload?.reason,
+        'size:',
+        payload?.size);
       return next(action);
     }
     if (type === 'chat/message') {
@@ -132,7 +164,13 @@ export const chatMiddleware = store => {
       next(action);
       const page = selectCurrentChatPage(store.getState());
       chatRenderer.changePage(page);
-      scheduleSaveToServer(store);
+      // Flush immediately for structural changes (add/remove tab),
+      // debounce for less critical ones (switch tab, toggle filter)
+      if (type === addChatPage.type || type === removeChatPage.type) {
+        flushSaveToServer(store);
+      } else {
+        scheduleSaveToServer(store);
+      }
       return;
     }
     if (type === updateChatPage.type) {
@@ -155,8 +193,8 @@ export const chatMiddleware = store => {
       return;
     }
     if (type === 'roundrestart') {
-      // Save chat as soon as possible
       saveChatToStorage(store);
+      flushSaveToServer(store);
       return next(action);
     }
     if (type === saveChatToDisk.type) {
