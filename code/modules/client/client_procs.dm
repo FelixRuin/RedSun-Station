@@ -298,7 +298,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
-	fps = prefs.clientfps //(prefs.clientfps < 0) ? RECOMMENDED_FPS : prefs.clientfps
+	fps = sanitize_clientfps(prefs.clientfps)
 
 	//Admin Authorisation
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.

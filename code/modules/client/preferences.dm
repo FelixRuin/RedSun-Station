@@ -2817,7 +2817,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<b>[ghosts_of_others_label]:</b> <a href='?_src_=prefs;task=input;preference=ghostothers'>[button_name]</a><br>"
 					dat += "<br>"
 
-					dat += "<b>[fps_label]:</b> <a href='?_src_=prefs;preference=clientfps;task=input'>[clientfps]</a><br>"
+					dat += "<b>[fps_label]:</b> <a href='?_src_=prefs;preference=clientfps;task=input'>[clientfps ? clientfps : "Авто ([CONFIG_GET(number/fps)])"]</a><br>"
 
 					dat += "<b>[income_updates_label]:</b> <a href='?_src_=prefs;preference=income_pings'>[(chat_toggles & CHAT_BANKCARD) ? allowed_label : muted_label]</a><br>"
 					dat += "<br>"
@@ -5179,8 +5179,26 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/pickedvictim = tgui_input_list(user, "Are you ok with antagonists interacting with you (e.g. kidnapping)? ERP consent is seperate: This setting does NOT mean they are allowed to rape you.", "Antag Victim Consent", list(BEVICTIM_NO,BEVICTIM_ASK,BEVICTIM_YES))
 					be_victim = pickedvictim
 				if ("clientfps")
-					var/desiredfps = input(user, "Choose your desired fps. (0 = synced with server tick rate (currently:[world.fps]))", "Character Preference", clientfps)  as null|num
-					if (!isnull(desiredfps))
+					var/config_fps = CONFIG_GET(number/fps)
+					var/list/fps_options = list(
+						"0 (синхронизация с сервером: [config_fps])" = 0,
+						"60" = 60,
+						"120 (рекомендуется)" = 120,
+						"180" = 180,
+						"240" = 240,
+						"300" = 300,
+						"360" = 360,
+						"420" = 420,
+						"480" = 480,
+					)
+					var/current_label
+					for(var/label in fps_options)
+						if(fps_options[label] == clientfps)
+							current_label = label
+							break
+					var/picked = tgui_input_list(user, "Выберите желаемый FPS. Рекомендуется 120.", "FPS", fps_options, current_label)
+					if(!isnull(picked))
+						var/desiredfps = fps_options[picked]
 						clientfps = desiredfps
 						parent.fps = desiredfps
 				if("ui")

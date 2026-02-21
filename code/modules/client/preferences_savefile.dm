@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	63
+#define SAVEFILE_VERSION_MAX	64
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -82,6 +82,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		new_character_creator = TRUE
 		if(!istext(charcreation_theme) || !findtext(charcreation_theme, "modern"))
 			charcreation_theme = "modern"
+
+	// BLUEMOON ADD - принудительный FPS 120 для фикса лага движения в BYOND 516
+	if(current_version < 64)
+		clientfps = 120
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	if(current_version < 19)
@@ -605,7 +609,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	default_slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
 	toggles = sanitize_integer(toggles, 0, 16777215, initial(toggles))
 	deadmin = sanitize_integer(deadmin, 0, 16777215, initial(deadmin))
-	clientfps = sanitize_integer(clientfps, 0, 1000, 0)
+	clientfps = sanitize_clientfps(clientfps)
 	preferred_chaos_level = sanitize_integer(preferred_chaos_level, 0, 3, 2)
 	parallax = sanitize_integer(parallax, PARALLAX_DISABLE, PARALLAX_INSANE, null)
 	ambientocclusion = sanitize_integer(ambientocclusion, 0, 1, initial(ambientocclusion))
