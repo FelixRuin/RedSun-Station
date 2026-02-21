@@ -195,6 +195,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/get_dynex_range,		//*debug verbs for dynex explosions.
 	/client/proc/set_dynex_scale,
 	/client/proc/cmd_display_del_log,
+	/client/proc/cmd_display_gc_queue,
 	/client/proc/create_outfits,
 	/client/proc/modify_goals,
 	/client/proc/debug_huds,
@@ -309,6 +310,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/admin_change_sec_level,
 	/client/proc/toggle_nuke,
 	/client/proc/cmd_display_del_log,
+	/client/proc/cmd_display_gc_queue,
 	/client/proc/toggle_combo_hud,
 	/client/proc/debug_huds,
 	/client/proc/cmd_admin_man_up, //CIT CHANGE - adds man up verb
