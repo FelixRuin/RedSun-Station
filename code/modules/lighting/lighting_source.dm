@@ -53,7 +53,8 @@
 	update()
 
 /datum/light_source/Destroy(force)
-	remove_lum()
+	if (applied || affecting_turfs || effect_str)
+		remove_lum()
 	if (source_atom)
 		LAZYREMOVE(source_atom.light_sources, src)
 
