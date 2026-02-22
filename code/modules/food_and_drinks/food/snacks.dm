@@ -129,6 +129,7 @@ All foods are distributed among various categories. Use common sense.
 	if(!reagents.total_volume)
 		var/mob/living/location = loc
 		var/obj/item/trash_item = generate_trash(location)
+		SEND_SIGNAL(src, COMSIG_FOOD_CONSUMED, eater)
 		qdel(src)
 		if(istype(location))
 			location.put_in_hands(trash_item)
@@ -347,32 +348,17 @@ All foods are distributed among various categories. Use common sense.
 				var/sattisfaction_text = pick("burps from enjoyment", "yaps for more", "woofs twice", "looks at the area where \the [src] was")
 				if(sattisfaction_text)
 					M.emote("me", EMOTE_VISIBLE, "[sattisfaction_text]")
+				SEND_SIGNAL(src, COMSIG_FOOD_CONSUMED, M)
 				qdel(src)
 
 // //////////////////////////////////////////////Store////////////////////////////////////////
 /// All the food items that can store an item inside itself, like bread or cake.
 /obj/item/reagent_containers/food/snacks/store
 	w_class = WEIGHT_CLASS_NORMAL
-	var/stored_item = 0
 
-/obj/item/reagent_containers/food/snacks/store/attackby(obj/item/W, mob/user, params)
-	..()
-	if(W.w_class <= WEIGHT_CLASS_SMALL & !istype(W, /obj/item/reagent_containers/food/snacks)) //can't slip snacks inside, they're used for custom foods.
-		if(W.get_sharpness())
-			return FALSE
-		if(stored_item)
-			return FALSE
-		if(!iscarbon(user))
-			return FALSE
-		if(contents.len >= 20)
-			to_chat(user, "<span class='warning'>[src] is full.</span>")
-			return FALSE
-		to_chat(user, "<span class='notice'>You slip [W] inside [src].</span>")
-		user.transferItemToLoc(W, src)
-		add_fingerprint(user)
-		contents += W
-		stored_item = 1
-		return TRUE // no afterattack here
+/obj/item/reagent_containers/food/snacks/store/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/food_storage)
 
 /obj/item/reagent_containers/food/snacks/MouseDrop(atom/over)
 	var/turf/T = get_turf(src)
