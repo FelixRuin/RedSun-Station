@@ -132,12 +132,13 @@
 				T.on_consume(src, usr)
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/generate_trash(atom/location)
-	if(trash && (ispath(trash, /obj/item/grown) || ispath(trash, /obj/item/reagent_containers/food/snacks/grown)))
-		. = new trash(location, seed)
-		trash = null
-		return
-	return ..()
+/obj/item/reagent_containers/food/snacks/grown/make_leave_trash()
+	if(trash)
+		AddElement(/datum/element/food_trash, trash, null, TYPE_PROC_REF(/obj/item/reagent_containers/food/snacks/grown/, generate_trash))
+
+/obj/item/reagent_containers/food/snacks/grown/proc/generate_trash(atom/location)
+	if(ispath(trash, /obj/item/grown) || ispath(trash, /obj/item/reagent_containers/food/snacks/grown))
+		. = new trash(get_turf(src), seed)
 
 /obj/item/reagent_containers/food/snacks/grown/grind_requirements()
 	if(dry_grind && !dry)
@@ -164,10 +165,6 @@
 		reagents.del_reagent(/datum/reagent/consumable/nutriment/vitamin)
 
 // For item-containing growns such as eggy or gatfruit
-/obj/item/reagent_containers/food/snacks/grown/shell/attack_self(mob/user)
-	var/obj/item/T
+/obj/item/reagent_containers/food/snacks/grown/shell/make_leave_trash()
 	if(trash)
-		T = generate_trash()
-		qdel(src)
-		user.putItemFromInventoryInHandIfPossible(T, user.active_hand_index, TRUE)
-		to_chat(user, "<span class='notice'>You open [src]\'s shell, revealing \a [T].</span>")
+		AddElement(/datum/element/food_trash, trash, FOOD_TRASH_OPENABLE)

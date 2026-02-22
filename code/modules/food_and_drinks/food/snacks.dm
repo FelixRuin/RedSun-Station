@@ -54,6 +54,7 @@ All foods are distributed among various categories. Use common sense.
 	consume_sound = 'sound/items/eatfood.ogg'
 	var/bitesize = 2
 	var/bitecount = 0
+	///Type of atom thats spawned after eating this item
 	var/trash = null
 	var/slice_path    // for sliceable food. path of the item resulting from the slicing
 	var/slices_num
@@ -82,6 +83,7 @@ All foods are distributed among various categories. Use common sense.
 	make_microwaveable()
 	make_processable()
 	make_dryable()
+	make_leave_trash()
 
 /obj/item/reagent_containers/food/snacks/Destroy()
 	UnregisterSignal(src, COMSIG_ITEM_MICROWAVE_COOKED)
@@ -107,6 +109,11 @@ All foods are distributed among various categories. Use common sense.
 /obj/item/reagent_containers/food/snacks/proc/make_dryable()
 	return
 
+///This proc handles trash components, overwrite this if you want the object to spawn trash
+/obj/item/reagent_containers/food/snacks/proc/make_leave_trash()
+	if(trash)
+		AddElement(/datum/element/food_trash, trash)
+
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(tastes && tastes.len)
 		if(list_reagents)
@@ -130,16 +137,8 @@ All foods are distributed among various categories. Use common sense.
 	if(!eater)
 		return
 	if(!reagents.total_volume)
-		var/mob/living/location = loc
-		var/obj/item/trash_item = generate_trash(location)
 		SEND_SIGNAL(src, COMSIG_FOOD_CONSUMED, eater)
 		qdel(src)
-		if(istype(location))
-			location.put_in_hands(trash_item)
-
-/obj/item/reagent_containers/food/snacks/attack_self(mob/user)
-	return
-
 
 /obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1)
 	if(user.a_intent == INTENT_HARM)
@@ -300,19 +299,6 @@ All foods are distributed among various categories. Use common sense.
 		material_flags &= ~MATERIAL_ADD_PREFIX
 	if(original_atom.desc != initial(original_atom.desc))
 		desc = "[original_atom.desc]"
-
-/obj/item/reagent_containers/food/snacks/proc/generate_trash(atom/location)
-	if(trash)
-		if(ispath(trash, /obj/item))
-			. = new trash(location)
-			trash = null
-			return
-		else if(isitem(trash))
-			var/obj/item/trash_item = trash
-			trash_item.forceMove(location)
-			. = trash
-			trash = null
-			return
 
 /obj/item/reagent_containers/food/snacks/proc/update_snack_overlays(obj/item/reagent_containers/food/snacks/S)
 	cut_overlays()
