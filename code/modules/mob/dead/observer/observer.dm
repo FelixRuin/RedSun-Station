@@ -168,6 +168,19 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	if(ckey)
 		ckey = null
 	//BLUEMOON ADD END
+
+	// Очищаем двустороннюю ссылку observetarget/observers (на случай если Logout не отработал)
+	if(observetarget)
+		var/mob/target = observetarget
+		observetarget = null
+		if(target.observers)
+			target.observers -= src
+			UNSETEMPTY(target.observers)
+
+	// Очищаем регистрацию z-уровня (на случай если Logout не вызвал update_z)
+	if(registered_z)
+		update_z(null)
+
 	if(data_huds_on)
 		remove_data_huds()
 	GLOB.ghost_images_default -= ghostimage_default
