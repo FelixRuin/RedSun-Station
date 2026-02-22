@@ -38,7 +38,6 @@
 	if(mob.control_object)
 		return Move_object(direction)
 	if(!isliving(mob))
-		mob.set_glide_size(DELAY_TO_GLIDE_SIZE(world.tick_lag))
 		return mob.Move(n, direction)
 	if(mob.stat == DEAD)
 		mob.ghostize()
@@ -413,8 +412,8 @@
 	. = ..()
 	if(!client?.parallax_holder)
 		return
-	var/anim_time = 0
-	if(glide_size > 0)
+	var/anim_time = world.tick_lag
+	if(isliving(src) && glide_size > 0)
 		anim_time = world.icon_size / glide_size * world.tick_lag
 	client.parallax_holder.Update(anim_time = anim_time)
 
