@@ -193,6 +193,10 @@ SUBSYSTEM_DEF(statpanels)
 		list("Globals:", GLOB.stat_entry(), "\ref[GLOB]"),
 		list("[config]:", config.stat_entry(), "\ref[config]"),
 		list("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%)) (Internal Tick Usage: [round(MAPTICK_LAST_INTERNAL_TICK_USAGE,0.1)]%)"),
+		list("Ping RTT:", "Samples:[SStime_track.ping_samples] | Last Avg:[round(SStime_track.ping_rtt_last_avg, 1)]ms | Last Max:[round(SStime_track.ping_rtt_last_max, 1)]ms | Avg Avg:[round(SStime_track.ping_rtt_avg_avg, 1)]ms"),
+		list("Ping Tick/Server:", "Tick Avg:[round(SStime_track.ping_tick_last_avg, 1)]ms | Tick Max:[round(SStime_track.ping_tick_last_max, 1)]ms | Server Avg:[round(SStime_track.ping_server_last_avg, 1)]ms | Server Max:[round(SStime_track.ping_server_last_max, 1)]ms"),
+		list("Movement Jitter:", "Raw Last:[round(SStime_track.raw_multiplier_last, 4)] | Jitter Last:[round(SStime_track.raw_multiplier_jitter_abs_last, 2)]% | Jitter Avg:[round(SStime_track.raw_multiplier_jitter_abs_avg, 2)]% | Jitter Max Window:[round(SStime_track.raw_multiplier_jitter_abs_max_window, 2)]% | Glide Mult:[round(SStime_track.glide_size_multiplier_current, 4)]"),
+		list("Server Maint Cleanup:", "Last:[round(SSserver_maint.cleanup_last_ms, 3)]ms | Avg:[round(SSserver_maint.cleanup_avg_ms, 3)]ms | Target:[SSserver_maint.cleanup_target_last]"),
 		list("Master Controller:", Master.stat_entry(), "\ref[Master]"),
 		list("Failsafe Controller:", Failsafe.stat_entry(), "\ref[Failsafe]"),
 		list("","")
