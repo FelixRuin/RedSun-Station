@@ -125,6 +125,7 @@
 	layer.parallax_intensity = parallax_intensity
 	layer.view_current = view_current
 	layer.appearance = appearance
+	return layer
 
 /atom/movable/screen/parallax_layer/proc/default_x()
 	return center_x

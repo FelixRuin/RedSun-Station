@@ -72,7 +72,10 @@
 
 /obj/item/gun/energy/Destroy()
 	if(cell)
-		QDEL_NULL(cell)
+		if(QDELING(cell))
+			cell = null
+		else
+			QDEL_NULL(cell)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 

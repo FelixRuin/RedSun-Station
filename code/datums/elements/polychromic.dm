@@ -72,6 +72,11 @@
 
 /datum/element/polychromic/Detach(atom/A)
 	. = ..()
+	var/skip_visual_refresh = QDELING(A)
+	var/skip_holder_refresh = skip_visual_refresh
+	if(!skip_holder_refresh && ismob(A.loc))
+		var/mob/M = A.loc
+		skip_holder_refresh = QDELING(M)
 	colors_by_atom -= A
 	var/datum/action/item_action/polychromic/P = actions_by_atom[A]
 	if(P)
@@ -85,17 +90,17 @@
 			helmet_by_suit -= A
 			suit_by_helmet -= H
 			colors_by_atom -= H
-			if(!QDELETED(H))
+			if(!skip_visual_refresh && !QDELETED(H))
 				H.update_icon() //removing the overlays
 		if(!(poly_flags & POLYCHROMIC_NO_WORN) || !(poly_flags & POLYCHROMIC_NO_HELD))
 			A.RemoveElement(/datum/element/update_icon_updates_onmob)
-			if(!QDELETED(A) && ismob(A.loc))
+			if(!skip_holder_refresh && !QDELETED(A) && ismob(A.loc))
 				var/mob/M = A.loc
 				if(!(poly_flags & POLYCHROMIC_NO_HELD) && M.is_holding(A))
 					M.update_inv_hands()
 				else if(!(poly_flags & POLYCHROMIC_NO_WORN))
 					M.regenerate_icons()
-	if(!QDELETED(A))
+	if(!skip_visual_refresh && !QDELETED(A))
 		A.update_icon() //removing the overlays
 
 /datum/element/polychromic/proc/apply_overlays(atom/source, list/overlays)
