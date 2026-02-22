@@ -15,47 +15,38 @@ SUBSYSTEM_DEF(statpanels)
 		var/datum/map_config/cached = SSmapping.next_map_config
 		var/round_time = world.time - SSticker.round_start_time
 		var/real_round_time = world.timeofday - SSticker.real_round_start_time
-		/* BLUEMOON REMOVAL START
-		var/list/global_data = list(
-			"Map: [SSmapping.config?.map_name || "Loading..."]",
-			cached ? "Next Map: [cached.map_name]" : null,
-			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
-			"Game Mode: [GLOB.master_mode]",
-			"Connected Players: [GLOB.clients.len]",
-			" ",
-			"OOC: [GLOB.ooc_allowed ? "Enabled" : "Disabled"]",
-			" ",
-			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
-			"Round Time: [GAMETIMESTAMP("hh:mm:ss", round_time)]",
-			"Actual Round Timer: [time2text(real_round_time, "hh:mm:ss", 0)]", //A back up control to check the round time to see if round time has descyed as well as properly track round time
-			"Station Time: [STATION_TIME_TIMESTAMP("hh:mm:ss", world.time)]",
-			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"
-		)
-		/ BLUEMOON REMOVAL END */
-		// BLUEMOON ADD START - наша версия стат-панели
-		var/list/global_data = list(
-			"Карта: [SSmapping.config?.map_name || "Loading..."]",
-			cached ? "Следующая карта: [cached.map_name]" : null,
-			"ID раунда: [GLOB.round_id ? GLOB.round_id : "NULL"]",
-			"Игровой Режим: [GLOB.master_mode]",
-			"Предыдущие Режимы: [jointext(SSpersistence.saved_modes, ", ")]", // Because some of us want to know when our favorite mode becomes forced - Flauros
-			"Подключено Игроков: [GLOB.clients.len]",
-			"Отклонения Во Времени: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)",
-			"Время Сервера: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
-			" ",
-			"Время Раунда: [time2text(round_time, "hh:mm:ss", 0)]",
-			"Настоящее Время Раунда: [time2text(real_round_time, "hh:mm:ss", 0)]", //A back up control to check the round time to see if round time has descyed as well as properly track round time
-			" ",
-			"Дата: [time2text(world.realtime, "MMM DD")] [GLOB.year_integer]",
-			"Время: [STATION_TIME_TIMESTAMP("hh:mm:ss", world.time)]",
-			"Время в Солнечной Системе: [SOLAR_TIME_TIMESTAMP("hh:mm:ss", world.time)]"
-		)
-		// BLUEMOON ADD END
-
+		// Structured status data
+		var/list/global_data = list()
+		// Server section
+		var/list/server_section = list(
+			list("\u041A\u0430\u0440\u0442\u0430", SSmapping.config?.map_name || "Loading..."))
+		if(cached)
+			server_section += list(list("\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0430\u044F \u043A\u0430\u0440\u0442\u0430", cached.map_name))
+		server_section += list(
+			list("ID \u0440\u0430\u0443\u043D\u0434\u0430", GLOB.round_id ? GLOB.round_id : "NULL"),
+			list("\u0418\u0433\u0440\u043E\u0432\u043E\u0439 \u0420\u0435\u0436\u0438\u043C", GLOB.master_mode),
+			list("\u041F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0438\u0435 \u0420\u0435\u0436\u0438\u043C\u044B", jointext(SSpersistence.saved_modes, ", ")),
+			list("\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u0418\u0433\u0440\u043E\u043A\u043E\u0432", GLOB.clients.len))
+		global_data["server"] = server_section
+		// Time section
+		global_data["time"] = list(
+			list("\u0412\u0440\u0435\u043C\u044F \u0420\u0430\u0443\u043D\u0434\u0430", time2text(round_time, "hh:mm:ss", 0)),
+			list("\u041D\u0430\u0441\u0442. \u0412\u0440\u0435\u043C\u044F \u0420\u0430\u0443\u043D\u0434\u0430", time2text(real_round_time, "hh:mm:ss", 0)),
+			list("\u0414\u0430\u0442\u0430", "[time2text(world.realtime, "MMM DD")] [GLOB.year_integer]"),
+			list("\u0412\u0440\u0435\u043C\u044F \u0421\u0442\u0430\u043D\u0446\u0438\u0438", STATION_TIME_TIMESTAMP("hh:mm:ss", world.time)),
+			list("\u0412\u0440\u0435\u043C\u044F \u0432 \u0421\u043E\u043B\u043D\u0435\u0447\u043D\u043E\u0439", SOLAR_TIME_TIMESTAMP("hh:mm:ss", world.time)),
+			list("\u0412\u0440\u0435\u043C\u044F \u0421\u0435\u0440\u0432\u0435\u0440\u0430", time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")))
+		// Time dilation as numbers for color coding on client
+		global_data["tidi"] = list(
+			round(SStime_track.time_dilation_current, 0.1),
+			round(SStime_track.time_dilation_avg_fast, 0.1),
+			round(SStime_track.time_dilation_avg, 0.1),
+			round(SStime_track.time_dilation_avg_slow, 0.1))
+		// Shuttle section (only when active)
 		if(SSshuttle.emergency)
 			var/ETA = SSshuttle.emergency.getModeStr()
 			if(ETA)
-				global_data += "[ETA] [SSshuttle.emergency.getTimerStr()]"
+				global_data["shuttle"] = list(ETA, SSshuttle.emergency.getTimerStr())
 
 		encoded_global_data = url_encode(json_encode(global_data))
 		src.currentrun = GLOB.clients.Copy()
@@ -68,7 +59,7 @@ SUBSYSTEM_DEF(statpanels)
 		if(!target?.statbrowser_ready)
 			continue
 		if(target.stat_tab == "Status")
-			var/ping_str = url_encode("Ping: [round(target.lastping, 1)]ms (Average: [round(target.avgping, 1)]ms)")
+			var/ping_str = url_encode(json_encode(list(round(target.lastping, 1), round(target.avgping, 1))))
 			var/other_str = url_encode(json_encode(target.mob.get_status_tab_items()))
 			target << output("[encoded_global_data];[ping_str];[other_str]", "statbrowser:update")
 			if(SSvote.mode)

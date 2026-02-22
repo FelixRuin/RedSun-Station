@@ -280,6 +280,9 @@
 
 	/* Key subsystems detail section */
 	.mc-key-section {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 0;
 		margin-bottom: 4px;
 	}
 	.mc-key-card {
@@ -401,6 +404,183 @@
 	.dark .mc-val-good { color: #4a4; }
 	.dark .mc-val-warn { color: #db0; }
 	.dark .mc-val-bad { color: #f44; }
+
+	/* Status Tab Styles */
+	.st-container { padding: 0; }
+
+	.st-ping-bar {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 5px 8px;
+		font-size: 12px;
+		font-family: Consolas, monospace;
+		background-color: #f5f5f5;
+		border-bottom: 1px solid #ddd;
+	}
+	.dark .st-ping-bar {
+		background-color: #1a1a1a;
+		border-bottom-color: #2a2a2a;
+	}
+	.st-ping-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+
+	.st-section-header {
+		font-weight: bold;
+		font-size: 13px;
+		padding: 5px 6px;
+		margin: 0;
+		cursor: pointer;
+		background-color: #e8e8e8;
+		border-bottom: 1px solid #ccc;
+		user-select: none;
+	}
+	.dark .st-section-header {
+		background-color: #1e1e1e;
+		border-bottom-color: #333;
+	}
+	.st-section-header:hover { background-color: #ddd; }
+	.dark .st-section-header:hover { background-color: #282828; }
+
+	.st-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 2px;
+	}
+	.st-table td {
+		padding: 2px 5px;
+		border-bottom: 1px solid #eee;
+		font-size: 12px;
+	}
+	.dark .st-table td {
+		border-bottom-color: #222;
+	}
+	.st-label {
+		font-weight: bold;
+		white-space: nowrap;
+		width: 1%;
+		color: #555;
+		padding-right: 8px;
+	}
+	.dark .st-label { color: #88a0b8; }
+	.st-value {
+		font-family: Consolas, monospace;
+	}
+
+	/* Shared grid layout for Status & MC tabs */
+	.st-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	}
+	.st-grid-item {
+		padding: 3px 6px;
+		border-bottom: 1px solid #eee;
+		min-width: 0;
+		overflow: hidden;
+	}
+	.dark .st-grid-item { border-bottom-color: #282828; }
+	.st-item-label {
+		font-size: 10px;
+		font-weight: bold;
+		color: #888;
+		text-transform: uppercase;
+		letter-spacing: 0.3px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.dark .st-item-label { color: #7a8a9a; }
+	.st-item-value {
+		font-size: 13px;
+		font-family: Consolas, monospace;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.dark .st-item-value { color: #a0b0c0; }
+	.st-item-value a { font-weight: bold; }
+	.st-grid-wide { grid-column: 1 / -1; }
+
+	.st-shuttle-bar {
+		padding: 6px 8px;
+		font-weight: bold;
+		font-size: 13px;
+		border-bottom: 1px solid #ccc;
+	}
+	.st-shuttle-bar.st-shuttle-warn {
+		background-color: #fff3cd;
+		color: #856404;
+	}
+	.dark .st-shuttle-bar.st-shuttle-warn {
+		background-color: #3d3200;
+		color: #ffc107;
+	}
+	.st-shuttle-bar.st-shuttle-danger {
+		background-color: #f8d7da;
+		color: #721c24;
+	}
+	.dark .st-shuttle-bar.st-shuttle-danger {
+		background-color: #3d0a0a;
+		color: #f55;
+	}
+
+	.st-vote-section {
+		padding: 4px 6px;
+		border-top: 1px solid #ddd;
+	}
+	.dark .st-vote-section { border-top-color: #333; }
+	.st-vote-header {
+		font-weight: bold;
+		font-size: 13px;
+		padding: 4px 0;
+		color: #555;
+	}
+	.dark .st-vote-header { color: #88a0b8; }
+	.st-vote-table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	.st-vote-table td {
+		padding: 2px 4px;
+		font-size: 12px;
+	}
+	.st-vote-table a {
+		text-decoration: none;
+	}
+	.st-vote-table a:hover {
+		text-decoration: underline;
+	}
+
+	.st-val-good { color: #080; }
+	.st-val-warn { color: #a80; }
+	.st-val-bad { color: #c00; font-weight: bold; }
+	.dark .st-val-good { color: #4a4; }
+	.dark .st-val-warn { color: #db0; }
+	.dark .st-val-bad { color: #f44; }
+
+	.st-tidi-row {
+		display: flex;
+		align-items: baseline;
+		gap: 6px;
+		padding: 4px 8px;
+		font-size: 12px;
+		font-family: Consolas, monospace;
+		border-bottom: 1px solid #eee;
+	}
+	.dark .st-tidi-row { border-bottom-color: #222; }
+	.st-tidi-current {
+		font-size: 14px;
+		font-weight: bold;
+	}
+	.st-tidi-avgs {
+		font-size: 11px;
+		color: #777;
+	}
+	.dark .st-tidi-avgs { color: #7a8a9a; }
 </style>
 </head>
 <body>
@@ -418,6 +598,19 @@ if (pixelRatio !== 1) {
 // Status panel implementation ------------------------------------------------
 var status_tab_parts = ["Loading..."];
 var current_tab = null;
+// Status tab structured data
+var st_global_data = null;
+var st_ping_data = null;
+var st_mob_items = [];
+var st_sections = { round: true, time: true, tidi: true, character: true };
+var st_container = null;
+var st_ping_bar = null;
+var st_server_grid = null;
+var st_time_grid = null;
+var st_tidi_el = null;
+var st_shuttle_el = null;
+var st_char_table = null;
+var st_vote_el = null;
 var mc_tab_parts = [["Loading...", ""]];
 // MC tab structured data
 var mc_server_data = {};
@@ -427,7 +620,7 @@ var mc_sort_asc = false;
 var mc_filter_text = "";
 var mc_sections = { server: true, ping: false, key: true, subsystems: true };
 var mc_container = null;
-var mc_server_table = null;
+var mc_server_grid = null;
 var mc_ping_table = null;
 var mc_ss_table = null;
 var mc_ss_tbody = null;
@@ -891,11 +1084,14 @@ function TakeTabFromByond(tab) {
 }
 
 function update(global_data, ping_entry, other_entries) {
-	status_tab_parts = [ping_entry];
-	var parsed = JSON.parse(global_data);
-	for(var i = 0; i < parsed.length; i++) if(parsed[i] != null) status_tab_parts.push(parsed[i]);
-	parsed = JSON.parse(other_entries);
-	for(var i = 0; i < parsed.length; i++) if(parsed[i] != null) status_tab_parts.push(parsed[i]);
+	var parsed_global = JSON.parse(global_data);
+	st_global_data = parsed_global;
+	st_ping_data = JSON.parse(ping_entry);
+	var parsed_mob = JSON.parse(other_entries);
+	st_mob_items = [];
+	for (var i = 0; i < parsed_mob.length; i++) {
+		if (parsed_mob[i] != null) st_mob_items.push(parsed_mob[i]);
+	}
 	if(current_tab == "Status")
 		draw_status();
 	else if(current_tab == "Debug Stat Panel")
@@ -1085,43 +1281,288 @@ function draw_debug() {
 	document.getElementById("statcontent").appendChild(table3);
 
 }
+// Status tab helpers
+function st_ping_class(ms) {
+	if (ms >= 200) return "st-val-bad";
+	if (ms >= 100) return "st-val-warn";
+	return "st-val-good";
+}
+function st_ping_color(ms) {
+	if (ms >= 200) return "#c00";
+	if (ms >= 100) return "#a80";
+	return "#080";
+}
+function st_ping_color_dark(ms) {
+	if (ms >= 200) return "#f44";
+	if (ms >= 100) return "#db0";
+	return "#4a4";
+}
+function st_tidi_class(val) {
+	if (val >= 20) return "st-val-bad";
+	if (val >= 5) return "st-val-warn";
+	return "st-val-good";
+}
+
+function st_build_section_header(key, label) {
+	var div = document.createElement("div");
+	div.className = "st-section-header";
+	div.textContent = (st_sections[key] ? "\u25BC " : "\u25B6 ") + label;
+	div.onclick = function() {
+		st_sections[key] = !st_sections[key];
+		div.textContent = (st_sections[key] ? "\u25BC " : "\u25B6 ") + label;
+		st_update_section_visibility(key);
+	};
+	return div;
+}
+
+function st_update_section_visibility(key) {
+	if (key === "round" && st_server_grid)
+		st_server_grid.style.display = st_sections.round ? "" : "none";
+	else if (key === "time" && st_time_grid)
+		st_time_grid.style.display = st_sections.time ? "" : "none";
+	else if (key === "tidi" && st_tidi_el)
+		st_tidi_el.style.display = st_sections.tidi ? "" : "none";
+	else if (key === "character" && st_char_table)
+		st_char_table.style.display = st_sections.character ? "" : "none";
+}
+
+function st_make_row(label, value) {
+	var tr = document.createElement("tr");
+	var td1 = document.createElement("td");
+	td1.className = "st-label";
+	td1.textContent = label;
+	var td2 = document.createElement("td");
+	td2.className = "st-value";
+	td2.textContent = "" + value;
+	tr.appendChild(td1);
+	tr.appendChild(td2);
+	return tr;
+}
+
+// Shared grid item builder for Status & MC tabs
+function st_make_grid_item(label, value, wide, cls, href) {
+	var item = document.createElement("div");
+	item.className = "st-grid-item" + (wide ? " st-grid-wide" : "");
+	var lbl = document.createElement("div");
+	lbl.className = "st-item-label";
+	lbl.textContent = label;
+	item.appendChild(lbl);
+	var val = document.createElement("div");
+	val.className = "st-item-value";
+	if (href) {
+		var a = document.createElement("a");
+		a.href = href;
+		a.textContent = value;
+		if (cls) a.className = cls;
+		val.appendChild(a);
+	} else {
+		val.textContent = "" + value;
+		if (cls) val.className += " " + cls;
+	}
+	item.appendChild(val);
+	return item;
+}
+
+function st_fill_grid(container, rows) {
+	container.textContent = "";
+	for (var i = 0; i < rows.length; i++) {
+		var wide = ("" + rows[i][1]).length > 20;
+		container.appendChild(st_make_grid_item(rows[i][0], rows[i][1], wide));
+	}
+}
+
+function st_parse_mob_item(str) {
+	var idx = str.indexOf(": ");
+	if (idx > 0 && idx < 30) {
+		return [str.substring(0, idx), str.substring(idx + 2)];
+	}
+	return null;
+}
+
 function draw_status() {
 	if(!document.getElementById("Status")) {
 		createStatusTab("Status");
 		current_tab = "Status";
 	}
-	statcontentdiv.textContent = '';
-	for(var i = 0; i < status_tab_parts.length; i++) {
-		if(status_tab_parts[i].trim() == "") {
-			document.getElementById("statcontent").appendChild(document.createElement("br"));
-		} else {
-			var div = document.createElement("div");
-			div.textContent = status_tab_parts[i];
-			document.getElementById("statcontent").appendChild(div);
-		}
+
+	var d = st_global_data;
+	if (!d) {
+		statcontentdiv.textContent = "Loading...";
+		return;
 	}
-	//voting shitcode. See mc for more info.
-	if(vote_parts && vote_parts[0][0]) { //null verification.
+
+	// Build skeleton once, update in-place on subsequent calls
+	if (!st_container || !st_container.parentNode) {
+		statcontentdiv.textContent = "";
+		st_container = document.createElement("div");
+		st_container.className = "st-container";
+
+		// Ping bar
+		st_ping_bar = document.createElement("div");
+		st_ping_bar.className = "st-ping-bar";
+		st_container.appendChild(st_ping_bar);
+
+		// Shuttle bar (hidden by default)
+		st_shuttle_el = document.createElement("div");
+		st_shuttle_el.className = "st-shuttle-bar";
+		st_shuttle_el.style.display = "none";
+		st_container.appendChild(st_shuttle_el);
+
+		// Round section
+		st_container.appendChild(st_build_section_header("round", "\u0420\u0430\u0443\u043D\u0434"));
+		st_server_grid = document.createElement("div");
+		st_server_grid.className = "st-grid";
+		st_container.appendChild(st_server_grid);
+
+		// Time section
+		st_container.appendChild(st_build_section_header("time", "\u0412\u0440\u0435\u043C\u044F"));
+		st_time_grid = document.createElement("div");
+		st_time_grid.className = "st-grid";
+		st_container.appendChild(st_time_grid);
+
+		// Time dilation section
+		st_container.appendChild(st_build_section_header("tidi", "\u041E\u0442\u043A\u043B\u043E\u043D\u0435\u043D\u0438\u044F"));
+		st_tidi_el = document.createElement("div");
+		st_tidi_el.className = "st-tidi-row";
+		st_container.appendChild(st_tidi_el);
+
+		// Character section
+		st_container.appendChild(st_build_section_header("character", "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u0436"));
+		st_char_table = document.createElement("table");
+		st_char_table.className = "st-table";
+		st_container.appendChild(st_char_table);
+
+		statcontentdiv.appendChild(st_container);
+
+		// Vote section (outside st_container for BYOND browser link compatibility)
+		st_vote_el = document.createElement("div");
+		st_vote_el.className = "st-vote-section";
+		st_vote_el.style.display = "none";
+		statcontentdiv.appendChild(st_vote_el);
+	}
+
+	// Update ping bar
+	if (st_ping_data) {
+		var ping = st_ping_data[0];
+		var avg = st_ping_data[1];
+		var isDark = document.body.classList.contains("dark");
+		var dotColor = isDark ? st_ping_color_dark(ping) : st_ping_color(ping);
+		st_ping_bar.innerHTML = "";
+		var dot = document.createElement("span");
+		dot.className = "st-ping-dot";
+		dot.style.backgroundColor = dotColor;
+		st_ping_bar.appendChild(dot);
+		var txt = document.createElement("span");
+		txt.className = st_ping_class(ping);
+		txt.textContent = "\u041F\u0438\u043D\u0433: " + ping + "ms";
+		st_ping_bar.appendChild(txt);
+		var avg_txt = document.createElement("span");
+		avg_txt.style.color = "#777";
+		avg_txt.textContent = "(\u0441\u0440\u0435\u0434\u043D\u0435\u0435: " + avg + "ms)";
+		st_ping_bar.appendChild(avg_txt);
+	}
+
+	// Update shuttle bar
+	if (d.shuttle) {
+		st_shuttle_el.style.display = "";
+		st_shuttle_el.textContent = "\uD83D\uDE80 " + d.shuttle[0] + " " + d.shuttle[1];
+		// Use danger style for final countdown-like modes
+		st_shuttle_el.className = "st-shuttle-bar st-shuttle-warn";
+	} else {
+		st_shuttle_el.style.display = "none";
+	}
+
+	// Update server/round section
+	if (st_sections.round && d.server) {
+		st_fill_grid(st_server_grid, d.server);
+		st_server_grid.style.display = "";
+	} else if (!st_sections.round) {
+		st_server_grid.style.display = "none";
+	}
+
+	// Update time section
+	if (st_sections.time && d.time) {
+		st_fill_grid(st_time_grid, d.time);
+		st_time_grid.style.display = "";
+	} else if (!st_sections.time) {
+		st_time_grid.style.display = "none";
+	}
+
+	// Update time dilation
+	if (st_sections.tidi && d.tidi) {
+		st_tidi_el.innerHTML = "";
+		var cur = d.tidi[0];
+		var curSpan = document.createElement("span");
+		curSpan.className = "st-tidi-current " + st_tidi_class(cur);
+		curSpan.textContent = cur + "%";
+		st_tidi_el.appendChild(curSpan);
+		var avgsSpan = document.createElement("span");
+		avgsSpan.className = "st-tidi-avgs";
+		avgsSpan.textContent = "(\u0431\u044B\u0441\u0442\u0440: " + d.tidi[1] + "%, \u0441\u0440\u0435\u0434\u043D: " + d.tidi[2] + "%, \u043C\u0435\u0434\u043B: " + d.tidi[3] + "%)";
+		st_tidi_el.appendChild(avgsSpan);
+		st_tidi_el.style.display = "";
+	} else if (!st_sections.tidi) {
+		st_tidi_el.style.display = "none";
+	}
+
+	// Update character section (mob items)
+	if (st_sections.character) {
+		st_char_table.textContent = "";
+		for (var i = 0; i < st_mob_items.length; i++) {
+			var item = st_mob_items[i];
+			if (typeof item !== "string" || item.trim() === "") continue;
+			var parsed = st_parse_mob_item(item);
+			if (parsed) {
+				st_char_table.appendChild(st_make_row(parsed[0], parsed[1]));
+			} else {
+				var tr = document.createElement("tr");
+				var td = document.createElement("td");
+				td.colSpan = 2;
+				td.className = "st-value";
+				td.textContent = item;
+				tr.appendChild(td);
+				st_char_table.appendChild(tr);
+			}
+		}
+		st_char_table.style.display = st_mob_items.length > 0 ? "" : "none";
+		// Also hide the character section header if no items
+		if (st_char_table.previousElementSibling && st_char_table.previousElementSibling.classList.contains("st-section-header")) {
+			st_char_table.previousElementSibling.style.display = st_mob_items.length > 0 ? "" : "none";
+		}
+	} else {
+		st_char_table.style.display = "none";
+	}
+
+	// Update voting section
+	if (vote_parts && vote_parts[0] && vote_parts[0][0]) {
+		st_vote_el.style.display = "";
+		st_vote_el.textContent = "";
 		var table = document.createElement("table");
-		for(var i = 0; i < vote_parts.length; i++) {
+		table.className = "st-vote-table";
+		for (var i = 0; i < vote_parts.length; i++) {
 			var part = vote_parts[i];
 			var tr = document.createElement("tr");
 			var td1 = document.createElement("td");
 			td1.textContent = part[0];
 			var td2 = document.createElement("td");
-			if(part[2]) {
+			if (part[2]) {
 				var a = document.createElement("a");
-				if(part[2] === "disabled") {
-					a.href = "#";
+				a.href = "#";
+				a.style.cursor = "pointer";
+				if (part[2] === "disabled") {
 					a.onclick = function(e) {
-						if (e && e.preventDefault) {
-							e.preventDefault();
-						}
+						if (e && e.preventDefault) e.preventDefault();
 						byond_winset({ command: "Vote" });
 						return false;
 					};
 				} else {
-					a.href = "?src=" + part[2];
+					a.onclick = (function(ref) {
+						return function(e) {
+							if (e && e.preventDefault) e.preventDefault();
+							byond_topic("?src=" + ref);
+							return false;
+						};
+					})(part[2]);
 				}
 				a.textContent = part[1];
 				td2.appendChild(a);
@@ -1132,10 +1573,12 @@ function draw_status() {
 			tr.appendChild(td2);
 			table.appendChild(tr);
 		}
-		document.getElementById("statcontent").appendChild(table);
+		st_vote_el.appendChild(table);
+	} else {
+		st_vote_el.style.display = "none";
 	}
-	if(verb_tabs.length == 0 || !verbs)
-	{
+
+	if(verb_tabs.length == 0 || !verbs) {
 		send_byond_command("Fix-Stat-Panel");
 	}
 }
@@ -1195,8 +1638,8 @@ function mc_build_section_header(key, label) {
 }
 
 function mc_toggle_section(key) {
-	if (key === "server" && mc_server_table) {
-		mc_server_table.style.display = mc_sections.server ? "" : "none";
+	if (key === "server" && mc_server_grid) {
+		mc_server_grid.style.display = mc_sections.server ? "" : "none";
 	} else if (key === "ping" && mc_ping_table) {
 		mc_ping_table.style.display = mc_sections.ping ? "" : "none";
 	} else if (key === "key" && mc_key_section) {
@@ -1229,33 +1672,38 @@ function mc_make_server_row(label, value, ref, cls) {
 }
 
 function mc_update_server_section() {
-	if (!mc_server_table) return;
-	mc_server_table.textContent = "";
+	if (!mc_server_grid) return;
+	mc_server_grid.textContent = "";
 	if (!mc_sections.server) return;
 	var d = mc_server_data;
-	mc_server_table.appendChild(mc_make_server_row("XYZ", d.coords, null, null));
-	mc_server_table.appendChild(mc_make_server_row("CPU", d.cpu, null, mc_cpu_class(d.cpu)));
-	mc_server_table.appendChild(mc_make_server_row("\u0423\u0437\u043B\u044B", d.instances, null, null));
-	mc_server_table.appendChild(mc_make_server_row("BYOND",
+	// Short metrics — grid cards
+	mc_server_grid.appendChild(st_make_grid_item("XYZ", d.coords, false));
+	mc_server_grid.appendChild(st_make_grid_item("CPU", d.cpu + "%", false, mc_cpu_class(d.cpu)));
+	mc_server_grid.appendChild(st_make_grid_item("\u0423\u0437\u043B\u044B", d.instances, false));
+	// Compound metrics — full-width
+	mc_server_grid.appendChild(st_make_grid_item("BYOND",
 		"FPS:" + d.fps + " | \u0422\u0438\u043A\u0438:" + d.tick_count +
 		" | \u0414\u0440\u0438\u0444\u0442:" + d.tick_drift + "(" + d.tick_drift_pct + "%)" +
 		" | \u0412\u043D\u0443\u0442\u0440.\u0442\u0438\u043A:" + d.internal_tick_usage + "%",
-		null, null));
-	mc_server_table.appendChild(mc_make_server_row("TimeDilation",
+		true));
+	mc_server_grid.appendChild(st_make_grid_item("TimeDilation",
 		d.tidi_current + "% (" + d.tidi_avg_fast + "%, " + d.tidi_avg + "%, " + d.tidi_avg_slow + "%)",
-		null, mc_tidi_class(d.tidi_current)));
-	mc_server_table.appendChild(mc_make_server_row("MC",
+		true, mc_tidi_class(d.tidi_current)));
+	mc_server_grid.appendChild(st_make_grid_item("MC",
 		"Rate:" + d.mc_tick_rate + " | Iter:" + d.mc_iteration + " | \u041B\u0438\u043C\u0438\u0442:" + d.mc_tick_limit,
-		d.ref_master, null));
-	mc_server_table.appendChild(mc_make_server_row("Failsafe", d.failsafe_stat, d.ref_failsafe, null));
-	mc_server_table.appendChild(mc_make_server_row("\u041A\u0430\u043C\u0435\u0440\u044B",
+		true, null, mc_make_vv_link(d.ref_master)));
+	mc_server_grid.appendChild(st_make_grid_item("Failsafe", d.failsafe_stat,
+		true, null, d.ref_failsafe ? mc_make_vv_link(d.ref_failsafe) : null));
+	mc_server_grid.appendChild(st_make_grid_item("\u041A\u0430\u043C\u0435\u0440\u044B",
 		d.camera_count + " | \u0427\u0430\u043D\u043A\u0438:" + d.camera_chunks,
-		d.ref_cameranet, null));
-	mc_server_table.appendChild(mc_make_server_row("\u041E\u0447\u0438\u0441\u0442\u043A\u0430",
+		true, null, d.ref_cameranet ? mc_make_vv_link(d.ref_cameranet) : null));
+	mc_server_grid.appendChild(st_make_grid_item("\u041E\u0447\u0438\u0441\u0442\u043A\u0430",
 		d.cleanup_last + "ms | Avg:" + d.cleanup_avg + "ms | Target:" + d.cleanup_target,
-		null, null));
-	mc_server_table.appendChild(mc_make_server_row("GLOB", "VV", d.ref_glob, null));
-	mc_server_table.appendChild(mc_make_server_row("Config", "VV", d.ref_config, null));
+		true));
+	mc_server_grid.appendChild(st_make_grid_item("GLOB", "VV",
+		false, null, mc_make_vv_link(d.ref_glob)));
+	mc_server_grid.appendChild(st_make_grid_item("Config", "VV",
+		false, null, mc_make_vv_link(d.ref_config)));
 }
 
 function mc_update_ping_section() {
@@ -1472,9 +1920,9 @@ function draw_mc() {
 
 		// Server section
 		mc_container.appendChild(mc_build_section_header("server", "\u0421\u0435\u0440\u0432\u0435\u0440"));
-		mc_server_table = document.createElement("table");
-		mc_server_table.className = "mc-server-table";
-		mc_container.appendChild(mc_server_table);
+		mc_server_grid = document.createElement("div");
+		mc_server_grid.className = "st-grid";
+		mc_container.appendChild(mc_server_grid);
 
 		// Ping section
 		mc_container.appendChild(mc_build_section_header("ping", "\u041F\u0438\u043D\u0433 \u0438 \u0421\u0435\u0442\u044C"));
