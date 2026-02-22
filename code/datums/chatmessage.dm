@@ -117,6 +117,9 @@
 	owned_by = owner.client
 	if(!owned_by)
 		return
+	if(isnull(target) || QDELETED(target))
+		qdel(src)
+		return
 	RegisterSignal(owned_by, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_qdel))
 
 	// Clip message
@@ -266,6 +269,8 @@
 		var/atom/movable/virtualspeaker/v = speaker
 		speaker = v.source
 		spans |= "virtual-speaker"
+	if(QDELETED(speaker))
+		return
 
 	// Ignore virtual speaker (most often radio messages) from ourself
 	if (originalSpeaker != src && speaker == src)
