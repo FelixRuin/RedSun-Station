@@ -467,7 +467,7 @@
 				cabin_air.transfer_to(t_air, transfer_moles)
 
 	// Добавляем минорное облучение, если батарея радиоактивна. Большей частью ради свечения.
-	if(cell.cell_is_radioactive)
+	if(cell?.cell_is_radioactive)
 		AddComponent(/datum/component/radioactive, 0, src, 0)
 	else
 		qdel(GetComponent(/datum/component/radioactive))
