@@ -212,6 +212,7 @@ SUBSYSTEM_DEF(garbage)
 					to_chat(admin, "## TESTING: GC: -- [ADMIN_VV(D)] | [type] was unable to be GC'd --")
 				#endif
 				I.failures++
+				GLOB.gc_failure_cache.log_gc_failure(D, type, refID)
 
 				if (I.qdel_flags & QDEL_ITEM_SUSPENDED_FOR_LAG)
 					#ifdef REFERENCE_TRACKING

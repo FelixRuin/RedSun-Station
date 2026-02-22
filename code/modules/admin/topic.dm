@@ -2745,6 +2745,17 @@
 		else
 			error_viewer.show_to(owner, null, href_list["viewruntime_linear"])
 
+	else if(href_list["viewgcfailure"])
+		var/datum/gc_failure_viewer/viewer = locate(href_list["viewgcfailure"])
+		if(!istype(viewer))
+			to_chat(usr, "<span class='warning'>That GC failure viewer no longer exists.</span>")
+			return
+
+		if(href_list["viewgcfailure_backto"])
+			viewer.show_to(owner, locate(href_list["viewgcfailure_backto"]), href_list["viewgcfailure_linear"])
+		else
+			viewer.show_to(owner, null, href_list["viewgcfailure_linear"])
+
 	else if(href_list["showrelatedacc"])
 		if(!check_rights(R_ADMIN))
 			return

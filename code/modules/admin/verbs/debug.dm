@@ -908,6 +908,16 @@
 
 	GLOB.error_cache.show_to(src)
 
+/client/proc/view_gc_failures()
+	set category = "Debug"
+	set name = "View GC Failures"
+	set desc = "Open the GC Failure Viewer"
+
+	if(!holder)
+		return
+
+	GLOB.gc_failure_cache.show_to(src)
+
 /client/proc/pump_random_event()
 	set category = "Debug"
 	set name = "Pump Random Event"
