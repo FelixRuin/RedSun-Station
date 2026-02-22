@@ -228,7 +228,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 /obj/item/Destroy()
 	master = null
 	item_flags &= ~DROPDEL	//prevent reqdels
-	if(ismob(loc))
+	if(ismob(loc) && !QDELING(loc))
 		var/mob/m = loc
 		m.temporarilyRemoveItemFromInventory(src, TRUE)
 	for(var/X in actions)

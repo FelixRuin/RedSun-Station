@@ -166,6 +166,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	alien_queen_finder = null
 	combo_display = null
 
+	if(mymob?.client)
+		for(var/key in plane_masters)
+			mymob.client.screen -= plane_masters[key]
 	QDEL_LIST_ASSOC_VAL(plane_masters)
 	QDEL_LIST_ASSOC_VAL(plane_master_controllers)
 	QDEL_LIST(screenoverlays)

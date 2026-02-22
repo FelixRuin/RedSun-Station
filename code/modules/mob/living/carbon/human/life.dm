@@ -33,8 +33,9 @@
 		return
 	if(HAS_TRAIT(src, TRAIT_ROBOTIC_ORGANISM) && hud_used)
 		hud_used.coolant_display.update_counter(src)
-	//Update our name based on whether our face is obscured/disfigured
-	name = get_visible_name()
+	//Update our name based on whether our face is obscured/disfigured (throttled to every 4th fire for performance)
+	if(times_fired % 4 == 0)
+		name = get_visible_name()
 
 /mob/living/carbon/human/calculate_affecting_pressure(pressure)
 	var/headless = !get_bodypart(BODY_ZONE_HEAD) //should the mob be perennially headless (see dullahans), we only take the suit into account, so they can into space.

@@ -228,9 +228,13 @@ SUBSYSTEM_DEF(tgui)
  */
 /datum/controller/subsystem/tgui/proc/close_uis(datum/src_object)
 	var/count = 0
+	if(!(src_object?.datum_flags & DF_HAS_OPEN_UI))
+		return count
 	var/key = "[REF(src_object)]"
 	// No UIs opened for this src_object
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
+		if(src_object)
+			src_object.datum_flags &= ~DF_HAS_OPEN_UI
 		return count
 	for(var/datum/tgui/ui in open_uis_by_src[key])
 		// Check if UI is valid.
@@ -307,6 +311,8 @@ SUBSYSTEM_DEF(tgui)
 	var/key = "[REF(ui.src_object)]"
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
 		open_uis_by_src[key] = list()
+	if(ui.src_object)
+		ui.src_object.datum_flags |= DF_HAS_OPEN_UI
 	ui.user.tgui_open_uis |= ui
 	var/list/uis = open_uis_by_src[key]
 	uis |= ui
@@ -324,6 +330,8 @@ SUBSYSTEM_DEF(tgui)
 /datum/controller/subsystem/tgui/proc/on_close(datum/tgui/ui)
 	var/key = "[REF(ui.src_object)]"
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
+		if(ui.src_object)
+			ui.src_object.datum_flags &= ~DF_HAS_OPEN_UI
 		return FALSE
 	// Remove it from the list of processing UIs.
 	open_uis.Remove(ui)
@@ -334,6 +342,8 @@ SUBSYSTEM_DEF(tgui)
 	uis.Remove(ui)
 	if(length(uis) == 0)
 		open_uis_by_src.Remove(key)
+		if(ui.src_object)
+			ui.src_object.datum_flags &= ~DF_HAS_OPEN_UI
 	return TRUE
 
 /**

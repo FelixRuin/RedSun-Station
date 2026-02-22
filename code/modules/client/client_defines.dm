@@ -96,6 +96,24 @@
 
 	var/lastping = 0
 	var/avgping = 0
+	/// Last ping measured from realtime clock (RTT in ms).
+	var/lastping_rtt = 0
+	/// Smoothed RTT in ms.
+	var/avgping_rtt = 0
+	/// Last raw RTT sample in ms before jitter filtering.
+	var/lastping_rtt_raw = 0
+	/// Smoothed raw RTT in ms before jitter filtering.
+	var/avgping_rtt_raw = 0
+	/// Last ping measured from server tickstamp clock (includes tick-phase jitter) in ms.
+	var/lastping_tick = 0
+	/// Smoothed tickstamp ping in ms.
+	var/avgping_tick = 0
+	/// Last server-delay component in ms (tick ping - RTT).
+	var/lastping_server = 0
+	/// Smoothed server-delay component in ms.
+	var/avgping_server = 0
+	/// Sliding window of recent raw RTT samples used to produce a stable user-facing ping.
+	var/list/ping_rtt_window = list()
 	var/connection_time //world.time they connected
 	var/connection_realtime //world.realtime they connected
 	var/connection_timeofday //world.timeofday they connected

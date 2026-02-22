@@ -418,7 +418,7 @@
 
 	for(var/i = 1 to number_of_pins)
 		var/list_index = i + start_index - 1
-		if(list_index > input_list.len)
+		if(list_index < 1 || list_index > input_list.len)
 			set_pin_data(IC_OUTPUT, i, null)
 		else
 			set_pin_data(IC_OUTPUT, i, input_list[list_index])

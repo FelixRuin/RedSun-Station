@@ -43,6 +43,14 @@
 	var/datum/chatmessage/next
 	/// Contains the reference to the previous chatmessage in the bucket, used by runechat subsystem
 	var/datum/chatmessage/prev
+	/// TRUE while this message is registered in SSrunechat
+	var/in_runechat_queue = FALSE
+	/// TRUE if SSrunechat currently stores this message in second_queue instead of buckets
+	var/in_runechat_second_queue = FALSE
+	/// TRUE once we have inserted into owned_by.seen_messages
+	var/in_seen_messages = FALSE
+	/// TRUE once we have inserted the image into owned_by.images
+	var/in_client_images = FALSE
 	/// The current index used for adjusting the layer of each sequential chat message such that recent messages will overlay older ones
 	var/static/current_z_idx = 0
 
@@ -69,13 +77,19 @@
 
 /datum/chatmessage/Destroy()
 	if (owned_by)
-		if (owned_by.seen_messages)
+		if (in_seen_messages && owned_by.seen_messages)
 			LAZYREMOVEASSOC(owned_by.seen_messages, message_loc, src)
-		owned_by.images.Remove(message)
+			in_seen_messages = FALSE
+		if (in_client_images && message)
+			owned_by.images.Remove(message)
+			in_client_images = FALSE
 	owned_by = null
+	if(in_runechat_queue)
+		leave_subsystem()
+	else
+		prev = next = null
 	message_loc = null
 	message = null
-	leave_subsystem()
 	return ..()
 
 /**
@@ -102,6 +116,9 @@
 	// Register client who owns this message
 	owned_by = owner.client
 	if(!owned_by)
+		return
+	if(isnull(target) || QDELETED(target))
+		qdel(src)
 		return
 	RegisterSignal(owned_by, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_qdel))
 
@@ -212,7 +229,9 @@
 
 	// View the message
 	LAZYADDASSOC(owned_by.seen_messages, message_loc, src)
+	in_seen_messages = TRUE
 	owned_by.images |= message
+	in_client_images = TRUE
 	animate(message, alpha = 255, time = CHAT_MESSAGE_SPAWN_TIME)
 
 	// Register with the runechat SS to handle EOL and destruction
@@ -250,6 +269,8 @@
 		var/atom/movable/virtualspeaker/v = speaker
 		speaker = v.source
 		spans |= "virtual-speaker"
+	if(QDELETED(speaker))
+		return
 
 	// Ignore virtual speaker (most often radio messages) from ourself
 	if (originalSpeaker != src && speaker == src)

@@ -795,6 +795,9 @@
 	QDEL_NULL(temp_pod) //Delete the temp_pod
 	QDEL_NULL(selector) //Delete the selector effect
 	QDEL_NULL(indicator)
+	QDEL_NULL(cam_screen)
+	QDEL_LIST(cam_plane_masters)
+	QDEL_NULL(cam_background)
 	. = ..()
 
 /datum/centcom_podlauncher/proc/supplypod_punish_log(list/whoDyin)

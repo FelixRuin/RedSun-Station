@@ -161,18 +161,52 @@ export const setWindowSize = vec => {
   });
 };
 
-// Fast inlined setters for the drag/resize hot path.
-// Pre-allocated param objects avoid GC churn during rapid mousemove events.
-const dragWinsetParams = { pos: '' };
-const setWindowPositionFast = (x, y) => {
-  dragWinsetParams.pos = Math.round(x + screenOffset[0]) + ',' + Math.round(y + screenOffset[1]);
-  Byond.winset(window.__windowId__, dragWinsetParams);
+// rAF-based batching: accumulate winset calls and flush once per animation frame.
+// Prevents CPU spikes when dragging/resizing at high mouse polling rates (125-1000 Hz).
+// Ported from tgstation drag.ts.
+let winsetRaf;
+let pendingWinset = {};
+let lastSentWinset = {};
+
+const flushWinset = () => {
+  winsetRaf = undefined;
+  const payload = {};
+  if (pendingWinset.pos && pendingWinset.pos !== lastSentWinset.pos) {
+    payload.pos = pendingWinset.pos;
+  }
+  if (pendingWinset.size && pendingWinset.size !== lastSentWinset.size) {
+    payload.size = pendingWinset.size;
+  }
+  pendingWinset = {};
+  if (payload.pos || payload.size) {
+    Byond.winset(window.__windowId__, payload);
+    lastSentWinset = { ...lastSentWinset, ...payload };
+  }
 };
 
-const resizeWinsetParams = { size: '' };
+const scheduleWinset = () => {
+  if (winsetRaf !== undefined) {
+    return;
+  }
+  winsetRaf = requestAnimationFrame(flushWinset);
+};
+
+const flushWinsetNow = () => {
+  if (winsetRaf !== undefined) {
+    cancelAnimationFrame(winsetRaf);
+    winsetRaf = undefined;
+  }
+  flushWinset();
+};
+
+const setWindowPositionFast = (x, y) => {
+  pendingWinset.pos = Math.round(x + screenOffset[0]) + ',' + Math.round(y + screenOffset[1]);
+  scheduleWinset();
+};
+
 const setWindowSizeFast = (w, h) => {
-  resizeWinsetParams.size = Math.round(w) + 'x' + Math.round(h);
-  Byond.winset(window.__windowId__, resizeWinsetParams);
+  pendingWinset.size = Math.round(w) + 'x' + Math.round(h);
+  scheduleWinset();
 };
 
 export const getScreenPosition = () => [
@@ -316,6 +350,7 @@ export const dragStartHandler = event => {
 const dragEndHandler = event => {
   logger.log('drag end');
   applyDragPosition(event.screenX, event.screenY);
+  flushWinsetNow();
   document.removeEventListener('mousemove', dragMoveHandler);
   document.removeEventListener('mouseup', dragEndHandler);
   document.body.style['pointer-events'] = 'auto';
@@ -359,6 +394,7 @@ export const resizeStartHandler = (x, y) => event => {
 const resizeEndHandler = event => {
   logger.log('resize end', size);
   applyResizeSize(event.screenX, event.screenY);
+  flushWinsetNow();
   document.removeEventListener('mousemove', resizeMoveHandler);
   document.removeEventListener('mouseup', resizeEndHandler);
   document.body.style['pointer-events'] = 'auto';

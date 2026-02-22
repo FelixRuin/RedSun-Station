@@ -38,6 +38,7 @@
 	if(mob.control_object)
 		return Move_object(direction)
 	if(!isliving(mob))
+		mob.set_glide_size(DELAY_TO_GLIDE_SIZE(world.tick_lag))
 		return mob.Move(n, direction)
 	if(mob.stat == DEAD)
 		mob.ghostize()
@@ -177,7 +178,7 @@
 						return
 				var/target = locate(locx,locy,mobloc.z)
 				if(target)
-					L.loc = target
+					L.forceMove(target)
 					var/limit = 2//For only two trailing shadows.
 					for(var/turf/T in getline(mobloc, L.loc))
 						new /obj/effect/temp_visual/dir_setting/ninja/shadow(T, L.dir)
@@ -407,6 +408,15 @@
 
 /mob/proc/canZMove(direction, turf/target)
 	return FALSE
+
+/mob/Moved(atom/old_loc, Dir, Forced = FALSE)
+	. = ..()
+	if(!client?.parallax_holder)
+		return
+	var/anim_time = 0
+	if(glide_size > 0)
+		anim_time = world.icon_size / glide_size * world.tick_lag
+	client.parallax_holder.Update(anim_time = anim_time)
 
 /mob/onTransitZ(old_z, new_z)
 	. = ..()

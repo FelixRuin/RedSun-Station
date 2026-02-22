@@ -168,6 +168,19 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	if(ckey)
 		ckey = null
 	//BLUEMOON ADD END
+
+	// Очищаем двустороннюю ссылку observetarget/observers (на случай если Logout не отработал)
+	if(observetarget)
+		var/mob/target = observetarget
+		observetarget = null
+		if(target.observers)
+			target.observers -= src
+			UNSETEMPTY(target.observers)
+
+	// Очищаем регистрацию z-уровня (на случай если Logout не вызвал update_z)
+	if(registered_z)
+		update_z(null)
+
 	if(data_huds_on)
 		remove_data_huds()
 	GLOB.ghost_images_default -= ghostimage_default
@@ -390,27 +403,28 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 		ghostize(0, penalize = TRUE)
 
-/mob/dead/observer/Move(NewLoc, direct)
-	if (SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_MOVE, NewLoc) & COMPONENT_MOVABLE_BLOCK_PRE_MOVE)
-		return
+/mob/dead/observer/Move(NewLoc, direct, glide_size_override)
+	if(SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_MOVE, NewLoc) & COMPONENT_MOVABLE_BLOCK_PRE_MOVE)
+		return FALSE
 	if(updatedir)
-		setDir(direct)//only update dir if we actually need it, so overlays won't spin on base sprites that don't have directions of their own
-	var/oldloc = loc
-
+		setDir(direct) //only update dir if we actually need it, so overlays won't spin on base sprites that don't have directions of their own
+	if(glide_size_override)
+		set_glide_size(glide_size_override)
 	if(NewLoc)
-		forceMove(NewLoc)
+		abstract_move(NewLoc)
 	else
-		forceMove(get_turf(src))  //Get out of closets and such as a ghost
+		// get_turf(src) handles getting out of closets/containers
+		var/turf/destination = get_turf(src)
 		if((direct & NORTH) && y < world.maxy)
-			y++
+			destination = get_step(destination, NORTH)
 		else if((direct & SOUTH) && y > 1)
-			y--
+			destination = get_step(destination, SOUTH)
 		if((direct & EAST) && x < world.maxx)
-			x++
+			destination = get_step(destination, EAST)
 		else if((direct & WEST) && x > 1)
-			x--
-
-	Moved(oldloc, direct)
+			destination = get_step(destination, WEST)
+		abstract_move(destination)
+	return TRUE
 
 /mob/dead/observer/verb/reenter_corpse()
 	set category = "Ghost"

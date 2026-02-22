@@ -25,7 +25,7 @@
 
 /obj/item/clothing/glasses/hud/dropped(mob/living/carbon/human/user)
 	..()
-	if(hud_type && istype(user) && user.glasses == src)
+	if(hud_type && istype(user))
 		var/datum/atom_hud/H = GLOB.huds[hud_type]
 		H.remove_hud_from(user)
 
