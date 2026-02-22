@@ -58,7 +58,6 @@ All foods are distributed among various categories. Use common sense.
 	var/slice_path    // for sliceable food. path of the item resulting from the slicing
 	var/slices_num
 	var/eatverb
-	var/dried_type = null
 	var/dry = 0
 	var/cooked_type = null  //for microwave cooking. path of the resulting item after microwaving
 	var/filling_color = "#FFFFFF" //color to use when added to custom food.
@@ -82,6 +81,7 @@ All foods are distributed among various categories. Use common sense.
 	RegisterSignal(src, COMSIG_ITEM_MICROWAVE_COOKED, PROC_REF(on_microwave_cooked))
 	make_microwaveable()
 	make_processable()
+	make_dryable()
 
 /obj/item/reagent_containers/food/snacks/Destroy()
 	UnregisterSignal(src, COMSIG_ITEM_MICROWAVE_COOKED)
@@ -102,6 +102,9 @@ All foods are distributed among various categories. Use common sense.
 /obj/item/reagent_containers/food/snacks/proc/make_processable()
 	if(slice_path)
 		AddElement(/datum/element/processable, TOOL_KNIFE, slice_path, slices_num,  3 SECONDS, table_required = TRUE, screentip_verb = "Cut", sound_to_play = SFX_KNIFE_SLICE)
+	return
+
+/obj/item/reagent_containers/food/snacks/proc/make_dryable()
 	return
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()

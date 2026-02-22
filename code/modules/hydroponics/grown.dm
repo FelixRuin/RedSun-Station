@@ -11,9 +11,6 @@
 	var/bitesize_mod = 0
 	var/splat_type = /obj/effect/decal/cleanable/plant_smudge
 	// If set, bitesize = 1 + round(reagents.total_volume / bitesize_mod)
-	dried_type = -1
-	// Saves us from having to define each stupid grown's dried_type as itself.
-	// If you don't want a plant to be driable (watermelons) set this to null in the time definition.
 	resistance_flags = FLAMMABLE
 	reagent_value = HARVEST_REAGENTS_VALUE
 	var/dry_grind = FALSE //If TRUE, this object needs to be dry to be ground up
@@ -22,6 +19,9 @@
 	var/wine_flavor //If NULL, this is automatically set to the fruit's flavor. Determines the flavor of the wine if distill_reagent is NULL.
 	var/wine_power = 10 //Determines the boozepwr of the wine if distill_reagent is NULL.
 	var/vision_flags = 0
+
+/obj/item/reagent_containers/food/snacks/grown/make_dryable()
+	AddElement(/datum/element/dryable, type)
 
 /obj/item/reagent_containers/food/snacks/grown/Initialize(mapload, obj/item/seeds/new_seed)
 	. = ..()
@@ -37,9 +37,6 @@
 
 	pixel_x = rand(-5, 5)
 	pixel_y = rand(-5, 5)
-
-	if(dried_type == -1)
-		dried_type = src.type
 
 	if(seed)
 		for(var/datum/plant_gene/trait/T in seed.genes)
