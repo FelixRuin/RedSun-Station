@@ -38,6 +38,7 @@
 	if(mob.control_object)
 		return Move_object(direction)
 	if(!isliving(mob))
+		mob.set_glide_size(DELAY_TO_GLIDE_SIZE(world.tick_lag))
 		return mob.Move(n, direction)
 	if(mob.stat == DEAD)
 		mob.ghostize()
