@@ -107,6 +107,12 @@
 	return FALSE
 
 /mob/living/carbon/monkey/proc/handle_combat()
+	if(QDELETED(target))
+		target = null
+	if(QDELETED(pickupTarget))
+		pickupTarget = null
+	if(QDELETED(bodyDisposal))
+		bodyDisposal = null
 	if(pickupTarget)
 		if(restrained() || blacklistItems[pickupTarget] || HAS_TRAIT(pickupTarget, TRAIT_NODROP))
 			pickupTarget = null
