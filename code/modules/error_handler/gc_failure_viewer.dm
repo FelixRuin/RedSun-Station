@@ -85,7 +85,7 @@ GLOBAL_DATUM_INIT(gc_failure_cache, /datum/gc_failure_viewer/gc_failure_cache, n
 
 	browse_to(user, html)
 
-/datum/gc_failure_viewer/gc_failure_cache/proc/log_gc_failure(datum/D, type_path, ref_id)
+/datum/gc_failure_viewer/gc_failure_cache/proc/log_gc_failure(datum/D, type_path, ref_id, queued_time)
 	total_failures++
 	var/type_key = "[type_path]"
 	var/datum/gc_failure_viewer/gc_failure_source/source = failure_sources[type_key]
@@ -93,7 +93,7 @@ GLOBAL_DATUM_INIT(gc_failure_cache, /datum/gc_failure_viewer/gc_failure_cache, n
 		source = new(type_path)
 		failure_sources[type_key] = source
 
-	var/datum/gc_failure_viewer/gc_failure_entry/entry = new(D, type_path, ref_id)
+	var/datum/gc_failure_viewer/gc_failure_entry/entry = new(D, type_path, ref_id, queued_time)
 	entry.failure_source = source
 	failures += entry
 	source.failures += entry
@@ -128,18 +128,57 @@ GLOBAL_DATUM_INIT(gc_failure_cache, /datum/gc_failure_viewer/gc_failure_cache, n
 	var/ref_id
 	var/obj_name
 	var/failure_time
+	var/queued_time
+	var/extra_info
 	var/datum_ref
 
-/datum/gc_failure_viewer/gc_failure_entry/New(datum/D, path, refid)
+/datum/gc_failure_viewer/gc_failure_entry/New(datum/D, path, refid, queuetime)
 	type_path = path
 	ref_id = refid
 	failure_time = world.time
+	queued_time = queuetime
 	if (D)
 		if (isatom(D))
 			var/atom/A = D
 			obj_name = A.name
 		datum_ref = REF(D)
-	name = "<b>\[[TIME_STAMP("hh:mm:ss", FALSE)]]</b> GC failure: <b>[type_path]</b> ([ref_id])"
+		extra_info = build_extra_info(D)
+	name = "<b>\[[TIME_STAMP("hh:mm:ss", FALSE)]]</b> GC failure: <b>[type_path]</b>[obj_name ? " \"[html_encode(obj_name)]\"" : ""] ([ref_id])"
+
+/datum/gc_failure_viewer/gc_failure_entry/proc/build_extra_info(datum/D)
+	var/list/info = list()
+
+	if (istype(D, /atom/movable/screen))
+		var/atom/movable/screen/S = D
+		if (S.screen_loc)
+			info += "screen_loc: [S.screen_loc]"
+		if (S.assigned_map)
+			info += "map: [S.assigned_map]"
+
+	if (isatom(D))
+		var/atom/A = D
+		if (A.loc)
+			var/loc_text = "[A.loc.type]"
+			if (isatom(A.loc))
+				var/atom/loc_atom = A.loc
+				if (loc_atom.name)
+					loc_text += " \"[loc_atom.name]\""
+			info += "loc: [loc_text]"
+		else
+			info += "loc: null"
+		if (isturf(A) || isturf(A.loc))
+			info += "coords: [A.x],[A.y],[A.z]"
+
+	if (ismob(D))
+		var/mob/M = D
+		if (M.ckey)
+			info += "ckey: [M.ckey]"
+		else if (M.key)
+			info += "key: [M.key]"
+
+	if (!length(info))
+		return null
+	return info.Join(" | ")
 
 /datum/gc_failure_viewer/gc_failure_entry/show_to(user, datum/gc_failure_viewer/back_to, linear)
 	if (!istype(back_to))
@@ -147,18 +186,22 @@ GLOBAL_DATUM_INIT(gc_failure_cache, /datum/gc_failure_viewer/gc_failure_cache, n
 
 	var/html = build_header(back_to, linear)
 	html += "<div class='gc_failure'>"
-	html += "<span class='gc_failure_line'><b>Type:</b> [type_path]</span><br>"
+	html += "<span class='gc_failure_line'><b>Тип:</b> [type_path]</span><br>"
 	html += "<span class='gc_failure_line'><b>Ref:</b> [ref_id]</span><br>"
 	if (obj_name)
-		html += "<span class='gc_failure_line'><b>Name:</b> [html_encode(obj_name)]</span><br>"
-	html += "<span class='gc_failure_line'><b>Time:</b> [DisplayTimeText(failure_time)]</span><br>"
+		html += "<span class='gc_failure_line'><b>Имя:</b> [html_encode(obj_name)]</span><br>"
+	if (extra_info)
+		html += "<span class='gc_failure_line'><b>Доп. инфо:</b> [html_encode(extra_info)]</span><br>"
+	html += "<span class='gc_failure_line'><b>Время фейла:</b> [DisplayTimeText(failure_time)] от начала раунда</span><br>"
+	if (queued_time)
+		html += "<span class='gc_failure_line'><b>В очереди GC:</b> ~[DisplayTimeText(failure_time - queued_time)]</span><br>"
 	html += "</div>"
 
 	if (datum_ref)
 		var/datum/D = locate(datum_ref)
 		if (D && D.type == text2path(type_path))
-			html += "<br><b>Object</b>: <a href='?_src_=vars;[HrefToken()];Vars=[datum_ref]'>VV</a>"
+			html += "<br><b>Объект</b>: <a href='?_src_=vars;[HrefToken()];Vars=[datum_ref]'>VV</a>"
 		else
-			html += "<br><b>Object</b>: no longer exists ([ref_id])"
+			html += "<br><b>Объект</b>: больше не существует ([ref_id])"
 
 	browse_to(user, html)
