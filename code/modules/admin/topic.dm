@@ -2623,7 +2623,7 @@
 		src.access_news_network()
 
 	else if(href_list["gc_queue_refresh"])
-		if(!check_rights(R_ADMIN))
+		if(!check_rights(R_DEBUG))
 			return
 		usr.client?.cmd_display_gc_queue()
 

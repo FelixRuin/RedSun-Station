@@ -386,7 +386,7 @@ SUBSYSTEM_DEF(timer)
 	bucketJoin()
 
 /datum/timedevent/Destroy()
-	datum_flags &= ~DF_USE_TAG
+	..()
 
 	if (flags & TIMER_UNIQUE && hash)
 		SStimer.hashes -= hash

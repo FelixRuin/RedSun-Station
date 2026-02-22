@@ -261,8 +261,8 @@ SUBSYSTEM_DEF(statpanels)
 	)
 	// Machines
 	key_ss["Machines"] = list(
-		list("\u0412\u0441\u0435\u0433\u043E \u043C\u0430\u0448\u0438\u043D", length(SSmachines.all_machines)),
-		list("\u0422\u0438\u043F\u043E\u0432", length(SSmachines.machines_by_type)),
+		list("\u0412\u0441\u0435\u0433\u043E \u043C\u0430\u0448\u0438\u043D", SSmachines.get_machine_count()),
+		list("\u0422\u0438\u043F\u043E\u0432", SSmachines.get_machine_type_count()),
 		list("\u041E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0430", length(SSmachines.processing)),
 		list("\u042D\u043D\u0435\u0440\u0433\u043E\u0441\u0435\u0442\u0438", length(SSmachines.powernets))
 	)
