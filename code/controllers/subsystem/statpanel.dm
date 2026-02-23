@@ -25,8 +25,8 @@ SUBSYSTEM_DEF(statpanels)
 		server_section += list(
 			list("ID \u0440\u0430\u0443\u043D\u0434\u0430", GLOB.round_id ? GLOB.round_id : "NULL"),
 			list("\u0418\u0433\u0440\u043E\u0432\u043E\u0439 \u0420\u0435\u0436\u0438\u043C", GLOB.master_mode),
-			list("\u041F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0438\u0435 \u0420\u0435\u0436\u0438\u043C\u044B", jointext(SSpersistence.saved_modes, ", ")),
-			list("\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u0418\u0433\u0440\u043E\u043A\u043E\u0432", GLOB.clients.len))
+			list("\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u0418\u0433\u0440\u043E\u043A\u043E\u0432", GLOB.clients.len),
+			list("\u041F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0438\u0435 \u0420\u0435\u0436\u0438\u043C\u044B", jointext(SSpersistence.saved_modes, ", ")))
 		global_data["server"] = server_section
 		// Time section
 		global_data["time"] = list(
