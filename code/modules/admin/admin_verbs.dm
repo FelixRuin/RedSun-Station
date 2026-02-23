@@ -650,7 +650,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Drop Dynamic Bomb") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/get_dynex_range()
-	set category = "Debug"
+	set category = "Debug.2) Info"
 	set name = "Get DynEx Range"
 	set desc = "Get the estimated range of a bomb, using explosive power."
 
@@ -661,7 +661,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	to_chat(usr, "Estimated Explosive Range: (Devastation: [round(range*0.25)], Heavy: [round(range*0.5)], Light: [round(range)])", confidential = TRUE)
 
 /client/proc/get_dynex_power()
-	set category = "Debug"
+	set category = "Debug.2) Info"
 	set name = "Get DynEx Power"
 	set desc = "Get the estimated required power of a bomb, to reach a specific range."
 
@@ -672,7 +672,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	to_chat(usr, "Estimated Explosive Power: [power]", confidential = TRUE)
 
 /client/proc/set_dynex_scale()
-	set category = "Debug"
+	set category = "Debug.6) Tweak"
 	set name = "Set DynEx Scale"
 	set desc = "Set the scale multiplier of dynex explosions. The default is 0.5."
 
@@ -856,7 +856,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/populate_world(amount = 50 as num)
 	set name = "Populate World"
-	set category = "Debug"
+	set category = "Debug.7) Testing"
 	set desc = "(\"Amount of mobs to create\") Populate the world with test mobs."
 
 	if (amount > 0)
@@ -902,6 +902,6 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/debugstatpanel()
 	set name = "Debug Stat Panel"
-	set category = "Debug"
+	set category = "Debug.2) Info"
 
 	src << output("", "statbrowser:create_debug")
