@@ -105,8 +105,12 @@ const handlePassthrough = (key: KeyEvent) => {
     location.reload();
     return;
   }
-  // Prevent passthrough on Ctrl+F
+  // Open/toggle the FindBar on Ctrl+F
   if (keyString === 'Ctrl+F') {
+    if (key.isDown()) {
+      key.event.preventDefault();
+      globalEvents.emit('findbar-toggle');
+    }
     return;
   }
   // NOTE: Alt modifier can be sticky and conflict-prone.

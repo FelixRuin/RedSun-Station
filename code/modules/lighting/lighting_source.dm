@@ -53,7 +53,8 @@
 	update()
 
 /datum/light_source/Destroy(force)
-	remove_lum()
+	if (applied || affecting_turfs || effect_str)
+		remove_lum()
 	if (source_atom)
 		LAZYREMOVE(source_atom.light_sources, src)
 
@@ -63,11 +64,11 @@
 	if (needs_update)
 		GLOB.lighting_update_lights -= src
 
-	datum_flags &= ~DF_USE_TAG
 	top_atom = null
 	source_atom = null
 	source_turf = null
 	pixel_turf = null
+	..()
 	return QDEL_HINT_IWILLGC
 
 // Yes this doesn't align correctly on anything other than 4 width tabs.

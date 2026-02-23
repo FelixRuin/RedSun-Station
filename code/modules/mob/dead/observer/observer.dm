@@ -22,12 +22,10 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	hud_type = /datum/hud/ghost
 	movement_type = GROUND | FLYING
 	var/can_reenter_corpse
-	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
 							//If you died in the game and are a ghsot - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
-	var/atom/movable/following = null
 	var/fun_verbs = 0
 	var/image/ghostimage_default = null //this mobs ghost image without accessories and dirs
 	var/image/ghostimage_simple = null //this mob with the simple white ghost sprite
@@ -183,6 +181,21 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 	if(data_huds_on)
 		remove_data_huds()
+
+	var/image/departing_default = ghostimage_default
+	var/image/departing_simple = ghostimage_simple
+	// updateghostimages() removes using the current global ghost image lists, so once
+	// the departing images are removed from GLOB.ghost_images_* they would stay in
+	// other observer client.images unless we explicitly remove them first.
+	if(departing_default || departing_simple)
+		for(var/mob/dead/observer/O in GLOB.player_list)
+			if(!O.client)
+				continue
+			if(departing_default)
+				O.client.images -= departing_default
+			if(departing_simple)
+				O.client.images -= departing_simple
+
 	GLOB.ghost_images_default -= ghostimage_default
 	QDEL_NULL(ghostimage_default)
 
@@ -193,6 +206,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 	QDEL_NULL(orbit_menu)
 	QDEL_NULL(spawners_menu)
+	mind = null
 	return ..()
 
 /*

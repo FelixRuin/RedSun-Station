@@ -105,6 +105,9 @@
 		Reset()
 		return
 	var/turf/T = get_turf(cached_eye)
+	if(!T)
+		Reset()
+		return
 	if(!last || T.z != last.z)
 		// z mismatch, reset
 		Reset()

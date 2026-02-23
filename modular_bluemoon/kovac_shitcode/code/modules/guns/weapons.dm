@@ -297,11 +297,13 @@
 		return
 	..()
 	if((wielded) && prob(50))
-		INVOKE_ASYNC(src, PROC_REF(slash), user)
+		INVOKE_ASYNC(src, PROC_REF(slash), user, target)
 
 /obj/item/inteq_sledgehammer/proc/slash(mob/living/user, mob/living/target)
-		user.do_attack_animation(target, ATTACK_EFFECT_KICK)
-		sleep(1)
+	if(!user || !target)
+		return
+	user.do_attack_animation(target, ATTACK_EFFECT_KICK)
+	sleep(1)
 
 /obj/item/inteq_sledgehammer/afterattack(atom/A, mob/user, proximity)
 	. = ..()

@@ -215,27 +215,20 @@ SUBSYSTEM_DEF(runechat)
 		prev = next = null
 		return
 
-	// Attempt to find the bucket that contains this chat message
-	var/bucket_pos = BUCKET_POS(scheduled_destruction)
-
 	// Get local references to the subsystem's vars, faster than accessing on the datum
 	var/list/bucket_list = SSrunechat.bucket_list
 	var/list/second_queue = SSrunechat.second_queue
 
-	// Attempt to get the head of the bucket
-	var/datum/chatmessage/bucket_head
-	if (bucket_pos > 0)
-		bucket_head = bucket_list[bucket_pos]
-
-	// Decrement the number of messages in buckets if the message is
-	// the head of the bucket, or has a SD less than BUCKET_LIMIT implying it fits
-	// into an existing bucket, or is otherwise not present in the secondary queue
 	if(in_runechat_second_queue)
 		second_queue -= src
-	else if(bucket_head == src)
-		bucket_list[bucket_pos] = next
-		SSrunechat.bucket_count--
 	else
+		// Attempt to find the bucket that contains this chat message
+		var/bucket_pos = BUCKET_POS(scheduled_destruction)
+		var/datum/chatmessage/bucket_head
+		if (bucket_pos > 0)
+			bucket_head = bucket_list[bucket_pos]
+		if(bucket_head == src)
+			bucket_list[bucket_pos] = next
 		SSrunechat.bucket_count--
 
 	// Remove the message from the bucket, ensuring to maintain

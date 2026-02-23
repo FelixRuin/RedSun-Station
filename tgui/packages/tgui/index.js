@@ -22,6 +22,7 @@ import './styles/themes/inteq.scss';
 
 import { perf } from 'common/perf';
 
+import { FindBar } from './components/FindBar';
 import { isDragOrResizeActive } from './drag';
 import { setupGlobalEvents } from './events';
 import { setupHotKeys } from './hotkeys';
@@ -40,11 +41,19 @@ window.__pushTguiDebugEvent__?.('bundleLoaded', {
 
 const store = configureStore();
 
+const getFindBarInstanceKey = () => {
+  const backend = store.getState()?.backend;
+  const windowKey = backend?.config?.window?.key || window.__windowId__ || 'tgui';
+  const sessionKey = backend?.suspended || 'active';
+  return `${windowKey}:${sessionKey}`;
+};
+
 const renderApp = createRenderer(() => {
   const Component = getRoutedComponent(store);
   return (
     <StoreProvider store={store}>
       <Component />
+      <FindBar key={getFindBarInstanceKey()} />
     </StoreProvider>
   );
 });

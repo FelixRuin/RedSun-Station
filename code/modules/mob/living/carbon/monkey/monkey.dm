@@ -63,6 +63,19 @@ GLOBAL_LIST_INIT(strippable_monkey_items, create_strippable_list(list(
 
 
 /mob/living/carbon/monkey/Destroy()
+	walk(src, 0)
+	// Clean up references other monkeys hold to us (prevents GC failures)
+	for(var/mob/living/carbon/monkey/M in GLOB.carbon_list)
+		if(M == src)
+			continue
+		if(M.target == src)
+			M.target = null
+			walk(M, 0)
+		M.enemies -= src
+	target = null
+	enemies = null
+	pickupTarget = null
+	bodyDisposal = null
 	SSmobs.cubemonkeys -= src
 	return ..()
 

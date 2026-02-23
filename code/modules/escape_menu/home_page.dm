@@ -99,6 +99,7 @@
 /atom/movable/screen/escape_menu/home_button/Destroy()
 	escape_menu = null
 	QDEL_NULL(on_click_callback)
+	QDEL_NULL(home_button_text)
 
 	return ..()
 
@@ -109,10 +110,12 @@
 	on_click_callback.InvokeAsync()
 
 /atom/movable/screen/escape_menu/home_button/MouseEntered(location, control, params)
-	home_button_text.set_hovered(TRUE)
+	if(home_button_text)
+		home_button_text.set_hovered(TRUE)
 
 /atom/movable/screen/escape_menu/home_button/MouseExited(location, control, params)
-	home_button_text.set_hovered(FALSE)
+	if(home_button_text)
+		home_button_text.set_hovered(FALSE)
 
 /atom/movable/screen/escape_menu/home_button/proc/text_color()
 	return enabled() ? "white" : "gray"

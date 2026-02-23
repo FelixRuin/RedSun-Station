@@ -89,7 +89,7 @@
 	if(old_object)
 		old_object.MouseExited(over_location, over_control, params)
 
-	if(QDELETED(over_location))
+	if(isatom(over_location) && QDELETED(over_location))
 		last_hovored_ref = null
 		return
 	last_hovored_ref = WEAKREF(over_object)
