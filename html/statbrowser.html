@@ -20,6 +20,38 @@
 		color: #b2c4dd;
 	}
 
+	::-webkit-scrollbar {
+		width: 12px;
+		height: 12px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #f0f0f0;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #c0c0c0;
+		border: 3px solid #f0f0f0;
+		border-radius: 6px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: #a0a0a0;
+	}
+
+	body.dark::-webkit-scrollbar-track {
+		background: #131313;
+	}
+
+	body.dark::-webkit-scrollbar-thumb {
+		background: #333333;
+		border: 3px solid #131313;
+	}
+
+	body.dark::-webkit-scrollbar-thumb:hover {
+		background: #555555;
+	}
+
 	#menu {
 		background-color: #F0F0F0;
 		position: fixed;
@@ -432,7 +464,7 @@
 	.st-section-header {
 		font-weight: bold;
 		font-size: 13px;
-		padding: 5px 6px;
+		padding: 3px 6px;
 		margin: 0;
 		cursor: pointer;
 		background-color: #e8e8e8;
@@ -452,7 +484,7 @@
 		margin-bottom: 2px;
 	}
 	.st-table td {
-		padding: 2px 5px;
+		padding: 1px 5px;
 		border-bottom: 1px solid #eee;
 		font-size: 12px;
 	}
@@ -602,7 +634,7 @@ var current_tab = null;
 var st_global_data = null;
 var st_ping_data = null;
 var st_mob_items = [];
-var st_sections = { round: true, time: true, tidi: true, character: true };
+var st_sections = { round: true, time: true, character: true };
 var st_container = null;
 var st_ping_bar = null;
 var st_server_grid = null;
@@ -1320,8 +1352,6 @@ function st_update_section_visibility(key) {
 		st_server_grid.style.display = st_sections.round ? "" : "none";
 	else if (key === "time" && st_time_grid)
 		st_time_grid.style.display = st_sections.time ? "" : "none";
-	else if (key === "tidi" && st_tidi_el)
-		st_tidi_el.style.display = st_sections.tidi ? "" : "none";
 	else if (key === "character" && st_char_table)
 		st_char_table.style.display = st_sections.character ? "" : "none";
 }
@@ -1366,7 +1396,7 @@ function st_make_grid_item(label, value, wide, cls, href) {
 function st_fill_grid(container, rows) {
 	container.textContent = "";
 	for (var i = 0; i < rows.length; i++) {
-		var wide = ("" + rows[i][1]).length > 20;
+		var wide = ("" + rows[i][1]).length > 32;
 		container.appendChild(st_make_grid_item(rows[i][0], rows[i][1], wide));
 	}
 }
@@ -1420,12 +1450,6 @@ function draw_status() {
 		st_time_grid.className = "st-grid";
 		st_container.appendChild(st_time_grid);
 
-		// Time dilation section
-		st_container.appendChild(st_build_section_header("tidi", "\u041E\u0442\u043A\u043B\u043E\u043D\u0435\u043D\u0438\u044F"));
-		st_tidi_el = document.createElement("div");
-		st_tidi_el.className = "st-tidi-row";
-		st_container.appendChild(st_tidi_el);
-
 		// Character section
 		st_container.appendChild(st_build_section_header("character", "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u0436"));
 		st_char_table = document.createElement("table");
@@ -1458,8 +1482,25 @@ function draw_status() {
 		st_ping_bar.appendChild(txt);
 		var avg_txt = document.createElement("span");
 		avg_txt.style.color = "#777";
-		avg_txt.textContent = "(\u0441\u0440\u0435\u0434\u043D\u0435\u0435: " + avg + "ms)";
+		avg_txt.textContent = "(\u0441\u0440\u0435\u0434: " + avg + "ms)";
 		st_ping_bar.appendChild(avg_txt);
+
+		if (d.tidi) {
+			var spacer = document.createElement("span");
+			spacer.style.flexGrow = "1";
+			st_ping_bar.appendChild(spacer);
+
+			var cur = d.tidi[0];
+			var tidiTxt = document.createElement("span");
+			tidiTxt.className = st_tidi_class(cur);
+			tidiTxt.textContent = "\u041E\u0442\u043A\u043B: " + cur + "%";
+			st_ping_bar.appendChild(tidiTxt);
+
+			var tidiAvg = document.createElement("span");
+			tidiAvg.style.color = "#777";
+			tidiAvg.textContent = " (\u0441\u0440: " + d.tidi[2] + "%)";
+			st_ping_bar.appendChild(tidiAvg);
+		}
 	}
 
 	// Update shuttle bar
@@ -1486,23 +1527,6 @@ function draw_status() {
 		st_time_grid.style.display = "";
 	} else if (!st_sections.time) {
 		st_time_grid.style.display = "none";
-	}
-
-	// Update time dilation
-	if (st_sections.tidi && d.tidi) {
-		st_tidi_el.innerHTML = "";
-		var cur = d.tidi[0];
-		var curSpan = document.createElement("span");
-		curSpan.className = "st-tidi-current " + st_tidi_class(cur);
-		curSpan.textContent = cur + "%";
-		st_tidi_el.appendChild(curSpan);
-		var avgsSpan = document.createElement("span");
-		avgsSpan.className = "st-tidi-avgs";
-		avgsSpan.textContent = "(\u0431\u044B\u0441\u0442\u0440: " + d.tidi[1] + "%, \u0441\u0440\u0435\u0434\u043D: " + d.tidi[2] + "%, \u043C\u0435\u0434\u043B: " + d.tidi[3] + "%)";
-		st_tidi_el.appendChild(avgsSpan);
-		st_tidi_el.style.display = "";
-	} else if (!st_sections.tidi) {
-		st_tidi_el.style.display = "none";
 	}
 
 	// Update character section (mob items)
