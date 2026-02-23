@@ -97,6 +97,10 @@
 	transform = transform.Scale(6, 1)
 
 /atom/movable/screen/escape_menu/home_button/Destroy()
+	maptext = null
+	filters = null
+	if(home_button_text)
+		vis_contents -= home_button_text
 	escape_menu = null
 	QDEL_NULL(on_click_callback)
 	QDEL_NULL(home_button_text)
@@ -168,6 +172,11 @@
 
 	if(escape_menu?.client)
 		RegisterSignal(escape_menu.client, COMSIG_CLIENT_MOB_LOGIN, PROC_REF(on_client_mob_login))
+
+/atom/movable/screen/escape_menu/home_button/leave_body/Destroy()
+	if(escape_menu?.client)
+		UnregisterSignal(escape_menu.client, COMSIG_CLIENT_MOB_LOGIN)
+	return ..()
 
 /atom/movable/screen/escape_menu/home_button/leave_body/enabled()
 	if (!..())

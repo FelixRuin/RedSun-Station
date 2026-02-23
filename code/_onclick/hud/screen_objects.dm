@@ -49,8 +49,9 @@
 	set_new_hud(hud_owner)
 
 /atom/movable/screen/Destroy()
+	set_new_hud(null)
 	master = null
-	hud = null
+	vis_contents.Cut()
 	return ..()
 
 /atom/movable/screen/Click(location, control, params)

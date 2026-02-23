@@ -50,6 +50,9 @@ GLOBAL_LIST_EMPTY(escape_menus)
 		GLOB.escape_menus[ckey] = src
 
 /datum/escape_menu/Destroy(force, ...)
+	if(client)
+		UnregisterSignal(client, list(COMSIG_PARENT_QDELETING, COMSIG_CLIENT_MOB_LOGIN))
+
 	QDEL_NULL(base_holder)
 	QDEL_NULL(page_holder)
 

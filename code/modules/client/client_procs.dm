@@ -1173,16 +1173,26 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		preview.screen_loc = "character_preview_map:0,[pos]"
 
 /client/proc/clear_character_previews()
-	for(var/index in char_render_holders)
-		var/atom/movable/screen/S = char_render_holders[index]
+	if(!LAZYLEN(char_render_holders))
+		char_render_holders = null
+		return
+
+	var/list/char_render_holders_copy = char_render_holders.Copy()
+	char_render_holders = null
+
+	for(var/index in char_render_holders_copy)
+		var/atom/movable/screen/S = char_render_holders_copy[index]
+		screen -= S
 		// 516 migration: clear appearance data before removal to release BYOND's
 		// internal appearance cache references, preventing GC failure timeouts.
+		S.vis_contents.Cut()
 		S.overlays.Cut()
 		S.underlays.Cut()
+		S.filters = null
+		S.maptext = null
 		S.icon = null
-		screen -= S
+		S.appearance = null
 		qdel(S)
-	char_render_holders = null
 
 /client/proc/can_have_part(part_name)
 	return prefs.pref_species.mutant_bodyparts[part_name] || (part_name in GLOB.unlocked_mutant_parts)

@@ -14,6 +14,8 @@
 	RegisterSignal(client, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_qdel))
 
 /datum/screen_object_holder/Destroy()
+	if(client)
+		UnregisterSignal(client, COMSIG_PARENT_QDELETING)
 	clear()
 	client = null
 
