@@ -1,5 +1,5 @@
 /client/proc/Debug2()
-	set category = "Debug"
+	set category = "Debug.7) Testing"
 	set name = "Debug-Game"
 	if(!check_rights(R_DEBUG))
 		return
@@ -16,7 +16,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Toggle Debug Two") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/allow_browser_inspect()
-	set category = "Debug"
+	set category = "Debug.2) Info"
 	set name = "Allow Browser Inspect"
 	if(!check_rights(R_DEBUG))
 		return
@@ -30,7 +30,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Allow Browser Inspect") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/Cell()
-	set category = "Debug"
+	set category = "Debug.9) Debug Verbs"
 	set name = "Air Status in Location"
 	if(!mob)
 		return
@@ -151,7 +151,7 @@
 
 //TODO: merge the vievars version into this or something maybe mayhaps
 /client/proc/cmd_debug_del_all(object as text)
-	set category = "Debug"
+	set category = "Debug.8) Misc"
 	set name = "Del-All"
 
 	var/list/matches = get_fancy_list_of_atom_types()
@@ -175,7 +175,7 @@
 
 
 /client/proc/cmd_debug_make_powernets()
-	set category = "Debug"
+	set category = "Debug.3) Fixing"
 	set name = "Make Powernets"
 	SSmachines.makepowernets()
 	log_admin("[key_name(src)] has remade the powernet. makepowernets() called.")
@@ -554,7 +554,7 @@
 	return dresscode
 
 /client/proc/cmd_admin_rejuvenate(mob/living/M in GLOB.mob_list)
-	set category = "Debug"
+	set category = "Debug.8) Misc"
 	set name = "Rejuvenate"
 
 	if(!check_rights(R_ADMIN))
@@ -575,7 +575,7 @@
 
 /client/proc/startSinglo()
 
-	set category = "Debug"
+	set category = "Debug.9) Debug Verbs"
 	set name = "Start Singularity"
 	set desc = "Sets up the singularity and all machines to get power flowing through the station"
 
@@ -631,7 +631,7 @@
 			SMES.input_attempt = 1
 
 /client/proc/cmd_debug_mob_lists()
-	set category = "Debug"
+	set category = "Debug.2) Info"
 	set name = "Debug Mob Lists"
 	set desc = "For when you just gotta know"
 
@@ -652,7 +652,7 @@
 			to_chat(usr, jointext(GLOB.joined_player_list,","))
 
 /client/proc/cmd_display_del_log()
-	set category = "Debug"
+	set category = "Debug.1) Logs"
 	set name = "Display del() Log"
 	set desc = "Display del's log of everything that's passed through it."
 
@@ -683,7 +683,7 @@
 	popup.open()
 
 /client/proc/cmd_display_gc_queue()
-	set category = "Debug"
+	set category = "Debug.1) Logs"
 	set name = "Display GC Queue"
 	set desc = "Display current GC queue contents by type."
 
@@ -762,14 +762,14 @@
 	popup.open()
 
 /client/proc/cmd_display_overlay_log()
-	set category = "Debug"
+	set category = "Debug.1) Logs"
 	set name = "Display overlay Log"
 	set desc = "Display SSoverlays log of everything that's passed through it."
 
 	render_stats(SSoverlays.stats, src)
 
 /client/proc/cmd_display_init_log()
-	set category = "Debug"
+	set category = "Debug.1) Logs"
 	set name = "Display Initialize() Log"
 	set desc = "Displays a list of things that didn't handle Initialize() properly"
 
@@ -778,7 +778,7 @@
 	popup.open(FALSE)
 
 /client/proc/debug_huds(i as num)
-	set category = "Debug"
+	set category = "Debug.4) VV"
 	set name = "Debug HUDs"
 	set desc = "Debug the data or antag HUDs"
 
@@ -787,7 +787,7 @@
 	debug_variables(GLOB.huds[i])
 
 /client/proc/jump_to_ruin()
-	set category = "Debug"
+	set category = "Debug.8) Misc"
 	set name = "Jump to Ruin"
 	set desc = "Displays a list of all placed ruins to teleport to."
 	if(!holder)
@@ -819,7 +819,7 @@
 		to_chat(usr, "<span class='italics'>[template.description]</span>")
 
 /client/proc/place_ruin()
-	set category = "Debug"
+	set category = "Debug.9) Debug Verbs"
 	set name = "Spawn Ruin"
 	set desc = "Attempt to randomly place a specific ruin."
 	if (!holder)
@@ -870,7 +870,7 @@
 		to_chat(src, "<span class='warning'>Failed to place [template.name].</span>")
 
 /client/proc/clear_dynamic_transit()
-	set category = "Debug"
+	set category = "Debug.3) Fixing"
 	set name = "Clear Dynamic Turf Reservations"
 	set desc = "Deallocates all reserved space, restoring it to round start conditions."
 	if(!holder)
@@ -884,7 +884,7 @@
 	SSmapping.wipe_reservations()				//this goes after it's logged, incase something horrible happens.
 
 /client/proc/toggle_medal_disable()
-	set category = "Debug"
+	set category = "Debug.6) Tweak"
 	set name = "Toggle Medal Disable"
 	set desc = "Toggles the safety lock on trying to contact the medal hub."
 
@@ -899,7 +899,7 @@
 
 
 /client/proc/view_runtimes()
-	set category = "Debug"
+	set category = "Debug.1) Logs"
 	set name = "View Runtimes"
 	set desc = "Open the runtime Viewer"
 
@@ -909,7 +909,7 @@
 	GLOB.error_cache.show_to(src)
 
 /client/proc/view_gc_failures()
-	set category = "Debug"
+	set category = "Debug.1) Logs"
 	set name = "View GC Failures"
 	set desc = "Open the GC Failure Viewer"
 
@@ -919,7 +919,7 @@
 	GLOB.gc_failure_cache.show_to(src)
 
 /client/proc/pump_random_event()
-	set category = "Debug"
+	set category = "Debug.5) Spawn"
 	set name = "Pump Random Event"
 	set desc = "Schedules the event subsystem to fire a new random event immediately. Some events may fire without notification."
 	if(!holder)
@@ -970,7 +970,7 @@
 	profile_show(src, sort)
 
 /client/proc/reload_configuration()
-	set category = "Debug"
+	set category = "Debug.3) Fixing"
 	set name = "Reload Configuration"
 	set desc = "Force config reload to world default"
 	if(!check_rights(R_DEBUG))

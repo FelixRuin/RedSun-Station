@@ -7,9 +7,9 @@
 		msg = span_filter_adminlog(msg)
 	else
 		msg = span_message_to_admin(msg)
-	
+
 	var/list/targets
-	if(LAZYLEN(ignore_ckey))		
+	if(LAZYLEN(ignore_ckey))
 		targets = list()
 		for(var/client/X in GLOB.admins)
 			if(X.key in ignore_ckey)
@@ -764,7 +764,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
 /datum/admins/proc/spawn_atom(object as text)
-	set category = "Debug"
+	set category = "Debug.5) Spawn"
 	set desc = "(atom path) Spawn an atom"
 	set name = "Spawn"
 
@@ -793,7 +793,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Spawn Atom") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/podspawn_atom(object as text)
-	set category = "Debug"
+	set category = "Debug.5) Spawn"
 	set desc = "(atom path) Spawn an atom via supply drop"
 	set name = "Podspawn"
 
@@ -818,7 +818,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Podspawn Atom") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/spawn_cargo(object as text)
-	set category = "Debug"
+	set category = "Debug.5) Spawn"
 	set desc = "(atom path) Spawn a cargo crate"
 	set name = "Spawn Cargo"
 
@@ -978,7 +978,7 @@
 	popup.open(FALSE)
 
 /datum/admins/proc/create_or_modify_area()
-	set category = "Debug"
+	set category = "Debug.6) Tweak"
 	set name = "Create or modify area"
 	create_area(usr)
 

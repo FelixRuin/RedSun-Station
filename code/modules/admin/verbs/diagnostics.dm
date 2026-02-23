@@ -14,7 +14,7 @@
 	to_chat(usr, lines.Join("\n"))
 
 /client/proc/air_status(turf/target)
-	set category = "Debug"
+	set category = "Debug.9) Debug Verbs"
 	set name = "Display Air Status"
 
 	if(!isturf(target))

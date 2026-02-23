@@ -309,7 +309,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/stop_sounds()
-	set category = "Debug"
+	set category = "Debug.3) Fixing"
 	set name = "Stop All Playing Sounds"
 	if(!src.holder)
 		return

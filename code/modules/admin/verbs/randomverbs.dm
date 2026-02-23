@@ -991,7 +991,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Nuke", "[N.timing]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/create_outfits()
-	set category = "Debug"
+	set category = "Debug.8) Misc"
 	set name = "Create Custom Outfit"
 
 	if(!check_rights(R_DEBUG))
@@ -1325,7 +1325,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 /client/proc/modify_goals()
 	set name = "Station Goals"
-	set category = "Admin.Events"
+	set category = "Debug.6) Tweak"
 
 	if(!check_rights(R_ADMIN))
 		return
