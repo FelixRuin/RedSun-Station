@@ -65,6 +65,84 @@ type FindBarState = {
   currentMatch: number;
 };
 
+type TextMatchOffsets = {
+  start: number;
+  end: number;
+};
+
+const shouldSkipTextNode = (node: Node, findBarNode?: HTMLDivElement | null) => {
+  if (findBarNode?.contains(node)) {
+    return true;
+  }
+  const parent = node.parentElement;
+  if (!parent) {
+    return true;
+  }
+  if (parent.closest('.FindBar')) {
+    return true;
+  }
+  if (parent.getClientRects().length === 0) {
+    return true;
+  }
+  const tagName = parent.tagName;
+  return tagName === 'SCRIPT' || tagName === 'STYLE' || tagName === 'NOSCRIPT';
+};
+
+/**
+ * Finds case-insensitive matches in text with Unicode normalization support and
+ * returns offsets for the original string so DOM Ranges remain valid.
+ */
+const findUnicodeMatchOffsets = (
+  text: string,
+  searchText: string,
+): TextMatchOffsets[] => {
+  const offsets: TextMatchOffsets[] = [];
+  if (!text || !searchText) {
+    return offsets;
+  }
+
+  const normalizedSearch = searchText.normalize('NFD').toLowerCase();
+  if (!normalizedSearch) {
+    return offsets;
+  }
+
+  let normalizedText = '';
+  const normUnitToOrigStart: number[] = [];
+  const normUnitToOrigEnd: number[] = [];
+
+  for (let i = 0; i < text.length;) {
+    const codePoint = text.codePointAt(i);
+    if (codePoint === undefined) {
+      break;
+    }
+    const codeUnitLength = codePoint > 0xffff ? 2 : 1;
+    const chunk = text
+      .slice(i, i + codeUnitLength)
+      .normalize('NFD')
+      .toLowerCase();
+
+    normalizedText += chunk;
+    for (let j = 0; j < chunk.length; j++) {
+      normUnitToOrigStart.push(i);
+      normUnitToOrigEnd.push(i + codeUnitLength);
+    }
+    i += codeUnitLength;
+  }
+
+  let pos = 0;
+  while ((pos = normalizedText.indexOf(normalizedSearch, pos)) !== -1) {
+    const endNormIndex = pos + normalizedSearch.length - 1;
+    const start = normUnitToOrigStart[pos];
+    const end = normUnitToOrigEnd[endNormIndex];
+    if (start !== undefined && end !== undefined && end > start) {
+      offsets.push({ start, end });
+    }
+    pos += Math.max(1, normalizedSearch.length);
+  }
+
+  return offsets;
+};
+
 export class FindBar extends Component<{}, FindBarState> {
   state: FindBarState = {
     visible: false,
@@ -157,25 +235,28 @@ export class FindBar extends Component<{}, FindBarState> {
 
   findTextRanges(searchText: string): Range[] {
     const ranges: Range[] = [];
+    const searchRoot = this.barRef.current?.parentElement
+      || document.getElementById('react-root')
+      || document.body;
     const walker = document.createTreeWalker(
-      document.body,
+      searchRoot,
       NodeFilter.SHOW_TEXT,
     );
-    const searchLower = searchText.toLowerCase();
 
     while (walker.nextNode()) {
       const node = walker.currentNode;
-      if (this.barRef.current?.contains(node)) {
+      if (shouldSkipTextNode(node, this.barRef.current)) {
         continue;
       }
-      const text = node.textContent?.toLowerCase() || '';
-      let pos = 0;
-      while ((pos = text.indexOf(searchLower, pos)) !== -1) {
+
+      const nodeText = node.textContent || '';
+      const matches = findUnicodeMatchOffsets(nodeText, searchText);
+
+      for (const match of matches) {
         const range = new Range();
-        range.setStart(node, pos);
-        range.setEnd(node, pos + searchText.length);
+        range.setStart(node, match.start);
+        range.setEnd(node, match.end);
         ranges.push(range);
-        pos += searchText.length;
       }
     }
     return ranges;
@@ -211,8 +292,28 @@ export class FindBar extends Component<{}, FindBarState> {
     if (!range) {
       return;
     }
-    const el = range.startContainer.parentElement;
-    el?.scrollIntoView({ block: 'center' });
+
+    const container = range.commonAncestorContainer;
+    const el = container instanceof Element
+      ? container
+      : container.parentElement;
+
+    // First, let the browser scroll nested containers when possible.
+    el?.scrollIntoView({ block: 'center', inline: 'nearest' });
+
+    // Then refine window scroll to the exact text range, not just the parent
+    // element (important when multiple matches live inside one large node).
+    const rect = range.getBoundingClientRect();
+    if (!rect.width && !rect.height) {
+      return;
+    }
+    const margin = 24;
+    const outOfView = rect.top < margin || rect.bottom > (window.innerHeight - margin);
+    if (!outOfView) {
+      return;
+    }
+    const targetTop = window.scrollY + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+    window.scrollTo({ top: Math.max(0, targetTop) });
   }
 
   navigateMatch(backwards: boolean) {
