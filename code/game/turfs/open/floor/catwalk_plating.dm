@@ -1,4 +1,6 @@
-#define CATWALK_BELOW_OBJECTS list(/obj/structure/disposalpipe, /obj/structure/cable, /obj/machinery/atmospherics) // BLUEMOON ADD - catwalks_fix
+#define CATWALK_BELOW_OBJECTS list(/obj/structure/disposalpipe, /obj/structure/cable, /obj/machinery/atmospherics/pipe, \
+/obj/machinery/atmospherics/components/unary/vent_scrubber, /obj/machinery/atmospherics/components/unary/vent_pump, \
+/obj/machinery/navbeacon, /obj/machinery/power/terminal) // BLUEMOON ADD - catwalks_fix
 
 /**
  * ## catwalk flooring
@@ -26,7 +28,6 @@
 /turf/open/floor/catwalk_floor/Destroy()
 	for(var/atom/A in contents)
 		if(is_type_in_list(A, CATWALK_BELOW_OBJECTS))
-			A.layer = initial(A.layer)
 			A.plane = initial(A.plane)
 	. = ..()
 	// BLUEMOON ADD END
