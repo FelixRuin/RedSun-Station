@@ -176,7 +176,8 @@
 			SShilbertshotel.user_data[user.ckey]["status"] = STATUS_ENTERING_ROOM
 			if(type == /obj/item/hilbertshotel)
 				user = istype(loc, /mob/living) ? loc : user
-			promptAndCheckIn(user, user, room_number, template)
+			if(!promptAndCheckIn(user, user, room_number, template))
+				SShilbertshotel.user_data[user.ckey]["status"] = STATUS_IDLE
 			return TRUE
 
 /obj/item/hilbertshotel/proc/check_user(mob/user)
@@ -202,26 +203,26 @@
 	if(!max_rooms)
 		playsound(src, 'sound/machines/terminal_error.ogg', 15, 1)
 		to_chat(user, span_warning("We're currently not offering service, please come back another day!"))
-		return
+		return FALSE
 
 	if(!mob_dorms[user] || !mob_dorms[user].Find(room_number)) //BLUEMOON ADD владелец комнаты может зайти в комнату даже если она закрыта и активна
 		if(activeRooms.len && activeRooms["[room_number]"])	//лесенка ради удобства восприятия, точно-точно говорю
 			if(lockedRooms.len && lockedRooms["[room_number]"])
 				to_chat(user, span_warning("You cant enter in locked room, contact with room owner."))
-				return												//BLUEMOON ADD END
+				return FALSE										//BLUEMOON ADD END
 	if(max_rooms > 0 && mob_dorms[user]?.len >= max_rooms && !activeRooms["[room_number]"] && !storedRooms["[room_number]"])
 		to_chat(user, span_warning("Your free trial of Hilbert's Hotel has ended! Please select one of the rooms you've already visited."))
 		room_number = input(user, "Select one of your previous rooms", "Room number") as null|anything in mob_dorms[user]
 
 	//SPLURT EDIT END
 	if(!room_number || !user.CanReach(src))
-		return
+		return FALSE
 	if(room_number > SHORT_REAL_LIMIT)
 		to_chat(user, span_warning("You have to check out the first [SHORT_REAL_LIMIT] rooms before you can go to a higher numbered one!"))
-		return
+		return FALSE
 	if((room_number < 1) || (room_number != round(room_number)))
 		to_chat(user, span_warning("That is not a valid room number!"))
-		return
+		return FALSE
 	if(!isturf(loc))
 		if((loc == user) || (loc.loc == user) || (loc.loc in user.contents) || (loc in user.GetAllContents(type)))		//short circuit, first three checks are cheaper and covers almost all cases (loc.loc covers hotel in box in backpack).
 			forceMove(get_turf(user))
@@ -230,9 +231,9 @@
 		SShilbertshotel.setup_storage_turf()
 	checked_in_ckeys |= user.ckey		//if anything below runtimes, guess you're outta luck!
 	if(tryActiveRoom(room_number, user))
-		return
+		return TRUE
 	if(tryStoredRoom(room_number, user))
-		return
+		return TRUE
 	sendToNewRoom(room_number, user, template)
 
 /area/hilbertshotel/proc/storeRoom()
