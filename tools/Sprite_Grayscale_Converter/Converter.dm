@@ -1,46 +1,39 @@
-/mob
-	var/mode = "RGB to Greyscale"
-	var/max_frames = 4
+/mob/var/mode = "RGB to Greyscale"
 
 /mob/verb/ChangeMode()
 	set name = "Change mode"
 	mode = mode == "RGB to Greyscale" ? "Greyscale to RGB" : "RGB to Greyscale"
 	world << "Current mode: [mode]"
 
-/mob/verb/ChangeFrames()
-	set name = "Change max frames"
-	max_frames = input("select maximum frames in file (yes, we can't count them automaticly)", "Max anim frames", max_frames) as num
-	world << "Current max frames: [max_frames]"
-
-/mob/verb/ChooseDMI(dmi as file)
-	if(isfile(dmi) && (copytext("[dmi]",-4) == ".dmi"))
+/mob/verb/ChooseDMI(dmi as icon)
+	if(isicon(dmi))
 		SliceNDice(dmi)
 	else
-		world << "\red Bad DMI file '[dmi]'"
+		world << "\red Bad DMI file '[file2text(dmi)]'"
 
 /datum/greyscale_holder
 	var/name
 	var/list/what_we_got = list()
 	var/base_icon_state_name
 
-/mob/proc/gen_grayscale(icon/sourceIcon, icon/outputIcon, state, current_dir, current_frame)
-	var/icon/rgb_icon = icon(sourceIcon, state, current_dir, current_frame)
+/mob/proc/gen_grayscale(icon/sourceIcon, icon/outputIcon, state)
+	var/icon/rgb_icon = icon(sourceIcon, state)
 
 	var/icon/red = icon(rgb_icon)
 	red.Blend(rgb(0,255,255), ICON_SUBTRACT)
 	red.SwapColor(rgb(0,0,0),rgb(0,0,0,0))
 	red.MapColors(1,1,1, 0,0,0, 0,0,0, 0,0,0)
-	outputIcon.Insert(red, "[state]_primary", current_dir, current_frame)
+	outputIcon.Insert(red, "[state]_primary")
 	var/icon/green = icon(rgb_icon)
 	green.Blend(rgb(255,0,255), ICON_SUBTRACT)
 	green.SwapColor(rgb(0,0,0),rgb(0,0,0,0))
 	green.MapColors(0,0,0, 1,1,1, 0,0,0, 0,0,0)
-	outputIcon.Insert(green, "[state]_secondary", current_dir, current_frame)
+	outputIcon.Insert(green, "[state]_secondary")
 	var/icon/blue = icon(rgb_icon)
 	blue.Blend(rgb(255,255,0), ICON_SUBTRACT)
 	blue.SwapColor(rgb(0,0,0),rgb(0,0,0,0))
 	blue.MapColors(0,0,0, 0,0,0, 1,1,1, 0,0,0)
-	outputIcon.Insert(blue, "[state]_tertiary", current_dir, current_frame)
+	outputIcon.Insert(blue, "[state]_tertiary")
 //	world << "RGB -> Grayscale: \icon[rgb_icon] -> \icon[red] \icon[green] \icon[blue]"
 
 /mob/proc/SliceNDice(dmifile)
@@ -62,9 +55,7 @@
 	var/list/states_groups = alist()
 	if(mode == "RGB to Greyscale")
 		for(var/state in states)
-			for(var/current_dir in 1 to 4)
-				for(var/current_frame in 1 to max_frames)
-					gen_grayscale(sourceIcon, outputIcon, state, current_dir, current_frame)
+			gen_grayscale(sourceIcon, outputIcon, state)
 
 	else if(mode == "Greyscale to RGB")
 		for(var/state in states)
@@ -83,39 +74,35 @@
 					group.what_we_got += state
 					states_groups += group
 
-			for(var/current_dir in 1 to 4)
-				for(var/current_frame in 1 to max_frames)
-					var/icon/curren_icon = icon(sourceIcon, state, current_dir, current_frame)
-					switch(used_color)
-						if("_primary", "single")
-							curren_icon.SetIntensity(1,0,0)
-						if("_secondary")
-							curren_icon.SetIntensity(0,1,0)
-						if("_tertiary")
-							curren_icon.SetIntensity(0,0,1)
-					outputIcon.Insert(curren_icon, state, current_dir, current_frame)
+			var/icon/curren_icon = icon(sourceIcon, state)
+			switch(used_color)
+				if("_primary", "single")
+					curren_icon.SetIntensity(1,0,0)
+				if("_secondary")
+					curren_icon.SetIntensity(0,1,0)
+				if("_tertiary")
+					curren_icon.SetIntensity(0,0,1)
+			outputIcon.Insert(curren_icon, state)
 		for(var/datum/greyscale_holder/i in states_groups)
-			for(var/current_dir in 1 to 4)
-				for(var/current_frame in 1 to max_frames)
-					var/icon/first_layer
-					var/icon/second_layer
-					var/icon/third_layer
-					if("[i.name]_primary" in i.what_we_got)
-						first_layer = icon(outputIcon, "[i.name]_primary", current_dir, current_frame)
-					else if(i.what_we_got.len == 1)
-						first_layer = icon(outputIcon, i.what_we_got[1], current_dir, current_frame)
-					if("[i.name]_secondary" in i.what_we_got)
-						second_layer = icon(outputIcon, "[i.name]_secondary", current_dir, current_frame)
-						if(first_layer)
-							first_layer.Blend(second_layer, ICON_OVERLAY)
-					if("[i.name]_tertiary" in i.what_we_got)
-						third_layer = icon(outputIcon, "[i.name]_tertiary", current_dir, current_frame)
-						if(first_layer)
-							first_layer.Blend(third_layer, ICON_OVERLAY)
-						else if(second_layer)
-							second_layer.Blend(third_layer, ICON_OVERLAY)
-					if(first_layer || second_layer || third_layer)
-						outputIcon2.Insert(first_layer ? first_layer : second_layer ? second_layer : third_layer, i.name, current_dir, current_frame)
+			var/icon/first_layer
+			var/icon/second_layer
+			var/icon/third_layer
+			if("[i.name]_primary" in i.what_we_got)
+				first_layer = icon(outputIcon, "[i.name]_primary")
+			else if(i.what_we_got.len == 1)
+				first_layer = icon(outputIcon, i.what_we_got[1])
+			if("[i.name]_secondary" in i.what_we_got)
+				second_layer = icon(outputIcon, "[i.name]_secondary")
+				if(first_layer)
+					first_layer.Blend(second_layer, ICON_OVERLAY)
+			if("[i.name]_tertiary" in i.what_we_got)
+				third_layer = icon(outputIcon, "[i.name]_tertiary")
+				if(first_layer)
+					first_layer.Blend(third_layer, ICON_OVERLAY)
+				else if(second_layer)
+					second_layer.Blend(third_layer, ICON_OVERLAY)
+			if(first_layer || second_layer || third_layer)
+				outputIcon2.Insert(first_layer ? first_layer : second_layer ? second_layer : third_layer, i.name)
 
 	if(mode == "RGB to Greyscale")
 		fcopy(outputIcon, filename)	//Update output icon each iteration
