@@ -62840,12 +62840,18 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 8
 	},
-/obj/machinery/door/poddoor/shutters{
-	id = "armory3"
-	},
 /obj/effect/turf_decal/siding/dark_red,
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/box,
+/obj/machinery/door/window/brigdoor{
+	dir = 4
+	},
+/obj/machinery/door/window/brigdoor{
+	dir = 8;
+	name = "Reception Desk";
+	req_access_txt = "3"
+	},
+/obj/machinery/rnd/production/techfab/department/security,
 /turf/open/floor/plasteel/dark/textured/half,
 /area/security/office)
 "oqp" = (
@@ -69093,8 +69099,16 @@
 	},
 /area/hallway/primary/fore)
 "qXA" = (
-/obj/machinery/rnd/production/techfab/department/security,
 /obj/effect/turf_decal/bot/yellow,
+/obj/structure/rack,
+/obj/item/gun/energy/e_gun/dragnet{
+	pixel_x = 1;
+	pixel_y = -3
+	},
+/obj/item/gun/energy/e_gun/dragnet{
+	pixel_x = -2;
+	pixel_y = 2
+	},
 /turf/open/floor/plasteel/textured/large,
 /area/ai_monitored/security/armory)
 "qXI" = (
@@ -74152,16 +74166,6 @@
 /turf/open/floor/grass,
 /area/security/prison/garden)
 "tfq" = (
-/obj/structure/rack,
-/obj/item/gun/energy/e_gun/dragnet{
-	pixel_x = -2;
-	pixel_y = 2
-	},
-/obj/item/gun/energy/e_gun/dragnet{
-	pixel_x = 1;
-	pixel_y = -3
-	},
-/obj/effect/turf_decal/bot/yellow,
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
