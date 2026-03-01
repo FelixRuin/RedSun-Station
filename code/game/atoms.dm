@@ -609,6 +609,13 @@
 				. += "<span class='notice'>Внутри находится [reagents.total_volume] u вещества.</span>"
 			else
 				. += "<span class='danger'>Внутри пусто.</span>"
+		else if(isobserver(user) && length(reagents.reagent_list))
+			. += "<b>Внутри находится:</b>"
+			for(var/datum/reagent/R in reagents.reagent_list)
+				. += "[R.volume] u [R.name]"
+			. += span_engradio("Температура: [round(reagents.chem_temp, 1)] K ([round(reagents.chem_temp-T0C, 1)] &deg;C)")
+			. += span_radio("pH: [round(reagents.pH, 0.01)]")
+			. += "<hr>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 
@@ -866,7 +873,7 @@
 /obj/item/proc/add_blood_overlay()
 	if(!blood_DNA.len)
 		return
-	if(initial(icon) && initial(icon_state))
+	if(initial(icon) && initial(icon_state) && isnull(blood_splatter_icon))
 		blood_splatter_icon = icon(initial(icon), initial(icon_state), , 1)		//we only want to apply blood-splatters to the initial icon_state for each object
 		blood_splatter_icon.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
 		blood_splatter_icon.Blend(icon('icons/effects/blood.dmi', "itemblood"), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
