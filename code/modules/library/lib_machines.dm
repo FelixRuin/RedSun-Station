@@ -173,7 +173,7 @@ GLOBAL_LIST_INIT(library_section_names, list("Any", "Fiction", "Non-Fiction", "A
 		dat += "No data stored in memory.<BR>"
 	dat += "<a href='byond://?src=[REF(src)];scan=1'>\[Scan\]</A>"
 	if(cache)
-		dat += "       <<a href='byond://?src=[REF(src)];clear=1'>\[Clear Memory\]</A><BR><BR><A href='?src=[UID()];eject=1'>\[Remove Book\]</A>"
+		dat += "       <a href='byond://?src=[REF(src)];clear=1'>\[Clear Memory\]</A><BR><BR><A href='?src=[UID()];eject=1'>\[Remove Book\]</A>"
 	else
 		dat += "<BR>"
 	var/datum/browser/popup = new(user, "scanner", name, 300, 200)
