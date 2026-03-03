@@ -402,7 +402,6 @@
 		"SmollRaptor" = image(icon = 'modular_zubbers/icons/mob/smolraptor.dmi', icon_state = "smolraptor_med-b"), // BubberStation Port; Made by aKhro/@aKromatopzia (GitHub)
 		"Mechoid" = image(icon = 'modular_bluemoon/icons/mob/robots.dmi', icon_state = "mechoid-medical"), // Danaiyka request
 		"DrakeTrauma" = image(icon = 'modular_sand/icons/mob/cyborg/drakemech.dmi', icon_state = "draketraumabox"),	//DarkSer request by Gardelin0
-		"Handy" = image(icon = 'modular_splurt/icons/mob/robots.dmi', icon_state = "handy_medical"), // SPLURT Addon (Fallout 13)
 		"Dullahan" = image(icon = 'modular_splurt/icons/mob/robots_32x64.dmi', icon_state = "dullahanmed"),
 		"Catborg" = image(icon ='modular_bluemoon/icons/mob/kittycatborgs/catborgs/catborg_medical.dmi', icon_state = "meowdical"),
 		"Kittyborg" = image(icon = 'modular_bluemoon/icons/mob/kittycatborgs/kittyborg/Kittyborg_medicat.dmi', icon_state = "medicat")
@@ -703,7 +702,6 @@
 		"Default" = image(icon = 'icons/mob/robots.dmi', icon_state = "engineer"),
 		"Default - Treads" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "engi-tread"),
 		"Loader" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "loaderborg"),
-		"Handy" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "handyeng"),
 		"Sleek" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "sleekeng"),
 		"Can" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "caneng"),
 		"Marina" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "marinaeng"),
@@ -725,7 +723,6 @@
 		"Otie" = image(icon = 'modular_splurt/icons/mob/widerobot.dmi', icon_state = "otiee-b"), // SPLURT Adoon (Skyrat Port)
 		"Drake" = image(icon = 'modular_sand/icons/mob/cyborg/drakemech.dmi', icon_state = "drakeengbox"),
 		"Fembot" = image(icon = 'modular_bluemoon/icons/mob/robot/robots.dmi', icon_state = "fembot-engineering"), //Gardelin0 Addon
-		"Meka" = image(icon = 'modular_bluemoon/icons/mob/robot/tallrobot.dmi', icon_state = "mekaengi"), //Krashly Request
 		"Assaultron" = image(icon = 'modular_splurt/icons/mob/robots.dmi', icon_state = "assaultron_engi"), // SPLURT Addon
 		"Meka" = image(icon = 'modular_splurt/icons/mob/robots_32x64.dmi', icon_state = "mekaengi"), // SPLURT Addon
 		"Meka (alt)" = image(icon = 'modular_splurt/icons/mob/robots_32x64.dmi', icon_state = "mekaengi_alt"), // SPLURT Addon (Bubbers Port)
@@ -765,9 +762,6 @@
 			cyborg_base_icon = "loaderborg"
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
 			has_snowflake_deadsprite = TRUE
-		if("Handy")
-			cyborg_base_icon = "handyeng"
-			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
 		if("Sleek")
 			cyborg_base_icon = "sleekeng"
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
@@ -878,10 +872,6 @@
 		if("Fembot") // //Gardelin0 Addon
 			cyborg_base_icon = "fembot-engineering"
 			cyborg_icon_override = 'modular_bluemoon/icons/mob/robot/robots.dmi'
-		if("Meka") //Krashly Request
-			cyborg_base_icon = "mekaengi"
-			cyborg_icon_override = 'modular_bluemoon/icons/mob/robot/tallrobot.dmi'
-			hasrest = TRUE
 		if("Assaultron") // SPLURT Addon (Hyper Port)
 			cyborg_base_icon = "assaultron_engi"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -1155,6 +1145,8 @@
 			cyborg_base_icon = "bladesec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "bladesecsleeper"
+			hat_offset = BLADE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("EdgyBoy") // SPLURT Addon (VIRGO Port)
 			cyborg_base_icon = "badboi"
@@ -1605,7 +1597,6 @@
 		"(Janitor Alt) SmollRaptor" = image(icon = 'modular_zubbers/icons/mob/smolraptor.dmi', icon_state = "smolraptor_sci-b"), // BubberStation Port; Made by aKhro/@aKromatopzia (GitHub)
 		"(Janitor) Dullahan" = image(icon = 'modular_splurt/icons/mob/robots_32x64.dmi', icon_state = "dullahanjani"),
 		"(Waiter) Meka" = image(icon = 'modular_splurt/icons/mob/robots_32x64.dmi', icon_state = "mekaserve_alt"), // SPLURT Addon
-		"(Service) Handy" = image(icon = 'modular_splurt/icons/mob/robots.dmi', icon_state = "handy_service"), // SPLURT Addon (Fallout 13)
 		"(Janitor) Handy" = image(icon = 'modular_splurt/icons/mob/robots.dmi', icon_state = "handy_janitor"), // SPLURT Addon (Fallout 13)
 		"(Pleasure) Handy" = image(icon = 'modular_splurt/icons/mob/robots.dmi', icon_state = "handy_pleasure"), // SPLURT Addon (Fallout 13)
 		"(Service) Mechoid" = image(icon = 'modular_bluemoon/icons/mob/robots.dmi', icon_state = "mechoid-civi"), // Danaiyka request
@@ -1679,10 +1670,6 @@
 			hat_offset = 3
 		if("(Service) BootyS") // SPLURT Addon (Hyper Port)
 			cyborg_base_icon = "bootyserviceS"
-			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
-		if("(Service) Handy") // SPLURT Addon (Fallout 13)
-			cyborg_base_icon = "handy_service"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
 			hat_offset = 3
 		if("(Service) DarkK9")
