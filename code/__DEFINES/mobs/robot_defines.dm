@@ -40,7 +40,7 @@
 #define PUP_DOZER_HAT_OFFSET alist( \
 	HAT_STAND_OFFSET = alist("north" = list(16, -1), "south" = list(16, -1), "east" = list(31, -1), "west" = list(1, -1)), \
 	HAT_REST_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(31, -7), "west" = list(1, -7)), \
-	HAT_REST_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(31, -7), "west" = list(1, -7)), \
+	HAT_SIT_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(31, -7), "west" = list(1, -7)), \
 	HAT_BELLYUP_OFFSET = HAT_NO_RENDER)
 
 #define BLADE_HAT_OFFSET alist( \
