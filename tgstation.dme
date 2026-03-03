@@ -234,6 +234,7 @@
 #include "code\__DEFINES\mapping\maploader.dm"
 #include "code\__DEFINES\material\worth.dm"
 #include "code\__DEFINES\mobs\innate_abilities.dm"
+#include "code\__DEFINES\mobs\robot_defines.dm"
 #include "code\__DEFINES\mobs\slowdowns.dm"
 #include "code\__DEFINES\rendering\atom_hud.dm"
 #include "code\__DEFINES\rendering\parallax.dm"

@@ -516,6 +516,8 @@
 			sleeper_overlay = "valemedsleeper"
 			moduleselect_icon = "medihound"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
+			hat_offset = VALE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Alina")
 			cyborg_base_icon = "alina-med"
@@ -546,36 +548,36 @@
 		if("Assaultron") // SPLURT Addon (Hyper Port)
 			cyborg_base_icon = "assaultron_medical"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 		if("Meka")
 			cyborg_base_icon = "mekamed"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Meka (alt)")
 			cyborg_base_icon = "mekamed_alt"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("M-Meka")
 			cyborg_base_icon = "mmekamed"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("F-Meka")
 			cyborg_base_icon = "fmekamed"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T")
 			cyborg_base_icon = "k4tmed"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T (alt)")
 			cyborg_base_icon = "k4tmed_alt1"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Feline") // SPLURT Addon (Chomp Port)
 			cyborg_base_icon = "vixmed"
@@ -621,7 +623,7 @@
 		if("Dullahan")
 			cyborg_base_icon = "dullahanmed"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		// BLUEMOON ADD наша гончая травмы
 		if("HoundTrauma")
@@ -832,6 +834,8 @@
 			cyborg_base_icon = "valeeng"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "valeengsleeper"
+			hasrest = TRUE
+			hat_offset = VALE_HAT_OFFSET
 			dogborg = TRUE
 		if("Alina")
 			cyborg_base_icon = "alina-eng"
@@ -879,32 +883,32 @@
 		if("Meka")
 			cyborg_base_icon = "mekaengi"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Meka (alt)")
 			cyborg_base_icon = "mekaengi_alt"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("M-Meka")
 			cyborg_base_icon = "mmekaeng"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("F-Meka")
 			cyborg_base_icon = "fmekaeng"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T")
 			cyborg_base_icon = "k4tengi"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T (alt)")
 			cyborg_base_icon = "k4tengi_alt1"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Haydee") // SPLURT Addon
 			cyborg_base_icon = "haydeeengi"
@@ -933,7 +937,7 @@
 		if("Dullahan")
 			cyborg_base_icon = "dullahaneng"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Catborg")
 			cyborg_base_icon = "engi"
@@ -1126,6 +1130,8 @@
 			cyborg_base_icon = "valesec"
 			sleeper_overlay = "valesecsleeper"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
+			hasrest = TRUE
+			hat_offset = VALE_HAT_OFFSET
 			dogborg = TRUE
 		if("Borgi") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "borgi-sec"
@@ -1170,19 +1176,23 @@
 		if("Meka")
 			cyborg_base_icon = "mekasec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
+			hasrest = TRUE
 		if("M-Meka")
 			cyborg_base_icon = "mmekasec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
+			hasrest = TRUE
 		if("F-Meka")
 			cyborg_base_icon = "fmekasec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
+			hasrest = TRUE
 		if("K4T")
 			cyborg_base_icon = "k4tsec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
+			hasrest = TRUE
 		if("Haydee") // SPLURT Addon
 			cyborg_base_icon = "haydeesec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -1210,7 +1220,7 @@
 		if("Dullahan")
 			cyborg_base_icon = "dullahanpeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Catborg")
 			cyborg_base_icon = "sec"
@@ -1348,6 +1358,7 @@
 			cyborg_base_icon = "valepeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "valepeacesleeper"
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Drake")
 			cyborg_base_icon = "drakepeace"
@@ -1369,21 +1380,22 @@
 		if("Meka")
 			cyborg_base_icon = "mekapeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
+			hasrest = TRUE
 		if("M-Meka")
 			cyborg_base_icon = "mmekapeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("F-Meka")
 			cyborg_base_icon = "fmekapeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T")
 			cyborg_base_icon = "k4tpeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Feline") // SPLURT Addon (ChompS Port)
 			cyborg_base_icon = "vixpk"
@@ -1402,7 +1414,7 @@
 		if("Dullahan")
 			cyborg_base_icon = "dullahanpeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Catborg")
 			cyborg_base_icon = "sci"
@@ -1672,11 +1684,15 @@
 			cyborg_base_icon = "valeserv"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "valeservsleeper"
+			hat_offset = VALE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("(Service) ValeDark")
 			cyborg_base_icon = "valeservdark"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "valeservsleeper"
+			hat_offset = VALE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("(Service) K69") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "k69"
@@ -1694,22 +1710,22 @@
 		if("(Service) M-Meka")
 			cyborg_base_icon = "mmekaserv"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Service) F-Meka")
 			cyborg_base_icon = "fmekaserv"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Service) K4T")
 			cyborg_base_icon = "k4tserve"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Service Alt) K4T")
 			cyborg_base_icon = "k4tserve_alt1"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Service) Feline") // SPLURT Addon (ChompS Port)
 			cyborg_base_icon = "vixserv"
@@ -1843,27 +1859,27 @@
 		if("(Janitor) Meka")
 			cyborg_base_icon = "mekajani"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Janitor) M-Meka")
 			cyborg_base_icon = "mmekajani"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Janitor) F-Meka")
 			cyborg_base_icon = "fmekajani"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Janitor) K4T")
 			cyborg_base_icon = "k4tjani"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Janitor Alt) K4T")
 			cyborg_base_icon = "k4tjani_alt1"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Janitor) Feline") // SPLURT Addon (ChompS Port)
 			cyborg_base_icon = "vixjani"
@@ -1896,12 +1912,12 @@
 		if("(Service) Meka") //ADD BLUEMOON Note: Был забыт для добавления в список
 			cyborg_base_icon = "mekaserve"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Waiter) Meka")
 			cyborg_base_icon = "mekaserve_alt"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Pleasure) Handy") // SPLURT Addon (Fallout 13)
 			cyborg_base_icon = "handy_pleasure"
@@ -1922,12 +1938,12 @@
 		if("(Service) Dullahan")
 			cyborg_base_icon = "dullahanserv"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Janitor) Dullahan")
 			cyborg_base_icon = "dullahanjani"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("(Janitor) Catborg")
 			cyborg_base_icon = "service"
@@ -2097,6 +2113,8 @@
 			cyborg_base_icon = "valemine"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "valeminesleeper"
+			hat_offset = VALE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Cargohound") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "cargohound"
@@ -2133,31 +2151,32 @@
 		if("Meka")
 			cyborg_base_icon = "mekamine"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
+			hasrest = TRUE
 		if("Meka (alt)")
 			cyborg_base_icon = "mekamine_alt"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("M-Meka")
 			cyborg_base_icon = "mmekamine"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("F-Meka")
 			cyborg_base_icon = "fmekamine"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T")
 			cyborg_base_icon = "k4tmine"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T (alt)")
 			cyborg_base_icon = "k4tmine_alt1"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Feline") // SPLURT Addon (ChompS Port)
 			cyborg_base_icon = "vixmine"
@@ -2182,7 +2201,7 @@
 		if("Dullahan")
 			cyborg_base_icon = "dullahanmine"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Catborg")
 			cyborg_base_icon = "mining"

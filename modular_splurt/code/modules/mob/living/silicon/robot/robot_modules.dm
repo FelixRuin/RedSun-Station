@@ -103,7 +103,7 @@
 		if("Dullahan")
 			cyborg_base_icon = "dullahanclown"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 	return ..()
 
@@ -245,6 +245,8 @@
 		if("Vale")
 			cyborg_base_icon = "valecargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobots_cargo.dmi'
+			hat_offset = VALE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Borgi")
 			cyborg_base_icon = "borgi-cargo"
@@ -261,26 +263,27 @@
 		if("Meka")
 			cyborg_base_icon = "mekacargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
+			hasrest = TRUE
 		if("M-Meka")
 			cyborg_base_icon = "mmekacargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("F-Meka")
 			cyborg_base_icon = "fmekacargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T")
 			cyborg_base_icon = "k4tcargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("K4T (alt)")
 			cyborg_base_icon = "k4tcargo_alt1"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Feline") // ChompS Port
 			cyborg_base_icon = "vixcargo"
@@ -299,7 +302,7 @@
 		if("Dullahan")
 			cyborg_base_icon = "dullahancargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
-			hat_offset = 3
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		else
 			return FALSE
