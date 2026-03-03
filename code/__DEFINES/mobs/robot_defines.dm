@@ -1,8 +1,12 @@
 // Hats
-#define HAT_STAND_OFFSET "hat_offset_stand"
-#define HAT_REST_OFFSET "hat_offset_rest"
-#define HAT_BELLYUP_OFFSET "hat_offset_bellyup"
-#define HAT_SIT_OFFSET "hat_offset_sit"
+
+#define HAT_STAND_OFFSET 	"hat_offset_stand"
+#define HAT_REST_OFFSET 	"hat_offset_rest"
+#define HAT_SIT_OFFSET 		"hat_offset_sit"
+#define HAT_BELLYUP_OFFSET 	"hat_offset_bellyup"
+#define HAT_NAP_OFFSET		"hat_offset_rest_deep"
+#define HAT_REST_WAG_OFFSET "hat_offset_rest_alt"
+#define HAT_SIT_WAG_OFFSET  "hat_offset_sit_alt"
 
 #define HAT_NO_RENDER "hat_no_render"
 
@@ -35,7 +39,7 @@
 
 #define PUP_DOZER_HAT_OFFSET alist( \
 	HAT_STAND_OFFSET = alist("north" = list(16, -1), "south" = list(16, -1), "east" = list(31, -1), "west" = list(1, -1)), \
-	HAT_REST_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(31, -7), "west" = list(1, -7)),
+	HAT_REST_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(31, -7), "west" = list(1, -7)), \
 	HAT_REST_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(31, -7), "west" = list(1, -7)), \
 	HAT_BELLYUP_OFFSET = HAT_NO_RENDER)
 
@@ -48,3 +52,10 @@
 	HAT_REST_OFFSET = alist("north" = list(16, -3), "south" = list(16, -3), "east" = list(28, -7), "west" = list(4, -7)), \
 	HAT_SIT_OFFSET = alist("north" = list(16, 3), "south" = list(16, 3), "east" = list(28, 3), "west" = list(4, 3)), \
 	HAT_BELLYUP_OFFSET = HAT_NO_RENDER)
+	HAT_STAND_OFFSET = alist("north" = list(16, -2), "south" = list(16, -2), "east" = list(36, -2), "west" = list(-4, -2)), \
+	HAT_REST_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(34, -7), "west" = list(-4, -7)), \
+	HAT_SIT_OFFSET = alist("north" = list(16, -4), "south" = list(16, -4), "east" = list(29, -1), "west" = list(1, -1)), \
+	HAT_BELLYUP_OFFSET = HAT_NO_RENDER, \
+	HAT_NAP_OFFSET = alist("north" = list(1, -11), "south" = list(30, -11), "east" = list(30, -11), "west" = list(1, -11)), \
+	HAT_REST_WAG_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(34, -7), "west" = list(-4, -7)), \
+	HAT_SIT_WAG_OFFSET = alist("north" = list(16, -4), "south" = list(16, -4), "east" = list(29, -1), "west" = list(1, -1)))

@@ -86,6 +86,8 @@
 		if(offset)
 			hat_overlay.pixel_x = offset[1]
 			hat_overlay.pixel_y = offset[2]
+	else if(isnum(hat_offset)) // legacy compatibility pixel_y
+		hat_overlay.pixel_y = hat_offset
 
 	add_overlay(hat_overlay)
 

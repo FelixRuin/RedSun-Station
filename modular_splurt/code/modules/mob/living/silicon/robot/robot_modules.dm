@@ -257,6 +257,8 @@
 		if("Drake")
 			cyborg_base_icon = "drakecargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobots_cargo.dmi'
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Assaultron")
 			cyborg_base_icon = "assaultron_cargo"

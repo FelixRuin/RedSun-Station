@@ -541,6 +541,8 @@
 			sleeper_overlay = "drakemedsleeper"
 			moduleselect_icon = "medihound"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 			drakerest = TRUE
 		if("Fembot") // //Gardelin0 Addon
@@ -619,6 +621,8 @@
 			sleeper_overlay = "drakemedsleeper"
 			moduleselect_icon = "medihound"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 			drakerest = TRUE
 		if("Dullahan")
@@ -867,6 +871,8 @@
 			cyborg_base_icon = "drakeeng"
 			cyborg_icon_override = 'modular_sand/icons/mob/cyborg/drakemech.dmi'
 			sleeper_overlay = "drakesecsleeper"
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 			drakerest = TRUE
 		if("Fembot") // //Gardelin0 Addon
@@ -1164,6 +1170,8 @@
 			cyborg_base_icon = "drakesec"
 			sleeper_overlay = "drakesecsleeper"
 			cyborg_icon_override = 'modular_sand/icons/mob/cyborg/drakemech.dmi'
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 			drakerest = TRUE
 		if("Fembot") // //Gardelin0 Addon
@@ -1366,6 +1374,8 @@
 			cyborg_base_icon = "drakepeace"
 			sleeper_overlay = "drakepeacesleeper"
 			cyborg_icon_override = 'modular_sand/icons/mob/cyborg/drakemech.dmi'
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 			drakerest = TRUE
 		if("Fembot") // //Gardelin0 Addon
@@ -2140,6 +2150,8 @@
 			cyborg_base_icon = "drakemine"
 			cyborg_icon_override = 'modular_sand/icons/mob/cyborg/drakemech.dmi'
 			sleeper_overlay = "drakeminesleeper"
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 			drakerest = TRUE
 		if("Fembot") // //Gardelin0 Addon
