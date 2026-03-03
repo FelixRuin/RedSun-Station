@@ -63,7 +63,7 @@
 	HAT_SIT_WAG_OFFSET = alist("north" = list(16, -4), "south" = list(16, -4), "east" = list(29, -1), "west" = list(1, -1)))
 
 #define HOUND_HAT_OFFSET alist( \
-	HAT_STAND_OFFSET = list("north" = list(16, 1), "south" = list(16, 1), "east" = list(26, 1), "west" = list(4, 1)), \
-	HAT_REST_OFFSET = list("north" = list(16, -6), "south" = list(16, -6), "east" = list(31, -6), "west" = list(1, -6)), \
+	HAT_STAND_OFFSET = alist("north" = list(16, 1), "south" = list(16, 1), "east" = list(26, 1), "west" = list(4, 1)), \
+	HAT_REST_OFFSET = alist("north" = list(16, -6), "south" = list(16, -6), "east" = list(31, -6), "west" = list(1, -6)), \
 	HAT_SIT_OFFSET = alist("north" = list(16, 2), "south" = list(16, 2), "east" = list(23, 3), "west" = list(9, 3)), \
 	HAT_BELLYUP_OFFSET = HAT_NO_RENDER)

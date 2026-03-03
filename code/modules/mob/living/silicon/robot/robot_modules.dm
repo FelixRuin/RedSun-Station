@@ -118,7 +118,6 @@
 /obj/item/robot_module/proc/dogborg_equip()
 	has_snowflake_deadsprite = TRUE
 	cyborg_pixel_offset = -16
-	hat_offset = INFINITY
 	basic_modules += new /obj/item/dogborg_nose(src)
 	basic_modules += new /obj/item/dogborg_tongue(src)
 
