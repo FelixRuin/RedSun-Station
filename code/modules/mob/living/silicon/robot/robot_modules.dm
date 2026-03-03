@@ -1368,6 +1368,7 @@
 			cyborg_base_icon = "valepeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "valepeacesleeper"
+			hat_offset = VALE_HAT_OFFSET
 			hasrest = TRUE
 			dogborg = TRUE
 		if("Drake")
