@@ -89,7 +89,7 @@
 
 	add_overlay(hat_overlay)
 
-/mob/living/silicon/robot/setDir(newdir)
+/mob/living/silicon/robot/setDir(newdir, ismousemovement)
 	var/old_dir = dir
 	. = ..()
 	if(. != old_dir)
