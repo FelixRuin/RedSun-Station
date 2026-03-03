@@ -501,6 +501,8 @@
 			sleeper_overlay = "msleeper"
 			moduleselect_icon = "medihound"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Medihound Dark")
 			cyborg_base_icon = "medihounddark"
@@ -508,6 +510,8 @@
 			sleeper_overlay = "mdsleeper"
 			moduleselect_icon = "medihound"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Vale")
 			cyborg_base_icon = "valemed"
@@ -637,6 +641,8 @@
 			sleeper_overlay = "msleeper"
 			moduleselect_icon = "medihound"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		// BLUEMOON ADD END
 		if("Catborg")
@@ -856,11 +862,15 @@
 			cyborg_base_icon = "engihound"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "engihoundsleeper"
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Engihound Dark") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "engihounddark"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "engihounddarksleeper"
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Otie") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "otiee"
@@ -1116,17 +1126,23 @@
 			cyborg_base_icon = "k9"
 			sleeper_overlay = "ksleeper"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Alina")
 			cyborg_base_icon = "alina-sec"
 			special_light_key = "alina-sec"
 			sleeper_overlay = "valesecsleeper"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("K9 Dark")
 			cyborg_base_icon = "k9dark"
 			sleeper_overlay = "k9darksleeper"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Vale")
 			cyborg_base_icon = "valesec"
@@ -1165,6 +1181,8 @@
 		if("Syndicate") // BLUEMOON Addon (VIRGO Port)
 			cyborg_base_icon = "syndihounddark"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot_synd.dmi'
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Drake") // Dergborg brought to you by Navier#1236 | Skyrat | Commissioned Artist: deviantart.com/mizartz
 			cyborg_base_icon = "drakesec"
@@ -1686,6 +1704,8 @@
 			cyborg_base_icon = "k50"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "ksleeper"
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("(Service) Vale")
 			cyborg_base_icon = "valeserv"
@@ -1705,6 +1725,8 @@
 			cyborg_base_icon = "k69"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "ksleeper"
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("(Service) Borgi") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "borgi-serv"
@@ -2135,11 +2157,15 @@
 			cyborg_base_icon = "cargohound"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "cargohound-sleeper"
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Cargohound Dark") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "cargohounddark"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "cargohounddark-sleeper"
+			hat_offset = HOUND_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Otie") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "otiec"
