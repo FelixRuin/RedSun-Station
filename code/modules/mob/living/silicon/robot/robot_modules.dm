@@ -1359,7 +1359,6 @@
 			cyborg_base_icon = "borgi"
 			moduleselect_icon = "borgi"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
-			hat_offset = INFINITY
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
 			has_snowflake_deadsprite = TRUE
 			hat_offset = BORGI_HAT_OFFSET
