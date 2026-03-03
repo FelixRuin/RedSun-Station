@@ -48,7 +48,7 @@
 		if("Zoomba")
 			cyborg_base_icon = "zoomba_standard"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("Marina")
 			cyborg_base_icon = "marinasd"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -233,7 +233,7 @@
 		if("Zoomba")
 			cyborg_base_icon = "zoomba_cargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_cargo.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("Cargohound")
 			cyborg_base_icon = "cargohound"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobots_cargo.dmi'
@@ -251,6 +251,8 @@
 		if("Borgi")
 			cyborg_base_icon = "borgi-cargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobots_cargo.dmi'
+			hat_offset = BORGI_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Drake")
 			cyborg_base_icon = "drakecargo"

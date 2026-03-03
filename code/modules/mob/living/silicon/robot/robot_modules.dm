@@ -431,7 +431,7 @@
 		if("Droid")
 			cyborg_base_icon = "medical"
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
-			hat_offset = 4
+			hat_offset = DROID_HAT_OFFSET
 		if("Sleek")
 			cyborg_base_icon = "sleekmed"
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
@@ -455,7 +455,7 @@
 		if("Zoomba") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "zoomba_med"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("Arachne") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "arachne"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -533,6 +533,8 @@
 			sleeper_overlay = "borgi-medi-sleeper"
 			moduleselect_icon = "medihound"
 			moduleselect_alternate_icon = 'modular_citadel/icons/ui/screen_cyborg.dmi'
+			hat_offset = BORGI_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Drake") // Dergborg brought to you by Navier#1236 | Skyrat | Commissioned Artist: deviantart.com/mizartz
 			cyborg_base_icon = "drakemed"
@@ -792,7 +794,7 @@
 		if("Zoomba") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "zoomba_engi"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("Conagher") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "conagher"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -829,6 +831,8 @@
 			cyborg_base_icon = "pupdozer"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "dozersleeper"
+			hat_offset = PUP_DOZER_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Vale")
 			cyborg_base_icon = "valeeng"
@@ -847,6 +851,8 @@
 			cyborg_base_icon = "borgi-eng"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "borgi-eng-sleeper"
+			hat_offset = BORGI_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Engihound") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "engihound"
@@ -1069,7 +1075,7 @@
 		if("Zoomba") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "zoomba_sec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("Woody") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "woody"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -1137,6 +1143,8 @@
 			cyborg_base_icon = "borgi-sec"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "borgi-sec-sleeper"
+			hat_offset = BORGI_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Otie") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "oties"
@@ -1354,6 +1362,8 @@
 			hat_offset = INFINITY
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
 			has_snowflake_deadsprite = TRUE
+			hat_offset = BORGI_HAT_OFFSET
+			hasrest = TRUE
 		if("Vale") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "valepeace"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
@@ -1650,7 +1660,7 @@
 		if("(Service) Zoomba") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "zoomba_green"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("(Service) Lloyd") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "lloyd"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -1703,6 +1713,8 @@
 			cyborg_base_icon = "borgi-serv"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "borgi-sleeper"
+			hat_offset = BORGI_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("(Service) Fembot") // //Gardelin0 Addon
 			cyborg_base_icon = "fembot-service"
@@ -1771,7 +1783,7 @@
 		if("(Janitor) Zoomba") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "zoomba_jani"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("(Janitor) Flynn") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "flynn"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -1816,11 +1828,15 @@
 			cyborg_base_icon = "scrubpup"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "jsleeper"
+			hat_offset = PUP_CLEAN_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("(Janitor) Borgi") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "borgi-jani"
 			cyborg_icon_override = 'modular_splurt/icons/mob/widerobot.dmi'
 			sleeper_overlay = "borgi-jani-sleeper"
+			hat_offset = BORGI_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("(Janitor) Otie") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "otiej"
@@ -2048,7 +2064,7 @@
 		if("Droid")
 			cyborg_base_icon = "miner"
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
-			hat_offset = 4
+			hat_offset = DROID_HAT_OFFSET
 		if("Sleek")
 			cyborg_base_icon = "sleekmin"
 			cyborg_icon_override = 'modular_citadel/icons/mob/robots.dmi'
@@ -2075,7 +2091,7 @@
 		if("Zoomba") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "zoomba_miner"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
-			hat_offset = 3
+			hat_offset = ZOOMBA_HAT_OFFSET
 		if("Ishimura") // SPLURT Addon (Skyrat Port)
 			cyborg_base_icon = "ishimura"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
@@ -2108,6 +2124,8 @@
 			cyborg_base_icon = "blade"
 			cyborg_icon_override = 'modular_citadel/icons/mob/widerobot.dmi'
 			sleeper_overlay = "bladesleeper"
+			hat_offset = BLADE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 		if("Vale")
 			cyborg_base_icon = "valemine"

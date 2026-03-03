@@ -80,7 +80,7 @@
 		else
 			offset_state = hat_offset[HAT_STAND_OFFSET]
 
-		if(offset_state[1] == HAT_NO_RENDER)
+		if(offset_state == HAT_NO_RENDER)
 			return
 		var/list/offset = offset_state[ISDIAGONALDIR(dir) ? dir2text(dir & (WEST|EAST)) : dir2text(dir)]
 		if(offset)
