@@ -52,6 +52,8 @@
 	HAT_REST_OFFSET = alist("north" = list(16, -3), "south" = list(16, -3), "east" = list(28, -7), "west" = list(4, -7)), \
 	HAT_SIT_OFFSET = alist("north" = list(16, 3), "south" = list(16, 3), "east" = list(28, 3), "west" = list(4, 3)), \
 	HAT_BELLYUP_OFFSET = HAT_NO_RENDER)
+
+#define DRAKE_HAT_OFFSET alist( \
 	HAT_STAND_OFFSET = alist("north" = list(16, -2), "south" = list(16, -2), "east" = list(36, -2), "west" = list(-4, -2)), \
 	HAT_REST_OFFSET = alist("north" = list(16, -7), "south" = list(16, -7), "east" = list(34, -7), "west" = list(-4, -7)), \
 	HAT_SIT_OFFSET = alist("north" = list(16, -4), "south" = list(16, -4), "east" = list(29, -1), "west" = list(1, -1)), \
