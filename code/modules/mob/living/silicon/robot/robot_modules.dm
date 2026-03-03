@@ -1869,6 +1869,8 @@
 			cyborg_base_icon = "drakejanit"
 			cyborg_icon_override = 'modular_sand/icons/mob/cyborg/drakemech.dmi'
 			sleeper_overlay = "drakesecsleeper"
+			hat_offset = DRAKE_HAT_OFFSET
+			hasrest = TRUE
 			dogborg = TRUE
 			drakerest = TRUE
 		if("(Janitor) Fembot") // //Gardelin0 Addon
