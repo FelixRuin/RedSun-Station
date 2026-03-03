@@ -114,11 +114,7 @@
 	var/static/list/can_ride_typecache = typecacheof(/mob/living/carbon/human)
 
 	// cit specific vars //
-	var/sitting = 0
-	var/bellyup = 0
-	var/deep_rest = 0		//DarkSer request by Gardelin0
-	var/wag_rest = 0		//DarkSer request by Gardelin0
-	var/wag_sit = 0			//DarkSer request by Gardelin0
+	var/resting_state = "rest"
 	var/dogborg = FALSE
 
 	var/cansprint = 1
