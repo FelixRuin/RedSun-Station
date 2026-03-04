@@ -167,14 +167,14 @@
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 
-/obj/item/clothing/glasses/eyepatch/syndicate
+/obj/item/clothing/glasses/syndicate_eyepatch
 	name = "cybernetic eyepatch"
 	desc = "An eyepatch used to enhance one's aim with guns."
 	icon_state = "syndicatepatch"
 	item_state = "syndicatepatch"
 	resistance_flags = ACID_PROOF
 
-/obj/item/clothing/glasses/eyepatch/syndicate/equipped(mob/living/carbon/human/user, slot)
+/obj/item/clothing/glasses/syndicate_eyepatch/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(slot == ITEM_SLOT_EYES)
 		user.visible_message("<span class='warning'>Circuitry from the eyepatch links itself to your brain as you put on the eyepatch.")
@@ -183,7 +183,7 @@
 		ADD_TRAIT(user, TRAIT_INSANE_AIM, "SYNDICATE_EYEPATCH_AIM")
 		ADD_TRAIT(src, TRAIT_NODROP, "SYNDICATE_EYEPATCH_NODROP")
 
-/obj/item/clothing/glasses/eyepatch/syndicate/dropped(mob/living/carbon/human/user)
+/obj/item/clothing/glasses/syndicate_eyepatch/dropped(mob/living/carbon/human/user)
 	. = ..()
 	if(user.get_item_by_slot(ITEM_SLOT_EYES) != src)
 		return
