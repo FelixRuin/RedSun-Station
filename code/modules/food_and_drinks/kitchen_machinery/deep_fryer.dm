@@ -39,7 +39,7 @@ God bless America.
 	/// The chance (%) of grease_level increase on process()
 	var/grease_increase_chance = 50
 	/// The amount of grease_level increase on process()
-	var/grease_Increase_amount = 0.1
+	var/grease_increase_amount = 0.1
 	var/static/list/deepfry_blacklisted_items = typecacheof(list(
 		/obj/item/screwdriver,
 		/obj/item/crowbar,
@@ -67,6 +67,7 @@ God bless America.
 
 /obj/machinery/deepfryer/Destroy()
 	QDEL_NULL(fry_loop)
+	UnregisterSignal(src, COMSIG_COMPONENT_CLEAN_ACT)
 	return ..()
 
 /obj/machinery/deepfryer/RefreshParts()
@@ -136,7 +137,7 @@ God bless America.
 		return
 
 	reagents.trans_to(frying, oil_use, multiplier = fry_speed * 3) //Fried foods gain more of the reagent thanks to space magic
-	grease_level += prob(grease_increase_chance) * grease_Increase_amount
+	grease_level += prob(grease_increase_chance) * grease_increase_amount
 	cook_time += fry_speed
 	if(cook_time >= 30 && !frying_fried)
 		frying_fried = TRUE //frying... frying... fried

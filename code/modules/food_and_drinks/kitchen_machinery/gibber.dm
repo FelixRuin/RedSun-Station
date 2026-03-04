@@ -28,6 +28,10 @@
 	. = ..()
 	RegisterSignal(src, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(on_cleaned))
 
+/obj/machinery/gibber/Destroy()
+	UnregisterSignal(src, COMSIG_COMPONENT_CLEAN_ACT)
+	return ..()
+
 /obj/machinery/gibber/RefreshParts()
 	gibtime = initial(gibtime)
 	meat_produced = initial(meat_produced)
@@ -236,7 +240,6 @@
 			if (!gibturf.density && (src in view(gibturf)))
 				new gibtype(gibturf,i,diseases)
 
-	pixel_x = initial(pixel_x) //return to its spot after shaking
 	operating = FALSE
 	update_icon()
 
