@@ -222,6 +222,7 @@
 	switch(cargo_borg_icon)
 		if("Default")
 			cyborg_base_icon = "cargoborg"
+			cyborg_icon_override = 'modular_splurt/icons/mob/robots_cargo.dmi'
 		if("Bird")
 			cyborg_base_icon = "bird_cargo"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_cargo.dmi'
