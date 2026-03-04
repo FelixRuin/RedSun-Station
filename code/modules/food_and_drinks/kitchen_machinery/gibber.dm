@@ -36,6 +36,7 @@
 	gibtime = initial(gibtime)
 	meat_produced = initial(meat_produced)
 	meat_quality = initial(meat_quality) // unupgraded this means quality is 50, and max upgraded it is 95
+	ignore_clothing = initial(ignore_clothing)
 	for(var/obj/item/stock_parts/matter_bin/B in component_parts)
 		meat_produced += B.rating
 		meat_quality += B.rating * 15
@@ -216,6 +217,7 @@
 		skin = new typeofskin
 
 	log_combat(user, occupant, "gibbed")
+	mob_occupant.pain_emote(realagony = TRUE)
 	mob_occupant.death(1)
 	mob_occupant.ghostize()
 	qdel(src.occupant)
@@ -223,7 +225,6 @@
 
 /obj/machinery/gibber/proc/make_meat(obj/item/stack/sheet/animalhide/skin, list/obj/item/reagent_containers/food/snacks/meat/slab/allmeat, meat_produced, gibtype, list/datum/disease/diseases)
 	playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-	operating = FALSE
 	if(!dirty && prob(50))
 		dirty = TRUE
 	var/turf/T = get_turf(src)
