@@ -57,7 +57,7 @@
 	. = ..()
 	if(dirty)
 		var/mutable_appearance/blood_overlay = mutable_appearance(icon, "grinder_bloody", appearance_flags = RESET_COLOR|KEEP_APART)
-		if(blood_dna_info["color"])
+		if(blood_dna_info && blood_dna_info["color"])
 			blood_overlay.color = blood_dna_info["color"]
 		else
 			blood_overlay.color = BLOOD_COLOR_HUMAN
