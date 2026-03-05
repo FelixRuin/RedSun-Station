@@ -71,17 +71,18 @@
 		I.play_tool_sound(src, 50)
 	UnregisterSignal(wrapped_on, list(COMSIG_ATOM_TOOL_ACT(TOOL_SCREWDRIVER), COMSIG_CLICK_CTRL_SHIFT,
 									COMSIG_PARENT_EXAMINE, COMSIG_ATOM_UPDATE_ICON_STATE))
-	wrapped_on.icon = previous_icon_data[DATA_ICON]
-	wrapped_on.icon_state = previous_icon_data[DATA_ICON_STATE]
-	if(previous_icon_data[DATA_ICON_WORN_OVERLAY])
-		wrapped_on.mob_overlay_icon = previous_icon_data[DATA_ICON_WORN_OVERLAY]
-	else
-		wrapped_on.mob_overlay_icon = null
+	if(wrapped_on)
+		wrapped_on.icon = previous_icon_data[DATA_ICON]
+		wrapped_on.icon_state = previous_icon_data[DATA_ICON_STATE]
+		if(previous_icon_data[DATA_ICON_WORN_OVERLAY])
+			wrapped_on.mob_overlay_icon = previous_icon_data[DATA_ICON_WORN_OVERLAY]
+		else
+			wrapped_on.mob_overlay_icon = null
+		wrapped_on = null
 	previous_icon_data[DATA_ICON] = ""
 	previous_icon_data[DATA_ICON_STATE] = ""
 	previous_icon_data[DATA_ICON_WORN_OVERLAY] = ""
 	forceMove(get_turf(wrapped_on))
-	wrapped_on = null
 	if(user)
 		user.update_inv_glasses()
 	update_icon(UPDATE_ICON_STATE)
@@ -101,7 +102,7 @@
 /obj/item/clothing/glasses/cover/Destroy()
 	if(QDELETED(wrapped_on))
 		wrapped_on = null
-	else
+	else if(wrapped_on)
 		remove()
 	. = ..()
 
