@@ -160,12 +160,6 @@
 	user.visible_message("<span class='suicide'>[user] is tightening \the [src]'s straps around [user.ru_ego()] neck! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return OXYLOSS
 
-/obj/item/clothing/glasses/eyepatch
-	name = "eyepatch"
-	desc = "Yarr."
-	icon_state = "eyepatch"
-	item_state = "eyepatch"
-
 /obj/item/clothing/glasses/syndicate_eyepatch
 	name = "cybernetic eyepatch"
 	desc = "An eyepatch used to enhance one's aim with guns."
@@ -388,12 +382,6 @@
 /obj/item/clothing/glasses/sunglasses/blindfold/dropped(mob/living/carbon/human/user)
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
-
-/obj/item/clothing/glasses/fakeblindfold
-	name = "thin blindfold"
-	desc = "Covers the eyes, but not thick enough to obscure vision. Mostly for aesthetic."
-	icon_state = "blindfoldwhite"
-	item_state = "blindfoldwhite"
 
 /obj/item/clothing/glasses/sunglasses/blindfold/white
 	name = "blind personnel blindfold"

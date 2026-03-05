@@ -4558,6 +4558,7 @@
 #include "modular_bluemoon\code\modules\clothing\blastwave_outfits\blastwave_uniform.dm"
 #include "modular_bluemoon\code\modules\clothing\ears\earrings.dm"
 #include "modular_bluemoon\code\modules\clothing\glasses\_glasses.dm"
+#include "modular_bluemoon\code\modules\clothing\glasses\cover_blindfolds.dm"
 #include "modular_bluemoon\code\modules\clothing\glasses\hud.dm"
 #include "modular_bluemoon\code\modules\clothing\gloves\toggles.dm"
 #include "modular_bluemoon\code\modules\clothing\head\helmet.dm"

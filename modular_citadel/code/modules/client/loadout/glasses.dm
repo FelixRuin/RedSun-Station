@@ -8,7 +8,7 @@
 
 /datum/gear/glasses/fakeblindfold
 	name = "Fake Blindfold"
-	path = /obj/item/clothing/glasses/fakeblindfold
+	path = /obj/item/clothing/glasses/cover/fakeblindfold
 
 /datum/gear/glasses/cold
 	name = "Cold goggles"
@@ -20,7 +20,7 @@
 
 /datum/gear/glasses/eyepatch
 	name = "Eyepatch"
-	path = /obj/item/clothing/glasses/eyepatch
+	path = /obj/item/clothing/glasses/cover/eyepatch
 
 /datum/gear/glasses/veil
 	name = "Veil"

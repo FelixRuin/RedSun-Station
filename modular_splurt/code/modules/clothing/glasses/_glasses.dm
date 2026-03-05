@@ -9,7 +9,7 @@
 	tint = 1
 	glass_colour_type = /datum/client_colour/glass_colour/gray
 
-/obj/item/clothing/glasses/eyepatch
+/obj/item/clothing/glasses/cover/eyepatch
 	is_edible = 1
 
 /obj/item/clothing/glasses/sunglasses/blindfold
