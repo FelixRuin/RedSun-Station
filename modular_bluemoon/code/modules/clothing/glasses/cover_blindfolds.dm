@@ -65,7 +65,8 @@
 
 /obj/item/clothing/glasses/cover/proc/remove(datum/source, mob/living/user, obj/item/I, list/mutable_recipes)
 	SIGNAL_HANDLER
-	I.play_tool_sound(src, 50)
+	if(I)
+		I.play_tool_sound(src, 50)
 	UnregisterSignal(wrapped_on, list(COMSIG_ATOM_TOOL_ACT(TOOL_SCREWDRIVER), COMSIG_CLICK_CTRL_SHIFT,
 									COMSIG_PARENT_EXAMINE, COMSIG_ATOM_UPDATE_ICON_STATE))
 	wrapped_on.icon = previous_icon_data[DATA_ICON]
