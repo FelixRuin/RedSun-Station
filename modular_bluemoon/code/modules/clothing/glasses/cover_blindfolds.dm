@@ -97,7 +97,8 @@
 		return
 	flipped = !flipped
 	update_icon(UPDATE_ICON_STATE)
-	user.update_inv_glasses()
+	if(user)
+		user.update_inv_glasses()
 
 /obj/item/clothing/glasses/cover/Destroy()
 	if(QDELETED(wrapped_on))
