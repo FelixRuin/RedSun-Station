@@ -60,6 +60,7 @@
 	icon_state = "healthhud"
 	hud_type = DATA_HUD_MEDICAL_ADVANCED
 	glass_colour_type = /datum/client_colour/glass_colour/lightblue
+	glasses_type = "med"
 
 /obj/item/clothing/glasses/hud/health/prescription/Initialize(mapload)
 	. = ..()
@@ -104,6 +105,7 @@
 	icon_state = "diagnostichud"
 	hud_type = DATA_HUD_DIAGNOSTIC_BASIC
 	glass_colour_type = /datum/client_colour/glass_colour/lightorange
+	glasses_type = "robo"
 
 /obj/item/clothing/glasses/hud/diagnostic/sunglasses
 	name = "diagnostic HUDSunglasses"
@@ -142,6 +144,7 @@
 	icon_state = "securityhud"
 	hud_type = DATA_HUD_SECURITY_ADVANCED
 	glass_colour_type = /datum/client_colour/glass_colour/red
+	glasses_type = "sec"
 
 /obj/item/clothing/glasses/hud/security/prescription/Initialize(mapload)
 	. = ..()

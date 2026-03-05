@@ -17,6 +17,8 @@
 	var/list/icon/current = list() //the current hud icons
 	var/vision_correction = 0 //does wearing these glasses correct some of our vision defects?
 	var/glass_colour_type //colors your vision when worn
+	/// type of glasses used in modular_bluemoon\code\modules\clothing\glasses\cover_blindfolds.dm
+	var/glasses_type
 
 /obj/item/clothing/glasses/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] is stabbing \the [src] into [user.ru_ego()] eyes! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -71,6 +73,7 @@
 	vision_flags = SEE_TURFS
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	glass_colour_type = /datum/client_colour/glass_colour/lightgreen
+	glasses_type = "meson"
 
 /obj/item/clothing/glasses/meson/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] is putting \the [src] to [user.ru_ego()] eyes and overloading the brightness! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -124,6 +127,7 @@
 	glass_colour_type = /datum/client_colour/glass_colour/purple
 	resistance_flags = ACID_PROOF
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 80, ACID = 100)
+	glasses_type = "sci"
 
 /obj/item/clothing/glasses/science/item_action_slot_check(slot, mob/user, datum/action/A)
 	if(slot == ITEM_SLOT_EYES)
