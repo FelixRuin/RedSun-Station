@@ -14,6 +14,10 @@
 	name = "Obsolete Fake Blindfold"
 	path = /obj/item/clothing/glasses/cover/obsolete
 
+/datum/gear/glasses/silk_blindfold
+	name = "Silk Blindfold"
+	path = /obj/item/clothing/glasses/cover/lace
+
 /datum/gear/glasses/cold
 	name = "Cold goggles"
 	path = /obj/item/clothing/glasses/cold

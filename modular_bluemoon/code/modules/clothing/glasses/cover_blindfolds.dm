@@ -121,3 +121,11 @@
 	desc = "An ornate fake blindfold, devoid of any electronics. It's belived to be originally worn by members of bygone military force that sought to protect humanity."
 	icon_state = "fold"
 	base_icon_state = "fold"
+
+/obj/item/clothing/glasses/cover/lace
+	name = "silk blindfold"
+	desc = "A blindfold made from black silk, it feels nice to the touch."
+	icon_state = "fold_silk"
+	base_icon_state = "fold_silk"
+	can_switch_eye = FALSE
+	has_adapt_icon_states = FALSE
