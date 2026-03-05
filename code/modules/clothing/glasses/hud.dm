@@ -249,11 +249,6 @@
 		var/datum/atom_hud/HUD = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
 		HUD.remove_hud_from(user)
 
-/obj/item/clothing/glasses/hud/security/sunglasses/eyepatch // why was this defined *before* the sunglasses it is a subtype of.
-	name = "eyepatch HUD"
-	desc = "A heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
-	icon_state = "hudpatch"
-
 /obj/item/clothing/glasses/hud/security/sunglasses/prescription/Initialize(mapload)
 	. = ..()
 	prescribe()
