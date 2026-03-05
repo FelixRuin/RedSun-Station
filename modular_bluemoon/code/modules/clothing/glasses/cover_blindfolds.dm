@@ -19,7 +19,7 @@
 
 /obj/item/clothing/glasses/cover/examine(mob/user)
 	. = ..()
-	. += span_notice("Под [src] можно установить очки.</span>")
+	. += span_notice("Под [src] можно установить очки.")
 	if(can_switch_eye)
 		. += span_notice("Ctrl-shift-click чтобы сменить закрываемый [src] глаз.")
 
@@ -129,3 +129,7 @@
 	base_icon_state = "fold_silk"
 	can_switch_eye = FALSE
 	has_adapt_icon_states = FALSE
+
+#undef DATA_ICON
+#undef DATA_ICON_STATE
+#undef DATA_ICON_WORN_OVERLAY
