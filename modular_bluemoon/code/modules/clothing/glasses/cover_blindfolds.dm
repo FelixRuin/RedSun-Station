@@ -34,6 +34,8 @@
 
 /obj/item/clothing/glasses/cover/afterattack(obj/item/clothing/glasses/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
+	if(!proximity_flag)
+		return
 	if(!istype(target))
 		return
 	if(istype(target, /obj/item/clothing/glasses/cover) || locate(/obj/item/clothing/glasses/cover) in target)
