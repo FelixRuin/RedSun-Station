@@ -94,11 +94,6 @@
 	. = ..()
 	prescribe()
 
-/obj/item/clothing/glasses/hud/health/eyepatch
-	name = "eyepatch medHUD"
-	desc = "A heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
-	icon_state = "medpatch"
-
 ///////////////////
 //Diagnostic Huds//
 ///////////////////
@@ -136,11 +131,6 @@
 	flash_protect = -2
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	glass_colour_type = /datum/client_colour/glass_colour/green
-
-/obj/item/clothing/glasses/hud/diagnostic/eyepatch
-	name = "eyepatch diagnostic HUD"
-	desc = "A heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
-	icon_state = "diagpatch"
 
 ////////////
 //Sec Huds//
