@@ -61,7 +61,7 @@
 
 /obj/item/clothing/glasses/cover/proc/wrapped_on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	examine_list += span_notice("Под [src] находится [wrapped_on]. Их можно разьеденить при помощи отвёртки!")
+	examine_list += span_notice("Под [src] находится [wrapped_on]. Их можно разъединить при помощи отвёртки!")
 	if(can_switch_eye)
 		examine_list += span_notice("Ctrl-shift-click чтобы сменить закрываемый [src] глаз.")
 
@@ -121,7 +121,7 @@
 
 /obj/item/clothing/glasses/cover/obsolete
 	name = "obsolete fake blindfold"
-	desc = "An ornate fake blindfold, devoid of any electronics. It's belived to be originally worn by members of bygone military force that sought to protect humanity."
+	desc = "An ornate fake blindfold, devoid of any electronics. It's believed to be originally worn by members of bygone military force that sought to protect humanity."
 	icon_state = "fold"
 	base_icon_state = "fold"
 
