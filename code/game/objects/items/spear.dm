@@ -25,6 +25,12 @@
 	var/wielded = FALSE // track wielded status on item
 	wound_bonus = 6
 	bare_wound_bonus = 10
+	unique_reskin = list("Alt" = list(RESKIN_ICON_STATE = "spear_rock1"), "Base" = list(RESKIN_ICON_STATE = "spearglass1"))
+
+/obj/item/spear/reskin_obj(mob/user)
+	if(current_skin == "Alt")
+		icon_prefix = "spear_rock"
+		AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=18, icon_wielded="[icon_prefix]1")
 
 /obj/item/spear/Initialize(mapload)
 	. = ..()
@@ -166,6 +172,7 @@
 	throwforce = 40
 	throw_speed = 4
 	attack_verb = list("gored")
+	unique_reskin = null
 	var/clonechance = 50
 	var/clonedamage = 12
 	var/clonespeed = 0
@@ -212,6 +219,7 @@
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	sharpness = SHARP_EDGED
 	icon_prefix = "bone_spear"
+	unique_reskin = null
 
 /obj/item/spear/bonespear/ComponentInitialize()
 	. = ..()
