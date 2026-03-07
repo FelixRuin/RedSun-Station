@@ -498,11 +498,13 @@
 	name = "Stylish uniform"
 	icon_state = "stylish_uniform"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/bm/sergal_stylish_dress
 	name = "Stylish dress"
 	icon_state = "stylish_dress"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/bm/sergal_brown_bib
 	name = "Brown bib"
