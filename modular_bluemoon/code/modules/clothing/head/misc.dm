@@ -135,7 +135,7 @@
 	icon_state = "slalom_hat"
 
 /obj/item/clothing/head/bm/sergal_stylish_helmet
-	name = "Sergal stylish_helmet"
+	name = "Sergal stylish helmet"
 	icon_state = "stylish_helmet"
 
 /obj/item/clothing/head/bm/sergal_red_helmet
