@@ -131,25 +131,25 @@
 	item_state = "commissar"
 
 /obj/item/clothing/head/bm/sergal_slalom_hat
-	name = "Slalom hat"
+	name = "Sergal slalom hat"
 	icon_state = "slalom_hat"
 
 /obj/item/clothing/head/bm/sergal_stylish_helmet
-	name = "Stylish_helmet"
+	name = "Sergal stylish_helmet"
 	icon_state = "stylish_helmet"
 
 /obj/item/clothing/head/bm/sergal_red_helmet
-	name = "Red helmet"
+	name = "Sergal red helmet"
 	icon_state = "red_helmet"
 
 /obj/item/clothing/head/bm/sergal_leather_hat
-	name = "Leather hat"
+	name = "Sergal leather hat"
 	icon_state = "Leather_hat"
 
 /obj/item/clothing/head/bm/sergal_brown_helmet
-	name = "Brown helmet"
+	name = "Sergal brown helmet"
 	icon_state = "brown_helmet"
 
 /obj/item/clothing/head/bm/sergal_knight_helmet
-	name = "Knight's helmet"
+	name = "Sergal knight's helmet"
 	icon_state = "knight_helmet"

@@ -9,11 +9,11 @@
 	mob_overlay_icon = 'modular_bluemoon/icons/mob/clothing/hats.dmi'
 
 /obj/item/clothing/suit/hooded/bm/sergal_green_jacket
-	name = "Green jacket"
+	name = "Sergal green jacket"
 	icon_state = "green_jacket"
 	hoodtype = /obj/item/clothing/head/hooded/bm/sergal_hood_green_jacket
 	no_t = TRUE
 
 /obj/item/clothing/head/hooded/bm/sergal_hood_green_jacket
-	name = "Green jacket hood"
+	name = "Sergal green jacket hood"
 	icon_state = "hood_green_jacket"

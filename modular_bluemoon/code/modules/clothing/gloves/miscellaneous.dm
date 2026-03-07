@@ -6,9 +6,9 @@
 	desc = "A pair of gloves, they don't look special in any way."
 
 /obj/item/clothing/gloves/bm/sergal_red
-	name = "red gloves"
+	name = "Sergal red gloves"
 	icon_state = "red_gloves"
 
 /obj/item/clothing/gloves/bm/sergal_knight_gloves
-	name = "knight's gloves"
+	name = "Sergal knight's gloves"
 	icon_state = "knight_gloves"

@@ -120,26 +120,26 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/suit/bm/sergal_leather_cape
-	name = "Leather cape"
+	name = "Sergal leather cape"
 	icon_state = "leather_cape"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/suit/bm/sergal_red_cape
-	name = "Red cape"
+	name = "Sergal red cape"
 	icon_state = "red_cape"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/suit/bm/sergal_red_armor
-	name = "Red armor"
+	name = "Sergal red armor"
 	icon_state = "red_armor"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/suit/bm/sergal_stylish_armor
-	name = "Stylish armor"
+	name = "Sergal stylish armor"
 	icon_state = "stylish_armor"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/suit/bm/sergal_knight_armor
-	name = "Knight's armor"
+	name = "Sergal knight's armor"
 	icon_state = "knight_armor"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
