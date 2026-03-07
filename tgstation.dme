@@ -4268,6 +4268,8 @@
 #include "interface\fonts\vcr_osd_mono.dm"
 #include "modular_bluemoon\code\_DEFINES\ashwalkers.dm"
 #include "modular_bluemoon\code\_DEFINES\mobs.dm"
+#include "modular_bluemoon\code\modules\clothing\gloves\miscellaneous.dm"
+#include "modular_bluemoon\code\modules\clothing\suits\toggles.dm"
 #include "modular_bluemoon\code\modules\lobby\__lobby_defines.dm"
 #include "modular_bluemoon\code\_globalvars\list\objects.dm"
 #include "modular_bluemoon\code\_HELPERS\_bm_helpers.dm"
