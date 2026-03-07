@@ -9,6 +9,6 @@
 	name = "red gloves"
 	icon_state = "red_gloves"
 
-/obj/item/clothing/gloves/bm/sergal_red
+/obj/item/clothing/gloves/bm/sergal_knight_gloves
 	name = "knight's gloves"
-	icon_state = "knight's_gloves"
+	icon_state = "knight_gloves"

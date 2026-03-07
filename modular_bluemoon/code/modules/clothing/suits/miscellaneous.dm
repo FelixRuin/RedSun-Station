@@ -126,7 +126,7 @@
 
 /obj/item/clothing/suit/bm/sergal_red_cape
 	name = "Red cape"
-	icon_state = "Red_cape "
+	icon_state = "red_cape"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/suit/bm/sergal_red_armor

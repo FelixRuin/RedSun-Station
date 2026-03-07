@@ -12,6 +12,7 @@
 	name = "Green jacket"
 	icon_state = "green_jacket"
 	hoodtype = /obj/item/clothing/head/hooded/bm/sergal_hood_green_jacket
+	no_t = TRUE
 
 /obj/item/clothing/head/hooded/bm/sergal_hood_green_jacket
 	name = "Green jacket hood"
