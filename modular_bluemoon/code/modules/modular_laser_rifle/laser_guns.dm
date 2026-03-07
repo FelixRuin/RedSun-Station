@@ -120,29 +120,29 @@
 	radial_menu_data = null
 	return ..()
 
-/obj/item/gun/energy/modular_laser_rifle/attackby(obj/item/used_item, mob/living/user, params)
-	if(used_item.tool_behaviour == TOOL_SCREWDRIVER)
-		panel_open = !panel_open
-		playsound(src, used_item.usesound, 50, TRUE)
-		to_chat(user, span_notice("You [panel_open ? "open" : "close"] the battery compartment of [src]."))
-		update_appearance()
-		return TRUE
-	if(panel_open && istype(used_item, /obj/item/stock_parts/cell))
-		var/obj/item/stock_parts/cell/new_cell = used_item
-		if(!user.transferItemToLoc(new_cell, src))
-			return
-		if(cell)
-			cell.forceMove(drop_location())
-			user.put_in_hands(cell)
-			to_chat(user, span_notice("You replace the power cell in [src] with [new_cell]."))
-		else
-			to_chat(user, span_notice("You insert [new_cell] into [src]."))
-		cell = new_cell
-		last_charge = cell.charge
-		recharge_newshot(TRUE)
-		update_appearance()
-		return TRUE
-	return ..()
+// /obj/item/gun/energy/modular_laser_rifle/attackby(obj/item/used_item, mob/living/user, params)
+// 	if(used_item.tool_behaviour == TOOL_SCREWDRIVER)
+// 		panel_open = !panel_open
+// 		playsound(src, used_item.usesound, 50, TRUE)
+// 		to_chat(user, span_notice("You [panel_open ? "open" : "close"] the battery compartment of [src]."))
+// 		update_appearance()
+// 		return TRUE
+// 	if(panel_open && istype(used_item, /obj/item/stock_parts/cell))
+// 		var/obj/item/stock_parts/cell/new_cell = used_item
+// 		if(!user.transferItemToLoc(new_cell, src))
+// 			return
+// 		if(cell)
+// 			cell.forceMove(drop_location())
+// 			user.put_in_hands(cell)
+// 			to_chat(user, span_notice("You replace the power cell in [src] with [new_cell]."))
+// 		else
+// 			to_chat(user, span_notice("You insert [new_cell] into [src]."))
+// 		cell = new_cell
+// 		last_charge = cell.charge
+// 		recharge_newshot(TRUE)
+// 		update_appearance()
+// 		return TRUE
+// 	return ..()
 
 /obj/item/gun/energy/modular_laser_rifle/attack_self(mob/living/user)
 	if(panel_open)
@@ -303,7 +303,7 @@
 /obj/item/stock_parts/cell/hyeseong_internal_cell
 	name = "\improper Hyeseong modular laser rifle internal cell"
 	desc = "These are usually supposed to be inside of the gun, you know."
-	maxcharge = STANDARD_CELL_CHARGE * 2
+	maxcharge = 40000
 
 /datum/action/item_action/toggle_personality
 	name = "Toggle Weapon Personality"

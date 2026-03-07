@@ -4560,6 +4560,7 @@
 #include "modular_bluemoon\code\modules\client\loadout\uniform.dm"
 #include "modular_bluemoon\code\modules\client\loadout\wrists.dm"
 #include "modular_bluemoon\code\modules\clothing\assasin_suit.dm"
+#include "modular_bluemoon\code\modules\clothing\clothing.dm"
 #include "modular_bluemoon\code\modules\clothing\fancy_maid_costume.dm"
 #include "modular_bluemoon\code\modules\clothing\gloves.dm"
 #include "modular_bluemoon\code\modules\clothing\pact_ninja_suit.dm"
