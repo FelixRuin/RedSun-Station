@@ -31,7 +31,8 @@
 	if(current_skin == "Alt")
 		icon_prefix = "spear_rock"
 		var/datum/component/two_handed/TH = GetComponent(/datum/component/two_handed)
-		TH.icon_wielded= "[icon_prefix]1"
+		if(TH)
+			TH.icon_wielded= "[icon_prefix]1"
 
 /obj/item/spear/Initialize(mapload)
 	. = ..()

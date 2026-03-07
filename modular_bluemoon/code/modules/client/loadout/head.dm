@@ -148,7 +148,7 @@
 	path = /obj/item/clothing/head/bm/sergal_slalom_hat
 
 /datum/gear/head/sergal_stylish_helmet
-	name = "Sergal stylish_helmet"
+	name = "Sergal stylish helmet"
 	path = /obj/item/clothing/head/bm/sergal_stylish_helmet
 
 /datum/gear/head/sergal_red_helmet
