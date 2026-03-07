@@ -493,3 +493,40 @@
 					U.desc = src.desc
 				to_chat(usr, span_notice("Now wearing as uniform!"))
 				qdel(src)
+
+/obj/item/clothing/under/bm/sergal_stylish_uniform
+	name = "Stylish uniform"
+	icon_state = "stylish_uniform"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+
+/obj/item/clothing/under/bm/sergal_stylish_dress
+	name = "Stylish dress"
+	icon_state = "stylish_dress"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+
+/obj/item/clothing/under/bm/sergal_brown_bib
+	name = "Brown bib"
+	icon_state = "brown_bib"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+
+/obj/item/clothing/under/bm/sergal_blue_clothing
+	name = "Blue clothing"
+	icon_state = "blue_clothing"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+
+/obj/item/clothing/under/bm/sergal_green_uniform
+	name = "Green uniform"
+	icon_state = "green_uniform"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+
+/obj/item/clothing/under/bm/sergal_body_chain
+	name = "Body chain"
+	icon_state = "body_chain"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+
+/obj/item/clothing/under/bm/sergal_gray_uniform
+	name = "Shigu clan kimono"
+	icon_state = "gray_uniform"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+
+
