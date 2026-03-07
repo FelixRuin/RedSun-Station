@@ -18,7 +18,7 @@
 	ass_image = 'icons/ass/assfluffy.png'
 	species_category = SPECIES_CATEGORY_FURRY
 
-	allowed_limb_ids = list("mammal","aquatic","avian")
+	allowed_limb_ids = list("mammal","aquatic","avian","sergal")
 
 /datum/species/mammal/synthetic
 	name = "Synthetic Anthropomorph"
