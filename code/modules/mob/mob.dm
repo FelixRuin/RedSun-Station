@@ -163,7 +163,7 @@
 
 	if(target_message && target && istype(target) && (target.client || target.audiovisual_redirect))
 		hearers -= target
-		if(omni || (target_message && !blind_message))
+		if(omni || !blind_message)
 			target.show_message(target_message)
 		else
 			//This entire if/else chain could be in two lines but isn't for readibilties sake.
