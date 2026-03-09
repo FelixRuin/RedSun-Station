@@ -961,6 +961,34 @@
 
 //////////////////////////////////////////////
 //                                          //
+//              DEVIL (GHOST)               //
+//                                          //
+//////////////////////////////////////////////
+
+/datum/dynamic_ruleset/midround/from_ghosts/devil
+	name = "Devil"
+	antag_datum = /datum/antagonist/devil
+	antag_flag = ROLE_DEVIL
+	antag_flag_override = ROLE_DEVIL
+	enemy_roles = list("Blueshield", "Peacekeeper", "Brig Physician", "Security Officer", "Warden", "Detective", "Head of Security", "Bridge Officer", "Captain")
+	required_enemies = list(0,0,0,0,0,5,4,3,3,0)
+	required_candidates = 1
+	weight = 5
+	cost = 10
+	required_round_type = list(ROUNDTYPE_DYNAMIC_TEAMBASED, ROUNDTYPE_DYNAMIC_HARD, ROUNDTYPE_DYNAMIC_MEDIUM)
+	requirements = list(101,101,101,50,40,30,20,10,10,10)
+	repeatable = TRUE
+
+/datum/dynamic_ruleset/midround/from_ghosts/devil/finish_setup(mob/new_character, index)
+	add_devil(new_character, ascendable = TRUE)
+	mode.add_devil_objectives(new_character.mind, 2)
+	new_character.mind.special_role = ROLE_DEVIL
+	new_character.mind.assigned_role = ROLE_DEVIL
+	message_admins("[ADMIN_LOOKUPFLW(new_character)] has been made into a Devil by the midround ruleset.")
+	log_game("DYNAMIC: [key_name(new_character)] was spawned as a Devil by the midround ruleset.")
+
+//////////////////////////////////////////////
+//                                          //
 //           ABDUCTORS    (GHOST)           //
 //                                          //
 //////////////////////////////////////////////

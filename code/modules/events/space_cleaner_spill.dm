@@ -10,10 +10,8 @@
 /datum/round_event/space_cleaner_spill
 	announce_when = 1
 	start_when = 5
-	/// Количество реагента из каждой точки
-	var/reagents_amount = 80
-	/// Вероятность срабатывания для каждой вентиляции/скруббера (в процентах)
-	var/spill_probability = 45
+	/// Количество реагента из каждой точки (больше = дальше распространение пены)
+	var/reagents_amount = 220
 	/// Список скрубберов и вентилей, из которых польётся пена
 	var/list/atmos_devices = list()
 
@@ -30,8 +28,6 @@
 			continue
 		if(temp_vent.welded)
 			continue
-		if(!prob(spill_probability))
-			continue
 		atmos_devices += temp_vent
 
 	// Собираем вентили (vent_pump)
@@ -42,8 +38,6 @@
 		if(!is_station_level(vent_turf.z))
 			continue
 		if(temp_vent.welded)
-			continue
-		if(!prob(spill_probability))
 			continue
 		atmos_devices += temp_vent
 

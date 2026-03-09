@@ -14,7 +14,7 @@
 		return
 	if(item_flags & ABSTRACT)
 		return
-	var/usrinput = stripped_input(usr, "Какое у предмета будет дополнительное описание при осмотре? Cancel - очистить.", "Дополнительное описание", custom_examine_tooltip[1], MAX_NAME_LEN)
+	var/usrinput = stripped_input(usr, "Какое у предмета будет дополнительное описание при осмотре? Cancel - очистить.", "Дополнительное описание", custom_examine_tooltip[1], MAX_MESSAGE_LEN)
 	custom_examine_tooltip[1] = usrinput
 	if(!usrinput)
 		return
