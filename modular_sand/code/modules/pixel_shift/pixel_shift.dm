@@ -76,7 +76,7 @@
 		return
 	// BLUEMOON ADD END
 
-	// X-axis
+	// Y-axis
 	if(CHECK_BITFIELD(direction, NORTH))
 		if(pixel_y < PIXEL_SHIFT_MAXIMUM + base_pixel_y)
 			pixel_y++
@@ -90,7 +90,7 @@
 				client.pixel_y--
 			is_shifted = TRUE
 
-	// Y-axis
+	// X-axis
 	if(CHECK_BITFIELD(direction, EAST))
 		if(pixel_x < PIXEL_SHIFT_MAXIMUM + base_pixel_x)
 			pixel_x++
