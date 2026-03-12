@@ -11,12 +11,14 @@
 
 /mob/living/silicon/robot/set_resting(new_resting, silent = FALSE, updating = TRUE)
 	. = ..()
-	if(. != new_resting && module && module.hasrest && !silent)
+	if(.) // в . мы передаём состояние до изменения состояния в проке, тоесть в данном случае мы проверяем, что изначально мы не сидели (TRUE тоесть)
+		return
+	if(new_resting && !silent && module?.hasrest)
 		var/turf/sit_pos = get_turf(src)
-		var/obj/structure/table/tabled = locate(/obj/structure/table) in sit_pos.contents
+		var/obj/structure/table/tabled = locate(/obj/structure/table) in sit_pos
 		if(!tabled)
-			new /obj/effect/temp_visual/mook_dust/robot(get_turf(src))
+			new /obj/effect/temp_visual/mook_dust/robot(sit_pos)
 			playsound(src, 'modular_bluemoon/sound/effects/robot_sit.ogg', 25, TRUE)
 		else
-			new /obj/effect/temp_visual/mook_dust/robot/table(get_turf(src))
+			new /obj/effect/temp_visual/mook_dust/robot/table(sit_pos)
 			playsound(src, 'modular_bluemoon/sound/effects/robot_bump.ogg', 50, TRUE)
