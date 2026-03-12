@@ -11,7 +11,7 @@
 
 /mob/living/silicon/robot/set_resting(new_resting, silent = FALSE, updating = TRUE)
 	. = ..()
-	if(new_resting && module && module.hasrest)
+	if(. != new_resting && module && module.hasrest && !silent)
 		var/turf/sit_pos = get_turf(src)
 		var/obj/structure/table/tabled = locate(/obj/structure/table) in sit_pos.contents
 		if(!tabled)

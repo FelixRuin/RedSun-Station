@@ -1249,6 +1249,7 @@
 		if("FMeka Syndie") //Lyoll Request (Skyrat Port) & Добавлен дополнительно в СБ-борги по запросу SmiLeY
 			cyborg_base_icon = "fmekasyndi"
 			cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
+			hat_offset = TALL_HAT_OFFSET
 			hasrest = TRUE
 		if("Mechoid") //Danaiyka request
 			cyborg_base_icon = "mechoid-security"
