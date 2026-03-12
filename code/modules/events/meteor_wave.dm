@@ -12,6 +12,18 @@
 	earliest_start = 120 MINUTES
 	category = EVENT_CATEGORY_SPACE
 
+/datum/round_event_control/meteor_wave/canSpawnEvent(players_amt, gamemode)
+	if(istype(SSticker.mode, /datum/game_mode/dynamic))
+		var/orig_min_players = min_players
+		var/orig_earliest_start = earliest_start
+		min_players = 5
+		earliest_start = 10 MINUTES
+		. = ..()
+		min_players = orig_min_players
+		earliest_start = orig_earliest_start
+		return .
+	return ..()
+
 /datum/round_event/meteor_wave
 	start_when		= 6
 	end_when			= 66
