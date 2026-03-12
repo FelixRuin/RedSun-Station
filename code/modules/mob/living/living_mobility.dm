@@ -16,7 +16,7 @@
 	resting = new_resting
 	if(!silent)
 		to_chat(src, "<span class='notice'>Вы [resting? "устало падаете" : "поднимаетесь"].</span>")
-	if(resting == 1)
+	if(resting) // Легли
 		if(SSevents.holidays && SSevents.holidays[APRIL_FOOLS] && prob(10))
 			emote("fart")
 		SEND_SIGNAL(src, COMSIG_LIVING_RESTING)
