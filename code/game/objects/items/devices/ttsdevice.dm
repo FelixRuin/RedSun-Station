@@ -23,7 +23,7 @@
 /obj/item/ttsdevice/attack_self(mob/user)
 	user.balloon_alert_to_viewers("печатает...", "начинает печатать...")
 	playsound(src, 'sound/items/tts/started_type.ogg', 50, TRUE)
-	var/str = input(user, "", "Say Text") as text|null //tgui_input_text(user, "What would you like the device to say?", "Say Text", "", MAX_MESSAGE_LEN, encode = FALSE)
+	var/str = tgui_input_text(user, "What would you like the device to say?", "Say Text", "", MAX_MESSAGE_LEN, encode = TRUE)
 	if(QDELETED(src) || !user.canUseTopic(src))
 		return
 	if(!str)
