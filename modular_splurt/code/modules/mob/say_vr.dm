@@ -39,14 +39,16 @@
 
 	user.visible_message(message = message, self_message = message, omni = TRUE)
 
-/mob/living/verb/player_narrate(message as message)
+/mob/living/verb/player_narrate()
 	set category = "Say"
 	set name = "Narrate (Player)"
 	set desc = "Narrate an action or event! An alternative to emoting, for when your emote shouldn't start with your name!"
 	if(GLOB.say_disabled)
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
-	message = trim(html_encode(message), MAX_MESSAGE_LEN)
+	var/message = tgui_input_text(src, "Опишите действие или событие. Альтернатива эмоции, когда ваша эмоция не должна начинаться с вашего имени.", "Narrate (Player)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	if(!length(message))
+		return
 	emote("narrate", message=message)
 
 /datum/emote/sound/human/subtle/subtle_indicator
@@ -57,21 +59,13 @@
 	// Set data
 	set name = "Subtle (Indicator)"
 	set category = "Say"
-
-	// Check if say is disabled
 	if(GLOB.say_disabled)
 		// Warn user and return
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
-
-	// Display typing indicator
 	display_typing_indicator(isMe = TRUE)
-
-	// Prompt user for text input
-	var/input_message = input(usr, "What would you like to subtly emote, with a typing indicator?", "Input subtle emote") as message|null
-
-	// Remove typing indicator
+	var/message = tgui_input_text(src, "Введите сообщение, которое увидят персонажи в упор к вам.", "Subtle (Indicator)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
 	clear_typing_indicator()
-
-	// Run subtle emote with input
-	usr.emote("subtle", message = input_message)
+	if(!length(message))
+		return
+	usr.emote("subtle", message = message)

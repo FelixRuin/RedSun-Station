@@ -23,65 +23,64 @@
 //Speech verbs.
 // the _keybind verbs uses "as text" versus "as text|null" to force a popup when pressed by a keybind.
 /mob/verb/say_typing_indicator()
-	set name = "say_indicator"
+	set name = "Say (Indicator)"
 	set hidden = TRUE
 	set category = "Say"
-	client?.last_activity = world.time
-	display_typing_indicator(isSay = TRUE)
-	var/message = input(usr, "", "say") as text|null
-	// If they don't type anything just drop the message.
-	clear_typing_indicator()		// clear it immediately!
-	if(QDELETED(src))
-		return
-	if(!length(message))
-		return
-	return say_verb(message)
-
-/mob/verb/say_verb(message as text)
-	set name = "say"
-	set category = "Say"
-	if(!length(message))
-		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
+	display_typing_indicator(isSay = TRUE)
+	var/message = tgui_input_text(src, "", "Say (Indicator)", null, MAX_MESSAGE_LEN, encode = TRUE)
 	clear_typing_indicator()		// clear it immediately!
+	if(!length(message))
+		return
+	client?.last_activity = world.time
 
+	say(message)
+
+/mob/verb/say_verb()
+	set name = "Say"
+	set category = "Say"
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		return
+	var/message = tgui_input_text(src, "", "Say", null, MAX_MESSAGE_LEN, encode = TRUE)
+	clear_typing_indicator()		// clear it immediately!
+	if(!length(message))
+		return
 	client?.last_activity = world.time
 
 	say(message)
 
 /mob/verb/me_typing_indicator()
-	set name = "me_indicator"
+	set name = "Me (Indicator)"
 	set hidden = TRUE
 	set category = "Say"
-	client?.last_activity = world.time
-	display_typing_indicator(isMe = TRUE)
-	var/message = input(usr, "", "me") as message|null
-	// If they don't type anything just drop the message.
-	clear_typing_indicator()		// clear it immediately!
-	if(QDELETED(src))
-		return
-	if(!length(message))
-		return
-	return me_verb(message)
-
-/mob/verb/me_verb(message as message)
-	set name = "me"
-	set category = "Say"
-	if(!length(message))
-		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
+	display_typing_indicator(isMe = TRUE)
+	var/message = tgui_input_text(src, "", "Me (Indicator)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	clear_typing_indicator()		// clear it immediately!
 
-	if(length(message) > MAX_MESSAGE_LEN)
-		to_chat(usr, message)
-		to_chat(usr, "<span class='danger'>^^^----- The preceeding message has been DISCARDED for being over the maximum length of [MAX_MESSAGE_LEN]. It has NOT been sent! -----^^^</span>")
+	if(!length(message))
 		return
 
-	message = trim(html_encode(message), MAX_MESSAGE_LEN)
+	client?.last_activity = world.time
+
+	usr.emote("me",1,message,TRUE)
+
+/mob/verb/me_verb()
+	set name = "Me"
+	set category = "Say"
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		return
+	var/message = tgui_input_text(src, "", "Me", null, MAX_MESSAGE_LEN, TRUE, TRUE)
 	clear_typing_indicator()		// clear it immediately!
+
+	if(!length(message))
+		return
 
 	client?.last_activity = world.time
 
@@ -136,13 +135,14 @@
 	return whisper_verb(message)
 */
 
-/mob/verb/whisper_verb(message as text)
+/mob/verb/whisper_verb()
 	set name = "Whisper"
 	set category = "Say"
-	if(!length(message))
-		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		return
+	var/message = tgui_input_text(src, "", "Whisper", null, MAX_MESSAGE_LEN, encode = TRUE)
+	if(!length(message))
 		return
 	whisper(message)
 
