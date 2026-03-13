@@ -41,11 +41,11 @@ export const TextInputModal = (_, context) => {
   const windowHeight
     = 135
     + (message.length > 30 ? Math.ceil(message.length / 4) : 0)
-    + (multiline || input.length >= 30 ? 75 : 0)
+    + (multiline || input.length >= 30 ? 200 : 0)
     + (message.length && large_buttons ? 5 : 0);
 
   return (
-    <Window title={title} width={325} height={windowHeight}>
+    <Window title={title} width={400} height={windowHeight}>
       {timeout && <Loader value={timeout} />}
       <Window.Content
         onKeyDown={(event) => {
@@ -87,6 +87,7 @@ const InputArea = (props, context) => {
 
   return (
     <TextArea
+      scrollbar
       autoFocus
       autoSelect
       height={multiline || input.length >= 30 ? '100%' : '1.8rem'}
