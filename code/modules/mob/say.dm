@@ -52,6 +52,20 @@
 
 	say(message)
 
+/mob/verb/speak_verb(message as text) // Специально для "saybutton"
+	set name = "Speak"
+	if(!length(message))
+		return
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		return
+	clear_typing_indicator()		// clear it immediately!
+	if(!length(message))
+		return
+	client?.last_activity = world.time
+
+	say(message)
+
 /mob/verb/me_typing_indicator()
 	set name = "Me (Indicator)"
 	set hidden = TRUE
@@ -82,6 +96,20 @@
 	if(!length(message))
 		return
 
+	client?.last_activity = world.time
+
+	usr.emote("me",1,message,TRUE)
+
+/mob/verb/emote_verb(message as text) // Специально для "mebutton"
+	set name = "Emote"
+	if(!length(message))
+		return
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		return
+	clear_typing_indicator()		// clear it immediately!
+	if(!length(message))
+		return
 	client?.last_activity = world.time
 
 	usr.emote("me",1,message,TRUE)
