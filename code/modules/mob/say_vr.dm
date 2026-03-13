@@ -123,7 +123,7 @@
 
 					if(see_invis < invis)
 						LAZYADD(ignored_mobs_list, M) // Исключаем мобов, которые должны быть невидимы для нас
-			
+
 			if(istype(B, /atom/movable))
 				var/atom/movable/MV = B
 				if(MV.contents && MV.contents.len)
@@ -264,14 +264,14 @@
 		var/subtle_emote = stripped_multiline_input_or_reflect(user, "Введите сообщение, которое увидит, ТОЛЬКО [target_name].", "Введите скрытое сообщение", null, MAX_MESSAGE_LEN)
 		if(parameters["indicator"]) // Удаляем индикатор
 			user.clear_typing_indicator()
-		
+
 		if(subtle_emote && !check_invalid(user, subtle_emote))
 			message = subtle_emote
 		else
 			return FALSE
 
 	message = "<span class='emote'><b>[user]</b> <i>[user.say_emphasis(message)]</i></span>"
-	
+
 	// Отправка сообщений
 	if(target in view(work_distance, user))
 		to_chat(target, "[span_nicegreen("Ты замечаешь, как")] [message]")
