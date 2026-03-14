@@ -88,7 +88,7 @@
 	playsound(user, dry_fire_sound, 50, 1)  // звук пустого выстрела
 	to_chat(user, "<span class='warning'>*CLICK* Пусто!</span>")
 
-/obj/item/gun/ballistic/shotgun/automatic/rsh12/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/shotgun/automatic/rsh12/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0, stam_cost = 0)
 	. = ..()
 	if(. && magazine?.ammo_count() == 0 && !chambered?.BB)
 		playsound(user, last_round_sound, 70, 1)  // Громче для последнего выстрела
