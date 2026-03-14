@@ -6,23 +6,12 @@
 /datum/round_event_control/meteor_wave
 	name = "Meteor Wave: Normal"
 	typepath = /datum/round_event/meteor_wave
-	weight = 1
-	min_players = 60
+	weight = 6
+	min_players = 40
 	max_occurrences = 1
-	earliest_start = 120 MINUTES
+	earliest_start = 60 MINUTES
 	category = EVENT_CATEGORY_SPACE
-
-/datum/round_event_control/meteor_wave/canSpawnEvent(players_amt, gamemode)
-	if(istype(SSticker.mode, /datum/game_mode/dynamic))
-		var/orig_min_players = min_players
-		var/orig_earliest_start = earliest_start
-		min_players = 5
-		earliest_start = 10 MINUTES
-		. = ..()
-		min_players = orig_min_players
-		earliest_start = orig_earliest_start
-		return .
-	return ..()
+	gamemode_blacklist = list(ROUNDTYPE_EXTENDED)
 
 /datum/round_event/meteor_wave
 	start_when		= 6
@@ -108,8 +97,8 @@
 /datum/round_event_control/meteor_wave/threatening
 	name = "Meteor Wave: Threatening"
 	typepath = /datum/round_event/meteor_wave/threatening
-	weight = 1
-	min_players = 60
+	weight = 4
+	min_players = 50
 	max_occurrences = 1
 	earliest_start = 120 MINUTES
 	category = EVENT_CATEGORY_SPACE
@@ -121,7 +110,7 @@
 /datum/round_event_control/meteor_wave/catastrophic
 	name = "Meteor Wave: Catastrophic"
 	typepath = /datum/round_event/meteor_wave/catastrophic
-	weight = 1
+	weight = 2
 	min_players = 60
 	max_occurrences = 1
 	earliest_start = 120 MINUTES

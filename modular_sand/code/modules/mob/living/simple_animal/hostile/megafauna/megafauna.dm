@@ -57,9 +57,12 @@
 	return FALSE
 
 /mob/living/simple_animal/hostile/megafauna/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
-	if(!peaceful)
-		. = ..()
-		if(. > 0 && stat == CONSCIOUS)
+	. = ..()
+	if(. > 0 && stat == CONSCIOUS)
+		if(peaceful)
+			peaceful = FALSE
+			Retaliate()
+		else
 			Retaliate()
 
 /mob/living/simple_animal/hostile/megafauna/Life()

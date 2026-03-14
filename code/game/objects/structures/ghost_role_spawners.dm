@@ -1487,6 +1487,8 @@ GLOBAL_LIST_EMPTY(ashwalker_spawns)
 	id_trim = /datum/id_trim/syndicom/ds2
 	implants = list(/obj/item/implant/weapons_auth, /obj/item/implant/deathrattle/deepspacecrew)
 
+	accessory = list(/obj/item/clothing/accessory/permit/special/deep_space_syndicate)
+
 /datum/outfit/ds2/syndicate/service
 	name = "DS-2 General Staff"
 	uniform = /obj/item/clothing/under/syndicate
@@ -1569,6 +1571,8 @@ GLOBAL_LIST_EMPTY(ashwalker_spawns)
 	id = /obj/item/card/id/syndicate/advanced/ds/gold/command
 	implants = list(/obj/item/implant/weapons_auth, /obj/item/implant/deathrattle/deepspacecrew)
 	id_trim = /datum/id_trim/syndicom/ds2
+
+	accessory = list(/obj/item/clothing/accessory/permit/special/deep_space_syndicate)
 
 /datum/outfit/ds2/syndicate_command/masteratarms
 	name = "DS-2 Master At Arms"
