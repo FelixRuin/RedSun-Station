@@ -43,8 +43,8 @@
 /obj/item/clothing/mask/gas/atmos/captain/corporate
 	name = "\improper CentCom Gas Mask"
 	desc = "Oooh, gold and green. Fancy! This should help as you sit in your office."
-	icon_state = "gas_cap"
-	item_state = "gasmask_captain"
+	icon_state = "gas_centcom"
+	item_state = "gasmask_centcom"
 
 /obj/item/clothing/mask/gas/glass
 	name = "Glass Gas Mask"
