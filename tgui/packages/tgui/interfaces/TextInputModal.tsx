@@ -42,10 +42,16 @@ export const TextInputModal = (_, context) => {
     = 135
     + (message.length > 30 ? Math.ceil(message.length / 4) : 0)
     + (multiline || input.length >= 30 ? 200 : 0)
+    + (multiline ? 200 : 0)
     + (message.length && large_buttons ? 5 : 0);
 
+  // Dynamically changes the window width based on the message.
+  const windowWidth
+    = 300
+    + (multiline ? 100 : 0)
+
   return (
-    <Window title={title} width={400} height={windowHeight}>
+    <Window title={title} width={windowWidth} height={windowHeight} canClose={false}>
       {timeout && <Loader value={timeout} />}
       <Window.Content
         onKeyDown={(event) => {
@@ -87,16 +93,20 @@ const InputArea = (props, context) => {
 
   return (
     <TextArea
-      scrollbar
+      scrollbar = {multiline}
+      nowrap = {!multiline}
       autoFocus
       autoSelect
-      height={multiline || input.length >= 30 ? '100%' : '1.8rem'}
+      height= '100%'
       maxLength={max_length > 0 && max_length <= 2147483647 ? max_length : undefined}
       onEscape={() => act('cancel')}
       onEnter={(event) => {
         act('submit', { entry: input });
-        event.preventDefault();
       }}
+      onKeyDown={(event) => {
+        if(event.key === KEY_ENTER && (!event.shiftKey || !multiline)) {
+          event.preventDefault();
+      }}}
       onInput={(_, value) => onType(value)}
       placeholder="Type something..."
       value={input}

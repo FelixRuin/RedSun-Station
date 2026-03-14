@@ -72,7 +72,7 @@ $border-radius: Input.$border-radius !default;
   white-space: pre-wrap;
 }
 
-.TextArea__nowrap {
+.TextArea--nowrap {
   white-space: nowrap;
   overflow-wrap: normal;
   overflow-x: scroll;
