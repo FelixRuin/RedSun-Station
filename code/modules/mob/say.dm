@@ -60,8 +60,6 @@
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 	clear_typing_indicator()		// clear it immediately!
-	if(!length(message))
-		return
 	client?.last_activity = world.time
 
 	say(message)
@@ -108,8 +106,6 @@
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 	clear_typing_indicator()		// clear it immediately!
-	if(!length(message))
-		return
 	client?.last_activity = world.time
 
 	usr.emote("me",1,message,TRUE)

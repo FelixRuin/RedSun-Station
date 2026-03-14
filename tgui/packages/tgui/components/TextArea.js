@@ -177,7 +177,7 @@ export class TextArea extends Component {
       maxLength,
       placeholder,
       scrollbar,
-      nowrap,
+      singleline,
       ...boxProps
     } = this.props;
     // Box props
@@ -199,7 +199,7 @@ export class TextArea extends Component {
           className={classes([
             'TextArea__textarea',
             scrollbar && 'TextArea__textarea--scrollable',
-            nowrap && 'TextArea--nowrap',
+            singleline && 'TextArea--singleline',
           ])}
           placeholder={placeholder}
           onChange={this.handleOnChange}

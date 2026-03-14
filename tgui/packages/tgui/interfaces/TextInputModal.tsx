@@ -39,10 +39,10 @@ export const TextInputModal = (_, context) => {
   };
   // Dynamically changes the window height based on the message.
   const windowHeight
-    = 135
+    = 140
     + (message.length > 30 ? Math.ceil(message.length / 4) : 0)
-    + (multiline ? 200 : 0)
-    + (message.length && large_buttons ? 5 : 0);
+    + (multiline ? 195 : 0)
+    + (message.length && large_buttons ? 5 : 0)
 
   // Dynamically changes the window width based on the message.
   const windowWidth
@@ -60,7 +60,8 @@ export const TextInputModal = (_, context) => {
           if (event.key === KEY_ESCAPE) {
             act('cancel');
           }
-        }}>
+        }}
+        onClick={() => document.querySelector('.TextArea__textarea')?.focus()}>
         <Section fill>
           <Stack fill vertical>
             <Stack.Item>
@@ -93,19 +94,18 @@ const InputArea = (props, context) => {
   return (
     <TextArea
       scrollbar = {multiline}
-      nowrap = {!multiline}
+      singleline = {!multiline}
       autoFocus
       autoSelect
       height= '100%'
       maxLength={max_length > 0 && max_length <= 2147483647 ? max_length : undefined}
       onEscape={() => act('cancel')}
       onEnter={(event) => {
-        act('submit', { entry: input });
-      }}
-      onKeyDown={(event) => {
-        if(event.key === KEY_ENTER && (!event.shiftKey || !multiline)) {
+        if(!multiline || !event.shiftKey) {
           event.preventDefault();
-      }}}
+          act('submit', { entry: input });
+          }
+      }}
       onInput={(_, value) => onType(value)}
       placeholder="Type something..."
       value={input}
