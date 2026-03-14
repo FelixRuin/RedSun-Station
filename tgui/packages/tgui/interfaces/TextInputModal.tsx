@@ -101,11 +101,12 @@ const InputArea = (props, context) => {
       maxLength={max_length > 0 && max_length <= 2147483647 ? max_length : undefined}
       onEscape={() => act('cancel')}
       onEnter={(event) => {
-        if(!multiline || !event.shiftKey) {
-          event.preventDefault();
-          act('submit', { entry: input });
-          }
+        act('submit', { entry: input });
       }}
+      onKeyDown={(event) => {
+        if(event.key === KEY_ENTER && (!event.shiftKey || !multiline)) {
+          event.preventDefault();
+      }}}
       onInput={(_, value) => onType(value)}
       placeholder="Type something..."
       value={input}
