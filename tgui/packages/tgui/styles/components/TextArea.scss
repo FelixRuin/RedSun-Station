@@ -75,5 +75,5 @@ $border-radius: Input.$border-radius !default;
 .TextArea--nowrap {
   white-space: nowrap;
   overflow-wrap: normal;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
