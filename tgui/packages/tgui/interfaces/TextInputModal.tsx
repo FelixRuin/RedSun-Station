@@ -41,7 +41,6 @@ export const TextInputModal = (_, context) => {
   const windowHeight
     = 135
     + (message.length > 30 ? Math.ceil(message.length / 4) : 0)
-    + (multiline || input.length >= 30 ? 200 : 0)
     + (multiline ? 200 : 0)
     + (message.length && large_buttons ? 5 : 0);
 

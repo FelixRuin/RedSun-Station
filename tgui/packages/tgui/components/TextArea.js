@@ -209,7 +209,6 @@ export class TextArea extends Component {
           onPaste={this.handleOnPaste}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          onEnter={this.onEnter}
           maxLength={maxLength} />
       </Box>
     );
