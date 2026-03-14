@@ -44,7 +44,7 @@ export const TextInputModal = (_, context) => {
     + (multiline ? 195 : 0)
     + (message.length && large_buttons ? 5 : 0)
 
-  // Dynamically changes the window width based on the message.
+  // Window width based multiline.
   const windowWidth
     = 300
     + (multiline ? 100 : 0)
