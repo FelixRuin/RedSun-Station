@@ -6,7 +6,12 @@
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>", confidential = TRUE)
 		return
 
-	var/message = tgui_input_text(src, "", "Pray", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(usr, "", "Pray", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(usr, "", "Pray")
+
 	if(!length(message))
 		return
 	log_prayer("[src.key]/([src.name]): [message]")

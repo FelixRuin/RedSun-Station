@@ -30,7 +30,13 @@
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 	display_typing_indicator(isSay = TRUE)
-	var/message = tgui_input_text(src, "", "Say (Indicator)", null, MAX_MESSAGE_LEN, encode = TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(src, "", "Say (Indicator)", null, MAX_MESSAGE_LEN, encode = TRUE)
+	else
+		message = input(src, "", "Say (Indicator)") as text|null
+
 	clear_typing_indicator()		// clear it immediately!
 	if(!length(message))
 		return
@@ -44,7 +50,13 @@
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
-	var/message = tgui_input_text(src, "", "Say", null, MAX_MESSAGE_LEN, encode = TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(usr, "", "Say", null, MAX_MESSAGE_LEN, encode = TRUE)
+	else
+		message = stripped_input(usr, "", "Say")
+
 	clear_typing_indicator()		// clear it immediately!
 	if(!length(message))
 		return
@@ -72,7 +84,13 @@
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 	display_typing_indicator(isMe = TRUE)
-	var/message = tgui_input_text(src, "", "Me (Indicator)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(usr, "", "Me (Indicator)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(usr, "", "Me (Indicator)")
+
 	clear_typing_indicator()		// clear it immediately!
 
 	if(!length(message))
@@ -88,7 +106,13 @@
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
-	var/message = tgui_input_text(src, "", "Me", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(usr, "", "Me", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(usr, "", "Me")
+
 	clear_typing_indicator()		// clear it immediately!
 
 	if(!length(message))
@@ -149,23 +173,19 @@
 		var/customsayverb = findtext_char(input, "*")
 		return lowertext(copytext_char(input, 1, customsayverb))
 
-/*
-//This proc is no longer used for a long time.
-/mob/proc/whisper_keybind()
-	client?.last_activity = world.time
-	var/message = input(src, "", "whisper") as text|null
-	if(!length(message))
-		return
-	return whisper_verb(message)
-*/
-
 /mob/verb/whisper_verb()
 	set name = "Whisper"
 	set category = "Say"
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
-	var/message = tgui_input_text(src, "", "Whisper", null, MAX_MESSAGE_LEN, encode = TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(usr, "", "Whisper", null, MAX_MESSAGE_LEN, encode = TRUE)
+	else
+		message = stripped_input(usr, "", "Whisper")
+
 	if(!length(message))
 		return
 	whisper(message)

@@ -46,7 +46,13 @@
 	if(GLOB.say_disabled)
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
-	var/message = tgui_input_text(src, "Опишите действие или событие. Альтернатива эмоции, когда ваша эмоция не должна начинаться с вашего имени.", "Narrate (Player)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(src, "Опишите действие или событие. Альтернатива эмоции, когда ваша эмоция не должна начинаться с вашего имени.", "Narrate (Player)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(src, "Опишите действие или событие. Альтернатива эмоции, когда ваша эмоция не должна начинаться с вашего имени.", "Narrate (Player)")
+
 	if(!length(message))
 		return
 	emote("narrate", message=message)
@@ -64,7 +70,13 @@
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 	display_typing_indicator(isMe = TRUE)
-	var/message = tgui_input_text(src, "Введите сообщение, которое увидят персонажи в упор к вам.", "Subtle (Indicator)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(src, "Введите сообщение, которое увидят персонажи в упор к вам и призраки.", "Subtle (Indicator)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(src, "Введите сообщение, которое увидят персонажи в упор к вам и призраки.", "Subtle (Indicator)")
+
 	clear_typing_indicator()
 	if(!length(message))
 		return
