@@ -11,7 +11,7 @@
 	if(client?.prefs.tgui_input_verbs)
 		message = tgui_input_text(src, "", "Whisper (Indicator)", null, MAX_MESSAGE_LEN, encode = TRUE)
 	else
-		message = input(src, "", "Whisper (Indicator)") as text|null
+		message = stripped_input(src, "", "Whisper (Indicator)")
 
 	clear_typing_indicator()
 	if(!length(message))

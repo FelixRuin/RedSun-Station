@@ -28,7 +28,7 @@
 	if(user.client?.prefs.tgui_input_verbs)
 		str = tgui_input_text(user, "What would you like the device to say?", "Say Text", "", MAX_MESSAGE_LEN, encode = TRUE)
 	else
-		str = input(user, "What would you like the device to say?", "Say Text") as text|null
+		str = stripped_input(user, "What would you like the device to say?", "Say Text")
 
 	if(QDELETED(src) || !user.canUseTopic(src))
 		return

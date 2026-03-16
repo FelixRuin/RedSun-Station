@@ -55,7 +55,7 @@
 	if(client?.prefs.tgui_input_verbs)
 		message = tgui_input_text(usr, "", "Say", null, MAX_MESSAGE_LEN, encode = TRUE)
 	else
-		message = input(usr, "", "Say") as text|null
+		message = stripped_input(usr, "", "Say")
 
 	clear_typing_indicator()		// clear it immediately!
 	if(!length(message))
@@ -173,16 +173,6 @@
 		var/customsayverb = findtext_char(input, "*")
 		return lowertext(copytext_char(input, 1, customsayverb))
 
-/*
-//This proc is no longer used for a long time.
-/mob/proc/whisper_keybind()
-	client?.last_activity = world.time
-	var/message = input(src, "", "whisper") as text|null
-	if(!length(message))
-		return
-	return whisper_verb(message)
-*/
-
 /mob/verb/whisper_verb()
 	set name = "Whisper"
 	set category = "Say"
@@ -194,7 +184,7 @@
 	if(client?.prefs.tgui_input_verbs)
 		message = tgui_input_text(usr, "", "Whisper", null, MAX_MESSAGE_LEN, encode = TRUE)
 	else
-		message = input(usr, "", "Whisper") as text|null
+		message = stripped_input(usr, "", "Whisper")
 
 	if(!length(message))
 		return
