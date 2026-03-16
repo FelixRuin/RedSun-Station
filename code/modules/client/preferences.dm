@@ -2530,7 +2530,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/allowed_label = src.use_modern_translations ? get_modern_text("allowed", src) : "Allowed"
 					var/disallowed_label = src.use_modern_translations ? get_modern_text("disallowed", src) : "Disallowed"
 					var/tgui_input_label = src.tgui_input_mode ? get_modern_text("tgui_input_mode", src) : "Input Framework"
-					var/tgui_input_verbs_label = src.tgui_input_verbs ? get_modern_text("tgui_input_verbs", src) : "Input SAY Framework"
+					var/tgui_input_verbs_label = src.tgui_input_verbs ? get_modern_text("tgui_input_verbs", src) : "Input Verbs (SAY, ME, OOC, etc.) Framework"
 					var/tgui_monitors_label = src.use_modern_translations ? get_modern_text("tgui_monitors", src) : "tgui Monitors"
 					var/tgui_monitor_primary = src.use_modern_translations ? get_modern_text("tgui_monitor_primary", src) : "Primary"
 					var/tgui_monitor_all = src.use_modern_translations ? get_modern_text("tgui_monitor_all", src) : "All"
