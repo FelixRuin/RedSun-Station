@@ -6,7 +6,13 @@
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 	display_typing_indicator(isSay = TRUE)
-	var/message = tgui_input_text(src, "", "Whisper (Indicator)", null, MAX_MESSAGE_LEN, encode = TRUE)
+	
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(src, "", "Whisper (Indicator)", null, MAX_MESSAGE_LEN, encode = TRUE)
+	else
+		message = input(src, "", "Whisper (Indicator)") as text|null
+
 	clear_typing_indicator()
 	if(!length(message))
 		return

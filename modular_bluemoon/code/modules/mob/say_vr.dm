@@ -5,7 +5,13 @@
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 	display_typing_indicator(isMe = TRUE)
-	var/message = tgui_input_text(src, "Введите сообщение, которое увидят персонажи в упор к вам. Призраки его не увидят.", "Введите скрытое сообщение", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(src, "Введите сообщение, которое увидят персонажи в упор к вам. Призраки его не увидят.", "Введите скрытое сообщение", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(src, "Введите сообщение, которое увидят персонажи в упор к вам. Призраки его не увидят.", "Введите скрытое сообщение")
+		
 	clear_typing_indicator()
 	if(!length(message))
 		return

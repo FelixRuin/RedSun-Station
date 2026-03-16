@@ -16,10 +16,17 @@
 		return
 
 	display_typing_indicator(isMe = TRUE)
-	activity = tgui_input_text(src, "Здесь можно описать продолжительную (долго длящуюся) деятельность, которая будет отображаться столько, сколько тебе нужно.", "Опиши свою деятельность", "", MAX_MESSAGE_LEN, encode = TRUE)
+
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(src, "Здесь можно описать продолжительную (долго длящуюся) деятельность, которая будет отображаться столько, сколько тебе нужно.", "Опиши свою деятельность", "", MAX_MESSAGE_LEN, encode = TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(src, "Здесь можно описать продолжительную (долго длящуюся) деятельность, которая будет отображаться столько, сколько тебе нужно.", "Опиши свою деятельность")
+	
 	clear_typing_indicator()
-	if(!length(activity))
+	if(!length(message))
 		return
+	activity = message
 	usr.emote("me",1,activity,TRUE)
 	activity = capitalize(activity)
 	set_activity_indicator(TRUE)
