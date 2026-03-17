@@ -88,7 +88,7 @@
 	playsound(user, dry_fire_sound, 50, 1)  // звук пустого выстрела
 	to_chat(user, "<span class='warning'>*CLICK* Пусто!</span>")
 
-/obj/item/gun/ballistic/shotgun/automatic/rsh12/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/shotgun/automatic/rsh12/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0, stam_cost = 0)
 	. = ..()
 	if(. && magazine?.ammo_count() == 0 && !chambered?.BB)
 		playsound(user, last_round_sound, 70, 1)  // Громче для последнего выстрела
@@ -340,11 +340,10 @@
 		O.take_damage(18)
 		O.take_damage(8)
 
-/// Игрушечная кувалда на основе banhammer — накладывает squish при ударе
 /obj/item/inteq_sledgehammer/toy
 	name = "toy sledgehammer"
 	desc = "A cheap plastic replica of an InteQ sledgehammer. BONK!"
-	force = 1
+	force = 0
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 3
@@ -356,7 +355,7 @@
 	wound_bonus = 0
 	bare_wound_bonus = 0
 	armour_penetration = 0
-	attack_speed = CLICK_CD_MELEE
+	attack_speed = CLICK_CD_MELEE * 0.5
 	slot_flags = ITEM_SLOT_BELT
 
 /obj/item/inteq_sledgehammer/toy/ComponentInitialize()
@@ -366,13 +365,8 @@
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		C.AddElement(/datum/element/squish, 3 SECONDS)
-	if(user.zone_selected == BODY_ZONE_HEAD)
-		M.visible_message("<span class='danger'>[user] бахнул [M] по голове [src]!</span>", "<span class='userdanger'>[user] бахнул тебя по голове [src]!</span>", "<span class='hear'>Слышен звук баха.</span>")
-	else
-		M.visible_message("<span class='danger'>[user] нашлёпал [M] [src]!</span>", "<span class='userdanger'>[user] нашлёпал тебя [src]!</span>", "<span class='hear'>Слышен звук хлюпа.</span>")
 	playsound(loc, 'modular_splurt/sound/misc/bonk.ogg', 1000, 1)
-	if(user.a_intent != INTENT_HELP)
-		return ..()
+	..()
 
 /obj/item/inteq_sledgehammer/toy/afterattack(atom/A, mob/user, proximity)
 	return
