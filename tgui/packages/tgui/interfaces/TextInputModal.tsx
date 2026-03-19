@@ -40,7 +40,7 @@ export const TextInputModal = (_, context) => {
   // Dynamically changes the window height based on the message.
   const windowHeight
     = 140
-    + (message.length > 30 ? Math.ceil(message.length / 4) : 0)
+    + (message.length > 30 ? Math.ceil(message.length * 0.45) : 0)
     + (multiline ? 195 : 0)
     + (message.length && large_buttons ? 5 : 0)
 
@@ -97,7 +97,7 @@ const InputArea = (props, context) => {
       singleline = {!multiline}
       autoFocus
       autoSelect
-      height= '100%'
+      height = {multiline ? '100%' : '3em'}
       maxLength={max_length > 0 && max_length <= 2147483647 ? max_length : undefined}
       onEscape={() => act('cancel')}
       onEnter={(event) => {
