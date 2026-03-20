@@ -97,6 +97,8 @@
 
 /// Max chars to process through say_emphasis regex - prevents ReDoS/crash from crafted input (illegal operation in chat)
 #define MAX_SAY_EMPHASIS_LEN	4096
+/// Max length for filter words - prevents regex engine issues from malformed filter entries
+#define MAX_FILTER_WORD_LEN	256
 //ambition start
 #define MAX_AMBITION_LEN		1024
 //ambition end

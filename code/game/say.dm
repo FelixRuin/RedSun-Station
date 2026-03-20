@@ -141,6 +141,11 @@ GLOBAL_LIST_INIT(freqtospan, list(
 
 /// Scans the input sentence for speech emphasis modifiers, notably |italics|, +bold+, and _underline_ -mothblocks
 /atom/movable/proc/say_emphasis(input)
+	if(length_char(input) > MAX_SAY_EMPHASIS_LEN)
+		input = copytext_char(input, 1, MAX_SAY_EMPHASIS_LEN + 1)
+	// Skip regex for long messages - Replace_char can crash (illegal operation) on complex input
+	if(length_char(input) > 1024)
+		return input
 	ENCODE_HTML_EMPHASIS(input, "\\|", "i", italics)
 	ENCODE_HTML_EMPHASIS(input, "\\+", "b", bold)
 	ENCODE_HTML_EMPHASIS(input, "_", "u", underline)
