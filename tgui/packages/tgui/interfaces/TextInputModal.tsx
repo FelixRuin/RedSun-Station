@@ -61,7 +61,7 @@ export const TextInputModal = (_, context) => {
             act('cancel');
           }
         }}
-        onClick={() => document.querySelector('.TextArea__textarea')?.focus()}>
+        onClick={() => (document.querySelector('.TextArea__textarea' ) as HTMLElement)?.focus()}>
         <Section fill>
           <Stack fill vertical>
             <Stack.Item>
