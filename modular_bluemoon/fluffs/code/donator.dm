@@ -1073,18 +1073,6 @@
 	ckeywhitelist = list("fedor1545")
 	subcategory = LOADOUT_SUBCATEGORIES_DON04
 
-/datum/gear/donator/bm/razorsong
-	name = "Razorsong Kit"
-	slot = ITEM_SLOT_BACKPACK
-	path = /obj/item/modkit/razorsong_kit
-	ckeywhitelist = list("xaeshkavd")
-
-/datum/gear/donator/bm/noxscoutcoat
-	name = "Military-Civilian Scout Coat"
-	slot = ITEM_SLOT_BACKPACK
-	path = /obj/item/clothing/suit/donator/bm/noxscoutcoat
-	ckeywhitelist = list("xaeshkavd")
-
 /datum/gear/donator/bm/rsh_future
 	name = "Special .38 Mars Kit"
 	slot = ITEM_SLOT_BACKPACK
@@ -1109,6 +1097,24 @@
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/clothing/neck/tie/oftok
 	ckeywhitelist = list("xaeshkavd", "akinight", "heathkit1", "scramblescream", "definitelynotnesuby", "sosnovskii","hellsinggc")
+
+/datum/gear/donator/bm/hecu_black
+	name = "Black HECU Backpack"
+	path = /obj/item/storage/backpack/hecu/black
+	slot = ITEM_SLOT_BACKPACK
+	ckeywhitelist = list("xaeshkavd")
+
+/datum/gear/donator/bm/razorsong
+	name = "Razorsong Kit"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/modkit/razorsong_kit
+	ckeywhitelist = list("xaeshkavd")
+
+/datum/gear/donator/bm/noxscoutcoat
+	name = "Military-Civilian Scout Coat"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/clothing/suit/donator/bm/noxscoutcoat
+	ckeywhitelist = list("xaeshkavd")
 
 /datum/gear/donator/bm/agentcape
 	name = "Marketing agent's cape"
@@ -1487,7 +1493,7 @@
 	name = "Millie plush"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/toy/plush/bm/millie
-	ckeywhitelist = list("pingvas", "ty4kahahebe", "scorpionch")
+	ckeywhitelist = list("pingvas", "ty4kahahebe", "scorpionch", "blatoff")
 
 /datum/gear/donator/bm/praxil_seven
 	name = "Praxil-7 Mark II Kit"
@@ -1735,12 +1741,6 @@
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/modkit/portalabomination_kit
 	ckeywhitelist = list("architect0r")
-
-/datum/gear/donator/bm/hecu_black
-	name = "Black HECU Backpack"
-	path = /obj/item/storage/backpack/hecu/black
-	slot = ITEM_SLOT_BACKPACK
-	ckeywhitelist = list("xaeshkavd")
 
 /datum/gear/donator/bm/legion_mask_frank
 	name = "Frank mask"
@@ -2083,7 +2083,7 @@
 	name = "LIZARED Open Panties"
 	slot = ITEM_SLOT_UNDERWEAR
 	path = /obj/item/clothing/underwear/briefs/panties/lizared/exposed
-	ckeywhitelist = list("pingvas", "ty4kahahebe")
+	ckeywhitelist = list("pingvas", "ty4kahahebe", "blatoff")
 
 /datum/gear/donator/bm/custom_vape
 	name = "Custom E-Cigarette"

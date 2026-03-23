@@ -212,6 +212,8 @@ SUBSYSTEM_DEF(title_bm)
 /datum/controller/subsystem/title_bm/proc/_get_player_counts()
 	var/ready = 0
 	for(var/mob/dead/new_player/np as anything in GLOB.new_player_list)
+		if(QDELETED(np))
+			continue
 		if(np.ready)
 			ready++
 	return list(length(GLOB.clients), length(GLOB.new_player_list), ready)
@@ -234,7 +236,7 @@ SUBSYSTEM_DEF(title_bm)
 /datum/controller/subsystem/title_bm/proc/update_player_counts_all()
 	var/payload = _build_counts_payload()
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
-		if(!player.bm_lobby_ready || !player.client)
+		if(QDELETED(player) || !player.bm_lobby_ready || !player.client)
 			continue
 		player.client << output(payload, "bm_lobby_browser:bm_update_counts")
 
@@ -252,7 +254,7 @@ SUBSYSTEM_DEF(title_bm)
 	if(!SSticker?.login_music)
 		return
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
-		if(!player.bm_lobby_ready || !player.client || player.bm_lobby_music_path)
+		if(QDELETED(player) || !player.bm_lobby_ready || !player.client || player.bm_lobby_music_path)
 			continue
 		player.client.bm_push_lobby_music()
 

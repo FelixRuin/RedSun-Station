@@ -37289,6 +37289,9 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/box,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/dark/textured/half,
 /area/ai_monitored/security/armory)
 "dVh" = (
