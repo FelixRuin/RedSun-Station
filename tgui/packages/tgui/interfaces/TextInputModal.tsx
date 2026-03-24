@@ -50,7 +50,7 @@ export const TextInputModal = (_, context) => {
     + (multiline ? 100 : 0)
 
   return (
-    <Window title={title} width={windowWidth} height={windowHeight} canClose={false}>
+    <Window title={title} width={windowWidth} height={windowHeight}>
       {timeout && <Loader value={timeout} />}
       <Window.Content
         onKeyDown={(event) => {
