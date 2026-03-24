@@ -706,7 +706,6 @@
 	name = "Nova plushie"
 	desc = "Ого, это же Новотька! Приве-ет, Новотька~! Выглядит как настоящая, и даже пахнет.. мышками и сырым мясом!"
 	icon_state = "nova"
-	icon = 'modular_bluemoon/icons/obj/toys/plushes.dmi'
 	attack_verb = list("bites", "disarms")
 	squeak_override = list('modular_bluemoon/sound/plush/nova_secret.ogg' = 1, 'modular_bluemoon/sound/plush/nova_wi.ogg' = 5, 'modular_bluemoon/sound/plush/nova_lisa.ogg' = 2)
 	can_you_fuck_plush = FALSE
@@ -715,7 +714,22 @@
 	name = "Zetta plushie"
 	desc = "Плюшевая игрушка, очень похожая на Зетту! Кажется её 'одежда' пришита намертво. Зетта, Зетточка не дружит с Омегой и Вегой"
 	icon_state = "zetta"
-	icon = 'modular_bluemoon/icons/obj/toys/plushes.dmi'
 	attack_verb = list("scratches", "claws")
 	squeak_override = list('modular_bluemoon/sound/plush/zetta_hahaha.ogg' = 2, 'modular_bluemoon/sound/plush/zetta_nya.ogg' = 4, 'modular_bluemoon/sound/plush/zetta_redo.ogg' = 4)
 	can_you_fuck_plush = FALSE
+
+/obj/item/toy/plush/bm/vinc
+	name = "Vinc Plushie"
+	desc = "An adorable vulp-wolf plushie. He's even got a removable shirt to see the tattoo on his back!"
+	icon_state = "vinc"
+	item_state = "vinc"
+	always_reskinnable = TRUE
+	unique_reskin = list(
+		"Normal" = list(RESKIN_ICON_STATE = "vinc"),
+		"Tongue out" = list(RESKIN_ICON_STATE = "vinc_tongue")
+	)
+	squeak_override = list('modular_bluemoon/sound/plush/vinc_fuck.ogg' = 2, 'modular_bluemoon/sound/plush/vinc_fahhh.ogg' = 4)
+
+/obj/item/toy/plush/bm/vinc/reskin_obj(mob/user)
+	if(current_skin == "Tongue out")
+		playsound(src, 'modular_bluemoon/sound/plush/vinc_bleh.ogg', 30)
