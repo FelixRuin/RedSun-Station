@@ -55,20 +55,26 @@
 	RegisterSignal(target, COMSIG_PARENT_EXAMINE, PROC_REF(wrapped_on_examine))
 	RegisterSignal(target, COMSIG_ATOM_UPDATE_ICON_STATE, PROC_REF(on_update_icon))
 	forceMove(target)
+	if(user)
+		user.update_inv_glasses()
 
 /obj/item/clothing/glasses/cover/proc/on_update_icon(datum/source)
 	SIGNAL_HANDLER
 	save_target_data(wrapped_on)
 	update_icon(UPDATE_ICON_STATE)
+	if(iscarbon(wrapped_on.loc))
+		var/mob/living/carbon/wearer = wrapped_on.loc
+		if(wearer.glasses == wrapped_on)
+			wearer.update_inv_glasses()
 
 /obj/item/clothing/glasses/cover/proc/save_target_data(obj/item/clothing/glasses/target)
 	if(target.icon && target.icon != previous_icon_data[DATA_ICON] && target.icon != icon)
 		previous_icon_data[DATA_ICON] = target.icon
 	if(target.icon_state && target.icon_state != previous_icon_data[DATA_ICON_STATE] && target.icon_state != icon_state)
 		previous_icon_data[DATA_ICON_STATE] = target.icon_state
-	if(target.mob_overlay_icon && target.mob_overlay_icon != previous_icon_data[DATA_ICON_WORN_OVERLAY] && target.icon_state != icon_state)
+	if(target.mob_overlay_icon && target.mob_overlay_icon != previous_icon_data[DATA_ICON_WORN_OVERLAY] && target.mob_overlay_icon != mob_overlay_icon)
 		previous_icon_data[DATA_ICON_WORN_OVERLAY] = target.mob_overlay_icon
-	if(target.color && target.color != previous_icon_data[DATA_ICON] && target.color != color)
+	if(target.color && target.color != previous_icon_data[DATA_COLOR] && target.color != color)
 		previous_icon_data[DATA_COLOR] = target.color
 
 /obj/item/clothing/glasses/cover/proc/load_and_del_target_data(obj/item/clothing/glasses/target)
@@ -156,3 +162,4 @@
 #undef DATA_ICON
 #undef DATA_ICON_STATE
 #undef DATA_ICON_WORN_OVERLAY
+#undef DATA_COLOR
