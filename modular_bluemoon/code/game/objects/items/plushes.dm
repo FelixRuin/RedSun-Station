@@ -733,3 +733,17 @@
 /obj/item/toy/plush/bm/vinc/reskin_obj(mob/user)
 	if(current_skin == "Tongue out")
 		playsound(src, 'modular_bluemoon/sound/plush/vinc_bleh.ogg', 30)
+
+/obj/item/toy/plush/bm/wolf
+	name = "Wolf plushie"
+	desc = "Мягкая на вид игрушка, но с очень злыми глазами, пахнет дорогим вином."
+	icon_state = "wolf"
+	squeak_override = list('sound/voice/woof.ogg' = 1)
+	can_you_fuck_plush = FALSE
+
+/obj/item/toy/plush/bm/ezuar
+	name = "Ezuar plushie"
+	desc = "На удивление большая и относительно тяжёлая игрушка синта по имени Эзуар, имя вам кого-то напоминает (или не напоминает), но вы не можете понять, почему оно выбито на этикетке игрушки.\n Так же имеется надпись: <span class='warning'>\"не кормить во избежание сценария серой слизи. Так же запрещается обнимать во избежание попыток поглощения\"</span>"
+	icon_state = "ezuar"
+	squeak_override = list('modular_citadel/sound/voice/hiss.ogg' = 1)
+	can_you_fuck_plush = FALSE
