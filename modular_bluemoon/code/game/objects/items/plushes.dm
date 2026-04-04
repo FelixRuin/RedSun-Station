@@ -750,7 +750,7 @@
 
 /obj/item/toy/plush/bm/oldman
 	name = "Old Man plushie"
-	desc = "Вам хочется врезать емy."
+	desc = "Вам хочется врезать ему."
 	icon_state = "oldman"
 	squeak_override = list('modular_bluemoon/sound/plush/oldman_dont_do_it.ogg' = 1, 'modular_bluemoon/sound/plush/oldman_hate.ogg' = 1, 'modular_bluemoon/sound/plush/oldman_too_old.ogg' = 1)
 	can_you_fuck_plush = FALSE
