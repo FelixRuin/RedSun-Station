@@ -55,6 +55,7 @@
 	glasses = /obj/item/clothing/glasses/hud/health/night/syndicate
 	back = /obj/item/storage/backpack/ert_commander
 	belt = /obj/item/storage/belt/military/ert_min
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,
 		/obj/item/storage/box/ammo/wt=1,
 		/obj/item/storage/box/ert_commander=1,
@@ -71,6 +72,7 @@
 	back = /obj/item/storage/backpack/ert_commander
 	belt = /obj/item/storage/belt/military/ert_min
 	suit_store = /obj/item/gun/ballistic/automatic/wt550/standart
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,
 		/obj/item/storage/box/ert_commander=1,
 		/obj/item/storage/firstaid/regular=1,\
@@ -113,6 +115,7 @@
 	suit_store = /obj/item/gun/energy/modular_laser_rifle
 	l_pocket = /obj/item/gun/ballistic/revolver/mateba
 	shoes = /obj/item/clothing/shoes/magboots/syndie/advance
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/box/ert_commander=1,\
 		/obj/item/storage/firstaid/regular=1,\
@@ -135,6 +138,7 @@
 	suit_store = /obj/item/gun/energy/modular_laser_rifle/zealstar
 	l_pocket = /obj/item/gun/energy/pulse/pistol/loyalpin
 	shoes = /obj/item/clothing/shoes/magboots/advance/debug
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom_max=1,\
 		/obj/item/storage/box/ert_commander=1,
 		/obj/item/storage/firstaid/tactical/ert_first = 1,\
@@ -162,6 +166,7 @@
 	belt = /obj/item/storage/belt/military/ert_min
 	l_hand = null
 	back = /obj/item/storage/backpack/ert_commander/ert_security
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/box/ammo/wt=1,
 		/obj/item/storage/firstaid/regular=1,
@@ -180,6 +185,7 @@
 	belt = /obj/item/storage/belt/military/ert_min
 	back = /obj/item/storage/backpack/ert_commander/ert_security
 	suit_store = /obj/item/gun/ballistic/automatic/wt550/standart
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 
 		/obj/item/storage/box/handcuffs=1,\
@@ -214,6 +220,7 @@
 	l_pocket = /obj/item/gun/ballistic/revolver/mateba
 	belt = /obj/item/storage/belt/military/ert_max
 
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/box/handcuffs=1,\
 		/obj/item/storage/firstaid/regular=1,\
@@ -237,6 +244,7 @@
 	mask = /obj/item/clothing/mask/gas/sechailer/swat
 	suit_store = /obj/item/gun/energy/modular_laser_rifle/zealstar
 	l_pocket = /obj/item/gun/energy/pulse/pistol/loyalpin
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom_max=1,\
 		/obj/item/storage/firstaid/tactical/ert_first = 1,\
 		/obj/item/storage/firstaid/tactical/ert_second = 1,\
@@ -265,6 +273,7 @@
 	back = /obj/item/storage/backpack/ert_commander/ert_medical
 	belt = /obj/item/defibrillator/compact/loaded_ert
 	l_hand = null
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/box/ammo/wt=1,
 		/obj/item/storage/firstaid/tactical/ert_first = 1,
@@ -292,6 +301,7 @@
 	back = /obj/item/storage/backpack/ert_commander/ert_medical
 	belt = /obj/item/defibrillator/compact/loaded_ert
 	suit_store = /obj/item/gun/ballistic/automatic/wt550/standart
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/firstaid/tactical/ert_first = 1,\
 		/obj/item/storage/firstaid/tactical/ert_second = 1,\
@@ -329,6 +339,7 @@
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/alert/med
 	suit_store = /obj/item/gun/energy/modular_laser_rifle
 	l_pocket = /obj/item/gun/ballistic/revolver/mateba
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,
 		/obj/item/gun/energy/e_gun/nuclear/ert=1,
 		/obj/item/storage/firstaid/tactical/ert_first = 1,
@@ -355,6 +366,7 @@
 	mask = /obj/item/clothing/mask/gas/sechailer/swat
 	suit_store = /obj/item/gun/energy/modular_laser_rifle/zealstar
 	l_pocket = /obj/item/gun/energy/pulse/pistol/loyalpin
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom_max=1,\
 		/obj/item/storage/firstaid/tactical/ert_first = 1,
 		/obj/item/storage/firstaid/tactical/ert_second = 1,
@@ -385,6 +397,7 @@
 	back = /obj/item/storage/backpack/ert_commander/ert_engineering
 	belt = /obj/item/storage/belt/utility/chief/full
 	l_hand = null
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/box/ammo/wt=1,
 		/obj/item/storage/firstaid/regular=1,\
@@ -412,6 +425,7 @@
 	back = /obj/item/storage/backpack/ert_commander/ert_engineering
 	belt = /obj/item/storage/belt/utility/chief/full
 	suit_store = /obj/item/gun/ballistic/automatic/wt550/standart
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/box/ammo/wt=1,
 		/obj/item/storage/firstaid/regular=1,\
@@ -446,6 +460,8 @@
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/alert/engi
 	suit_store = /obj/item/gun/energy/modular_laser_rifle
 	l_pocket = /obj/item/gun/ballistic/revolver/mateba
+
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/gun/energy/e_gun/nuclear/ert=1,\
 		/obj/item/storage/firstaid/regular=1,\
@@ -469,6 +485,8 @@
 	mask = /obj/item/clothing/mask/gas/welding/up
 	suit_store = /obj/item/gun/energy/modular_laser_rifle/zealstar
 	l_pocket = /obj/item/gun/energy/pulse/pistol/loyalpin
+
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom_max=1,\
 		/obj/item/storage/firstaid/tactical/ert_first = 1,\
 		/obj/item/storage/firstaid/tactical/ert_second = 1,\
@@ -498,6 +516,8 @@
 	glasses = /obj/item/clothing/glasses/night/syndicate
 	back = /obj/item/storage/backpack/ert_commander/ert_janitor
 	belt = /obj/item/storage/belt/janitor/ert_maid
+
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
 		/obj/item/storage/firstaid/regular=1,\
 		/obj/item/storage/box/ammo/cleaning_grenades=1,
@@ -527,6 +547,7 @@
 	name = "Emergency Assistant"
 
 	uniform = /obj/item/clothing/under/color/grey/glorf
+	suit = /obj/item/clothing/suit/hazardvest
 	shoes = /obj/item/clothing/shoes/sneakers/black
 	gloves = /obj/item/clothing/gloves/color/fyellow
 	ears = /obj/item/radio/headset
@@ -534,12 +555,16 @@
 	belt = /obj/item/storage/belt/utility/full
 	back = /obj/item/storage/backpack
 	mask = /obj/item/clothing/mask/gas
-	l_hand = /obj/item/storage/toolbox/emergency/old
+	l_hand = /obj/item/storage/toolbox/plastitanium
 	id = /obj/item/card/id
 
+
+	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,\
+		/obj/item/storage/firstaid/regular=1,\
+		)
+
 /datum/outfit/ert/greybois/greygod
-	suit = /obj/item/clothing/suit/hazardvest
-	l_hand = /obj/item/storage/toolbox/plastitanium
+	l_hand = /obj/item/spear/grey_tide
 	gloves = /obj/item/clothing/gloves/color/yellow
 
 /datum/outfit/ert/greybois/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
@@ -548,8 +573,10 @@
 	var/obj/item/card/id/W = H.wear_id
 	W.registered_name = H.real_name
 	W.assignment = "Assistant"
+	W.special_assignment = "assistant"
 	W.access = list(ACCESS_MAINT_TUNNELS,ACCESS_CENT_GENERAL)
 	W.update_label()
+	H.sec_hud_set_ID()
 
 /datum/outfit/ert/commander/inquisitor
 	name = "Inquisition Commander"
@@ -559,6 +586,7 @@
 	l_hand = /obj/item/gun/ballistic/automatic/proto/unrestricted
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/paranormal
 	belt = /obj/item/storage/belt/military/ert_max
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,
 		/obj/item/storage/box/ert_commander=1,
 		/obj/item/storage/firstaid/tactical/ert_first = 1,\
@@ -590,6 +618,7 @@
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/paranormal/inquisitor
 	l_hand = /obj/item/gun/ballistic/automatic/proto/unrestricted
 	belt = /obj/item/storage/belt/military/ert_max
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,
 		/obj/item/storage/firstaid/regular=1,
 		/obj/item/gun/energy/e_gun/dragnet=1,
@@ -620,6 +649,7 @@
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/paranormal/inquisitor
 	l_hand = /obj/item/gun/ballistic/automatic/proto/unrestricted
 	belt = /obj/item/defibrillator/compact/loaded_ert
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,
 		/obj/item/storage/box/ammo/smgap=1,\
 		/obj/item/storage/box/ammo/holy=1,
@@ -655,15 +685,17 @@
 	mask = null
 	id = /obj/item/card/id/ert
 
+
 	backpack_contents = list(/obj/item/storage/box/survival/centcom=1,
 		/obj/item/storage/box/ert_commander=1,
 		)
+
 	implants = list(
 		/obj/item/implant/mindshield,
 		/obj/item/implant/deathrattle/centcom,
-	 	/obj/item/implant/weapons_auth,
+		/obj/item/implant/weapons_auth,
 		/obj/item/implant/radio/centcom,
-	 	/obj/item/implant/cqc,
+		/obj/item/implant/cqc,
 	)
 
 	cybernetic_implants = list(

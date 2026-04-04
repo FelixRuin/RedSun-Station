@@ -22,7 +22,7 @@
 		message = tgui_input_text(src, "Здесь можно описать продолжительную (долго длящуюся) деятельность, которая будет отображаться столько, сколько тебе нужно.", "Опиши свою деятельность", "", MAX_MESSAGE_LEN, encode = TRUE)
 	else
 		message = stripped_multiline_input_or_reflect(src, "Здесь можно описать продолжительную (долго длящуюся) деятельность, которая будет отображаться столько, сколько тебе нужно.", "Опиши свою деятельность")
-	
+
 	clear_typing_indicator()
 	if(!length(message))
 		return
@@ -53,10 +53,8 @@
 	. = ..()
 	if(activity)
 		reset_activity()
-	// BLUEMOON EDIT START - изменение памяти после смерти
 	if(mind)
 		mind.death_handle_memory()
-	// BLUEMOON EDIT END
 
 /mob/living/get_tooltip_data()
 	if(activity)
@@ -64,3 +62,26 @@
 		. += activity
 
 //SET_ACTIVITY END
+
+/mob/living/verb/player_narrate_subtler()
+	set category = "Say"
+	set name = "Narrate Subtler (Player)"
+	set desc = "Narrate an action or event! An alternative to emoting, for when your emote shouldn't start with your name! Only for adjacent players excluding ghosts."
+	if(GLOB.say_disabled)
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		return
+	display_typing_indicator(isMe = TRUE)
+	var/message = ""
+	if(client?.prefs.tgui_input_verbs)
+		message = tgui_input_text(src, "Опишите действие или событие. Альтернатива эмоции, когда ваша эмоция не должна начинаться с вашего имени. Видно только игрокам поблизости, исключая призраков.", "Narrate Subtler (Player)", null, MAX_MESSAGE_LEN, TRUE, TRUE)
+	else
+		message = stripped_multiline_input_or_reflect(src, "Опишите действие или событие. Альтернатива эмоции, когда ваша эмоция не должна начинаться с вашего имени. Видно только игрокам поблизости, исключая призраков.", "Narrate Subtler (Player)")
+	clear_typing_indicator()
+	if(!length(message))
+		return
+	emote("narrate_subtler", message=message)
+
+/datum/emote/sound/human/narrate/subtler
+	key = "narrate_subtler"
+	key_third_person = "narrate_subtler"
+	subtler = TRUE
