@@ -157,11 +157,12 @@
 
 ////////////////////////
 
-/obj/item/clothing/neck/tie/dogtag
+/obj/item/clothing/accessory/dogtag
 	name = "Dog tag"
 	desc = "The first tag indicates personal number - AG-003288 and affiliation with the AC mercenaries.  The second tag contains the first and last name - Althea Gantia, along with the blood type."
 	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/accessories.dmi'
 	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/accessories.dmi'
+	slot_flags = ITEM_SLOT_NECK
 	icon_state = "dogtag"
 	item_state = "dogtag"
 
@@ -442,18 +443,21 @@
 	icon = 'modular_bluemoon/fluffs/icons/obj/accessories.dmi'
 	icon_state = "banner-irellia"
 	desc = "Banner of the Irellia"
+	inspiration_available = FALSE
 
 /obj/item/banner/rohai
 	name = "Banner of the Rohai empire"
 	icon = 'modular_bluemoon/fluffs/icons/obj/accessories.dmi'
 	icon_state = "banner-rohai"
 	desc = "Banner of the Rohai empire"
+	inspiration_available = FALSE
 
 /obj/item/banner/norn
 	name = "Banner of kingdom Norn"
 	icon = 'modular_bluemoon/fluffs/icons/obj/accessories.dmi'
 	icon_state = "banner-norn"
 	desc = "Banner of kingdom Norn"
+	inspiration_available = FALSE
 
 //////////////////////// БАНЕРЫ
 
