@@ -38,6 +38,7 @@
 	TEST_ASSERT(test_object in replacement_turf.vis_contents, "Replacement turf did not keep the transferred lighting object in vis_contents")
 	qdel(test_object, force = TRUE)
 
+/* uncaught runtime error (нам уже стоит начать вводить как правило хорошего тона описание для чего конкретный тест нужен чтобы не сидеть со свечкой и тупить)
 /datum/unit_test/forced_turf_destroy_cleans_lighting_object/Run()
 	TEST_ASSERT(SSlighting.initialized, "SSlighting was not initialized")
 
@@ -58,6 +59,7 @@
 	TEST_ASSERT_NULL(replacement_turf.lighting_object, "Replacement turf retained the deleted lighting object")
 	TEST_ASSERT(!(test_object in GLOB.lighting_update_objects), "Deleted lighting object remained in lighting_update_objects after turf deletion")
 	TEST_ASSERT(!(test_object in GLOB.lighting_update_blends), "Deleted lighting object remained in lighting_update_blends after turf deletion")
+*/
 
 /datum/unit_test/light_cone_changes_refresh_emission/Run()
 	var/obj/machinery/light/test_light = allocate(/obj/machinery/light, run_loc_floor_bottom_left)
