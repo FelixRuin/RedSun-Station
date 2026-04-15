@@ -224,12 +224,6 @@
 	path = /obj/item/clothing/neck/cloak/sencloak
 	ckeywhitelist = list("romontesque")
 
-/datum/gear/donator/bm/ftucloak
-	name = "FTU Cape"
-	slot = ITEM_SLOT_NECK
-	path = /obj/item/clothing/neck/cloak/ftu
-	ckeywhitelist = list("fanlexa", "kosep", "dragoncora")
-
 /datum/gear/donator/bm/angelo
 	name = "Angelo's Coat"
 	slot = ITEM_SLOT_OCLOTHING
@@ -626,6 +620,12 @@
 	path = /obj/item/modkit/ks22_kit
 	ckeywhitelist = list("lodagn")
 
+/datum/gear/donator/bm/shotgun_mossberg
+	name = "Shotgun into Mossberg-590A Kit"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/modkit/mossberg_kit
+	ckeywhitelist = list("shizalrp", "krasler101")
+
 /datum/gear/donator/bm/g36_kit
 	name = "AK-12 into G36 Kit"
 	slot = ITEM_SLOT_BACKPACK
@@ -709,12 +709,6 @@
 	slot = ITEM_SLOT_NECK
 	path = /obj/item/clothing/neck/tie/h_soul_coat
 	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon", "moun4l")
-
-/datum/gear/donator/bm/pedantcape
-	name = "Corvus Pendant"
-	slot = ITEM_SLOT_BACKPACK
-	path = /obj/item/clothing/neck/tie/pendantcape
-	ckeywhitelist = list("smol42", "weirdbutton", "sage4or")
 
 /datum/gear/donator/bm/tricorne
 	name = "Tricorne"
@@ -1116,13 +1110,6 @@
 	path = /obj/item/clothing/suit/donator/bm/noxscoutcoat
 	ckeywhitelist = list("xaeshkavd")
 
-/datum/gear/donator/bm/agentcape
-	name = "Marketing agent's cape"
-	slot = ITEM_SLOT_OCLOTHING
-	path = /obj/item/clothing/suit/donator/bm/agentcape
-	ckeywhitelist = list("sosnovskii")
-	subcategory = LOADOUT_SUBCATEGORIES_DON03
-
 /datum/gear/donator/bm/kladmen_panties
 	name = "Panties"
 	slot = ITEM_SLOT_OCLOTHING
@@ -1427,12 +1414,6 @@
 	path = /obj/item/clothing/mask/gas/syndicate/hahun_mask/eidovox
 	ckeywhitelist = list("dolbajob", "enigma418")
 
-/datum/gear/donator/bm/hahun_cape
-	name = "MI13 cape"
-	slot = ITEM_SLOT_BACKPACK
-	path = /obj/item/clothing/neck/tie/hahun_cape
-	ckeywhitelist = list("dolbajob", "enigma418")
-
 /datum/gear/donator/bm/hahun_jukebox
 	name = "Irrelian Jukebox"
 	slot = ITEM_SLOT_BACKPACK
@@ -1520,12 +1501,6 @@
 	name = "MI13 combat uniform"
 	slot = ITEM_SLOT_ICLOTHING
 	path = /obj/item/clothing/under/donator/bm/MI13_uniform
-	ckeywhitelist = list("enigma418", "dolbajob")
-
-/datum/gear/donator/bm/eidolon_cape
-	name = "Eidolon officer cape"
-	slot = ITEM_SLOT_NECK
-	path = /obj/item/clothing/neck/eidolon_cape
 	ckeywhitelist = list("enigma418", "dolbajob")
 
 /datum/gear/donator/bm/eo95_mask
@@ -2252,12 +2227,6 @@
 	path = /obj/item/modkit/supernova_kit
 	ckeywhitelist = list("lapkee")
 
-/datum/gear/donator/bm/winter_cape
-	name = "Winter Cape"
-	slot = ITEM_SLOT_NECK
-	path = /obj/item/clothing/neck/cloak/wintercape
-	ckeywhitelist = list("lindaastereih")
-
 /datum/gear/donator/bm/bwal_special_kit
 	name = "B-Wal-Special Kit"
 	slot = ITEM_SLOT_BACKPACK
@@ -2269,3 +2238,46 @@
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/modkit/captain_rifle_kit
 	ckeywhitelist = list("lindaastereih")
+
+/datum/gear/donator/bm/ftucloak
+	name = "FTU Cape"
+	slot = ITEM_SLOT_NECK
+	path = /obj/item/clothing/neck/cloak/ftu
+	ckeywhitelist = list("fanlexa", "kosep", "dragoncora")
+
+/datum/gear/donator/bm/pedantcape
+	name = "Corvus Pendant"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/clothing/neck/tie/pendantcape
+	ckeywhitelist = list("smol42", "weirdbutton", "sage4or")
+
+/datum/gear/donator/bm/agentcape
+	name = "Marketing agent's cape"
+	slot = ITEM_SLOT_OCLOTHING
+	path = /obj/item/clothing/suit/donator/bm/agentcape
+	ckeywhitelist = list("sosnovskii")
+	subcategory = LOADOUT_SUBCATEGORIES_DON03
+
+/datum/gear/donator/bm/hahun_cape
+	name = "MI13 cape"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/clothing/neck/tie/hahun_cape
+	ckeywhitelist = list("dolbajob", "enigma418")
+
+/datum/gear/donator/bm/eidolon_cape
+	name = "Eidolon officer cape"
+	slot = ITEM_SLOT_NECK
+	path = /obj/item/clothing/neck/eidolon_cape
+	ckeywhitelist = list("enigma418", "dolbajob")
+
+/datum/gear/donator/bm/winter_cape
+	name = "Winter Cape"
+	slot = ITEM_SLOT_NECK
+	path = /obj/item/clothing/neck/cloak/wintercape
+	ckeywhitelist = list("lindaastereih")
+
+/datum/gear/donator/bm/eclipse_cape
+	name = "Eclipse cape"
+	slot = ITEM_SLOT_NECK
+	path = /obj/item/clothing/neck/tie/eclipse_cape
+	ckeywhitelist = list("shizalrp", "krasler101")
