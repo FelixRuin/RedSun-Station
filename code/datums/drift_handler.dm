@@ -51,7 +51,13 @@
 
 	apply_initial_visuals(visual_delay)
 	if(drifting_loop.timer <= world.time)
-		SSnewtonian_movement.fire_moveloop(drifting_loop)
+		var/rate_loop_delay = get_loop_delay(parent)
+		var/next_allowed_move = parent.last_drift_time + rate_loop_delay
+		if(world.time < next_allowed_move)
+			var/pause_time = next_allowed_move - world.time
+			drifting_loop.pause_for(pause_time)
+		else
+			SSnewtonian_movement.fire_moveloop(drifting_loop)
 
 /datum/drift_handler/Destroy()
 	// Never qdel the move_loop synchronously: Destroy can run from the loop's process/signals.
@@ -84,15 +90,23 @@
 	var/force_x = sin(drifting_loop.angle) * drift_force + sin(inertia_angle) * applied_force / parent.inertia_force_weight
 	var/force_y = cos(drifting_loop.angle) * drift_force + cos(inertia_angle) * applied_force / parent.inertia_force_weight
 
-	drift_force = clamp(sqrt(force_x * force_x + force_y * force_y), 0, !isnull(controlled_cap) ? controlled_cap : INERTIA_FORCE_CAP)
+	var/uncapped_force = sqrt(force_x * force_x + force_y * force_y)
+	var/effective_cap = !isnull(controlled_cap) ? controlled_cap : INERTIA_FORCE_CAP
+	drift_force = clamp(uncapped_force, 0, effective_cap)
 	if(drift_force < 0.1)
 		qdel(src)
 		return TRUE
 
 	drifting_loop.set_angle(delta_to_angle(force_x, force_y))
-	drifting_loop.set_delay(get_loop_delay(parent))
+	var/rate_loop_delay = get_loop_delay(parent)
+	drifting_loop.set_delay(rate_loop_delay)
 	if(drifting_loop.timer <= world.time && force_loop)
-		SSnewtonian_movement.fire_moveloop(drifting_loop)
+		var/next_allowed_move = parent.last_drift_time + rate_loop_delay
+		if(world.time < next_allowed_move)
+			var/pause_time = next_allowed_move - world.time
+			drifting_loop.pause_for(pause_time)
+		else
+			SSnewtonian_movement.fire_moveloop(drifting_loop)
 	return TRUE
 
 /datum/drift_handler/proc/moveloop_began()
@@ -127,9 +141,10 @@
 	if(result == MOVELOOP_FAILURE)
 		QDEL_IN(src, 0)
 		return
+	parent.last_drift_time = world.time
 	parent.setDir(old_dir)
 	parent.inertia_moving = FALSE
-	if(parent.Process_Spacemove(angle2dir(drifting_loop.angle), TRUE))
+	if(parent.Process_Spacemove(angle2dir(drifting_loop.angle), continuous_move = TRUE))
 		glide_to_halt(visual_delay)
 		return
 	ignore_next_glide = TRUE
@@ -200,7 +215,8 @@
 	if(isnull(drifting_loop))
 		return
 	if(isnull(target_angle))
-		parent.newtonian_move(angle2dir(REVERSE_ANGLE(drifting_loop.angle)), drift_force = min(drift_force, stabilization_force))
+		var/halt_force = min(drift_force, stabilization_force)
+		parent.newtonian_move(angle2dir(REVERSE_ANGLE(drifting_loop.angle)), drift_force = halt_force)
 		return
 	var/drift_projection = max(0, cos(target_angle - drifting_loop.angle)) * drift_force
 	var/force_x = sin(target_angle) * target_force - sin(drifting_loop.angle) * drift_force

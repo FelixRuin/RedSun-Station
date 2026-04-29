@@ -33,6 +33,8 @@
 	var/datum/drift_handler/drift_handler
 	/// Last time we used this atom as a push-off point (anti double-count same tick)
 	var/last_pushoff = 0
+	/// Last time drift actually moved this atom — prevents spamming inputs to bypass move delay (see /datum/drift_handler)
+	var/last_drift_time = 0
 	/// Scalar for impulse math (higher = harder to nudge)
 	var/inertia_force_weight = 1
 	/// Species / vehicle modifiers
