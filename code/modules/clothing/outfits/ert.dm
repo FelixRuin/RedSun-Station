@@ -123,7 +123,8 @@
 		/obj/item/storage/firstaid/brute=1,\
 		/obj/item/storage/firstaid/fire=1,\
 		/obj/item/gun/energy/e_gun/nuclear/ert=1,\
-		/obj/item/ammo_box/a357=2,\
+		/obj/item/ammo_box/a357/requiem=2,\
+		/obj/item/disk/design_disk/adv/ammo/requiem=1,\
 		)
 
 	cybernetic_implants = list(
@@ -239,7 +240,8 @@
 		/obj/item/storage/firstaid/fire=1,\
 		/obj/item/gun/energy/e_gun/dragnet=1,\
 		/obj/item/gun/energy/e_gun/nuclear/ert=1,\
-		/obj/item/ammo_box/a357=2,\
+		/obj/item/ammo_box/a357/requiem=2,\
+		/obj/item/disk/design_disk/adv/ammo/requiem=1,\
 		)
 
 	cybernetic_implants = list(
@@ -370,7 +372,8 @@
 		/obj/item/paper/beamgun_istruction=1,
 		/obj/item/roller=1,
 		/obj/item/bodybag/bluespace=1,
-		/obj/item/ammo_box/a357=2,\
+		/obj/item/ammo_box/a357/requiem=2,\
+		/obj/item/disk/design_disk/adv/ammo/requiem=1,\
 		)
 
 	cybernetic_implants = list(
@@ -497,7 +500,8 @@
 		/obj/item/construction/rcd/combat=1,
 		/obj/item/inducer/sci/combat=1,
 		/obj/item/stock_parts/cell/vortex=1,
-		/obj/item/ammo_box/a357=2,\
+		/obj/item/ammo_box/a357/requiem=2,\
+		/obj/item/disk/design_disk/adv/ammo/requiem=1,\
 		)
 
 	cybernetic_implants = list(
