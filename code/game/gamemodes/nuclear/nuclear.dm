@@ -157,19 +157,21 @@
 
 /datum/outfit/inteq/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
 	var/obj/item/radio/R = H.ears
-	R.set_frequency(FREQ_INTEQ)
-	R.freqlock = TRUE
-	if(command_radio)
-		R.command = TRUE
+	if(R)
+		R.set_frequency(FREQ_INTEQ)
+		R.freqlock = TRUE
+		if(command_radio)
+			R.command = TRUE
 
-	if(tc)
-		var/obj/item/U = new uplink_type(H, H.key, tc)
-		H.equip_to_slot_or_del(U, ITEM_SLOT_BACKPACK)
+	if(!visualsOnly)
+		if(tc)
+			var/obj/item/U = new uplink_type(H, H.key, tc)
+			H.equip_to_slot_or_del(U, ITEM_SLOT_BACKPACK)
 
-	var/obj/item/implant/weapons_auth/W = new
-	W.implant(H)
-	var/obj/item/implant/explosive/E = new
-	E.implant(H)
+		var/obj/item/implant/weapons_auth/W = new
+		W.implant(H)
+		var/obj/item/implant/explosive/E = new
+		E.implant(H)
 
 	H.faction |= ROLE_INTEQ
 	H.update_icons()
@@ -189,9 +191,31 @@
 		/obj/item/gun/ballistic/automatic/pistol=1,\
 		/obj/item/kitchen/knife/combat/survival)
 
-/datum/outfit/inteq/full/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
+/datum/outfit/inteq/full/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
 	. = ..()
-	H.mind.make_Traitor()
+	if(visualsOnly || !H.mind)
+		return
+	if(!H.mind.has_antag_datum(/datum/antagonist/traitor))
+		var/datum/antagonist/traitor/traitor_inst = new
+		traitor_inst.give_objectives = FALSE
+		traitor_inst.should_give_codewords = FALSE
+		traitor_inst.should_equip = FALSE
+		H.mind.add_antag_datum(traitor_inst)
+
+/datum/outfit/inteq/full/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
+	if(visualsOnly || !H.mind)
+		return ..()
+	. = ..()
+	var/datum/antagonist/traitor/traitor_datum = H.mind.has_antag_datum(/datum/antagonist/traitor)
+	if(!traitor_datum)
+		return
+	for(var/datum/objective/old_obj in traitor_datum.objectives.Copy())
+		traitor_datum.remove_objective(old_obj)
+		qdel(old_obj)
+	var/datum/objective/martyr/martyr_obj = new
+	martyr_obj.owner = H.mind
+	traitor_datum.add_objective(martyr_obj)
+	H.mind.announce_objectives()
 
 /datum/outfit/inteq/lone/inteq
 	name = "InteQ Lone Operative"
@@ -212,4 +236,4 @@
 	/obj/item/kitchen/knife/combat/survival)
 
 	uplink_type = /obj/item/inteq/uplink/radio/nuclear
-	tc = 60
+	tc = 90
