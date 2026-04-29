@@ -36,7 +36,6 @@
 		return
 	var/mob/living/carbon/human/human = mob
 	if(human.client)
-		// Prefs can wipe hardsuit; re-apply inteq after load.
 		if(alert(human, "Загрузить внешность, расу и имя с ваших сохранённых персонажей?", "Внешность", "Да", "Нет") == "Да")
 			human.load_client_appearance(human.client, FALSE)
-		human.equipOutfit(/datum/outfit/inteq/full)
+	human.equipOutfit(/datum/outfit/inteq/full)

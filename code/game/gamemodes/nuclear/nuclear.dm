@@ -157,10 +157,11 @@
 
 /datum/outfit/inteq/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
 	var/obj/item/radio/R = H.ears
-	R.set_frequency(FREQ_INTEQ)
-	R.freqlock = TRUE
-	if(command_radio)
-		R.command = TRUE
+	if(R)
+		R.set_frequency(FREQ_INTEQ)
+		R.freqlock = TRUE
+		if(command_radio)
+			R.command = TRUE
 
 	if(!visualsOnly)
 		if(tc)
@@ -249,4 +250,4 @@
 	/obj/item/kitchen/knife/combat/survival)
 
 	uplink_type = /obj/item/inteq/uplink/radio/nuclear
-	tc = 60
+	tc = 90
