@@ -1,0 +1,5 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - code_imp: оптимизирован /mob/Process_Spacemove - газовая проверка для квирка "Парение"
+      больше не выполняется для мобов без этого трейта
