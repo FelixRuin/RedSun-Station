@@ -1,5 +1,0 @@
-author: DuLL-FoX
-delete-after: true
-changes:
-  - code_imp: icon2html теперь кэширует результат и для людей, снизив нагрузку при
-      их examine
