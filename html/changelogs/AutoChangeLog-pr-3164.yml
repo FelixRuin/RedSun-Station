@@ -1,0 +1,5 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - bugfix: Black Market Uplink снова открывается без рантаймов
+  - bugfix: Chem Implant больше не передаёт мусор в parent_ui при открытии меню
