@@ -877,9 +877,9 @@
 	return json_encode(L)
 
 //json decode that will return null on parse error instead of runtiming.
-/proc/safe_json_decode(data)
+/proc/safe_json_decode(string, default = list())
 	try
-		return json_decode(data)
+		return json_decode(string)
 	catch
 		return null
 
