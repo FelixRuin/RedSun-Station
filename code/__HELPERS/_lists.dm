@@ -876,9 +876,12 @@
 	. = default
 	return json_encode(L)
 
-/proc/safe_json_decode(string, default = list())
-	. = default
-	return json_decode(string)
+//json decode that will return null on parse error instead of runtiming.
+/proc/safe_json_decode(data)
+	try
+		return json_decode(data)
+	catch
+		return null
 
 /**
  * Custom binary search sorted insert utilising comparison procs instead of vars.
