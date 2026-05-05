@@ -1,0 +1,4 @@
+author: IO979996
+delete-after: true
+changes:
+  - server: Фикс краша сервера при подгрузке битого сейва
