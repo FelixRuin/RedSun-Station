@@ -115,7 +115,7 @@
 	item_state = "mopphood"
 	can_flashlight = 1
 	anthro_mob_worn_overlay = 'modular_splurt/icons/mob/clothing/head_muzzled.dmi'
-	armor = list("melee" = 35, "bullet" = 40, "laser" = 35,"energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 75, "fire" = 40, "acid" = 100)
+	armor = list("melee" = 35, "bullet" = 40, "laser" = 35,"energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 100, "fire" = 40, "acid" = 100)
 	is_edible = 0
 	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL
 	max_heat_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT

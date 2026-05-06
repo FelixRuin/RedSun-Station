@@ -53,7 +53,9 @@
 	anthro_mob_worn_overlay = 'modular_splurt/icons/mob/clothing/mask_muzzle.dmi' // BLUEMOON COMMENTING OUT using own states modular_bluemoon\icons\mob\clothing\mask_muzzled.dmi
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	armor = list("melee" = 10, "bullet" = 5, "laser" = 10,"energy" = 10, "bomb" = 10, "bio" = 100, "rad" = 75, "fire" = 40, "acid" = 100)
+	armor = list("melee" = 10, "bullet" = 5, "laser" = 10,"energy" = 10, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 40, "acid" = 100)
+	resistance_flags = ACID_PROOF | FIRE_PROOF
+	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 	aggressiveness = 1
 	clothing_flags = BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS | STOPSPRESSUREDAMAGE | THICKMATERIAL
 	flags_cover = MASKCOVERSMOUTH | MASKCOVERSEYES

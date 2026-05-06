@@ -23,7 +23,7 @@
 
 /datum/station_trait/radiation_contamination/on_round_start()
 	. = ..()
-	scatter_contamination()
+	INVOKE_ASYNC(src, PROC_REF(scatter_contamination))
 
 /// По одному радиоактивному объекту на каждый generic event spawn; тип чередуется.
 /datum/station_trait/radiation_contamination/proc/scatter_contamination()
@@ -55,53 +55,68 @@
 				contamination_atoms += cell
 		placed++
 
-	// if(!placed)
-	var/fallback_pieces = 64
-	for(var/f in 1 to fallback_pieces)
-		var/turf/open/T = get_safe_open_turf()
-		if(!T)
-			break
-		switch((f - 1) % 4)
+	var/fallback_spawns_wanted = 128
+	var/fallback_spawned = 0
+	var/pick_budget = 800
+	while(fallback_spawned < fallback_spawns_wanted && pick_budget > 0)
+		pick_budget--
+		var/turf/picked_drop = pick_radioactive_drop_turf()
+		if(!picked_drop)
+			continue
+		switch(fallback_spawned % 4)
 			if(0)
-				var/obj/structure/reagent_dispensers/urbanismbarrel/radium/brl = new(T)
+				var/obj/structure/reagent_dispensers/urbanismbarrel/radium/brl = new(picked_drop)
 				contamination_atoms += brl
 			if(1)
-				var/obj/effect/landmark/nuclear_waste_spawner/spawner = new(T)
+				var/obj/effect/landmark/nuclear_waste_spawner/spawner = new(picked_drop)
 				spawner.fire()
 			if(2)
-				var/obj/item/nuke_core/core = new(T)
+				var/obj/item/nuke_core/core = new(picked_drop)
 				contamination_atoms += core
 			if(3)
-				var/obj/item/stock_parts/cell/bluespacereactor/cell = new(T)
+				var/obj/item/stock_parts/cell/bluespacereactor/cell = new(picked_drop)
 				contamination_atoms += cell
+		fallback_spawned++
 
 /datum/station_trait/radiation_contamination/proc/get_rad_spawn_turf(obj/effect/landmark/event_spawn/mark)
 	var/turf/origin = get_turf(mark)
-	if(try_rad_turf(origin))
-		return origin
+	var/list/options = list()
+	if(is_valid_rad_spawn_turf(origin))
+		options += origin
 	for(var/direction in GLOB.cardinals)
 		var/turf/near = get_step(origin, direction)
-		if(try_rad_turf(near))
-			return near
-	return null
+		if(is_valid_rad_spawn_turf(near))
+			options += near
+	for(var/turf/check in orange(4, origin))
+		if(!(check in options) && is_valid_rad_spawn_turf(check))
+			options += check
+	return length(options) ? pick(options) : null
 
-/datum/station_trait/radiation_contamination/proc/try_rad_turf(turf/T)
+/// Турф, куда имеет смысл класть источники радиации.
+/datum/station_trait/radiation_contamination/proc/is_valid_rad_spawn_turf(turf/T)
 	if(!T || !istype(T, /turf/open))
+		return FALSE
+	if(!is_station_level(T.z))
+		return FALSE
+	if(isspaceturf(T))
+		return FALSE
+	if(T.density)
 		return FALSE
 	if(is_blocked_turf(T, TRUE))
 		return FALSE
 	return TRUE
 
-/datum/station_trait/radiation_contamination/proc/get_safe_open_turf()
-	for(var/attempt in 1 to 12)
+/// Сначала «безопасные» локации ивента, затем широкий random по станционным зонам.
+/datum/station_trait/radiation_contamination/proc/pick_radioactive_drop_turf()
+	for(var/i in 1 to 48)
 		var/turf/candidate = get_safe_random_station_turf()
-		if(!candidate)
-			continue
-		if(!istype(candidate, /turf/open))
-			continue
-		if(is_blocked_turf(candidate, TRUE))
-			continue
-		return candidate
+		if(is_valid_rad_spawn_turf(candidate))
+			return candidate
+	if(LAZYLEN(GLOB.the_station_areas))
+		for(var/j in 1 to 120)
+			var/turf/wide_pick = get_random_station_turf()
+			if(is_valid_rad_spawn_turf(wide_pick))
+				return wide_pick
 	return null
 
 /datum/station_trait/radiation_contamination/proc/on_job_roundstart_spawn(datum/source, datum/job/job, mob/living/spawned, client/player_client)
@@ -138,7 +153,7 @@
 	H.equip_to_slot_or_del(suit, ITEM_SLOT_OCLOTHING)
 	H.equip_to_slot_or_del(mask, ITEM_SLOT_MASK)
 	H.equip_to_slot_or_del(hood, ITEM_SLOT_HEAD)
-	H.equip_to_slot_or_del(tank, ITEM_SLOT_BACK)
+	H.equip_to_slot_or_del(tank, ITEM_SLOT_SUITSTORE)
 
 	var/obj/item/broom/liquidator/broom = new(H)
 	if(!H.put_in_hands(broom))
@@ -147,7 +162,7 @@
 	to_chat(H, span_warning("Из-за радиационной аномалии вам выдано защитное снаряжение и метла ликвидатора."))
 
 /datum/station_trait/radiation_contamination/proc/strip_rad_response_slots(mob/living/carbon/human/H)
-	for(var/slot in list(ITEM_SLOT_OCLOTHING, ITEM_SLOT_HEAD, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_FEET, ITEM_SLOT_BACK))
+	for(var/slot in list(ITEM_SLOT_OCLOTHING, ITEM_SLOT_HEAD, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_FEET, ITEM_SLOT_SUITSTORE))
 		var/obj/item/I = H.get_item_by_slot(slot)
 		if(I)
 			H.dropItemToGround(I, force = TRUE)
