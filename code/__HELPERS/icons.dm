@@ -852,6 +852,8 @@ GLOBAL_LIST_EMPTY(readrgb_cache)
 		// Dimensions of overlay being added
 		var/list/add_size[4]
 
+		var/list/rc_overlays = null // flat list
+
 		for(var/V in layers)
 			var/image/I = V
 			if(I.alpha == 0)
@@ -883,7 +885,15 @@ GLOBAL_LIST_EMPTY(readrgb_cache)
 				flat_size = add_size.Copy()
 
 			// Blend the overlay into the flattened icon
-			flat.Blend(add, blendMode2iconMode(curblend), I.pixel_x + 2 - flatX1, I.pixel_y + 2 - flatY1)
+			if(I != copy && (I.appearance_flags & RESET_COLOR))
+				if(!rc_overlays)
+					rc_overlays = list()
+				rc_overlays += add
+				rc_overlays += blendMode2iconMode(curblend)
+				rc_overlays += I.pixel_x
+				rc_overlays += I.pixel_y
+			else
+				flat.Blend(add, blendMode2iconMode(curblend), I.pixel_x + 2 - flatX1, I.pixel_y + 2 - flatY1)
 
 		if(A.color)
 			if(islist(A.color))
@@ -893,6 +903,11 @@ GLOBAL_LIST_EMPTY(readrgb_cache)
 
 		if(A.alpha < 255)
 			flat.Blend(rgb(255, 255, 255, A.alpha), ICON_MULTIPLY)
+
+		// Применение RESET_COLOR overlays ПОСЛЕ parent color/alpha
+		if(rc_overlays)
+			for(var/rc_i = 1, rc_i <= rc_overlays.len, rc_i += 4)
+				flat.Blend(rc_overlays[rc_i], rc_overlays[rc_i+1], rc_overlays[rc_i+2] + 2 - flatX1, rc_overlays[rc_i+3] + 2 - flatY1)
 
 		if(no_anim)
 			//Clean up repeated frames
