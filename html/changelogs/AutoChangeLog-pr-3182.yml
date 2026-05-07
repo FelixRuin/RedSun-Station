@@ -1,4 +1,0 @@
-author: Pingvas
-delete-after: true
-changes:
-  - bugfix: Фикс сборки изображений base64 для персонажей.
