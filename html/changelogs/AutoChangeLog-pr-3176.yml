@@ -1,0 +1,16 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - code_imp: ограничил humanoid_icon_cache и bicon_cache, чтобы не текли весь раунд
+  - code_imp: dummySave теперь создаётся лениво под уникальным именем, виндовый файл-лок
+      после рестарта больше не ломает icon2base64
+  - code_imp: get_mob_by_ckey больше не сортирует mob_list впустую
+  - code_imp: дедуп screentip при повторном hover на тот же атом с тем же предметом
+  - code_imp: кэш flat-иконок по appearance внутри одного снимка фотоаппарата
+  - code_imp: shuttle_docker не пересчитывает посадочную площадку, если камера не
+      двигалась
+  - code_imp: build_pipeline теперь O(N) вместо O(N²), пайпнеты собираются линейно
+      по числу труб
+  - code_imp: REF() стал инлайн-макросом, горячий путь больше не платит за проц-колл
+  - code_imp: 'add_to_single_hud батчит client.images |= одним вызовом вместо одного
+      на каждую иконку, минус #1 проц по овертайму в перф-логе'
