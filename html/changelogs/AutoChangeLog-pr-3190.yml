@@ -1,0 +1,5 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - code_imp: убрал лишние аллокации в add_to_single_hud и вернул быстрый путь для
+      одиночных HUD-иконок
