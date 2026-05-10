@@ -1,0 +1,12 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - refactor: reload_huds и add_hud_to теперь батчат client.images одним |= вместо
+      N штук, overtime add_to_single_hud в перф-логах должен пропасть
+  - code_imp: добавлены /datum/atom_hud/proc/should_show_to (предикат для гейтинга),
+      collect_hud_images_for (батч-сборка) и push_all_atoms_to_user (collect + |=
+      одним вызовом)
+  - code_imp: medical/basic и bloodsucker перенесли свои add_to_single_hud override
+      в should_show_to, единая точка фильтрации для обоих путей
+  - code_imp: reload_huds дёргает CHECK_TICK между худами и проверяет client после
+      yield, чтобы burst не съедал тик целиком и не падал при логауте в момент пересчёта
