@@ -1,0 +1,5 @@
+author: Episode03
+delete-after: true
+changes:
+  - bugfix: Пофиксил лаги сервера при быстром изучении большого количества научных
+      нод
