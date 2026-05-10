@@ -1,0 +1,7 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - refactor: переделан pipeline asset_cache, убран двойной md5 в icon2html
+  - code_imp: добавлены get_icon_dmi_path / generate_and_hash_rsc_file / is_valid_dmi_file;
+      register_asset принимает file_hash и dmi_file_path
+  - code_imp: strip-menu кэширует icon2base64 по (icon, icon_state)
