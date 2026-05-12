@@ -94,6 +94,7 @@
 // #include "holidays.dm"
 // #include "hydroponics_harvest.dm"
 // #include "keybinding_init.dm"
+#include "keybindings_stuck_keys.dm"
 // #include "language_transfer.dm"
 #include "lighting.dm"
 #include "lighting_performance.dm"
@@ -145,6 +146,8 @@
 #endif
 
 /// BLUEMOON TESTS
+#include "atom_hud_perf.dm"
+
 #include "auto_cryo.dm"
 #include "bad_defines_defined.dm"
 #include "bugfix_coverage.dm"
