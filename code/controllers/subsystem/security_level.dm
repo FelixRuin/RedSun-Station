@@ -196,7 +196,7 @@ SUBSYSTEM_DEF(security_level)
 
 			if(SEC_LEVEL_DELTA)
 				set_stationwide_emergency_lighting()
-				addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(delta_process)), 10 SECONDS)
+				addtimer(CALLBACK(src, PROC_REF(delta_process), secret_variant_override), 10 SECONDS)
 				SSblackbox.record_feedback("tally", "security_level_changes", 1, NUM2SECLEVEL(GLOB.security_level))
 
 		SEND_SIGNAL(src, COMSIG_SECURITY_LEVEL_CHANGED, new_level)
@@ -334,7 +334,7 @@ SUBSYSTEM_DEF(security_level)
 	if(C)
 		C.post_status("alert", "epsilonalert")
 
-/proc/delta_process()
+/datum/controller/subsystem/security_level/proc/delta_process(secret_variant_override)
 	announce_security_level_change(SEC_LEVEL_DELTA, CONFIG_GET(string/alert_delta), TRUE)
 	var/obj/machinery/computer/communications/C = locate() in GLOB.machines
 	var/use_secret = pick_secret_alert_variant(secret_variant_override)
