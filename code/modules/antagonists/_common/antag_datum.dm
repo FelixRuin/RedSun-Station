@@ -52,6 +52,8 @@ GLOBAL_LIST_EMPTY(antagonists_to_remind) // BLUEMOON ADD - список анта
 	var/antagpanel_category = "Uncategorized"
 	///Will append antagonist name in admin listings - use for categories that share more than one antag type
 	var/show_name_in_check_antagonists = FALSE
+	/// If FALSE, excluded from the admin Check Antagonists / round status listing (orbit panel etc. unchanged)
+	var/show_in_check_antagonists = TRUE
 	/// Should this antagonist be shown as antag to ghosts? Shouldn't be used for stealthy antagonists like traitors
 	var/show_to_ghosts = FALSE
 //ambition start

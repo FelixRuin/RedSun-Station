@@ -322,6 +322,10 @@
 	name = "box of WT ammo"
 	ammo = /obj/item/ammo_box/magazine/wt550m9
 
+/obj/item/storage/box/ammo/m10mm
+	name = "box of M10mm ammo"
+	ammo = /obj/item/ammo_box/magazine/m10mm
+
 /obj/item/storage/box/ammo/holy
 	name = "box of holy water"
 	ammo = /obj/item/reagent_containers/food/drinks/bottle/holywater
@@ -1609,8 +1613,8 @@
 	illustration = null
 	can_expire = FALSE
 
-/obj/item/storage/box/mre/random_safe/Initialize(mapload)
-	. = ..()
+/// Не заменяем себя через qdel — иначе лодаут/спавн через `new path` без loc даёт QDELETED и предмет пропадает.
+/obj/item/storage/box/mre/random_safe/PopulateContents()
 	var/static/list/ration_types = list(
 		/obj/item/storage/box/mre/menu1/safe,
 		/obj/item/storage/box/mre/menu2/safe,
@@ -1618,10 +1622,13 @@
 		/obj/item/storage/box/mre/menu4/safe,
 	)
 	var/picked = pick(ration_types)
-	var/obj/item/storage/box/mre/actual = new picked(loc)
-	transfer_fingerprints_to(actual)
-	qdel(src)
-	return INITIALIZE_HINT_QDEL
+	var/obj/item/storage/box/mre/phantom = new picked(null)
+	name = phantom.name
+	desc = phantom.desc
+	icon_state = phantom.icon_state
+	for(var/obj/item/I in phantom.contents)
+		I.forceMove(src)
+	qdel(phantom)
 
 //Where do I put this?
 /obj/item/secbat
