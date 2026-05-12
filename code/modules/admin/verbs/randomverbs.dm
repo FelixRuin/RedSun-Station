@@ -942,7 +942,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!level)
 		return
 	var/secret_variant_override = null
-	if(level in list("violet", "amber", "red"))
+	if(level in list("violet", "amber", "red", "delta"))
 		var/choice = tgui_alert(usr, "Иконка и музыка на коммуникационных консолях:", "Set Security Level", list("Обычные", "Секретные", "Случайно (90% обычные)"))
 		if(!choice)
 			return
@@ -956,7 +956,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set_security_level(level, secret_variant_override)
 
 	var/extra_log = ""
-	if(level in list("violet", "amber", "red"))
+	if(level in list("violet", "amber", "red", "delta"))
 		extra_log = isnull(secret_variant_override) ? " (вариант: случайный)" : (secret_variant_override ? " (вариант: секретный)" : " (вариант: обычный)")
 	log_admin("[key_name(usr)] changed the security level to [level][extra_log]")
 	message_admins("[key_name_admin(usr)] changed the security level to [level][extra_log]")

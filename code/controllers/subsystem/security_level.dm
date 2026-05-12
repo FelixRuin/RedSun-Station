@@ -245,7 +245,7 @@ SUBSYSTEM_DEF(security_level)
 				continue
 			if(L.status)
 				continue
-			if(GLOB.security_level == SEC_LEVEL_RED || SEC_LEVEL_LAMBDA || SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON || SEC_LEVEL_DELTA)
+			if(GLOB.security_level in list(SEC_LEVEL_RED, SEC_LEVEL_LAMBDA, SEC_LEVEL_GAMMA, SEC_LEVEL_EPSILON, SEC_LEVEL_DELTA))
 				L.fire_mode = TRUE
 			L.on = FALSE
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/obj/machinery/light, update), FALSE), rand(5, 10) SECONDS)
@@ -275,10 +275,10 @@ SUBSYSTEM_DEF(security_level)
 		addtimer(CALLBACK(A, TYPE_PROC_REF(/obj/machinery/power/apc, update), FALSE), rand(5, 10) SECONDS)
 
 /proc/lambda_process()
+	GLOB.security_level = SEC_LEVEL_LAMBDA
+	SEND_SIGNAL(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED)
 	announce_security_level_change(SEC_LEVEL_LAMBDA, CONFIG_GET(string/alert_lambda), TRUE)
 	sound_to_playing_players('modular_bluemoon/kovac_shitcode/sound/lambda_code.ogg')
-	GLOB.security_level = SEC_LEVEL_LAMBDA
-	SEND_SIGNAL(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED) // Без этого никакие сигнал_хендлеры, связанные со сменой кода, не ловят лямбду. Включая мой сейф.
 	SSnightshift.check_nightshift()
 	for(var/obj/machinery/firealarm/FA in GLOB.machines)
 		if(is_station_level(FA.z))
@@ -296,10 +296,10 @@ SUBSYSTEM_DEF(security_level)
 		C.post_status("alert", "lambdaalert")
 
 /proc/gamma_process()
+	GLOB.security_level = SEC_LEVEL_GAMMA
+	SEND_SIGNAL(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED)
 	announce_security_level_change(SEC_LEVEL_GAMMA, CONFIG_GET(string/alert_gamma), TRUE)
 	sound_to_playing_players('sound/misc/alerts/gamma_alert.ogg')
-	GLOB.security_level = SEC_LEVEL_GAMMA
-	SEND_SIGNAL(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED) // Без этого никакие сигнал_хендлеры, связанные со сменой кода, не ловят гамму. Включая мой сейф.
 	SSnightshift.check_nightshift()
 	for(var/obj/machinery/firealarm/FA in GLOB.machines)
 		if(is_station_level(FA.z))
@@ -317,6 +317,8 @@ SUBSYSTEM_DEF(security_level)
 		C.post_status("alert", "gammaalert")
 
 /proc/epsilon_process()
+	GLOB.security_level = SEC_LEVEL_EPSILON
+	SEND_SIGNAL(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED)
 	announce_security_level_change(SEC_LEVEL_EPSILON, CONFIG_GET(string/alert_epsilon), TRUE)
 	switch(rand(1,10))
 		if(1 to 5)
@@ -325,7 +327,6 @@ SUBSYSTEM_DEF(security_level)
 			sound_to_playing_players('sound/misc/alerts/epsilon_mexica.ogg')
 		if(10)
 			sound_to_playing_players('sound/misc/alerts/epsilon_elevator.ogg')
-	GLOB.security_level = SEC_LEVEL_EPSILON
 	SSnightshift.check_nightshift()
 	for(var/obj/machinery/firealarm/FA in GLOB.machines)
 		if(is_station_level(FA.z))
@@ -335,6 +336,8 @@ SUBSYSTEM_DEF(security_level)
 		C.post_status("alert", "epsilonalert")
 
 /datum/controller/subsystem/security_level/proc/delta_process(secret_variant_override)
+	GLOB.security_level = SEC_LEVEL_DELTA
+	SEND_SIGNAL(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED)
 	announce_security_level_change(SEC_LEVEL_DELTA, CONFIG_GET(string/alert_delta), TRUE)
 	var/obj/machinery/computer/communications/C = locate() in GLOB.machines
 	var/use_secret = pick_secret_alert_variant(secret_variant_override)
@@ -344,11 +347,12 @@ SUBSYSTEM_DEF(security_level)
 	else
 		C?.post_status("alert", "deltaalert")
 		sound_to_playing_players('sound/misc/alerts/delta.ogg')
-	GLOB.security_level = SEC_LEVEL_DELTA
+
 	SSnightshift.check_nightshift()
 	for(var/obj/machinery/firealarm/FA in GLOB.machines)
 		if(is_station_level(FA.z))
 			FA.update_icon()
+
 	var/obj/docking_port/mobile/emergency/emergency_shuttle = SSsecurity_level.get_called_emergency_shuttle()
 	if(emergency_shuttle)
 		if(GLOB.security_level < SEC_LEVEL_BLUE)
