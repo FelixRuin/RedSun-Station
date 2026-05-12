@@ -336,15 +336,19 @@ SUBSYSTEM_DEF(security_level)
 
 /proc/delta_process()
 	announce_security_level_change(SEC_LEVEL_DELTA, CONFIG_GET(string/alert_delta), TRUE)
-	sound_to_playing_players('sound/misc/alerts/delta.ogg')
+	var/obj/machinery/computer/communications/C = locate() in GLOB.machines
+	var/use_secret = pick_secret_alert_variant(secret_variant_override)
+	if(use_secret)
+		C?.post_status("alert", "deltaalert_secret")
+		sound_to_playing_players('sound/misc/alerts/delta_secret.ogg')
+	else
+		C?.post_status("alert", "deltaalert")
+		sound_to_playing_players('sound/misc/alerts/delta.ogg')
 	GLOB.security_level = SEC_LEVEL_DELTA
 	SSnightshift.check_nightshift()
 	for(var/obj/machinery/firealarm/FA in GLOB.machines)
 		if(is_station_level(FA.z))
 			FA.update_icon()
-	var/obj/machinery/computer/communications/C = locate() in GLOB.machines
-	if(C)
-		C.post_status("alert", "deltaalert")
 	var/obj/docking_port/mobile/emergency/emergency_shuttle = SSsecurity_level.get_called_emergency_shuttle()
 	if(emergency_shuttle)
 		if(GLOB.security_level < SEC_LEVEL_BLUE)
