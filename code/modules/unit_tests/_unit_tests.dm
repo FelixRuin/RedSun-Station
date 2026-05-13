@@ -156,6 +156,7 @@
 #include "human_mob_gc.dm"
 #include "perf_optimizations.dm"
 #include "screen_gc.dm"
+#include "statpanel_listedturf.dm"
 #include "ssmobs_optimization.dm"
 #include "tattoo_system.dm"
 
