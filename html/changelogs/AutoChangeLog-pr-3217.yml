@@ -1,0 +1,5 @@
+author: Herobrine998
+delete-after: true
+changes:
+  - bugfix: Теперь с квирком Стойкость, не будет эффектов "Крови" и т. д. Когда урон
+      не прошел
