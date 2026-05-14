@@ -1,0 +1,6 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - code_imp: добавил кэши для getFlatIcon (icon_states и проверка направленности)
+      и кэш результата для icon2html/get_icon_dmi_path, меньше овертаймов в иконочном
+      пайплайне
