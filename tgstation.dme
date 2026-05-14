@@ -4317,6 +4317,7 @@
 #include "modular_bluemoon\code\controllers\subsystem\autotransfer.dm"
 #include "modular_bluemoon\code\controllers\subsystem\hilbertshotel.dm"
 #include "modular_bluemoon\code\controllers\subsystem\metadollars.dm"
+#include "modular_bluemoon\code\controllers\subsystem\tetris_weekly_rewards.dm"
 #include "modular_bluemoon\code\controllers\subsystem\ticker.dm"
 #include "modular_bluemoon\code\controllers\subsystem\vote.dm"
 #include "modular_bluemoon\code\controllers\subsystem\who.dm"
