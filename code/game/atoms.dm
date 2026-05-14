@@ -592,7 +592,7 @@
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
 	return "[icon2html(src, user)] [thats? "That's ":""][get_examine_name(user)]"
 
-/atom/proc/examine(mob/user)
+/atom/proc/examine(mob/user, silent = FALSE)
 	. = list("[get_examine_string(user, TRUE)].[desc ? "<hr>" : null]")
 
 	if(desc)
