@@ -602,7 +602,7 @@
 		var/list/materials_list = list()
 		for(var/i in custom_materials)
 			var/datum/material/M = i
-			materials_list += material_to_ru_genitive(M.name)
+			materials_list += vocabulary_to_ru(GLOB.mat_ru_genitive, M.name)
 		. += "<u>Сделано из [english_list(materials_list)]</u>."
 	if(reagents)
 		if(reagents.reagents_holder_flags & TRANSPARENT)
