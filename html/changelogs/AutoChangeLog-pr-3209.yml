@@ -1,6 +1,0 @@
-author: Episode03
-delete-after: true
-changes:
-  - rscadd: Добавил строку поиска в меню крафта
-  - bugfix: Поправил категорию приправы, чтобы в меню не появлялся дубликат
-  - code_imp: Перевёл меню крафта на class component
