@@ -1721,6 +1721,7 @@
 #include "code\modules\admin\admin_fax_panel.dm"
 #include "code\modules\admin\admin_investigate.dm"
 #include "code\modules\admin\admin_ranks.dm"
+#include "code\modules\admin\admin_ticket_panel.dm"
 #include "code\modules\admin\admin_verbs.dm"
 #include "code\modules\admin\adminmenu.dm"
 #include "code\modules\admin\antag_panel.dm"
