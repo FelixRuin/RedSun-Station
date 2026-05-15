@@ -1753,6 +1753,7 @@
 #include "code\modules\admin\whitelist.dm"
 #include "code\modules\admin\callproc\callproc.dm"
 #include "code\modules\admin\DB_ban\functions.dm"
+#include "code\modules\admin\ban_panel.dm"
 #include "code\modules\admin\smites\aikofication.dm"
 #include "code\modules\admin\smites\berforate.dm"
 #include "code\modules\admin\smites\bloodless.dm"

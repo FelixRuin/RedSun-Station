@@ -76,17 +76,25 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/list/L = list()
+	var/num_disconnected = 0
+	L[++L.len] = list("Active Tickets:", "[astatclick.update("[active_tickets.len]")]", null, REF(astatclick))
+	astatclick.update("[active_tickets.len]")
 	for(var/I in active_tickets)
 		var/datum/admin_help/AH = I
-		if(!AH.initiator)
-			continue
-		L[++L.len] = list("#[AH.id]. [AH.initiator_key_name]:", "[AH.statclick.update()]", REF(AH), list("id" = AH.id, "state" = AH.state, "handler" = AH.handler))
-	for(var/I in closed_tickets)
-		var/datum/admin_help/AH = I
-		L[++L.len] = list("#[AH.id]. [AH.initiator_key_name]:", AH.name, REF(AH), list("id" = AH.id, "state" = AH.state, "handler" = AH.handler))
-	for(var/I in resolved_tickets)
-		var/datum/admin_help/AH = I
-		L[++L.len] = list("#[AH.id]. [AH.initiator_key_name]:", AH.name, REF(AH), list("id" = AH.id, "state" = AH.state, "handler" = AH.handler))
+		if(AH.initiator)
+			L[++L.len] = list("#[AH.id]. [AH.initiator_key_name]:", "[AH.statclick.update()]", REF(AH), list("id" = AH.id, "state" = AH.state, "handler" = AH.handler))
+		else
+			++num_disconnected
+	if(num_disconnected)
+		L[++L.len] = list("Disconnected:", "[astatclick.update("[num_disconnected]")]", null, REF(astatclick))
+	L[++L.len] = list("Closed Tickets:", "[cstatclick.update("[closed_tickets.len]")]", null, REF(cstatclick))
+	L[++L.len] = list("Resolved Tickets:", "[rstatclick.update("[resolved_tickets.len]")]", null, REF(rstatclick))
+
+	var/unhandledMessages = 0
+	for(var/list/commandMessage in GLOB.centcom_communications_messages)
+		if(commandMessage["handled"] == FALSE)
+			unhandledMessages++
+	L[++L.len] = list("Communications:", "[mstatclick.update("[unhandledMessages]")]", null, REF(mstatclick))
 
 	return L
 
