@@ -1,7 +1,0 @@
-author: Pingvas
-delete-after: true
-changes:
-  - admin: Новая бан панель.
-  - bugfix: Стелс мод будет скрывать из Who.
-  - bugfix: Сообщения теперь скрыты по умолчанию.
-  - bugfix: Фикс бота в дс.
