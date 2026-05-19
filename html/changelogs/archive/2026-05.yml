@@ -189,3 +189,6 @@
   iamasay:
   - rscadd: Добавлен новый хвост Fox SoftTip и три новых вида ушей(Kasari, Kasari
       alt, Kasari big)
+2026-05-19:
+  IO979996:
+  - bugfix: Фикс порезов стекла через скафандр
