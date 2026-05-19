@@ -4899,6 +4899,8 @@
 #include "modular_bluemoon\code\modules\tattoo\tattoo_supply.dm"
 #include "modular_bluemoon\code\modules\tattoo\tattoo_surgery.dm"
 #include "modular_bluemoon\code\modules\tgui\states\portal_device.dm"
+#include "modular_bluemoon\code\modules\tgui_panel\telemetry_prefs.dm"
+#include "modular_bluemoon\code\modules\tgui_panel\tgui_panel.dm"
 #include "modular_bluemoon\code\modules\tgui_panel\telemetry.dm"
 #include "modular_bluemoon\code\modules\tgui_panel\tgui_emote_panel.dm"
 #include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_ammo.dm"
