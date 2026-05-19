@@ -1,0 +1,5 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - bugfix: Починил `<p align>`, colspan/rowspan в таблицах и прочие HTML-атрибуты
+      в бумажках, которые сломались вместе с добавлением видосиков.
