@@ -1,0 +1,11 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - bugfix: фикс света у crown of greed на away-mission caves
+  - bugfix: персистент картин больше не тащит записи без png-файлов
+  - bugfix: atom/Destroy() безопасно удаляет alternate_appearances
+  - bugfix: глоушрум не пытается размножаться после смерти от Decay
+  - bugfix: door_remote теперь правильно проверяет доступ двери, а не свой
+  - bugfix: smite не крашится при отмене выбора наказания
+  - bugfix: lobby_preferences не падает на пустой телеметрии
+  - bugfix: micro mob_holder безопасно отпускает при странных носителях
