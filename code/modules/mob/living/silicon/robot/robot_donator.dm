@@ -131,6 +131,18 @@
 // 	cyborg_icon_override = 'modular_splurt/icons/mob/robots.dmi'
 // 	hat_offset = 3
 
+/datum/borg_donator_skin/syndicate/inteq/mekafl
+	name = "ANI-Meka"
+	module_type = /obj/item/robot_module/syndicate/inteq
+	preview_icon = 'modular_splurt/icons/mob/robots_32x64.dmi'
+	preview_icon_state = "mekafl"
+	ckey_whitelist = list("foxrtotlimda")
+	cyborg_base_icon = "mekafl"
+	cyborg_icon_override = 'modular_splurt/icons/mob/robots_32x64.dmi'
+	hat_offset = TALL_HAT_OFFSET
+	hasrest = TRUE
+
 GLOBAL_LIST_INIT_TYPED(borg_donator_skins, /datum/borg_donator_skin, list(
 	// new /datum/borg_donator_skin/standard/pe4henika_debug
+	new /datum/borg_donator_skin/syndicate/inteq/mekafl
 ))

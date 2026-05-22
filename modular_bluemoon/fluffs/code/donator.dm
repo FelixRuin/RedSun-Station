@@ -111,7 +111,7 @@
 	name = "Kukri Kit"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/modkit/kukri_kit
-	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "kingdeaths", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon")
+	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "kingdeaths", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon", "foxrtotlimda")
 
 /datum/gear/donator/bm/Advanced_Tracksuit
 	name = "Advanced Tracksuit"
@@ -664,19 +664,19 @@
 	name = "Combat Dogtag"
 	slot = ITEM_SLOT_NECK
 	path = /obj/item/clothing/accessory/hateredsoul_dogtag
-	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon")
+	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon", "foxrtotlimda")
 
 /datum/gear/donator/bm/hateredsoul_dogtag_nt
 	name = "NT Combat Dogtag"
 	slot = ITEM_SLOT_NECK
 	path = /obj/item/clothing/accessory/hateredsoul_dogtag/nt
-	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon")
+	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon", "foxrtotlimda")
 
 /datum/gear/donator/bm/hateredsoul_dogtag_syndie
 	name = "Syndie Combat Dogtag"
 	slot = ITEM_SLOT_NECK
 	path = /obj/item/clothing/accessory/hateredsoul_dogtag/syndie
-	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon")
+	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon", "foxrtotlimda")
 
 /datum/gear/donator/bm/paws_patch
 	name = "PAWS Patch"
@@ -688,7 +688,7 @@
 	name = "Black coat"
 	slot = ITEM_SLOT_NECK
 	path = /obj/item/clothing/neck/tie/h_soul_coat
-	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon", "moun4l")
+	ckeywhitelist = list("hateredsoul", "ggishka", "arion1234", "swgitty", "sw00ty", "sierraiv", "ordinarylife", "milidead", "blatoff", "angelnedemon", "moun4l", "foxrtotlimda")
 
 /datum/gear/donator/bm/tricorne
 	name = "Tricorne"
