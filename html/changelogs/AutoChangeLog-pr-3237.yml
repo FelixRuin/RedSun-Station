@@ -1,0 +1,4 @@
+author: iamasay
+delete-after: true
+changes:
+  - bugfix: пофикшен абуз ТК через VR
