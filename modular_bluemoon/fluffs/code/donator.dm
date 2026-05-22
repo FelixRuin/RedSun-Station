@@ -327,7 +327,7 @@
 /datum/gear/donator/bm/pchelik
 	name = "GFYS"
 	slot = ITEM_SLOT_BACKPACK
-	path = /obj/item/gun/ballistic/automatic/AM4B_pchelik
+	path = /obj/item/gun/ballistic/automatic/AM4B/pchelik
 	ckeywhitelist = list("pchelik")
 
 /datum/gear/donator/bm/pchelik_cloak
@@ -928,10 +928,10 @@
 	path = /obj/item/modkit/dreadmk3_kit
 	ckeywhitelist = list("stasdvrz", "mrsko", "akinight", "vovakr", "roninqwerty","pingvas","lev1932","dragon9090","cnaperdodo")
 
-/datum/gear/donator/bm/old_laser_kit
+/datum/gear/donator/bm/aer9
 	name = "AER9 Kit"
 	slot = ITEM_SLOT_ICLOTHING
-	path = /obj/item/modkit/old_laser_kit
+	path = /obj/item/modkit/aer9
 	ckeywhitelist = list("stasdvrz", "vlonger", "vidl")
 
 /datum/gear/donator/bm/institute_kit
@@ -2353,37 +2353,19 @@
 	path = /obj/item/clothing/underwear/socks/thigh/oldwraps
 	ckeywhitelist = list("lindaastereih")
 
-/datum/gear/donator/bm/occult_outfit
-	name = "occult collector's outfit"
-	slot = ITEM_SLOT_ICLOTHING
-	path = /obj/item/clothing/under/donator/bm/occult
-	ckeywhitelist = list("pingvas", "dimofon", "devildeadspace")
-
-/datum/gear/donator/bm/occult_coat
-	name = "occult collector's coat"
-	slot = ITEM_SLOT_OCLOTHING
-	path = /obj/item/clothing/suit/hooded/bm/donator/occult
-	ckeywhitelist = list("pingvas", "dimofon", "devildeadspace")
-
-/datum/gear/donator/bm/ranger_poncho
-	name = "ranger poncho"
-	slot = ITEM_SLOT_NECK
-	path = /obj/item/clothing/neck/cloak/ranger_poncho
-	ckeywhitelist = list("pingvas", "dimofon", "devildeadspace")
-
-/datum/gear/donator/bm/primitive_catgirl_leather_poncho
-	name = "primitive catgirl leather poncho"
-	slot = ITEM_SLOT_NECK
-	path = /obj/item/clothing/neck/cloak/ranger_poncho/primitive_catgirl_leather
-	ckeywhitelist = list("pingvas", "dimofon", "devildeadspace")
-
 /datum/gear/donator/backpack/lipstick/heartboom
 	name = "Heartboom Lipstick"
 	path = /obj/item/lipstick/heartboom
 	ckeywhitelist = list("liesbee")
-  
+
 /datum/gear/donator/bm/cz_75_kit
 	name = "CZ-75 kit"
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/modkit/cz_75
 	ckeywhitelist = list("shizalrp", "krasler101", "kingdeaths", "vlonger")
+
+/datum/gear/donator/bm/kila_mask
+	name = "Mask-1Щ 'Killa edition'"
+	slot = ITEM_SLOT_HEAD
+	path = /obj/item/clothing/head/donator/bm/kila_mask
+	ckeywhitelist = list("vlonger")
