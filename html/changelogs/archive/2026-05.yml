@@ -211,3 +211,8 @@
   - bugfix: smite не крашится при отмене выбора наказания
   - bugfix: lobby_preferences не падает на пустой телеметрии
   - bugfix: micro mob_holder безопасно отпускает при странных носителях
+2026-05-22:
+  iamasay:
+  - bugfix: пофикшен абуз ТК через VR
+  nopeingeneer:
+  - balance: Изменил уровень кода для печати патрон ВТ
