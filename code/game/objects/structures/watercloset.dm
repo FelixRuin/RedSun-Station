@@ -450,7 +450,7 @@
 					if(prob(80))
 						H.visible_message(span_warning("[H] искрит, когда [H.ru_ego()] схемы замыкает попавшая влага!"), span_boldwarning("Влага замыкает ваши схемы!"))
 						do_sparks(2, TRUE, H)
-						H.Confused(15)
+						H.AdjustConfused(30 SECONDS)
 						H.Jitter(20)
 						H.apply_damage(10, BURN)
 					else
@@ -460,7 +460,7 @@
 						playsound(H, 'modular_splurt/sound/misc/connection_terminated.ogg', 40, FALSE)
 						H.apply_damage(25, BURN)
 						H.AdjustUnconscious(20)
-						H.Confused(20)
+						H.AdjustConfused(40 SECONDS)
 						H.Jitter(30)
 
 			if(H.wear_suit)

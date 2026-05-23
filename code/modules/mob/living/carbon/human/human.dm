@@ -349,27 +349,52 @@
 /mob/living/carbon/human/proc/canUseHUD()
 	return CHECK_MOBILITY(src, MOBILITY_UI)
 
+/mob/living/carbon/human/proc/is_zone_covered_by_clothing(target_zone)
+	var/covered_part = zone2body_parts_covered_complicated(target_zone)
+	if(!covered_part)
+		if(above_neck(target_zone))
+			covered_part = HEAD
+		else
+			return FALSE
+	for(var/obj/item/I in get_equipped_items())
+		if(!istype(I, /obj/item/clothing))
+			continue
+		var/obj/item/clothing/C = I
+		if(C.body_parts_covered & covered_part)
+			return TRUE
+	return FALSE
+
 /mob/living/carbon/human/can_inject(mob/user, error_msg, target_zone, penetrate_thick = FALSE, bypass_immunity = FALSE)
 	. = 1 // Default to returning true.
 	if(user && !target_zone)
 		target_zone = user.zone_selected
 	if(HAS_TRAIT(src, TRAIT_PIERCEIMMUNE) && !bypass_immunity)
 		. = 0
+
+	var/pierce_level = SYRINGE_PIERCE_NONE
+	if(isnum(penetrate_thick))
+		pierce_level = penetrate_thick
+	else if(penetrate_thick)
+		pierce_level = SYRINGE_PIERCE_ALL
+
 	// If targeting the head, see if the head item is thin enough.
 	// If targeting anything else, see if the wear suit is thin enough.
-	if (!penetrate_thick)
+	if(pierce_level < SYRINGE_PIERCE_ALL)
 		if(above_neck(target_zone))
 			if(head && istype(head, /obj/item/clothing))
 				var/obj/item/clothing/CH = head
-				if (CH.clothing_flags & THICKMATERIAL)
+				if(CH.clothing_flags & THICKMATERIAL)
 					. = 0
 		else
 			var/obj/item/bodypart/BP = get_bodypart(target_zone)
 			var/obj/item/clothing/CS = get_bodypart_protecting_clothing_by_coverage(src, BP)
 			if(CS && (CS.clothing_flags & THICKMATERIAL))
 				. = 0
+
+	if(pierce_level < SYRINGE_PIERCE_THICK && . && is_zone_covered_by_clothing(target_zone))
+		. = 0
+
 	if(!. && error_msg && user)
-		// Might need re-wording.
 		to_chat(user, "<span class='alert'>Участок тела на [above_neck(target_zone) ? "вашей голове" : "вашем теле"] скрыт или на нём слишком толстый слой одежды!</span>")
 
 /mob/living/carbon/human/check_obscured_slots()

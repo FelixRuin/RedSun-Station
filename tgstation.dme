@@ -979,6 +979,7 @@
 #include "code\datums\mutations\actions.dm"
 #include "code\datums\mutations\antenna.dm"
 #include "code\datums\mutations\body.dm"
+#include "code\datums\mutations\breathing.dm"
 #include "code\datums\mutations\chameleon.dm"
 #include "code\datums\mutations\cluwne.dm"
 #include "code\datums\mutations\cold.dm"
