@@ -109,7 +109,7 @@
 
 /obj/machinery/power/apc
 	name = "area power controller"
-	desc = "Терминалу управления электросистемами соответствующей ему зоны."
+	desc = "Терминал управления электросистемами соответствующей ему зоны."
 	plane = ABOVE_WALL_PLANE
 
 	icon_state = "apc0"
