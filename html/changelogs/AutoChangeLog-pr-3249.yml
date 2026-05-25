@@ -1,5 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - code_imp: добавлен dev hot-reload бандлов tgui через локальный dev-сервер (только
-      для разработки)
