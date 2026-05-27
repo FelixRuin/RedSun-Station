@@ -1,0 +1,5 @@
+author: ''
+delete-after: true
+changes:
+  - rscdel: Удалены старые КПК.
+  - rscadd: Добавлены новые КПК на базе modular_computer.
