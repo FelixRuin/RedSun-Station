@@ -347,8 +347,8 @@
 	name = "Toggle Light"
 
 /datum/action/item_action/toggle_light/pda/Trigger(trigger_flags)
-	if(istype(target, /obj/item/pda))
-		var/obj/item/pda/P = target
+	if(istype(target, /obj/item/modular_computer/pda))
+		var/obj/item/modular_computer/pda/P = target
 		return P.toggle_light(owner)
 
 /datum/action/item_action/toggle_hood
