@@ -15,11 +15,11 @@
 #define SUICIDE_BELT_EX_FLAME_RANGE 16
 
 /datum/action/item_action/suicide_belt_trigger
-	name = "Activate suicide belt"
+	name = "Активировать пояс смертника"
 
 /obj/item/suicide_belt
-	name = "\improper suicide martyr belt"
-	desc = "A wide belt wired with synced charges. Activation starts a countdown and cannot be undone."
+	name = "\improper Suicide Martyr Belt"
+	desc = "Широкий пояс, оплетённый синхронизированными зарядами. Активация запускает обратный отсчёт, который нельзя отменить."
 	icon = 'icons/obj/clothing/belts.dmi'
 	mob_overlay_icon = 'icons/mob/clothing/belt.dmi'
 	lefthand_file = 'icons/mob/inhands/equipment/belt_lefthand.dmi'
@@ -27,14 +27,14 @@
 	icon_state = "boom_vest"
 	item_state = "boom_vest"
 	w_class = WEIGHT_CLASS_NORMAL
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACKPACK
 	var/countdown_time = 5 SECONDS
 	var/arming = FALSE
 	actions_types = list(/datum/action/item_action/suicide_belt_trigger)
 
 /obj/item/suicide_belt/equipped(mob/user, slot)
 	. = ..()
-	if(slot == ITEM_SLOT_BELT)
+	if(slot == ITEM_SLOT_BELT || slot == ITEM_SLOT_BACKPACK)
 		ADD_TRAIT(src, TRAIT_NODROP, SUICIDE_BELT_TRAIT)
 
 /obj/item/suicide_belt/ui_action_click(mob/user)
@@ -43,23 +43,22 @@
 /obj/item/suicide_belt/examine(mob/user)
 	. = ..()
 	if(HAS_TRAIT_FROM(src, TRAIT_NODROP, SUICIDE_BELT_TRAIT))
-		. += span_warning("The charges are fused to your belt — it cannot be removed.")
-	. += span_notice("Use the action button on your HUD while worn on your belt to activate.")
+		. += span_warning("Пояс сидит намертво - снять невозможно.")
 
-/obj/item/suicide_belt/proc/worn_on_belt(mob/living/user)
+/obj/item/suicide_belt/proc/worn_correctly(mob/living/user)
 	if(!ishuman(user) || user.stat != CONSCIOUS)
 		return FALSE
 	var/mob/living/carbon/human/H = user
-	return H.belt == src
+	return (H.belt == src) || (H.back && src.loc == H.back)
 
 /obj/item/suicide_belt/attack_self(mob/user)
 	if(arming || !user || QDELING(src))
 		return
-	if(!worn_on_belt(user))
-		to_chat(user, span_warning("You need to wear this on your belt slot to activate it."))
+	if(!worn_correctly(user))
+		to_chat(user, span_warning("Наденьте Пояс Смертника в слот 'пояс' или 'рюкзак'."))
 		return
-	if(tgui_alert(user, "Arm the explosives? [countdown_time/10] seconds until detonation. There is NO cancel!", "Martyr Belt", list("DETONATE", "Abort")) != "DETONATE")
-		return
+	// if(tgui_alert(user, "Взвести заряды? До взрыва [countdown_time/10] секунд. Отмены НЕТ!", "Пояс смертника", list("ВЗОРВАТЬ", "Отмена")) != "ВЗОРВАТЬ")
+	// 	return
 	arming = TRUE
 	INVOKE_ASYNC(src, PROC_REF(countdown_explode), user)
 
@@ -69,12 +68,13 @@
 		arming = FALSE
 		return
 	var/mob/living/carbon/human/H = user
-	if(!ishuman(H) || H.stat != CONSCIOUS || !worn_on_belt(H))
+	if(!ishuman(H) || H.stat != CONSCIOUS || !worn_correctly(H))
 		arming = FALSE
 		return
 
 	var/turf/belt_turf = get_turf(H)
-	H.visible_message(span_danger("[H] fiddles frantically at their belt!"), span_userdanger("You've armed the martyr belt!"))
+	H.visible_message(span_danger("[H] лихорадочно ковыряется у пояса!"), span_userdanger("Вы активировали пояс смертника!"))
+	H.balloon_alert_to_viewers("ОН СЕЙЧАС ВЗОРВЁТСЯ!")
 	message_admins("[ADMIN_LOOKUPFLW(H)] armed a martyr suicide belt at [ADMIN_VERBOSEJMP(belt_turf)].")
 
 	playsound(belt_turf, 'modular_bluemoon/sound/effects/terrorist_countdown.ogg', 110, FALSE, MEDIUM_RANGE_SOUND_EXTRARANGE)
@@ -88,8 +88,8 @@
 		arming = FALSE
 		return
 
-	if(H.belt != src)
-		H.visible_message(span_notice("[H]'s suicide belt chirps abortively — it's no longer on their belt."))
+	if(!worn_correctly(H))
+		H.visible_message(span_notice("Пояс смертника у [H] тихо пискнул и оборвал отсчёт - пояс больше не на месте."))
 		arming = FALSE
 		return
 
