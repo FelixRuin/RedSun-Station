@@ -4,15 +4,15 @@
  * Radius values are tiles from epicenter unless noted; raise/lower together for weaker/stronger blasts.
  */
 /// Epicenter tier: devastation_range (max hull/item damage tier).
-#define SUICIDE_BELT_EX_DEVASTATION_RANGE 2
+#define SUICIDE_BELT_EX_DEVASTATION_RANGE 3
 /// Next ring: heavy_impact_range (strong ex_act tier).
 #define SUICIDE_BELT_EX_HEAVY_RANGE 8
 /// Outer pressure wave: light_impact_range (weaker structural damage tier).
-#define SUICIDE_BELT_EX_LIGHT_RANGE 16
+#define SUICIDE_BELT_EX_LIGHT_RANGE 12
 /// Flash bang propagation: flash_range (mobs/screens).
-#define SUICIDE_BELT_EX_FLASH_RANGE 14
+#define SUICIDE_BELT_EX_FLASH_RANGE 20
 /// Fire halo: flame_range named argument (tiles igniting / plasma fire spread input to explosion datum).
-#define SUICIDE_BELT_EX_FLAME_RANGE 14
+#define SUICIDE_BELT_EX_FLAME_RANGE 16
 
 /datum/action/item_action/suicide_belt_trigger
 	name = "Activate suicide belt"
@@ -20,8 +20,12 @@
 /obj/item/suicide_belt
 	name = "\improper suicide martyr belt"
 	desc = "A wide belt wired with synced charges. Activation starts a countdown and cannot be undone."
-	icon = 'icons/obj/grenade.dmi'
-	icon_state = "syndicate"
+	icon = 'icons/obj/clothing/belts.dmi'
+	mob_overlay_icon = 'icons/mob/clothing/belt.dmi'
+	lefthand_file = 'icons/mob/inhands/equipment/belt_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/belt_righthand.dmi'
+	icon_state = "boom_vest"
+	item_state = "boom_vest"
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_BELT
 	var/countdown_time = 5 SECONDS
