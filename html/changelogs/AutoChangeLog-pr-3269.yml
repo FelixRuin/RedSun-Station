@@ -1,0 +1,8 @@
+author: ''
+delete-after: true
+changes:
+  - rscdel: Тестовые липстики из автомата Game.
+  - bugfix: Логика математических задач, все еще может вызывать ошибки.
+  - admin: popup работает корректно.
+  - admin: CID выписан в PP, вкладка Punish.
+  - admin: Все Jump to переделанны в один общий и удобный хаб.
