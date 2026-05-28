@@ -916,6 +916,7 @@ BLUEMOON REMOVAL END*/
 	weight = 4
 	cost = 18
 	scaling_cost = 0
+	flags = LONE_RULESET
 	required_round_type = list(ROUNDTYPE_DYNAMIC_TEAMBASED, ROUNDTYPE_DYNAMIC_HARD, ROUNDTYPE_DYNAMIC_MEDIUM) // BLUEMOON ADD
 	requirements = list(101,101,101,101,50,40,30,20,10,10)
 	flags = HIGH_IMPACT_RULESET
@@ -1072,6 +1073,7 @@ BLUEMOON REMOVAL END*/
 	weight = 4
 	cost = 15
 	scaling_cost = 0
+	flags = LONE_RULESET
 	requirements = list(101,101,101,101,40,30,20,15,10,10)
 
 /datum/dynamic_ruleset/roundstart/abductors/ready(population, forced = FALSE)
