@@ -155,6 +155,7 @@
 			update_appearance()
 			if(user && istype(user))
 				ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
+			return TRUE
 
 		if("PC_killprogram")
 			var/prog = params["name"]

@@ -252,7 +252,7 @@
 
 				if(user && istype(user))
 					computer.ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
-
+				return TRUE
 
 /datum/computer_file/program/ui_host()
 	if(!computer)

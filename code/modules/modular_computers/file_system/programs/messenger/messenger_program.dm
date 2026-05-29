@@ -116,6 +116,22 @@
 			COMSIG_MODULAR_PDA_IMPRINT_RESET,
 		))
 	remove_messenger(src)
+	for(var/other_ref in GLOB.pda_messengers)
+		var/datum/computer_file/program/messenger/other = GLOB.pda_messengers[other_ref]
+		if(other == src || QDELETED(other))
+			continue
+		var/list/to_remove = list()
+		for(var/chat_ref in other.saved_chats)
+			var/datum/pda_chat/chat = other.saved_chats[chat_ref]
+			var/datum/computer_file/program/messenger/recipient = chat.recipient?.resolve()
+			if(recipient == src)
+				to_remove += chat_ref
+		for(var/chat_ref in to_remove)
+			var/datum/pda_chat/chat = other.saved_chats[chat_ref]
+			other.saved_chats -= chat_ref
+			qdel(chat)
+		if(other.computer)
+			SStgui.update_uis(other.computer)
 	QDEL_LIST_ASSOC_VAL(saved_chats)
 	return ..()
 
@@ -180,6 +196,8 @@
 
 /datum/computer_file/program/messenger/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+	if(isobserver(usr))
+		return FALSE
 	switch(action)
 		if("PDA_ringSet")
 			var/mob/living/user = usr
@@ -623,7 +641,7 @@
 	var/mob/sender
 	if(ismob(source))
 		sender = source
-		if(!sender.canUseTopic(computer, BE_CLOSE, check_resting = TRUE))
+		if(!sender.canUseTopic(computer, BE_CLOSE, check_resting = FALSE))
 			return FALSE
 
 	if(!COOLDOWN_FINISHED(src, last_text))
@@ -800,7 +818,9 @@
 
 	if(QDELETED(src))
 		return
-	if(!usr.canUseTopic(computer, BE_CLOSE, no_tk = TRUE, check_resting = TRUE))
+	if(!usr.canUseTopic(computer, BE_CLOSE, no_tk = TRUE, check_resting = FALSE))
+		return
+	if(isobserver(usr))
 		return
 
 	// Ensure computer is on
