@@ -718,10 +718,12 @@ const ChatScreen = (props, context) => {
 const MediaAttachment = ({ src, maxHeight = '200px', maxWidth = '100%', onClick }) => {
   if (!src) return null;
 
-  const isVideo = /\.(webm|mp4)(\?.*)?$/i.test(src);
+  const isVideo = /\.(webm|mp4)(\?.*)?$/i.test(src) || src.startsWith('data:video/');
 
   if (isVideo) {
-    const videoType = /\.mp4(\?.*)?$/i.test(src) ? 'video/mp4' : 'video/webm';
+    const videoType = src.startsWith('data:')
+      ? (src.match(/^data:([^;,]+)/)?.[1] || 'video/webm')
+      : (/\.mp4(\?.*)?$/i.test(src) ? 'video/mp4' : 'video/webm');
     return (
       <Box>
         <video
