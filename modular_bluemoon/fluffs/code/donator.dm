@@ -31,7 +31,7 @@
 
 /datum/gear/donator/bm/reaper_helmet
 	name = "Reaper Helmet"
-	slot = ITEM_SLOT_OCLOTHING
+	slot = ITEM_SLOT_HEAD
 	path = /obj/item/clothing/head/helmet/space/plasmaman/security/reaper
 	ckeywhitelist = list("reaperdb")
 
@@ -2405,3 +2405,15 @@
 	slot = ITEM_SLOT_BACK
 	path = /obj/item/storage/backpack/satchel/sport_abibas_bag
 	ckeywhitelist = list("ty4kahahebe", "pingvas")
+
+/datum/gear/donator/bm/renory_jumpsuit
+	name = "Leather Jumpsuit"
+	slot = ITEM_SLOT_ICLOTHING
+	path = /obj/item/clothing/under/donator/bm/renory_jumpsuit
+	ckeywhitelist = list("kumikoshouko")
+
+/datum/gear/donator/bm/renory_helmet
+	name = "Motorcycle Helmet"
+	slot = ITEM_SLOT_HEAD
+	path = /obj/item/clothing/head/donator/bm/renory_helmet
+	ckeywhitelist = list("kumikoshouko")
