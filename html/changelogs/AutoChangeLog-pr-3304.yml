@@ -1,5 +1,0 @@
-author: FelixRuin
-delete-after: true
-changes:
-  - bugfix: персонажи в правой руке не выглядят как моль
-  - bugfix: убран лишний пиксель с головы у женской модели хуманов
