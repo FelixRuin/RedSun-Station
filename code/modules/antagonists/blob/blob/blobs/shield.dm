@@ -9,6 +9,8 @@
 	explosion_block = 3
 	point_return = 4
 	atmosblock = TRUE
+	flags_1 = DEFAULT_RICOCHET_1
+	flags_ricochet = RICOCHET_HARD
 	armor = list(MELEE = 25, BULLET = 50, LASER = 25, ENERGY = 10, BOMB = 20, BIO = 0, RAD = 0, FIRE = 90, ACID = 90)
 	var/weakened
 
@@ -39,6 +41,9 @@
 			armor = armor.setRating(MELEE = 25, BULLET = 25, LASER = 15, ENERGY = 10, BOMB = 20, BIO = 0, RAD = 0, FIRE = 90, ACID = 90)
 			weakened = FALSE
 	air_update_turf(TRUE)
+
+/obj/structure/blob/shield/check_projectile_ricochet(obj/item/projectile/P)
+	return PROJECTILE_RICOCHET_FORCE
 
 /obj/structure/blob/shield/reflective
 	name = "reflective blob"
