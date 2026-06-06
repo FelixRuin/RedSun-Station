@@ -45,6 +45,11 @@
 /obj/structure/blob/shield/check_projectile_ricochet(obj/item/projectile/P)
 	return PROJECTILE_RICOCHET_FORCE
 
+/obj/structure/blob/shield/handle_ricochet(obj/item/projectile/P)
+	. = ..()
+	if(.)
+		P.hit_prone_targets = TRUE
+
 /obj/structure/blob/shield/reflective
 	name = "reflective blob"
 	desc = "A solid wall of slightly twitching tendrils with a reflective glow."
@@ -60,8 +65,3 @@
 
 /obj/structure/blob/shield/reflective/check_projectile_ricochet(obj/item/projectile/P)
 	return PROJECTILE_RICOCHET_FORCE
-
-/obj/structure/blob/shield/reflective/handle_ricochet(obj/item/projectile/P)
-	. = ..()
-	if(.)
-		P.hit_prone_targets = TRUE
