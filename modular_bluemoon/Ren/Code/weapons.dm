@@ -184,6 +184,22 @@
 	projectile_piercing = PASSMOB
 	range = 15
 
+/obj/item/projectile/bullet/incendiary/m2a100/on_hit(atom/target, blocked = FALSE)
+	. = /obj/item/projectile/on_hit(target, blocked)
+	if(iscarbon(target))
+		var/mob/living/carbon/M = target
+		M.adjust_fire_stacks(fire_stacks)
+		M.IgniteMob()
+	var/turf/open/target_turf = get_turf(target)
+	if(istype(target_turf))
+		target_turf.IgniteTurf(rand(12, 22))
+
+/obj/item/projectile/bullet/incendiary/m2a100/Move()
+	. = /obj/item/projectile/bullet/Move()
+	var/turf/open/location = get_turf(src)
+	if(istype(location))
+		location.IgniteTurf(rand(8, 15))
+
 /obj/item/ammo_casing/energy/laser/m2a100
 	projectile_type = /obj/item/projectile/bullet/incendiary/m2a100
 	pellets = 6
