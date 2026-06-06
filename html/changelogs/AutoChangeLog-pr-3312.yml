@@ -1,0 +1,4 @@
+author: FelixRuin
+delete-after: true
+changes:
+  - bugfix: спрайт клин гранаты пропадал при разборе
