@@ -221,6 +221,7 @@
 	qdel(air_transfer)
 	var/fire_power = clamp(round(release_amount * 50), 8, 50)
 	open_target.IgniteTurf(fire_power)
+	target.hotspot_expose((ptank.air_contents.return_temperature()*2) + 380,500)
 
 /obj/item/flamethrower/Initialize(mapload)
 	. = ..()
@@ -255,6 +256,7 @@
 
 /obj/item/assembly/igniter/proc/flamethrower_process(turf/open/location)
 	location.IgniteTurf(6)
+	location.hotspot_expose(700,2)
 
 /obj/item/assembly/igniter/cold/flamethrower_process(turf/open/location)
 	return

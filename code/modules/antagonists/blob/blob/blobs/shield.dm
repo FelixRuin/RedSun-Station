@@ -46,6 +46,20 @@
 	return PROJECTILE_RICOCHET_FORCE
 
 /obj/structure/blob/shield/handle_ricochet(obj/item/projectile/P)
+	if(P.flag in list(BULLET, BOMB))
+		// Bullets use ricochet_incidence_leeway in /atom/proc/handle_ricochet, which blocks most impacts.
+		// Strong blob should always reflect bullets like reflective does for lasers.
+		var/turf/p_turf = get_turf(P)
+		var/face_direction = get_dir(src, p_turf)
+		var/face_angle = dir2angle(face_direction)
+		var/incidence_s = GET_ANGLE_OF_INCIDENCE(face_angle, (P.Angle + 180))
+		var/a_incidence_s = abs(incidence_s)
+		if(a_incidence_s > 90 && a_incidence_s < 270)
+			return FALSE
+		var/new_angle_s = SIMPLIFY_DEGREES(face_angle + incidence_s)
+		P.setAngle(new_angle_s)
+		P.hit_prone_targets = TRUE
+		return TRUE
 	. = ..()
 	if(.)
 		P.hit_prone_targets = TRUE
