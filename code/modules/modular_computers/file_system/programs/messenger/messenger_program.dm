@@ -611,6 +611,8 @@
 
 			if(!istype(target_chat))
 				target_chat = create_chat(REF(target))
+			if(!target_chat)
+				continue
 
 		else
 			continue
@@ -624,6 +626,8 @@
 	// Log in our chat
 	var/datum/pda_message/message_datum = new(message, TRUE, STATION_TIME_TIMESTAMP(PDA_MESSAGE_TIMESTAMP_FORMAT, world.time), photo_asset, everyone)
 	for(var/datum/pda_chat/target_chat as anything in target_chats)
+		if(!target_chat)
+			continue
 		target_chat.add_message(message_datum, show_in_recents = !everyone)
 		target_chat.unread_messages = 0
 
