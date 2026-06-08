@@ -272,7 +272,7 @@
 		if(L.stat != DEAD)
 			attacksuccess = TRUE
 		blobstrain.attack_living(L)
-	var/spreadsuccess = FALSE
+//	var/spreadsuccess = FALSE
 	var/obj/structure/blob/B = locate() in T
 	if(B)
 		if(attacksuccess)
@@ -292,7 +292,7 @@
 		if(cardinalblobs.len)
 			OB = pick(cardinalblobs)
 			if(OB.expand(T, src))
-				spreadsuccess = TRUE
+//				spreadsuccess = TRUE
 				add_points(-BLOB_SPREAD_COST)
 		else
 			OB = pick(diagonalblobs)

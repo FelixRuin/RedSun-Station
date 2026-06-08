@@ -102,7 +102,7 @@ GLOBAL_DATUM_INIT(spare_id_safe, /obj/structure/safe/spare_id, null)
 		code_opening()
 
 /obj/structure/safe/floor/syndi/armory/code_opening(datum/source, level)
-	SIGNAL_HANDLER
+	. = ..()
 	if(!security_level_opens_safe(level) || open)
 		return
 	playsound(src, 'modular_bluemoon/sound/effects/opening-gears.ogg', 200, ignore_walls = TRUE)
