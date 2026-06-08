@@ -1,0 +1,4 @@
+author: shahribek
+delete-after: true
+changes:
+  - bugfix: fixed outline showing when outline preference disabled
