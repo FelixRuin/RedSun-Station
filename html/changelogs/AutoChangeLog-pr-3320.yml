@@ -1,0 +1,5 @@
+author: Herobrine998
+delete-after: true
+changes:
+  - qol: Добавлена кнопка копирования лодаута из слота в слот
+  - qol: Слоты лодаута расширены до 10
