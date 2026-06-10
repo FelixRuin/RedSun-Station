@@ -1,0 +1,5 @@
+author: Herobrine998
+delete-after: true
+changes:
+  - qol: Добавлена новая настройка (Hide Action Buttons On Spawn), которая позволяет
+      при спавне скрывать все его активные кнопки в сворачиваемой панельке
