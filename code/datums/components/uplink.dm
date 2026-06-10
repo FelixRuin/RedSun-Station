@@ -239,6 +239,14 @@ GLOBAL_LIST_EMPTY(uplinks)
 	. = ..()
 	if(.)
 		return
+	switch(action)
+		if("lock")
+			active = FALSE
+			locked = TRUE
+			telecrystals += hidden_crystals
+			hidden_crystals = 0
+			SStgui.close_uis(src)
+			return TRUE
 	if(!active)
 		return
 	switch(action)
@@ -251,12 +259,6 @@ GLOBAL_LIST_EMPTY(uplinks)
 				var/datum/uplink_item/I = buyable_items[item_name]
 				MakePurchase(usr, I)
 				return TRUE
-		if("lock")
-			active = FALSE
-			locked = TRUE
-			telecrystals += hidden_crystals
-			hidden_crystals = 0
-			SStgui.close_uis(src)
 		if("select")
 			selected_cat = params["category"]
 			return TRUE
