@@ -1,6 +1,0 @@
-author: Pingvas
-delete-after: true
-changes:
-  - rscadd: Указатели для мультитула к АПЦ.
-  - rscadd: Указатели для сердца еретика к цели.
-  - rscadd: Альт-клик для разблокировки АПЦ.
