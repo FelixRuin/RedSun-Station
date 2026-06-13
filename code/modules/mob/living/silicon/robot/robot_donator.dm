@@ -305,5 +305,5 @@ GLOBAL_LIST_INIT_TYPED(borg_donator_skins, /datum/borg_donator_skin, list(
 	new /datum/borg_donator_skin/security/swatmeka,
 	new /datum/borg_donator_skin/medical/epmeka,
 	new /datum/borg_donator_skin/engineering/ratvarmeka,
-	/datum/borg_donator_skin/syndicatejack/ratvarmeka
+	new /datum/borg_donator_skin/syndicatejack/ratvarmeka
 ))
