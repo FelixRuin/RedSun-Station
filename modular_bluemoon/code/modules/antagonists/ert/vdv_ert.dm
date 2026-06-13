@@ -2,7 +2,6 @@
 	roles = list(/datum/antagonist/ert/vdv)
 	leader_role = /datum/antagonist/ert/vdv/leader
 	rename_team = "NRI Vozdushno Desantnie Voyska Squad"
-	teamsize = 7
 	opendoors = FALSE
 	rename_team = "ВДВ"
 	code = "Red"

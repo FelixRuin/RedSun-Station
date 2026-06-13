@@ -159,6 +159,8 @@
 			hierophant_message("<span class='large_brass bold'>With the conversion of a new servant the Hierophant Network's power grows. Application scriptures are now available.</span>")
 	if(add_servant_of_ratvar(L))
 		L.log_message("conversion was done with a [sigil_name]", LOG_ATTACK, color="BE8700")
+		var/datum/antagonist/clockcult/C = L.mind?.has_antag_datum(/datum/antagonist/clockcult)
+		C?.clock_team?.check_size()
 		if(iscarbon(L))
 			var/mob/living/carbon/M = L
 			M.uncuff()

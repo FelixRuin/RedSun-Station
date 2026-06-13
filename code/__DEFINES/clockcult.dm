@@ -72,6 +72,9 @@ GLOBAL_LIST_EMPTY(all_clockwork_rites) //a list containing all clockwork rites. 
 //Objective text define
 #define CLOCKCULT_OBJECTIVE "Construct the Ark of the Clockwork Justicar and free Ratvar."
 
+#define CLOCK_RISEN 0.05 //percent before rise
+#define CLOCK_ASCENDENT 0.10 //percent before ascend
+
 //Eminence defines
 #define SUPERHEATED_CLOCKWORK_WALL_LIMIT 20 //How many walls can be superheated at once
 

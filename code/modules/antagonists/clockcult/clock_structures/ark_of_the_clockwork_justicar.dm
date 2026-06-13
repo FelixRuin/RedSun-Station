@@ -248,6 +248,7 @@
 
 /obj/structure/destructible/clockwork/massive/celestial_gateway/proc/fulfill_purpose()
 	set waitfor = FALSE
+	var/turf/spawn_turf = get_turf(src)
 	countdown.stop()
 	resistance_flags |= INDESTRUCTIBLE
 	purpose_fulfilled = TRUE
@@ -260,7 +261,7 @@
 	QDEL_IN(src, 3)
 	sleep(3)
 	GLOB.clockwork_gateway_activated = TRUE
-	var/turf/T = SSmapping.get_station_center()
+	var/turf/T = spawn_turf || SSmapping.get_station_center()
 	new /obj/structure/destructible/clockwork/massive/ratvar(T)
 	var/x0 = T.x
 	var/y0 = T.y
