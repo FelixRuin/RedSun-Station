@@ -376,6 +376,7 @@
 GLOBAL_LIST_INIT(admin_forceable_hyperspace_events, list(
 	/datum/shuttle_event/hyperspace_nothing,
 	/datum/shuttle_event/turbulence,
+	/datum/shuttle_event/turbulence/evasive_maneuvers,
 	/datum/shuttle_event/simple_spawner/carp/friendly,
 	/datum/shuttle_event/simple_spawner/carp/friendly/personal_space_invader,
 	/datum/shuttle_event/simple_spawner/carp,
@@ -419,6 +420,7 @@ GLOBAL_LIST_INIT(admin_forceable_hyperspace_events, list(
 	var/list/weighted = list(
 		/datum/shuttle_event/hyperspace_nothing = 10,
 		/datum/shuttle_event/turbulence = 5,
+		/datum/shuttle_event/turbulence/evasive_maneuvers = 3,
 		/datum/shuttle_event/simple_spawner/carp/friendly = 3,
 		/datum/shuttle_event/simple_spawner/carp/friendly/personal_space_invader = 2,
 		/datum/shuttle_event/simple_spawner/carp = 4,
