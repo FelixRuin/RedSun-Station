@@ -3,6 +3,7 @@
 	leader_role = /datum/antagonist/ert/vdv/leader
 	rename_team = "NRI Vozdushno Desantnie Voyska Squad"
 	opendoors = FALSE
+	maxteamsize = 7
 	rename_team = "ВДВ"
 	code = "Red"
 	mission = "От одной из близлежащих космических станций получен сигнал о помощи. Мы связались с НТ и получили добро на вмешательство. Окажите поддержку."

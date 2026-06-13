@@ -47,6 +47,7 @@
 /datum/ert/ntr_ert // Агенты Внутренних Дел
 	roles = list(/datum/antagonist/ert/ntr_ert_agent)
 	leader_role = /datum/antagonist/ert/ntr_ert_leader
+	maxteamsize = 4
 	rename_team = "Internal Affairs Squad"
 	code = "Red"
 	mission = "слушайтесь Представителя Корпорации. Окажите поддержку Представителю Корпорации в установлении порядка и верховенства права на станции."
@@ -75,6 +76,7 @@
 	roles = list(/datum/antagonist/ert/security/rabbit)
 	leader_role = /datum/antagonist/ert/commander/rabbit
 	opendoors = FALSE
+	maxteamsize = 10
 	rename_team = "Rabbit Team"
 	mission = "устраните любые нарушения и/или отклонения от нормы на станции."
 	polldesc = "a Rabbit Team"

@@ -8,6 +8,7 @@
 	enforce_human = FALSE
 	opendoors = FALSE
 	polldesc = "Trauma Team Squad"
+	maxteamsize = 3
 	leader_role = /datum/antagonist/ert/hsc/medic
 	roles = list(/datum/antagonist/ert/hsc/sec, /datum/antagonist/ert/hsc/assistant)
 
