@@ -318,7 +318,6 @@
 	bare_wound_bonus = 0
 
 /obj/item/plasmascythe/toy/ComponentInitialize()
-	. = ..()
 	AddComponent(/datum/component/two_handed, force_unwielded=0, force_wielded=0, \
 					wieldsound='modular_bluemoon/Ren/Sound/2.1.ogg', unwieldsound='modular_bluemoon/Ren/Sound/2.1.ogg')
 
