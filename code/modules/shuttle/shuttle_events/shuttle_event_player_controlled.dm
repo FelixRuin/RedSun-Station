@@ -102,6 +102,7 @@
 
 /datum/shuttle_event/simple_spawner/player_controlled/human
 	name = "Человек (игрок)"
+	admin_forceable = FALSE
 
 /// Up to nine ghost-controlled carp — one poll, full wave.
 /datum/shuttle_event/simple_spawner/player_controlled/carp

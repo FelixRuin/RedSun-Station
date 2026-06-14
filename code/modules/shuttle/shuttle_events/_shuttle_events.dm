@@ -2,6 +2,8 @@
 /datum/shuttle_event
 	var/name = "shuttle event"
 	var/event_probability = 50
+	/// If FALSE, omitted from GLOB.admin_forceable_hyperspace_events (abstract parents).
+	var/admin_forceable = TRUE
 	var/active = FALSE
 	/// Fraction of total flight duration before this activates (0 = start of flight)
 	var/activation_fraction = 0
@@ -165,3 +167,28 @@
 				continue
 			turfs += T
 	return turfs
+
+/// pickweight pool for one random hyperspace event per evacuation transit.
+/proc/get_hyperspace_event_roll_weights()
+	var/list/weights = list()
+	var/default_name = initial(/datum/shuttle_event.name)
+	for(var/event_type in subtypesof(/datum/shuttle_event))
+		if(initial(event_type.name) == default_name)
+			continue
+		var/weight = initial(event_type.event_probability)
+		if(weight > 0)
+			weights[event_type] = weight
+	return weights
+
+GLOBAL_LIST_INIT(admin_forceable_hyperspace_events, collect_admin_forceable_hyperspace_events())
+
+/proc/collect_admin_forceable_hyperspace_events()
+	var/list/result = list()
+	var/default_name = initial(/datum/shuttle_event.name)
+	for(var/event_type in subtypesof(/datum/shuttle_event))
+		if(!initial(event_type.admin_forceable))
+			continue
+		if(initial(event_type.name) == default_name)
+			continue
+		result += event_type
+	return result
