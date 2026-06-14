@@ -68,7 +68,6 @@ GLOBAL_VAR_INIT(personal_music_boxes_last_play, 0)
 	righthand_file = 'modular_citadel/icons/obj/boombox_righthand.dmi'
 	lefthand_file = 'modular_citadel/icons/obj/boombox_lefthand.dmi'
 	icon_state = "mbox0"
-	w_class = WEIGHT_CLASS_BULKY
 	verb_say = "states"
 	var/curfile_path
 	var/song_name
