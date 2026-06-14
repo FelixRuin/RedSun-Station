@@ -4,11 +4,16 @@ GLOBAL_VAR_INIT(narsie_cosmos_active, FALSE)
 GLOBAL_VAR_INIT(infernal_cosmos_active, FALSE)
 GLOBAL_VAR_INIT(ratvar_cosmos_active, FALSE)
 
+// Transition: partial desat -> near-black -> entity-specific final tint.
 #define COSMOS_PARALLAX_GREY list(0.25, 0.25, 0.25, 0, 0.25, 0.25, 0.25, 0, 0.25, 0.25, 0.25, 0, 0, 0, 0, 1, 0, 0, 0, 0)
 #define COSMOS_PARALLAX_BLACK list(0.05, 0.05, 0.05, 0, 0.05, 0.05, 0.05, 0, 0.05, 0.05, 0.05, 0, 0, 0, 0, 0.6, 0, 0, 0, 0)
-#define COSMOS_PARALLAX_NARSIE list(0.6, 0.05, 0.05, 0, 0.1, 0.02, 0.02, 0, 0.05, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-#define COSMOS_PARALLAX_INFERNAL list(0.55, 0.15, 0, 0, 0.15, 0.05, 0, 0, 0.05, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-#define COSMOS_PARALLAX_RATVAR list(0.55, 0.4, 0.05, 0, 0.15, 0.12, 0, 0, 0.05, 0.04, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+/// Full greyscale (Nar'Sie drains colour from the void).
+#define COSMOS_PARALLAX_GREYSCALE list(0.299, 0.587, 0.114, 0, 0.299, 0.587, 0.114, 0, 0.299, 0.587, 0.114, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+/// Light golden wash (Ratvar).
+#define COSMOS_PARALLAX_RATVAR list(0.42, 0.36, 0.14, 0, 0.14, 0.12, 0.04, 0, 0.10, 0.08, 0.02, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+/// Crimson wash (arch devil ascension).
+#define COSMOS_PARALLAX_INFERNAL list(0.62, 0.10, 0.10, 0, 0.14, 0.03, 0.03, 0, 0.08, 0.01, 0.01, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+/// Nar'Sie vs Ratvar clash.
 #define COSMOS_PARALLAX_CLASH list(0.58, 0.28, 0.02, 0, 0.14, 0.08, 0, 0, 0.05, 0.03, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
 
 /proc/_cosmos_update_from_entities()
@@ -16,10 +21,11 @@ GLOBAL_VAR_INIT(ratvar_cosmos_active, FALSE)
 	if(GLOB.narsie_cosmos_active && GLOB.ratvar_cosmos_active)
 		clash_cosmos()
 	else if(GLOB.narsie_cosmos_active)
-		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_starlight_anim), "#960000", 0.05, 25, 150, 0, 0)
-		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_parallax_anim), COSMOS_PARALLAX_GREY, COSMOS_PARALLAX_BLACK, 20 SECONDS, COSMOS_PARALLAX_NARSIE, 10 SECONDS)
+		// Bleach starlight to pale grey, parallax to monochrome.
+		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_starlight_anim), "#C8C8C8", 0.05, 25, 200, 200, 200)
+		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_parallax_anim), COSMOS_PARALLAX_GREY, COSMOS_PARALLAX_BLACK, 20 SECONDS, COSMOS_PARALLAX_GREYSCALE, 10 SECONDS)
 	else if(GLOB.ratvar_cosmos_active)
-		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_starlight_anim), "#BE8700", 0.1, 20, 190, 135, 0)
+		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_starlight_anim), "#F0D878", 0.15, 20, 240, 200, 80)
 		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_parallax_anim), COSMOS_PARALLAX_GREY, COSMOS_PARALLAX_BLACK, 18 SECONDS, COSMOS_PARALLAX_RATVAR, 10 SECONDS)
 
 /proc/narsie_darken_cosmos()
@@ -43,7 +49,7 @@ GLOBAL_VAR_INIT(ratvar_cosmos_active, FALSE)
 		return
 	GLOB.infernal_cosmos_active = TRUE
 	SSnightshift.starlight_override = TRUE
-	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_starlight_anim), "#501010", 0.08, 12, 80, 16, 16)
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_starlight_anim), "#A01828", 0.09, 12, 180, 24, 32)
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(_cosmos_parallax_anim), COSMOS_PARALLAX_GREY, COSMOS_PARALLAX_BLACK, 8 SECONDS, COSMOS_PARALLAX_INFERNAL, 6 SECONDS)
 
 /proc/_cosmos_starlight_anim(final_color, final_power, steps, lerp_r = 150, lerp_g = 0, lerp_b = 0)
@@ -104,7 +110,7 @@ GLOBAL_VAR_INIT(ratvar_cosmos_active, FALSE)
 
 #undef COSMOS_PARALLAX_GREY
 #undef COSMOS_PARALLAX_BLACK
-#undef COSMOS_PARALLAX_NARSIE
+#undef COSMOS_PARALLAX_GREYSCALE
 #undef COSMOS_PARALLAX_INFERNAL
 #undef COSMOS_PARALLAX_RATVAR
 #undef COSMOS_PARALLAX_CLASH

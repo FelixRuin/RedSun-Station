@@ -22,11 +22,6 @@
 		return
 	.["HONOR_RATVAR"] = GLOB.ratvar_awakens
 
-/datum/antagonist/clockcult/silent
-	name = "Silent Clock Cultist"
-	silent = TRUE
-	show_in_antagpanel = FALSE //internal
-
 /datum/antagonist/clockcult/neutered
 	name = "Neutered Clock Cultist"
 	neutered = TRUE
