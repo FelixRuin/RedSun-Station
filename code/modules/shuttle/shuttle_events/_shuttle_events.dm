@@ -168,12 +168,16 @@
 			turfs += T
 	return turfs
 
+/// Abstract parents keep /datum/shuttle_event's default name and are excluded from rolls/admin lists.
+/proc/is_abstract_shuttle_event(datum/shuttle_event/event_type)
+	var/datum/shuttle_event/base_type = /datum/shuttle_event
+	return initial(event_type.name) == initial(base_type.name)
+
 /// pickweight pool for one random hyperspace event per evacuation transit.
 /proc/get_hyperspace_event_roll_weights()
 	var/list/weights = list()
-	var/default_name = initial(/datum/shuttle_event/name)
 	for(var/datum/shuttle_event/event_type in subtypesof(/datum/shuttle_event))
-		if(initial(event_type.name) == default_name)
+		if(is_abstract_shuttle_event(event_type))
 			continue
 		var/weight = initial(event_type.event_probability)
 		if(weight > 0)
@@ -184,11 +188,10 @@ GLOBAL_LIST_INIT(admin_forceable_hyperspace_events, collect_admin_forceable_hype
 
 /proc/collect_admin_forceable_hyperspace_events()
 	var/list/result = list()
-	var/default_name = initial(/datum/shuttle_event/name)
 	for(var/datum/shuttle_event/event_type in subtypesof(/datum/shuttle_event))
 		if(!initial(event_type.admin_forceable))
 			continue
-		if(initial(event_type.name) == default_name)
+		if(is_abstract_shuttle_event(event_type))
 			continue
 		result += event_type
 	return result
