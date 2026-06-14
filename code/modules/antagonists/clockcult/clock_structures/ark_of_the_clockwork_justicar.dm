@@ -93,12 +93,6 @@
 	SSshuttle.registerHostileEnvironment(src)
 
 /obj/structure/destructible/clockwork/massive/celestial_gateway/proc/let_slip_the_dogs()
-	for(var/V in SSticker.mode.servants_of_ratvar)
-		var/datum/mind/M = V
-		if(!M || !M.current)
-			continue
-		if(ishuman(M.current))
-			M.current.add_overlay(mutable_appearance('icons/effects/genetics.dmi', "servitude", -MUTATIONS_LAYER))
 	first_sound_played = TRUE
 	active = TRUE
 	visible_message("<span class='boldwarning'>[src] shudders and roars to life, its parts beginning to whirr and screech!</span>")
