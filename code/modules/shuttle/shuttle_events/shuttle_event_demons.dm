@@ -1,7 +1,7 @@
 /// Ghost-poll imps near the evacuation shuttle; hostile NPCs if ghosts decline.
 /datum/shuttle_event/simple_spawner/player_controlled/imp
 	name = "Импы гиперпространства"
-	spawning_list = list(/mob/living/simple_animal/imp = 16)
+	spawning_list = list(/mob/living/simple_animal/imp = 12)
 	spawning_flags = SHUTTLE_EVENT_HIT_SHUTTLE
 	event_probability = 40
 	spawn_probability_per_process = 10

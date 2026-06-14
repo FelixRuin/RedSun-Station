@@ -171,8 +171,8 @@
 /// pickweight pool for one random hyperspace event per evacuation transit.
 /proc/get_hyperspace_event_roll_weights()
 	var/list/weights = list()
-	var/default_name = initial(/datum/shuttle_event.name)
-	for(var/event_type in subtypesof(/datum/shuttle_event))
+	var/default_name = initial(/datum/shuttle_event/name)
+	for(var/datum/shuttle_event/event_type in subtypesof(/datum/shuttle_event))
 		if(initial(event_type.name) == default_name)
 			continue
 		var/weight = initial(event_type.event_probability)
@@ -184,8 +184,8 @@ GLOBAL_LIST_INIT(admin_forceable_hyperspace_events, collect_admin_forceable_hype
 
 /proc/collect_admin_forceable_hyperspace_events()
 	var/list/result = list()
-	var/default_name = initial(/datum/shuttle_event.name)
-	for(var/event_type in subtypesof(/datum/shuttle_event))
+	var/default_name = initial(/datum/shuttle_event/name)
+	for(var/datum/shuttle_event/event_type in subtypesof(/datum/shuttle_event))
 		if(!initial(event_type.admin_forceable))
 			continue
 		if(initial(event_type.name) == default_name)
