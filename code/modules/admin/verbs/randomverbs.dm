@@ -1553,11 +1553,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if(istype(L, /mob/living/simple_animal/hostile/megafauna/dragon))
 			continue
 		if(islist(flame_hit) && !flame_hit[L])
-			L.adjustFireLoss(40)
+			L.adjustFireLoss(55)
 			to_chat(L, "<span class='userdanger'>You're hit by the drake's fire breath!</span>")
 			flame_hit[L] = TRUE
 		else
-			L.adjustFireLoss(10) //if we've already hit them, do way less damage
+			L.adjustFireLoss(14)
 
 /datum/admins/proc/cmd_show_exp_panel(client/client_to_check)
 	if(!check_rights(R_ADMIN))
