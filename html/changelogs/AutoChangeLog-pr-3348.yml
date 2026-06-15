@@ -1,4 +1,0 @@
-author: IO979996
-delete-after: true
-changes:
-  - balance: Теперь для снятия КК требуется авторизация через терминал
