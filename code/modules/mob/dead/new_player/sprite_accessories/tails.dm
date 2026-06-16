@@ -235,14 +235,14 @@
 	icon = 'modular_citadel/icons/mob/mam_tails.dmi'
 	icon_state = "crow"
 	matrixed_sections = MATRIX_RED
-	color_src = MUTCOLORS
+	color_src = MATRIXED
 
 /datum/sprite_accessory/tails_animated/human/corvid
 	name = "Corvid"
 	icon = 'modular_citadel/icons/mob/mam_tails.dmi'
 	icon_state = "crow"
 	matrixed_sections = MATRIX_RED
-	color_src = MUTCOLORS
+	color_src = MATRIXED
 
 /datum/sprite_accessory/tails/human/cow
 	name = "Cow"
@@ -542,14 +542,14 @@
 	icon = 'modular_citadel/icons/mob/mam_tails.dmi'
 	icon_state = "straighttail"
 	matrixed_sections = MATRIX_RED
-	color_src = MUTCOLORS
+	color_src = MATRIXED
 
 /datum/sprite_accessory/tails_animated/human/straighttail
 	name = "Straight Tail"
 	icon = 'modular_citadel/icons/mob/mam_tails.dmi'
 	icon_state = "straighttail"
 	matrixed_sections = MATRIX_RED
-	color_src = MUTCOLORS
+	color_src = MATRIXED
 
 /datum/sprite_accessory/tails/human/squirrel
 	name = "Squirrel"
