@@ -506,12 +506,14 @@
 	icon_state = "spade"
 	icon = 'modular_splurt/icons/mob/mam_tails.dmi'
 	matrixed_sections = MATRIX_RED
+	color_src = MUTCOLORS
 
 /datum/sprite_accessory/tails_animated/human/spade
 	name = "Demon spade"
 	icon_state = "spade"
 	icon = 'modular_splurt/icons/mob/mam_tails.dmi'
 	matrixed_sections = MATRIX_RED
+	color_src = MUTCOLORS
 
 /datum/sprite_accessory/tails/human/leopard
 	name = "Leopard Tail"
