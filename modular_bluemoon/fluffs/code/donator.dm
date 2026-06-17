@@ -1623,7 +1623,7 @@
 	slot = ITEM_SLOT_UNDERWEAR
 	path = /obj/item/clothing/underwear/briefs/bongepop
 	ckeywhitelist = list("ordinarylife", "leony24", "kennedykiller", "theatlasplay", "ninjapikachushka", \
-	"devildeadspace", "trustmeimengineer", "izakfromrus", "hazzi", "dolbajob", "vulpshiro", "pingvas", "silyamg")
+	"devildeadspace", "trustmeimengineer", "izakfromrus", "hazzi", "dolbajob", "vulpshiro", "pingvas", "silyamg", "hateredsoul")
 
 /datum/gear/donator/bm/breadboots
 	name = "Breadshoe"
@@ -2442,6 +2442,12 @@
 	path = /obj/item/storage/backpack/krieg
 	ckeywhitelist = list("vlonger", "pingavas", "dragon9090")
 
+/datum/gear/donator/bm/pmc_skull_mask
+	name = "Skull mask"
+	slot = ITEM_SLOT_MASK
+	path = /obj/item/clothing/mask/gas/syndicate/pmc_skull_mask
+	ckeywhitelist = list("hateredsoul")
+  
 /datum/gear/donator/bm/krieg_backpack
 	name = "Security winter coat"
 	slot = ITEM_SLOT_OCLOTHING
