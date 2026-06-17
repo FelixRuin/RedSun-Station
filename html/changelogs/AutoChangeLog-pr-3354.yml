@@ -1,0 +1,9 @@
+author: FelixRuin
+delete-after: true
+changes:
+  - rscadd: хвосты Kathari и Nightstalker (3 colors)
+  - rscadd: морда Kathari
+  - rscdel: сломанная версия Demon Spade (нужно использовать Demon spade)
+  - bugfix: исправлено отображение хвостов Straight Tail и Corvid у хуманов
+  - rscadd: перекрашивание хвоста Demon spade (у всех) и Straight Tail с Corvid у
+      хуманов
