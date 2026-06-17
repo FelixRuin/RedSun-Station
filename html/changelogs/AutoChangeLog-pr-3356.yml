@@ -1,0 +1,5 @@
+author: iamasay
+delete-after: true
+changes:
+  - balance: Снижена стоимость powerfist и Mauler Gauntlets до 4 ТК
+  - bugfix: пофикшен баг с броском хуманов на расстоянии
