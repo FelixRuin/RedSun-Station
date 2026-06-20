@@ -1,0 +1,6 @@
+author: iamasay
+delete-after: true
+changes:
+  - rscadd: Добавил возможность порвать одежду в панельку и при клике на саму одежду
+  - rscadd: Изменены спрайты kasari ушей и хвоста foxsoftip
+  - sound: добавлен звук для рваной одежды
