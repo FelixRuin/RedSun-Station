@@ -1,0 +1,5 @@
+author: Skilets
+delete-after: true
+changes:
+  - rscadd: Новый хвост
+  - bugfix: пофиксила хвост
