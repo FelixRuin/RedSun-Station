@@ -174,6 +174,10 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	/// Who is handling this admin help?
 	var/handler
 	var/suppress_ticket_panel = FALSE
+	/// Admin-shnir typing in ticket
+	var/list/typing_admins
+	/// ticket initiator
+	var/initiator_typing_time
 
 //call this on its own to create a ticket, don't manually assign current_ticket
 //msg is the title of the ticket: usually the ahelp text
@@ -203,6 +207,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 	statclick = new(null, src)
 	_interactions = list()
+	typing_admins = list()
 
 	addtimer(CALLBACK(src, PROC_REF(add_to_ping_ss), 2 MINUTES)) // Ticket Ping | this is not responsible for the notification itself, but only for adding the ticket to the list of those to notify.
 
