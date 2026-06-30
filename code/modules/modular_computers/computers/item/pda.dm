@@ -742,8 +742,7 @@
 		var/list/skin_data = GLOB.pda_reskins[new_skin]
 		if(skin_data && skin_data["icon"])
 			icon = skin_data["icon"]
-			if(skin_data["overlays_icon"])
-				overlays_icon = skin_data["overlays_icon"]
+			overlays_icon = skin_data["icon"]
 			icon_state = base_icon_state
 			if(job_icon_state)
 				icon_state = job_icon_state
@@ -818,8 +817,7 @@
 	if(!skin_data || !skin_data["icon"])
 		return
 	icon = skin_data["icon"]
-	if(skin_data["overlays_icon"])
-		overlays_icon = skin_data["overlays_icon"]
+	overlays_icon = skin_data["icon"]
 	icon_state = base_icon_state
 	if(job_icon_state)
 		icon_state = job_icon_state
