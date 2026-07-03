@@ -14,7 +14,7 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 1
 	},
-/turf/open/floor/plasteel/textured/half,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "c" = (
 /obj/item/storage/bag/trash,
@@ -32,11 +32,12 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/open/floor/plasteel/textured/half{
-	dir = 8
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "e" = (
+/obj/effect/turf_decal/tile/dark/half/contrasted{
+	dir = 1
+	},
 /turf/open/floor/plasteel/damturf/damage3,
 /area/template_noop)
 "g" = (
@@ -64,9 +65,7 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/textured/corner{
-	dir = 8
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "k" = (
 /mob/living/simple_animal/pet/fox,
@@ -77,30 +76,26 @@
 /turf/open/floor/plasteel/cafeteria,
 /area/template_noop)
 "l" = (
+/obj/effect/turf_decal/tile/dark/half/contrasted{
+	dir = 8
+	},
 /turf/open/floor/plasteel/damturf/scorched1,
 /area/template_noop)
 "m" = (
 /obj/effect/turf_decal/siding/yellow{
 	dir = 5
 	},
-/turf/open/floor/plasteel/textured/edge{
-	dir = 4
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "n" = (
-/obj/effect/turf_decal/tile/dark/half,
-/turf/open/floor/plasteel/textured/half,
+/obj/effect/turf_decal/tile/dark/half/contrasted,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "o" = (
-/obj/effect/turf_decal/tile/dark/half{
+/obj/effect/turf_decal/tile/dark/anticorner/contrasted{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/dark{
-	dir = 1
-	},
-/turf/open/floor/plasteel/textured/edge{
-	dir = 4
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "p" = (
 /obj/item/trash/sosjerky,
@@ -122,8 +117,8 @@
 "r" = (
 /obj/machinery/light/small,
 /obj/structure/table,
-/obj/effect/turf_decal/tile/dark/half,
-/turf/open/floor/plasteel/textured/half,
+/obj/effect/turf_decal/tile/dark/half/contrasted,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "s" = (
 /obj/effect/turf_decal/siding/yellow{
@@ -133,14 +128,14 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
-/turf/open/floor/plasteel/textured/half,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "t" = (
 /obj/structure/chair{
 	dir = 8
 	},
-/obj/effect/turf_decal/tile/dark/half,
-/turf/open/floor/plasteel/textured/half,
+/obj/effect/turf_decal/tile/dark/half/contrasted,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "u" = (
 /obj/item/trash/popcorn,
@@ -153,17 +148,13 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/textured/half{
-	dir = 8
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "w" = (
-/obj/effect/turf_decal/tile/dark/half{
+/obj/effect/turf_decal/tile/dark/half/contrasted{
 	dir = 8
 	},
-/turf/open/floor/plasteel/textured/half{
-	dir = 8
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "x" = (
 /obj/effect/turf_decal/tile/brown/opposingcorners{
@@ -180,19 +171,10 @@
 /obj/effect/turf_decal/siding/yellow/corner{
 	dir = 8
 	},
-/obj/effect/turf_decal/tile/dark/half{
+/obj/effect/turf_decal/tile/dark/half/contrasted{
 	dir = 1
 	},
-/turf/open/floor/plasteel/textured/half,
-/area/template_noop)
-"A" = (
-/obj/effect/turf_decal/siding/yellow,
-/obj/effect/turf_decal/tile/dark/half{
-	dir = 1
-	},
-/turf/open/floor/plasteel/textured/edge{
-	dir = 1
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "B" = (
 /obj/effect/turf_decal/tile/brown/opposingcorners{
@@ -208,18 +190,11 @@
 /turf/open/floor/plating,
 /area/template_noop)
 "D" = (
-/turf/open/floor/plasteel/textured/large,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "E" = (
-/obj/effect/turf_decal/tile/dark/half{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/dark{
-	dir = 8
-	},
-/turf/open/floor/plasteel/textured/edge{
-	dir = 4
-	},
+/obj/effect/turf_decal/tile/dark/anticorner/contrasted,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "H" = (
 /obj/effect/turf_decal/tile/brown/opposingcorners{
@@ -242,7 +217,7 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 1
 	},
-/turf/open/floor/plasteel/textured/half,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "K" = (
 /obj/machinery/door/airlock/maintenance{
@@ -258,24 +233,25 @@
 /obj/effect/turf_decal/siding/yellow/corner{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/dark/half{
+/obj/effect/turf_decal/tile/dark/half/contrasted{
 	dir = 8
 	},
-/turf/open/floor/plasteel/textured/edge{
-	dir = 8
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "N" = (
 /turf/closed/wall,
 /area/template_noop)
 "P" = (
 /obj/effect/turf_decal/siding/yellow,
-/obj/effect/turf_decal/tile/dark/half{
+/obj/effect/turf_decal/tile/dark/half/contrasted{
 	dir = 1
 	},
-/turf/open/floor/plasteel/textured/half,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "Q" = (
+/obj/effect/turf_decal/tile/dark/half/contrasted{
+	dir = 1
+	},
 /turf/open/floor/plasteel/damturf/scorched2,
 /area/template_noop)
 "R" = (
@@ -286,12 +262,10 @@
 /turf/open/floor/plasteel/cafeteria,
 /area/template_noop)
 "S" = (
-/obj/effect/turf_decal/tile/dark/half{
+/obj/effect/turf_decal/tile/dark/half/contrasted{
 	dir = 4
 	},
-/turf/open/floor/plasteel/textured/half{
-	dir = 8
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "T" = (
 /obj/machinery/reagentgrinder{
@@ -312,17 +286,13 @@
 	pixel_x = -32;
 	pixel_y = 0
 	},
-/turf/open/floor/plasteel/textured/half{
-	dir = 8
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "V" = (
 /obj/effect/turf_decal/siding/yellow/corner{
 	dir = 1
 	},
-/turf/open/floor/plasteel/textured/corner{
-	dir = 1
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "W" = (
 /obj/structure/chair/stool/bar{
@@ -331,32 +301,26 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 1
 	},
-/turf/open/floor/plasteel/textured/half,
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "X" = (
 /obj/structure/chair{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/dark/anticorner{
+/obj/effect/turf_decal/tile/dark/anticorner/contrasted{
 	dir = 8
 	},
-/turf/open/floor/plasteel/textured/corner{
-	dir = 4
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "Y" = (
 /obj/effect/turf_decal/siding/yellow/corner{
 	dir = 4
 	},
-/turf/open/floor/plasteel/textured/corner{
-	dir = 4
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 "Z" = (
 /obj/machinery/vending/cola/random,
-/turf/open/floor/plasteel/textured/corner{
-	dir = 4
-	},
+/turf/open/floor/plasteel/textured,
 /area/template_noop)
 
 (1,1,1) = {"
@@ -444,7 +408,7 @@ W
 n
 "}
 (8,1,1) = {"
-A
+P
 Z
 N
 N
