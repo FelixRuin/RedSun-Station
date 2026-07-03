@@ -64,13 +64,13 @@
 
 //Вендорный бургер (ретекстур большого бургера)
 /obj/item/reagent_containers/food/snacks/burger/macvulpburger
-	name = "MacVulpBurger Gourmet"
+	name = "MacVulpBurger gourmet"
 	desc = "огромный, аппетитный и сочащийся соками бургер с двойной говяжей котлетой, трюфельным и ягодным соусом. "
 	icon = 'modular_bluemoon/icons/obj/food/food.dmi'
 	icon_state = "macvulpburger"
 
 /obj/item/storage/fancy/macvulpburger
-	name = "MacVulpBurger Gourmet box"
+	name = "MacVulpBurger gourmet box"
 	desc = "Особый бургер из линейки “Большой Укус” с трюфельным и ягодным соусом, только для истинных гурманов!"
 	icon = 'modular_bluemoon/icons/obj/food/food.dmi'
 	icon_state = "macvulpburger_box_closed"
@@ -84,3 +84,29 @@
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_items = 1
 	STR.can_hold = typecacheof(list(/obj/item/reagent_containers/food/snacks/burger))
+
+// Коробка из под пиццы
+/obj/item/pizzabox/macvulpizza
+	name = "MacVulPizza extra pepperoni"
+	desc = "Легендарная тройная пепперони-пицца от МакВульпикс с особым томатным соусом, в основе которого лежит тайная смесь сорока двух специй!"
+	icon = 'modular_bluemoon/icons/obj/food/macvulpizzabox.dmi'
+	custom_price = 500
+
+/obj/item/pizzabox/macvulpizza/Initialize(mapload)
+	. = ..()
+	pizza = new /obj/item/reagent_containers/food/snacks/pizza/sassysage/macvulp(src)
+	boxtag = "MacVulpix"
+
+// Пицца
+/obj/item/reagent_containers/food/snacks/pizza/sassysage/macvulp
+	name = "MacVulPizza extra pepperoni"
+	desc = "Хорошо выглядящая пицца с тройной порцией пепперони, большим количеством моцареллы и ярким томатным соусом."
+	icon = 'modular_bluemoon/icons/obj/food/food.dmi'
+	icon_state = "macvulpizza"
+	slice_path = /obj/item/reagent_containers/food/snacks/pizzaslice/sassysage/macvulp
+
+/obj/item/reagent_containers/food/snacks/pizzaslice/sassysage/macvulp
+	name = "MacVulPizza extra pepperoni pizza slice"
+	desc = "Хорошо выглядящий кусок пиццы с тройной порцией пепперони, большим количеством моцареллы и ярким томатным соусом."
+	icon = 'modular_bluemoon/icons/obj/food/food.dmi'
+	icon_state = "macvulpizza_slice"
