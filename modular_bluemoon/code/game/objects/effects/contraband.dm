@@ -33,6 +33,7 @@
 	name = "Dymai poster"
 	poster_type = /obj/structure/sign/poster/official/mac_vulpix
 	icon_state = "rolled_legit"
+	custom_price = PRICE_FREE
 
 ////
 
