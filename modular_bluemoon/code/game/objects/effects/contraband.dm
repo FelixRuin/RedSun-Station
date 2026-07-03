@@ -30,10 +30,10 @@
 	icon_state = "mac_vulpix"
 
 /obj/item/poster/mac_vulpix
-	name = "Dymai poster"
+	name = "MacVulpix Commercial Poster"
 	poster_type = /obj/structure/sign/poster/official/mac_vulpix
 	icon_state = "rolled_legit"
-	custom_price = PRICE_FREE
+	custom_premium_price = PRICE_CHEAP_AS_FREE
 
 ////
 

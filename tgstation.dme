@@ -4998,6 +4998,7 @@
 #include "modular_bluemoon\code\modules\vending\kinkmate.dm"
 #include "modular_bluemoon\code\modules\vending\liberation.dm"
 #include "modular_bluemoon\code\modules\vending\liberation_toy.dm"
+#include "modular_bluemoon\code\modules\vending\mac_vulpix.dm"
 #include "modular_bluemoon\code\modules\vending\magivend.dm"
 #include "modular_bluemoon\code\modules\vending\medical.dm"
 #include "modular_bluemoon\code\modules\vending\medical_wall.dm"
