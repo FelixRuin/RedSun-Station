@@ -2066,6 +2066,7 @@
 	slot = ITEM_SLOT_BACKPACK
 	path = /obj/item/storage/backpack/case/command/freak
 	ckeywhitelist = list("freakowo")
+	handle_post_equip = TRUE
 
 /datum/gear/donator/bm/fire_blossom
 	name = "Fire blossom"
