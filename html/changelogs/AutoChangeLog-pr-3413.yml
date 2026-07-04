@@ -1,0 +1,4 @@
+author: Kubic70
+delete-after: true
+changes:
+  - bugfix: canvas frame offset
