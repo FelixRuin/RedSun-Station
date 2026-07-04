@@ -33,7 +33,6 @@
 	name = "MacVulpix Commercial Poster"
 	poster_type = /obj/structure/sign/poster/official/mac_vulpix
 	icon_state = "rolled_legit"
-	custom_premium_price = PRICE_CHEAP_AS_FREE
 
 ////
 

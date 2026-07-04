@@ -18,7 +18,7 @@
 		/obj/item/reagent_containers/food/drinks/drinkingglass = 30
 	)
 	contraband = list(
-		/obj/structure/sign/poster/official/mac_vulpix = 10,
+		/obj/item/poster/mac_vulpix = 10,
 		/obj/item/toy/plush/bm/vulpix = 3
 	)
 	premium = list(
