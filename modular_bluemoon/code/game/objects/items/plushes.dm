@@ -948,3 +948,9 @@ GLOBAL_VAR_INIT(plush_reijo_mickie_active, 0)
 	desc = "An autistic presence has entered the room."
 	icon_state = "voronka"
 	squeak_override = list('modular_splurt/sound/voice/caw.ogg' = 1)
+
+/obj/item/toy/plush/bm/vulpix
+	name = "Business Red Fox plushie"
+	desc = "Мягкая и приятная на ощупь игрушка важного рыжего лиса в пальто."
+	icon_state = "vulpix"
+	squeak_override = list('sound/fox/Voice/fox_trill_2.ogg' = 1)
