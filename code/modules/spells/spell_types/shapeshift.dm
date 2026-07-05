@@ -116,6 +116,7 @@
 /obj/shapeshift_holder/Destroy()
 	if(!restoring)
 		restore()
+	slink = null
 	stored = null
 	shape = null
 	slink = null // qdel'ится в restore(); без обнуления держит цикл holder <-> soullink и оба хардделятся

@@ -1179,7 +1179,6 @@ so as to remain in compliance with the most up-to-date laws."
 		deltimer(timeout_id)
 		timeout_id = null
 	detach_from_owner(TRUE)
-	animate(src)
 	transform = null
 	severity = 0
 	if(clickable_glow)
