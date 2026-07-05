@@ -1,0 +1,4 @@
+author: iamasay
+delete-after: true
+changes:
+  - bugfix: ПИИ теперь интегрируется в МОД без ошибок
