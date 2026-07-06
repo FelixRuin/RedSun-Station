@@ -4499,6 +4499,7 @@
 #include "modular_bluemoon\code\game\objects\items\circuitboards\machine_circuitboards.dm"
 #include "modular_bluemoon\code\game\objects\items\clothing\collectable_hat_random.dm"
 #include "modular_bluemoon\code\game\objects\items\devices\multitool.dm"
+#include "modular_bluemoon\code\game\objects\items\devices\traitor_announcer.dm"
 #include "modular_bluemoon\code\game\objects\items\devices\scanners.dm"
 #include "modular_bluemoon\code\game\objects\items\devices\tricoder.dm"
 #include "modular_bluemoon\code\game\objects\items\devices\tvcamera.dm"
