@@ -1,0 +1,8 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - refactor: tgui переведён с Inferno на React 19
+  - code_imp: большинство вызовов useLocalState переведены на useState, окна меньше
+      ререндерятся целиком
+  - bugfix: починен коллапс flex-раскладок и формы, ломавшиеся на React-семантике
+  - server: вендоренный Node для сборки tgui обновлён с 20.19.0 до 24.16.0
