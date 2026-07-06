@@ -56,6 +56,7 @@
 		hud_list = null
 	QDEL_LIST(client_colours)
 	clear_typing_indicator()
+	QDEL_NULL(mob_panel)
 	ghostize()
 	if(mind?.current == src) //Let's just be safe yeah? This will occasionally be cleared, but not always. Can't do it with ghostize without changing behavior
 		mind.set_current(null)

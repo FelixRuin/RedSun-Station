@@ -320,6 +320,7 @@
 	if(GLOB.lighting_deferred_atoms.Remove(src)) // кэш отложенных z протухает только если атом реально был запаркован
 		GLOB.lighting_deferred_z_cache = null
 	QDEL_NULL(light)
+	QDEL_NULL(proximity_monitor)
 
 	return ..()
 
