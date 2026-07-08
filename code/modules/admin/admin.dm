@@ -639,6 +639,9 @@
 	var/chosen = pick_closest_path(path)
 	if(!chosen)
 		return
+	if(bm_is_forbidden_admin_metadollar_spawn(chosen, usr))
+		to_chat(usr, span_warning("Метадоллары запрещено спавнить через админский Spawn. Используйте игровые инструменты, например КПК."))
+		return
 	var/turf/T = get_turf(usr)
 
 	if(ispath(chosen, /turf))
@@ -662,6 +665,9 @@
 
 	var/chosen = pick_closest_path(object)
 	if(!chosen)
+		return
+	if(bm_is_forbidden_admin_metadollar_spawn(chosen, usr))
+		to_chat(usr, span_warning("Метадоллары запрещено спавнить через админский Spawn. Используйте игровые инструменты, например КПК."))
 		return
 	var/turf/T = get_turf(usr)
 
