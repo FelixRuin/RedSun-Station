@@ -4981,6 +4981,7 @@
 #include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_devices.dm"
 #include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_implants.dm"
 #include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_monkey.dm"
+#include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_pact.dm"
 #include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_roles.dm"
 #include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_stealth.dm"
 #include "modular_bluemoon\code\modules\uplink\uplink_items\uplink_stealthdevices.dm"
