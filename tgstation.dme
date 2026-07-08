@@ -4384,6 +4384,7 @@
 #include "modular_bluemoon\code\datums\world_topic.dm"
 #include "modular_bluemoon\code\datums\ai_laws\glados.dm"
 #include "modular_bluemoon\code\datums\brain_damage\imaginary_friend.dm"
+#include "modular_bluemoon\code\datums\components\condom_clipping.dm"
 #include "modular_bluemoon\code\datums\components\demoraliser.dm"
 #include "modular_bluemoon\code\datums\components\follow_component.dm"
 #include "modular_bluemoon\code\datums\components\latex_lockable.dm"
