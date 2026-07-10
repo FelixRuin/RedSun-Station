@@ -110,6 +110,7 @@
 #include "login_path_async_audit.dm"
 #include "lighting_performance.dm"
 #include "machine_disassembly.dm"
+#include "machinery_idle_sleep.dm"
 #include "machinery_optimization.dm"
 #include "mapload_space_verification.dm"	// BLUEMOON EDIT: Invalid Space Turfs
 #include "mapping.dm"						// BLUEMOON EDIT: Invalid Space Turfs
@@ -142,11 +143,13 @@
 #include "strippable_hands_gate.dm"
 #include "subsystem_init.dm"
 #include "surgeries.dm"
+#include "tank_idle_sleep.dm"
 #include "teleporters.dm"
 #include "tgui_create_message.dm"
 #include "tgui_dev_asset_url.dm"
 #include "timer_sanity.dm"
 #include "unit_test.dm"
+#include "vending_stock_keys.dm"
 // #include "wizard.dm"
 
 /// CIT TESTS
@@ -188,6 +191,7 @@
 #include "statpanel_listedturf.dm"
 #include "ssmobs_optimization.dm"
 #include "ssobj_idle_processing.dm"
+#include "proximity_monitor.dm"
 #include "tattoo_system.dm"
 #include "techweb_copy.dm"
 #include "tick_spike_recorder.dm"
