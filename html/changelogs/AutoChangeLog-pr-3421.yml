@@ -1,0 +1,7 @@
+author: Kubic70
+delete-after: true
+changes:
+  - rscadd: new item Hardspace Panties
+  - rscadd: new item Hardspace Bra
+  - rscadd: new item Hardspace Mask
+  - refactor: extract chance check from snap_choker()
