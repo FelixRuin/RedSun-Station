@@ -140,5 +140,10 @@
   - rscadd: Для использования зелёной КБ на Синдистанции теперь всем выдаётся особый
       пермит
 2026-07-10:
+  Kubic70:
+  - rscadd: new item Hardspace Panties
+  - rscadd: new item Hardspace Bra
+  - rscadd: new item Hardspace Mask
+  - refactor: extract chance check from snap_choker()
   Lev1932:
   - rscadd: Переведён культ ратвара
