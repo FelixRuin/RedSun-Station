@@ -4770,6 +4770,7 @@
 #include "modular_bluemoon\code\modules\lewd_structures\milking_machine.dm"
 #include "modular_bluemoon\code\modules\lewd_structures\sex_machine.dm"
 #include "modular_bluemoon\code\modules\lewd_structures\shibari_stand.dm"
+#include "modular_bluemoon\code\modules\living\simple_animal\friendly\slugcat.dm"
 #include "modular_bluemoon\code\modules\lobby\__lobby_defines.dm"
 #include "modular_bluemoon\code\modules\lobby\lobby_admin_controls.dm"
 #include "modular_bluemoon\code\modules\lobby\lobby_new_player.dm"
