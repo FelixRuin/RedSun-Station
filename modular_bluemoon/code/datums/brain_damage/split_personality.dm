@@ -1,3 +1,6 @@
+#define OWNER 0
+#define STRANGER 1
+
 /datum/brain_trauma/severe/split_personality
 	desc = "Мозг пациента разделён на две личности, которые могут передавать друг другу управление телом по желанию."
 	var/datum/action/innate/split_personality_control/body_action
@@ -108,3 +111,6 @@
 			trauma.send_inner_message(owner, message)
 		if("switch")
 			trauma.request_voluntary_switch(owner)
+
+#undef OWNER
+#undef STRANGER

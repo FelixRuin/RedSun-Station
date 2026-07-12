@@ -332,7 +332,7 @@
 
 //adds a set amount to any injury rolls on a limb using get_damage() multiplied by this number
 /datum/config_entry/number/wound_damage_multiplier
-	default = 0.333
+	default = 0.4
 	min_val = 0
 	integer = FALSE
 
