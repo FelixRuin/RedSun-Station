@@ -94,7 +94,7 @@
 	for(var/V in GLOB.player_list)
 		var/mob/M = V
 		if((M.client?.prefs?.toggles & SOUND_MIDI) && is_station_level(M.z))
-			M.playsound_local(M, 'sound/ambience/star.ogg', 100, FALSE, pressure_affected = FALSE)
+			M.playsound_local(M, 'sound/ambience/star.ogg', 100, FALSE, channel = CHANNEL_EVENT_MUSIC, pressure_affected = FALSE)
 
 /datum/round_event/comet_belt/start()
 	for(var/V in GLOB.player_list)
