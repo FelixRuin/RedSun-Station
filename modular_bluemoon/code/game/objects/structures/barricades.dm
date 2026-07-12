@@ -44,7 +44,7 @@
 	flags_1 = ON_BORDER_1
 	obj_flags = CAN_BE_HIT | BLOCKS_CONSTRUCTION_DIR | IGNORE_DENSITY
 	max_integrity = 100
-	pass_flags_self = PASSSTRUCTURE | LETPASSTHROW
+	pass_flags_self = PASSSTRUCTURE | PASSTABLE | LETPASSTHROW
 	///The type of stack the barricade dropped when disassembled if any.
 	var/stack_type
 	///The amount of stack dropped when disassembled at full health
@@ -102,6 +102,9 @@
 		return
 
 	if (leaving.movement_type & (PHASING | FLYING | FLOATING))
+		return
+
+	if (leaving.pass_flags & pass_flags_self)
 		return
 
 	if (leaving.move_force >= MOVE_FORCE_EXTREMELY_STRONG)
@@ -299,7 +302,7 @@
 	stack_type = /obj/item/stack/rods
 	destroyed_stack_amount = 2
 	barricade_type = "railing"
-	pass_flags_self = PASSSTRUCTURE
+	pass_flags_self = PASSSTRUCTURE | PASSTABLE
 	can_wire = FALSE
 
 /obj/structure/deployable_barricade/guardrail/update_icon()
