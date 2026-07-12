@@ -138,6 +138,24 @@
 	path = /obj/item/jukebox
 	cost = 4
 
+/datum/gear/donator/horny_stamp
+	name = "horny active rubber stamp"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/stamp/horny
+	cost = 1
+
+/datum/gear/donator/cat_stamp
+	name = "cat approved rubber stamp"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/stamp/cat
+	cost = 1
+
+/datum/gear/donator/pepe_stamp
+	name = "Pepe rubber stamp"
+	slot = ITEM_SLOT_BACKPACK
+	path = /obj/item/stamp/pepe
+	cost = 1
+
 /datum/gear/donator/purple_zippo
 	name = "Purple Zippo"
 	slot = ITEM_SLOT_BACKPACK
