@@ -63,10 +63,6 @@
 
 ////////////////////////////////////////////////////////////////////////
 
-/datum/gear/donator/muck_kit
-	name = "Muck activity kit"
-	path = /obj/item/storage/box/deviant_kit/muck
-	cost = 1
 
 /datum/gear/donator/backpack/penetrator
 	name = "The Penetrator"
