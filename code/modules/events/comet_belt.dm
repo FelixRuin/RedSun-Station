@@ -4,12 +4,14 @@
 	name = "Comet Belt"
 	typepath = /datum/round_event/comet_belt
 	max_occurrences = 1
-	weight = 5
+	// Редкое зрелище, а не фоновый флавор: на весе 10 выпадал почти каждый второй раунд
+	// и приелся (жалоба прода). 3 = примерно раз в 8-10 раундов.
+	weight = 3
 	earliest_start = 10 MINUTES
 	category = EVENT_CATEGORY_FRIENDLY
 	description = "A belt of comets passes near the station, creating a spectacular light show."
 
-/datum/round_event_control/comet_belt/canSpawnEvent(players, gamemode)
+/datum/round_event_control/comet_belt/can_fire(datum/director_signals/signals)
 	if(!CONFIG_GET(flag/starlight))
 		return FALSE
 	return ..()
