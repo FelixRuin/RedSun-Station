@@ -1,0 +1,5 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - bugfix: Исправлен ряд утечек ссылок при удалении объектов
+  - code_imp: Добавлены регрессионные тесты для harddel-ошибок
