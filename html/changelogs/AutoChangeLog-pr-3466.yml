@@ -1,5 +1,0 @@
-author: Linda-Astereih
-delete-after: true
-changes:
-  - map: Исправлена проблема, при которой газ из труб скрубберов перетекал в трубы
-      с воздухом на MetaStation.
