@@ -1080,7 +1080,7 @@
 /**
   * update_wounds() is called whenever a wound is gained or lost on this bodypart, as well as if there's a change of some kind on a bone wound possibly changing disabled status
   *
-  * Covers tabulating the damage multipliers we have from wounds (burn specifically), as well as deleting our gauze wrapping if we don't have any wounds that can use bandaging
+  * Covers tabulating the damage multipliers we have from wounds (burn specifically)
   *
   * Arguments:
   * * replaced- If true, this is being called from the remove_wound() of a wound that's being replaced, so the bandage that already existed is still relevant, but the new wound hasn't been added yet
@@ -1093,10 +1093,6 @@
 		var/datum/wound/iter_wound = i
 		dam_mul *= iter_wound.damage_mulitplier_penalty
 
-	if(!LAZYLEN(wounds) && current_gauze && !replaced)
-		owner.visible_message("<span class='notice'>\The [current_gauze] on [owner]'s [name] fall away.</span>", "<span class='notice'>The [current_gauze] on your [name] fall away.</span>")
-		QDEL_NULL(current_gauze)
-		owner.update_bandage_overlays()
 	wound_damage_multiplier = dam_mul
 	update_disabled()
 	update_part_wound_overlay()
@@ -1178,8 +1174,7 @@
   *
   * As of the Wounds 2 PR, all bleeding is now bodypart based rather than the old bleedstacks system, and 90% of standard bleeding comes from flesh wounds (the exception is embedded weapons).
   * The same way bleeding is totaled up by bodyparts, gauze now applies to all wounds on the same part. Thus, having a slash wound, a pierce wound, and a broken bone wound would have the gauze
-  * applying blood staunching to the first two wounds, while also acting as a sling for the third one. Once enough blood has been absorbed or all wounds with the ACCEPTS_GAUZE flag have been cleared,
-  * the gauze falls off.
+  * applying blood staunching to the first two wounds, while also acting as a sling for the third one. Gauze must be removed manually via self-examination.
   *
   * Arguments:
   * * gauze- Just the gauze stack we're taking a sheet from to apply here
@@ -1196,7 +1191,7 @@
 /**
   * seep_gauze() is for when a gauze wrapping absorbs blood or pus from wounds, lowering its absorption capacity.
   *
-  * The passed amount of seepage is deducted from the bandage's absorption capacity, and if we reach a negative absorption capacity, the bandages fall off and we're left with nothing.
+  * The passed amount of seepage is deducted from the bandage's absorption capacity, clamped at zero.
   *
   * Arguments:
   * * seep_amt - How much absorption capacity we're removing from our current bandages (think, how much blood or pus are we soaking up this tick?)
@@ -1204,8 +1199,24 @@
 /obj/item/bodypart/proc/seep_gauze(seep_amt = 0)
 	if(!current_gauze)
 		return
-	current_gauze.absorption_capacity -= seep_amt
-	if(current_gauze.absorption_capacity < 0)
-		owner.visible_message("<span class='danger'>\The [current_gauze] on [owner]'s [name] fall away in rags.</span>", "<span class='warning'>\The [current_gauze] on your [name] fall away in rags.</span>", vision_distance=COMBAT_MESSAGE_RANGE)
-		QDEL_NULL(current_gauze)
-		owner.update_bandage_overlays()
+	var/old_capacity = current_gauze.absorption_capacity
+	current_gauze.absorption_capacity = max(0, current_gauze.absorption_capacity - seep_amt)
+	if(old_capacity > 0 && !current_gauze.absorption_capacity && owner)
+		owner.balloon_alert(owner, "[current_gauze] пропитался кровью, его пора снимать")
+
+/**
+  * remove_gauze() removes the gauze wrapping from this bodypart and returns it to the user.
+  *
+  * Arguments:
+  * * user - The mob removing the gauze
+  * * to_hands - If TRUE, attempt to place the gauze in the user's hands
+  */
+/obj/item/bodypart/proc/remove_gauze(mob/user, to_hands = TRUE)
+	if(!current_gauze || !owner)
+		return FALSE
+	var/obj/item/stack/medical/gauze/removed = current_gauze
+	current_gauze = null
+	removed.forceMove(user || owner)
+	if(to_hands && user)
+		user.put_in_hands(removed)
+	return TRUE
