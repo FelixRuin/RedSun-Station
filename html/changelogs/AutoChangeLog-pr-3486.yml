@@ -1,0 +1,6 @@
+author: iamasay
+delete-after: true
+changes:
+  - bugfix: вернул адмиралу 20 ТК
+  - bugfix: пофиксил невидимые пермиты
+  - bugfix: пофиксил снаряжение охранника отеля
