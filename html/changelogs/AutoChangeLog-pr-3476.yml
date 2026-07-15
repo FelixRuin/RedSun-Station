@@ -1,0 +1,5 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - code_imp: Оптимизированы несколько горячих путей, найденных в профилях тиковых
+      спайков.
