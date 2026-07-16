@@ -32705,7 +32705,6 @@
 /area/maintenance/disposal)
 "cAJ" = (
 /obj/structure/grille,
-/obj/structure/grille,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "cAK" = (
