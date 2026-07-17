@@ -1,5 +1,0 @@
-author: Herobrine998
-delete-after: true
-changes:
-  - bugfix: Мартышек, лягушек, змей и мышей теперь нельзя ЕРПшить, пока внутри не
-      будет игрока.
