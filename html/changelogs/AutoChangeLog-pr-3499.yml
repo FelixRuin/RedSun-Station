@@ -1,0 +1,5 @@
+author: Herobrine998
+delete-after: true
+changes:
+  - balance: Random Heart Attack убран с эксты, побавлена проверка на сектор станции,
+      понижен шанс выпадения
