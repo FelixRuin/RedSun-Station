@@ -1,0 +1,5 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - bugfix: таймер начала раунда больше не замирает намертво из-за зависшего клиента
+      в лобби
