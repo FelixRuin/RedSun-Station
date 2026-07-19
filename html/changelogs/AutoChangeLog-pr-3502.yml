@@ -1,0 +1,6 @@
+author: Pingvas
+delete-after: true
+changes:
+  - rscadd: Тикет система для менторов
+  - rscadd: Адекватное окно ахелпа, ментор хелпа.
+  - admin: Большой рефактор системы логирования.
