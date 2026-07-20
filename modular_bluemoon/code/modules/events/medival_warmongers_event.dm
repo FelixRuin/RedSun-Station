@@ -1,7 +1,9 @@
 /datum/round_event_control/medieval_warmongers
 	name = "Medieval Warmongers"
 	typepath = /datum/round_event/medieval_warmongers
-	weight = 15
+	// Вес 15 был диким выбросом для тяжёлого командного асолта: любой поздний ролл цели
+	// гост-копилки почти гарантированно уходил в вармонгеров. Теперь тир прочих heavy.
+	weight = 6
 	max_occurrences = 1
 	min_players = 35
 	earliest_start = 40 MINUTES
@@ -307,8 +309,8 @@
 /obj/item/storage/belt/gold_tasset
 	name = "tasseted gold belt"
 	desc = "A fine leather belt that's been sleeved within many segments of steel, and further reinforced with the tassets of a fluted cuirass."
-	icon_state = "steeltasset"
-	item_state = "steeltasset"
+	icon_state = "goldtasset"
+	item_state = "goldtasset"
 	mob_overlay_icon = 'icons/mob/clothing/belt.dmi'
 	w_class = WEIGHT_CLASS_NORMAL
 
