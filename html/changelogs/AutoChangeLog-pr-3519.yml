@@ -1,0 +1,4 @@
+author: DuLL-FoX
+delete-after: true
+changes:
+  - server: Ускорен запуск сервера и прогон юнит-тестов
