@@ -415,3 +415,5 @@
   - server: Расширены колонки флагов admin_ranks (см. database_changelog 5.13)
   - code_imp: Processing-подсистемы автоматически профилируют дорогие проходы; warnfail-лог
       GC печатает улики держателей
+  iamasay:
+  - bugfix: мёртвые туши больше не плюются кровью
