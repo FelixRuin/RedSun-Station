@@ -408,7 +408,7 @@ GLOBAL_VAR_INIT(floor_cluwnes, 0)
 		H.add_splatter_floor(T)
 	if(do_after(src, 50, target = H))
 		H.unequip_everything()//more runtime prevention
-		if(prob(100))
+		if(prob(50))
 			H.death()
 		else
 			H.cluwneify()
