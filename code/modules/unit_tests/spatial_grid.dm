@@ -30,7 +30,11 @@
 	TEST_ASSERT(listener in far_cell.hearing_contents, "After moving the new cell must hold the item")
 
 	// a container carries its hearing contents between cells
-	var/obj/structure/closet/container = allocate(/obj/structure/closet, far_turf)
+	// Generic closets have a 1% chance to spawn a hearing-sensitive Halloween
+	// skeleton during Initialize(), which makes this fixture nondeterministic.
+	// Crates explicitly disable spooky traps and start empty.
+	var/obj/structure/closet/crate/container = allocate(/obj/structure/closet/crate, far_turf)
+	TEST_ASSERT(!container.spatial_grid_key, "The test container must start without grid-aware contents")
 	listener.forceMove(container)
 	TEST_ASSERT(container.spatial_grid_key, "A container holding a hearing item must gain grid awareness")
 
@@ -229,3 +233,11 @@
 	TEST_ASSERT(victim in cell?.client_contents, "the victim must stay in the CLIENTS channel after the headcrab dies")
 
 	victim.clear_important_client_contents() // cleanup канала CLIENTS
+
+/// A move queued before qdelete may arrive after Destroy removed grid state.
+/// Re-entry is then stale work, not a new registration or a fatal invariant.
+/datum/unit_test/spatial_grid_rejects_qdeleted_reentry/Run()
+	var/obj/item/stale_target = new(run_loc_floor_bottom_left)
+	qdel(stale_target)
+	SSspatial_grid.enter_cell(stale_target, run_loc_floor_bottom_left)
+	TEST_ASSERT(QDELETED(stale_target), "The stale spatial-grid target must remain deleted")

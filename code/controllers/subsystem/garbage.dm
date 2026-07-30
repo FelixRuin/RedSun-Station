@@ -142,9 +142,10 @@ SUBSYSTEM_DEF(garbage)
 	var/reftrack_autoscans_this_round = 0
 	/// Авто-сканов по типам за раунд: type string -> count.
 	var/list/reftrack_autoscan_type_counts = list()
-	// Тесты компилируются и под SPACEMAN_DMM — гард обязан совпадать с _unit_tests.dm.
-	#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
-	/// Test hook: skip async ref scans while still exercising GC control flow.
+	// TESTING builds compile the GC failure viewer branch that reads this hook;
+	// unit tests and Spaceman also need the field even when their define sets differ.
+	#if defined(TESTING) || defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+	/// Diagnostic/test hook: skip async ref scans while still exercising GC control flow.
 	var/test_ref_scan_skip_async = FALSE
 	#endif
 	#ifdef REFERENCE_TRACKING_DEBUG
@@ -814,14 +815,19 @@ SUBSYSTEM_DEF(garbage)
 				var/mob/leaked_mob = D
 				if (leaked_mob.pending_native_prompts > 0)
 					prompt_note = ", висящих нативных промптов: [leaked_mob.pending_native_prompts]"
-			log_world("## GC: -- \ref[D] | [type][extra_name] не собрался (warnfail, ~[round((GC_SOFTCHECK_TIMEOUT + GC_WARNFAIL_TIMEOUT) / 10)]с, внешних ссылок: [external_refs][prompt_note]) --")
+			log_world("## GC: -- \ref[D] | [type][extra_name] не собрался (warnfail, ~[round((GC_SOFTCHECK_TIMEOUT + GC_WARNFAIL_TIMEOUT) / 10)]с, внешних ссылок: [external_refs][prompt_note][build_warnfail_context(D)]) --")
 			gc_notify_opted_admins("GC утечка: [type][extra_name] - [refID] не собрался за ~[round((GC_SOFTCHECK_TIMEOUT + GC_WARNFAIL_TIMEOUT) / 10)]с, внешних ссылок: [external_refs]")
-			GLOB.gc_failure_cache.log_gc_failure(D, type, refID, origin_time, hint, external_refs)
+			var/datum/gc_failure_viewer/gc_failure_entry/logged_failure = GLOB.gc_failure_cache.log_gc_failure(D, type, refID, origin_time, hint, external_refs)
 			// Подтверждённая утечка - момент для авто-скана держателей (гейт рантайм-режимом).
 			var/reftrack_mode_now = GetReftrackMode()
 			if (!(I.qdel_flags & QDEL_ITEM_SKIP_REFSCAN) && (reftrack_mode_now == GC_REFTRACK_ALL || (reftrack_mode_now == GC_REFTRACK_FLAGGED && (I.qdel_flags & QDEL_ITEM_FAST_REFTRACK))))
 				TryAutoScan(D, external_refs)
 			Queue(D, GC_QUEUE_HARDDELETE, hint, origin_time)
+			// Queue() advances gc_destroyed to the harddelete-stage timestamp.
+			// Keep the viewer's identity marker in sync so its on-demand refscan
+			// can still resolve this exact datum without accepting a reused ref.
+			if(logged_failure)
+				logged_failure.target_gc_destroyed = D.gc_destroyed
 
 		if (GC_QUEUE_HARDDELETE)
 			if (I.qdel_flags & QDEL_ITEM_SUSPENDED_FOR_LAG)
@@ -986,6 +992,63 @@ SUBSYSTEM_DEF(garbage)
 		if (!admin.gc_leak_notify)
 			continue
 		to_chat(admin, "<span class='warning'>[msg]</span>")
+
+/**
+ * Дешёвый контекст-снапшот для строки warnfail: только прямые улики без ref-сканов.
+ * Ловит самые частые классы держателей: не вынутый из loc/vis_contents предмет,
+ * экран, оставшийся в client.screen живого клиента, живые таймеры с колбеком на датум,
+ * забытый STOP_PROCESSING, бакл-связки мобов. Зовётся только на редких warnfail'ах -
+ * стоимость не влияет на тик.
+ */
+/datum/controller/subsystem/garbage/proc/build_warnfail_context(datum/D)
+	var/list/notes = list()
+	if (length(D.active_timers))
+		var/datum/timedevent/first_timer = D.active_timers[1]
+		var/timer_desc = istype(first_timer) && first_timer.callBack ? "[first_timer.callBack.delegate]" : "?"
+		notes += "таймеров на датуме: [length(D.active_timers)] (первый: [timer_desc])"
+	if (D.datum_flags & DF_ISPROCESSING)
+		notes += "DF_ISPROCESSING всё ещё стоит"
+	// datum/Destroy сам снимает все подписки - непустой signal_procs ПОСЛЕ Destroy
+	// означает регистрацию после qdel; цели этих подписок держат датум в comp_lookup.
+	// Гейт по gc_destroyed: у живого датума подписки штатны и уликой не являются.
+	if (D.gc_destroyed && length(D.signal_procs))
+		var/datum/first_signal_target = D.signal_procs[1]
+		notes += "сигналы не сняты с [length(D.signal_procs)] целей (первая: [istype(first_signal_target) ? "[first_signal_target.type]" : "?"])"
+	if (ismovable(D))
+		var/atom/movable/movable = D
+		if (movable.loc)
+			var/loc_desc = "[movable.loc.type]"
+			var/atom/outer = movable.loc.loc
+			if (outer)
+				loc_desc += " -> [outer.type]"
+			notes += "всё ещё в loc: [loc_desc]"
+		if (length(movable.vis_locs))
+			var/atom/vis_holder = movable.vis_locs[1]
+			notes += "в vis_contents у [vis_holder.type] ([length(movable.vis_locs)] держателей)"
+		if (movable.orbiting)
+			var/atom/orbit_parent = movable.orbiting.parent
+			notes += "орбитит [orbit_parent ? "[orbit_parent.type]" : "?"]"
+		if (istype(movable, /atom/movable/screen))
+			for (var/client/candidate in GLOB.clients)
+				if (movable in candidate.screen)
+					notes += "в client.screen у [candidate.ckey]"
+					break
+	if (ismob(D))
+		var/mob/leaked_mob = D
+		if (leaked_mob.client)
+			notes += "клиент ещё привязан: [leaked_mob.client.ckey]"
+		// Именно mind.current -> моб: обратная ссылка пинит. Сам mob.mind после
+		// Destroy штатно не чистится и держателем не является (ложная улика 9746).
+		if (leaked_mob.mind?.current == leaked_mob)
+			notes += "mind.current всё ещё указывает на моба"
+		if (leaked_mob.buckled)
+			notes += "бакнут к [leaked_mob.buckled.type]"
+		if (length(leaked_mob.buckled_mobs))
+			var/mob/living/rider = leaked_mob.buckled_mobs[1]
+			notes += "на нём бакл: [rider.type]"
+	if (!length(notes))
+		return ""
+	return "; улики: [notes.Join(", ")]"
 
 /// Schedules a reference scan for a GC-failed datum.
 /// references_to_clear ограничивает поиск числом реально оставшихся ссылок (ранний выход).
