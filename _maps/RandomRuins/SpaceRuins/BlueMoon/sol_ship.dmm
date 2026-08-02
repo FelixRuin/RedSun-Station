@@ -3807,8 +3807,8 @@
 /obj/machinery/fax{
 	name = "SolarFederation37";
 	radio_channel = "Command";
-	fax_id = SolarFederation37;
-	fax_name = SolarFederation37
+	fax_id = "SolarFederation37";
+	fax_name = "SolarFederation37"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/bluemoon/solfed_ship/bridge)
