@@ -23,6 +23,7 @@
 /obj/effect/turf_decal/siding/wideplating/end{
 	dir = 4
 	},
+/turf/open/floor/mineral/titanium/white/airless,
 /area/ruin/space/has_grav/whiteship/box)
 "bB" = (
 /obj/machinery/sleeper{
@@ -191,6 +192,7 @@
 /obj/effect/turf_decal/siding/wideplating/end{
 	dir = 8
 	},
+/turf/open/floor/mineral/titanium/white/airless,
 /area/ruin/space/has_grav/whiteship/box)
 "hf" = (
 /obj/effect/turf_decal/siding/wideplating/corner{
@@ -281,6 +283,7 @@
 /obj/machinery/door/airlock/mining/glass{
 	name = "Resource Collector Dock"
 	},
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/whiteship/box)
 "jb" = (
 /obj/effect/turf_decal/siding/wideplating/terracotta{
@@ -401,8 +404,6 @@
 "lZ" = (
 /obj/effect/turf_decal/siding/wideplating,
 /turf/open/floor/mineral/plastitanium,
-/area/ruin/space/has_grav/whiteship/box)
-"md" = (
 /area/ruin/space/has_grav/whiteship/box)
 "mp" = (
 /obj/effect/turf_decal/trimline/yellow/corner{
@@ -655,6 +656,7 @@
 /obj/effect/turf_decal/siding/wideplating{
 	dir = 8
 	},
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/whiteship/box)
 "sX" = (
 /obj/effect/decal/cleanable/dirt,
@@ -785,6 +787,7 @@
 /obj/machinery/door/airlock/mining/glass{
 	name = "Resource Collector Dock"
 	},
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/whiteship/box)
 "Ay" = (
 /turf/open/floor/mineral/plastitanium,
@@ -1097,6 +1100,7 @@
 /obj/machinery/door/airlock/mining/glass{
 	name = "Resource Collector Dock"
 	},
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/whiteship/box)
 "LZ" = (
 /obj/effect/turf_decal/trimline/blue/arrow_cw{
@@ -1291,6 +1295,7 @@
 "Sr" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/titanium,
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/whiteship/box)
 "Tj" = (
 /obj/effect/turf_decal/trimline/dark_red/warning{
@@ -1394,6 +1399,7 @@
 "Xg" = (
 /obj/effect/decal/cleanable/glass,
 /obj/structure/girder/displaced,
+/turf/open/floor/plating,
 /area/ruin/space/has_grav/whiteship/box)
 "Xp" = (
 /obj/effect/turf_decal/siding/yellow{
@@ -2041,7 +2047,7 @@ nH
 nH
 nH
 nH
-md
+Vt
 Wc
 aB
 Ov
