@@ -188,11 +188,12 @@
 							return
 						else if(!istype(H.glasses, /obj/item/clothing/glasses/hud) && !istype(H.getorganslot(ORGAN_SLOT_HUD), /obj/item/organ/cyberimp/eyes/hud/medical))
 							return
+						// Клик по ссылке в ХУД-осмотре - такой же первый просмотр записи, как карточка.
 						var/obj/item/photo/P = null
 						if(href_list["photo_front"])
-							P = R.fields["photo_front"]
+							P = R.get_record_photo("photo_front")
 						else if(href_list["photo_side"])
-							P = R.fields["photo_side"]
+							P = R.get_record_photo("photo_side")
 						if(P)
 							P.show(H)
 				if(href_list["hud"] == "s")
@@ -905,7 +906,6 @@
 		regenerate_limbs()
 		regenerate_organs()
 	remove_all_embedded_objects()
-	set_heartattack(FALSE)
 	drunkenness = 0
 	for(var/datum/mutation/human/HM in dna.mutations)
 		if(HM.quality != POSITIVE)
@@ -914,6 +914,10 @@
 		blood_volume = (BLOOD_VOLUME_NORMAL*blood_ratio)
 	integrating_blood = 0
 	..()
+	//Только после ..(): урон органов обнуляет /mob/living/carbon/fully_heal(), и лишь
+	//тогда сердце перестаёт быть ORGAN_FAILING. Отказавшую помпу set_heartattack(FALSE)
+	//не заводит - её всё равно остановил бы ближайший on_life().
+	set_heartattack(FALSE)
 
 /mob/living/carbon/human/check_weakness(obj/item/weapon, mob/living/attacker)
 	. = ..()

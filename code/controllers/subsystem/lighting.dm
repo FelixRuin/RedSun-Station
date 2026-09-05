@@ -156,6 +156,24 @@ SUBSYSTEM_DEF(lighting)
 	/// подсчётом строк dd.log вручную, а обе цифры кумулятивны и стоят одного сложения.
 	var/zlevel_builds_total = 0
 	var/zlevel_teardowns_total = 0
+	/// "[z]" -> сколько МБ VmSize этот уровень способен вернуть ОС, по последней улике.
+	///
+	/// Книга замеров, а не прогнозов: цену сноса прибор печатал и раньше, но ни одна из
+	/// проверок решения её не читала, и раунд 10146 трижды перемолол z16, каждый раз
+	/// напечатав, что возврат нулевой (см. LIGHTING_TEARDOWN_MIN_PAYOFF_MB).
+	///
+	/// Прерванный снос сюда НЕ пишется: он не довёл до конца ни одну фазу освобождения, и
+	/// его дельта VmSize ничего не говорит о том, сколько уровень отдал бы целиком.
+	///
+	/// Хранится МАКСИМУМ, а не последняя запись. Замер снимается как дельта VmSize вокруг
+	/// сноса, который идёт до минуты, и всё, что мир успел выделить за это время, садится
+	/// в ту же цифру. Один шумный сэмпл при last-write запирал бы уровень до конца раунда,
+	/// даже если прошлый снос того же уровня честно вернул сотню мегабайт.
+	///
+	/// Замер подъёма перетирает запись в обе стороны, см. note_zlevel_lighting_rebuild().
+	var/list/zlevel_teardown_payoff = list()
+	/// "[z]" -> TRUE, пока уровень частично снесён: цена его подъёма меряет долю, а не уровень.
+	var/list/zlevel_partial_teardown = list()
 	/// Z-уровень, свет которого сейчас сносится (0 = никакой).
 	var/teardown_zlevel = 0
 	/// Фаза сноса: 0 = парковка источников, 1 = объекты и старлайт, 2 = углы, 3 = финал.
@@ -163,6 +181,8 @@ SUBSYSTEM_DEF(lighting)
 	/// Снимок GLOB.all_light_sources для фазы 0 и курсор по нему.
 	var/list/teardown_sources
 	var/teardown_source_index = 0
+	/// Множество уже запаркованных атомов на время фазы 0: дедуп парковки за O(1).
+	var/list/teardown_parked_lookup
 	/// Кэш турфов уровня для фаз 1-2 и курсор по нему.
 	var/list/teardown_turfs
 	var/teardown_turf_index = 0
@@ -181,6 +201,8 @@ SUBSYSTEM_DEF(lighting)
 	/// молча и по нескольким причинам сразу, а снаружи это неотличимо от штатного завершения:
 	/// в обоих случаях teardown_zlevel обнуляется.
 	var/teardown_abort_reason
+	/// world.time финала последнего доведённого до конца сноса; 0 - сносов ещё не было.
+	var/last_teardown_finished_at = 0
 
 /datum/controller/subsystem/lighting/stat_entry(msg)
 	var/total_cost = cost_sources + cost_corners + cost_objects
@@ -614,9 +636,9 @@ SUBSYSTEM_DEF(lighting)
 /// Safety net for the "lighting never loads" report: a z-level left flagged lighting_initialized with
 /// orphaned deferred atoms (interrupted on-demand init) is never re-entered by any movement trigger,
 /// because update_z only fires on a z CHANGE and a stationary player never re-fires it. This periodic
-/// scan finds z-levels that still have parked deferred atoms AND a present occupant (living client or
-/// ghost) and re-runs create_lighting_for_zlevel, letting its self-heal guard flush them. Unoccupied
-/// deferred z-levels are intentionally left alone (preserving the deferral optimization).
+/// scan finds z-levels that still have parked deferred atoms AND a present occupant (living client, or a
+/// ghost with darkness on) and re-runs create_lighting_for_zlevel, letting its self-heal guard flush them.
+/// Unoccupied deferred z-levels are intentionally left alone (preserving the deferral optimization).
 /datum/controller/subsystem/lighting/proc/scan_stuck_deferred_zlevels()
 	// Лиза вместо булевого латча: рантайм внутри спасательного вызова оставлял бы флаг занятости
 	// взведённым навечно, молча отключая сейфнет до конца раунда. Протухшая лиза истекает сама.
@@ -639,8 +661,7 @@ SUBSYSTEM_DEF(lighting)
 			if(atom_turf)
 				parked_z |= atom_turf.z
 		GLOB.lighting_deferred_z_cache = parked_z
-	// Recover only z-levels with a present occupant (living client or ghost; dead players are the
-	// dominant stuck case since they reach away/reserved z first). A parked-but-empty reserved z stays
+	// Recover only z-levels with a present occupant (see zlevel_has_occupant). A parked-but-empty reserved z stays
 	// deferred on purpose; force-initing it would defeat the deferral optimization.
 	for(var/z in parked_z)
 		if(z < 1 || z > SSmapping.z_list.len)
@@ -687,6 +708,13 @@ SUBSYSTEM_DEF(lighting)
 		if(!level.lighting_initialized || !zlevel_lighting_teardownable(level))
 			zlevel_empty_since -= key
 			continue
+		// Фоновый краулер ставит lighting_initialized уже после фазы 0, а источники строит
+		// дальше срезами. Уровень под его рукой - не кандидат: иначе снос и постройка
+		// перемалывали друг друга по кругу (три "Снос света" за 80 мс в тестовом прогоне
+		// 30.08), и уровень оставался помеченным поднятым при снесённых объектах.
+		if(z == bg_current_zlevel)
+			zlevel_empty_since -= key
+			continue
 		lit_deferred++
 		if(zlevel_has_occupant(z))
 			zlevel_empty_since -= key
@@ -699,8 +727,19 @@ SUBSYSTEM_DEF(lighting)
 		// в квоте участвует - иначе она перестала бы видеть собственный пик.
 		if(zlevel_teardown_cooldown_active(zlevel_lit_since[key], world.time, pressure))
 			continue
+		// Улика прошлого сноса читается ПОСЛЕ счётчика по той же причине, что и кулдаун:
+		// исключённый уровень всё равно горит и в квоте участвует. Иначе его исключение
+		// занижало бы lit_deferred и снимало давление квоты с ОСТАЛЬНЫХ уровней.
+		if(zlevel_teardown_payoff_exhausted(zlevel_teardown_payoff[key]))
+			continue
 		idle_since_by_z[key] = since
+	// Гейт стоит после прохода: книга простоя обязана тикать и ниже порога.
+	if(!lighting_teardown_pressure_allows(pressure))
+		return
 	if(!length(idle_since_by_z))
+		return
+	// Пауза стоит после учёта и гейта: при его открытии все пустующие уровни просрочены разом.
+	if(!lighting_teardown_spacing_elapsed(last_teardown_finished_at, world.time, pressure))
 		return
 	var/idle_time = lighting_teardown_idle_time(pressure, lit_deferred)
 	var/best_z = pick_lighting_teardown_zlevel(idle_since_by_z, idle_time, world.time)
@@ -715,6 +754,7 @@ SUBSYSTEM_DEF(lighting)
 	teardown_zlevel = z
 	teardown_phase = 0
 	teardown_sources = null
+	teardown_parked_lookup = null
 	teardown_source_index = 0
 	teardown_turfs = null
 	teardown_turf_index = 0
@@ -780,13 +820,47 @@ SUBSYSTEM_DEF(lighting)
 /// Прекращает снос, не откатывая сделанное: уровень уже помечен неинициализированным, и
 /// подъём по требованию достроит недостающее (create_lighting_for_zlevel пропускает турфы,
 /// у которых объект уже есть).
-/datum/controller/subsystem/lighting/proc/abort_zlevel_lighting_teardown()
+/datum/controller/subsystem/lighting/proc/abort_zlevel_lighting_teardown(completed = FALSE)
+	if(teardown_zlevel)
+		var/key = "[teardown_zlevel]"
+		if(completed)
+			zlevel_partial_teardown -= key
+		else if(teardown_objects)
+			zlevel_partial_teardown[key] = TRUE
 	teardown_zlevel = 0
 	teardown_phase = 0
 	teardown_sources = null
+	teardown_parked_lookup = null
 	teardown_source_index = 0
 	teardown_turfs = null
 	teardown_turf_index = 0
+
+/// Возвращает один источник сносимого уровня в отложку. TRUE, если источник был снят.
+/datum/controller/subsystem/lighting/proc/park_teardown_source(datum/light_source/source, z)
+	if(QDELETED(source))
+		return FALSE
+	var/atom/source_atom = source.source_atom
+	if(QDELETED(source_atom))
+		return FALSE
+	var/turf/source_turf = get_turf(source_atom)
+	if(source_turf?.z != z)
+		return FALSE
+	if(isspaceturf(source_atom))
+		// Звёздный свет не паркуется: его зажигает соседний объект света через
+		// update_starlight(), поэтому при обратном подъёме он вернётся сам.
+		var/turf/open/space/space_turf = source_atom
+		GLOB.starlight -= space_turf
+		space_turf.set_light(l_range = 0)
+		return TRUE
+	if(!teardown_parked_lookup[source_atom])
+		teardown_parked_lookup[source_atom] = TRUE
+		GLOB.lighting_deferred_atoms += source_atom
+		note_deferred_lighting_z(z)
+	if(source_atom.light == source)
+		QDEL_NULL(source_atom.light)
+	else
+		qdel(source)
+	return TRUE
 
 /datum/controller/subsystem/lighting/proc/process_zlevel_lighting_teardown()
 	var/z = teardown_zlevel
@@ -802,6 +876,8 @@ SUBSYSTEM_DEF(lighting)
 		abort_reason = "уровень успели поднять обратно"
 	else if(init_in_progress)
 		abort_reason = "другой проход строит свет"
+	else if(bg_current_zlevel == z)
+		abort_reason = "фоновый краулер строит этот уровень"
 	else if(zlevel_has_occupant(z))
 		abort_reason = "на уровне появился жилец"
 	if(abort_reason)
@@ -815,33 +891,18 @@ SUBSYSTEM_DEF(lighting)
 		if(isnull(teardown_sources))
 			teardown_sources = GLOB.all_light_sources.Copy()
 			teardown_source_index = 1
+			// Дедуп через |= по самой отложке квадратичен: индекс строится один раз за снос.
+			teardown_parked_lookup = list()
+			for(var/atom/parked as anything in GLOB.lighting_deferred_atoms)
+				teardown_parked_lookup[parked] = TRUE
+		// Снимок держит источники всего мира, поэтому тик-чек на каждой итерации, не только на снятом.
 		while(teardown_source_index <= length(teardown_sources))
-			var/datum/light_source/source = teardown_sources[teardown_source_index++]
-			if(QDELETED(source))
-				continue
-			var/atom/source_atom = source.source_atom
-			if(QDELETED(source_atom))
-				continue
-			var/turf/source_turf = get_turf(source_atom)
-			if(source_turf?.z != z)
-				continue
-			if(isspaceturf(source_atom))
-				// Звёздный свет не паркуется: его зажигает соседний объект света через
-				// update_starlight(), поэтому при обратном подъёме он вернётся сам.
-				var/turf/open/space/space_turf = source_atom
-				GLOB.starlight -= space_turf
-				space_turf.set_light(l_range = 0)
-			else
-				GLOB.lighting_deferred_atoms |= source_atom
-				GLOB.lighting_deferred_z_cache = null
-				if(source_atom.light == source)
-					QDEL_NULL(source_atom.light)
-				else
-					qdel(source)
-			teardown_parked++
+			if(park_teardown_source(teardown_sources[teardown_source_index++], z))
+				teardown_parked++
 			if(MC_TICK_CHECK)
 				return
 		teardown_sources = null
+		teardown_parked_lookup = null
 		teardown_phase = 1
 		if(MC_TICK_CHECK)
 			return
@@ -913,8 +974,61 @@ SUBSYSTEM_DEF(lighting)
 	bg_queued_zlevels |= z
 	if(starlight_color_index > length(GLOB.starlight))
 		starlight_color_index = 0
-	log_world("## LIGHTING: Снос света z[z] завершён: объектов [teardown_objects], углов [teardown_corners], источников в отложку [teardown_parked][zlevel_teardown_memory_note(teardown_vsz_before, get_process_memory_mb())]")
-	abort_zlevel_lighting_teardown()
+	// Замер снимается ОДИН раз и идёт сразу в три места: в книгу отдачи, в цифру возврата и
+	// в пометку об исключении. Два вызова get_process_memory_mb() подряд дали бы строке лога
+	// и книге разные числа, и разбор прода не сошёлся бы сам с собой.
+	var/list/memory_after = get_process_memory_mb()
+	var/payoff_mb = record_zlevel_teardown_payoff(z, memory_after)
+	last_teardown_finished_at = world.time
+	log_world("## LIGHTING: Снос света z[z] завершён: объектов [teardown_objects], углов [teardown_corners], источников в отложку [teardown_parked][zlevel_teardown_memory_note(teardown_vsz_before, memory_after)][zlevel_teardown_payoff_note(payoff_mb)]")
+	abort_zlevel_lighting_teardown(completed = TRUE)
+
+/**
+ * Записывает в книгу, сколько МБ VmSize вернул только что завершённый снос уровня.
+ *
+ * Возвращает то, что в книге лежит ПОСЛЕ записи (то есть лучший из замеров этого уровня),
+ * либо null, если мерить было нечем (Windows, ранний старт) - там улик против уровня не
+ * появляется, и он остаётся кандидатом на общих основаниях.
+ *
+ * Пишется МАКСИМУМ, а не последняя цифра: окно замера - это весь снос, до минуты реального
+ * времени, и любая чужая аллокация внутри него садится в ту же дельту. При last-write один
+ * такой сэмпл запирал бы уровень до конца раунда поверх честного прошлого замера.
+ *
+ * Зовётся ТОЛЬКО из финала фазы 3: у прерванного сноса дельта VmSize не значит ничего.
+ */
+/datum/controller/subsystem/lighting/proc/record_zlevel_teardown_payoff(z, list/memory_after)
+	if(isnull(teardown_vsz_before) || !memory_after || isnull(memory_after["vsz"]))
+		return null
+	var/payoff_mb = teardown_vsz_before - memory_after["vsz"]
+	var/key = "[z]"
+	var/existing = zlevel_teardown_payoff[key]
+	if(!isnull(existing) && existing > payoff_mb)
+		payoff_mb = existing
+	zlevel_teardown_payoff[key] = payoff_mb
+	return payoff_mb
+
+/// Пересматривает допуск уровня к сносам по цене его подъёма: дорогой подъём снимает улику
+/// прошлого сноса, дешёвый ставит её без сноса. Возвращает LIGHTING_REBUILD_VERDICT_*.
+/datum/controller/subsystem/lighting/proc/note_zlevel_lighting_rebuild(z, spent_mb)
+	if(isnull(spent_mb))
+		return LIGHTING_REBUILD_VERDICT_UNCHANGED
+	var/key = "[z]"
+	var/was_partial = zlevel_partial_teardown[key]
+	zlevel_partial_teardown -= key
+	if(zlevel_rebuild_commits_fresh_memory(spent_mb))
+		if(isnull(zlevel_teardown_payoff[key]))
+			return LIGHTING_REBUILD_VERDICT_UNCHANGED
+		zlevel_teardown_payoff -= key
+		return LIGHTING_REBUILD_VERDICT_REOPENED
+	// После прерванного сноса достраивается лишь доля: её цена об уровне ничего не говорит.
+	if(was_partial)
+		return LIGHTING_REBUILD_VERDICT_UNCHANGED
+	// Отрицательная цена - чужое освобождение в окне замера, а не дешёвый подъём.
+	if(spent_mb < 0)
+		return LIGHTING_REBUILD_VERDICT_UNCHANGED
+	var/was_excluded = zlevel_teardown_payoff_exhausted(zlevel_teardown_payoff[key])
+	zlevel_teardown_payoff[key] = spent_mb
+	return was_excluded ? LIGHTING_REBUILD_VERDICT_UNCHANGED : LIGHTING_REBUILD_VERDICT_EXCLUDED
 
 /**
  * Есть ли на z-уровне живой клиент или наблюдатель. Мёртвые считаются наравне: именно они
@@ -954,12 +1068,14 @@ SUBSYSTEM_DEF(lighting)
 		count++
 	return count
 
+/// Есть ли на z кто-то, ради кого свет уровня строят и держат: живой клиент - всегда,
+/// наблюдатель - только с включённой темнотой (см. ghost_holds_zlevel_lighting).
 /datum/controller/subsystem/lighting/proc/zlevel_has_occupant(z)
 	for(var/mob/occupant as anything in SSmobs.clients_on_zlevel(z))
 		if(!QDELETED(occupant))
 			return TRUE
-	for(var/mob/occupant as anything in SSmobs.dead_players_on_zlevel(z))
-		if(!QDELETED(occupant))
+	for(var/mob/watcher as anything in SSmobs.dead_players_on_zlevel(z))
+		if(ghost_holds_zlevel_lighting(watcher))
 			return TRUE
 	return FALSE
 
@@ -998,6 +1114,10 @@ SUBSYSTEM_DEF(lighting)
 		if(level.lighting_initialized)
 			bg_current_zlevel = 0
 			return
+		// Уровень выбран потому, что на нём жилец, - идущий снос этого же уровня обязан
+		// уступить, иначе его срезы разбирали бы то, что мы сейчас строим.
+		if(teardown_zlevel == bg_current_zlevel)
+			abort_zlevel_lighting_teardown()
 		log_world("## LIGHTING: Background init starting for z-level [bg_current_zlevel] ([level.name])")
 
 	var/z = bg_current_zlevel

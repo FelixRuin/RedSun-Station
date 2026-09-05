@@ -178,6 +178,10 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 #define BLOOD_STATE_NOT_BLOODY		"no blood whatsoever"
 #define BLOOD_AMOUNT_PER_DECAL		20
 
+/// Сколько /obj/effect/decal/cleanable может лежать на одном турфе. Шесть выбрано по картам:
+/// самый забитый замапленный турф несёт 5 декалей, кап режет только рантаймовый нарост.
+#define CLEANABLE_DECAL_TURF_CAP	6
+
 //suit sensors: sensor_mode defines
 
 #define SENSOR_OFF 0
@@ -599,6 +603,21 @@ GLOBAL_LIST_INIT(payed_ert, list(
 /// правок склеиваем в одну; но переносить бесконечно нельзя, иначе игрок,
 /// который щёлкает настройки чаще кулдауна, не сохраняется до самого логаута.
 #define PREF_SAVE_MAX_DEFER 15 SECONDS
+
+/// Окно склейки одиночных записей префов (save_single_pref) в одну.
+/// Шире клиентского дебаунса панели tgui (3 с): иначе две соседние отправки состояния
+/// чата приходят уже разнесёнными и склеивать их не с чем. Верхняя граница переноса
+/// та же, что и у полной записи - PREF_SAVE_MAX_DEFER.
+#define PREF_SINGLE_SAVE_DEBOUNCE 5 SECONDS
+
+// Решения pref_defer_decision() - что делать с очередной отложенной записью savefile.
+/// Очереди не было: завести крайний срок и зарядить таймер.
+#define PREF_DEFER_ARM 1
+/// Очередь есть, крайний срок не наступил: перевзвести таймер, срок не трогать.
+#define PREF_DEFER_RESCHEDULE 2
+/// Крайний срок наступил: оставить заряженный таймер как есть, иначе поток правок
+/// переносит запись бесконечно и игрок не сохраняется до самого логаута.
+#define PREF_DEFER_KEEP 3
 
 #define VOMIT_TOXIC 1
 #define VOMIT_PURPLE 2

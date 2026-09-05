@@ -39,10 +39,8 @@
 	var/status_flags
 	var/datum/mod_theme/theme = /datum/mod_theme
 
-	/// Looks of the MOD.		//]
-	var/skin = "standard"		//]
-	/// Theme of the MOD TGUI	//] <-- перенести в mod_theme
-	var/ui_theme = "ntos"		//]
+	var/skin = "standard"
+	var/ui_theme = "ntos"
 
 	var/seconds_electrified = MACHINE_NOT_ELECTRIFIED
 	var/interface_break = FALSE
@@ -78,6 +76,47 @@
 /obj/item/mod/control/proc/get_mod_part_by_index(index)
 	return mod_parts[index]
 
+/// TRUE, если предмет лежит в одном из слотов mod_parts.
+/// Штатный поиск по списку тут не годится: у alist он идёт по КЛЮЧАМ, а ключи -
+/// числа, поэтому поиск части всегда возвращал ноль.
+/obj/item/mod/control/proc/is_mod_part(obj/item/part)
+	if(isnull(part))
+		return FALSE
+	for(var/index in mod_parts)
+		if(mod_parts[index] == part)
+			return TRUE
+	return FALSE
+
+/// Убирает часть из mod_parts, находя её ключ. Возвращает TRUE, если часть нашлась.
+/// Писать `mod_parts -= part` нельзя: alist вычитает по ключу, а не по значению,
+/// и костюм молча остаётся со ссылкой на удалённую часть.
+/obj/item/mod/control/proc/clear_mod_part(obj/item/part)
+	if(isnull(part))
+		return FALSE
+	var/found_index
+	for(var/index in mod_parts)
+		if(mod_parts[index] == part)
+			found_index = index
+			break
+	if(isnull(found_index))
+		return FALSE
+	mod_parts -= found_index
+	return TRUE
+
+/// Возвращает список частей костюма (значения mod_parts), пропуская пустые слоты.
+/// Перебирать alist напрямую нельзя: `for(var/obj/item/part in mod_parts)` выдаёт
+/// КЛЮЧИ, и фильтр по типу отбрасывает их все - тело такого цикла не исполняется.
+/obj/item/mod/control/proc/get_mod_parts(include_cell = TRUE)
+	var/list/parts = list()
+	for(var/index in mod_parts)
+		if(!include_cell && index == MOD_PART_CELL)
+			continue
+		var/obj/item/part = mod_parts[index]
+		if(isnull(part))
+			continue
+		parts += part
+	return parts
+
 /obj/item/mod/control/proc/get_helmet()
 	return mod_parts[MOD_PART_HEAD]
 
@@ -89,6 +128,9 @@
 
 /obj/item/mod/control/proc/get_boots()
 	return mod_parts[MOD_PART_FEET]
+
+/obj/item/mod/control/get_cell()
+	return mod_parts[MOD_PART_CELL]
 
 //Проверяет, надет ли этот элемент одежды, а так же включён ли МОД
 /obj/item/mod/control/proc/check_module_ready_by_mod_index(mod_index)
@@ -173,23 +215,33 @@
 	//unset_wearer звали только из equipped/dropped, а крио уносит надетый МОД
 	//forceMove'ом мимо dropped: костюм держал тело и две подписки на нём до конца смены
 	if(wearer)
+		// Хардлайт-оверлеи лежат в layers_for_apply_effect носителя вместе с нашим
+		// hardlight_effect (датум плюс его /icon): без снятия тело держало их до конца смены.
+		wearer.clear_bodypart_overlays()
 		unset_wearer()
-	var/atom/deleting_atom
-	for(var/index in mod_parts)
-		var/obj/item/clothing/mod_part/part = mod_parts[index]
-		if(!QDELETED(part))
-			deleting_atom = part
-			if(index != MOD_PART_CELL)
-				part.mod = null
-			mod_parts -= deleting_atom
-			qdel(deleting_atom)
-	for(var/obj/item/mod/module/module as anything in modules)
+	QDEL_NULL(hardlight_effect)
+	// mod_parts это alist, и вычитание из него идёт по КЛЮЧУ, а не по значению.
+	// Прежний `mod_parts -= deleting_atom` получал на вход саму часть и потому не
+	// удалял ничего: костюм продолжал держать qdel-нутые части, те не собирались
+	// GC и уходили в харддел. Батарея в харддел не попадала только потому, что её
+	// чистил QDEL_NULL(MOD_CELL) - макрос разворачивается в lvalue и зануляет слот.
+	// Обход по копии: удаление ключа правит тот же alist.
+	for(var/index in mod_parts.Copy())
+		var/obj/item/part = mod_parts[index]
+		mod_parts -= index
+		if(QDELETED(part))
+			continue
+		// part.mod НЕ зануляем до qdel: цепочка Destroy части читает mod.wearer,
+		// а от повторного удаления костюма её страхует QDELETED(mod) в
+		// /obj/item/clothing/mod_part/Destroy - qdel выставляет gc_destroyed до
+		// вызова Destroy, так что для части костюм уже помечен уничтожаемым.
+		qdel(part)
+	for(var/obj/item/mod/module/module as anything in modules.Copy())
 		module.mod = null
 		modules -= module
 		qdel(module)
 	QDEL_NULL(ai)
 	QDEL_NULL(wires)
-	QDEL_NULL(MOD_CELL)
 	return ..()
 
 /obj/item/mod/control/examine_more(mob/user)
@@ -231,13 +283,14 @@
 
 /obj/item/mod/control/dropped(mob/user)
 	. = ..()
+	// Части убираются ДО unset_wearer(): on_dropped первым делом проверяет mod.wearer и
+	// молча выходит без него, а conceal() и remove_hardlight() работают через wearer.
+	// С обратным порядком цикл не делал ничего, и снятый силой костюм (gib, крио,
+	// принудительный дроп) оставлял шлем и сапоги на теле с TRAIT_NODROP навсегда.
+	for(var/obj/item/clothing/mod_part/part as anything in get_mod_parts(include_cell = FALSE))
+		part.on_dropped(user, part, TRUE, drop_location())
 	if(wearer)
 		unset_wearer()
-	for(var/index in mod_parts)
-		var/obj/item/clothing/mod_part/part
-		if(index == MOD_PART_CELL)
-			continue
-		part.on_dropped(user, part, TRUE, drop_location())
 
 /obj/item/mod/control/item_action_slot_check(slot)
 	if(slot == slot_flags)
@@ -247,7 +300,7 @@
 	var/mob/living/carbon/carbon_user = user
 	if(!istype(carbon_user) || src != carbon_user.back)
 		return ..()
-	for(var/obj/item/part in mod_parts)
+	for(var/obj/item/part as anything in get_mod_parts(include_cell = FALSE))
 		if(part.loc != src)
 			balloon_alert(carbon_user, "выдвиньте элементы МОДа!")
 			playsound(src, 'sound/machines/scanbuzz.ogg', 25, FALSE, SILENCED_SOUND_EXTRARANGE)
@@ -363,6 +416,7 @@
 	playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
 	return FALSE
 
+//TODO: Вынести каждый кейс в отдельный proc. Эта функция становится трудночитаемой.
 /obj/item/mod/control/attackby(obj/item/attacking_item, mob/living/user, params)
 	var/obj/item/stock_parts/cell/cell = get_cell()
 	if(istype(attacking_item, /obj/item/weldingtool) && !is_open())
@@ -379,6 +433,11 @@
 		if(can_install_pai)
 			insert_pai(user, attacking_item)
 			return TRUE
+	if(istype(attacking_item, /obj/item/slimepotion))
+		var/obj/item/slimepotion/potion = attacking_item
+		for(var/obj/item/piece as anything in get_mod_parts(include_cell = FALSE))
+			potion.afterattack(piece, user)
+		return TRUE
 	if(istype(attacking_item, /obj/item/mod/module))
 		if(!is_open())
 			balloon_alert(user, "сначала откройте панель!")
@@ -410,9 +469,6 @@
 		update_access(user, attacking_item)
 		return TRUE
 	return ..()
-
-/obj/item/mod/control/get_cell()
-	return mod_parts[MOD_PART_CELL]
 
 /obj/item/mod/control/emp_act(severity)
 	. = ..()
@@ -449,11 +505,18 @@
 
 	if(!toggle_activate(stripper, force_deactivate = TRUE))
 		return
-	for(var/obj/item/part in mod_parts)
+	// conceal() снимает часть с носителя, поэтому без носителя тут делать нечего:
+	// прежний цикл перебирал ключи alist и не исполнялся ни разу, так что этот путь
+	// раньше просто не работал.
+	var/mob/living/carbon/human/stripped_wearer = wearer
+	if(!stripped_wearer)
+		return ..()
+	for(var/obj/item/part as anything in get_mod_parts(include_cell = FALSE))
 		conceal(null, part)
-		if(need_to_conseal)
-			wearer.clear_bodypart_overlays(update = FALSE)
-		remove_hardlight()
+	// Снятие оверлеев стоит полного обновления иконок, поэтому один раз на весь
+	// разбор, а не на каждую часть. Носителя держим в локальной копии: conceal()
+	// снимает часть и может по дороге обнулить wearer.
+	stripped_wearer.clear_bodypart_overlays()
 	return ..()
 
 /obj/item/mod/control/worn_overlays(isinhands = FALSE, icon_file)
@@ -601,8 +664,16 @@
 		balloon_alert(user, "[new_module] добавлен")
 		playsound(src, 'sound/machines/click.ogg', 50, TRUE, SILENCED_SOUND_EXTRARANGE)
 
-/obj/item/mod/control/proc/uninstall(module, user)
+/// deleting = TRUE приходит из Destroy() самого модуля: тогда on_uninstall() не имеет
+/// права звать qdel(src) - это и был qdel-луп у /obj/item/mod/module/armor/prebuild.
+/obj/item/mod/control/proc/uninstall(module, user, deleting = FALSE)
 	var/obj/item/mod/module/old_module = module
+	if(!(old_module in modules))
+		// Повторный заход: on_uninstall() модуля сам позвал qdel(), и Destroy() пришёл
+		// сюда ещё раз. Снимать уже нечего, а второй проход портил бы complexity и
+		// дважды дёргал on_unequip().
+		old_module.mod = null
+		return
 	modules -= old_module
 	complexity -= old_module.complexity
 	if(is_active())
@@ -611,7 +682,7 @@
 			old_module.on_deactivation()
 	if(wearer)
 		old_module.on_unequip()
-	old_module.on_uninstall(FALSE, user)
+	old_module.on_uninstall(deleting, user)
 	old_module.mod = null
 
 /obj/item/mod/control/proc/update_access(mob/user, obj/item/card/id/card)
@@ -643,11 +714,16 @@
 			wearer.throw_alert("mod_charge", /atom/movable/screen/alert/emptycell)
 
 /obj/item/mod/control/proc/update_speed()
-	for(var/index in mod_parts)
-		if(index == MOD_PART_CELL)
-			continue
-		var/obj/item/clothing/mod_part/part = mod_parts[index]
-		part.slowdown = (is_active() ? slowdown_active : slowdown_inactive) / length(mod_parts)
+	// Замедление делится между ЧАСТЯМИ ОДЕЖДЫ: батарея в alist тоже лежит, но
+	// slowdown у неё нет, а деление на полную длину alist раздавало частям лишь 4/5 номинала.
+	var/list/parts = get_mod_parts(include_cell = FALSE)
+	if(!length(parts))
+		return
+	var/part_slowdown = (is_active() ? slowdown_active : slowdown_inactive) / length(parts)
+	for(var/obj/item/clothing/mod_part/part as anything in parts)
+		if(obj_flags & SPEED_POTION_EFFECT && !part.slowdown)
+			return FALSE //уже применялось, обновлять скорость не требуется. Иначе сбросится модификатор
+		part.slowdown = part_slowdown
 	wearer?.update_equipment_speed_mods()
 
 /obj/item/mod/control/proc/power_off()
@@ -660,7 +736,9 @@
 	if(part.loc == src)
 		return
 	if(part == cell)
-		cell = null
+		// Зануляли локальную копию, а слот в mod_parts продолжал держать вынутую
+		// батарею - и ссылка на неё жила до конца раунда.
+		mod_parts[MOD_PART_CELL] = null
 		update_cell_alert()
 		return
 	if(part.loc == wearer)
@@ -668,7 +746,7 @@
 	if(modules.Find(part))
 		uninstall(part)
 		return
-	if(mod_parts.Find(part))
+	if(is_mod_part(part))
 		INVOKE_ASYNC(src, PROC_REF(conceal), wearer, part)
 		if(is_active())
 			INVOKE_ASYNC(src, PROC_REF(toggle_activate), wearer, TRUE)

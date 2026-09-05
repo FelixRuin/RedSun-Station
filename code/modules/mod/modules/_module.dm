@@ -66,7 +66,7 @@
 		RegisterSignal(src, COMSIG_ATOM_EXITED, PROC_REF(on_exit))
 
 /obj/item/mod/module/Destroy()
-	mod?.uninstall(src)
+	mod?.uninstall(src, deleting = TRUE)
 	if(device)
 		UnregisterSignal(device, COMSIG_PARENT_PREQDELETED)
 		QDEL_NULL(device)
@@ -83,6 +83,10 @@
 	if(!required_modpart)
 		return TRUE
 	return required_modpart.check_module_ready()
+
+/obj/item/mod/module/proc/handle_emp_act(source, severity)
+	SIGNAL_HANDLER
+	return
 
 /// Called from MODsuit's install() proc, so when the module is installed.
 /obj/item/mod/module/proc/on_install()
@@ -113,6 +117,14 @@
 /// Called when the MODsuit is unequipped
 /obj/item/mod/module/proc/on_unequip()
 	return
+
+//Сюда нужно прописывать новые варианты, если появятся МОДы, которые вешаются в другой слот.
+/obj/item/mod/module/proc/update_modsuit_slot()
+	switch(mod.slot_flags)
+		if(ITEM_SLOT_BACK)
+			mod.wearer.update_inv_back()
+		if(ITEM_SLOT_BELT)
+			mod.wearer.update_inv_belt()
 
 /// Called when the module is selected from the TGUI
 /obj/item/mod/module/proc/on_select()

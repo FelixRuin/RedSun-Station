@@ -95,6 +95,8 @@
  * Ноль остаётся ровно там, где он и был оправдан, - у критического давления: раунд, доехавший
  * до 88% потолка, иначе умирает молча, и там вспышка дешевле смерти процесса.
  *
+ * Скан зовёт прок только выше LIGHTING_TEARDOWN_PRESSURE_HIGH, поэтому ветка обычного срока приходит только из тестов.
+ *
  * Аргументы:
  * * pressure - доля потолка адресного пространства, 0 = не замерено (Windows, ранний старт)
  * * lit_deferred_count - сколько отложенных уровней сейчас горит, включая занятые
@@ -110,6 +112,11 @@
 	if(pressure >= LIGHTING_TEARDOWN_PRESSURE_CRITICAL)
 		return 0
 	return min(idle_time, LIGHTING_TEARDOWN_IDLE_TIME_QUOTA)
+
+/// Пускать ли обычный снос света при этом давлении: ниже порога не сносится ничего.
+/// Ноль (давление не замерено) не пропуск.
+/proc/lighting_teardown_pressure_allows(pressure)
+	return pressure >= LIGHTING_TEARDOWN_PRESSURE_HIGH
 
 /**
  * Рано ли сносить уровень, поднятый совсем недавно.
@@ -131,6 +138,83 @@
 	if(pressure >= LIGHTING_TEARDOWN_PRESSURE_CRITICAL)
 		return FALSE
 	return (now - lit_since) < LIGHTING_TEARDOWN_MIN_LIT_TIME
+
+/// Прошла ли пауза между сносами (LIGHTING_TEARDOWN_SPACING) с финала прошлого.
+/// Пауза общая на подсистему, а не по уровню; с критического давления снимается.
+/proc/lighting_teardown_spacing_elapsed(last_finished, now, pressure)
+	if(!last_finished)
+		return TRUE
+	if(pressure >= LIGHTING_TEARDOWN_PRESSURE_CRITICAL)
+		return TRUE
+	return (now - last_finished) >= LIGHTING_TEARDOWN_SPACING
+
+/**
+ * Исчерпал ли уровень право на снос: прошлый снос уже доказал, что возвращать нечего.
+ *
+ * Четвёртая чистая функция решения (рядом с lighting_teardown_idle_time,
+ * zlevel_teardown_cooldown_active и pick_lighting_teardown_zlevel) и единственная,
+ * работающая по ЗАМЕРУ, а не по прогнозу. Остальные три предсказывают пользу от сноса
+ * косвенно, и раунд 10146 показал, что все три вместе ошибаются трижды за 48 минут на
+ * одном и том же уровне (см. LIGHTING_TEARDOWN_MIN_PAYOFF_MB).
+ *
+ * Одного сэмпла достаточно намеренно. Куча за процессом остаётся навсегда: уровень, чей
+ * снос уже не вернул ничего, не вернёт ничего и в следующий раз - все последующие подъёмы
+ * лишь переиспользуют ту же арену (в 10146 обратные подъёмы стоили +1.2, +1.3 и 0 МБ
+ * против +73.8 МБ у первого). Ждать второго подтверждения значило бы заплатить за него
+ * ещё одним бесполезным циклом.
+ *
+ * Давление здесь не участвует: раунды 10177-10188 дали 71 снос под критическим давлением
+ * с суммарной отдачей -184 МБ, а каждый обратный подъём стоил ~1000 тяжёлых фаеров.
+ *
+ * Аргументы:
+ * * last_payoff_mb - сколько МБ VmSize вернул последний ДОВЕДЁННЫЙ ДО КОНЦА снос этого
+ *   уровня; null = сноса ещё не было либо память мерить нечем (Windows, ранний старт),
+ *   и тогда улик против уровня нет - ведём себя как раньше
+ */
+/proc/zlevel_teardown_payoff_exhausted(last_payoff_mb)
+	if(isnull(last_payoff_mb))
+		return FALSE
+	return last_payoff_mb < LIGHTING_TEARDOWN_MIN_PAYOFF_MB
+
+/**
+ * Хвост итоговой строки сноса: попал ли уровень после него в исключения.
+ *
+ * Отдельным проком и отдельной строкой, потому что разбор прод-логов читает итог сноса как
+ * улику. Цифру возврата строка печатала и раньше (zlevel_teardown_memory_note), но по ней
+ * нельзя было сказать, СДЕЛАЛ ли сервер из этой цифры вывод: в 10146 три сноса подряд
+ * напечатали "-1.5", "-4.2" и "-0.1 МБ" и каждый раз начинали заново.
+ *
+ * Хвост обязан совпадать с тем, что РЕАЛЬНО решит zlevel_teardown_payoff_exhausted().
+ *
+ * Аргументы:
+ * * payoff_mb - возврат последнего сноса в МБ; null = не замерено, выводов нет
+ */
+/proc/zlevel_teardown_payoff_note(payoff_mb)
+	if(!zlevel_teardown_payoff_exhausted(payoff_mb))
+		return ""
+	return ", уровень исключён из сносов (порог отдачи [LIGHTING_TEARDOWN_MIN_PAYOFF_MB] МБ)"
+
+/**
+ * Закоммитила ли постройка света z-уровня свежую память, а не переиспользовала старую арену.
+ *
+ * Единственная чистая функция решения, работающая на пути ПОДЪЁМА: цена подъёма - это
+ * потолок отдачи будущего сноса, поэтому дешёвый подъём исключает уровень без цикла сноса.
+ *
+ * Запрет на снос уровня стоит на допущении "арена осталась за процессом, следующий подъём
+ * бесплатный": в 10146 обратные подъёмы z16 стоили +1.2, +1.3 и 0 МБ против +73.8 МБ у
+ * первой постройки. Подъём дороже порога отдачи - прямое опровержение этого допущения, и
+ * улику прошлого сноса после него держать нельзя.
+ *
+ * Порог тот же, что и у отдачи: одна и та же арена меряется одной и той же линейкой, и
+ * второй дефайн разъехался бы с первым молча.
+ *
+ * Аргументы:
+ * * spent_mb - сколько МБ VmSize стоила постройка; null = не замерено (Windows, ранний старт)
+ */
+/proc/zlevel_rebuild_commits_fresh_memory(spent_mb)
+	if(isnull(spent_mb))
+		return FALSE
+	return spent_mb >= LIGHTING_TEARDOWN_MIN_PAYOFF_MB
 
 /**
  * Кого из пустующих уровней разбирать первым при этом сроке простоя.
@@ -241,6 +325,18 @@
 	var/datum/space_level/level = SSmapping.z_list.len >= new_z ? SSmapping.z_list[new_z] : null
 	return level && !level.lighting_initialized
 
+/// Держит ли наблюдатель свет отложенного z-уровня. Со штатной альфой
+/// LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE неподнятый уровень для госта просто яркий, разницы
+/// он не увидит, а подъём стоит десятков МБ, которых снос не возвращает.
+/proc/ghost_holds_zlevel_lighting(mob/watcher)
+	return !QDELETED(watcher) && watcher.lighting_alpha >= LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+
+/// Дополняет кэш отложенных z вместо сброса: пересборка это get_turf по всей отложке одним куском.
+/proc/note_deferred_lighting_z(z)
+	var/list/parked_z = GLOB.lighting_deferred_z_cache
+	if(z && islist(parked_z))
+		parked_z |= z
+
 /**
  * Нужен ли отложенному уровню свет всё ещё, спустя выдержку гостового дебаунса.
  *
@@ -316,7 +412,7 @@
 	// Свет целого z-уровня - самая крупная разовая аллокация идущего раунда: в 10119 три
 	// таких постройки стоили 466 МБ из 4094 потолка, и восстанавливать эту цифру пришлось
 	// вручную по ступенькам перф-CSV. Меряем прямо здесь и записываем на СВОЙ счёт, чтобы
-	// прибор подключения не выставлял её счётом игроку, спящему в acquire_dpi().
+	// прибор подключения не выставлял её счётом игроку, чей вход в это окно ждал клиента.
 	// Окно честно только пока внутри него нет второй такой постройки. Пустой повторный
 	// проход по этому же z отсечён ниже по objects_created, а вот параллельный подъём
 	// ДРУГОГО z в окно попадёт и будет посчитан дважды - на проде такое видно по сумме
@@ -432,6 +528,7 @@
 
 /// Записывает цену постройки света z-уровня в лог и на счёт фоновой работы. Отдельным
 /// проком, потому что вызывать его придётся и из фонового краула, и из сноса.
+/// Фоновый краул свою цену не меряет: дельта VmSize за десятки фаеров - не цена света.
 /proc/log_zlevel_lighting_cost(z_level, level_name, list/memory_before, objects_created)
 	if(!should_report_zlevel_lighting_cost(objects_created, memory_before))
 		return
@@ -441,3 +538,8 @@
 	var/spent = memory_after["vsz"] - memory_before["vsz"]
 	attribute_memory_elsewhere_mb(spent)
 	log_world("## MEMORY: свет z-уровня [z_level] ([level_name]) стоил [format_mb_delta(spent)] VmSize на [objects_created] объектов")
+	switch(SSlighting?.note_zlevel_lighting_rebuild(z_level, spent))
+		if(LIGHTING_REBUILD_VERDICT_REOPENED)
+			log_world("## LIGHTING: z[z_level] ([level_name]) снова допущен к сносам - подъём взял у ОС [format_mb_delta(spent)] свежей памяти")
+		if(LIGHTING_REBUILD_VERDICT_EXCLUDED)
+			log_world("## LIGHTING: z[z_level] ([level_name]) исключён из сносов по цене подъёма - подъём стоил [format_mb_delta(spent)], больше этого снос не вернёт при пороге отдачи [LIGHTING_TEARDOWN_MIN_PAYOFF_MB] МБ")

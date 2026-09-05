@@ -4,7 +4,7 @@
 			Раньше они не имели наследования и друг от друга, а брали родителя от типа \
 			своего слота, т.е шлемов, ботинок и т.д. Вы не представляете, как же много макаронного кода \
 			это порождало."
-
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/obj/item/mod/control/mod
 	var/obj/item/clothing/overslot
 	var/list/seal_message = list(
@@ -15,20 +15,26 @@
 		)
 	var/list/overslot_blacklist = list(
 		/obj/item/clothing/suit/space,
-		/obj/item/clothing/head/helmet,
+		/obj/item/clothing/head/helmet/space,
 		/obj/item/clothing/mod_part,
 		//Сюда вписываем то, поверх чего должно быть невозможно развернуть элемент МОДа!
 	)
-	var/obj/item/mod/module/linked_modules = list()
+	var/list/linked_modules = list()
 	var/theme_category
 
 /obj/item/clothing/mod_part/equipped(mob/user, slot)
 	. = ..()
-	RegisterSignal(mod.wearer, COMSIG_MOB_UNEQUIPPED_ITEM, PROC_REF(on_dropped))
+	if(!mod?.wearer)
+		return
+	// override: повторный equipped на том же носителе (смена слота, повторное
+	// развёртывание) иначе ловит stack_trace "already registered".
+	RegisterSignal(mod.wearer, COMSIG_MOB_UNEQUIPPED_ITEM, PROC_REF(on_dropped), override = TRUE)
 
 /obj/item/clothing/mod_part/proc/on_dropped(mob/source, obj/item, force, new_location)
 	SIGNAL_HANDLER
 	if(!istype(item, /obj/item/clothing/mod_part))
+		return
+	if(!mod?.wearer)
 		return
 	UnregisterSignal(mod.wearer, COMSIG_MOB_UNEQUIPPED_ITEM)
 	if(new_location == null)//чтобы не путать со штатным свертыванием
@@ -49,16 +55,26 @@
 	if(state == MODPART_CONSEALED)
 		for(var/obj/item/mod/module/module in linked_modules)
 			module.saved_state = module.active
+			if(module.module_type == MODULE_PASSIVE)
+				module.on_suit_deactivation()
+				continue
 			if(module.active)
 				module.on_deactivation()
 		return TRUE
 	else
 		for(var/obj/item/mod/module/module in linked_modules)
+			if(module.module_type == MODULE_PASSIVE)
+				module.on_suit_activation()
+				continue
+
 			if(!module.saved_state)
 				continue
+
 			module.on_activation()
 
 /obj/item/clothing/mod_part/proc/check_module_ready()
+	if(!mod?.wearer)
+		return FALSE
 	return mod.is_active() && mod.wearer.get_item_by_slot(src.slot_flags) == src
 
 /obj/item/clothing/mod_part/proc/update_flags(list/used_skin)
@@ -71,6 +87,8 @@
 	visor_flags_cover = category[SEALED_COVER] || NONE
 
 /obj/item/clothing/mod_part/proc/conseal_to_overslot()//Не давать скрывать space suit
+	if(!mod?.wearer)
+		return FALSE
 	var/obj/item/clothing/item = mod.wearer.get_item_by_slot(slot_flags)
 	if(!item)
 		return TRUE
@@ -95,6 +113,8 @@
 		clothing_flags &= ~visor_flags
 		heat_protection = NONE
 		cold_protection = NONE
+	if(!mod)
+		return
 	icon_state = "[mod.skin]-[initial(icon_state)][seal ? "-sealed" : ""]"
 	item_state = "[mod.skin]-[initial(item_state)][seal ? "-sealed" : ""]"
 
@@ -102,14 +122,24 @@
 	REMOVE_TRAIT(src, TRAIT_NODROP, MOD_TRAIT)
 	if(!overslot)
 		return
+	if(!mod?.wearer)
+		return
 	if(!mod.wearer.equip_to_slot_if_possible(overslot, overslot.slot_flags, qdel_on_fail = FALSE, disable_warning = TRUE))//Экипировать элемент одежды с оверслота обратно
 		mod.wearer.dropItemToGround(overslot, force = TRUE)//если условие выше не удалось, то дропать на землю
 	overslot = null
 
 /obj/item/clothing/mod_part/Destroy()
+	// linked_modules и overslot держали ссылки до конца раунда: part -> module ->
+	// module.mod -> control -> mod_parts -> part это замкнутый цикл рефкаунтов,
+	// а его BYOND не собирает никогда.
+	linked_modules = null
+	overslot = null
 	if(!QDELETED(mod))
-		mod.mod_parts -= src
+		// mod_parts это alist: вычитание идёт по КЛЮЧУ, поэтому `mod_parts -= src`
+		// не удаляло ничего и костюм продолжал держать удалённую часть.
+		mod.clear_mod_part(src)
 		QDEL_NULL(mod)
+	mod = null
 	return ..()
 
 /obj/item/clothing/mod_part/head
@@ -158,9 +188,9 @@
 		alternate_worn_layer = null
 	else
 		alternate_worn_layer = alternate_layer
-	mod.wearer.update_inv_head()
-	mod.wearer.update_inv_wear_mask()
-	mod.wearer.update_hair()
+	mod?.wearer?.update_inv_head()
+	mod?.wearer?.update_inv_wear_mask()
+	mod?.wearer?.update_hair()
 
 //Дать на альт-клик отображать глаза поверх шлема.
 /obj/item/clothing/mod_part/suit
@@ -195,8 +225,8 @@
 
 /obj/item/clothing/mod_part/suit/seal_part(seal)
 	. = ..()
-	mod.wearer.update_inv_wear_suit()
-	mod.wearer.update_inv_w_uniform()
+	mod?.wearer?.update_inv_wear_suit()
+	mod?.wearer?.update_inv_w_uniform()
 
 /obj/item/clothing/mod_part/gloves
 	name = "MOD gauntlets"
@@ -224,7 +254,7 @@
 
 /obj/item/clothing/mod_part/gloves/seal_part(seal)
 	. = ..()
-	mod.wearer.update_inv_gloves()
+	mod?.wearer?.update_inv_gloves()
 
 /obj/item/clothing/mod_part/gloves/proc/Touch(atom/A, proximity)
 	return FALSE // return TRUE to cancel attack_hand()
@@ -253,7 +283,7 @@
 
 /obj/item/clothing/mod_part/shoes/seal_part(seal)
 	. = ..()
-	mod.wearer.update_inv_shoes()
+	mod?.wearer?.update_inv_shoes()
 
 /obj/item/clothing/mod_part/shoes/negates_gravity()
 	return clothing_flags & NOSLIP
