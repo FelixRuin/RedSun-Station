@@ -137,7 +137,10 @@
 				if(target_turf.can_liquid_spill_on_hit())
 					var/datum/reagents/spill_copy = new(reagents.maximum_volume)
 					reagents.trans_to(spill_copy, reagents.total_volume, log = "reagentcontainer-glass pour spill")
-					addtimer(CALLBACK(target_turf, TYPE_PROC_REF(/atom, add_liquid_from_reagents), spill_copy), 1 SECONDS)
+					if(isclosedturf(target_turf) && spill_copy.has_reagent(/datum/reagent/thermite))
+						qdel(spill_copy)
+					else
+						addtimer(CALLBACK(target_turf, TYPE_PROC_REF(/atom, add_liquid_from_reagents), spill_copy), 1 SECONDS)
 			reagents.clear_reagents()
 
 /obj/item/reagent_containers/glass/attackby(obj/item/I, mob/user, params)
@@ -187,7 +190,7 @@
 	if(reagents && reagents.total_volume)
 		var/mutable_appearance/filling = mutable_appearance('icons/obj/reagentfillings.dmi', "[cached_icon]10", color = mix_color_from_reagents(reagents.reagent_list))
 
-		var/percent = round((reagents.total_volume / volume) * 100)
+		var/percent = round((reagents.total_volume / reagents.maximum_volume) * 100)
 		switch(percent)
 			if(0 to 9)
 				filling.icon_state = "[cached_icon]-10"

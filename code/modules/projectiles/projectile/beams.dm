@@ -57,7 +57,7 @@
 	fire_hazard = TRUE
 
 /obj/item/projectile/beam/laser/hellfire/swarmer
-	damage = 30
+	damage = 20
 	hit_prone_targets = TRUE
 
 /obj/item/projectile/beam/laser/hellfire/Initialize(mapload)
@@ -143,6 +143,13 @@
 	tracer_type = /obj/effect/projectile/tracer/disabler
 	muzzle_type = /obj/effect/projectile/muzzle/disabler
 	impact_type = /obj/effect/projectile/impact/disabler
+
+/obj/item/projectile/beam/disabler/on_hit(atom/target, blocked = FALSE)
+	if(iscarbon(target) && HAS_TRAIT(target, TRAIT_DISABLER_RESISTANCE))
+		do_sparks(1, TRUE, src)
+		target.visible_message(span_warning("The [name] dissipates harmlessly against [target]!"))
+		return
+	return ..()
 
 /obj/item/projectile/beam/disabler/swarmer
 	damage = 45
