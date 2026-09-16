@@ -558,8 +558,8 @@
 /turf/open/floor/carpet,
 /area/template_noop)
 "tr" = (
-/obj/structure/bookcase/random/nonfiction,
 /obj/machinery/light,
+/obj/structure/bookcase/random/opacity/nonfiction,
 /turf/open/floor/wood/wood_large,
 /area/template_noop)
 "tw" = (
@@ -700,7 +700,7 @@
 /turf/open/floor/carpet/red,
 /area/template_noop)
 "wJ" = (
-/obj/structure/bookcase/random/fiction,
+/obj/structure/bookcase/random/opacity/fiction,
 /turf/open/floor/wood/wood_parquet,
 /area/template_noop)
 "wO" = (
@@ -753,7 +753,7 @@
 /turf/open/floor/carpet,
 /area/template_noop)
 "Bc" = (
-/obj/structure/bookcase/random/nonfiction,
+/obj/structure/bookcase/random/opacity/nonfiction,
 /turf/open/floor/wood/wood_large,
 /area/template_noop)
 "Bn" = (
@@ -787,7 +787,7 @@
 /turf/open/floor/carpet,
 /area/template_noop)
 "BE" = (
-/obj/structure/bookcase/random/fiction,
+/obj/structure/bookcase/random/opacity/fiction,
 /turf/open/floor/wood/wood_large,
 /area/template_noop)
 "BK" = (
@@ -1036,7 +1036,7 @@
 /turf/open/floor/carpet/red,
 /area/template_noop)
 "JL" = (
-/obj/structure/bookcase/random/reference,
+/obj/structure/bookcase/random/opacity/reference,
 /turf/open/floor/wood/wood_large,
 /area/template_noop)
 "KA" = (
@@ -1215,7 +1215,7 @@
 /turf/open/floor/wood/wood_parquet,
 /area/template_noop)
 "Re" = (
-/obj/structure/bookcase/random/adult,
+/obj/structure/bookcase/random/opacity/adult,
 /turf/open/floor/wood/wood_large,
 /area/template_noop)
 "Rm" = (
@@ -1395,7 +1395,7 @@
 /turf/open/floor/wood/wood_parquet,
 /area/template_noop)
 "Xa" = (
-/obj/structure/bookcase/random/religion,
+/obj/structure/bookcase/random/opacity/religion,
 /turf/open/floor/wood/wood_large,
 /area/template_noop)
 "Xi" = (
