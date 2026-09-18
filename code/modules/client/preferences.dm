@@ -94,7 +94,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/windownoise = TRUE
 	var/mood_vignette = TRUE
 	var/toggles = TOGGLES_DEFAULT
-	var/sound_toggles = NONE
+	var/sound_toggles = SOUND_BUTTONS
 	/// A separate variable for deadmin toggles, only deals with those.
 	var/deadmin = DEADMIN_AUTODMENTOR
 	var/mentor_toggles = SOUND_MENTORHELP
@@ -6475,7 +6475,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if((parent?.can_have_part("legs") || pref_species.mutant_bodyparts["legs"])  && (character.dna.features["legs"] == "Digitigrade" || character.dna.features["legs"] == "Avian"))
 		pref_species.species_traits |= DIGITIGRADE
-	else if(character.dna.species.mutant_bodyparts["limbs_id"] == "sergal")
+	else if(character.dna.species.mutant_bodyparts["limbs_id"] in list("sergal", "sergal2"))
 		pref_species.species_traits |= DIGITIGRADE
 	else
 		pref_species.species_traits -= DIGITIGRADE
