@@ -1061,19 +1061,15 @@
 	switch(current_skin)
 		if("Buttoned")
 			body_parts_covered = CHEST|GROIN|ARMS
-			alternate_worn_layer = GLOVES_LAYER
 			mutantrace_variation = STYLE_DIGITIGRADE|USE_TAUR_CLIP_MASK
 		if("Decollete")
 			body_parts_covered = ARMS
-			alternate_worn_layer = HANDS_PART_LAYER
 			mutantrace_variation = USE_TAUR_CLIP_MASK
 		if("Unbuttoned")
 			body_parts_covered = ARMS
-			alternate_worn_layer = GLOVES_LAYER
 			mutantrace_variation = STYLE_DIGITIGRADE|USE_TAUR_CLIP_MASK
 		if("Spread out")
 			body_parts_covered = ARMS
-			alternate_worn_layer = GLOVES_LAYER
 			mutantrace_variation = USE_TAUR_CLIP_MASK
 
 /obj/item/clothing/under/donator/bm/longshirt/set_to_maximum_sensor(user)
