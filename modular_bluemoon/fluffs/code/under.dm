@@ -1071,12 +1071,20 @@
 		if("Spread out")
 			body_parts_covered = ARMS
 			mutantrace_variation = USE_TAUR_CLIP_MASK
+	user.update_inv_w_uniform()
+	user.update_body(TRUE)
 
 /obj/item/clothing/under/donator/bm/longshirt/set_to_maximum_sensor(user)
 	return
 
 /obj/item/clothing/under/donator/bm/longshirt/CtrlClick(mob/user)
 	. = ..()
+	if (!(item_flags & IN_INVENTORY))
+		return
+
+	if(!isliving(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
+		return
+
 	var/desired_layer = tgui_input_number(user, "Выставить слой одежды", "Слой отображения", GLOVES_LAYER, UNDERWEAR_LAYER, HEAD_LAYER)
 	if(!desired_layer)
 		return
