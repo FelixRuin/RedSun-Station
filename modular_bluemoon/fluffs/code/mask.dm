@@ -272,7 +272,8 @@
 	name = "Зловещая маска"
 	desc = "Серо-бледное лицо с потускневшими блондинистыми волосами. Чёрные прорези на месте глаз смотрят прямиком в душу."
 	icon_state = "horror_mask"
-	item_state = "horror_mask"
+	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/mask.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/mask.dmi'
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	flags_inv = HIDEHAIR|HIDEFACIALHAIR
 
@@ -280,17 +281,12 @@
 	name = "Skull mask"
 	desc = "No fear, no regrets, no mercy."
 	icon_state = "pmc_skull_mask"
-	item_state = "pmc_skull_mask"
+	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/mask.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/mask.dmi'
 	clothing_flags = ALLOWINTERNALS
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	flags_inv = HIDEHAIR|HIDEFACIALHAIR|HIDEFACE|HIDEEARS
 	unique_reskin = list(
-		"Blood" = list(
-			RESKIN_ICON_STATE = "pmc_skull_mask_blood",
-			RESKIN_ITEM_STATE = "pmc_skull_mask_blood"
-		),
-		"Basic" = list(
-			RESKIN_ICON_STATE = "pmc_skull_mask",
-			RESKIN_ITEM_STATE = "pmc_skull_mask"
-		),
+		"Blood" = list(RESKIN_ICON_STATE = "pmc_skull_mask_blood"),
+		"Basic" = list(RESKIN_ICON_STATE = "pmc_skull_mask")
 	)
