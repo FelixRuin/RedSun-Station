@@ -1060,16 +1060,12 @@
 	switch(current_skin)
 		if("Buttoned")
 			body_parts_covered = CHEST|GROIN|ARMS
-			mutantrace_variation = STYLE_DIGITIGRADE|USE_TAUR_CLIP_MASK
 		if("Decollete")
 			body_parts_covered = ARMS
-			mutantrace_variation = USE_TAUR_CLIP_MASK
 		if("Unbuttoned")
 			body_parts_covered = ARMS
-			mutantrace_variation = STYLE_DIGITIGRADE|USE_TAUR_CLIP_MASK
 		if("Spread out")
 			body_parts_covered = ARMS
-			mutantrace_variation = USE_TAUR_CLIP_MASK
 	user.update_inv_w_uniform()
 	user.update_body(TRUE)
 

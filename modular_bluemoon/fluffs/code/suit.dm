@@ -699,8 +699,7 @@
 	name = "Sweater"
 	desc = "A sweater belonging to some fox"
 	icon_state = "lsweater_0"
-	anthro_mob_worn_overlay = 'modular_bluemoon/fluffs/icons/mob/clothing/suit_digi.dmi'
-	mutantrace_variation = STYLE_NO_ANTHRO_ICON
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	body_parts_covered = CHEST|GROIN|ARMS
 	always_reskinnable = TRUE
 	unique_reskin = list(
