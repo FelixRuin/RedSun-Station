@@ -454,7 +454,7 @@ GLOBAL_LIST_INIT(smoke_flavor_emotes, list(
 /obj/item/cigbutt
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
-	icon = 'icons/obj/clothing/masks.dmi'
+	icon = 'icons/obj/clothing/masks/cig.dmi'
 	icon_state = "cigbutt"
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 0
