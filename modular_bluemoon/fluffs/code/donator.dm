@@ -1940,7 +1940,7 @@
 /datum/gear/donator/bm/lsweater
 	name = "Sweater"
 	slot = ITEM_SLOT_OCLOTHING
-	path = /obj/item/clothing/suit/toggle/lsweater
+	path = /obj/item/clothing/suit/donator/bm/lsweater
 	ckeywhitelist = list("lindaastereih")
 
 /datum/gear/donator/bm/longtie

@@ -1047,7 +1047,6 @@
 	icon_state = "longshirt_0"
 	fitted = NO_FEMALE_UNIFORM
 	body_parts_covered = CHEST|GROIN|ARMS
-	alternate_worn_layer = GLOVES_LAYER
 	always_reskinnable = TRUE
 	can_adjust = FALSE
 	unique_reskin = list(
@@ -1085,7 +1084,7 @@
 	if(!isliving(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		return
 
-	var/desired_layer = tgui_input_number(user, "Выставить слой одежды", "Слой отображения", GLOVES_LAYER, UNDERWEAR_LAYER, HEAD_LAYER)
+	var/desired_layer = tgui_input_number(user, "Выставить слой одежды", "Слой отображения", UNIFORM_LAYER, UNDERWEAR_LAYER, HEAD_LAYER)
 	if(!desired_layer)
 		return
 	alternate_worn_layer = desired_layer

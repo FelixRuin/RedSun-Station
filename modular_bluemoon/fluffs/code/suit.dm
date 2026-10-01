@@ -695,17 +695,51 @@
 
 ///////////////////////////////////////////////
 
-/obj/item/clothing/suit/toggle/lsweater
+/obj/item/clothing/suit/donator/bm/lsweater
 	name = "Sweater"
 	desc = "A sweater belonging to some fox"
-	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/suit.dmi'
-	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/suit.dmi'
-	mutantrace_variation = STYLE_DIGITIGRADE | STYLE_NO_ANTHRO_ICON
-	body_parts_covered = GROIN|ARMS
-	icon_state = "lsweater"
-	item_state = "lsweater"
-	togglename = "buttons"
-	alternate_worn_layer = SUIT_STORE_LAYER
+	icon_state = "lsweater_0"
+	anthro_mob_worn_overlay = 'modular_bluemoon/fluffs/icons/mob/clothing/suit_digi.dmi'
+	mutantrace_variation = STYLE_NO_ANTHRO_ICON
+	body_parts_covered = CHEST|GROIN|ARMS
+	always_reskinnable = TRUE
+	unique_reskin = list(
+		"Buttoned" = list("icon_state" = "lsweater_0"),
+		"Decollete" = list("icon_state" = "lsweater_1"),
+		"Unbuttoned" = list("icon_state" = "lsweater_2"),
+		"Knot on the waist" = list("icon_state" = "lsweater_3")
+	)
+
+/obj/item/clothing/suit/donator/bm/lsweater/reskin_obj(mob/user)
+	switch(current_skin)
+		if("Buttoned")
+			body_parts_covered = CHEST|GROIN|ARMS
+			mutantrace_variation = STYLE_NO_ANTHRO_ICON
+		if("Decollete")
+			body_parts_covered = GROIN|ARMS
+			mutantrace_variation = STYLE_NO_ANTHRO_ICON
+		if("Unbuttoned")
+			body_parts_covered = ARMS
+			mutantrace_variation = STYLE_NO_ANTHRO_ICON
+		if("Knot on the waist")
+			body_parts_covered = GROIN
+			mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
+	user.update_inv_wear_suit()
+	user.update_body(TRUE)
+
+/obj/item/clothing/suit/donator/bm/lsweater/CtrlClick(mob/user)
+	. = ..()
+	if (!(item_flags & IN_INVENTORY))
+		return
+
+	if(!isliving(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
+		return
+
+	var/desired_layer = tgui_input_number(user, "Выставить слой одежды", "Слой отображения", SUIT_LAYER, UNDERWEAR_LAYER, HEAD_LAYER)
+	if(!desired_layer)
+		return
+	alternate_worn_layer = desired_layer
+	user.update_inv_wear_suit()
 
 ///////////////////////////////////////////////
 
