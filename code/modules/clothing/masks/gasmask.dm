@@ -299,44 +299,23 @@
 	desc = "A creepy wooden mask. Surprisingly expressive for a poorly carved bit of wood."
 	icon_state = "tiki_eyebrow"
 	item_state = "tiki_eyebrow"
+	icon = 'icons/obj/clothing/masks/tiki.dmi'
 	custom_materials = list(/datum/material/wood = MINERAL_MATERIAL_AMOUNT * 1.25)
 	resistance_flags = FLAMMABLE
 	max_integrity = 100
 	actions_types = list(/datum/action/item_action/adjust)
 	dog_fashion = null
-	var/list/tikimask_designs = list()
-
-
-/obj/item/clothing/mask/gas/tiki_mask/Initialize(mapload)
-	.=..()
-	tikimask_designs = list(
-		"Original Tiki" = image(icon = src.icon, icon_state = "tiki_eyebrow"),
-		"Happy Tiki" = image(icon = src.icon, icon_state = "tiki_happy"),
-		"Confused Tiki" = image(icon = src.icon, icon_state = "tiki_confused"),
-		"Angry Tiki" = image(icon = src.icon, icon_state = "tiki_angry")
-		)
-
-/obj/item/clothing/mask/gas/tiki_mask/ui_action_click(mob/user)
-
-	var/mob/M = usr
-	var/static/list/options = list("Original Tiki" = "tiki_eyebrow", "Happy Tiki" = "tiki_happy", "Confused Tiki" = "tiki_confused",
-							"Angry Tiki" = "tiki_angry")
-
-	var/choice = show_radial_menu(user,src, tikimask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
-
-	if(src && choice && !M.stat && in_range(M,src))
-		icon_state = options[choice]
-		user.update_inv_wear_mask()
-		for(var/X in actions)
-			var/datum/action/A = X
-			A.UpdateButtons()
-		to_chat(M, "The Tiki Mask has now changed into the [choice] Mask!")
-		return TRUE
+	unique_reskin = list(
+		"Original Tiki" = list(RESKIN_ICON_STATE = "tiki_eyebrow"),
+		"Happy Tiki" = list(RESKIN_ICON_STATE = "tiki_happy"),
+		"Confused Tiki" = list(RESKIN_ICON_STATE = "tiki_confused"),
+		"Angry Tiki" = list(RESKIN_ICON_STATE = "tiki_angry"),
+	)
 
 /obj/item/clothing/mask/gas/tiki_mask/yalp_elor
 	icon_state = "tiki_yalp"
 	item_state = "tiki_yalp"
-	actions_types = list()
+	unique_reskin = null
 
 /obj/item/clothing/mask/gas/hunter
 	name = "bounty hunting mask"

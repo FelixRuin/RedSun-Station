@@ -504,51 +504,24 @@
 	name = "paper mask"
 	desc = "A neat, circular mask made out of paper."
 	icon_state = "plainmask"
-	item_state = "plainmask"
+	icon = 'icons/obj/clothing/masks/paper_mask.dmi'
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	resistance_flags = FLAMMABLE
 	max_integrity = 100
-	actions_types = list(/datum/action/item_action/adjust)
-	var/list/papermask_designs = list()
-
-
-/obj/item/clothing/mask/paper/Initialize(mapload)
-	. = ..()
-	papermask_designs = list(
-		"Blank" = image(icon = src.icon, icon_state = "plainmask"),
-		"Neutral" = image(icon = src.icon, icon_state = "neutralmask"),
-		"Eyes" = image(icon = src.icon, icon_state = "eyemask"),
-		"Sleeping" = image(icon = src.icon, icon_state = "sleepingmask"),
-		"Heart" = image(icon = src.icon, icon_state = "heartmask"),
-		"Core" = image(icon = src.icon, icon_state = "coremask"),
-		"Plus" = image(icon = src.icon, icon_state = "plusmask"),
-		"Square" = image(icon = src.icon, icon_state = "squaremask"),
-		"Bullseye" = image(icon = src.icon, icon_state = "bullseyemask"),
-		"Vertical" = image(icon = src.icon, icon_state = "verticalmask"),
-		"Horizontal" = image(icon = src.icon, icon_state = "horizontalmask"),
-		"X" = image(icon = src.icon, icon_state = "xmask"),
-		"Bugeyes" = image(icon = src.icon, icon_state = "bugmask"),
-		"Double" = image(icon = src.icon, icon_state = "doublemask"),
-		"Mark" = image(icon = src.icon, icon_state = "markmask")
-		)
-
-/obj/item/clothing/mask/paper/ui_action_click(mob/user)
-	if(!istype(user) || user.incapacitated())
-		return
-
-	var/static/list/options = list("Blank" = "plainmask", "Neutral" = "neutralmask", "Eyes" = "eyemask",
-							"Sleeping" ="sleepingmask", "Heart" = "heartmask", "Core" = "coremask",
-							"Plus" = "plusmask", "Square" ="squaremask", "Bullseye" = "bullseyemask",
-							"Vertical" = "verticalmask", "Horizontal" = "horizontalmask", "X" ="xmask",
-							"Bugeyes" = "bugmask", "Double" = "doublemask", "Mark" = "markmask")
-
-	var/choice = show_radial_menu(user, src, papermask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
-
-	if(src && choice && !user.incapacitated() && in_range(user,src))
-		icon_state = options[choice]
-		user.update_inv_wear_mask()
-		for(var/X in actions)
-			var/datum/action/A = X
-			A.UpdateButtons()
-		to_chat(user, "<span class='notice'>Your paper mask now has a [choice] symbol!</span>")
-		return TRUE
+	unique_reskin = list(
+		"Blank" = list(RESKIN_ICON_STATE = "plainmask"),
+		"Neutral" = list(RESKIN_ICON_STATE = "neutralmask"),
+		"Eyes" = list(RESKIN_ICON_STATE = "eyemask"),
+		"Sleeping" = list(RESKIN_ICON_STATE = "sleepingmask"),
+		"Heart" = list(RESKIN_ICON_STATE = "heartmask"),
+		"Core" = list(RESKIN_ICON_STATE = "coremask"),
+		"Plus" = list(RESKIN_ICON_STATE = "plusmask"),
+		"Square" = list(RESKIN_ICON_STATE = "squaremask"),
+		"Bullseye" = list(RESKIN_ICON_STATE = "bullseyemask"),
+		"Vertical" = list(RESKIN_ICON_STATE = "verticalmask"),
+		"Horizontal" = list(RESKIN_ICON_STATE = "horizontalmask"),
+		"X" = list(RESKIN_ICON_STATE = "xmask"),
+		"Bugeyes" = list(RESKIN_ICON_STATE = "bugmask"),
+		"Double" = list(RESKIN_ICON_STATE = "doublemask"),
+		"Mark" = list(RESKIN_ICON_STATE = "markmask")
+	)

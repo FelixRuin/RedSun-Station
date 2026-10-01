@@ -272,6 +272,7 @@
 	name = "Зловещая маска"
 	desc = "Серо-бледное лицо с потускневшими блондинистыми волосами. Чёрные прорези на месте глаз смотрят прямиком в душу."
 	icon_state = "horror_mask"
+	item_state = null
 	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/mask.dmi'
 	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/mask.dmi'
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -281,6 +282,7 @@
 	name = "Skull mask"
 	desc = "No fear, no regrets, no mercy."
 	icon_state = "pmc_skull_mask"
+	item_state = null
 	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/mask.dmi'
 	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/mask.dmi'
 	clothing_flags = ALLOWINTERNALS
