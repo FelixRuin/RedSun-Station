@@ -714,16 +714,12 @@
 	switch(current_skin)
 		if("Buttoned")
 			body_parts_covered = CHEST|GROIN|ARMS
-			mutantrace_variation = STYLE_NO_ANTHRO_ICON
 		if("Decollete")
 			body_parts_covered = GROIN|ARMS
-			mutantrace_variation = STYLE_NO_ANTHRO_ICON
 		if("Unbuttoned")
 			body_parts_covered = ARMS
-			mutantrace_variation = STYLE_NO_ANTHRO_ICON
 		if("Knot on the waist")
 			body_parts_covered = GROIN
-			mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	user.update_inv_wear_suit()
 	user.update_body(TRUE)
 
