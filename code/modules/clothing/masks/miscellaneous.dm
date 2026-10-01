@@ -231,6 +231,7 @@
 /obj/item/clothing/mask/pig
 	name = "pig mask"
 	desc = "A rubber pig mask with a builtin voice modulator."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "pig"
 	item_state = "pig"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
@@ -257,6 +258,7 @@
 /obj/item/clothing/mask/frog
 	name = "frog mask"
 	desc = "An ancient mask carved in the shape of a frog.<br> Sanity is like gravity, all it needs is a push."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "frog"
 	item_state = "frog"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
@@ -313,6 +315,7 @@
 /obj/item/clothing/mask/horsehead
 	name = "horse head mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "horsehead"
 	item_state = "horsehead"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDEEYES|HIDEEARS
@@ -338,46 +341,46 @@
 /obj/item/clothing/mask/rat
 	name = "rat mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a rat."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "rat"
-	item_state = "rat"
 	flags_inv = HIDEFACE
 	flags_cover = MASKCOVERSMOUTH
 
 /obj/item/clothing/mask/rat/fox
 	name = "fox mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a fox."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "fox"
-	item_state = "fox"
 
 /obj/item/clothing/mask/rat/bee
 	name = "bee mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a bee."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "bee"
-	item_state = "bee"
 
 /obj/item/clothing/mask/rat/bear
 	name = "bear mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a bear."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "bear"
-	item_state = "bear"
 
 /obj/item/clothing/mask/rat/bat
 	name = "bat mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a bat."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "bat"
-	item_state = "bat"
 
 /obj/item/clothing/mask/rat/raven
 	name = "raven mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a raven."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "raven"
-	item_state = "raven"
 
 /obj/item/clothing/mask/rat/jackal
 	name = "jackal mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a jackal."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "jackal"
-	item_state = "jackal"
 
 /obj/item/clothing/mask/rat/tribal
 	name = "tribal mask"
@@ -475,6 +478,7 @@
 /obj/item/clothing/mask/gondola
 	name = "gondola mask"
 	desc = "Genuine gondola fur."
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "gondola"
 	item_state = "gondola"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR

@@ -284,6 +284,7 @@
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
 	desc = "Twoooo!"
+	icon = 'icons/obj/clothing/masks/animal.dmi'
 	icon_state = "owl"
 	clothing_flags = ALLOWINTERNALS
 	flags_cover = MASKCOVERSEYES
