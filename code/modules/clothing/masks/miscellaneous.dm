@@ -165,7 +165,7 @@
 	name = "Kitsune Mask"
 	desc = "An oriental styled porcelain mask."
 	icon = 'icons/obj/clothing/masks/kitsune.dmi'
-	mob_overlay_icon = 'icons/mob/clothing/mask/kitsune/kitsune.dmi'
+	mob_overlay_icon = 'icons/mob/clothing/mask/kitsune.dmi'
 	icon_state = "kitsune"
 	w_class = WEIGHT_CLASS_TINY
 	flags_cover = MASKCOVERSMOUTH
