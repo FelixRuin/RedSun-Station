@@ -152,6 +152,9 @@
 	var/mob/living/carbon/human/wearer = loc
 	var/obj/item/organ/genital/breasts/breast = wearer.getorganslot(ORGAN_SLOT_BREASTS)
 	var/breast_size = clamp(round(breast?.size || 0), 0, 9)
+	flags_inv &= ~HIDEHAIR
+	if(selected_type in list("Hood", "Hood and Kama", "Cloak, Hood and Kama"))
+		flags_inv |= HIDEHAIR
 	switch(selected_type)
 		if("Hood")
 			item_state = "concord-hood"
@@ -167,3 +170,4 @@
 			item_state = "concord-cloak-hood-kama-[breast_size]"
 	wearer.update_inv_neck()
 	wearer.update_body()
+	wearer.update_hair()

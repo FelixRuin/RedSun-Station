@@ -773,6 +773,14 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 			dynamic_hair_suffix = M.dynamic_hair_suffix
 		if(M.flags_inv & HIDEHAIR)
 			hair_hidden = TRUE
+	// BLUEMOON EDIT: Маски теперь могут скрывать волосы.
+	if(H.wear_neck)
+		var/obj/item/clothing/neck/N = H.wear_neck
+		if(istype(N, /obj/item/clothing))
+			var/obj/item/clothing/N = I
+			dynamic_hair_suffix = N.dynamic_hair_suffix
+		if(N.flags_inv & HIDEHAIR)
+			hair_hidden = TRUE
 
 	if(!hair_hidden || dynamic_hair_suffix)
 		var/mutable_appearance/hair_overlay = mutable_appearance(layer = -HAIR_LAYER)
