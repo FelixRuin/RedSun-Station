@@ -67,7 +67,7 @@
   * Proc that moves gas/breath masks out of the way, disabling them and allowing pill/food consumption
   * The flavor_details variable is for masks that use this function only to toggle HIDEFACE for identity.
   */
-/obj/item/clothing/mask/proc/adjustmask(mob/living/user, just_flavor = FALSE)
+/obj/item/clothing/mask/proc/adjustmask(mob/living/user)
 	if(user && user.incapacitated())
 		return FALSE
 	if(src.reinforced)

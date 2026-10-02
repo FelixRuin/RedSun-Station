@@ -174,6 +174,10 @@
 	visor_flags_cover = MASKCOVERSMOUTH
 	var/list/poly_colors = list("#FFFFFF", "#CC0000", "#000000")
 
+/obj/item/clothing/mask/kitsune/examine(mob/user)
+	. = ..()
+	. += span_notice("Alt-клик чтобы сдвинуть маску.")
+
 /obj/item/clothing/mask/kitsune/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/polychromic, poly_colors, 3, names = list("Shell", "Ornament", "Eyes"))
