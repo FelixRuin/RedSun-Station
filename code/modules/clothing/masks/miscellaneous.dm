@@ -161,62 +161,32 @@
 		to_chat(user, "<span class='notice'>Your Joy mask now has a [choice] Emotion!</span>")
 		return TRUE
 
-/obj/item/clothing/mask/kitsuneblk
-	name = "Black Kitsune Mask"
-	desc = "An oriental styled porcelain mask, this one is black and gold."
-	icon_state = "blackkitsunemask"
-	item_state = "blackkitsunemask"
+/obj/item/clothing/mask/kitsune
+	name = "Kitsune Mask"
+	desc = "An oriental styled porcelain mask."
+	icon = 'icons/obj/clothing/masks/kitsune.dmi'
+	mob_overlay_icon = 'icons/mob/clothing/mask/kitsune/kitsune.dmi'
+	icon_state = "kitsune"
 	w_class = WEIGHT_CLASS_TINY
 	flags_cover = MASKCOVERSMOUTH
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	visor_flags_inv = HIDEFACE|HIDEFACIALHAIR
 	visor_flags_cover = MASKCOVERSMOUTH
-	slot_flags = ITEM_SLOT_MASK
+	var/list/poly_colors = list("#FFFFFF", "#CC0000", "#000000")
 
-/obj/item/clothing/mask/kitsuneblk/attack_self(mob/user)
-    adjustmask(user)
+/obj/item/clothing/mask/kitsune/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/polychromic, poly_colors, 3, names = list("Shell", "Ornament", "Eyes"))
 
-/obj/item/clothing/mask/kitsuneblk/AltClick(mob/user)
+/obj/item/clothing/mask/kitsune/AltClick(mob/user)
     . = ..()
     if(!user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
         return
     adjustmask(user)
     return TRUE
 
-/obj/item/clothing/mask/kitsunewhi
-	name = "White Kitsune Mask"
-	desc = "An oriental styled porcelain mask, this one is white and red."
-	icon_state = "whitekitsunemask"
-	item_state = "whitekitsunemask"
-	w_class = WEIGHT_CLASS_TINY
-	flags_cover = MASKCOVERSMOUTH
-	flags_inv = HIDEFACE|HIDEFACIALHAIR
-	visor_flags_inv = HIDEFACE|HIDEFACIALHAIR
-	visor_flags_cover = MASKCOVERSMOUTH
-	slot_flags = ITEM_SLOT_MASK
-
-/obj/item/clothing/mask/kitsunewhi/attack_self(mob/user)
-    adjustmask(user)
-
-/obj/item/clothing/mask/kitsunewhi/AltClick(mob/user)
-    . = ..()
-    if(!user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
-        return
-    adjustmask(user)
-    return TRUE
-
-/obj/item/clothing/mask/magickitsune
-	name = "Magical Kitsune Mask"
-	desc = "An oriental styled porcelain mask, this one is white and red. You can feel ancient power emitting from it!"
-	icon_state = "magickitsunemask"
-	item_state = "magickitsunemask"
-	clothing_flags = ALLOWINTERNALS
-	w_class = WEIGHT_CLASS_TINY
-	flags_cover = MASKCOVERSMOUTH
-	flags_inv = HIDEFACE|HIDEFACIALHAIR
-	visor_flags_inv = HIDEFACE|HIDEFACIALHAIR
-	visor_flags_cover = MASKCOVERSMOUTH
-	slot_flags = ITEM_SLOT_MASK
+/obj/item/clothing/mask/kitsune/black
+	poly_colors = list("#333333", "#CC9933", "#000000")
 
 /obj/item/clothing/mask/pig
 	name = "pig mask"

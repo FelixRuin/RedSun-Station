@@ -1,3 +1,17 @@
+/obj/item/clothing/mask/magickitsune
+	name = "Magical Kitsune Mask"
+	desc = "An oriental styled porcelain mask, this one is white and red. You can feel ancient power emitting from it!"
+	icon_state = "magickitsunemask"
+	icon = 'modular_bluemoon/fluffs/icons/obj/clothing/mask.dmi'
+	mob_overlay_icon = 'modular_bluemoon/fluffs/icons/mob/clothing/mask.dmi'
+	clothing_flags = ALLOWINTERNALS
+	w_class = WEIGHT_CLASS_TINY
+	flags_cover = MASKCOVERSMOUTH
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
+	visor_flags_inv = HIDEFACE|HIDEFACIALHAIR
+	visor_flags_cover = MASKCOVERSMOUTH
+	slot_flags = ITEM_SLOT_MASK
+
 /obj/item/clothing/mask/magickitsune/equipped(mob/user, slot)
 	. = ..()
 	for(var/mob/living/M in get_hearers_in_view(4, user))
