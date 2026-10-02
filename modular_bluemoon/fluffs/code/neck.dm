@@ -102,7 +102,7 @@
 	desc = "Тряпки, тряпки и ещё раз тряпки. Ни функционала, ни цели, только стиль."
 	icon_state = "concord-cloak"
 	anthro_mob_worn_overlay = 'modular_bluemoon/fluffs/icons/mob/clothing/neck.dmi'
-	alternate_worn_layer = SUIT_STORE_LAYER // попросили сделать так, чтобы он отображался ПОД волосами и оружием одетым на спину, по идее ничего сломать не должно.
+	alternate_worn_layer = HORNS_LAYER // опять меняем слой... надо чтоб был над волосами
 	var/selected_type = "Cloak"
 
 /obj/item/clothing/neck/donator/bm/concord_cloak/equipped(mob/user, slot) //оверрайдим этот прок, дабы у нас вызывалась обнова иконки в момент одевания
@@ -138,7 +138,7 @@
 			icon_state = "concord-cloak-kama-[breast_size]"
 			selected_type = "Cloak and Kama"
 		if("Cloak, Hood and Kama")
-			icon_state = "concord-cloak-hood-kama-[breast_size]" // не забыть доделать, нужно, чтобы капюшон скрывал волосы, но не уши
+			icon_state = "concord-cloak-hood-kama-[breast_size]"
 			selected_type = "Cloak, Hood and Kama"
 	update_icon()
 	user.update_inv_neck()
@@ -151,9 +151,6 @@
 	var/mob/living/carbon/human/wearer = loc
 	var/obj/item/organ/genital/breasts/breast = wearer.getorganslot(ORGAN_SLOT_BREASTS)
 	var/breast_size = clamp(round(breast?.size || 0), 0, 9)
-	flags_inv &= ~HIDEHAIR
-	if(selected_type in list("Hood", "Hood and Kama", "Cloak, Hood and Kama"))
-		flags_inv |= HIDEHAIR
 	switch(selected_type)
 		if("Hood")
 			icon_state = "concord-hood"
