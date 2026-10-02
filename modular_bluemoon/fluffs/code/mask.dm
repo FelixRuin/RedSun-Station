@@ -119,9 +119,9 @@
 	wearer.update_inv_wear_mask()
 	wearer.update_body()
 
-/obj/item/clothing/mask/gas/sechailer/star_dust/adjustmask(mob/living/user, just_flavor)
+/obj/item/clothing/mask/gas/sechailer/star_dust/adjustmask(mob/living/user)
 	. = ..()
-	if(. && !just_flavor)
+	if(.)
 		update_icon()
 
 /obj/item/modkit/star_dust_kit

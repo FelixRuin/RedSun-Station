@@ -13,22 +13,6 @@
 	resistance_flags = NONE
 	mutantrace_variation = STYLE_MUZZLE
 	visor_flags_inv = HIDEFACE
-	var/flavor_adjust = TRUE //can it do the heehoo alt click to hide/show identity
-
-/obj/item/clothing/mask/gas/examine(mob/user)
-	. = ..()
-	if(flavor_adjust)
-		. += "<span class='info'>Alt-click to toggle identity concealment. It's currently <b>[flags_inv & HIDEFACE ? "on" : "off"]</b>.</span>"
-
-/obj/item/clothing/mask/gas/AltClick(mob/user)
-	if(face_hide_capable)
-		if(!user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
-			return ..()
-		toggle_face_hiding(user)
-		return TRUE
-	. = ..()
-	if(flavor_adjust && adjustmask(user, TRUE))
-		return TRUE
 
 /obj/item/clothing/mask/gas/atmos
 	name = "Atmospheric Gas Mask"
@@ -56,7 +40,6 @@
 	desc = "A face-covering mask that can be connected to an air supply. This one doesn't obscure your face however." //More accurate
 	icon_state = "gas_clear"
 	flags_inv = 0
-	flavor_adjust = FALSE
 
 /obj/item/clothing/mask/gas/glass/alt
 	icon_state = "gas_alt2"
@@ -78,13 +61,10 @@
 	visor_flags_inv = HIDEEYES
 	visor_flags_cover = MASKCOVERSEYES
 	resistance_flags = FIRE_PROOF
-	flavor_adjust = FALSE
 	can_toggle = TRUE
 
 /obj/item/clothing/mask/gas/welding/attack_self(mob/user)
 	weldingvisortoggle(user)
-
-/obj/item/clothing/mask/gas/welding/up
 
 /obj/item/clothing/mask/gas/welding/up/Initialize(mapload)
 	. = ..()
