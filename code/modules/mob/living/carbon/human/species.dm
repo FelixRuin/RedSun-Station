@@ -774,7 +774,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 		if(M.flags_inv & HIDEHAIR)
 			hair_hidden = TRUE
 	// BLUEMOON EDIT: Плащи теперь могут скрывать волосы.
-	if(H.wear_neck)
+	if(H.wear_neck && istype(H.wear_neck))
 		var/obj/item/clothing/neck/N = H.wear_neck
 		if(!dynamic_hair_suffix)
 			dynamic_hair_suffix = N.dynamic_hair_suffix
