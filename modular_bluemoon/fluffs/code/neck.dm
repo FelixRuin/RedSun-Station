@@ -101,7 +101,6 @@
 	name = "Concord cloak kit"
 	desc = "Тряпки, тряпки и ещё раз тряпки. Ни функционала, ни цели, только стиль."
 	icon_state = "concord-cloak"
-	item_state = "concord-cloak"
 	anthro_mob_worn_overlay = 'modular_bluemoon/fluffs/icons/mob/clothing/neck.dmi'
 	alternate_worn_layer = SUIT_STORE_LAYER // попросили сделать так, чтобы он отображался ПОД волосами и оружием одетым на спину, по идее ничего сломать не должно.
 	var/selected_type = "Cloak"
@@ -124,22 +123,22 @@
 	var/breast_size = clamp(round(breast?.size || 0), 0, 9)
 	switch(select_type)
 		if("Hood")
-			item_state = "concord-hood"
+			icon_state = "concord-hood"
 			selected_type = "Hood"
 		if("Kama")
-			item_state = "concord-kama"
+			icon_state = "concord-kama"
 			selected_type = "Kama"
 		if("Hood and Kama")
-			item_state = "concord-hood-kama"
+			icon_state = "concord-hood-kama"
 			selected_type = "Hood and Kama"
 		if("Cloak")
-			item_state = "concord-cloak-[breast_size]"
+			icon_state = "concord-cloak-[breast_size]"
 			selected_type = "Cloak"
 		if("Cloak and Kama")
-			item_state = "concord-cloak-kama-[breast_size]"
+			icon_state = "concord-cloak-kama-[breast_size]"
 			selected_type = "Cloak and Kama"
 		if("Cloak, Hood and Kama")
-			item_state = "concord-cloak-hood-kama-[breast_size]" // не забыть доделать, нужно, чтобы капюшон скрывал волосы, но не уши
+			icon_state = "concord-cloak-hood-kama-[breast_size]" // не забыть доделать, нужно, чтобы капюшон скрывал волосы, но не уши
 			selected_type = "Cloak, Hood and Kama"
 	update_icon()
 	user.update_inv_neck()
@@ -157,17 +156,17 @@
 		flags_inv |= HIDEHAIR
 	switch(selected_type)
 		if("Hood")
-			item_state = "concord-hood"
+			icon_state = "concord-hood"
 		if("Kama")
-			item_state = "concord-kama"
+			icon_state = "concord-kama"
 		if("Hood and Kama")
-			item_state = "concord-hood-kama"
+			icon_state = "concord-hood-kama"
 		if("Cloak")
-			item_state = "concord-cloak-[breast_size]"
+			icon_state = "concord-cloak-[breast_size]"
 		if("Cloak and Kama")
-			item_state = "concord-cloak-kama-[breast_size]"
+			icon_state = "concord-cloak-kama-[breast_size]"
 		if("Cloak, Hood and Kama")
-			item_state = "concord-cloak-hood-kama-[breast_size]"
+			icon_state = "concord-cloak-hood-kama-[breast_size]"
 	wearer.update_inv_neck()
 	wearer.update_body()
 	wearer.update_hair()
