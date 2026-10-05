@@ -8,6 +8,8 @@
 /// Во сколько раз медленная фаза пены тикает реже быстрой (SSprocessing 1с / SSfastprocess 0.2с).
 /// Доза химии и расход жизни масштабируются этим же множителем - суммарный эффект как раньше.
 #define FOAM_SLOW_TICK_MULTIPLIER 5
+/// Игровое время на один шаг разлива. amount считает проходы SSfastprocess, а срок по world.time ограничивает разлив, даже если проходы тормозят.
+#define FOAM_SPREAD_STEP_TIME (1 SECONDS)
 
 /obj/effect/particle_effect/foam
 	name = "foam"
@@ -18,6 +20,8 @@
 	layer = EDGED_TURF_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	var/amount = 10
+	/// world.time, после которого пена больше не растекается. Потомки наследуют срок источника.
+	var/spread_deadline = 0
 	animate_movement = 0
 	var/metal = 0
 	var/lifetime = 40
@@ -125,8 +129,13 @@
 	. = ..()
 	MakeSlippery()
 	create_reagents(1000, NONE, NO_REAGENTS_VALUE) //limited by the size of the reagent holder anyway.
+	set_spread_amount(amount)
 	START_PROCESSING(SSfastprocess, src)
 	playsound(src, 'sound/effects/bubbles2.ogg', 80, 1, -3)
+
+/obj/effect/particle_effect/foam/proc/set_spread_amount(new_amount)
+	amount = new_amount
+	spread_deadline = world.time + (max(new_amount, 0) + 1) * FOAM_SPREAD_STEP_TIME
 
 /obj/effect/particle_effect/foam/proc/MakeSlippery()
 	AddComponent(/datum/component/slippery, 100)
@@ -221,7 +230,7 @@
 	if(hit)
 		lifetime += tick_multiplier //this is so the decrease from mobs hit and the natural decrease don't cumulate.
 
-	if(--amount < 0)
+	if(--amount < 0 || world.time > spread_deadline)
 		// Разлив закончен: пена больше не спредится, дотикивать жизнь и травить
 		// стоящих в ней можно на медленном процессинге. Именно одновременность
 		// тысяч пен на быстром тике давала 228мс/проход SSfastprocess (раунд 9746,
@@ -266,6 +275,9 @@
 	var/copied_adjacency = FALSE
 	for(var/adjacent_index in 1 to length(adjacent_turfs))
 		var/turf/T = adjacent_turfs[adjacent_index]
+		// Через дыру пена стекает вниз, но не поднимается к потолку.
+		if(T.z != t_loc.z && T != GET_TURF_BELOW(t_loc))
+			continue
 		var/obj/effect/particle_effect/foam/foundfoam = locate() in T //Don't spread foam where there's already foam!
 		if(foundfoam)
 			continue
@@ -281,6 +293,7 @@
 			foam_mob(L)
 		var/obj/effect/particle_effect/foam/F = new src.type(T)
 		F.amount = amount
+		F.spread_deadline = spread_deadline
 		reagents.copy_to(F, (reagents.total_volume))
 		F.add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 		F.metal = metal
@@ -363,7 +376,7 @@
 	var/foamcolor = mix_color_from_reagents(chemholder.reagents.reagent_list)
 	chemholder.reagents.copy_to(F, chemholder.reagents.total_volume/amount)
 	F.add_atom_colour(foamcolor, FIXED_COLOUR_PRIORITY)
-	F.amount = amount
+	F.set_spread_amount(amount)
 	F.metal = metal
 
 	// Химия отдана рождённой пене, chemholder больше не нужен ни на что.
@@ -456,3 +469,4 @@
 #undef IRON_FOAM
 #undef RESIN_FOAM
 #undef FOAM_SLOW_TICK_MULTIPLIER
+#undef FOAM_SPREAD_STEP_TIME

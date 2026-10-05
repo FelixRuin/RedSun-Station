@@ -243,6 +243,10 @@
 				liquids.reagent_list[R.type] = R.volume
 				liquids.total_reagents += R.volume
 			liquids.temp = reagents.chem_temp
+			if(!liquids.total_reagents)
+				qdel(reagents)
+				qdel(liquids, TRUE)
+				return
 		qdel(reagents)
 		//Expose turf
 		liquids.ExposeMyTurf()
