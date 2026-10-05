@@ -20,6 +20,9 @@ GLOBAL_VAR(test_log)
 GLOBAL_LIST_EMPTY(unit_test_mapping_logs)
 // BLUEMOON EDIT END: Invalid Space Turfs
 
+/// Areas of map-loaded start landmarks by landmark type: roundstart deletes the landmarks before the tests run.
+GLOBAL_LIST_EMPTY(unit_test_start_landmark_areas)
+
 /// A list of every test that is currently focused.
 /// Use the PERFORM_ALL_TESTS macro instead.
 GLOBAL_VAR_INIT(focused_tests, focused_tests())
