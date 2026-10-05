@@ -31,7 +31,7 @@ Difficulty: Very Hard
 	attack_sound = 'sound/magic/clockwork/ratvar_attack.ogg'
 	icon_state = "eva"
 	icon_living = "eva"
-	icon_dead = "dragon_dead"
+	icon_dead = ""
 	friendly_verb_continuous = "stares down"
 	friendly_verb_simple = "stare down"
 	icon = 'icons/mob/lavaland/96x96megafauna.dmi'
