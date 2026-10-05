@@ -170,7 +170,7 @@
 	has_adapt_icon_states = FALSE
 	var/list/poly_colors = list("#FFFFFF","#C5302D")
 
-	/obj/item/clothing/glasses/cover/tac_veil/ComponentInitialize()
+/obj/item/clothing/glasses/cover/tac_veil/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/polychromic, poly_colors, 1)
 
