@@ -5428,7 +5428,6 @@
 #include "modular_bluemoon\krashly\code\modules\clothing\glasses.dm"
 #include "modular_bluemoon\krashly\code\modules\clothing\gloves.dm"
 #include "modular_bluemoon\krashly\code\modules\clothing\head.dm"
-#include "modular_bluemoon\krashly\code\modules\clothing\neck.dm"
 #include "modular_bluemoon\krashly\code\modules\clothing\under.dm"
 #include "modular_bluemoon\krashly\code\modules\mecha\mecha.dm"
 #include "modular_bluemoon\krashly\code\modules\mobs\carbon\nucleation\code\nucleation.dm"
