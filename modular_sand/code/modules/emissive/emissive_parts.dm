@@ -48,7 +48,7 @@ GLOBAL_LIST_INIT(emissive_blocked_layers, list(
 /// Nested overlays are dropped because they are not on the emissive plane and would add pixels.
 /proc/emissive_copy(mutable_appearance/source, layer = null)
 	var/mutable_appearance/emissive = new /mutable_appearance(source)
-	emissive.layer = layer ?: source.layer
+	emissive.layer = layer != null ? layer : source.layer
 	emissive.overlays = null
 	emissive.plane = EMISSIVE_PLANE
 	emissive.color = GLOB.emissive_color
