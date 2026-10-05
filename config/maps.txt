@@ -117,3 +117,19 @@ endmap
 map icemoonstation
 minplayers 30
 endmap
+
+map tramstation
+minplayers 70
+endmap
+
+map northstar
+minplayers 70
+endmap
+
+map voidraptor
+minplayers 40
+endmap
+
+map icebox
+minplayers 50
+endmap
