@@ -372,6 +372,28 @@
 			unnamed += "[station_area.type]"
 	TEST_ASSERT(!length(unnamed), "Станционные зоны без имени: [unnamed.Join(", ")]")
 
+#define SUPERMATTER_COLLECTOR_RANGE 2
+#define SUPERMATTER_MIN_COLLECTORS 6
+
+/// У кристалла суперматерии станции стоят радколлекторы на сети с вводом СМЕСа: наш кристалл кормит их излучением, в тесла-катушки бьёт только при перегрузке.
+/datum/unit_test/station_supermatter_has_rad_collectors
+	requires_full_map = TRUE
+
+/datum/unit_test/station_supermatter_has_rad_collectors/Run()
+	for(var/obj/machinery/power/supermatter_crystal/engine/crystal as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/supermatter_crystal/engine))
+		if(!is_station_level(crystal.z))
+			continue
+		var/wired = 0
+		for(var/obj/machinery/power/rad_collector/collector as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/rad_collector))
+			if(collector.z != crystal.z || get_dist(collector, crystal) > SUPERMATTER_COLLECTOR_RANGE)
+				continue
+			if(collector.anchored && collector.powernet && (locate(/obj/machinery/power/terminal) in collector.powernet.nodes))
+				wired++
+		TEST_ASSERT(wired >= SUPERMATTER_MIN_COLLECTORS, "У суперматерии ([crystal.x],[crystal.y],[crystal.z]) радколлекторов на сети СМЕСа: [wired] из [SUPERMATTER_MIN_COLLECTORS]")
+
+#undef SUPERMATTER_COLLECTOR_RANGE
+#undef SUPERMATTER_MIN_COLLECTORS
+
 /// Трубы сантехники, проложенные картой под плиткой, не видны поверх пола.
 /datum/unit_test/station_mapped_ducts_under_tiles_hidden
 	requires_full_map = TRUE

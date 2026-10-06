@@ -32587,9 +32587,7 @@
 /obj/machinery/atmospherics/pipe/manifold/general/visible{
 	dir = 4
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /turf/open/floor/engine,
 /area/engineering/supermatter)
 "hly" = (
@@ -35359,9 +35357,7 @@
 /obj/machinery/atmospherics/pipe/manifold/general/visible{
 	dir = 4
 	},
-/obj/machinery/power/grounding_rod{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /turf/open/floor/engine,
 /area/engineering/supermatter)
 "hPM" = (
@@ -40014,9 +40010,7 @@
 /obj/machinery/atmospherics/pipe/simple/general/visible{
 	dir = 5
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /turf/open/floor/engine,
 /area/engineering/supermatter)
 "iQO" = (
@@ -44748,9 +44742,7 @@
 /obj/machinery/atmospherics/pipe/manifold/general/visible{
 	dir = 8
 	},
-/obj/machinery/power/grounding_rod{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /turf/open/floor/engine,
 /area/engineering/supermatter)
 "jXh" = (
@@ -49115,9 +49107,7 @@
 /obj/machinery/atmospherics/pipe/simple/general/visible{
 	dir = 9
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /turf/open/floor/engine,
 /area/engineering/supermatter)
 "kWD" = (
@@ -66764,9 +66754,7 @@
 /obj/machinery/atmospherics/pipe/manifold/general/visible{
 	dir = 8
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /turf/open/floor/engine,
 /area/engineering/supermatter)
 "oOA" = (
