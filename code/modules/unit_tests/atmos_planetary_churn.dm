@@ -453,3 +453,17 @@
 #undef PLANETARY_CHURN_TEMPLATE_B
 #undef PLANETARY_CHURN_MAX_CYCLES
 #undef PLANETARY_CHURN_WARM_EDGE_TEMPERATURE
+
+/// Закрытая комната руины Hot Springs стоит на одном непланетарном воздухе: вода с воздухом луны у песка со станционным давала активные турфы с роундстарта.
+/datum/unit_test/hotsprings_ruin_one_air
+
+/datum/unit_test/hotsprings_ruin_one_air/Run()
+	var/map_text = file2text("_maps/RandomRuins/IceRuins/icemoon_surface_hotsprings.dmm")
+	TEST_ASSERT(length(map_text), "Карта руины Hot Springs не прочиталась")
+	var/regex/open_turf_path = regex(@"/turf/open/[\w/]+", "g")
+	var/list/mixes = list()
+	while(open_turf_path.Find(map_text))
+		var/turf/open/turf_type = text2path(open_turf_path.match)
+		TEST_ASSERT(!initial(turf_type.planetary_atmos), "[turf_type] в закрытой руине планетарный")
+		mixes[initial(turf_type.initial_gas_mix)] = TRUE
+	TEST_ASSERT_EQUAL(length(mixes), 1, "Воздух открытых турфов руины разный: [jointext(mixes, ", ")]")
