@@ -32681,7 +32681,7 @@
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple{
 	dir = 8
 	},
-/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/open/floor/plasteel/showroomfloor,
 /area/medical/coldroom)
 "hsF" = (
@@ -52670,7 +52670,7 @@
 /obj/machinery/atmospherics/components/unary/portables_connector/visible{
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/structure/window{
 	dir = 8
 	},
@@ -84194,7 +84194,7 @@
 /obj/machinery/atmospherics/pipe/heat_exchanging/junction{
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/open/floor/plasteel/showroomfloor,
 /area/medical/coldroom)
 "tef" = (
@@ -90286,7 +90286,7 @@
 /obj/machinery/atmospherics/components/unary/portables_connector/visible{
 	dir = 8
 	},
-/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/structure/window{
 	dir = 4
 	},
