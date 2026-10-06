@@ -77,6 +77,7 @@
 #include "action_button_positions.dm"
 #include "advanced_locator.dm"
 #include "anchored_mobs.dm"
+#include "antag_removal_without_body.dm"
 #include "airalarm_mode_cutoff.dm"
 #include "airalarm_thresholds.dm"
 #include "atmos_breach_containment.dm"
