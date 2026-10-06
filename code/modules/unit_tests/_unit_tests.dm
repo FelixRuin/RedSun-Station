@@ -138,6 +138,7 @@
 // #include "crayons.dm"
 #include "create_and_destroy.dm"
 #include "custom_emote_panel.dm"
+#include "custom_portal_station.dm"
 // #include "designs.dm"
 #include "director.dm"
 #include "door_timer_airlock.dm"
