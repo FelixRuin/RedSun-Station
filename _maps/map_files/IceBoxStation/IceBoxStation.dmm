@@ -4423,6 +4423,9 @@
 "bcX" = (
 /obj/structure/chair/stool/directional/south,
 /obj/effect/decal/cleanable/oil/slippery,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/maintenance/department/electrical)
 "bdj" = (
@@ -15609,7 +15612,9 @@
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/security/prison)
 "dBQ" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/effect/turf_decal/delivery,
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
@@ -48684,7 +48689,12 @@
 /turf/open/floor/plasteel/dark,
 /area/mine/eva/lower)
 "kQp" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-1"
+	},
 /turf/open/floor/plating,
 /area/maintenance/department/electrical)
 "kQL" = (
@@ -59820,6 +59830,9 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/department/electrical)
@@ -80166,7 +80179,9 @@
 	},
 /area/service/chapel)
 "rJa" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/effect/turf_decal/delivery,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
@@ -84763,6 +84778,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer4{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /turf/open/floor/plating,
 /area/maintenance/department/electrical)
 "sLs" = (
@@ -86686,7 +86704,9 @@
 	},
 /area/commons/storage/mining)
 "thq" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/effect/turf_decal/delivery,
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
@@ -98538,6 +98558,13 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/plasteel,
 /area/commons/dorms)
+"vMs" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plasteel,
+/area/maintenance/department/electrical)
 "vMy" = (
 /obj/structure/disposalpipe/segment{
 	dir = 9
@@ -287835,7 +287862,7 @@ xlQ
 sqH
 exd
 sLr
-tun
+vMs
 kQp
 xlQ
 xlQ
@@ -288862,7 +288889,7 @@ xlQ
 xlQ
 hbc
 nlD
-tun
+vMs
 bcX
 kQp
 jwb

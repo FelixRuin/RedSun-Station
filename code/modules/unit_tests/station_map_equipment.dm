@@ -445,3 +445,45 @@
 					sinks += "([planet_turf.x],[planet_turf.y],[planet_turf.z]) [planet_area.type]"
 					break
 	TEST_ASSERT(!length(sinks), "Планетарный воздух в станционной комнате: [sinks.Join(", ")]")
+
+/// SMES с меньшим зарядом пустеют за минуты и стартовую нагрузку не держат.
+#define STATION_SMES_STORAGE_CHARGE 1e6
+/// Запас отдачи над нагрузкой APC, как у Meta на старте: потом просыпаются машины и заряжаются ячейки APC.
+#define STATION_SMES_LOAD_MARGIN 1.2
+
+/// На портированных картах заряженные SMES станции отдают в сеть, и на старте их отдача с запасом покрывает нагрузку APC той же сети.
+/datum/unit_test/ported_map_smes_cover_apc_load
+	requires_full_map = TRUE
+
+/datum/unit_test/ported_map_smes_cover_apc_load/Run()
+	if(!(SSmapping.config.map_name in PORTED_STATION_MAPS))
+		return
+	var/list/relays = SSmachines.get_machines_by_type(/obj/machinery/power/deck_relay)
+	for(var/obj/machinery/power/deck_relay/relay as anything in relays)
+		relay.find_relays()
+	for(var/obj/machinery/power/deck_relay/relay as anything in relays)
+		relay.refresh()
+
+	var/list/problems = list()
+	var/list/supply = list()
+	for(var/obj/machinery/power/smes/smes as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/smes))
+		if(!is_station_level(smes.z) || smes.charge < STATION_SMES_STORAGE_CHARGE)
+			continue
+		if(!smes.powernet)
+			problems += "заряженный SMES без сети ([smes.x],[smes.y],[smes.z])"
+		else if(smes.output_attempt)
+			supply[smes.powernet] += smes.output_level
+	var/list/demand = list()
+	for(var/obj/machinery/power/apc/apc as anything in GLOB.apcs_list)
+		var/datum/powernet/grid = apc.terminal?.powernet
+		if(is_station_level(apc.z) && grid)
+			demand[grid] += apc.lastused_total
+	TEST_ASSERT(length(supply), "На станции нет заряженных SMES на сети")
+	for(var/datum/powernet/grid as anything in supply)
+		TEST_ASSERT(demand[grid], "APC сети SMES ещё не посчитали нагрузку")
+		if(supply[grid] < demand[grid] * STATION_SMES_LOAD_MARGIN)
+			problems += "отдача SMES [supply[grid] / 1000] кВт при нагрузке APC [round(demand[grid] / 1000)] кВт"
+	TEST_ASSERT(!length(problems), "Питание станции на старте: [problems.Join("; ")]")
+
+#undef STATION_SMES_STORAGE_CHARGE
+#undef STATION_SMES_LOAD_MARGIN
