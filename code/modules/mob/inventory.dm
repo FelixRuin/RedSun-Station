@@ -383,6 +383,9 @@
 		on_item_dropped(I)
 		if(I.dropped(src) == ITEM_RELOCATED_BY_DROPPED)
 			return FALSE
+	else
+		// блок и парирование держат ссылку на предмет, а разбитый щит удаляется прямо из рук
+		on_item_dropped(I)
 	SEND_SIGNAL(src, COMSIG_MOB_UNEQUIPPED_ITEM, I, force, newloc, no_move, invdrop, silent)
 	return TRUE
 

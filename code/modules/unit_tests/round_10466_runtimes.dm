@@ -28,3 +28,15 @@
 	darkened_turfs = null
 	darkened_area = null
 	return ..()
+
+/// Щит, разбитый во время активного блока, снимает блок с владельца.
+/datum/unit_test/shattered_shield_ends_active_block/Run()
+	var/mob/living/carbon/human/holder = allocate(/mob/living/carbon/human)
+	var/obj/item/shield/riot/pointman/shield = allocate(/obj/item/shield/riot/pointman)
+	holder.put_in_active_hand(shield)
+	TEST_ASSERT(holder.active_block_start(shield), "test premise: блок щитом должен начаться")
+
+	qdel(shield)
+
+	TEST_ASSERT_NULL(holder.active_block_item, "Удалённый щит не должен оставаться предметом активного блока")
+	TEST_ASSERT(!(holder.combat_flags & COMBAT_FLAG_ACTIVE_BLOCKING), "Активный блок должен закончиться вместе со щитом")
