@@ -426,3 +426,22 @@
 			unknown += "[display.shuttle_id] ([display.x],[display.y],[display.z])"
 	TEST_ASSERT(!length(unknown), "Табло шаттлов с неизвестным id: [unknown.Join(", ")]")
 
+/// На портированных картах планетарный турф внутри станционной зоны не делит воздух со станционным полом: иначе он вечно студит комнату.
+/datum/unit_test/ported_map_rooms_no_planetary_air
+	requires_full_map = TRUE
+
+/datum/unit_test/ported_map_rooms_no_planetary_air/Run()
+	if(!(SSmapping.config.map_name in PORTED_STATION_MAPS))
+		return
+	var/list/sinks = list()
+	for(var/station_z in SSmapping.levels_by_trait(ZTRAIT_STATION))
+		for(var/turf/open/planet_turf in block(locate(1, 1, station_z), locate(world.maxx, world.maxy, station_z)))
+			var/area/planet_area = planet_turf.loc
+			if(!planet_turf.planetary_atmos || planet_area.outdoors || istype(planet_area, /area/ruin))
+				continue
+			for(var/turf/open/neighbour as anything in planet_turf.atmos_adjacent_turfs)
+				var/area/neighbour_area = neighbour.loc
+				if(neighbour.initial_gas_mix == OPENTURF_DEFAULT_ATMOS && !neighbour.planetary_atmos && !neighbour_area.outdoors)
+					sinks += "([planet_turf.x],[planet_turf.y],[planet_turf.z]) [planet_area.type]"
+					break
+	TEST_ASSERT(!length(sinks), "Планетарный воздух в станционной комнате: [sinks.Join(", ")]")
