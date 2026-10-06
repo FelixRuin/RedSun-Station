@@ -37453,7 +37453,7 @@
 	dir = 4
 	},
 /obj/machinery/firealarm/directional/east,
-/obj/structure/chair/sofa/corp/left{
+/obj/structure/chair/sofa/corp/right{
 	dir = 8
 	},
 /obj/machinery/camera{
@@ -38253,7 +38253,7 @@
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "ixm" = (
-/obj/structure/chair/sofa/corp/right{
+/obj/structure/chair/sofa/corp/left{
 	dir = 4;
 	pixel_x = -4
 	},
@@ -55321,7 +55321,7 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
 "mkk" = (
-/obj/structure/chair/sofa/corp/right{
+/obj/structure/chair/sofa/corp/left{
 	dir = 8
 	},
 /obj/effect/landmark/start/prisoner,
@@ -81155,7 +81155,7 @@
 /turf/closed/wall,
 /area/hallway/primary/starboard)
 "rVH" = (
-/obj/structure/chair/sofa/corp/right{
+/obj/structure/chair/sofa/corp/left{
 	dir = 8
 	},
 /obj/effect/landmark/start/scientist,
@@ -88083,7 +88083,7 @@
 /turf/open/floor/plasteel/dark,
 /area/maintenance/disposal)
 "tyg" = (
-/obj/structure/chair/sofa/corp/left{
+/obj/structure/chair/sofa/corp/right{
 	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
@@ -92707,7 +92707,7 @@
 /turf/open/floor/plasteel/dark,
 /area/service/hydroponics/garden)
 "uwG" = (
-/obj/structure/chair/sofa/corp/right{
+/obj/structure/chair/sofa/corp/left{
 	dir = 8
 	},
 /obj/effect/turf_decal/trimline/green/filled/line{
@@ -101962,7 +101962,7 @@
 "wyu" = (
 /obj/machinery/light/small/directional/north,
 /obj/machinery/firealarm/directional/west,
-/obj/structure/chair/sofa/corp/left{
+/obj/structure/chair/sofa/corp/right{
 	dir = 4;
 	pixel_x = -4
 	},
@@ -272483,7 +272483,7 @@ gKO
 rxZ
 wWP
 weE
-obs
+mOD
 koO
 tTB
 gyL
@@ -272997,7 +272997,7 @@ box
 fmx
 rVt
 fBG
-mOD
+obs
 lsp
 mKh
 xNu

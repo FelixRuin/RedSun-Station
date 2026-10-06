@@ -273,14 +273,14 @@
 /turf/open/floor/catwalk_floor,
 /area/maintenance/department/security)
 "DH" = (
-/obj/structure/chair/pew/left{
+/obj/structure/chair/pew/right{
 	dir = 4
 	},
 /turf/open/floor/grass,
 /area/asteroid/tramstation)
 "DL" = (
 /obj/structure/flora/ausbushes/ppflowers,
-/obj/structure/chair/pew/right{
+/obj/structure/chair/pew/left{
 	dir = 4
 	},
 /turf/open/floor/grass,

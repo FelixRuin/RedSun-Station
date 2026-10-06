@@ -181,6 +181,36 @@
 				return TRUE
 	return FALSE
 
+/// Концы скамей и угловых диванов порта стоят как на родных картах: left на западе или юге, при dir 8 на севере.
+/datum/unit_test/ported_map_seat_ends_match_natives
+	requires_full_map = TRUE
+
+/datum/unit_test/ported_map_seat_ends_match_natives/Run()
+	if(!(SSmapping.config.map_name in PORTED_STATION_MAPS))
+		return
+	var/list/flipped = list()
+	for(var/obj/structure/chair/seat in world)
+		if(!is_station_level(seat.z))
+			continue
+		var/side
+		if(istype(seat, /obj/structure/chair/pew/left) || istype(seat, /obj/structure/chair/sofa/corp/left))
+			side = "left"
+		else if(istype(seat, /obj/structure/chair/pew/right) || istype(seat, /obj/structure/chair/sofa/corp/right))
+			side = "right"
+		else
+			continue
+		var/family = istype(seat, /obj/structure/chair/pew) ? /obj/structure/chair/pew : /obj/structure/chair/sofa/corp
+		var/plus_dir = (seat.dir & (NORTH|SOUTH)) ? EAST : NORTH
+		var/at_plus = locate(family) in get_step(seat, plus_dir)
+		var/at_minus = locate(family) in get_step(seat, REVERSE_DIR(plus_dir))
+		if(!at_plus == !at_minus)
+			continue
+		var/is_plus_end = !at_plus
+		var/wanted = (is_plus_end == (seat.dir == WEST)) ? "left" : "right"
+		if(wanted != side)
+			flipped += "[seat.type] ([seat.x],[seat.y],[seat.z]) dir [seat.dir]"
+	TEST_ASSERT(!length(flipped), "Концы скамей перепутаны: [flipped.Join(", ")]")
+
 /// Фабрикаторы робототехники синхронизируются с R&D: sync() ищет консоль в семи тайлах.
 /datum/unit_test/robotics_fabricators_sync_research
 	requires_full_map = TRUE
