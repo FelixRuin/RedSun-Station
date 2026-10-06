@@ -145,11 +145,16 @@ Difficulty: Hard
 
 /// Teleports to a location 4 turfs away from the enemy in view
 /mob/living/simple_animal/hostile/megafauna/wendigo/proc/teleport()
+	var/turf/target_turf = get_turf(target)
+	if(!target_turf || target_turf.z != z)
+		return
 	var/list/possible_ends = list()
-	for(var/turf/T in view(4, target.loc) - view(3, target.loc))
+	for(var/turf/T in view(4, target_turf) - view(3, target_turf))
 		if(isclosedturf(T))
 			continue
 		possible_ends |= T
+	if(!length(possible_ends))
+		return
 	var/turf/end = pick(possible_ends)
 	do_teleport(src, end, 0,  channel=TELEPORT_CHANNEL_BLUESPACE, forced = TRUE)
 	SetRecoveryTime(20, 0)
