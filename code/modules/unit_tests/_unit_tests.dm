@@ -290,6 +290,7 @@
 #include "plane_master_backdrop.dm"
 #include "player_report_regressions.dm"
 #include "plumbing_ducts.dm"
+#include "portal_toys_cleanup.dm"
 #include "process_memory.dm"
 #include "progressbar_deleted_target.dm"
 #include "projectiles.dm"
