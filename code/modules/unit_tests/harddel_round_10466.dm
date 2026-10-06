@@ -40,3 +40,15 @@
 	var/registered_before = length(GLOB.transformation_animation_objects)
 	animate_and_delete()
 	TEST_ASSERT_EQUAL(length(GLOB.transformation_animation_objects), registered_before, "Удалённый атом остался в GLOB.transformation_animation_objects")
+
+/mob/living/simple_animal/bot/cleanbot/hud_build_counter
+	var/hud_builds = 0
+
+/mob/living/simple_animal/bot/cleanbot/hud_build_counter/prepare_huds()
+	hud_builds++
+	return ..()
+
+/// Значки худа бота строятся один раз: пересборка после добавления в диагностический худ оставляет зрителям образы с loc на бота
+/datum/unit_test/bot_hud_images_built_once/Run()
+	var/mob/living/simple_animal/bot/cleanbot/hud_build_counter/bot = allocate(/mob/living/simple_animal/bot/cleanbot/hud_build_counter, run_loc_floor_bottom_left)
+	TEST_ASSERT_EQUAL(bot.hud_builds, 1, "Значки худа бота пересобраны после регистрации в диагностическом худе")
