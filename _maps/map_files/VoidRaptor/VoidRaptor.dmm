@@ -38006,9 +38006,7 @@
 /obj/machinery/atmospherics/pipe/manifold/cyan/visible{
 	dir = 4
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
@@ -52685,9 +52683,7 @@
 /obj/machinery/atmospherics/pipe/manifold/green/visible{
 	dir = 8
 	},
-/obj/machinery/power/grounding_rod{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
@@ -79276,9 +79272,7 @@
 /obj/machinery/atmospherics/pipe/manifold/cyan/visible{
 	dir = 4
 	},
-/obj/machinery/power/grounding_rod{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
@@ -80999,9 +80993,7 @@
 /obj/machinery/atmospherics/pipe/simple/cyan/visible{
 	dir = 9
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
@@ -89876,9 +89868,7 @@
 /obj/machinery/atmospherics/pipe/simple/green/visible{
 	dir = 5
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
@@ -104553,9 +104543,7 @@
 /obj/machinery/atmospherics/pipe/manifold/green/visible{
 	dir = 8
 	},
-/obj/machinery/power/tesla_coil{
-	anchored = 1
-	},
+/obj/machinery/power/rad_collector/anchored,
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
