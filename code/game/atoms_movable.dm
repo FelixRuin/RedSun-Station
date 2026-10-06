@@ -246,6 +246,9 @@
 
 	QDEL_NULL(move_packet)
 
+	if(length(GLOB.transformation_animation_objects) && (src in GLOB.transformation_animation_objects))
+		drop_transformation_animation()
+
 	. = ..()
 
 	//We add ourselves to this list, best to clear it out

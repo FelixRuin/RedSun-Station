@@ -26,3 +26,17 @@
 	settle()
 	TEST_ASSERT_EQUAL(deleted_in_cache(controller, BB_AI_ALLY_CACHE), 0, "Кэш союзников держит удалённого моба после смены тика")
 	TEST_ASSERT_EQUAL(deleted_in_cache(controller, BB_AI_THREAT_CACHE), 0, "Кэш угроз держит удалённого моба после смены тика")
+
+/// Атом, удалённый посреди анимации превращения, не остаётся в глобальном реестре анимаций
+/datum/unit_test/transformation_animation_releases_deleted_atom
+
+/datum/unit_test/transformation_animation_releases_deleted_atom/proc/animate_and_delete()
+	var/obj/item/morphing = new(run_loc_floor_bottom_left)
+	morphing.transformation_animation(mutable_appearance('icons/obj/stack_objects.dmi', "sheet-metal"), time = 10 SECONDS, transform_overlay = mutable_appearance('icons/obj/stack_objects.dmi', "sheet-glass"), reset_after = FALSE, replace_icon = FALSE)
+	TEST_ASSERT(GLOB.transformation_animation_objects[morphing], "Sanity: анимация не записалась в реестр")
+	qdel(morphing)
+
+/datum/unit_test/transformation_animation_releases_deleted_atom/Run()
+	var/registered_before = length(GLOB.transformation_animation_objects)
+	animate_and_delete()
+	TEST_ASSERT_EQUAL(length(GLOB.transformation_animation_objects), registered_before, "Удалённый атом остался в GLOB.transformation_animation_objects")
