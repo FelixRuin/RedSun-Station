@@ -192,6 +192,57 @@
 	TEST_ASSERT(!probe.can_z_move(DOWN, hole, destination, NONE), "Заякоренный предмет не должен проваливаться в дыру")
 	probe.anchored = FALSE
 
+/// Голая решётка над дырой замедляет и роняет спринтующего; шаг без спринта, паркур, полёт и катуок - нет.
+/datum/unit_test/multiz_lattice_footing
+
+/datum/unit_test/multiz_lattice_footing/Run()
+	var/list/levels = multiz_gravity_test_levels()
+	multiz_gravity_test_turf(101, 20, levels[1], /turf/open/floor/plating)
+	multiz_gravity_test_turf(101, 22, levels[1], /turf/open/floor/plating)
+	var/turf/ledge = multiz_gravity_test_turf(100, 20, levels[2], /turf/open/floor/plating)
+	var/turf/hole = multiz_gravity_test_turf(101, 20, levels[2], /turf/open/openspace)
+	var/turf/catwalk_ledge = multiz_gravity_test_turf(100, 22, levels[2], /turf/open/floor/plating)
+	var/turf/catwalk_hole = multiz_gravity_test_turf(101, 22, levels[2], /turf/open/openspace)
+	var/obj/structure/lattice/lattice = allocate(/obj/structure/lattice, hole)
+	lattice.sprint_stumble_chance = 100
+	allocate(/obj/structure/lattice/catwalk, catwalk_hole)
+
+	var/mob/living/carbon/human/walker = allocate(/mob/living/carbon/human, ledge)
+	walker.m_intent = MOVE_INTENT_RUN
+	walker.Move(hole, EAST)
+	TEST_ASSERT(walker.has_movespeed_modifier(/datum/movespeed_modifier/lattice_footing), "Решётка над дырой не замедлила шаг")
+	TEST_ASSERT(!walker.resting, "Шаг без спринта уронил на решётке")
+	walker.Move(ledge, WEST)
+	TEST_ASSERT(!walker.has_movespeed_modifier(/datum/movespeed_modifier/lattice_footing), "Замедление решётки осталось после схода на пол")
+	walker.combat_flags |= COMBAT_FLAG_SPRINT_ACTIVE
+	walker.Move(hole, EAST)
+	TEST_ASSERT_EQUAL(walker.loc, hole, "Решётка не удержала оступившегося")
+	TEST_ASSERT(walker.resting, "Спринт по решётке не уронил при шансе 100")
+	qdel(walker)
+
+	var/mob/living/carbon/human/runner = allocate(/mob/living/carbon/human, ledge)
+	ADD_TRAIT(runner, TRAIT_FREERUNNING, TRAIT_GENERIC)
+	runner.m_intent = MOVE_INTENT_RUN
+	runner.combat_flags |= COMBAT_FLAG_SPRINT_ACTIVE
+	runner.Move(hole, EAST)
+	TEST_ASSERT(!runner.resting, "Паркурщик оступился на решётке")
+	qdel(runner)
+
+	var/mob/living/carbon/human/flyer = allocate(/mob/living/carbon/human, ledge)
+	flyer.setMovetype(flyer.movement_type | FLYING)
+	flyer.m_intent = MOVE_INTENT_RUN
+	flyer.combat_flags |= COMBAT_FLAG_SPRINT_ACTIVE
+	flyer.Move(hole, EAST)
+	TEST_ASSERT(!flyer.resting, "Летящий оступился на решётке")
+	qdel(flyer)
+
+	var/mob/living/carbon/human/catwalker = allocate(/mob/living/carbon/human, catwalk_ledge)
+	catwalker.m_intent = MOVE_INTENT_RUN
+	catwalker.combat_flags |= COMBAT_FLAG_SPRINT_ACTIVE
+	catwalker.Move(catwalk_hole, EAST)
+	TEST_ASSERT(!catwalker.has_movespeed_modifier(/datum/movespeed_modifier/lattice_footing), "Катуок замедлил шаг")
+	TEST_ASSERT(!catwalker.resting, "Спринт по катуоку уронил")
+
 /// Решётка над дырой держит шагнувшего на неё, перестройка в катуок его не роняет, срезанная опора роняет.
 /datum/unit_test/multiz_lattice_holds_over_hole
 

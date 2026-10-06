@@ -71,6 +71,11 @@
 		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/turf_slowdown, multiplicative_slowdown = T.slowdown)
 	else
 		remove_movespeed_modifier(/datum/movespeed_modifier/turf_slowdown)
+	var/obj/structure/lattice/footing = get_unsteady_lattice(T)
+	if(footing?.footing_slowdown)
+		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/lattice_footing, multiplicative_slowdown = footing.footing_slowdown)
+	else
+		remove_movespeed_modifier(/datum/movespeed_modifier/lattice_footing)
 
 /mob/living/proc/update_pull_movespeed()
 	// BLUEMOON ADD START
