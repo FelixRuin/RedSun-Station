@@ -237,6 +237,7 @@
 #include "lighting_object_var_diet.dm"
 #include "lighting_teardown.dm"
 #include "lighting_update_queue.dm"
+#include "loadout_polychromic_colors.dm"
 #include "maptext_surface_budget.dm"
 #include "icon_cache_ref_reuse.dm"
 #include "light_range_cap.dm"
