@@ -78,4 +78,54 @@
 	group.apply_viewer_offset(0, 1, MULTIZ_PERFORMANCE_DISABLE, MULTIZ_SCALE_PER_LEVEL)
 	TEST_ASSERT_EQUAL(length(upper.filters), upper_filters, "Круг по этажам не должен плодить фильтры")
 
+#define DISTORTION_REBUILD_BATCH 50
+#define DISTORTION_REBUILD_WARMUP 200
+#define DISTORTION_REBUILD_TIMER "unit-test-distortion-rebuild"
+
+/// Пересборка фильтров на этаже с линзой сингулярности не дорожает от раза к разу.
+/datum/unit_test/multiz_distortion_rebuild_cost_flat
+
+/datum/unit_test/multiz_distortion_rebuild_cost_flat/Run()
+	var/datum/plane_master_group/main/group = allocate(/datum/plane_master_group/main, EYE_FLOOR_FILTERS_TEST_KEY)
+	var/atom/movable/screen/plane_master/game = group.plane_masters["[GET_NEW_PLANE(GAME_PLANE, 0)]"]
+	TEST_ASSERT(game.world_distortion_applied, "Этаж глаза обязан нести линзу сингулярности")
+
+	var/first_batch = time_rebuilds(game, DISTORTION_REBUILD_BATCH)
+	time_rebuilds(game, DISTORTION_REBUILD_WARMUP)
+	var/last_batch = time_rebuilds(game, DISTORTION_REBUILD_BATCH)
+	TEST_ASSERT(last_batch < first_batch * 3 + 2000, "Пересборка подорожала с [first_batch] до [last_batch] мкс за [DISTORTION_REBUILD_BATCH] раз")
+
+/datum/unit_test/multiz_distortion_rebuild_cost_flat/proc/time_rebuilds(atom/movable/screen/plane_master/target, count)
+	rustg_time_reset(DISTORTION_REBUILD_TIMER)
+	for(var/i in 1 to count)
+		target.update_filters()
+	return rustg_time_microseconds(DISTORTION_REBUILD_TIMER)
+
+#undef DISTORTION_REBUILD_BATCH
+#undef DISTORTION_REBUILD_WARMUP
+#undef DISTORTION_REBUILD_TIMER
+
+/// Тот же порог тьмы не пересобирает фильтры света: его переставляет каждый update_sight().
+/datum/unit_test/multiz_light_cutoff_noop
+
+/datum/unit_test/multiz_light_cutoff_noop/Run()
+	var/datum/plane_master_group/main/group = allocate(/datum/plane_master_group/main, EYE_FLOOR_FILTERS_TEST_KEY)
+	var/atom/movable/screen/plane_master/lighting/lighting = group.plane_masters["[GET_NEW_PLANE(LIGHTING_PLANE, 0)]"]
+	TEST_ASSERT(cutoff_rebuilds(lighting, 30, list(10, 0, 0)), "Новый порог обязан пересобрать фильтры")
+	TEST_ASSERT(!cutoff_rebuilds(lighting, 30, list(10, 0, 0)), "Тот же порог не должен пересобирать фильтры")
+	TEST_ASSERT_NOTNULL(lighting.get_filter("light_cutoff"), "Порог обязан остаться на плоскости")
+	TEST_ASSERT(cutoff_rebuilds(lighting, 0, null), "Снятие порога обязано пересобрать фильтры")
+	TEST_ASSERT_NULL(lighting.get_filter("light_cutoff"), "Снятый порог не должен остаться на плоскости")
+	TEST_ASSERT(!cutoff_rebuilds(lighting, 0, null), "Повторное снятие не должно пересобирать фильтры")
+
+/datum/unit_test/multiz_light_cutoff_noop/proc/cutoff_rebuilds(atom/movable/screen/plane_master/lighting/lighting, cutoff, list/color_cutoffs)
+	lighting.filter_updates_deferred = TRUE
+	lighting.filters_dirty = FALSE
+	lighting.apply_light_cutoff(cutoff, color_cutoffs)
+	lighting.filter_updates_deferred = FALSE
+	. = lighting.filters_dirty
+	lighting.filters_dirty = FALSE
+	if(.)
+		lighting.update_filters()
+
 #undef EYE_FLOOR_FILTERS_TEST_KEY

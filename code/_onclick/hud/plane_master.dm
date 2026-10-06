@@ -46,6 +46,7 @@
 	/// Пять фильтров плюс четыре бесконечные анимации на экземпляр, поэтому только этаж глаза.
 	var/wants_world_distortion = FALSE
 	var/world_distortion_applied = FALSE
+	var/singularity_animated = FALSE
 	/// Декоративные фильтры: их держит только этаж глаза, остальные этажи платят за них GPU даже скрытыми.
 	var/list/eye_floor_filters
 	/// Декоративные фильтры чужого этажа с параметрами, ждут прихода глаза.
@@ -140,10 +141,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 	return viewer_client?.prefs
 
 /atom/movable/screen/plane_master/Destroy()
-	for(var/filter_name in GLOB.singularity_filter_names)
-		var/existing = get_filter(filter_name)
-		if(existing)
-			animate(existing)
+	stop_singularity_filters()
 	if(home)
 		home.plane_masters -= "[plane]"
 		home = null
@@ -274,11 +272,12 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 	entry["priority"] = priority
 	LAZYSET(filter_data, name, entry)
 
-/// Пересборка списка сбрасывает анимации фильтров, линзу сингулярности заводим заново.
+/// Пересобранные фильтры приходят без анимации, линзу сингулярности заводим заново.
 /atom/movable/screen/plane_master/update_filters()
 	if(filter_updates_deferred)
 		filters_dirty = TRUE
 		return
+	stop_singularity_filters()
 	. = ..()
 	if(world_distortion_applied)
 		animate_singularity_filters()
@@ -331,8 +330,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 	if(changed)
 		update_filters()
 
-/// Отдельно от установки фильтров: update_filters() пересобирает список целиком и сбрасывает анимации.
 /atom/movable/screen/plane_master/proc/animate_singularity_filters()
+	singularity_animated = TRUE
 	animate(get_filter("singularity_0"), size = -20, time = 10, easing = LINEAR_EASING, loop = -1, flags = ANIMATION_PARALLEL)
 	animate(size = -30, time = 10, easing = LINEAR_EASING, loop = -1)
 
@@ -345,13 +344,19 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 	animate(get_filter("singularity_3"), size = 750, time = 10, easing = LINEAR_EASING, loop = -1, flags = ANIMATION_PARALLEL)
 	animate(size = 600, time = 10, easing = LINEAR_EASING, loop = -1)
 
-/// Анимации гасим до удаления фильтра, иначе цикл крутится на удалённом фильтре.
 /atom/movable/screen/plane_master/proc/clear_world_distortion()
+	stop_singularity_filters()
+	remove_filter(list("displacer", "singularity_0", "singularity_1", "singularity_2", "singularity_3"))
+
+/// Цикл переживает удаление фильтра и пересборку списка и копится на мастере, поэтому гасим его до них.
+/atom/movable/screen/plane_master/proc/stop_singularity_filters()
+	if(!singularity_animated)
+		return
+	singularity_animated = FALSE
 	for(var/filter_name in GLOB.singularity_filter_names)
 		var/existing = get_filter(filter_name)
 		if(existing)
 			animate(existing)
-	remove_filter(list("displacer", "singularity_0", "singularity_1", "singularity_2", "singularity_3"))
 
 GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1", "singularity_2", "singularity_3"))
 
@@ -481,6 +486,8 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	wants_world_distortion = TRUE
 	eye_floor_filters = list("lighting_blur", "lighting_blur_edge_fix")
+	/// update_sight() переставляет порог на каждом шаге, а пересборка фильтров дорогая.
+	var/applied_cutoff_key
 
 /atom/movable/screen/plane_master/lighting/backdrop(mob/mymob)
 	if(!mymob)
@@ -565,8 +572,12 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	update_filters()
 
 /atom/movable/screen/plane_master/lighting/proc/apply_light_cutoff(cutoff, list/color_cutoffs)
-	remove_filter("light_cutoff")
+	var/cutoff_key = "[cutoff]|[islist(color_cutoffs) ? jointext(color_cutoffs, ",") : "-"]"
+	if(cutoff_key == applied_cutoff_key)
+		return
+	applied_cutoff_key = cutoff_key
 	if(!cutoff && !color_cutoffs)
+		remove_filter("light_cutoff")
 		return
 	var/ratio = cutoff / 100
 	var/list/rgb_add = list(ratio, ratio, ratio)
