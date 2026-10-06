@@ -40231,7 +40231,9 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "hNK" = (
@@ -69077,7 +69079,9 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/item/radio/intercom{
 	pixel_x = -27
 	},
@@ -74851,7 +74855,9 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /turf/open/floor/plasteel,
 /area/engineering/engine_smes)
 "ojN" = (
@@ -83217,7 +83223,9 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /turf/open/floor/plasteel,
 /area/engineering/engine_smes)
 "pNy" = (
