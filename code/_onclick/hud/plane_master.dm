@@ -46,6 +46,11 @@
 	/// Пять фильтров плюс четыре бесконечные анимации на экземпляр, поэтому только этаж глаза.
 	var/wants_world_distortion = FALSE
 	var/world_distortion_applied = FALSE
+	/// Декоративные фильтры: их держит только этаж глаза, остальные этажи платят за них GPU даже скрытыми.
+	var/list/eye_floor_filters
+	/// Декоративные фильтры чужого этажа с параметрами, ждут прихода глаза.
+	var/list/stashed_floor_filters
+	var/is_eye_floor = TRUE
 	var/wants_vision_cone = FALSE
 
 	/// В какие плоскости сдаём картинку. Пусто - рисуемся сами.
@@ -252,14 +257,62 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 
 /// Искажения мира: гравитационный импульс и четыре ступени сингулярности.
 /atom/movable/screen/plane_master/proc/apply_world_distortion()
-	add_filter("displacer", 1, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(GRAVITY_PULSE_RENDER_TARGET, offset), size = 10))
+	queue_filter("displacer", 1, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(GRAVITY_PULSE_RENDER_TARGET, offset), size = 10))
 
-	add_filter("singularity_0", 1, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_0_RENDER_TARGET, offset), size = -20))
-	add_filter("singularity_1", 2, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_1_RENDER_TARGET, offset), size = 75))
-	add_filter("singularity_2", 3, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_2_RENDER_TARGET, offset), size = 400))
-	add_filter("singularity_3", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_3_RENDER_TARGET, offset), size = 700))
+	queue_filter("singularity_0", 1, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_0_RENDER_TARGET, offset), size = -20))
+	queue_filter("singularity_1", 2, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_1_RENDER_TARGET, offset), size = 75))
+	queue_filter("singularity_2", 3, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_2_RENDER_TARGET, offset), size = 400))
+	queue_filter("singularity_3", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_3_RENDER_TARGET, offset), size = 700))
+	update_filters()
 
-	animate_singularity_filters()
+/// Фильтр без пересборки списка: несколько подряд собираются одним update_filters().
+/atom/movable/screen/plane_master/proc/queue_filter(name, priority, list/params)
+	var/list/entry = params.Copy()
+	entry["priority"] = priority
+	LAZYSET(filter_data, name, entry)
+
+/// Пересборка списка сбрасывает анимации фильтров, линзу сингулярности заводим заново.
+/atom/movable/screen/plane_master/update_filters()
+	. = ..()
+	if(world_distortion_applied)
+		animate_singularity_filters()
+
+/atom/movable/screen/plane_master/add_filter(name, priority, list/params)
+	if(is_eye_floor || !(name in eye_floor_filters))
+		return ..()
+	var/list/entry = params.Copy()
+	entry["priority"] = priority
+	LAZYSET(stashed_floor_filters, name, entry)
+
+/atom/movable/screen/plane_master/remove_filter(name_or_names)
+	if(stashed_floor_filters)
+		stashed_floor_filters -= name_or_names
+		UNSETEMPTY(stashed_floor_filters)
+	return ..()
+
+/// Этаж глаза забирает отложенные декоративные фильтры, остальные этажи отдают их в запас.
+/atom/movable/screen/plane_master/proc/set_eye_floor(eye_floor)
+	if(is_eye_floor == eye_floor)
+		return
+	is_eye_floor = eye_floor
+	if(!length(eye_floor_filters))
+		return
+	var/changed = FALSE
+	if(eye_floor)
+		for(var/name in stashed_floor_filters)
+			LAZYSET(filter_data, name, stashed_floor_filters[name])
+			changed = TRUE
+		stashed_floor_filters = null
+	else
+		for(var/name in eye_floor_filters)
+			var/list/entry = LAZYACCESS(filter_data, name)
+			if(!entry)
+				continue
+			LAZYSET(stashed_floor_filters, name, entry)
+			filter_data -= name
+			changed = TRUE
+	if(changed)
+		update_filters()
 
 /// Отдельно от установки фильтров: update_filters() пересобирает список целиком и сбрасывает анимации.
 /atom/movable/screen/plane_master/proc/animate_singularity_filters()
@@ -306,6 +359,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
 	wants_world_distortion = TRUE
+	eye_floor_filters = list("ambient_occlusion")
 
 /atom/movable/screen/plane_master/floor/backdrop(mob/mymob)
 	apply_ambient_occlusion(mymob, 2, "#04080F32")
@@ -317,6 +371,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	appearance_flags = PLANE_MASTER
 	wants_world_distortion = TRUE
 	wants_vision_cone = TRUE
+	eye_floor_filters = list("ambient_occlusion")
 
 /atom/movable/screen/plane_master/wall/backdrop(mob/mymob)
 	apply_ambient_occlusion(mymob, 4, "#04080FAA")
@@ -328,6 +383,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	appearance_flags = PLANE_MASTER
 	wants_world_distortion = TRUE
 	wants_vision_cone = TRUE
+	eye_floor_filters = list("ambient_occlusion")
 
 /atom/movable/screen/plane_master/above_wall/backdrop(mob/mymob)
 	apply_ambient_occlusion(mymob, 3, "#04080F64")
@@ -342,6 +398,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	render_target = GAME_PLANE_RENDER_TARGET
 	wants_world_distortion = TRUE
 	wants_vision_cone = TRUE
+	eye_floor_filters = list("ambient_occlusion")
 
 /atom/movable/screen/plane_master/game_world/update_offset()
 	. = ..()
@@ -406,6 +463,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	wants_world_distortion = TRUE
+	eye_floor_filters = list("lighting_blur", "lighting_blur_edge_fix")
 
 /atom/movable/screen/plane_master/lighting/backdrop(mob/mymob)
 	if(!mymob)
@@ -481,14 +539,13 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 
 /// Маски эмиссива и оверлейного света ложатся раньше искажений, иначе линза сингулярности размажет вырезанные ими дырки.
 /atom/movable/screen/plane_master/lighting/apply_world_distortion()
-	add_filter("singularity_0", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_0_RENDER_TARGET, offset), size = -20))
-	add_filter("singularity_1", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_1_RENDER_TARGET, offset), size = 75))
-	add_filter("singularity_2", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_2_RENDER_TARGET, offset), size = 400))
-	add_filter("singularity_3", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_3_RENDER_TARGET, offset), size = 700))
+	queue_filter("singularity_0", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_0_RENDER_TARGET, offset), size = -20))
+	queue_filter("singularity_1", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_1_RENDER_TARGET, offset), size = 75))
+	queue_filter("singularity_2", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_2_RENDER_TARGET, offset), size = 400))
+	queue_filter("singularity_3", 4, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(SINGULARITY_3_RENDER_TARGET, offset), size = 700))
 
-	add_filter("displacer", 5, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(GRAVITY_PULSE_RENDER_TARGET, offset), size = 10))
-
-	animate_singularity_filters()
+	queue_filter("displacer", 5, displacement_map_filter(render_source = OFFSET_RENDER_TARGET(GRAVITY_PULSE_RENDER_TARGET, offset), size = 10))
+	update_filters()
 
 /atom/movable/screen/plane_master/lighting/proc/apply_light_cutoff(cutoff, list/color_cutoffs)
 	remove_filter("light_cutoff")
@@ -531,6 +588,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	render_target = EMISSIVE_RENDER_TARGET
 	render_relay_planes = list()
+	eye_floor_filters = list("emissive_bloom")
 
 /atom/movable/screen/plane_master/emissive/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset = 0)
 	. = ..()
@@ -601,6 +659,12 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	appearance_flags = PLANE_MASTER|PIXEL_SCALE
 	blend_mode = BLEND_ADD
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	eye_floor_filters = list("blur_exposure")
+
+/// Без размытия экспозиция - жёсткие пятна, поэтому чужой этаж её гасит.
+/atom/movable/screen/plane_master/exposure/set_eye_floor(eye_floor)
+	. = ..()
+	alpha = (is_eye_floor && get_filter("blur_exposure")) ? 255 : 0
 
 /atom/movable/screen/plane_master/exposure/backdrop(mob/mymob)
 	remove_filter("blur_exposure")
@@ -630,7 +694,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	else
 		enabled = (prefs.lighting_blur >= 1)
 	if(enabled)
-		alpha = 255
+		alpha = is_eye_floor ? 255 : 0
 		var/bloom_intensity = prefs.lighting_bloom_intensity
 		if(isnull(bloom_intensity))
 			bloom_intensity = LIGHTING_BLOOM_INTENSITY_DEFAULT
@@ -645,6 +709,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_ADD
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	eye_floor_filters = list("add_lamps_to_selfglow", "lamps_selfglow_bloom", "selfglow_game_mask")
 	var/target_rendering = LIGHTING_LAMPS_RENDER_TARGET
 
 /atom/movable/screen/plane_master/lamps_selfglow/floor
@@ -728,6 +793,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 	name = "lamps glare plane master"
 	plane = LIGHTING_LAMPS_GLARE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	eye_floor_filters = list("add_lamps_to_glare", "lamps_glare", "glare_game_mask")
 	var/target_rendering = LIGHTING_LAMPS_RENDER_TARGET
 
 /atom/movable/screen/plane_master/lamps_glare/floor

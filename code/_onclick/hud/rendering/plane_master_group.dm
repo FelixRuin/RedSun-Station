@@ -131,6 +131,7 @@
 		var/atom/movable/screen/plane_master/plane = plane_masters[plane_key]
 		//До решения о скрытии: плита по этажу глаза выбирает, рисоваться или уехать наверх.
 		plane.sync_to_viewer(new_offset)
+		plane.set_eye_floor(plane.offset == new_offset)
 		if(plane.offsetting_flags & BLOCKS_PLANE_OFFSETTING)
 			continue
 

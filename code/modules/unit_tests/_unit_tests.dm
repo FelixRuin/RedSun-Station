@@ -263,6 +263,7 @@
 #include "multiz_ai_floor_controls.dm"
 #include "multiz_camera_console_floors.dm"
 #include "multiz_crew_monitor.dm"
+#include "multiz_eye_floor_filters.dm"
 #include "multiz_hud_eye_signal.dm"
 #include "multiz_item_plane.dm"
 #include "multiz_look_vertically.dm"
