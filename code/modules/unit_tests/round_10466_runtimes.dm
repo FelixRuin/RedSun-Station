@@ -56,3 +56,17 @@
 	sleep(0.5 SECONDS)
 
 	TEST_ASSERT(!LAZYLEN(user.do_afters), "Второй удар не должен начинать разделку удалённой цели")
+
+/// Снятие модуля, который киборг держит в слоте, освобождает слот.
+/datum/unit_test/borg_remove_held_module/Run()
+	var/mob/living/silicon/robot/borg = allocate(/mob/living/silicon/robot)
+	borg.set_hud_used(new borg.hud_type(borg))
+	var/obj/item/robot_module/module = borg.module
+	var/obj/item/dogborg_nose/tool = new(module)
+	module.basic_modules += tool
+	module.rebuild_modules()
+	TEST_ASSERT(borg.activate_module(tool), "test premise: киборг должен взять инструмент модуля")
+
+	module.remove_module(tool, TRUE)
+
+	TEST_ASSERT(!(tool in borg.held_items), "Снятый модуль не должен оставаться в слоте киборга")
