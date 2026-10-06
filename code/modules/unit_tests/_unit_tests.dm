@@ -451,6 +451,7 @@
 #include "mecha_leg_overload.dm"
 #include "parallax_position.dm"
 #include "parallax_profiles.dm"
+#include "parallax_stack_scene.dm"
 #include "perf_cross_ports.dm"
 #include "perf_optimizations.dm"
 #include "perf_pass_non_atmos.dm"

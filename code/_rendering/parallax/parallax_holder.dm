@@ -88,11 +88,20 @@
 		last = cached_eye = last_area = null
 		SetParallax(null, null, auto_z_change)
 		return
+	var/datum/parallax/template = SSparallax.get_parallax_template(T.z)
+	//Этаж той же стопки с той же сценой: слоям хватает новой позиции без пересборки.
+	if(!force && parallax_is_template && template && template == parallax && last && last.z != T.z)
+		last = T
+		last_area = T.loc
+		for(var/atom/movable/screen/parallax_layer/L in layers)
+			L.ResetPosition(T.x, T.y)
+		UpdateMotion(auto_z_change)
+		return
 	// set last loc and eye
 	last = T
 	last_area = T.loc
 	// rebuild parallax
-	SetParallax(SSparallax.get_parallax_template(T.z), null, auto_z_change, force, TRUE)
+	SetParallax(template, null, auto_z_change, force, TRUE)
 	// hard reset positions to correct positions
 	for(var/atom/movable/screen/parallax_layer/L in layers)
 		L.ResetPosition(T.x, T.y)
