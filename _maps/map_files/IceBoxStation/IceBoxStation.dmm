@@ -50660,7 +50660,7 @@
 	},
 /obj/machinery/status_display/shuttle{
 	pixel_x = -32;
-	shuttle_id = "arrival"
+	shuttle_id = "arrivals"
 	},
 /turf/open/floor/plasteel/white/corner{
 	dir = 1
@@ -100207,7 +100207,7 @@
 	},
 /obj/machinery/status_display/shuttle{
 	pixel_x = -32;
-	shuttle_id = "arrival"
+	shuttle_id = "arrivals"
 	},
 /turf/open/floor/plasteel/white/corner{
 	dir = 8

@@ -411,3 +411,18 @@
 		if(length(examples) < 10)
 			examples += "([duct.x],[duct.y],[duct.z])"
 	TEST_ASSERT(!visible_count, "Трубы поверх плитки: [visible_count], например [examples.Join(", ")]")
+
+/// Табло шаттлов на станции смотрят на шаттл, который есть: у tg прибытие зовётся "arrival", у нас "arrivals".
+/datum/unit_test/station_shuttle_displays_known_shuttle
+	requires_full_map = TRUE
+
+/datum/unit_test/station_shuttle_displays_known_shuttle/Run()
+	var/list/known_ids = list()
+	for(var/obj/docking_port/mobile/port as anything in SSshuttle.mobile)
+		known_ids[port.shuttle_id] = TRUE
+	var/list/unknown = list()
+	for(var/obj/machinery/status_display/shuttle/display as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/status_display/shuttle))
+		if(display.shuttle_id && is_station_level(display.z) && !known_ids[display.shuttle_id])
+			unknown += "[display.shuttle_id] ([display.x],[display.y],[display.z])"
+	TEST_ASSERT(!length(unknown), "Табло шаттлов с неизвестным id: [unknown.Join(", ")]")
+
