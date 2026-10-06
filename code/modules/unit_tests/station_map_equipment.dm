@@ -356,3 +356,18 @@
 		cell.on = was_on
 		cell.update_icon()
 	TEST_ASSERT(!length(dead_cells), "Криокапсулы гаснут сразу после включения, на их сети нет нужного газа: [dead_cells.Join(", ")]")
+
+/// Станционные зоны карты названы: зона без своего name подписывается в логах и на ПДА как «Space».
+/datum/unit_test/station_areas_named
+	requires_full_map = TRUE
+
+/datum/unit_test/station_areas_named/Run()
+	var/area/base_area = /area
+	var/default_name = initial(base_area.name)
+	var/list/unnamed = list()
+	for(var/area/station_area as anything in GLOB.sortedAreas)
+		if(istype(station_area, /area/space) || !is_station_level(station_area.z))
+			continue
+		if(station_area.name == default_name)
+			unnamed += "[station_area.type]"
+	TEST_ASSERT(!length(unnamed), "Станционные зоны без имени: [unnamed.Join(", ")]")
