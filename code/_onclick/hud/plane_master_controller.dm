@@ -55,11 +55,11 @@ INITIALIZE_IMMEDIATE(/atom/movable/plane_master_controller)
 		var/atom/movable/screen/plane_master/pm_iterator = controlled_planes[i]
 		pm_iterator.remove_filter(name_or_names)
 
-/atom/movable/plane_master_controller/update_filters()
+/atom/movable/plane_master_controller/change_filter_priority(name, new_priority)
 	. = ..()
 	for(var/i in controlled_planes)
 		var/atom/movable/screen/plane_master/pm_iterator = controlled_planes[i]
-		pm_iterator.update_filters()
+		pm_iterator.change_filter_priority(name, new_priority)
 
 ///Gets all filters for this controllers plane masters
 /atom/movable/plane_master_controller/proc/get_filters(name)

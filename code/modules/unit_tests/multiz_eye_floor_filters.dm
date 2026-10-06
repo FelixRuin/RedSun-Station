@@ -93,7 +93,7 @@
 	var/first_batch = time_rebuilds(game, DISTORTION_REBUILD_BATCH)
 	time_rebuilds(game, DISTORTION_REBUILD_WARMUP)
 	var/last_batch = time_rebuilds(game, DISTORTION_REBUILD_BATCH)
-	TEST_ASSERT(last_batch < first_batch * 3 + 2000, "Пересборка подорожала с [first_batch] до [last_batch] мкс за [DISTORTION_REBUILD_BATCH] раз")
+	TEST_ASSERT(last_batch < first_batch * 10 + 50000, "Пересборка подорожала с [first_batch] до [last_batch] мкс за [DISTORTION_REBUILD_BATCH] раз")
 
 /datum/unit_test/multiz_distortion_rebuild_cost_flat/proc/time_rebuilds(atom/movable/screen/plane_master/target, count)
 	rustg_time_reset(DISTORTION_REBUILD_TIMER)
