@@ -120,8 +120,6 @@
 	desc = "A set of denim overalls."
 	icon_state = "overalls"
 	item_state = "overalls"
-	icon = 'icons/obj/clothing/suits/apron.dmi'
-	mob_overlay_icon = 'icons/mob/clothing/suit/apron.dmi'
 	color = "#2D3866"
 	body_parts_covered = CHEST|GROIN|LEGS
 
