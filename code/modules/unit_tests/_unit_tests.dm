@@ -147,6 +147,7 @@
 #include "emissive_offset.dm"
 // #include "emoting.dm"
 #include "event_ports.dm"
+#include "eye_blur_filters.dm"
 #include "families.dm"
 #include "flat_icon_static.dm"
 #include "foam_performance.dm"
