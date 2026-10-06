@@ -40,3 +40,19 @@
 
 	TEST_ASSERT_NULL(holder.active_block_item, "Удалённый щит не должен оставаться предметом активного блока")
 	TEST_ASSERT(!(holder.combat_flags & COMBAT_FLAG_ACTIVE_BLOCKING), "Активный блок должен закончиться вместе со щитом")
+
+/// Второй удар парными когтями не бьёт цель, удалённую первым ударом.
+/datum/unit_test/ambidextria_second_strike_skips_deleted_target/Run()
+	var/mob/living/carbon/human/user = allocate(/mob/living/carbon/human)
+	var/obj/item/kitchen/knife/claws/natural/first_claw = allocate(/obj/item/kitchen/knife/claws/natural)
+	var/obj/item/kitchen/knife/claws/natural/second_claw = allocate(/obj/item/kitchen/knife/claws/natural)
+	user.put_in_active_hand(first_claw)
+	user.put_in_inactive_hand(second_claw)
+	user.a_intent = INTENT_HARM
+	var/mob/living/simple_animal/mouse/mouse = allocate(/mob/living/simple_animal/mouse, get_step(run_loc_floor_bottom_left, EAST))
+
+	first_claw.attack(mouse, user)
+	TEST_ASSERT(QDELETED(mouse), "test premise: первый удар должен убить и удалить мышь")
+	sleep(0.5 SECONDS)
+
+	TEST_ASSERT(!LAZYLEN(user.do_afters), "Второй удар не должен начинать разделку удалённой цели")
