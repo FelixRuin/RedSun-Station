@@ -13101,6 +13101,7 @@
 	},
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/pod/dark,
 /area/maintenance/floor1/port)
 "cAt" = (
@@ -13110,6 +13111,7 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/pod/dark,
 /area/maintenance/floor1/starboard)
 "cAy" = (
@@ -14923,6 +14925,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor1/starboard/aft)
 "cSm" = (
@@ -18183,6 +18186,7 @@
 	},
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/pod/dark,
 /area/maintenance/floor1/port/aft)
 "dAq" = (
@@ -23496,6 +23500,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor2/port)
 "eEp" = (
@@ -23609,6 +23614,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/floor3/fore)
 "eFf" = (
@@ -30027,6 +30033,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/yellow/line,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor4/port/fore)
 "fPD" = (
@@ -31288,6 +31295,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/solars/starboard/aft)
 "gdL" = (
@@ -39014,6 +39022,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "HFR"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/engineering/atmos/project)
 "hCB" = (
@@ -43493,6 +43502,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/solars/port/aft)
 "ivZ" = (
@@ -47670,6 +47680,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/engineering/supermatter_room)
 "jhk" = (
@@ -52070,6 +52081,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor2/starboard)
 "jVt" = (
@@ -53100,6 +53112,7 @@
 	name = "Labor Camp Shuttle Airlock";
 	shuttledocked = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/aisat/teleporter)
 "kfD" = (
@@ -54340,6 +54353,7 @@
 /obj/machinery/atmospherics/pipe/simple/green/visible{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/engineering/supermatter_room)
 "krX" = (
@@ -63888,6 +63902,7 @@
 	name = "External Airlock"
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/exit)
 "mhA" = (
@@ -68689,6 +68704,7 @@
 /obj/effect/turf_decal/stripes/red{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/security/eva)
 "nbB" = (
@@ -70730,6 +70746,7 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor3/port/aft)
 "nvK" = (
@@ -72263,6 +72280,7 @@
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
 /obj/effect/mapping_helpers/airlock/access/any/science/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel,
 /area/maintenance/floor4/starboard/fore)
 "nKq" = (
@@ -77390,6 +77408,7 @@
 /obj/effect/turf_decal/stripes/yellow/line{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor3/starboard)
 "oHY" = (
@@ -77428,6 +77447,7 @@
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/structure/fans/tiny,
 /turf/open/floor/pod/dark,
 /area/maintenance/floor1/starboard/fore)
 "oIn" = (
@@ -85697,6 +85717,7 @@
 	name = "Escape Airlock";
 	unres_sides = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel/dark/textured/large,
 /area/hallway/secondary/exit/departure_lounge)
 "qnE" = (
@@ -86212,6 +86233,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/solars/starboard/fore)
 "qsT" = (
@@ -88600,6 +88622,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor4/starboard/aft)
 "qRp" = (
@@ -104260,6 +104283,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/disposal/incinerator)
 "tMt" = (
@@ -104704,6 +104728,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/yellow/line,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor3/port)
 "tQD" = (
@@ -105274,6 +105299,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor3/starboard/fore)
 "tXp" = (
@@ -105580,6 +105606,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/machinery/door/airlock/external/glass,
+/obj/structure/fans/tiny,
 /turf/open/floor/engine/hull/reinforced,
 /area/maintenance/floor1/port/aft)
 "uaZ" = (
@@ -111702,6 +111729,7 @@
 /obj/effect/turf_decal/stripes/yellow/line{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor2/port/aft)
 "vlV" = (
@@ -115351,6 +115379,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/floor3/port/fore)
 "vWm" = (
@@ -124845,6 +124874,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/airlock/access/any/security/brig,
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel/dark,
 /area/security/execution/transfer)
 "xGX" = (

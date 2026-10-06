@@ -256,6 +256,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/airlock/access/any/science/maintenance,
 /obj/effect/mapping_helpers/airlock/access/any/supply/maintenance,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/starboard/central)
 "sT" = (

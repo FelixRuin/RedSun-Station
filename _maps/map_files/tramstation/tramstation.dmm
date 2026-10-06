@@ -1604,6 +1604,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/security/processing)
 "aut" = (
@@ -2578,6 +2579,7 @@
 	name = "Port Docking Bay 1";
 	unres_sides = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "aHD" = (
@@ -4026,6 +4028,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "baK" = (
@@ -4902,6 +4905,7 @@
 	idDoor = "rightmost_lower_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/primary/tram/right)
 "bmf" = (
@@ -10975,6 +10979,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "dcI" = (
@@ -12110,6 +12115,7 @@
 	idDoor = "middleright_lower_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/primary/tram/center)
 "dto" = (
@@ -16488,6 +16494,7 @@
 	idDoor = "mostleft_lower_lower_eva_external"
 	},
 /obj/effect/turf_decal/weather/sand/floor,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/left)
 "eGn" = (
@@ -19492,6 +19499,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/solars/starboard/fore)
 "fzw" = (
@@ -20572,6 +20580,7 @@
 	idDoor = "middleright_lower_upper_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/mid)
 "fOU" = (
@@ -22320,6 +22329,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/all/supply/general,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/cargo/storage)
 "goK" = (
@@ -23800,6 +23810,7 @@
 	name = "Port Docking Bay 1";
 	unres_sides = 2
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "gKH" = (
@@ -27206,6 +27217,7 @@
 	idDoor = "middleleft_lower_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/primary/tram/center)
 "hLv" = (
@@ -27308,6 +27320,7 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer4,
 /obj/effect/mapping_helpers/airlock/access/any/command/minisat,
 /obj/effect/mapping_helpers/airlock/access/any/command/ai_upload,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/ai_monitored/turret_protected/aisat/foyer)
 "hMK" = (
@@ -27555,6 +27568,7 @@
 	unres_sides = 1
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "hPW" = (
@@ -27833,6 +27847,18 @@
 	},
 /turf/open/floor/wood/wood_parquet,
 /area/medical/psychology)
+"hUR" = (
+/obj/machinery/door/airlock/external{
+	name = "Solar Maintenance"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/structure/fans/tiny,
+/turf/open/floor/plating,
+/area/maintenance/solars/starboard/fore)
 "hUS" = (
 /obj/structure/table/reinforced,
 /obj/item/clothing/head/radiation,
@@ -31323,6 +31349,7 @@
 	idDoor = "rightmost_lower_upper_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/right)
 "iSA" = (
@@ -33452,6 +33479,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/airlock/access/all/supply/mining,
+/obj/structure/fans/tiny,
 /turf/open/floor/plasteel,
 /area/cargo/miningdock)
 "jxi" = (
@@ -34637,6 +34665,7 @@
 	idSelf = "rightmost_lower_lower_eva_airlock_control";
 	idDoor = "rightmost_lower_lower_eva_external"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/right)
 "jMe" = (
@@ -35530,6 +35559,7 @@
 	idDoor = "middleleft_lower_lower_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/mid)
 "jZs" = (
@@ -35935,6 +35965,7 @@
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating/airless,
 /area/engineering/supermatter_room)
 "kfo" = (
@@ -43176,6 +43207,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/escapepodbay)
 "mcf" = (
@@ -46296,6 +46328,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/engineering/atmos)
 "mVp" = (
@@ -48848,6 +48881,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/solars/port)
 "nJu" = (
@@ -50360,6 +50394,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/primary/tram/center)
 "ogN" = (
@@ -53469,6 +53504,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/exit)
 "oZb" = (
@@ -53485,6 +53521,7 @@
 /obj/effect/mapping_helpers/airlock/access/any/command/minisat,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer4,
 /obj/effect/mapping_helpers/airlock/access/any/command/ai_upload,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/science/lower)
 "oZf" = (
@@ -53564,6 +53601,7 @@
 	unres_sides = 4
 	},
 /obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/exit/departure_lounge)
 "oZJ" = (
@@ -53721,6 +53759,7 @@
 	idDoor = "middleleft_upper_lower_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/mid)
 "pbk" = (
@@ -54813,6 +54852,7 @@
 	idSelf = "middleright_lower_lower_eva_airlock_control";
 	idDoor = "middleright_lower_lower_eva_external"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/mid)
 "prN" = (
@@ -57052,6 +57092,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/primary/tram/center)
 "pWW" = (
@@ -59357,6 +59398,7 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/syndicate_outpost)
 "qDt" = (
@@ -64243,6 +64285,7 @@
 /obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/effect/turf_decal/weather/sand/plating,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/central/greater)
 "rVW" = (
@@ -64989,6 +65032,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/security/processing)
 "sgr" = (
@@ -71799,6 +71843,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "tVw" = (
@@ -76574,6 +76619,7 @@
 	idDoor = "mostleft_lower_eva_external"
 	},
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/primary/tram/left)
 "vhH" = (
@@ -76918,6 +76964,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/effect/turf_decal/weather/sand/floor,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/tram/left)
 "vnC" = (
@@ -77200,6 +77247,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/solars/port)
 "vpP" = (
@@ -78930,6 +78978,7 @@
 	name = "Escape Airlock";
 	unres_sides = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/exit/departure_lounge)
 "vOu" = (
@@ -79910,6 +79959,7 @@
 	name = "Cargo Escape Airlock";
 	unres_sides = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/hallway/secondary/exit/departure_lounge)
 "wba" = (
@@ -81934,6 +81984,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/primary/tram/left)
 "wEV" = (
@@ -84478,6 +84529,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating/airless,
 /area/engineering/supermatter_room)
 "xnU" = (
@@ -87280,6 +87332,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/primary/tram/right)
 "yaX" = (
@@ -87928,6 +87981,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/engineering/supermatter_room)
 "ylw" = (
@@ -194499,7 +194553,7 @@ lyC
 lyC
 lyC
 rIT
-iNk
+hUR
 jbj
 fQg
 tSs

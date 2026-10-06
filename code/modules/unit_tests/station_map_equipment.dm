@@ -152,6 +152,35 @@
 			hanging += "[camera.c_tag || camera.name] ([camera.x],[camera.y],[camera.z]) dir [camera.dir]"
 	TEST_ASSERT(!length(hanging), "Камеры без стены за спиной: [hanging.Join(", ")]")
 
+/// Внешний шлюз порта, выходящий в космос, безвоздушный туннель или наружу планеты, держит маленький вентилятор, как на родных картах.
+/datum/unit_test/ported_map_external_airlocks_have_fans
+	requires_full_map = TRUE
+
+/datum/unit_test/ported_map_external_airlocks_have_fans/Run()
+	if(!(SSmapping.config.map_name in PORTED_STATION_MAPS))
+		return
+	var/list/bare = list()
+	for(var/obj/machinery/door/airlock/external/door as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/door/airlock/external))
+		if(!is_station_level(door.z) || !faces_outside(door))
+			continue
+		if(!(locate(/obj/structure/fans/tiny) in door.loc))
+			bare += "[door.name] ([door.x],[door.y],[door.z])"
+	TEST_ASSERT(!length(bare), "Внешние шлюзы без маленького вентилятора: [bare.Join(", ")]")
+
+/datum/unit_test/ported_map_external_airlocks_have_fans/proc/faces_outside(obj/machinery/door/door)
+	for(var/direction in GLOB.cardinals)
+		var/turf/neighbor = get_step(door, direction)
+		if(!neighbor)
+			continue
+		var/area/neighbor_area = neighbor.loc
+		if(isspaceturf(neighbor) || neighbor_area.outdoors || istype(neighbor_area, /area/space))
+			return TRUE
+		if(isopenturf(neighbor))
+			var/turf/open/open_neighbor = neighbor
+			if(open_neighbor.initial_gas_mix == AIRLESS_ATMOS)
+				return TRUE
+	return FALSE
+
 /// Фабрикаторы робототехники синхронизируются с R&D: sync() ищет консоль в семи тайлах.
 /datum/unit_test/robotics_fabricators_sync_research
 	requires_full_map = TRUE

@@ -40,6 +40,7 @@
 	name = "External Access"
 	},
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/port/central)
 "w" = (

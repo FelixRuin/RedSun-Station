@@ -191,6 +191,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/department/crew_quarters/dorms)
 "sR" = (

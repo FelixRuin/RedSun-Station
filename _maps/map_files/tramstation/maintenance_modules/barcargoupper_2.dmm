@@ -21,6 +21,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/weather/sand/plating,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/maintenance/department/cargo)
 "cA" = (

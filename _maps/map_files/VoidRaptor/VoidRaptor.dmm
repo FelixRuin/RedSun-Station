@@ -3725,6 +3725,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/primary/fore)
 "aSe" = (
@@ -5494,6 +5495,7 @@
 /obj/machinery/door/airlock/external,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
 /obj/effect/mapping_helpers/airlock/access/any/service/chapel_office,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/service/chapel/funeral)
 "blg" = (
@@ -6587,6 +6589,7 @@
 	name = "Labor Camp Shuttle Airlock";
 	unres_sides = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/security/execution/transfer)
 "bBo" = (
@@ -7242,6 +7245,7 @@
 	name = "External Access";
 	unres_sides = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/starboard/upper)
 "bKb" = (
@@ -13354,6 +13358,7 @@
 	name = "Arrival Airlock";
 	unres_sides = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/secondary/entry)
 "djh" = (
@@ -24975,6 +24980,7 @@
 	name = "Arrival Airlock";
 	unres_sides = 2
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/secondary/entry)
 "fIa" = (
@@ -26373,6 +26379,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/solars/starboard/aft)
 "fYI" = (
@@ -26983,6 +26990,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
 /obj/effect/mapping_helpers/airlock/access/any/service/crematorium,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/service/chapel/office)
 "gfk" = (
@@ -36660,6 +36668,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/secondary/exit/departure_lounge)
 "imc" = (
@@ -38693,6 +38702,7 @@
 	name = "Mining Dock Airlock";
 	unres_sides = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/primary/aft)
 "iKp" = (
@@ -39109,6 +39119,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/security/execution/transfer)
 "iPn" = (
@@ -41572,6 +41583,7 @@
 	name = "External Access";
 	unres_sides = 2
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor/iron_smooth,
 /area/maintenance/department/medical/central)
 "jto" = (
@@ -42627,6 +42639,7 @@
 	name = "Arrival Airlock";
 	unres_sides = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/secondary/entry)
 "jHQ" = (
@@ -44336,6 +44349,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/any/science/minisat,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/ai_monitored/turret_protected/aisat/foyer)
 "jZP" = (
@@ -47030,6 +47044,7 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/service/chapel)
 "kIR" = (
@@ -51183,6 +51198,7 @@
 /obj/effect/turf_decal/stripes/yellow/line{
 	dir = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/secondary/command)
 "lGd" = (
@@ -51442,6 +51458,7 @@
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
 /obj/machinery/door/airlock/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/aft)
 "lJe" = (
@@ -52919,6 +52936,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/any/science/minisat,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/department/bridge)
 "lZU" = (
@@ -59289,6 +59307,7 @@
 	name = "Escape Pod";
 	unres_sides = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/medical/medbay/central)
 "nxh" = (
@@ -64356,6 +64375,7 @@
 	name = "External Access";
 	unres_sides = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/department/security)
 "oEa" = (
@@ -66278,6 +66298,7 @@
 	name = "Escape Pod";
 	unres_sides = 2
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/security/execution/transfer)
 "pbx" = (
@@ -67701,6 +67722,7 @@
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
 /obj/machinery/door/airlock/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/engineering/main)
 "ptt" = (
@@ -79049,6 +79071,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
 /obj/effect/mapping_helpers/airlock/access/any/science/maintenance,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/department/science)
 "rVH" = (
@@ -80966,6 +80989,7 @@
 /obj/effect/mapping_helpers/airlock/access/any/engineering/external,
 /obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
 /obj/machinery/door/airlock/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/department/engine/atmos)
 "ssi" = (
@@ -82844,6 +82868,7 @@
 	name = "Supply Door Airlock"
 	},
 /obj/effect/mapping_helpers/airlock/access/all/supply/general,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/cargo/storage)
 "sOo" = (
@@ -85704,6 +85729,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/solars/port/aft)
 "txw" = (
@@ -90761,6 +90787,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/solars/starboard/fore)
 "uGg" = (
@@ -91551,6 +91578,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/hallway/secondary/exit/departure_lounge)
 "uOZ" = (
@@ -92167,6 +92195,7 @@
 	name = "Escape Pod";
 	unres_sides = 1
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/science/research)
 "uWa" = (
@@ -100924,6 +100953,14 @@
 	},
 /turf/closed/wall,
 /area/cargo/warehouse)
+"wSm" = (
+/obj/machinery/door/airlock/external{
+	name = "Mining Dock Airlock"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/supply/mining,
+/obj/structure/fans/tiny,
+/turf/open/floor/catwalk_floor,
+/area/cargo/miningdock)
 "wSw" = (
 /obj/effect/turf_decal/stripes/yellow/line{
 	dir = 8
@@ -102665,6 +102702,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/solars/port/fore)
 "xnd" = (
@@ -150411,7 +150449,7 @@ xIT
 xIT
 xIT
 wwe
-phw
+wSm
 fQX
 phw
 fEt

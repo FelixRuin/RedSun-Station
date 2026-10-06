@@ -389,6 +389,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/structure/fans/tiny,
 /turf/open/floor/catwalk_floor,
 /area/maintenance/starboard/greater)
 "GH" = (
