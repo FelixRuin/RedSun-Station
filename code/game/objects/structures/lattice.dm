@@ -9,6 +9,7 @@
 	max_integrity = 50
 	layer = LATTICE_LAYER //under pipes
 	plane = FLOOR_PLANE
+	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	var/number_of_rods = 1
 	canSmoothWith = list(/obj/structure/lattice,
 	/turf/open/floor,
@@ -20,6 +21,9 @@
 /obj/structure/lattice/examine(mob/user)
 	. = ..()
 	. += deconstruction_hints(user)
+	var/turf/our_turf = loc
+	if(isturf(our_turf) && isopenspaceturf(our_turf))
+		. += span_notice("Держит вес: по ней можно ходить над провалом. Срезанная, она уронит вниз всё, что на ней стоит.")
 
 /obj/structure/lattice/proc/deconstruction_hints(mob/user)
 	return "<span class='notice'>The rods look like they could be <b>cut</b>. There's space for more <i>rods</i> or a <i>tile</i>.</span>"

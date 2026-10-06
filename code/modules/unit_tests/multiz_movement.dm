@@ -192,6 +192,32 @@
 	TEST_ASSERT(!probe.can_z_move(DOWN, hole, destination, NONE), "Заякоренный предмет не должен проваливаться в дыру")
 	probe.anchored = FALSE
 
+/// Решётка над дырой держит шагнувшего на неё, перестройка в катуок его не роняет, срезанная опора роняет.
+/datum/unit_test/multiz_lattice_holds_over_hole
+
+/datum/unit_test/multiz_lattice_holds_over_hole/Run()
+	var/list/levels = multiz_gravity_test_levels()
+	var/turf/below = multiz_gravity_test_turf(30, 10, levels[1], /turf/open/floor/plating)
+	var/turf/ledge = multiz_gravity_test_turf(29, 10, levels[2], /turf/open/floor/plating)
+	var/turf/hole = multiz_gravity_test_turf(30, 10, levels[2], /turf/open/openspace)
+	allocate(/obj/structure/lattice, hole)
+	var/mob/living/carbon/human/walker = allocate(/mob/living/carbon/human, ledge)
+	walker.Move(hole, EAST)
+	TEST_ASSERT_EQUAL(walker.loc, hole, "Решётка не удержала шагнувшего на неё")
+
+	var/mob/living/carbon/human/builder = allocate(/mob/living/carbon/human, ledge)
+	var/obj/item/stack/rods/rods = allocate(/obj/item/stack/rods, ledge, 10)
+	builder.put_in_active_hand(rods)
+	hole.attackby(rods, builder)
+	var/obj/structure/lattice/catwalk/walkway = locate() in hole
+	TEST_ASSERT_NOTNULL(walkway, "Прутья не перестроили решётку в катуок")
+	TEST_ASSERT_EQUAL(walker.loc, hole, "Перестройка решётки в катуок уронила стоящего на ней")
+
+	walkway.deconstruct()
+	TEST_ASSERT_EQUAL(walker.loc, below, "Срезанная опора не уронила стоящего на ней")
+	for(var/obj/item/stack/rods/leftover in below)
+		qdel(leftover)
+
 /// zImpact и zFall отбивают удалённый атом и принимают живой.
 /datum/unit_test/multiz_zimpact_survives_deleted_faller
 
