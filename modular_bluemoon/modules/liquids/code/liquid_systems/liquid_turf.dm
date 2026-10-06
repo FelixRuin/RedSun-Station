@@ -207,6 +207,8 @@
 		qdel(reagents)
 		//Expose turf
 		liquids.ExposeMyTurf()
+		if(QDELETED(liquids)) // cleaning reagents can wash their own puddle away
+			return
 
 	liquids.calculate_height()
 	liquids.set_reagent_color_for_liquid()
@@ -250,6 +252,8 @@
 		qdel(reagents)
 		//Expose turf
 		liquids.ExposeMyTurf()
+		if(QDELETED(liquids)) // cleaning reagents can wash their own puddle away
+			return
 
 	liquids.calculate_height()
 	liquids.set_reagent_color_for_liquid()

@@ -230,6 +230,7 @@
 	if(!RM.be_transformed_to(src))
 		qdel(RM)
 		return
+	R.uneq_all()
 	R.module = RM
 	R.update_module_innate()
 	RM.rebuild_modules()

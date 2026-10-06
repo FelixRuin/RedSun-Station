@@ -890,7 +890,11 @@
 
 /// Removes a language from the blocked language list.
 /atom/movable/proc/remove_blocked_language(language, source = LANGUAGE_ATOM)
-	return get_language_holder().remove_blocked_language(language, source)
+	if(QDELING(src))
+		return
+	if(!language_holder)
+		return
+	return language_holder.remove_blocked_language(language, source)
 
 /// Checks if atom has the language. If spoken is true, only checks if atom can speak the language.
 /atom/movable/proc/has_language(language, flags_to_check)
