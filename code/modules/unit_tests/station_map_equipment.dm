@@ -331,3 +331,28 @@
 	TEST_ASSERT(!rock.powered(LIGHT), "Свет в скале Трамстанции горит без APC")
 	TEST_ASSERT(!rock.powered(EQUIP), "Оборудование в скале Трамстанции работает без APC")
 	TEST_ASSERT(!rock.has_gravity, "Скала Трамстанции держит гравитацию сама, мимо генератора")
+
+/// Канистры у портов криокапсул станции, прикрученные ключом, дают капсуле газ, на котором она работает.
+/datum/unit_test/station_cryo_cells_have_gas
+	requires_full_map = TRUE
+
+/datum/unit_test/station_cryo_cells_have_gas/Run()
+	var/list/dead_cells = list()
+	for(var/obj/machinery/atmospherics/components/unary/cryo_cell/cell as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/atmospherics/components/unary/cryo_cell))
+		if(!is_station_level(cell.z))
+			continue
+		var/datum/pipeline/net = cell.parents[1]
+		if(net)
+			net.ensure_built()
+			for(var/obj/machinery/atmospherics/components/unary/portables_connector/port in net.other_atmosmch)
+				var/obj/machinery/portable_atmospherics/canister/canister = locate() in port.loc
+				canister?.connect(port)
+			net.reconcile_air()
+		var/was_on = cell.on
+		cell.on = TRUE
+		cell.process_atmos()
+		if(!cell.on)
+			dead_cells += "([cell.x],[cell.y],[cell.z])"
+		cell.on = was_on
+		cell.update_icon()
+	TEST_ASSERT(!length(dead_cells), "Криокапсулы гаснут сразу после включения, на их сети нет нужного газа: [dead_cells.Join(", ")]")
