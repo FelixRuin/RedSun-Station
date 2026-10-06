@@ -570,6 +570,27 @@
 	TEST_ASSERT_EQUAL(length(vacuum.underlays), before, "Снятый элемент обязан унести и свою подложку")
 
 /// Прутья, кликнутые в то, что видно сквозь дыру, кладут решётку в саму дыру под курсором; дальняя дыра не трогается.
+/// Аномалия - поле, а не предмет: шагнув на дыру, она остаётся на своём этаже, даже без якоря.
+/datum/unit_test/multiz_anomaly_does_not_fall
+
+/datum/unit_test/multiz_anomaly_does_not_fall/Run()
+	var/list/levels = multiz_gravity_test_levels()
+	multiz_gravity_test_turf(110, 30, levels[1], /turf/open/floor/plating)
+	multiz_gravity_test_turf(111, 30, levels[1], /turf/open/floor/plating)
+	var/turf/start = multiz_gravity_test_turf(110, 30, levels[2], /turf/open/floor/plating)
+	var/turf/hole = multiz_gravity_test_turf(111, 30, levels[2], /turf/open/openspace)
+
+	var/obj/effect/anomaly/bhole/vortex = allocate(/obj/effect/anomaly/bhole, start)
+	TEST_ASSERT(vortex.Move(hole, EAST), "Аномалия должна свободно зайти на дыру")
+	TEST_ASSERT_EQUAL(vortex.loc, hole, "Заякоренная аномалия провалилась этажом ниже")
+
+	vortex.forceMove(start)
+	vortex.anchored = FALSE
+	vortex.Move(hole, EAST)
+	TEST_ASSERT_EQUAL(vortex.loc, hole, "Аномалия без якоря провалилась этажом ниже")
+	hole.zFall(vortex)
+	TEST_ASSERT_EQUAL(vortex.loc, hole, "Прямой zFall уронил аномалию")
+
 /datum/unit_test/multiz_openspace_click_builds_in_hole
 
 /datum/unit_test/multiz_openspace_click_builds_in_hole/Run()
