@@ -31,3 +31,17 @@
 	for(var/obj/machinery/duct/piece as anything in ring)
 		TEST_ASSERT_EQUAL(piece.duct, net, "Все трубы кольца обязаны быть в одной сети")
 	TEST_ASSERT_EQUAL(length(net.ducts), length(ring), "В сети кольца ровно его трубы")
+
+/// Уложенная поверх плитки труба видна, снятие плитки её открывает, укладка плитки прячет.
+/datum/unit_test/duct_hides_under_floor_tile
+
+/datum/unit_test/duct_hides_under_floor_tile/Run()
+	var/turf/spot = run_loc_floor_bottom_left
+	var/obj/machinery/duct/duct = allocate(/obj/machinery/duct, spot)
+	TEST_ASSERT_EQUAL(duct.invisibility, 0, "Уложенная поверх плитки труба не видна")
+
+	spot.ChangeTurf(/turf/open/floor/plating)
+	TEST_ASSERT_EQUAL(duct.invisibility, 0, "Труба на пластине не видна")
+
+	spot.ChangeTurf(/turf/open/floor/plasteel)
+	TEST_ASSERT_EQUAL(duct.invisibility, INVISIBILITY_MAXIMUM, "Труба под плиткой видна")

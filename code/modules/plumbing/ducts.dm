@@ -7,6 +7,7 @@ All the important duct code:
 	name = "fluid duct"
 	icon = 'icons/obj/plumbing/fluid_ducts.dmi'
 	icon_state = "nduct"
+	level = 1
 
 	///bitfield with the directions we're connected in
 	var/connects
@@ -56,6 +57,11 @@ All the important duct code:
 		add_atom_colour(duct_color, FIXED_COLOUR_PRIORITY)
 
 	handle_layer()
+
+	// Уложенная игроком поверх плитки труба остаётся видна, как у tg: прячут только карта и смена турфа.
+	if(mapload && isturf(loc))
+		var/turf/duct_turf = loc
+		hide(duct_turf.turf_flags & TURF_INTACT)
 
 	for(var/obj/machinery/duct/D in loc)
 		if(D == src)
@@ -288,6 +294,8 @@ All the important duct code:
 	pixel_x = offset
 	pixel_y = offset
 
+/obj/machinery/duct/hide(intact)
+	invisibility = intact ? INVISIBILITY_MAXIMUM : 0
 
 /obj/machinery/duct/set_anchored(anchorvalue)
 	. = ..()

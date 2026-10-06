@@ -371,3 +371,21 @@
 		if(station_area.name == default_name)
 			unnamed += "[station_area.type]"
 	TEST_ASSERT(!length(unnamed), "Станционные зоны без имени: [unnamed.Join(", ")]")
+
+/// Трубы сантехники, проложенные картой под плиткой, не видны поверх пола.
+/datum/unit_test/station_mapped_ducts_under_tiles_hidden
+	requires_full_map = TRUE
+
+/datum/unit_test/station_mapped_ducts_under_tiles_hidden/Run()
+	var/visible_count = 0
+	var/list/examples = list()
+	for(var/obj/machinery/duct/duct as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/duct))
+		var/turf/duct_turf = duct.loc
+		if(!isturf(duct_turf) || !is_station_level(duct.z) || !(duct_turf.turf_flags & TURF_INTACT))
+			continue
+		if(duct.invisibility == INVISIBILITY_MAXIMUM)
+			continue
+		visible_count++
+		if(length(examples) < 10)
+			examples += "([duct.x],[duct.y],[duct.z])"
+	TEST_ASSERT(!visible_count, "Трубы поверх плитки: [visible_count], например [examples.Join(", ")]")
