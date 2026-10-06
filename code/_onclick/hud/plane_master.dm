@@ -51,6 +51,9 @@
 	/// Декоративные фильтры чужого этажа с параметрами, ждут прихода глаза.
 	var/list/stashed_floor_filters
 	var/is_eye_floor = TRUE
+	/// Пересборку фильтров копим до конца пересчёта этажа: искажения и декор меняются на одной плоскости разом.
+	var/filter_updates_deferred = FALSE
+	var/filters_dirty = FALSE
 	var/wants_vision_cone = FALSE
 
 	/// В какие плоскости сдаём картинку. Пусто - рисуемся сами.
@@ -273,9 +276,23 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 
 /// Пересборка списка сбрасывает анимации фильтров, линзу сингулярности заводим заново.
 /atom/movable/screen/plane_master/update_filters()
+	if(filter_updates_deferred)
+		filters_dirty = TRUE
+		return
 	. = ..()
 	if(world_distortion_applied)
 		animate_singularity_filters()
+
+/// Глаз сменил этаж: искажения и декор встают на плоскость одной пересборкой фильтров.
+/atom/movable/screen/plane_master/proc/sync_to_eye_floor(viewer_offset)
+	filter_updates_deferred = TRUE
+	sync_to_viewer(viewer_offset)
+	set_eye_floor(offset == viewer_offset)
+	filter_updates_deferred = FALSE
+	if(!filters_dirty)
+		return
+	filters_dirty = FALSE
+	update_filters()
 
 /atom/movable/screen/plane_master/add_filter(name, priority, list/params)
 	if(is_eye_floor || !(name in eye_floor_filters))
@@ -664,7 +681,7 @@ GLOBAL_LIST_INIT(singularity_filter_names, list("singularity_0", "singularity_1"
 /// Без размытия экспозиция - жёсткие пятна, поэтому чужой этаж её гасит.
 /atom/movable/screen/plane_master/exposure/set_eye_floor(eye_floor)
 	. = ..()
-	alpha = (is_eye_floor && get_filter("blur_exposure")) ? 255 : 0
+	alpha = (is_eye_floor && LAZYACCESS(filter_data, "blur_exposure")) ? 255 : 0
 
 /atom/movable/screen/plane_master/exposure/backdrop(mob/mymob)
 	remove_filter("blur_exposure")
