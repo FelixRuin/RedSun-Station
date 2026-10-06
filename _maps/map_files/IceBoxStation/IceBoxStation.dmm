@@ -100485,6 +100485,7 @@
 /area/medical/virology)
 "wgM" = (
 /obj/effect/turf_decal/delivery/red,
+/obj/machinery/jukebox,
 /turf/open/floor/wood/wood_parquet,
 /area/service/bar/atrium)
 "wgP" = (
