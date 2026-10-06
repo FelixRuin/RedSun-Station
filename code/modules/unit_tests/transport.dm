@@ -185,6 +185,68 @@
 	TEST_ASSERT(wait_for_var(door, "density", FALSE, 10 SECONDS), "Дверь не открылась на прибытии")
 	TEST_ASSERT(wait_for_var(controller, "controller_active", FALSE, 10 SECONDS), "Контроллер не освободился после поездки")
 
+/// Положенное на клетку стоящего трамвая после замены турфа под ней уезжает вместе с трамваем.
+/datum/unit_test/tram_travels_to_platform/turf_changed_under_tram
+
+/datum/unit_test/tram_travels_to_platform/turf_changed_under_tram/Run()
+	build_tram()
+	second_tile.ChangeTurf(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
+	var/obj/item/stack/rods/cargo = allocate(/obj/item/stack/rods, second_tile)
+
+	TEST_ASSERT(controller.calculate_route(second_platform), "Маршрут до второй платформы не построился")
+	drive_route()
+	TEST_ASSERT_EQUAL(lead.loc, destination, "Трамвай не доехал до платформы")
+	TEST_ASSERT_EQUAL(cargo.loc, get_step(destination, EAST), "Груз с клетки, где меняли турф, остался на месте, а трамвай уехал")
+
+/// Украденный шкаф управления, заново повешенный на стену трамвая с клетки, где меняли турф, снимает отказ и не сносится своим же трамваем.
+/datum/unit_test/tram_travels_to_platform/cabinet_rebuilt
+
+/datum/unit_test/tram_travels_to_platform/cabinet_rebuilt/Run()
+	build_tram()
+	qdel(cabinet)
+	TEST_ASSERT(controller.controller_status & SYSTEM_FAULT, "Пропажа шкафа не перевела трамвай в отказ")
+
+	second_tile.ChangeTurf(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
+	second_tile.ChangeTurf(/turf/open/floor/plasteel, flags = CHANGETURF_INHERIT_AIR)
+	var/obj/structure/tram/tram_wall = allocate(/obj/structure/tram, get_step(second_tile, NORTH))
+	allocate(/obj/structure/thermoplastic, second_tile)
+	var/mob/living/carbon/human/engineer = allocate(/mob/living/carbon/human, second_tile)
+	var/obj/item/wallframe/tram/frame = allocate(/obj/item/wallframe/tram, second_tile)
+	tram_wall.attackby(frame, engineer)
+
+	var/obj/machinery/transport/tram_controller/new_cabinet = locate() in second_tile
+	TEST_ASSERT_NOTNULL(new_cabinet, "Рамка шкафа не встала на стену трамвая")
+	allocated += new_cabinet
+	TEST_ASSERT_EQUAL(controller.paired_cabinet, new_cabinet, "Новый шкаф не связался с трамваем")
+	TEST_ASSERT(!(controller.controller_status & SYSTEM_FAULT), "Новый шкаф не снял отказ трамвая")
+
+	TEST_ASSERT(controller.calculate_route(second_platform), "Маршрут до второй платформы не построился")
+	drive_route()
+	controller.unlock_controls()
+	TEST_ASSERT(controller.calculate_route(first_platform), "Обратный маршрут не построился")
+	drive_route()
+
+	TEST_ASSERT(!QDELETED(new_cabinet), "Трамвай снёс собственный шкаф управления")
+	TEST_ASSERT_EQUAL(new_cabinet.loc, second_tile, "Шкаф не вернулся вместе с трамваем")
+	TEST_ASSERT_EQUAL(controller.paired_cabinet, new_cabinet, "После поездки трамвай потерял шкаф")
+
+/// Плитка и титан, приложенные к рельсу под трамваем, строят пол и каркас на клетке рельса.
+/datum/unit_test/tram_travels_to_platform/build_over_rail
+
+/datum/unit_test/tram_travels_to_platform/build_over_rail/Run()
+	build_tram()
+	var/obj/structure/fluff/tram_rail/rail = allocate(/obj/structure/fluff/tram_rail, second_tile)
+	var/mob/living/carbon/human/builder = allocate(/mob/living/carbon/human, start)
+	var/obj/item/stack/thermoplastic/tiles = allocate(/obj/item/stack/thermoplastic, start, 5)
+	var/obj/item/stack/sheet/mineral/titanium/titanium = allocate(/obj/item/stack/sheet/mineral/titanium, start, 5)
+
+	tiles.melee_attack_chain(builder, rail)
+	TEST_ASSERT_NOTNULL(locate(/obj/structure/thermoplastic) in second_tile, "Плитка, приложенная к рельсу под трамваем, не легла полом")
+	TEST_ASSERT_EQUAL(tiles.amount, 4, "На пол ушла не одна плитка")
+
+	titanium.melee_attack_chain(builder, rail)
+	TEST_ASSERT_NOTNULL(locate(/obj/structure/girder/tram) in second_tile, "Титан, приложенный к рельсу под трамваем, не встал каркасом")
+
 /// Аварийный рычаг обесточенной двери трамвая срабатывает, даже если трамвай сдвинул дверь и пассажира посреди рывка.
 /datum/unit_test/tram_door_lever_survives_movement
 

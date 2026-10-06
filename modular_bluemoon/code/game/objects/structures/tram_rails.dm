@@ -11,6 +11,19 @@
 	buckle_requires_restraints = TRUE
 	buckle_lying = 90
 
+/// The tram subfloor is mostly holes, so clicks on a tram floor often land on the rail below it
+/obj/structure/fluff/tram_rail/attackby(obj/item/attacking_item, mob/user, params)
+	var/turf/open/rail_turf = loc
+	if(!istype(rail_turf))
+		return ..()
+	if(istype(attacking_item, /obj/item/stack/thermoplastic))
+		rail_turf.build_with_transport_tiles(attacking_item, user)
+		return STOP_ATTACK_PROC_CHAIN
+	if(istype(attacking_item, /obj/item/stack/sheet/mineral/titanium))
+		rail_turf.build_with_titanium(attacking_item, user)
+		return STOP_ATTACK_PROC_CHAIN
+	return ..()
+
 /obj/structure/fluff/tram_rail/post_buckle_mob(mob/living/target)
 	. = ..()
 	target.pixel_y += dir == SOUTH ? -3 : 14

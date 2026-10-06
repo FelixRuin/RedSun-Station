@@ -92,6 +92,10 @@
 	for(var/turf/turf_loc as anything in turfs_to_unset || locs)
 		UnregisterSignal(turf_loc, registrations)
 
+/// Our ChangeTurf drops every signal of the replaced turf, so the new turf under us is listened to again
+/obj/structure/transport/linear/HandleTurfChange(turf/T)
+	set_movement_registrations(list(T))
+
 /obj/structure/transport/linear/proc/uncrossed_remove_item_from_transport(datum/source, atom/movable/gone, direction)
 	SIGNAL_HANDLER
 	if(!(gone.loc in locs))

@@ -1092,7 +1092,7 @@
 /atom/proc/handle_atom_del(atom/A)
 	SEND_SIGNAL(src, COMSIG_ATOM_CONTENTS_DEL, A)
 
-/// Called by ChangeTurf on the new turf, which passes it on only to decals lying directly on it.
+/// Called by ChangeTurf on the new turf, which passes it on only to decals and transport modules lying on it.
 /atom/proc/HandleTurfChange(turf/T)
 	return
 

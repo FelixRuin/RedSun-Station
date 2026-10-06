@@ -146,6 +146,8 @@ GLOBAL_LIST_EMPTY(station_turfs)
 /turf/HandleTurfChange(turf/T)
 	for(var/obj/effect/decal/decal in src)
 		decal.HandleTurfChange(T)
+	for(var/obj/structure/transport/linear/transport_module in src)
+		transport_module.HandleTurfChange(T)
 
 /turf/Destroy(force)
 	. = QDEL_HINT_IWILLGC
