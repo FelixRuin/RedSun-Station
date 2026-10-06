@@ -39283,7 +39283,9 @@
 	},
 /area/engineering/atmos)
 "iRj" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
@@ -43593,7 +43595,9 @@
 /turf/open/floor/plasteel/rivets,
 /area/maintenance/department/electrical)
 "jRB" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
@@ -51073,7 +51077,9 @@
 	},
 /area/engineering/main)
 "lDP" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
@@ -91126,7 +91132,9 @@
 /turf/open/floor/plating,
 /area/science/robotics/lab)
 "uKw" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	output_level = 90000
+	},
 /obj/structure/cable/yellow{
 	icon_state = "0-1"
 	},
