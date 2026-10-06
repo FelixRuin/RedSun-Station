@@ -122,6 +122,7 @@ multiple modular subtrees with behaviors
 		PossessPawn(new_pawn)
 
 /datum/ai_controller/Destroy(force)
+	GLOB.ai_tactical_cache_owners -= src
 	release_ai_target_reservation()
 	release_pack_focus()
 	UnpossessPawn(FALSE)
