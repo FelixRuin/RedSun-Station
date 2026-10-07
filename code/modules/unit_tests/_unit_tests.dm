@@ -322,6 +322,7 @@
 #include "resist.dm"
 #include "riot_shield_implant.dm"
 #include "round_10458_10462_runtimes.dm"
+#include "round_10463_10470_runtimes.dm"
 #include "round_10466_runtimes.dm"
 #include "runechat_sanity.dm"
 #include "runtime_null_guards.dm"

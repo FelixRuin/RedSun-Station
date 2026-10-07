@@ -417,6 +417,8 @@ GLOBAL_LIST_EMPTY(genital_slot_dna_features)
 		for(var/A in genitals_to_add)
 			if(istype(A, /obj/item/clothing/underwear/briefs/strapon))
 				var/obj/item/clothing/underwear/briefs/strapon/strapon = A
+				if(!strapon.attached_dildo)
+					continue
 				//BLUEMOON EDIT START
 				var/datum/sprite_accessory/S = GLOB.cock_shapes_list[GLOB.dildo_shape_to_cock_shape[strapon.attached_dildo.dildo_shape]]
 				mutant_string = S.mutant_part_string

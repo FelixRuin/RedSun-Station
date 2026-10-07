@@ -419,14 +419,14 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	if(!ui)
 		ui = new(user, src, "Gateway", name)
 		ui.open()
-		G.portal_visuals.display_to(user, ui.window)
+		G?.portal_visuals.display_to(user, ui.window)
 
 /obj/machinery/computer/gateway_control/ui_data(mob/user)
 	. = ..()
 	.["gateway_present"] = G
 	.["gateway_status"] = G ? G.powered() : FALSE
 	.["current_target"] = G?.target?.get_ui_data()
-	.["gateway_mapkey"] = G.portal_visuals.assigned_map
+	.["gateway_mapkey"] = G?.portal_visuals.assigned_map
 	var/list/destinations = list()
 	if(G)
 		for(var/datum/gateway_destination/possible_destination in GLOB.gateway_destinations)
