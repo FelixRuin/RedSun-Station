@@ -9,6 +9,7 @@
 	earliest_start = 15 MINUTES
 	category = EVENT_CATEGORY_ENGINEERING
 	description = "Tram comes to an emergency stop, requiring engineering to reset."
+	min_staffing = list(DIRECTOR_DEPT_ENGINEERING = 1)
 
 /datum/round_event_control/tram_malfunction/can_fire(datum/director_signals/signals)
 	. = ..()
