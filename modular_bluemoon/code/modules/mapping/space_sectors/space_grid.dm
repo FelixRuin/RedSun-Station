@@ -221,4 +221,19 @@
 /proc/space_grid_edge_name(edge)
 	return dir2text_ru(isnum(edge) ? edge : text2num(edge)) || "сторона [edge]"
 
+/atom/movable
+	/// Номер палубы в связке, с которой атом улетел за край. Обратно из космоса он вернётся на неё же.
+	var/space_departure_floor
+
+/// z прилёта через край космоса. Соседний сектор связан только с нижней палубой многопалубной станции, поэтому палубу вылета помнит сам атом.
+/proc/space_transit_floor(atom/movable/traveller, from_z, list/from_stack, to_z, list/to_stack)
+	if(from_stack == to_stack)
+		return to_z
+	if(length(from_stack) > 1)
+		traveller.space_departure_floor = from_stack.Find(from_z)
+	if(length(to_stack) < 2 || !traveller.space_departure_floor)
+		return to_z
+	. = to_stack[min(traveller.space_departure_floor, length(to_stack))]
+	traveller.space_departure_floor = null
+
 #undef SPACE_GRID_KEY

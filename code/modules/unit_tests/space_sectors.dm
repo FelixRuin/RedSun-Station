@@ -248,3 +248,15 @@
 	TEST_ASSERT_EQUAL(upper.neigbours[TEXT_EAST], east, "С верхнего этажа на восток обязан вести восточный сектор")
 	TEST_ASSERT_NULL(upper.neigbours[TEXT_SOUTH], "К югу клетки пусты, соседа быть не должно")
 	TEST_ASSERT_EQUAL(north.neigbours[TEXT_SOUTH], hub, "Обратная дорога из северного сектора обязана вести на нижний этаж стопки")
+
+/// Улетевший за край из многопалубной связки возвращается из соседнего сектора на палубу вылета.
+/datum/unit_test/space_transit_returns_to_departure_floor/Run()
+	var/obj/item/stack/sheet/metal/probe = allocate(/obj/item/stack/sheet/metal)
+	var/list/station = list(5, 6)
+	var/list/neighbour = list(11)
+
+	TEST_ASSERT_EQUAL(space_transit_floor(probe, 11, neighbour, 5, station), 5, "Без палубы вылета прилёт идёт туда, куда ведёт край")
+	TEST_ASSERT_EQUAL(space_transit_floor(probe, 6, station, 11, neighbour), 11, "Вылет из связки ведёт в соседний сектор")
+	TEST_ASSERT_EQUAL(space_transit_floor(probe, 11, neighbour, 5, station), 6, "Вернувшийся обязан попасть на палубу, с которой улетел")
+	TEST_ASSERT_NULL(probe.space_departure_floor, "Палуба вылета забывается после возвращения")
+	TEST_ASSERT_EQUAL(space_transit_floor(probe, 6, station, 5, station), 5, "Край, заворачивающий связку на себя, палубу не подменяет")
