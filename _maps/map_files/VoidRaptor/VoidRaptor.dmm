@@ -7249,10 +7249,9 @@
 /turf/open/floor/catwalk_floor,
 /area/maintenance/starboard/upper)
 "bKb" = (
-/obj/structure/bed/roller{
-	dir = 4
+/obj/machinery/computer/operating{
+	dir = 1
 	},
-/obj/item/bedsheet/medical,
 /obj/machinery/iv_drip,
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 4
@@ -82247,6 +82246,7 @@
 /obj/item/surgical_processor{
 	pixel_x = 6
 	},
+/obj/item/storage/backpack/duffelbag/sec/surgery,
 /turf/open/floor/plasteel/white/smooth/edge{
 	dir = 4
 	},
@@ -86063,10 +86063,7 @@
 /turf/open/floor/plasteel/rivets,
 /area/maintenance/department/crew_quarters/bar)
 "tCZ" = (
-/obj/structure/bed/roller{
-	dir = 4
-	},
-/obj/item/bedsheet/medical,
+/obj/structure/table/optable,
 /obj/machinery/iv_drip,
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 4

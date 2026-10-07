@@ -10161,9 +10161,7 @@
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
 "cQJ" = (
-/obj/structure/bed/roller{
-	dir = 4
-	},
+/obj/structure/table/optable,
 /obj/effect/turf_decal/trimline/red/filled/line,
 /obj/machinery/light/cold/directional/south,
 /turf/open/floor/plasteel/white,
@@ -11624,6 +11622,9 @@
 "dmc" = (
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 10
+	},
+/obj/machinery/computer/operating{
+	dir = 4
 	},
 /turf/open/floor/plasteel/white,
 /area/security/brig/brig_medical)
@@ -47035,6 +47036,7 @@
 	dir = 1
 	},
 /obj/machinery/light/directional/north,
+/obj/machinery/photocopier,
 /turf/open/floor/plasteel,
 /area/security/office)
 "nhm" = (
@@ -83144,6 +83146,7 @@
 	},
 /obj/machinery/light/cold/directional/north,
 /obj/item/stack/medical/bruise_pack,
+/obj/item/storage/backpack/duffelbag/sec/surgery,
 /turf/open/floor/plasteel/white,
 /area/security/brig/brig_medical)
 "wUR" = (

@@ -34285,8 +34285,8 @@
 /turf/open/floor/plating,
 /area/mine/living_quarters)
 "hEw" = (
-/obj/structure/bed/roller{
-	dir = 4
+/obj/machinery/computer/operating{
+	dir = 8
 	},
 /obj/item/clothing/suit/straight_jacket,
 /obj/machinery/power/apc/auto_name/north,
@@ -71024,7 +71024,7 @@
 /turf/open/floor/plasteel,
 /area/science/xenobiology)
 "pIA" = (
-/obj/structure/bed/roller,
+/obj/structure/table/optable,
 /obj/structure/extinguisher_cabinet/directional/west,
 /obj/machinery/defibrillator_mount/loaded{
 	pixel_x = -28
@@ -101595,6 +101595,7 @@
 /obj/item/reagent_containers/spray/cleaner,
 /obj/structure/table/glass,
 /obj/structure/window/reinforced,
+/obj/item/storage/backpack/duffelbag/sec/surgery,
 /turf/open/floor/plasteel/white/textured,
 /area/security/brig/brig_medical)
 "wus" = (

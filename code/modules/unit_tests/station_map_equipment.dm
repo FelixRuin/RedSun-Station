@@ -130,6 +130,18 @@
 			problems += "у точек старта Авангарда ([area_types.Join(", ")]) нет [kit_missing.Join(", ")]"
 	TEST_ASSERT(!length(problems), "На станции не хватает: [problems.Join("; ")]")
 
+/// В охране портированных карт есть операционная, как на Box, Meta и Delta: стол и консоль операций при нём.
+/datum/unit_test/ported_map_security_surgery
+	requires_full_map = TRUE
+
+/datum/unit_test/ported_map_security_surgery/Run()
+	if(!(SSmapping.config.map_name in PORTED_STATION_MAPS))
+		return
+	for(var/obj/machinery/computer/operating/console as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/computer/operating))
+		if(console.table && is_station_level(console.z) && istype(get_area(console), /area/security))
+			return
+	TEST_FAIL("В охране нет операционного стола с консолью операций")
+
 /// Камеры портированных карт висят на стене: у tg dir камеры - сторона стены, у нас - сторона взгляда.
 /datum/unit_test/ported_map_cameras_on_walls
 	requires_full_map = TRUE
