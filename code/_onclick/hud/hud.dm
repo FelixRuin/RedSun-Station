@@ -413,7 +413,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	for(var/true_plane in true_planes)
 		var/list/masters = get_true_plane_masters(true_plane)
 		for(var/atom/movable/screen/plane_master/master as anything in masters)
-			master.backdrop(viewer)
+			master.refresh_backdrop(viewer)
 
 /datum/hud/proc/on_plane_increase(datum/source, old_max_offset, new_max_offset)
 	SIGNAL_HANDLER

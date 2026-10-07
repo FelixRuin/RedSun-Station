@@ -133,6 +133,17 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 //Trust me, you need one. Period. If you don't think you do, you're doing something extremely wrong.
 /atom/movable/screen/plane_master/proc/backdrop(mob/mymob)
 
+/// backdrop() переставляет фильтры по одному, а каждая правка пересобирает весь список: собираем один раз в конце.
+/atom/movable/screen/plane_master/proc/refresh_backdrop(mob/mymob)
+	var/was_deferred = filter_updates_deferred
+	filter_updates_deferred = TRUE
+	backdrop(mymob)
+	filter_updates_deferred = was_deferred
+	if(was_deferred || !filters_dirty)
+		return
+	filters_dirty = FALSE
+	update_filters()
+
 /// prefs зрителя: клиент получает их не сразу после входа.
 /atom/movable/screen/plane_master/proc/viewer_prefs(mob/viewer)
 	if(!istype(viewer))
@@ -169,7 +180,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/plane_master)
 	var/client/our_client = mymob?.client
 	if(!our_client)
 		return TRUE
-	backdrop(mymob)
+	refresh_backdrop(mymob)
 	our_client.screen += src
 	if(!force_hidden)
 		our_client.screen += relays

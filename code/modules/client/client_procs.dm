@@ -1872,7 +1872,8 @@ GLOBAL_VAR_INIT(last_churn_alert, 0)
 	view = new_size
 	var/list/actualview = getviewsize(view)
 	update_clickcatcher()
-	parallax_holder?.Reset()
+	if(old_view[1] != actualview[1] || old_view[2] != actualview[2])
+		parallax_holder?.Reset()
 	mob?.hud_used?.screentip_text?.update_view()
 	// Гарды на mob здесь и на SEND_SIGNAL ниже: change_view зовётся из /datum/view_data/New()
 	// (view.dm:86 apply -> chief.change_view) ещё внутри /client/New() - client_procs.dm:826,
@@ -1920,7 +1921,7 @@ GLOBAL_VAR_INIT(last_churn_alert, 0)
 		char_preview_planes = new /datum/plane_master_group/popup/on_demand(PLANE_GROUP_POPUP_WINDOW("character_preview"), "character_preview_map")
 		for(var/plane_key in char_preview_planes.plane_masters)
 			var/atom/movable/screen/plane_master/plane_master = char_preview_planes.plane_masters[plane_key]
-			plane_master.backdrop(mob)
+			plane_master.refresh_backdrop(mob)
 			plane_master.screen_loc = "character_preview_map:0,CENTER"
 		char_preview_planes.register_to_client(src)
 		// Disable lighting on the preview — no lighting objects exist there,
