@@ -1084,7 +1084,7 @@
 
 /datum/gear/donator/bm/kladmen_bodysuit
 	name = "Bodysuit"
-	slot = ITEM_SLOT_OCLOTHING
+	slot = ITEM_SLOT_SHIRT
 	path = /obj/item/clothing/underwear/shirt/bm/kladmen_bodysuit
 	ckeywhitelist = list("kladmenuwu")
 
