@@ -92,3 +92,4 @@
 /// Ледяная равнина под станцией. Долго лежал в DMI неподключённым.
 /atom/movable/screen/parallax_layer/space/planet/icemoon
 	icon_state = "icemoon"
+	base_scale = 1.5
