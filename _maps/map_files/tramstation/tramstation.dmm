@@ -8548,8 +8548,11 @@
 /turf/open/floor/carpet,
 /area/command/heads_quarters/hos)
 "csY" = (
-/obj/structure/chair/stool/directional/south,
-/turf/open/floor/carpet,
+/obj/structure/chair/comfy/beige{
+	dir = 1
+	},
+/obj/effect/landmark/start/hangover,
+/turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/entry)
 "cte" = (
 /obj/structure/disposalpipe/segment,
@@ -12313,6 +12316,11 @@
 /obj/structure/table/wood,
 /obj/machinery/airalarm/directional/west,
 /obj/machinery/light/directional/west,
+/obj/effect/spawner/lootdrop/cig_packs,
+/obj/effect/spawner/lootdrop{
+	pixel_x = 9;
+	loot = list(/obj/item/storage/box/matches = 10, /obj/item/lighter/greyscale = 10, /obj/item/lighter = 1)
+	},
 /turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/entry)
 "dxn" = (
@@ -32229,15 +32237,6 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/plasteel,
 /area/security/checkpoint/medical)
-"jdY" = (
-/obj/structure/table/wood,
-/obj/effect/spawner/lootdrop/cig_packs,
-/obj/effect/spawner/lootdrop{
-	pixel_x = 9;
-	loot = list(/obj/item/storage/box/matches = 10, /obj/item/lighter/greyscale = 10, /obj/item/lighter = 1)
-	},
-/turf/open/floor/carpet,
-/area/hallway/secondary/entry)
 "jee" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
@@ -35293,7 +35292,7 @@
 /area/command/heads_quarters/hop)
 "jVI" = (
 /obj/effect/landmark/transport/nav_beacon/tram/nav/immovable_rod,
-/turf/open/floor/carpet,
+/turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/entry)
 "jVJ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -36176,8 +36175,6 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/tram/right)
 "kia" = (
-/obj/structure/chair/stool/directional/south,
-/obj/effect/landmark/start/hangover,
 /turf/open/floor/carpet,
 /area/hallway/secondary/entry)
 "kiz" = (
@@ -70835,6 +70832,10 @@
 	},
 /obj/effect/turf_decal/trimline/neutral/filled/line,
 /obj/effect/turf_decal/trimline/purple/filled/warning,
+/obj/structure/reagent_dispensers/spacecleanertank{
+	pixel_x = 0;
+	pixel_y = -30
+	},
 /turf/open/floor/plasteel,
 /area/service/janitor)
 "tFv" = (
@@ -74376,10 +74377,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engineering/atmos)
-"uDx" = (
-/obj/structure/table/wood,
-/turf/open/floor/carpet,
-/area/hallway/secondary/entry)
 "uDA" = (
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 4
@@ -165857,9 +165854,9 @@ eQM
 hdZ
 uTt
 gnV
-aaa
 gnV
-aqY
+gnV
+csY
 gNA
 xob
 gVj
@@ -166113,8 +166110,8 @@ nAg
 eQM
 hdZ
 gnV
-csY
-uDx
+kia
+kia
 kia
 gnV
 gNA
@@ -166370,9 +166367,9 @@ hqd
 ohK
 dFj
 ldM
-uDx
-jdY
-uDx
+kia
+aaa
+kia
 glH
 bpa
 wbk
@@ -166628,8 +166625,8 @@ mLz
 npw
 gnV
 kia
-uDx
-csY
+kia
+kia
 gnV
 gNA
 uhy
