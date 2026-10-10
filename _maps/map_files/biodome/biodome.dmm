@@ -2861,6 +2861,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
+"aLe" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 5
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "aLk" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
@@ -6218,6 +6224,12 @@
 /obj/effect/landmark/start/head_of_personnel,
 /turf/open/floor/carpet/blue,
 /area/command/meeting_room)
+"bIL" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 1
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "bIR" = (
 /obj/machinery/atmospherics/components/binary/pump{
 	name = "Port Mix to East Ports"
@@ -12293,6 +12305,10 @@
 	},
 /turf/open/floor/plasteel/dark/smooth/large,
 /area/medical/morgue)
+"djL" = (
+/obj/effect/turf_decal/siding/wood/thin,
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "djT" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -16785,14 +16801,7 @@
 /area/maintenance/department/science)
 "eoP" = (
 /obj/machinery/airalarm/directional/north,
-/obj/structure/table/wood,
-/obj/item/binoculars,
-/obj/item/paper/pamphlet{
-	pixel_x = -6;
-	name = "Nanotrasen 'Biodome' Travel Brochure";
-	desc = "A somewhat tacky brochure for Nanotrasen's new line of 'Biodome'-class stations.";
-	default_raw_text = "<center><b>NANOTRASEN 'BIODOME' TRAVEL BROCHURE</b></center><br>Take a scenic tour through the Biodome skybridge, looking down upon the tamed wilderness!<br>Relax by the fountain in the expanded Biodome service department!<br>Now with live, open-air entertainment (entertainment is still largely clown-based)...<br>See the dome in style with our new 'BioTube' transit system...<br>Take a calming river ride across the scenic Biodome Lake! (Minimum speed 70 kph).<br>Research in style in our state-of-the-art 'VapoRnDwave' facilities!<br>Now with safety measures to prevent turbine exhaust from destroying atmosian windows!<br>See such exciting zoo exhibits as axolotls, endangered lagomorphs, or even the rare Gondolas! (Gondola flesh not included)<br>Note: due to construction expenses, transfers to 'Biodome'-class stations currently comes with a 20% pay cut...<br>All the comforts of living on a planet without actually being on a planet!<br>Too warm? Take a trip to the wintery medical bay, kept at a bracing 17 C at all times...<br>All employee breakrooms equipped with cozy fireplaces (fuel supplies minimal to prevent smoke inhalation)...<br>There is nothing behind the walls.<br>The captain can always watch over you with our new, patented 'OverBridge' design! Give them a wave!<br>Climbing across the rooftops is strictly prohibited...<br>Maybe you COULD use a vacation..."
-	},
+/obj/structure/chair/sofa/right/brown,
 /turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/entry)
 "epk" = (
@@ -31023,9 +31032,11 @@
 /turf/open/floor/plasteel/rivets/large,
 /area/service/janitor)
 "ian" = (
-/obj/effect/landmark/event_spawn,
-/obj/machinery/holopad,
-/turf/open/floor/plasteel/grimy,
+/obj/item/hilbertshotel/ghostdojo{
+	pixel_x = 0;
+	pixel_y = 0
+	},
+/turf/open/floor/carpet,
 /area/hallway/secondary/entry)
 "iau" = (
 /turf/closed/wall/r_wall,
@@ -33662,8 +33673,10 @@
 /turf/open/floor/plating,
 /area/maintenance/port)
 "iMi" = (
-/obj/item/hilbertshotel/ghostdojo,
-/turf/open/floor/plasteel/grimy,
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 4
+	},
+/turf/open/floor/carpet,
 /area/hallway/secondary/entry)
 "iMo" = (
 /obj/structure/disposalpipe/segment{
@@ -33920,6 +33933,18 @@
 	dir = 1
 	},
 /obj/machinery/disposal/bin,
+/obj/structure/table/wood,
+/obj/effect/spawner/lootdrop{
+	pixel_x = 9;
+	loot = list(/obj/item/storage/box/matches = 10, /obj/item/lighter/greyscale = 10, /obj/item/lighter = 1)
+	},
+/obj/item/paper/pamphlet{
+	pixel_x = 2;
+	pixel_y = 5;
+	name = "Nanotrasen 'Biodome' Travel Brochure";
+	desc = "A somewhat tacky brochure for Nanotrasen's new line of 'Biodome'-class stations.";
+	default_raw_text = "<center><b>NANOTRASEN 'BIODOME' TRAVEL BROCHURE</b></center><br>Take a scenic tour through the Biodome skybridge, looking down upon the tamed wilderness!<br>Relax by the fountain in the expanded Biodome service department!<br>Now with live, open-air entertainment (entertainment is still largely clown-based)...<br>See the dome in style with our new 'BioTube' transit system...<br>Take a calming river ride across the scenic Biodome Lake! (Minimum speed 70 kph).<br>Research in style in our state-of-the-art 'VapoRnDwave' facilities!<br>Now with safety measures to prevent turbine exhaust from destroying atmosian windows!<br>See such exciting zoo exhibits as axolotls, endangered lagomorphs, or even the rare Gondolas! (Gondola flesh not included)<br>Note: due to construction expenses, transfers to 'Biodome'-class stations currently comes with a 20% pay cut...<br>All the comforts of living on a planet without actually being on a planet!<br>Too warm? Take a trip to the wintery medical bay, kept at a bracing 17 C at all times...<br>All employee breakrooms equipped with cozy fireplaces (fuel supplies minimal to prevent smoke inhalation)...<br>There is nothing behind the walls.<br>The captain can always watch over you with our new, patented 'OverBridge' design! Give them a wave!<br>Climbing across the rooftops is strictly prohibited...<br>Maybe you COULD use a vacation..."
+	},
 /turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/entry)
 "iQi" = (
@@ -54723,17 +54748,8 @@
 /obj/machinery/newscaster{
 	pixel_y = -30
 	},
-/obj/structure/table/wood,
-/obj/item/paper/pamphlet{
-	pixel_x = 2;
-	pixel_y = 5;
-	name = "Nanotrasen 'Biodome' Travel Brochure";
-	desc = "A somewhat tacky brochure for Nanotrasen's new line of 'Biodome'-class stations.";
-	default_raw_text = "<center><b>NANOTRASEN 'BIODOME' TRAVEL BROCHURE</b></center><br>Take a scenic tour through the Biodome skybridge, looking down upon the tamed wilderness!<br>Relax by the fountain in the expanded Biodome service department!<br>Now with live, open-air entertainment (entertainment is still largely clown-based)...<br>See the dome in style with our new 'BioTube' transit system...<br>Take a calming river ride across the scenic Biodome Lake! (Minimum speed 70 kph).<br>Research in style in our state-of-the-art 'VapoRnDwave' facilities!<br>Now with safety measures to prevent turbine exhaust from destroying atmosian windows!<br>See such exciting zoo exhibits as axolotls, endangered lagomorphs, or even the rare Gondolas! (Gondola flesh not included)<br>Note: due to construction expenses, transfers to 'Biodome'-class stations currently comes with a 20% pay cut...<br>All the comforts of living on a planet without actually being on a planet!<br>Too warm? Take a trip to the wintery medical bay, kept at a bracing 17 C at all times...<br>All employee breakrooms equipped with cozy fireplaces (fuel supplies minimal to prevent smoke inhalation)...<br>There is nothing behind the walls.<br>The captain can always watch over you with our new, patented 'OverBridge' design! Give them a wave!<br>Climbing across the rooftops is strictly prohibited...<br>Maybe you COULD use a vacation..."
-	},
-/obj/effect/spawner/lootdrop{
-	pixel_x = 9;
-	loot = list(/obj/item/storage/box/matches = 10, /obj/item/lighter/greyscale = 10, /obj/item/lighter = 1)
+/obj/structure/chair/sofa/left/brown{
+	dir = 1
 	},
 /turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/entry)
@@ -57353,10 +57369,10 @@
 /turf/open/floor/plasteel/dark,
 /area/science/research)
 "pix" = (
-/obj/structure/chair/sofa/left/brown{
-	dir = 1
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 9
 	},
-/turf/open/floor/plasteel/grimy,
+/turf/open/floor/carpet,
 /area/hallway/secondary/entry)
 "piB" = (
 /obj/effect/spawner/structure/window/reinforced,
@@ -72943,8 +72959,10 @@
 /turf/open/floor/wood,
 /area/commons/vacant_room/office)
 "tmw" = (
-/obj/structure/chair/sofa/right/brown,
-/turf/open/floor/plasteel/grimy,
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 10
+	},
+/turf/open/floor/carpet,
 /area/hallway/secondary/entry)
 "tmN" = (
 /obj/structure/sign/warning{
@@ -77870,6 +77888,14 @@
 /obj/item/radio/intercom{
 	pixel_y = 27
 	},
+/obj/structure/table/wood,
+/obj/item/binoculars,
+/obj/item/paper/pamphlet{
+	pixel_x = -6;
+	name = "Nanotrasen 'Biodome' Travel Brochure";
+	desc = "A somewhat tacky brochure for Nanotrasen's new line of 'Biodome'-class stations.";
+	default_raw_text = "<center><b>NANOTRASEN 'BIODOME' TRAVEL BROCHURE</b></center><br>Take a scenic tour through the Biodome skybridge, looking down upon the tamed wilderness!<br>Relax by the fountain in the expanded Biodome service department!<br>Now with live, open-air entertainment (entertainment is still largely clown-based)...<br>See the dome in style with our new 'BioTube' transit system...<br>Take a calming river ride across the scenic Biodome Lake! (Minimum speed 70 kph).<br>Research in style in our state-of-the-art 'VapoRnDwave' facilities!<br>Now with safety measures to prevent turbine exhaust from destroying atmosian windows!<br>See such exciting zoo exhibits as axolotls, endangered lagomorphs, or even the rare Gondolas! (Gondola flesh not included)<br>Note: due to construction expenses, transfers to 'Biodome'-class stations currently comes with a 20% pay cut...<br>All the comforts of living on a planet without actually being on a planet!<br>Too warm? Take a trip to the wintery medical bay, kept at a bracing 17 C at all times...<br>All employee breakrooms equipped with cozy fireplaces (fuel supplies minimal to prevent smoke inhalation)...<br>There is nothing behind the walls.<br>The captain can always watch over you with our new, patented 'OverBridge' design! Give them a wave!<br>Climbing across the rooftops is strictly prohibited...<br>Maybe you COULD use a vacation..."
+	},
 /turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/entry)
 "uBM" = (
@@ -80026,6 +80052,11 @@
 /obj/effect/turf_decal/siding/purple/corner,
 /turf/open/floor/plasteel/white,
 /area/science/lab)
+"vfw" = (
+/obj/machinery/holopad,
+/obj/effect/landmark/event_spawn,
+/turf/open/floor/plasteel/grimy,
+/area/hallway/secondary/entry)
 "vfI" = (
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
@@ -80553,6 +80584,12 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/carpet,
 /area/cargo/office)
+"vnT" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 8
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "vnU" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -91310,6 +91347,12 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/service/library/lounge)
+"ycW" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 6
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "ydm" = (
 /obj/structure/transit_tube,
 /turf/open/openspace,
@@ -174070,7 +174113,7 @@ vVq
 usj
 eJr
 rKF
-rKF
+vfw
 rKF
 lxM
 usj
@@ -174327,7 +174370,7 @@ vVq
 hQY
 dpW
 pix
-rKF
+vnT
 tmw
 jNh
 hQY
@@ -174583,9 +174626,9 @@ rly
 vVq
 usj
 eoP
-qBx
+bIL
 ian
-nuC
+djL
 oBi
 usj
 cZK
@@ -174839,11 +174882,11 @@ usj
 uuY
 vVq
 hQY
-rKF
-rKF
+nuC
+aLe
 iMi
-rKF
-rKF
+ycW
+qBx
 hQY
 dms
 vVq

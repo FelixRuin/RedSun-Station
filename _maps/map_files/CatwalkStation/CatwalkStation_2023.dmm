@@ -31184,7 +31184,10 @@
 	pixel_y = 16;
 	pixel_x = -16
 	},
-/turf/open/floor/wood/wood_large,
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 6
+	},
+/turf/open/floor/carpet,
 /area/hallway/primary/central)
 "gFW" = (
 /obj/machinery/portable_atmospherics/canister/water_vapor,
@@ -32342,6 +32345,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/engineering/lobby)
+"gTy" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 9
+	},
+/turf/open/floor/carpet,
+/area/hallway/primary/central)
 "gTz" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 8
@@ -34280,6 +34289,12 @@
 /obj/effect/turf_decal/tile/yellow/full,
 /turf/open/floor/plasteel/smooth/large,
 /area/maintenance/starboard/central)
+"hou" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 5
+	},
+/turf/open/floor/carpet,
+/area/hallway/primary/central)
 "hox" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/yellow{
@@ -56181,6 +56196,12 @@
 /obj/effect/landmark/start/hangover,
 /turf/open/floor/glass/reinforced,
 /area/hallway/secondary/construction)
+"lOS" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 10
+	},
+/turf/open/floor/carpet,
+/area/hallway/primary/central)
 "lPj" = (
 /obj/machinery/door/airlock/command{
 	name = "Teleport Access"
@@ -149053,8 +149074,8 @@ lPB
 rzn
 aEl
 wYz
-pKo
-pKo
+gTy
+lOS
 pKo
 jdw
 sTH
@@ -149310,7 +149331,7 @@ uMN
 rzn
 mwC
 wYz
-pKo
+hou
 gFR
 pKo
 jdw

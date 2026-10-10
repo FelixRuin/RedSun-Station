@@ -1,6 +1,9 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aaa" = (
-/obj/item/hilbertshotel/ghostdojo,
+/obj/item/hilbertshotel/ghostdojo{
+	pixel_x = 0;
+	pixel_y = 0
+	},
 /turf/open/floor/carpet,
 /area/hallway/secondary/entry)
 "aab" = (
@@ -6436,6 +6439,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/brig)
+"bLA" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 4
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "bLP" = (
 /obj/effect/turf_decal/trimline/yellow/arrow_cw,
 /obj/effect/turf_decal/trimline/yellow/arrow_ccw{
@@ -17119,6 +17128,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/tram/right)
+"eQK" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 1
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "eQM" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -36175,6 +36190,9 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/tram/right)
 "kia" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 10
+	},
 /turf/open/floor/carpet,
 /area/hallway/secondary/entry)
 "kiz" = (
@@ -38571,6 +38589,12 @@
 	outbound = 2
 	},
 /area/hallway/primary/tram/left)
+"kPz" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 6
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "kPB" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/structure/reagent_dispensers/watertank,
@@ -60911,6 +60935,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/syndicate_outpost)
+"qXz" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 8
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "qXD" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable/yellow{
@@ -62539,6 +62569,12 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/research/lobby)
+"rtP" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 5
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "rtS" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer4{
 	dir = 10
@@ -66201,6 +66237,12 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/command/gateway)
+"stk" = (
+/obj/effect/turf_decal/siding/wood/thin{
+	dir = 9
+	},
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "stw" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/preopen{
@@ -82729,6 +82771,10 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/xenobiology)
+"wNg" = (
+/obj/effect/turf_decal/siding/wood/thin,
+/turf/open/floor/carpet,
+/area/hallway/secondary/entry)
 "wNw" = (
 /obj/effect/turf_decal/weather/sand/plating,
 /obj/docking_port/stationary/escape_pod{
@@ -166110,8 +166156,8 @@ nAg
 eQM
 hdZ
 gnV
-kia
-kia
+stk
+qXz
 kia
 gnV
 gNA
@@ -166367,9 +166413,9 @@ hqd
 ohK
 dFj
 ldM
-kia
+eQK
 aaa
-kia
+wNg
 glH
 bpa
 wbk
@@ -166624,9 +166670,9 @@ fsw
 mLz
 npw
 gnV
-kia
-kia
-kia
+rtP
+bLA
+kPz
 gnV
 gNA
 uhy
