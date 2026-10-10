@@ -20220,6 +20220,10 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/command)
+"eHI" = (
+/obj/machinery/jukebox,
+/turf/open/floor/plasteel/grimy,
+/area/commons/lounge)
 "eIn" = (
 /obj/structure/transit_tube/crossing{
 	dir = 4
@@ -139558,7 +139562,7 @@ uSM
 vwa
 vwa
 kez
-sAw
+eHI
 oZW
 qmF
 hjb
