@@ -334,12 +334,13 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 		return TRUE
 
 	to_chat(user, span_warning("Вы начинаете смещать [src]"))
-	if(!I.use_tool(src, user, (consequences ? 30 : 3) SECONDS, volume = 50 ))
+	if(!I.use_tool(src, user, (consequences ? 30 / clamp(I.toolspeed, 0.1, 1) : 3) SECONDS, volume = 50 ))
 		return TRUE
 
 	if(consequences)
 		to_chat(user, span_warning("С диким усилием вы отрываете плитку от пола... и видите под ней чёрно-фиолетовые квадраты."))
 		to_chat(user, span_eldritch("[user.key], ты ведь жаждал это увидеть?"))
+		user.client.give_award(/datum/award/achievement/misc/crow_necro, user)
 		user.emote("shiver")
 		user.dropItemToGround(I)
 		return TRUE
