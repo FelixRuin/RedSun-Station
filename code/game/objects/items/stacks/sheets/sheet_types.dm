@@ -281,62 +281,67 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 /*
  * Wood
  */
-GLOBAL_LIST_INIT(wood_recipes, list ( \
-	new/datum/stack_recipe("Wooden Sandals", /obj/item/clothing/shoes/sandal, 1), \
-	new/datum/stack_recipe("Sauna Oven", /obj/structure/sauna_oven, 50, time = 15 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("Wooden Half-Barricade", /obj/structure/deployable_barricade/wooden, 5, time = 2 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("tiki mask", /obj/item/clothing/mask/gas/tiki_mask, 2), \
-	new/datum/stack_recipe("wood table frame", /obj/structure/table_frame/wood, 2, time = 10), \
-	null, \
-	new/datum/stack_recipe("wooden floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
-	new/datum/stack_recipe("large wooden floor tile", /obj/item/stack/tile/wood/wood_large, 1, 4, 20), \
-	new/datum/stack_recipe("tiled wooden floor tile", /obj/item/stack/tile/wood/wood_tiled, 1, 4, 20), \
-	new/datum/stack_recipe("diagonal wooden floor tile", /obj/item/stack/tile/wood/wood_diagonal, 1, 4, 20), \
-	null, \
-	new/datum/stack_recipe_list("pews", list(
-		new /datum/stack_recipe("pew (middle)", /obj/structure/chair/pew, 3, one_per_turf = TRUE, on_floor = TRUE),\
-		new /datum/stack_recipe("pew (left)", /obj/structure/chair/pew/left, 3, one_per_turf = TRUE, on_floor = TRUE),\
-		new /datum/stack_recipe("pew (right)", /obj/structure/chair/pew/right, 3, one_per_turf = TRUE, on_floor = TRUE),\
+GLOBAL_LIST_INIT(wood_recipes, list (
+	new/datum/stack_recipe_list("Floor Tiles", list(
+		new/datum/stack_recipe("Floor Tile", /obj/item/stack/tile/wood, 1, 4, 20),
+		new/datum/stack_recipe("Large floor Tile", /obj/item/stack/tile/wood/wood_large, 1, 4, 20),
+		new/datum/stack_recipe("Tiled floor Tile", /obj/item/stack/tile/wood/wood_tiled, 1, 4, 20),
+		new/datum/stack_recipe("Diagonal Floor Tile", /obj/item/stack/tile/wood/wood_diagonal, 1, 4, 20),
 		)),
-	null, \
-	new/datum/stack_recipe("rifle stock", /obj/item/weaponcrafting/stock, 10, time = 20), \
-	new/datum/stack_recipe("rolling pin", /obj/item/kitchen/rollingpin, 2, time = 30), \
-	new/datum/stack_recipe("unrolling pin", /obj/item/kitchen/unrollingpin, 2, time = 30), \
-	new/datum/stack_recipe("wooden bucket", /obj/item/reagent_containers/glass/bucket/wood, 2, time = 30), \
-	new/datum/stack_recipe("painting frame", /obj/item/wallframe/painting, 1, time = 10),\
-	new/datum/stack_recipe("large painting frame", /obj/item/wallframe/painting/large, 1, time = 10),\
-	new/datum/stack_recipe("wooden buckler", /obj/item/shield/riot/buckler, 25, time = 120), \
-	new/datum/stack_recipe("baseball bat", /obj/item/melee/baseball_bat, 25, time = 100),\
-	new/datum/stack_recipe("Stick For Angry Plants", /obj/item/scythe/stick, 25, time = 100),\
-	null, \
-	new/datum/stack_recipe("wooden chair", /obj/structure/chair/wood, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("winged wooden chair", /obj/structure/chair/wood/wings, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("plywood chair", /obj/structure/chair/comfy/plywood, 4, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
-	null, \
-	new/datum/stack_recipe("wooden barricade", /obj/structure/barricade/wooden, 5, time = 50, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("wooden door", /obj/structure/mineral_door/wood, 10, time = 20, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("rustic wooden door", /obj/structure/mineral_door/woodrustic, 10, time = 20, one_per_turf = TRUE, on_floor = TRUE), \
-	null, \
-	new/datum/stack_recipe("wooden barrel", /obj/structure/fermenting_barrel, 10, time = 20, one_per_turf = TRUE, on_floor = TRUE),\
-	new/datum/stack_recipe("coffin", /obj/structure/closet/crate/coffin, 5, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("book case", /obj/structure/bookcase, 3, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("drying rack", /obj/machinery/smartfridge/drying_rack, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("dog bed", /obj/structure/bed/dogbed, 10, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("dresser", /obj/structure/dresser, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("ore box", /obj/structure/ore_box, 4, time = 50, one_per_turf = TRUE, on_floor = TRUE),\
-	new/datum/stack_recipe("wooden crate", /obj/structure/closet/crate/wooden, 6, time = 50, one_per_turf = TRUE, on_floor = TRUE),\
-	new/datum/stack_recipe("display case chassis", /obj/structure/displaycase_chassis, 5, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("loom", /obj/structure/loom, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("apiary", /obj/structure/beebox, 40, time = 50),\
-	null, \
-	new/datum/stack_recipe("picture frame", /obj/item/wallframe/picture, 1, time = 10),\
-	new/datum/stack_recipe("painting frame", /obj/item/wallframe/painting, 1, time = 10),\
-	new/datum/stack_recipe("large painting frame", /obj/item/wallframe/painting/large, 1, time = 10),\
-	new/datum/stack_recipe("mortar", /obj/item/reagent_containers/glass/mortar, 3), \
-	new/datum/stack_recipe("honey frame", /obj/item/honey_frame, 5, time = 10),\
-	new/datum/stack_recipe("notice board frame", /obj/item/wallframe/noticeboard, 5, time = 10),\
-	new/datum/stack_recipe("wooden block", /obj/item/stamp_block, 10, time = 10),\
-	new/datum/stack_recipe("wooden cup", /obj/item/reagent_containers/food/drinks/drinkingglass/wooden, 1, time = 50)
+	new/datum/stack_recipe_list("Pews", list(
+		new /datum/stack_recipe("Pew (Middle)", /obj/structure/chair/pew, 3, one_per_turf = TRUE, on_floor = TRUE),
+		new /datum/stack_recipe("Pew (Left)", /obj/structure/chair/pew/left, 3, one_per_turf = TRUE, on_floor = TRUE),
+		new /datum/stack_recipe("Pew (Right)", /obj/structure/chair/pew/right, 3, one_per_turf = TRUE, on_floor = TRUE),
+		)),
+	new/datum/stack_recipe_list("Weaponry", list(
+		new/datum/stack_recipe("Rifle Stock", /obj/item/weaponcrafting/stock, 10, time = 20),
+		new/datum/stack_recipe("Buckler", /obj/item/shield/riot/buckler, 25, time = 120),
+		new/datum/stack_recipe("Baseball Bat", /obj/item/melee/baseball_bat, 25, time = 100),
+		)),
+	new/datum/stack_recipe_list("Barricade", list(
+		new/datum/stack_recipe("Barricade", /obj/structure/barricade/wooden, 5, time = 50, one_per_turf = TRUE, on_floor = TRUE),
+		new/datum/stack_recipe("Half-Barricade", /obj/structure/deployable_barricade/wooden, 5, time = 2 SECONDS, one_per_turf = TRUE, on_floor = TRUE),
+		)),
+	new/datum/stack_recipe_list("Chairs", list(
+		new/datum/stack_recipe("Chair", /obj/structure/chair/wood, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE),
+		new/datum/stack_recipe("Winged Chair", /obj/structure/chair/wood/wings, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE),
+		new/datum/stack_recipe("Plywood Chair", /obj/structure/chair/comfy/plywood, 4, time = 10, one_per_turf = TRUE, on_floor = TRUE),
+		)),
+	new/datum/stack_recipe_list("Painting", list(
+		new/datum/stack_recipe("Picture Frame", /obj/item/wallframe/picture, 1, time = 10),
+		new/datum/stack_recipe("Painting Frame", /obj/item/wallframe/painting, 1, time = 10),
+		new/datum/stack_recipe("Large Painting Frame", /obj/item/wallframe/painting/large, 1, time = 10),
+		)),
+	new/datum/stack_recipe_list("Doors", list(
+		new/datum/stack_recipe("Door", /obj/structure/mineral_door/wood, 10, time = 20, one_per_turf = TRUE, on_floor = TRUE),
+		new/datum/stack_recipe("Rustic Door", /obj/structure/mineral_door/woodrustic, 10, time = 20, one_per_turf = TRUE, on_floor = TRUE),
+		)),
+	new/datum/stack_recipe_list("Gardening", list(
+		new/datum/stack_recipe("Barrel", /obj/structure/fermenting_barrel, 10, time = 20, one_per_turf = TRUE, on_floor = TRUE),
+		new/datum/stack_recipe("Bucket", /obj/item/reagent_containers/glass/bucket/wood, 2, time = 30),
+		new/datum/stack_recipe("Stick For Angry Plants", /obj/item/scythe/stick, 25, time = 100),
+		new/datum/stack_recipe("Drying Rack", /obj/machinery/smartfridge/drying_rack, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE),
+		new/datum/stack_recipe("Loom", /obj/structure/loom, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE),
+		new/datum/stack_recipe("Apiary", /obj/structure/beebox, 40, time = 50),
+		new/datum/stack_recipe("Honey Frame", /obj/item/honey_frame, 5, time = 10),
+		)),
+	new/datum/stack_recipe("Sandals", /obj/item/clothing/shoes/sandal, 1),
+	new/datum/stack_recipe("Sauna Oven", /obj/structure/sauna_oven, 50, time = 15 SECONDS, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Tiki Mask", /obj/item/clothing/mask/gas/tiki_mask, 2),
+	new/datum/stack_recipe("Table Frame", /obj/structure/table_frame/wood, 2, time = 10),
+	new/datum/stack_recipe("Rolling Pin", /obj/item/kitchen/rollingpin, 2, time = 30),
+	new/datum/stack_recipe("Unrolling Pin", /obj/item/kitchen/unrollingpin, 2, time = 30),
+	new/datum/stack_recipe("Coffin", /obj/structure/closet/crate/coffin, 5, time = 15, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Book Case", /obj/structure/bookcase, 3, time = 15, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Dog Bed", /obj/structure/bed/dogbed, 10, time = 10, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Dresser", /obj/structure/dresser, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Ore Box", /obj/structure/ore_box, 4, time = 50, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Crate", /obj/structure/closet/crate/wooden, 6, time = 50, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Display Case Chassis", /obj/structure/displaycase_chassis, 5, one_per_turf = TRUE, on_floor = TRUE),
+	new/datum/stack_recipe("Mortar", /obj/item/reagent_containers/glass/mortar, 3),
+	new/datum/stack_recipe("Notice Board Frame", /obj/item/wallframe/noticeboard, 5, time = 10),
+	new/datum/stack_recipe("Stamp Block", /obj/item/stamp_block, 10, time = 10),
+	new/datum/stack_recipe("Cup", /obj/item/reagent_containers/food/drinks/drinkingglass/wooden, 1, time = 50),
 	))
 
 /obj/item/stack/sheet/mineral/wood
