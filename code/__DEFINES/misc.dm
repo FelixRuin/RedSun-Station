@@ -59,13 +59,13 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 #define DRESS_LAYER               30 // uniforms drawn on top of shoes
 #define ID_LAYER                  29
 #define HANDS_PART_LAYER          28
-#define GENITALS_EXPOSED_LAYER    27
-#define DAMAGE_LAYER              26 // damage indicators
-#define WOUND_LAYER               25 // bleeding wound icons
-#define LOWER_MEDICINE_LAYER      24
-#define MEDICINE_LAYER            23
-#define GLOVES_LAYER              22
-#define WRISTS_LAYER              21
+#define GLOVES_LAYER              27
+#define WRISTS_LAYER              26
+#define GENITALS_EXPOSED_LAYER    25
+#define DAMAGE_LAYER              24 // damage indicators
+#define WOUND_LAYER               23 // bleeding wound icons
+#define LOWER_MEDICINE_LAYER      22
+#define MEDICINE_LAYER            21
 #define EAR_RIGHT_LAYER           20
 #define EAR_LEFT_LAYER            19
 #define SUIT_LAYER                18
