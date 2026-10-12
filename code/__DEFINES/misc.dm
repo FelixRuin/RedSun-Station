@@ -37,9 +37,13 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 //Human Overlays Indexes/////////
 //LOTS OF CIT CHANGES HERE. BE CAREFUL WHEN UPSTREAM ADDS MORE LAYERS
 
-#define MUTATIONS_LAYER           45 // mutations. Tk headglows, cold resistance glow, etc
-#define GENITALS_BEHIND_LAYER     44 // Some genitalia needs to be behind everything, such as with taurs
-#define BODY_BEHIND_LAYER         43 // certain mutantrace features, such as tail when looking south
+#define MUTATIONS_LAYER           49 // mutations. Tk headglows, cold resistance glow, etc
+#define BODY_BEHIND_LAYER         48 // certain mutantrace features, such as tail when looking south
+#define	LEGS_PART_LAYER           47 // legs bodyparts
+#define GENITALS_BEHIND_LAYER     46 // Some genitalia needs to be behind everything, such as with taurs
+#define	CHEST_PART_LAYER          45 // chest bodypart
+#define	ARMS_PART_LAYER           44 // arms bodypart
+#define	HEAD_PART_LAYER           43 // head bodypart
 #define BODYPARTS_LAYER           42 // catch-all bodyparts flag
 #define MARKING_LAYER             41 // Matrixed body markings
 #define BODY_ADJ_LAYER            40 // snout, body markings, etc.
@@ -54,8 +58,8 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 #define SHOES_LAYER               31
 #define DRESS_LAYER               30 // uniforms drawn on top of shoes
 #define ID_LAYER                  29
-#define GENITALS_EXPOSED_LAYER    28
-#define HANDS_PART_LAYER          27
+#define HANDS_PART_LAYE#define HANDS_PART_LAYER          28
+#define GENITALS_EXPOSED_LAYER    27
 #define DAMAGE_LAYER              26 // damage indicators
 #define WOUND_LAYER               25 // bleeding wound icons
 #define LOWER_MEDICINE_LAYER      24

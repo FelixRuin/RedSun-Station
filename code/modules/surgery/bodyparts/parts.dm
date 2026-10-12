@@ -9,6 +9,7 @@
 	max_damage = 200
 	body_zone = BODY_ZONE_CHEST
 	body_part = CHEST
+	as_mob_layer = LEGS_PART_LAYER
 	px_x = 0
 	px_y = 0
 	stam_damage_coeff = 1
@@ -72,6 +73,7 @@
 	max_stamina_damage = 50
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
+	as_mob_layer = LEGS_PART_LAYER
 	aux_icons = list(BODY_ZONE_PRECISE_L_HAND = HANDS_PART_LAYER, "l_hand_behind" = BODY_BEHIND_LAYER)
 	body_damage_coeff = 0.75
 	held_index = 1
@@ -207,6 +209,7 @@
 	disable_threshold = 75
 	body_zone = BODY_ZONE_L_LEG
 	body_part = LEG_LEFT
+	as_mob_layer = LEGS_PART_LAYER
 	body_damage_coeff = 0.75
 	px_x = -2
 	px_y = 12
@@ -270,6 +273,7 @@
 	max_damage = 50
 	body_zone = BODY_ZONE_R_LEG
 	body_part = LEG_RIGHT
+	as_mob_layer = LEGS_PART_LAYER
 	body_damage_coeff = 0.75
 	px_x = 2
 	px_y = 12
