@@ -40,8 +40,8 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 #define MUTATIONS_LAYER           49 // mutations. Tk headglows, cold resistance glow, etc
 #define BODY_BEHIND_LAYER         48 // certain mutantrace features, such as tail when looking south
 #define	LEGS_PART_LAYER           47 // legs bodyparts
-#define GENITALS_BEHIND_LAYER     46 // Some genitalia needs to be behind everything, such as with taurs
-#define	CHEST_PART_LAYER          45 // chest bodypart
+#define	CHEST_PART_LAYER          46 // chest bodypart
+#define GENITALS_BEHIND_LAYER     45 // Some genitalia needs to be behind everything, such as with taurs
 #define	ARMS_PART_LAYER           44 // arms bodypart
 #define	HEAD_PART_LAYER           43 // head bodypart
 #define BODYPARTS_LAYER           42 // catch-all bodyparts flag
