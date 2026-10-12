@@ -87,7 +87,7 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 #define ANTAG_LAYER                2
 #define FIRE_LAYER                 1
 
-#define TOTAL_LAYERS              45
+#define TOTAL_LAYERS              49
 
 /// Потолок общего кэша наборов конечностей (limb_icon_cache, см. cache_limb_icons).
 /// Двух тысяч записей хватает на популяцию прода с запасом: ключ разный у каждого
