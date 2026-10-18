@@ -1094,4 +1094,4 @@
 	user.visible_message("<span class='notice'>[user] [pick("nuzzles", "pushes", "boops")] \the [target.name] with their nose!</span>")
 	if(isliving(target))
 		var/mob/living/L = target
-		user.show_message(span_notice("Аромат [target] можно описать как [target.get_taste_message()]."))
+		user.show_message(span_notice("Аромат [target] можно описать как [target.get_smell_message()]."))

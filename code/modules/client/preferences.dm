@@ -3614,7 +3614,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(!isnull(msg))
 						vore_smell = msg
 				if("set_taste")
-					var/msg = tgui_input_text(usr, "Задайте описание вкуса вашего персонажа. Его возможно узнать при облизывании персонажа.", "Описание Вкуса Персонажа", vore_taste, MAX_TASTE_LEN, TRUE, FALSE)
+					var/msg = tgui_input_text(usr, "Задайте описание вкуса вашего персонажа. Его возможно узнать при облизывании (*lick) персонажа. \nНа вкус можно описать как \[...\]", "Описание Вкуса Персонажа", vore_taste, MAX_TASTE_LEN, TRUE, FALSE)
 					if(!isnull(msg))
 						vore_taste = msg
 				//SPLURT edit end
