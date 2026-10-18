@@ -1283,7 +1283,8 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		if(ishuman(target) && !clean_human(target, user, TRUE))
 			return
 		var/mob/living/L = target
-		user.show_message(span_notice("На вкус [L.name] можно описать как [L.get_taste_message()]."))
+		if(!HAS_TRAIT(user, TRAIT_AGEUSIA))
+			user.show_message(span_notice("На вкус [L.name] можно описать как [L.get_taste_message()]."))
 		playsound(src.loc, 'sound/effects/attackblob.ogg', 50, 1)
 		if(L.fire_stacks > 0)
 			L.adjust_fire_stacks(-10)
