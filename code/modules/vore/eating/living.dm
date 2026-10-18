@@ -8,9 +8,9 @@
 	/// List of vore containers inside a mob
 	var/list/vore_organs = list()
 	/// What the character tastes like
-	var/taste_desc = null
+	var/taste_desc
 	/// What the character smells like
-	var/smell_desc = null
+	var/smell_desc
 	/// Next time vore sounds get played for the prey, do not change manually as it is intended to be set automatically
 	var/next_preyloop
 
@@ -18,7 +18,7 @@
 // Hook for generic creation of stuff on new creatures
 //
 /hook/living_new/proc/vore_setup(mob/living/M)
-	add_verb(M, list(/mob/living/proc/preyloop_refresh, /mob/living/proc/lick, /mob/living/proc/escapeOOC))
+	add_verb(M, list(/mob/living/proc/preyloop_refresh, /mob/living/proc/escapeOOC))
 
 	if(M.vore_flags & NO_VORE) //If the mob isn't supposed to have a stomach, let's not give it an insidepanel so it can make one for itself, or a stomach.
 		return TRUE
@@ -341,78 +341,25 @@
 
 	return ..()
 
-//
-// Clearly super important. Obviously.
-//
-/mob/living/proc/lick()
-	set name = "Lick Someone"
-	set category = "Vore"
-	set desc = "Lick someone nearby!"
-
-	if(incapacitated(ignore_restraints = TRUE))
-		to_chat(src, "<span class='warning'>You can't do that while incapacitated.</span>")
-		return
-	if(!CheckActionCooldown())
-		to_chat(src, "<span class='warning'>You can't do that so fast, slow down.</span>")
-		return
-
-	DelayNextAction(CLICK_CD_MELEE, flush = TRUE)
-
-	var/list/lickable = list()
-	for(var/mob/living/L in view(1))
-		if(L != src && Adjacent(L))
-			LAZYADD(lickable, L)
-	for(var/mob/living/listed in lickable)
-		lickable[listed] = new /mutable_appearance(listed)
-
-	if(!lickable)
-		return
-
-	var/mob/living/tasted = lickable.len == 1 ? lickable[1] : show_radial_menu(src, src, lickable, radius = 40, require_near = TRUE) // BLUEMOON EDIT
-
-	if(QDELETED(tasted) || !Adjacent(tasted) || incapacitated(ignore_restraints = TRUE)) // BLUEMOON EDIT
-		return
-
-	//BLUEMOON ADD START // Delay like licking tongue
-	var/lickspeed = initial((/obj/item/soap/tongue/organic)::cleanspeed)
-	visible_message("<span class='warning'><b>[src]</b> begins to lick \the <b>[tasted]</b>.", "<span class='warning'>You begin to lick \the <b>[tasted]</b>...</span>")
-	if(!do_after(src, lickspeed, tasted) || !in_range(src, tasted))
-		return //If they moved away, you can't lick them.
-	//BLUEMOON ADD END
-
-	if(ishuman(tasted))
-		var/mob/living/carbon/human/H = tasted
-		H.wash_cream()
-
-	playsound(src.loc, 'sound/effects/attackblob.ogg', 50, 1) //BLUEMOON ADD
-	visible_message("<span class='warning'><b>[src]</b> licks <b>[tasted]</b>!</span>","<span class='notice'>You lick <b>[tasted]</b>. They taste rather like [tasted.get_taste_message()].</span>","<b>Slurp!</b>") //BLUEMOON EDIT
-
-// BLUEMOON EDIT START
 /mob/living/proc/get_taste_message(allow_generic = TRUE)
 	if(taste_desc)
 		. += "[taste_desc]"
 	else if(allow_generic)
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
-			. += "a normal [H.custom_species ? H.custom_species : H.dna.species]"
-		else
-			. += "a plain old normal [src]"
-	return .
-
-//
-// Equally important as the above
-//
-
-// BLUEMOON EDIT START
-/mob/living/proc/get_smell_message()
-	if(smell_desc)
-		. += "[smell_desc]"
-	else
-		if(ishuman(src))
-			var/mob/living/carbon/human/H = src
 			. += "нормальный [H.custom_species ? H.custom_species : H.dna.species]"
 		else
 			. += "старый добрый [name]"
+	return .
+
+/mob/living/proc/get_smell_message()
+	if(smell_desc)
+		. += "[smell_desc]"
+	else if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		. += "нормальный [H.custom_species ? H.custom_species : H.dna.species]"
+	else
+		. += "старый добрый [name]"
 	return .
 
 //	Check if an object is capable of eating things, based on vore_organs
