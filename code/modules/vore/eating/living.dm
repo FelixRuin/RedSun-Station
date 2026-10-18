@@ -18,7 +18,7 @@
 // Hook for generic creation of stuff on new creatures
 //
 /hook/living_new/proc/vore_setup(mob/living/M)
-	add_verb(M, list(/mob/living/proc/preyloop_refresh, /mob/living/proc/lick, /mob/living/proc/smell_someone, /mob/living/proc/escapeOOC))
+	add_verb(M, list(/mob/living/proc/preyloop_refresh, /mob/living/proc/lick, /mob/living/proc/escapeOOC))
 
 	if(M.vore_flags & NO_VORE) //If the mob isn't supposed to have a stomach, let's not give it an insidepanel so it can make one for itself, or a stomach.
 		return TRUE
@@ -402,37 +402,6 @@
 //
 // Equally important as the above
 //
-/mob/living/proc/smell_someone()
-	set name = "Smell Someone"
-	set category = "Vore"
-	set desc = "Smell someone nearby!"
-
-	if(incapacitated(ignore_restraints = TRUE))
-		to_chat(src, "<span class='warning'>You can't do that while incapacitated.</span>")
-		return
-	if(!CheckActionCooldown())
-		to_chat(src, "<span class='warning'>You can't do that so fast, slow down.</span>")
-		return
-
-	DelayNextAction(CLICK_CD_MELEE, flush = TRUE)
-
-	var/list/smellable = list()
-	for(var/mob/living/L in view(1))
-		if(L != src && Adjacent(L))
-			LAZYADD(smellable, L)
-	for(var/mob/living/listed in smellable)
-		smellable[listed] = new /mutable_appearance(listed)
-
-	if(!smellable)
-		return
-
-	var/mob/living/sniffed = smellable.len == 1 ? smellable[1] : show_radial_menu(src, src, smellable, radius = 40, require_near = TRUE) // BLUEMOON EDIT
-
-	if(QDELETED(sniffed) || !Adjacent(sniffed) || incapacitated(ignore_restraints = TRUE))
-		return
-
-	emote("sniff") //BLUEMOON ADD
-	visible_message("<span class='warning'><b>[src]</b> smells <b>[sniffed]</b>!</span>","<span class='notice'>You smell <b>[sniffed]</b>. They smell like [sniffed.get_smell_message()].</span>","<b>Sniff!</b>") //BLUEMOON EDIT
 
 // BLUEMOON EDIT START
 /mob/living/proc/get_smell_message()
@@ -441,9 +410,9 @@
 	else
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
-			. += "a normal [H.custom_species ? H.custom_species : H.dna.species]"
+			. += "нормальный [H.custom_species ? H.custom_species : H.dna.species]"
 		else
-			. += "a plain old normal [src]"
+			. += "старый добрый [name]"
 	return .
 
 //	Check if an object is capable of eating things, based on vore_organs

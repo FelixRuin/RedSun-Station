@@ -3610,7 +3610,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						features["naked_flavor_text"] = copytext_char(msg, 1, MAX_FLAVOR_LEN)
 
 				if("set_smell")
-					var/msg = tgui_input_text(usr, "Задайте описание запаха вашего персонажа. Его возможно узнать при обнюхивании персонажа.", "Описание Запаха Персонажа", vore_smell, MAX_TASTE_LEN, TRUE, FALSE)
+					var/msg = tgui_input_text(usr, "Задайте описание запаха вашего персонажа. Его возможно узнать при обнюхивании (*sniff) персонажа. \nЭтот аромат можно описать как \[...\]", "Описание Запаха Персонажа", vore_smell, MAX_TASTE_LEN, TRUE, FALSE)
 					if(!isnull(msg))
 						vore_smell = msg
 				if("set_taste")
