@@ -2814,3 +2814,15 @@
 	slot = ITEM_SLOT_ICLOTHING
 	path = /obj/item/clothing/under/donator/bm/mall_cop_chic
 	ckeywhitelist = list("sawwarrr")
+
+/datum/gear/donator/bm/arsmaid_suit
+	name = "Maid Suit"
+	slot = ITEM_SLOT_OCLOTHING
+	path = /obj/item/clothing/suit/donator/bm/arsmaid_suit
+	ckeywhitelist = list("TheARS")
+
+/datum/gear/donator/bm/taxedo
+	name = "Taxedo Suit"
+	slot = ITEM_SLOT_OCLOTHING
+	path = /obj/item/clothing/suit/taxedo
+	ckeywhitelist = list("kumikoshouko")
