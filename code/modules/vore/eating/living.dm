@@ -8,9 +8,9 @@
 	/// List of vore containers inside a mob
 	var/list/vore_organs = list()
 	/// What the character tastes like
-	var/vore_taste = null
+	var/taste_desc = null
 	/// What the character smells like
-	var/vore_smell = null
+	var/smell_desc = null
 	/// Next time vore sounds get played for the prey, do not change manually as it is intended to be set automatically
 	var/next_preyloop
 
@@ -268,8 +268,6 @@
 		return FALSE
 
 	client.prefs.vore_flags = vore_flags // there's garbage data in here, but it doesn't matter
-	client.prefs.vore_taste = vore_taste
-	client.prefs.vore_smell = vore_smell
 
 	var/list/serialized = list()
 	for(var/belly in vore_organs)
@@ -291,8 +289,6 @@
 		return FALSE
 	vore_flags |= VOREPREF_INIT
 	COPY_SPECIFIC_BITFIELDS(vore_flags, client.prefs.vore_flags, DIGESTABLE | DEVOURABLE | FEEDING | LICKABLE | SMELLABLE | ABSORBABLE | MOBVORE)
-	vore_taste = client.prefs.vore_taste
-	vore_smell = client.prefs.vore_smell
 
 	release_vore_contents(silent = TRUE)
 	QDEL_LIST(vore_organs)
@@ -393,20 +389,15 @@
 
 // BLUEMOON EDIT START
 /mob/living/proc/get_taste_message(allow_generic = TRUE)
-	if(!vore_taste && !allow_generic)
-		return FALSE
-
-	var/taste_message = ""
-	if((!ckey || client?.prefs.vore_flags & LICKABLE) && vore_taste && vore_taste != "")
-// BLUEMOON EDIT END
-		taste_message += "[vore_taste]"
-	else
+	if(taste_desc)
+		. += "[taste_desc]"
+	else if(allow_generic)
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
-			taste_message += "a normal [H.custom_species ? H.custom_species : H.dna.species]"
+			. += "a normal [H.custom_species ? H.custom_species : H.dna.species]"
 		else
-			taste_message += "a plain old normal [src]"
-	return taste_message
+			. += "a plain old normal [src]"
+	return .
 
 //
 // Equally important as the above
@@ -445,18 +436,15 @@
 
 // BLUEMOON EDIT START
 /mob/living/proc/get_smell_message()
-
-	var/smell_message = ""
-	if((!ckey || client?.prefs.vore_flags & SMELLABLE) && vore_smell && vore_smell != "")
-	// BLUEMOON EDIT END
-		smell_message += "[vore_smell]"
+	if(smell_desc)
+		. += "[smell_desc]"
 	else
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
-			smell_message += "a normal [H.custom_species ? H.custom_species : H.dna.species]"
+			. += "a normal [H.custom_species ? H.custom_species : H.dna.species]"
 		else
-			smell_message += "a plain old normal [src]"
-	return smell_message
+			. += "a plain old normal [src]"
+	return .
 
 //	Check if an object is capable of eating things, based on vore_organs
 //
