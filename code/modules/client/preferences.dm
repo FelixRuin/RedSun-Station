@@ -1503,9 +1503,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "[copytext_char(naked_preview, 1, MAX_FLAVOR_PREVIEW_LEN)]...<BR><span style='color:#888;font-size:80%'>(исходник: [html_encode(TextPreview(features["naked_flavor_text"]))]...)</span><BR>"
 					//SPLURT edit end
 					dat += "<h2>[taste_text_label]</h2>"
-					dat += "<a href='?_src_=prefs;preference=set_taste;task=input'><b>[vore_taste ? copytext_char(vore_taste, 1, MAX_FLAVOR_PREVIEW_LEN) : "\[...\]"]</b></a>"
+					dat += "<a href='?_src_=prefs;preference=set_taste;task=input'><b>[vore_taste ? "[copytext_char(vore_taste, 1, MAX_FLAVOR_PREVIEW_LEN)][length(vore_taste) > MAX_FLAVOR_PREVIEW_LEN ? "..." : "."]" : "\[...\]"]</b></a>"
 					dat += "<h2>[smell_text_label]</h2>"
-					dat += "<a href='?_src_=prefs;preference=set_smell;task=input'><b>[vore_smell ? copytext_char(vore_smell, 1, MAX_FLAVOR_PREVIEW_LEN) : "\[...\]"]</b></a>"
+					dat += "<a href='?_src_=prefs;preference=set_smell;task=input'><b>[vore_smell ? "[copytext_char(vore_smell, 1, MAX_FLAVOR_PREVIEW_LEN)][length(vore_smell) > MAX_FLAVOR_PREVIEW_LEN ? "..." : "."]" : "\[...\]"]</b></a>"
 					// BLUEMOON ADD START - пользовательский эмоут смерти
 					dat += "<h2>[custom_deathgasp_label]</h2>"
 					dat += "<a href='?_src_=prefs;preference=custom_deathgasp;task=input'><b>[set_custom_deathgasp_label]</b></a><br>"

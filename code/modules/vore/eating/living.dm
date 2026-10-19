@@ -173,7 +173,7 @@
 
 	// Flavor handling
 	if(belly.can_taste && prey.get_taste_message(FALSE))
-		to_chat(belly.owner, "<span class='notice'>[prey] tastes of [prey.get_taste_message(FALSE)].</span>")
+		to_chat(belly.owner, span_notice("[prey] ощущается по вкусу как [prey.get_taste_message(FALSE)]."))
 
 	// Inform Admins
 	var/prey_braindead
