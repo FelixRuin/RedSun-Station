@@ -126,10 +126,12 @@
 	else
 		playsound(user, 'sound/voice/sniff_m1.ogg', 50, 1)
 
+	if(!user.get_smell_sensitivity())
+		return
 	if(target.is_dirty())
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			H.set_disgust(max(H.disgust, DISGUST_LEVEL_GROSS))
+			H.set_disgust(max(H.disgust, DISGUST_LEVEL_GROSS + 10, user.get_smell_sensitivity() * DISGUST_LEVEL_GROSS))
 			H.show_message(span_warning("Вы чуете вонь <b>[target.name]</b>. В голове стало дурно от запаха."))
 	else
 		user.show_message(span_notice("Вы чуете <b>[target.name]</b>. Этот аромат можно описать как [target.get_smell_message()]."))

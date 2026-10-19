@@ -617,7 +617,7 @@
 
 	var/mob/living/sniffed = pick(smellable)
 	if(sniffed.is_dirty())
-		user.set_disgust(max(user.disgust, DISGUST_LEVEL_GROSS))
+		user.set_disgust(max(user.disgust, DISGUST_LEVEL_GROSS + 10, smell_range * DISGUST_LEVEL_GROSS))
 		user.show_message(span_warning("Вы чуете вонь <b>[sniffed.name]</b>. В голове стало дурно от запаха."))
 	else
 		user.show_message(span_notice("Вы чуете <b>[sniffed.name]</b>. Этот аромат можно описать как [sniffed.get_smell_message()]."))
