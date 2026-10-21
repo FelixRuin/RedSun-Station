@@ -66,6 +66,10 @@
 	inspector.mind_initialize("sol_shuttle_test")
 	commander.equip(inspector)
 	commander.special(inspector)
+	var/datum/mind/inspector_mind = inspector.mind
+	var/datum/antagonist/sol_inspector/inspector_role = inspector_mind.has_antag_datum(/datum/antagonist/sol_inspector)
+	var/datum/objective/sol_inspection_return/return_objective = locate() in inspector_role?.objectives
+	TEST_ASSERT_NOTNULL(return_objective, "The commander must get the return objective.")
 	TEST_ASSERT(locate(/obj/item/sol_inspection_scanner) in inspector.GetAllContents(), "The commander's equipped outfit must include an inspection scanner.")
 	var/mob/living/carbon/human/crew_member = allocate(/mob/living/carbon/human, get_turf(inspector_spawner))
 	inspector_spawner.equip(crew_member)
@@ -102,22 +106,24 @@
 	TEST_ASSERT_EQUAL(vessel.initiate_docking(landing), DOCKING_SUCCESS, "The loaded vessel must fly to the station sector.")
 	TEST_ASSERT_EQUAL(vessel.dir, landing_direction, "The flight must exercise a 90-degree shuttle rotation.")
 	TEST_ASSERT(team.visited_station, "The first station arrival must start the return timer.")
-	TEST_ASSERT(team.return_available_at > world.time + 29 MINUTES, "The return delay must be 30 minutes.")
-	TEST_ASSERT(team.return_time_left() <= 30 MINUTES && team.return_time_left() > 29 MINUTES, "The console must report the whole mandatory stay.")
-	TEST_ASSERT_EQUAL(vessel.canDock(vessel.home_dock), SHUTTLE_NOT_A_DOCKING_PORT, "Early return must remain blocked.")
+	TEST_ASSERT(team.return_available_at > world.time + 59 MINUTES, "The return delay must be 60 minutes.")
+	TEST_ASSERT(team.return_time_left() <= 60 MINUTES && team.return_time_left() > 59 MINUTES, "The console must report the whole mandatory stay.")
+	TEST_ASSERT_EQUAL(vessel.canDock(vessel.home_dock), SHUTTLE_NOT_A_DOCKING_PORT, "The berth must stay locked during the inspection.")
 	TEST_ASSERT(!home_destination_visible(flight_console), "The console must hide the CentCom berth during the inspection period.")
 
-	team.account._adjust_money(99999)
-	TEST_ASSERT(!team.return_unlocked(), "A haul just under the threshold must not shorten the stay.")
-	team.account._adjust_money(1)
-	TEST_ASSERT(team.return_unlocked(), "A 100,000 credit haul must buy out the rest of the mandatory stay.")
-	TEST_ASSERT_EQUAL(vessel.canDock(vessel.home_dock), SHUTTLE_CAN_DOCK, "A rich haul must let the vessel dock at CentCom.")
-	TEST_ASSERT(home_destination_visible(flight_console), "The console must offer the CentCom berth as soon as the haul unlocks it.")
-	TEST_ASSERT(flight_console.ui_data()["status_note"] == null, "An unlocked console must not claim to be locked.")
+	// 100,000 кредитов штрафами разблокируют досрочный вылет, но не уводят шаттл автоматически.
+	team.fines_total = 100000
+	TEST_ASSERT(team.return_unlocked(), "100,000 credits in fines must unlock early return.")
+	TEST_ASSERT_EQUAL(vessel.canDock(vessel.home_dock), SHUTTLE_CAN_DOCK, "Early return must allow docking at CentCom.")
+	TEST_ASSERT(home_destination_visible(flight_console), "The console must offer the CentCom berth once fines unlock early return.")
+	TEST_ASSERT(isnull(vessel.destination), "Unlocking via fines must not launch the shuttle on the spot.")
+	TEST_ASSERT_EQUAL(vessel.mode, SHUTTLE_IDLE, "The vessel must stay docked after fine-based unlock.")
 
+	// Fast-forward past the mandatory stay to test the unattended time-based return.
+	team.return_available_at = world.time
 	vessel.check_return()
-	TEST_ASSERT(team.departure_scheduled_at > world.time + 2 MINUTES, "The unlocked vessel must hold its berth for a grace period before leaving.")
-	TEST_ASSERT(isnull(vessel.destination), "Unlocking the berth must not launch the shuttle on the spot.")
+	TEST_ASSERT(team.departure_scheduled_at > world.time + 2 MINUTES, "The expired vessel must hold its berth for a grace period before leaving.")
+	TEST_ASSERT(isnull(vessel.destination), "Expiring the stay must not launch the shuttle on the spot.")
 	TEST_ASSERT_EQUAL(vessel.mode, SHUTTLE_IDLE, "The vessel must stay docked through the grace period.")
 
 	// The grace period lapses: the vessel finally leaves for CentCom without anyone touching a console.
@@ -125,12 +131,12 @@
 	vessel.check_return()
 	TEST_ASSERT(vessel.destination == vessel.home_dock, "The grace period must lapse into a CentCom departure.")
 	TEST_ASSERT_EQUAL(vessel.mode, SHUTTLE_IGNITING, "The unattended departure must start the engines.")
-	team.account._adjust_money(-100000)
-	team.return_available_at = world.time
-	TEST_ASSERT(home_destination_visible(flight_console), "The console must automatically offer the CentCom berth when the 30-minute lock expires.")
+	TEST_ASSERT(home_destination_visible(flight_console), "The console must automatically offer the CentCom berth once the stay expires.")
 	TEST_ASSERT_EQUAL(vessel.initiate_docking(vessel.home_dock), DOCKING_SUCCESS, "The vessel must return once the inspection period expires.")
 	TEST_ASSERT(team.returned_home, "Returning to CentCom must finish the inspection.")
-	TEST_ASSERT(team.is_returned_inspector(inspector.mind), "A living inspector aboard the returning ship must complete the objective.")
+	TEST_ASSERT(team.is_returned_inspector(inspector_mind), "A living inspector aboard the returning ship must complete the objective.")
+	TEST_ASSERT(QDELETED(inspector), "The returned inspector's body must be removed with sparks.")
+	TEST_ASSERT(return_objective.check_completion(), "The return objective must stay completed after the body is removed.")
 
 /// Check the destination data actually rendered by ShuttleConsole.
 /datum/unit_test/sol_inspection_shuttle/proc/home_destination_visible(obj/machinery/computer/shuttle/sol_inspection/console)
