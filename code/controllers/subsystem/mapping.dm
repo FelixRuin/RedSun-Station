@@ -81,6 +81,8 @@ SUBSYSTEM_DEF(mapping)
 	var/list/z_to_station_z_index
 
 	var/stat_map_name = "Loading..."
+	// Единый выбор защиты внешних станционных окон на весь раунд.
+	var/station_window_firelocks = FALSE
 
 	/// Lookup list for random generated IDs.
 	var/list/random_generated_ids_by_original = list()
@@ -114,6 +116,7 @@ SUBSYSTEM_DEF(mapping)
 	HACK_LoadMapConfig()
 	if(initialized)
 		return
+	station_window_firelocks = prob(STATION_WINDOW_FIRELOCKS_CHANCE)
 	if(config.defaulted)
 		var/old_config = config
 		config = global.config.defaultmap
@@ -255,6 +258,7 @@ SUBSYSTEM_DEF(mapping)
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT
 	initialized = SSmapping.initialized
+	station_window_firelocks = SSmapping.station_window_firelocks
 	map_templates = SSmapping.map_templates
 	ruins_templates = SSmapping.ruins_templates
 	space_ruins_templates = SSmapping.space_ruins_templates
@@ -711,10 +715,15 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 		var/datum/biome/biome_instance = new biome_path()
 		biomes[biome_path] += biome_instance
 
-/datum/controller/subsystem/mapping/proc/reg_in_areas_in_z(list/areas)
+/// area_floors (зона -> z её новых клеток) дописывает уже известные зоны под эти z без обхода всех их клеток.
+/datum/controller/subsystem/mapping/proc/reg_in_areas_in_z(list/areas, list/area_floors)
 	for(var/B in areas)
 		var/area/A = B
-		A.reg_in_areas_in_z()
+		var/list/floors = area_floors?[A]
+		if(floors)
+			A.reg_on_floors(floors)
+		else
+			A.reg_in_areas_in_z()
 
 /datum/controller/subsystem/mapping/proc/get_isolated_ruin_z()
 	if(!isolated_ruins_z)

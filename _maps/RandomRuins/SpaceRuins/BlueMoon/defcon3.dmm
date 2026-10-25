@@ -5701,7 +5701,7 @@
 /obj/effect/turf_decal/tile/brown/half{
 	dir = 4
 	},
-/obj/machinery/mineral/equipment_vendor/golem,
+/obj/machinery/equipment_vendor/golem,
 /turf/open/floor/plasteel,
 /area/ruin/space/has_grav/bluemoon/port_tarkon/mining)
 "Bp" = (
@@ -6110,6 +6110,8 @@
 /obj/item/coin,
 /obj/machinery/light/directional/north,
 /obj/item/card/id/departmental_budget/tar,
+/obj/item/xenoarch/help/cargo/tarkoff,
+/obj/item/xenoarch/help/cargo/tarkoff,
 /turf/open/floor/plasteel/dark,
 /area/ruin/space/has_grav/bluemoon/port_tarkon/comms)
 "CX" = (

@@ -85,6 +85,8 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 // Дата
 /datum/job_menu/ui_data(mob/user)
 	var/list/data = list()
+	if(!previews)
+		return data
 	if(!prefs && user?.client)
 		prefs = user.client.prefs
 
@@ -106,6 +108,8 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 		var/preview_image = previews[preview_target]
 		if(isnull(preview_image))
 			preview_image = selected ? generate_preview(selected, user) : generate_ghost_preview(selected_ghost, user)
+			if(!previews)  // <-- datum мог быть уничтожен во время генерации
+				return data
 			previews[preview_target] = preview_image
 		pushed_preview = preview_target
 		if(length(preview_image))
@@ -264,7 +268,7 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 /datum/job_menu/proc/prefers_overflow_locked(datum/job/job_datum, mob/user)
 	if(!prefs || job_datum.title == SSjob.overflow_role)
 		return FALSE
-	if(prefs.job_preferences["[SSjob.overflow_role]"] != JP_LOW)
+	if(!prefs.job_preferences || prefs.job_preferences["[SSjob.overflow_role]"] != JP_LOW)
 		return FALSE
 	if(user && jobban_isbanned(user, SSjob.overflow_role))
 		return FALSE
@@ -546,7 +550,7 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 	if(istype(job_datum, /datum/job/cyborg))
 		return encode_preview_icon(icon('icons/mob/robots.dmi', "robot", SOUTH, 1))
 
-	var/icon/flat_icon = get_flat_human_icon(null, job_datum, preview_prefs, null, list(SOUTH))
+	var/icon/flat_icon = get_flat_human_icon(null, job_datum, preview_prefs, DUMMY_HUMAN_SLOT_JOB_MENU, list(SOUTH))
 	return encode_preview_icon(flat_icon)
 
 /// Превью гост роли
@@ -580,7 +584,9 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 		var/obj/effect/mob_spawn/human/human_spawn = spawn_landmark
 		var/outfit_path = istype(human_spawn.outfit) ? human_spawn.outfit.type : human_spawn.outfit
 		var/datum/preferences/role_prefs = (human_spawn.can_load_appearance && preview_prefs) ? preview_prefs : null
-		return encode_preview_icon(get_flat_human_icon(null, null, role_prefs, null, list(SOUTH), outfit_path))
+		// без префов общий манекен показал бы внешность из прошлого превью
+		var/dummy_key = role_prefs ? DUMMY_HUMAN_SLOT_JOB_MENU : null
+		return encode_preview_icon(get_flat_human_icon(null, null, role_prefs, dummy_key, list(SOUTH), outfit_path))
 
 	// остальное спрайт самого моба
 	if(!ispath(spawn_landmark.mob_type, /mob))
@@ -722,7 +728,8 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 			return
 
 		if("alt_title")
-			if(!prefs)
+			var/datum/preferences/our_prefs = prefs
+			if(!our_prefs)
 				return
 			var/job_title = params["job"]
 			var/datum/job/job_datum = SSjob?.GetJob(job_title)
@@ -733,11 +740,13 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 				titles_list += alt_title
 			var/chosen_title = tgui_input_list(ui_user, "Выберите название должности:", "Настройка профессий", titles_list)
 			if(chosen_title)
+				if(!our_prefs.alt_titles_preferences)
+					our_prefs.alt_titles_preferences = list()
 				if(chosen_title == job_title)
-					prefs.alt_titles_preferences.Remove(job_title)
+					our_prefs.alt_titles_preferences.Remove(job_title)
 				else
-					prefs.alt_titles_preferences[job_title] = chosen_title
-				prefs.save_character(silent = TRUE)
+					our_prefs.alt_titles_preferences[job_title] = chosen_title
+				our_prefs.save_character(silent = TRUE)
 			return
 
 		if("close")
@@ -770,6 +779,8 @@ GLOBAL_LIST_INIT(job_menu_antag_spawners, list(
 /datum/job_menu/proc/set_priority(mob/user, job_title, level)
 	if(!prefs || !istext(job_title))
 		return
+	if(!prefs.job_preferences)
+		prefs.job_preferences = list()
 	var/datum/job/job_datum = SSjob?.GetJob(job_title)
 	if(!job_datum || !length(SSjob.occupations))
 		return

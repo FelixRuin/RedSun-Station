@@ -16,7 +16,10 @@ import crypto from 'crypto';
 import { spawn } from 'child_process';
 import { DreamDaemon, DreamMaker, getDmPath, getDreamDaemonPath } from './lib/byond.js';
 import { yarn } from './lib/yarn.js';
+import { NanomapsTarget } from './lib/nanomaps.js';
 import Juke from './juke/index.js';
+
+export { NanomapsTarget };
 
 Juke.chdir('../..', import.meta.url);
 Juke.setup({ file: import.meta.url }).then((code) => process.exit(code));
@@ -77,6 +80,27 @@ export const DmMapsIncludeTarget = new Juke.Target({
   },
 });
 
+const CENTCOM_MAP = '_maps/map_files/generic/CentCom.dmm';
+const CENTCOM_HERMETIC_MAP = '_maps/map_files/generic/CentCom_hermetic.dmm';
+
+/** CentCom for the hermetic unit-test profile: only z1. The other z-levels are
+ * empty event space, about 4 seconds of init on every test world. */
+export const CentComHermeticTarget = new Juke.Target({
+  inputs: [CENTCOM_MAP],
+  outputs: [CENTCOM_HERMETIC_MAP],
+  executes: async () => {
+    const map = fs.readFileSync(CENTCOM_MAP, 'utf-8');
+    const firstBlock = map.search(/^\(\d+,\d+,\d+\) = \{"/m);
+    const blocks = map.slice(firstBlock).split(/^(?=\(\d+,\d+,\d+\) = \{")/m);
+    const kept = blocks.filter((block) => /^\(\d+,\d+,1\) = \{"/.test(block));
+    if (firstBlock < 0 || kept.length === 0) {
+      Juke.logger.error(`${CENTCOM_MAP} is not in TGM format, cannot cut z1 out of it.`);
+      throw new Juke.ExitCode(1);
+    }
+    fs.writeFileSync(CENTCOM_HERMETIC_MAP, map.slice(0, firstBlock) + kept.join(''));
+  },
+});
+
 export const StatbrowserTarget = new Juke.Target({
   inputs: [
     'html/statbrowser/build.js',
@@ -92,10 +116,12 @@ export const StatbrowserTarget = new Juke.Target({
   },
 });
 
+
 export const DmTarget = new Juke.Target({
   dependsOn: ({ get }) => [
     LoadoutCryptoRuntimeTarget,
     StatbrowserTarget,
+    NanomapsTarget,
     get(DefineParameter).includes('ALL_TEMPLATES') && DmMapsIncludeTarget,
   ],
   inputs: async () => [
@@ -195,6 +221,7 @@ export const DmTestBuildTarget = new Juke.Target({
   parameters: [DefineParameter, UnitTestProfileParameter],
   dependsOn: ({ get }) => [
     get(DefineParameter).includes('ALL_TEMPLATES') && DmMapsIncludeTarget,
+    getUnitTestProfile(get) === 'hermetic' && CentComHermeticTarget,
   ],
   inputs: async () => [
     ...dmTestInputs,
@@ -618,7 +645,7 @@ const prependDefines = (...defines) => {
 };
 
 export const TgsTarget = new Juke.Target({
-  dependsOn: [TguiTarget, TgFontTarget],
+  dependsOn: [TguiTarget, TgFontTarget, NanomapsTarget],
   executes: async () => {
     Juke.logger.info('Prepending TGS define');
     prependDefines('TGS');

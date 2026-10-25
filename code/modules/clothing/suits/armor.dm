@@ -1,8 +1,9 @@
 /obj/item/clothing/suit/armor
 	allowed = null
-	cold_protection = CHEST|GROIN
+	cold_protection = CHEST|GROIN|ARMS
+	body_parts_covered = CHEST|GROIN|ARMS
+	heat_protection = CHEST|GROIN|ARMS
 	min_cold_protection_temperature = ARMOR_MIN_TEMP_PROTECT
-	heat_protection = CHEST|GROIN
 	max_heat_protection_temperature = ARMOR_MAX_TEMP_PROTECT
 	strip_delay = 60
 	equip_delay_other = 40

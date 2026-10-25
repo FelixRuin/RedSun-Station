@@ -615,6 +615,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["tgui_panel_theme"]		>> tgui_panel_theme
 	S["tgui_panel_state"]		>> tgui_panel_state
 	S["ui_zoom_preferences"]	>> ui_zoom_preferences
+	S["vending_layouts"]		>> vending_layouts
+	S["podlauncher_presets"]	>> podlauncher_presets
 	S["windowflash"] 			>> windowflashing
 	S["adminhelp_windowflash"]	>> adminhelp_windowflash
 	S["windownoise"] 			>> windownoise
@@ -782,6 +784,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	tgui_swapped_buttons	= sanitize_integer(tgui_swapped_buttons, 0, 1, initial(tgui_swapped_buttons))
 	tgui_panel_theme = sanitize_inlist(tgui_panel_theme, list("default", "light", "dark"), initial(tgui_panel_theme))
 	tgui_panel_state = sanitize_text(tgui_panel_state, initial(tgui_panel_state))
+	var/list/sanitized_vending_layouts = list()
+	if(islist(vending_layouts))
+		for(var/machine_key in vending_layouts)
+			if(!istext(machine_key))
+				continue
+			var/machine_type = text2path(machine_key)
+			if(!(ispath(machine_type, /obj/machinery/vending) || ispath(machine_type, /obj/machinery/smartfridge) || ispath(machine_type, /obj/machinery/equipment_vendor)))
+				continue
+			if(vending_layouts[machine_key] in list("grid", "list"))
+				sanitized_vending_layouts[machine_key] = vending_layouts[machine_key]
+	vending_layouts = sanitized_vending_layouts
 	if(length(tgui_panel_state) > 16384)
 		tgui_panel_state = initial(tgui_panel_state)
 	if(!islist(ui_zoom_preferences))
@@ -868,6 +881,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	key_bindings = sanitize_islist(key_bindings, list())
 	modless_key_bindings = sanitize_islist(modless_key_bindings, list())
 	favorite_outfits = SANITIZE_LIST(favorite_outfits)
+	podlauncher_presets = SANITIZE_LIST(podlauncher_presets)
 	color_presets_tint = sanitize_color_preset_keys(color_presets_tint) // BLUEMOON ADD
 	color_presets_hsv = sanitize_color_preset_keys(color_presets_hsv) // BLUEMOON ADD
 	color_presets_matrix = sanitize_color_preset_keys(color_presets_matrix) // BLUEMOON ADD
@@ -1268,6 +1282,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["tgui_panel_theme"], tgui_panel_theme)
 	WRITE_FILE(S["tgui_panel_state"], tgui_panel_state)
 	WRITE_FILE(S["ui_zoom_preferences"], ui_zoom_preferences)
+	WRITE_FILE(S["vending_layouts"], vending_layouts)
+	WRITE_FILE(S["podlauncher_presets"], podlauncher_presets)
 	WRITE_FILE(S["windowflash"], windowflashing)
 	WRITE_FILE(S["adminhelp_windowflash"], adminhelp_windowflash)
 	WRITE_FILE(S["windownoise"], windownoise)
