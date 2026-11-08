@@ -112,6 +112,7 @@
 	.["windowflashing"] = windowflashing
 	.["adminhelp_windowflash"] = adminhelp_windowflash
 	.["windownoise"] = windownoise
+	.["examine_headshots"] = examine_headshots
 	.["mood_vignette"] = mood_vignette
 
 	// Gameplay toggles
@@ -123,6 +124,19 @@
 	.["action_buttons_hide"] = action_buttons_hide_on_spawn
 	.["autostand"] = autostand
 	.["long_strip_menu"] = long_strip_menu
+	.["right_click_mode"] = right_click_mode()
+	.["shift_right_click_mode"] = shift_right_click_mode()
+	var/list/menu_style = list()
+	for(var/key in GLOB.context_menu_style_choices + CONTEXT_MENU_FREE_OPTIONS)
+		menu_style[key] = context_menu_option(key)
+	.["context_menu_style"] = menu_style
+	.["context_menu_themes"] = GLOB.context_menu_themes
+	var/list/menu_presets = list()
+	for(var/preset_id in GLOB.context_menu_style_presets)
+		var/list/preset = GLOB.context_menu_style_presets[preset_id]
+		menu_presets += list(list("id" = preset_id, "name" = preset["name"], "desc" = preset["desc"]))
+	.["context_menu_presets"] = menu_presets
+	.["context_menu_preset"] = current_context_menu_preset()
 	.["shift_invites"] = shift_invites
 
 	// Gameplay: combat
@@ -460,6 +474,9 @@
 				if("windownoise")
 					windownoise = !windownoise
 					dirty_var = "windownoise"
+				if("examine_headshots")
+					examine_headshots = !examine_headshots
+					dirty_var = "examine_headshots"
 				if("auto_capitalize_enabled")
 					auto_capitalize_enabled = !auto_capitalize_enabled
 					dirty_var = "auto_capitalize_enabled"
@@ -574,6 +591,21 @@
 					mentor_toggles ^= DEMENTOR_ON_LOGIN
 			save_pref_var("mentor_toggles")
 			return TRUE
+
+		if("set_right_click_mode")
+			parent?.set_right_click_mode(text2num(params["value"]))
+
+		if("set_shift_right_click_mode")
+			parent?.set_shift_right_click_mode(text2num(params["value"]))
+
+		if("set_context_menu_style")
+			set_context_menu_style(params["key"], params["value"])
+
+		if("reset_context_menu_style")
+			reset_context_menu_style()
+
+		if("apply_context_menu_preset")
+			apply_context_menu_preset(params["preset"])
 
 		if("set_screenshake")
 			var/flag = params["flag"]
@@ -690,6 +722,9 @@
 					ghost_others = value
 					dirty_var = "ghost_others"
 			save_pref_var(dirty_var)
+			if(dirty_var == "ghost_others" && isobserver(parent?.mob))
+				var/mob/dead/observer/ghost = parent.mob
+				ghost.update_sight()
 
 		if("set_ooc_pref")
 			var/flag = params["flag"]

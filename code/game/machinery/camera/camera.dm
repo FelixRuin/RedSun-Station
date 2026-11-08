@@ -265,7 +265,7 @@
 				var/mob/living/silicon/ai/AI = O
 				if(AI.control_disabled || (AI.stat == DEAD))
 					return
-				if(U.name == "Unknown")
+				if(U.name in list("Unknown", "Неизвестный"))
 					to_chat(AI, "<b>[U]</b> holds <a href='?_src_=usr;show_paper=1;'>\a [itemname]</a> up to one of your cameras ...")
 				else
 					to_chat(AI, "<b><a href='?src=[REF(AI)];track=[html_encode(U.name)]'>[U]</a></b> holds <a href='?_src_=usr;show_paper=1;'>\a [itemname]</a> up to one of your cameras ...")
@@ -369,6 +369,8 @@
 	alarm_manager?.clear_alarm(ALARM_CAMERA)
 
 /obj/machinery/camera/proc/can_use()
+	if(HAS_TRAIT(src, TRAIT_MOD_DISRUPTED))
+		return FALSE
 	if(!status)
 		return FALSE
 	if(machine_stat & EMPED)
