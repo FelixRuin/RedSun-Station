@@ -971,7 +971,8 @@ SUBSYSTEM_DEF(vote)
 	return GLOB.always_state
 
 /datum/controller/subsystem/vote/ui_close(mob/user, datum/tgui/ui)
-	voting -= user?.client
+	// В Logout при смене моба user.client уже пуст, а клиент жив: его знает окно.
+	voting -= user?.client || ui?.window?.client
 
 /datum/controller/subsystem/vote/ui_static_data(mob/user)
 	var/list/data = list()
@@ -1060,7 +1061,7 @@ SUBSYSTEM_DEF(vote)
 		// Пояснения о вариантах динамика
 		var/list/roundtype_descs = list()
 		roundtype_descs += list(list("name" = ROUNDTYPE_DYNAMIC, "desc" = "Одна из вариаций динамика выбирается автоматически."))
-		roundtype_descs += list(list("name" = ROUNDTYPE_DYNAMIC_TEAMBASED, "desc" = "90–100 угрозы, только командные и особые одиночные антагонисты. Нужен хаос > [CONFIG_GET(number/chaos_for_a_hard_dynamic)]."))
+		roundtype_descs += list(list("name" = ROUNDTYPE_DYNAMIC_TEAMBASED, "desc" = "90–100 угрозы, кровавые братья и почасовые командные волны. Нужен хаос > [CONFIG_GET(number/chaos_for_a_hard_dynamic)]."))
 		roundtype_descs += list(list("name" = ROUNDTYPE_DYNAMIC_HARD, "desc" = "90–100 угрозы. Нужен хаос > [CONFIG_GET(number/chaos_for_a_hard_dynamic)]."))
 		roundtype_descs += list(list("name" = ROUNDTYPE_DYNAMIC_MEDIUM, "desc" = "50–100 угрозы. Нужен хаос < [CONFIG_GET(number/chaos_for_a_hard_dynamic)]."))
 		roundtype_descs += list(list("name" = ROUNDTYPE_DYNAMIC_LIGHT, "desc" = "30–70 угрозы, без командных антагонистов, < 20 игроков."))
