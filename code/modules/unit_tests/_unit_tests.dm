@@ -361,6 +361,7 @@
 // #include "keybinding_init.dm"
 #include "join_render_cost.dm"
 #include "keybindings_stuck_keys.dm"
+#include "kinetic_accelerator_modkits.dm"
 // #include "language_transfer.dm"
 #include "latejoin_fallback.dm"
 #include "lewd_summon.dm"
